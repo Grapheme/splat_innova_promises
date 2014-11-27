@@ -168,11 +168,11 @@
 		}
 	</script>
 
-    {{ HTML::script('js/plugin/select2/select2.min.js') }}
+    {{ HTML::script('private/js/plugin/select2/select2.min.js') }}
 
-    {{ HTML::script('js/vendor/redactor.min.js') }}
-    {{ HTML::script('js/system/redactor-config.js') }}
+    {{ HTML::script('private/js/vendor/redactor.min.js') }}
+    {{ HTML::script('private/js/system/redactor-config.js') }}
 
-    {{-- HTML::script('js/modules/gallery.js') --}}
+    {{-- HTML::script('private/js/modules/gallery.js') --}}
 
 @stop

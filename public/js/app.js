@@ -1,7 +1,7 @@
 $(document).ready(function($){
     var ulogintoken = getCookie("ulogintoken");
-    if (ulogintoken != '')
-        uloginauth(ulogintoken);
+    //if (ulogintoken != '')
+    //    uloginauth(ulogintoken);
 
     /*
     var user_social_info = getCookie("user_social_info");
@@ -13,11 +13,15 @@ $(document).ready(function($){
 });
 
 
-$(document).on('click', '#logout', function(e){
+$(document).on('click', '.logout', function(e){
 	e.preventDefault();
-    setCookie("ulogintoken", null);
-    $(this).text("Войти");
-    $(this).attr("id", "login");
+
+    //setCookie("ulogintoken", null);
+    //$(this).text("Войти");
+    //$(this).attr("id", "login");
+
+    setCookie("user_token", null);
+    location.href = location.href;
 });
 
 
@@ -36,63 +40,116 @@ function uloginauth(token) {
             //alert("Привет, "+data.first_name+" "+data.last_name+"!");
             //$(".welcome_msg").html("Добро пожаловать, "+data.first_name+"!");
 
-            $(".popup.auth").addClass("hidden");
-            $(".overlay").addClass("hidden");
-
-            $("#login").text("Выйти");
-            $("#login").attr("id", "logout");
-
+            //$(".popup.auth").addClass("hidden");
+            //$(".overlay").addClass("hidden");
+            //$("#login").text("Выйти");
+            //$("#login").attr("id", "logout");
 
             /**
              * Отправляем запрос на сервер для добавления пользователя
              */
+            var new_user = false;
 
-            var new_user = true;
+            $.ajax({
+                url: base_url + '/user-auth',
+                type: 'POST',
+                dataType: 'json',
+                data: { data: data }
+            })
+                .done(function(response) {
+                    //alert("SUCCESS");
+                    console.log(response);
 
-            /**
-             * Проверка - если пользователь новый, то получим список его друзей
-             */
+                    if (typeof response.status != 'undefined' && response.status && typeof response.user != 'undefined' && typeof response.new_user != 'undefined') {
 
-            if (new_user) {
+                        var user_data = response;
+                        var new_user = user_data.new_user;
+                        //console.log('token => ' + user_data.user.user_token);
+                        setCookie("user_token", user_data.user.user_token, "Mon, 01-Jan-2018 00:00:00 GMT", "/");
 
-                /**
-                 * Отправляем запрос к VK для получения списка друзей
-                 */
-                if (typeof data.network != 'undefined' && data.network == 'vkontakte') {
 
-                    /**
-                     * https://vk.com/dev/api_requests
-                     * https://vk.com/dev/friends.get
-                     */
-                    $.ajax({
-                        url: 'https://api.vk.com/method/friends.get',
-                        type: 'POST',
-                        dataType: 'jsonp',
-                        data: { user_id: data.uid, fields: 'nickname, domain, sex, bdate, city', name_case: 'nom' }
-                    })
-                        .done(function(response) {
-                            //alert("SUCCESS");
-                            //console.log(response);
-                            //console.log(response.response.length);
-                            if (response.response.length) {
+
+                        /**
+                         * Проверка - если пользователь новый, то получим список его друзей
+                         */
+
+                        if (new_user) {
+
+                            /**
+                             * Отправляем запрос к VK для получения списка друзей
+                             */
+                            if (typeof data.network != 'undefined' && data.network == 'vkontakte') {
 
                                 /**
-                                 * Сохраняем список друзей пользователя
+                                 * https://vk.com/dev/api_requests
+                                 * https://vk.com/dev/friends.get
                                  */
-                                console.log(response);
+                                $.ajax({
+                                    url: 'https://api.vk.com/method/friends.get',
+                                    type: 'POST',
+                                    dataType: 'jsonp',
+                                    data: { user_id: data.uid, fields: 'nickname, domain, sex, bdate, city', name_case: 'nom' }
+                                })
+                                    .done(function(response) {
+                                        //alert("SUCCESS");
+                                        //console.log(response);
+                                        //console.log(response.response.length);
+                                        if (response.response.length) {
+
+                                            /**
+                                             * Сохраняем список друзей пользователя
+                                             */
+                                            console.log(response);
+
+                                            $.ajax({
+                                                url: base_url + '/user-update-friends',
+                                                type: 'POST',
+                                                dataType: 'json',
+                                                data: { user_id: user_data.user.id, friends: response.response }
+                                            })
+                                                .done(function(response) {
+                                                    //alert("SUCCESS");
+                                                    console.log(response);
+
+                                                    //alert('RELOAD PAGE');
+                                                    location.href = location.href;
+
+                                                })
+                                                .fail(function(jqXHR, textStatus, errorThrown) {
+                                                    //alert('ERROR');
+                                                    console.log(textStatus);
+                                                })
+                                            ;
+
+                                        }
+                                    })
+                                    .fail(function(jqXHR, textStatus, errorThrown) {
+                                        //alert('ERROR');
+                                        console.log(textStatus);
+                                    })
+                                    .always(function(response) {
+                                        //console.log(response);
+                                        //alert( "complete" );
+                                    })
+                                ;
                             }
-                        })
-                        .fail(function(jqXHR, textStatus, errorThrown) {
-                            //alert('ERROR');
-                            console.log(textStatus);
-                        })
-                        .always(function(response) {
-                            //console.log(response);
-                            //alert( "complete" );
-                        })
-                    ;
-                }
-            }
+
+                        } else {
+
+                            location.href = location.href;
+                        }
+
+
+
+
+                    }
+
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    //alert('ERROR');
+                    console.log(textStatus);
+                })
+            ;
 
 
         } else {
@@ -101,7 +158,11 @@ function uloginauth(token) {
 
                 // Token expired
                 setCookie("ulogintoken", null);
-                alert('Ваша сессия завершена. Пожалуйста, повторите вход');
+                //alert('Ваша сессия завершена. Пожалуйста, повторите вход');
+            } else if (data.error == 'invalid token') {
+
+                // Invalid token
+                setCookie("ulogintoken", null);
             }
         }
     });

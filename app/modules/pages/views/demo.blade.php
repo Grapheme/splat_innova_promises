@@ -45,5 +45,5 @@
 
 
 @section('scripts')
-    {{ HTML::script('js/vendor/fotorama.js') }}
+    {{ HTML::script('private/js/vendor/fotorama.js') }}
 @stop

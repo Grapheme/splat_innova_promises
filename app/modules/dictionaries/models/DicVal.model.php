@@ -650,7 +650,9 @@ class DicVal extends BaseModel {
 
         ## CREATE FIELDS
         if (@isset($array['fields']) && is_array($array['fields']) && count($array['fields'])) {
-            $fields = array();
+
+            $fields = new Collection();
+
             foreach ($array['fields'] as $key => $value) {
                 $dicval_field = new DicFieldVal();
                 $dicval_field->dicval_id = $dicval->id;
@@ -661,18 +663,21 @@ class DicVal extends BaseModel {
 
                 $fields[] = $dicval_field;
             }
-            #$dicval->fields = $fields;
+            $dicval->relations['fields'] = $fields;
         }
 
         ## CREATE FIELDS_I18N
         if (@isset($array['fields_i18n']) && is_array($array['fields_i18n']) && count($array['fields_i18n'])) {
-            $fields_i18n = array();
+
+            $fields_i18n = new Collection();
+
             foreach ($array['fields_i18n'] as $locale_sign => $fields) {
 
                 if (!@is_array($fields) || !@count($fields))
                     continue;
 
-                $temp = array();
+                $temp = new Collection();
+
                 foreach ($fields as $key => $value) {
 
                     $dicval_field_i18n = new DicFieldVal();
@@ -686,13 +691,15 @@ class DicVal extends BaseModel {
                 }
                 $fields_i18n[$locale_sign] = $temp;
             }
-            #$dicval->fields_i18n = $fields_i18n;
+            $dicval->relations['fields_i18n'] = $fields_i18n;
         }
 
 
         ## CREATE TEXT FIELDS
         if (@isset($array['textfields']) && is_array($array['textfields']) && count($array['textfields'])) {
-            $textfields = array();
+
+            $textfields = new Collection();
+
             foreach ($array['textfields'] as $key => $value) {
                 $dicval_textfield = new DicTextFieldVal();
                 $dicval_textfield->dicval_id = $dicval->id;
@@ -703,18 +710,21 @@ class DicVal extends BaseModel {
 
                 $textfields[] = $dicval_textfield;
             }
-            #$dicval->textfields = $textfields;
+            $dicval->relations['textfields'] = $textfields;
         }
 
         ## CREATE TEXT FIELDS_I18N
         if (@isset($array['textfields_i18n']) && is_array($array['textfields_i18n']) && count($array['textfields_i18n'])) {
-            $textfields_i18n = array();
+
+            $textfields_i18n = new Collection();
+
             foreach ($array['textfields_i18n'] as $locale_sign => $textfields) {
 
                 if (!@is_array($textfields) || !@count($textfields))
                     continue;
 
-                $temp = array();
+                $temp = new Collection();
+
                 foreach ($textfields as $key => $value) {
 
                     $dicval_textfield_i18n = new DicTextFieldVal();
@@ -728,19 +738,22 @@ class DicVal extends BaseModel {
                 }
                 $textfields_i18n[$locale_sign] = $temp;
             }
-            #$dicval->textfields_i18n = $textfields_i18n;
+            $dicval->relations['textfields_i18n'] = $textfields_i18n;
         }
 
 
         ## CREATE META
         if (@isset($array['meta']) && is_array($array['meta']) && count($array['meta'])) {
-            $metas = array();
+
+            $metas = new Collection();
+
             foreach ($array['meta'] as $locale_sign => $fields) {
 
                 if (!@is_array($fields) || !@count($fields))
                     continue;
 
-                $temp = array();
+                $temp = new Collection();
+
                 foreach ($fields as $key => $value) {
 
                     $dicval_meta = new DicValMeta();
@@ -754,7 +767,7 @@ class DicVal extends BaseModel {
                 }
                 $metas[$locale_sign] = $temp;
             }
-            #$dicval->metas = $metas;
+            $dicval->relations['metas'] = $metas;
         }
 
         ## RETURN EXTRACTED DICVAL
