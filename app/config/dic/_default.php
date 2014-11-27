@@ -421,6 +421,18 @@ if (len > 0) {
 
     ),
 
+    /*
+    'first_line_modifier' => function($line, $dic, $dicval) {
+        return '<a href="' . URL::route('feedback.view', $dicval->id) . '" target="_blank">' . $line . '</a> <i class="fa fa-arrow-right"></i>';
+    },
+    #*/
+
+    /*
+    'second_line_modifier' => function($line, $dic, $dicval) {
+        return 'От: ' . $dicval->message_name . ($dicval->message_email ? ' &lt;<a href="mailto:' . $dicval->message_email . '">' . $dicval->message_email . '</a>>' : '') . ', ' . $dicval->created_at->format('d.m.Y в H:i');
+    },
+    #*/
+
     /**
      * Вкл./выкл. модуль SEO для данного словаря
      */

@@ -352,7 +352,7 @@
         });
     </script>
 
-    {{ HTML::script('js/modules/standard.js') }}
+    {{ HTML::script('private/js/modules/standard.js') }}
 
     {{ HTML::script('js/vendor/redactor.min.js') }}
     {{ HTML::script('js/system/redactor-config.js') }}
@@ -360,9 +360,9 @@
     <script type="text/javascript">
         if(typeof pageSetUp === 'function'){pageSetUp();}
         if(typeof runFormValidation === 'function') {
-            loadScript("{{ asset('js/vendor/jquery-form.min.js'); }}", runFormValidation);
+            loadScript("{{ asset('private/js/vendor/jquery-form.min.js'); }}", runFormValidation);
         } else {
-            loadScript("{{ asset('js/vendor/jquery-form.min.js'); }}");
+            loadScript("{{ asset('private/js/vendor/jquery-form.min.js'); }}");
         }
     </script>
 

@@ -7,7 +7,9 @@
 
 @section('content')
 
-    {{ $page->block('slider') }}
+    Hello, SPLAT!
+
+    <script src="//ulogin.ru/js/ulogin.js"></script><div id="uLogin_c0a8a519" data-uloginid="c0a8a519"></div>
 
 @stop
 

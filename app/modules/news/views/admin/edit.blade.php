@@ -156,15 +156,15 @@
         //var onsuccess_function = 'update_blocks()';
     </script>
 
-	{{ HTML::script('js/modules/standard.js') }}
+	{{ HTML::script('private/js/modules/standard.js') }}
 
 	<script src="{{ link::path('js/vendor/jquery.ui.datepicker-ru.js') }}"></script>
 	<script type="text/javascript">
 		if(typeof pageSetUp === 'function'){pageSetUp();}
 		if(typeof runFormValidation === 'function'){
-			loadScript("{{ asset('js/vendor/jquery-form.min.js'); }}",runFormValidation);
+			loadScript("{{ asset('private/js/vendor/jquery-form.min.js'); }}",runFormValidation);
 		}else{
-			loadScript("{{ asset('js/vendor/jquery-form.min.js'); }}");
+			loadScript("{{ asset('private/js/vendor/jquery-form.min.js'); }}");
 		}
 	</script>
 

@@ -393,9 +393,9 @@
 	<script type="text/javascript">
 		if(typeof pageSetUp === 'function'){pageSetUp();}
 		if(typeof runDicValFormValidation === 'function') {
-			loadScript("{{ asset('js/vendor/jquery-form.min.js'); }}", runDicValFormValidation);
+			loadScript("{{ asset('private/js/vendor/jquery-form.min.js'); }}", runDicValFormValidation);
 		} else {
-			loadScript("{{ asset('js/vendor/jquery-form.min.js'); }}");
+			loadScript("{{ asset('private/js/vendor/jquery-form.min.js'); }}");
 		}        
 	</script>
 
