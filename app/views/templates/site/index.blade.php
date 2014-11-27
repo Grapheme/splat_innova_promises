@@ -10,7 +10,7 @@
     Hello, SPLAT!
 
 
-    @if ($user !== NULL)
+    @if (isset($user) && $user !== NULL)
         <br/>
         Вы вошли как: <a href="{{ $user->identity }}" target="_blank">{{ $user->name }}</a>
         <a href="#" class="logout">Выйти</a>
