@@ -62,7 +62,10 @@
                 </ul>
             @endif
 
-            @if (count($existing_friends_list) && count($existing_friends_list) < count($user->friends))
+            @if (
+                !count($existing_friends_list)
+                || (count($existing_friends_list) < count($user->friends))
+            )
                 <ul>
                     @foreach ($user->friends as $friend)
                         <?
