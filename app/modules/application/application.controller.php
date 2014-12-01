@@ -635,7 +635,7 @@ class ApplicationController extends BaseController {
             die;
         }
 
-        $curl = curl_init('https://api.vk.com/method/users.get?fields=sex,bdate,city,country,photo_200,domain&v=5.27');
+        $curl = curl_init('https://api.vk.com/method/users.get?user_ids=' . @$auth['user_id'] . '&fields=sex,bdate,city,country,photo_200,domain&v=5.27');
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         curl_close($curl);
