@@ -240,8 +240,7 @@ $fb_friends_limit = 99;
     <script src="http://www.odnoklassniki.ru/oauth/resources.do?type=js" type="text/javascript" charset="utf-8">
     </script>
 
-    <a class="odkl-oauth-lnk"
-         href=""
+    <a class="odkl-oauth-lnk" href=""
          onclick="ODKL.Oauth2(this, 1110811904, 'SET STATUS;VALUABLE ACCESS;PHOTO CONTENT', 'http://splat.dev.grapheme.ru/ok-oauth' ); return false;">
     </a>
 
