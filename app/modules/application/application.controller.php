@@ -126,11 +126,13 @@ class ApplicationController extends BaseController {
 
     private function processFriends($user) {
 
-        #if (!isset($user->friends) || !$user->friends || !count($user->friends))
-        #    return $user;
+        if (!isset($user->friends) || !$user->friends || !count($user->friends))
+            return $user;
 
         $existing_friends = new Collection();
         $non_existing_friends = new Collection();
+
+        Helper::ta($user);
 
         switch ($user->auth_method) {
 
