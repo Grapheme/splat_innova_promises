@@ -52,7 +52,15 @@
                 <ul>
                 @foreach ($user->existing_friends as $friend)
                     <li>
-                        {{ @$friend['_name'] }}
+                        @if (@$friend['profile_id'])
+                            <a href="{{ URL::route('profile_id', $friend['profile_id']) }}">
+                        @endif
+
+                            {{ @$friend['_name'] }}
+
+                        @if (@$friend['profile_id'])
+                            </a>
+                        @endif
                     </li>
                 @endforeach
                 </ul>
