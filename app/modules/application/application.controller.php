@@ -688,7 +688,7 @@ class ApplicationController extends BaseController {
         #curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept-Language: ru-RU;q=1.0'));
         curl_close($curl);
         $friends = json_decode($s, true);
-        #$friends = $friends['response'];
+        $friends = @$friends['response']['items'];
 
 
         Helper::dd($friends);
