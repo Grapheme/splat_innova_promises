@@ -501,7 +501,7 @@ class ApplicationController extends BaseController {
                 'code=' . $_GET['code'] .
                 '&client_id=' . $AUTH['client_id'] .
                 '&client_secret=' . $AUTH['client_secret'] .
-                '&redirect_uri=' . URL::route('app.ok-oauth') .
+                '&redirect_uri=' . domain . URL::route('app.ok-oauth') .
                 '&grant_type=authorization_code'
             );
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
