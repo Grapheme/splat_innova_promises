@@ -508,28 +508,18 @@ class ApplicationController extends BaseController {
 
             $auth = json_decode($s, true);
 
-            Helper::d($auth);
+            #Helper::d($auth);
+
+            if (!@$auth['access_token']) {
+                echo "Не удается выполнить вход. Повторите попытку позднее (1).";
+                die;
+            }
 
             $curl = curl_init('http://api.odnoklassniki.ru/fb.do?access_token=' . $auth['access_token'] . '&application_key=' . $AUTH['application_key'] . '&method=users.getCurrentUser&sig=' . md5('application_key=' . $AUTH['application_key'] . 'method=users.getCurrentUser' . md5($auth['access_token'] . $AUTH['client_secret'])));
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $s = curl_exec($curl);
             curl_close($curl);
             $user = json_decode($s, true);
-
-            Helper::d($user);
-
-            $user['identity'] = 'http://ok.ru/profile/' . $user['uid'];
-            $user['bdate'] = $user['birthday'];
-
-            $check = $this->checkUserData($user, true);
-
-            if (@$check['user']['user_token']) {
-                setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
-            }
-
-            Helper::d($check);
-
-            die;
 
             /*
             Массив $user содержит следующие поля:
@@ -548,7 +538,25 @@ class ApplicationController extends BaseController {
             ...
             */
 
+            Helper::d($user);
 
+            if (!@$user['uid']) {
+                echo "Не удается выполнить вход. Повторите попытку позднее (2).";
+                die;
+            }
+
+            $user['identity'] = 'http://ok.ru/profile/' . $user['uid'];
+            $user['bdate'] = @$user['birthday'];
+
+            $check = $this->checkUserData($user, true);
+            Helper::d($check);
+
+            if (!@$check['user']['user_token']) {
+                echo "Не удается выполнить вход. Повторите попытку позднее (3).";
+                die;
+            }
+
+            setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
 
             echo "
             Авторизация прошла успешно, теперь это окно можно закрыть.
