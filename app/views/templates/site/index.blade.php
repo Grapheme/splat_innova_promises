@@ -178,7 +178,7 @@ $fb_friends_limit = 99;
                                 dataType: 'json',
                                 data: {user_id: user_data.user.id, friends: friends}
                             })
-                                .before(function() {
+                                .beforeSend(function() {
 
                                     // get taggable friends
                                     FB.api('/me/taggable_friends?limit=<?=$fb_friends_limit?>', function(response) {
