@@ -178,29 +178,19 @@ class ApplicationController extends BaseController {
                          * Фильтруем друзей юзера
                          */
                         $array = $user->friends;
-                        foreach ($existing_friends_list as $friend_url) {
+                        foreach ($existing_friends_list as $friend_url => $profile_id) {
                             #Helper::d($friend_url);
                             if (!isset($array[$friend_url]))
                                 continue;
                             $friend = $array[$friend_url];
+                            /**
+                             * Сопоставляем установивших приложение друзей и ID профиля в системе
+                             */
+                            $friend['profile_id'] = $profile_id;
                             $existing_friends[$friend_url] = $friend;
                             unset($array[$friend_url]);
                         }
                         $user->friends = $array;
-
-                        /**
-                         * Сопоставляем установивших приложение друзей и ID профиля в системе
-                         */
-                        $friends = $existing_friends;
-                        foreach ($friends as $f => $friend) {
-                            $profile_id = @$existing_friends_list[$friend['identity']];
-                            if (!$profile_id)
-                                continue;
-                            $friend['profile_id'] = $profile_id;
-                            $friends[$f] = $friend;
-                        }
-                        $existing_friends = $friends;
-                        #Helper::tad($existing_friends);
 
                     }
 
