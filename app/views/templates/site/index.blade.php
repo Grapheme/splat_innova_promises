@@ -242,7 +242,7 @@ $fb_friends_limit = 99;
 
     <a class="odkl-oauth-lnk"
          href=""
-         onclick="ODKL.Oauth2(this, 1110811904, 'SET_STATUS;VALUABLE_ACCESS;PHOTO_CONTENT', 'http://splat.dev.grapheme.ru/ok-oauth' ); return false;">
+         onclick="ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS', 'http://splat.dev.grapheme.ru/ok-oauth' ); return false;">
     </a>
 
 @stop
