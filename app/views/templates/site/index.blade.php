@@ -206,6 +206,7 @@ $fb_friends_limit = 99;
 
                                             //alert('RELOAD PAGE');
                                             location.href = base_url + '';
+                                            location.href = location.href;
                                         })
                                         .fail(function (jqXHR, textStatus, errorThrown) {
                                             //alert('ERROR');
