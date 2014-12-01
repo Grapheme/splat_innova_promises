@@ -524,7 +524,7 @@ class ApplicationController extends BaseController {
             $check = $this->checkUserData($user, true);
 
             if (@$check['user']['user_token']) {
-                setcookie("user_token", $check['user']['user_token'], "Mon, 01-Jan-2018 00:00:00 GMT", "/");
+                setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
             }
 
             Helper::d($check);
