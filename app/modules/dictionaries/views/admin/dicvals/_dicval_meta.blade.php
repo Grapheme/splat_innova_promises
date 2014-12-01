@@ -3,10 +3,12 @@
 #Helper::tad($element->metas->where('language', $locale_sign)->first());
 #Helper::ta($element);
 #Helper::dd($dic_settings);
-/*{{--
+/*
+{{--
 if (@is_callable($dic_settings['fields_i18n']))
     $fields_i18n = $dic_settings['fields_i18n']();
-#--}}*/
+--}}
+*/
 
 $element_meta = new DicValMeta;
 if (@is_object($element->metas) && $element->metas->count())
