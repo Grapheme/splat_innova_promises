@@ -138,7 +138,7 @@ class ApplicationController extends BaseController {
 
             case "vkontakte":
 
-                echo "Это Яблоко";
+                #echo "Это Яблоко";
 
                 /**
                  * Ключи массива друзей => полный адрес их страницы
@@ -165,30 +165,34 @@ class ApplicationController extends BaseController {
                 #$friends_uids[] = 'http://vk.com/id1889847';
                 #Helper::ta($friends_uids);
 
-                #$dic = Dic::where('slug', 'users')->first();
-                $existing_friends_temp = DicFieldVal::where('key', 'identity')
-                    ->whereIn('value', $friends_uids)
-                    ->get()
-                ;
-                #Helper::ta($existing_friends_temp);
+                if (count($friends_uids)) {
+                    #$dic = Dic::where('slug', 'users')->first();
+                    $existing_friends_temp = DicFieldVal::where('key', 'identity')
+                        ->whereIn('value', $friends_uids)
+                        ->get()
+                    ;
+                    #Helper::ta($existing_friends_temp);
 
-                $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'value');
-                #Helper::ta($existing_friends_list);
+                    $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'value');
+                    #Helper::ta($existing_friends_list);
 
-                /**
-                 * Фильтруем друзей юзера
-                 */
-                $array = $user->friends;
-                foreach ($existing_friends_list as $friend_url) {
-                    #Helper::d($friend_url);
-                    if (!isset($array[$friend_url]))
-                        continue;
-                    $friend = $array[$friend_url];
-                    $existing_friends[$friend_url] = $friend;
-                    unset($array[$friend_url]);
+                    /**
+                     * Фильтруем друзей юзера
+                     */
+                    $array = $user->friends;
+                    foreach ($existing_friends_list as $friend_url) {
+                        #Helper::d($friend_url);
+                        if (!isset($array[$friend_url]))
+                            continue;
+                        $friend = $array[$friend_url];
+                        $existing_friends[$friend_url] = $friend;
+                        unset($array[$friend_url]);
+                    }
+                    $user->friends = $array;
+
                 }
-                $user->friends = $array;
-                #Helper::ta($existing_friends);
+
+
                 $non_existing_friends = $user->friends;
 
                 #Helper::ta($existing_friends);
