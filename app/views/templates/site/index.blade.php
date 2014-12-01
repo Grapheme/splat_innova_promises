@@ -169,6 +169,8 @@ $fb_friends_limit = 99;
                          */
                         if (typeof data.network != 'undefined' && data.network == 'facebook') {
 
+                            var friends;
+
                             // get friends
                             FB.api('/me/taggable_friends?limit=<?=$fb_friends_limit?>', function(response) {
 
@@ -179,6 +181,8 @@ $fb_friends_limit = 99;
                                 //var friend_data = response.data.sort(sortMethod);
                                 var friend_data = response.data;
 
+                                friends.taggable_friends = response.data;
+
                                 var results = '';
                                 for (var i = 0; i < friend_data.length; i++) {
                                     //results += '<div><img src="https://graph.facebook.com/' + friend_data[i].id + '/picture">' + friend_data[i].name + '</div>';
@@ -186,7 +190,7 @@ $fb_friends_limit = 99;
                                 }
 
                                 // and display them at our holder element
-                                result_holder.innerHTML = '<h2>Список ваших друзей:</h2>' + results;
+                                //result_holder.innerHTML = '<h2>Список ваших друзей:</h2>' + results;
                             });
 
                             // get friends
@@ -194,7 +198,29 @@ $fb_friends_limit = 99;
 
                                 console.log('FB friends list:');
                                 console.log(response);
+
+                                friends.friends = response.data;
                             });
+
+                            $.ajax({
+                                url: base_url + '/user-update-friends',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: {user_id: user_data.user.id, friends: friends}
+                            })
+                                .done(function (response) {
+                                    //alert("SUCCESS");
+                                    console.log(response);
+
+                                    //alert('RELOAD PAGE');
+                                    location.href = base_url + '';
+                                })
+                                .fail(function (jqXHR, textStatus, errorThrown) {
+                                    //alert('ERROR');
+                                    console.log(textStatus);
+                                })
+                            ;
+
 
                         }
 

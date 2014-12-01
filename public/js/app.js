@@ -148,6 +148,10 @@ function uloginauth(token) {
     });
 }
 
+
+/********************************************************************************** */
+
+
 function setCookie (name, value, expires, path, domain, secure) {
     document.cookie = name + "=" + escape(value) +
         ((expires) ? "; expires=" + expires : "") +
@@ -176,9 +180,15 @@ function getCookie(name) {
 	return(setStr);
 }
 
+
 /********************************************************************************** */
 
 
+    /**
+     * https://vk.com/dev/api_requests
+     * https://vk.com/dev/friends.get
+     * https://vk.com/editapp?id=4659025&section=options
+     */
     $(document).on('click', '.vk-oauth-link', function(e){
         e.preventDefault();
 
