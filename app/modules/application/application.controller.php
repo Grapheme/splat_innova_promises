@@ -166,10 +166,10 @@ class ApplicationController extends BaseController {
                         ->whereIn('value', $friends_uids)
                         ->get()
                     ;
-                    #Helper::ta($existing_friends_temp);
+                    Helper::ta($existing_friends_temp);
 
                     $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'value');
-                    #Helper::ta($existing_friends_list);
+                    Helper::ta($existing_friends_list);
 
                     /**
                      * Фильтруем друзей юзера
@@ -189,7 +189,7 @@ class ApplicationController extends BaseController {
 
                 $non_existing_friends = $user->friends;
 
-                #Helper::ta($existing_friends);
+                Helper::tad($existing_friends);
                 #Helper::tad($non_existing_friends);
 
                 break;
