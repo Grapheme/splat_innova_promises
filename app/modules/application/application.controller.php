@@ -643,6 +643,8 @@ class ApplicationController extends BaseController {
         $user = json_decode($s, true);
         $user = $user['response'][0];
 
+        $user['uid'] = @$user['id'];
+
         /*
         Массив $user содержит следующие поля:
         uid - уникальный номер пользователя
@@ -660,20 +662,19 @@ class ApplicationController extends BaseController {
         ...
         */
 
-        Helper::d($user);
-
-        die;
+        #Helper::d($user);
 
         if (!@$user['uid']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (2).";
             die;
         }
 
-        $user['identity'] = 'http://ok.ru/profile/' . $user['uid'];
+        $user['identity'] = 'https://vk.com/' . @$user['domain'] ?: 'id' . $user['uid'];
         $user['bdate'] = @$user['birthday'];
+        $user['email'] = @$auth['email'];
 
         $check = $this->checkUserData($user, true);
-        #Helper::d($check);
+        Helper::d($check);
 
         if (!@$check['user']['user_token']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (3).";
@@ -681,18 +682,15 @@ class ApplicationController extends BaseController {
         }
 
 
-
-
-        $friends_get_url = 'http://api.odnoklassniki.ru/fb.do?access_token=' . $auth['access_token']
-            . '&method=friends.get&application_key='
-            . $AUTH['application_key']
-            . '&sig=' . md5('application_key=' . $AUTH['application_key'] . 'method=friends.get' . md5($auth['access_token'] . $AUTH['client_secret']));
-
-        $curl = curl_init($friends_get_url);
+        $curl = curl_init('https://api.vk.com/method/friends.get?user_ids=' . @$auth['user_id'] . '&fields=sex,bdate,city,country,photo_200,domain&v=5.27&lang=ru');
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        $friends = curl_exec($curl);
+        $s = curl_exec($curl);
+        #curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept-Language: ru-RU;q=1.0'));
         curl_close($curl);
-        #$user = json_decode($s, true);
+        $friends = json_decode($s, true);
+        $friends = $friends['response'];
+
+
         Helper::dd($friends);
 
 
