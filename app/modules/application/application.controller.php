@@ -221,19 +221,21 @@ class ApplicationController extends BaseController {
                 $existing_friends = $friends;
                 #Helper::ta($friends_uids);
 
+
+
                 #$dic = Dic::where('slug', 'users')->first();
                 $existing_friends_temp = DicFieldVal::where('key', 'identity')
                     ->whereIn('value', $friends_uids)
                     ->get()
                 ;
-                Helper::ta($existing_friends_temp);
+                #Helper::ta($existing_friends_temp);
 
                 /**
                  * Здесь может понадобится доп. проверка на принадлежность записей словарю users
                  */
 
                 $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'dicval_id', 'value');
-                Helper::ta($existing_friends_list);
+                #Helper::ta($existing_friends_list);
 
                 /**
                  * Сопоставляем установивших приложение друзей и ID профиля в системе
@@ -247,9 +249,7 @@ class ApplicationController extends BaseController {
                     $friends[$f] = $friend;
                 }
                 $existing_friends = $friends;
-                Helper::tad($existing_friends);
-
-
+                #Helper::tad($existing_friends);
 
 
 
