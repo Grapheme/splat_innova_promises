@@ -23,7 +23,7 @@ $fb_friends_limit = 99;
         <br/>
         <br/>
 
-        Войдите с помощью соц.сетей:
+        Войдите с помощью ВКонтакте (uLogin):
         <script src="//ulogin.ru/js/ulogin.js"></script><div id="uLogin_c0a8a519" data-uloginid="c0a8a519"></div>
 
         или адреса электронной почты:<br/>
@@ -45,6 +45,12 @@ $fb_friends_limit = 99;
 
 
 
+    <!--
+    https://developers.facebook.com/docs/javascript/reference/v2.2?locale=ru_RU
+    https://developers.facebook.com/docs/facebook-login/permissions/v2.2?locale=ru_RU
+    http://stackoverflow.com/questions/23417356/facebook-graph-api-v2-0-me-friends-returns-empty-or-only-friends-who-also-u
+    https://developers.facebook.com/apps/1010986995584773/review-status/
+    -->
     <script>
       // This is called with the results from from FB.getLoginStatus().
       function statusChangeCallback(response) {
@@ -175,7 +181,8 @@ $fb_friends_limit = 99;
 
                                 var results = '';
                                 for (var i = 0; i < friend_data.length; i++) {
-                                    results += '<div><img src="https://graph.facebook.com/' + friend_data[i].id + '/picture">' + friend_data[i].name + '</div>';
+                                    //results += '<div><img src="https://graph.facebook.com/' + friend_data[i].id + '/picture">' + friend_data[i].name + '</div>';
+                                    results += '<div><img src="' + friend_data[i].picture.data.url + '">' + friend_data[i].name + '</div>';
                                 }
 
                                 // and display them at our holder element
