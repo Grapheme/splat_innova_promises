@@ -510,7 +510,7 @@ class ApplicationController extends BaseController {
 
             $auth = json_decode($s, true);
 
-            #Helper::d($auth);
+            Helper::d($auth);
 
             if (!@$auth['access_token']) {
                 echo "Не удается выполнить вход. Повторите попытку позднее (1).";
