@@ -513,7 +513,7 @@ class ApplicationController extends BaseController {
             curl_close($curl);
             $user = json_decode($s, true);
 
-            Helper::dd($user);
+            Helper::d($user);
 
             /*
             Массив $user содержит следующие поля:
@@ -531,6 +531,14 @@ class ApplicationController extends BaseController {
             Записываем полученные данные в базу, устанавливаем cookies
             ...
             */
+
+            echo "
+            <script>
+            parent.location = parent.location;
+            </script>
+            ";
+
+            die;
 
             header('Location: /'); // редиректим после авторизации на главную страницу
 
