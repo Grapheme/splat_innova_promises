@@ -150,6 +150,7 @@ class ApplicationController extends BaseController {
                     unset($array[$f]);
                 }
                 $user->friends = $array;
+                Helper::ta($user->friends);
 
                 /**
                  * Получаем список друзей, которые уже есть в системе
@@ -163,7 +164,7 @@ class ApplicationController extends BaseController {
                     $friends_uids[] = $friend_uid;
                 }
                 #$friends_uids[] = 'http://vk.com/id1889847';
-                #Helper::ta($friends_uids);
+                Helper::ta($friends_uids);
 
                 if (count($friends_uids)) {
                     #$dic = Dic::where('slug', 'users')->first();
@@ -171,10 +172,10 @@ class ApplicationController extends BaseController {
                         ->whereIn('value', $friends_uids)
                         ->get()
                     ;
-                    #Helper::ta($existing_friends_temp);
+                    Helper::ta($existing_friends_temp);
 
                     $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'value');
-                    #Helper::ta($existing_friends_list);
+                    Helper::ta($existing_friends_list);
 
                     /**
                      * Фильтруем друзей юзера
@@ -189,14 +190,13 @@ class ApplicationController extends BaseController {
                         unset($array[$friend_url]);
                     }
                     $user->friends = $array;
-
                 }
 
 
                 $non_existing_friends = $user->friends;
 
-                #Helper::ta($existing_friends);
-                #Helper::tad($non_existing_friends);
+                Helper::ta($existing_friends);
+                Helper::tad($non_existing_friends);
 
                 break;
 
@@ -762,6 +762,12 @@ class ApplicationController extends BaseController {
             $friends = curl_exec($curl);
             curl_close($curl);
             #$user = json_decode($s, true);
+
+            /**
+             * VALUABLE_ACCESS
+             * http://apiok.ru/wiki/pages/viewpage.action?pageId=83034588
+             * http://apiok.ru/wiki/pages/viewpage.action?pageId=81822097
+             */
             Helper::dd($friends);
 
 
