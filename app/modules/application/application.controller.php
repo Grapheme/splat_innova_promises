@@ -132,7 +132,7 @@ class ApplicationController extends BaseController {
         $existing_friends = new Collection();
         $non_existing_friends = new Collection();
 
-        Helper::ta($user);
+        #Helper::ta($user);
 
         switch ($user->auth_method) {
 
@@ -611,7 +611,7 @@ class ApplicationController extends BaseController {
                     $user->extract(1);
                     #$user->extract();
 
-                    #Helper::ta($user);
+                    Helper::tad($user);
 
                     $user->full_social_info = json_decode($user->full_social_info, 1);
                     $user->friends = json_decode($user->friends, 1);
