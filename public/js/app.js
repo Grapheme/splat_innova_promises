@@ -175,3 +175,14 @@ function getCookie(name) {
 	}
 	return(setStr);
 }
+
+/********************************************************************************** */
+
+
+    $(document).on('click', '.vk-oauth-link', function(e){
+        e.preventDefault();
+
+        var params = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=800,height=600"
+        window.open('https://oauth.vk.com/authorize?client_id=4659025&scope=friends,email,offline,nohttps&redirect_uri=' + domain + '/vk-oauth&response_type=code&v=5.27', 'vk-oauth', params);
+        return false;
+    });

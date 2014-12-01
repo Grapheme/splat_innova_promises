@@ -22,4 +22,5 @@
 
         <script>
         var base_url = '{{ URL::to('') }}';
+        var domain = 'http://splat.dev.grapheme.ru';
         </script>

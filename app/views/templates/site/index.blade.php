@@ -234,15 +234,32 @@ $fb_friends_limit = 99;
 
 
     <!--
+    http://ok.ru/game/1110811904
     http://api.mail.ru/docs/guides/ok_sites/
+    SERVER AUTH: http://apiok.ru/wiki/pages/viewpage.action?pageId=81822109
+    OAUTH 2.0:   http://apiok.ru/wiki/display/api/Authorization+OAuth+2.0
+    API REQUEST: http://apiok.ru/wiki/pages/viewpage.action?pageId=46137373
     -->
     <link href="http://www.odnoklassniki.ru/oauth/resources.do?type=css" rel="stylesheet">
     <script src="http://www.odnoklassniki.ru/oauth/resources.do?type=js" type="text/javascript" charset="utf-8">
     </script>
 
     <a class="odkl-oauth-lnk" href=""
-         onclick="ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT', 'http://splat.dev.grapheme.ru/ok-oauth' ); return false;">
+         onclick="ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT', domain + '/ok-oauth' ); return false;">
     </a>
+
+
+
+
+
+
+    <hr/>
+
+
+
+
+    <a href="#" class="vk-oauth-link">Авторизоваться ВК</a>
+
 
 @stop
 
