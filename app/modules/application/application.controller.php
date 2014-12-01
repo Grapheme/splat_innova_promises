@@ -284,7 +284,7 @@ class ApplicationController extends BaseController {
 
     }
 
-    private function checkUserData($data) {
+    private function checkUserData($data, $internal_request = false) {
 
         $user_id = NULL;
 
@@ -370,7 +370,10 @@ class ApplicationController extends BaseController {
 
         #die;
 
-        return Response::json($json_request, 200);
+        if ($internal_request)
+            return $json_request;
+        else
+            return Response::json($json_request, 200);
     }
 
 
@@ -514,6 +517,13 @@ class ApplicationController extends BaseController {
             $user = json_decode($s, true);
 
             Helper::d($user);
+
+            $user['identity'] = 'http://ok.ru/profile/' . $user['uid'];
+            $user['bdate'] = $user['birthday'];
+
+            $check = $this->checkUserData($user);
+
+            Helper::d($check);
 
             die;
 
