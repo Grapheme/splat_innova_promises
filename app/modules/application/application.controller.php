@@ -538,7 +538,7 @@ class ApplicationController extends BaseController {
             ...
             */
 
-            Helper::d($user);
+            #Helper::d($user);
 
             if (!@$user['uid']) {
                 echo "Не удается выполнить вход. Повторите попытку позднее (2).";
@@ -549,7 +549,7 @@ class ApplicationController extends BaseController {
             $user['bdate'] = @$user['birthday'];
 
             $check = $this->checkUserData($user, true);
-            Helper::d($check);
+            #Helper::d($check);
 
             if (!@$check['user']['user_token']) {
                 echo "Не удается выполнить вход. Повторите попытку позднее (3).";
