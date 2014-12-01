@@ -228,8 +228,29 @@ class ApplicationController extends BaseController {
                 ;
                 Helper::ta($existing_friends_temp);
 
-                $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'value', 'dicval_id');
-                Helper::tad($existing_friends_list);
+                /**
+                 * Здесь может понадобится доп. проверка на принадлежность записей словарю users
+                 */
+
+                $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'dicval_id', 'value');
+                Helper::ta($existing_friends_list);
+
+                /**
+                 * Сопоставляем установивших приложение друзей и ID профиля в системе
+                 */
+                $friends = $existing_friends;
+                foreach ($friends as $f => $friend) {
+                    $profile_id = @$existing_friends_list[$friend['identity']];
+                    if (!$profile_id)
+                        continue;
+                    $friend['profile_id'] = $profile_id;
+                    $friends[$f] = $friend;
+                }
+                $existing_friends = $friends;
+                Helper::tad($existing_friends);
+
+
+
 
 
                 /**
