@@ -111,6 +111,24 @@ class Dictionary extends BaseModel {
         return $array;
     }
 
+    public static function modifyAttrKeys(&$collection, $relation_name = '', $key = 'slug') {
+        #Helper::d($collection);
+        #$array = array();
+        $array = array();
+
+        foreach ($collection->attributes[$relation_name] as $c => $col) {
+            $current_key = is_object($col) ? $col->$key : @$col[$key];
+            if (NULL !== $current_key) {
+                $array[$current_key] = $col;
+            }
+        }
+        #return $array;
+        unset($collection->attributes[$relation_name]);
+        $collection->attributes[$relation_name] = $array;
+
+        #Helper::dd($collection);
+    }
+
     /**
      * В функцию передается коллекция объектов, полученная из Eloguent методом ->get(),
      * которая имеет в себе некоторую коллекцию прочих объектов, полученную через связь hasMany (с помощью ->with('...')).

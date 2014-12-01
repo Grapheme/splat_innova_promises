@@ -134,15 +134,16 @@ $fb_friends_limit = 99;
 
           console.log('Successful login for: ' + response.name);
           console.log(response)
-          document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+          //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
 
             /**
              * FB - Отправляем запрос на сервер для добавления пользователя
              */
             var promise_text = $('.promise_text').val();
             var data = response;
-            data.identity = response.link;
-            data.network = 'facebook';
+            data.auth_method = 'facebook';
+            //data.identity = response.link;
+            data.identity = 'https://www.facebook.com/profile.php?id=' + data.id;
             $.ajax({
                 url: base_url + '/user-auth',
                 type: 'POST',

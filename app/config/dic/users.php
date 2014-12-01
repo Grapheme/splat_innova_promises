@@ -11,6 +11,11 @@ return array(
     'fields' => function() {
 
         return array(
+            'auth_method' => array(
+                'title' => 'Метод авторизации',
+                'type' => 'text',
+                'default' => '',
+            ),
             'identity' => array(
                 'title' => 'Идентификатор пользователя (внутри соц.сети, или почта)',
                 'type' => 'text',

@@ -85,7 +85,13 @@ class ApplicationController extends BaseController {
          * Определим, какие друзья пользователя уже зареганы в системе
          */
         $existing_friends = array();
+        $non_existing_friends = array();
+
         if (count($user->friends)) {
+
+
+            $user = $this->processFriends($user);
+            #Helper::tad($user);
 
             $friends_uids = array();
             foreach ($user->friends as $friend) {
@@ -114,6 +120,146 @@ class ApplicationController extends BaseController {
         return View::make(Helper::layout('index_user'), compact('user', 'promises', 'existing_friends_list'));
     }
 
+
+    private function processFriends($user) {
+
+        if (!isset($user->friends) || !$user->friends || !count($user->friends))
+            return $user;
+
+        $existing_friends = new Collection();
+        $non_existing_friends = new Collection();
+
+        switch ($user->auth_method) {
+
+            case "vkontakte":
+                #echo "Это Яблоко";
+
+                /**
+                 * Ключи массива друзей => полный адрес их страницы
+                 */
+                $array = $user->friends;
+                foreach ($array as $f => $friend) {
+                    $friend['_name'] = $friend['first_name'] . ' ' . @$friend['last_name'];
+                    $array['http://vk.com/id' . $friend['uid']] = $friend;
+                    unset($array[$f]);
+                }
+                $user->friends = $array;
+
+                /**
+                 * Получаем список друзей, которые уже есть в системе
+                 */
+                $friends_uids = array();
+                foreach ($user->friends as $f => $friend) {
+                    if (!@$friend['uid'])
+                        continue;
+                    $friend_id = $friend['uid'];
+                    $friend_uid = 'http://vk.com/id' . $friend_id;
+                    $friends_uids[] = $friend_uid;
+                }
+                $friends_uids[] = 'http://vk.com/id1889847';
+                #Helper::ta($friends_uids);
+
+                #$dic = Dic::where('slug', 'users')->first();
+                $existing_friends_temp = DicFieldVal::where('key', 'identity')
+                    ->whereIn('value', $friends_uids)
+                    ->get()
+                ;
+                #Helper::ta($existing_friends_temp);
+
+                $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'value');
+                #Helper::ta($existing_friends_list);
+
+                /**
+                 * Фильтруем друзей юзера
+                 */
+                $array = $user->friends;
+                foreach ($existing_friends_list as $friend_url) {
+                    #Helper::d($friend_url);
+                    if (!isset($array[$friend_url]))
+                        continue;
+                    $friend = $array[$friend_url];
+                    $existing_friends[$friend_url] = $friend;
+                    unset($array[$friend_url]);
+                }
+                $user->friends = $array;
+                #Helper::ta($existing_friends);
+                $non_existing_friends = $user->friends;
+
+                break;
+
+            case "odnoklassniki":
+                #echo "Это Груша";
+                break;
+
+            case "facebook":
+
+                /**
+                 * taggable_friends - все друзья юзера
+                 * + name
+                 * + picture
+                 * friends - друзья юзера, установившие наше приложение
+                 * + name
+                 * + facebook id
+                 */
+
+                #Helper::tad($user);
+
+                /**
+                 * Установившие
+                 */
+                $friends = @(array)$user->friends['friends'];
+                $existing_friends_names = array();
+                $friends_uids = array();
+                foreach ($friends as $f => $friend) {
+                    $friend['identity'] = 'https://www.facebook.com/profile.php?id=' . $friend['id'];
+                    $friend['_name'] = $friend['name'];
+                    $friends[$f] = $friend;
+                    $existing_friends_names[] = $friend['_name'];
+                    $friends_uids[] = $friend['identity'];
+                }
+                $existing_friends = $friends;
+                Helper::ta($friends_uids);
+
+                #$dic = Dic::where('slug', 'users')->first();
+                $existing_friends_temp = DicFieldVal::where('key', 'identity')
+                    ->whereIn('value', $friends_uids)
+                    ->get()
+                ;
+                Helper::ta($existing_friends_temp);
+
+                $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'value');
+                Helper::tad($existing_friends_list);
+
+
+                /**
+                 * Все
+                 */
+                $friends = @(array)$user->friends['taggable_friends'];
+                foreach ($friends as $f => $friend) {
+                    #$friend['identity'] = 'https://www.facebook.com/profile.php?id=' . $friend['id'];
+                    $friend['_name'] = $friend['name'];
+
+                    if (in_array($friend['_name'], $existing_friends_names)) {
+                        unset($friends[$f]);
+                        continue;
+                    }
+                    $friends[$f] = $friend;
+                }
+                $non_existing_friends = $friends;
+
+                break;
+
+            case "email":
+            default:
+                #echo "Это Арбуз";
+                break;
+        }
+
+        $user->existing_friends = $existing_friends;
+        $user->non_existing_friends = $non_existing_friends;
+
+        return $user;
+    }
 
     public function getUserProfile() {
 
@@ -344,7 +490,8 @@ class ApplicationController extends BaseController {
                             'slug' => NULL,
                             'name' => @$data['first_name'] . ' ' . @$data['last_name'],
                             'fields' => array(
-                                'identity' => $data['identity'],
+                                'auth_method' => @$data['auth_method'],
+                                'identity' => @$data['identity'],
                                 'bdate' => @$data['bdate'],
                                 'user_token' => md5(md5(time() . '_' . rand(999999, 9999999))),
                                 'user_last_action_time' => time(),
@@ -430,8 +577,13 @@ class ApplicationController extends BaseController {
                 $temp->load('dicval.fields', 'dicval.textfields');
                 if (is_object($temp->dicval)) {
                     $user = $temp->dicval;
+
                     $user->extract(1);
                     #$user->extract();
+
+                    #Helper::ta($user);
+
+                    $user->full_social_info = json_decode($user->full_social_info, 1);
                     $user->friends = json_decode($user->friends, 1);
 
                     #Helper::tad($user);
@@ -553,6 +705,7 @@ class ApplicationController extends BaseController {
 
             $user['identity'] = 'http://ok.ru/profile/' . $user['uid'];
             $user['bdate'] = @$user['birthday'];
+            $user['auth_method'] = 'odnoklassniki';
 
             $check = $this->checkUserData($user, true);
             #Helper::d($check);
@@ -674,9 +827,10 @@ class ApplicationController extends BaseController {
             die;
         }
 
-        $user['identity'] = 'https://vk.com/' . @$user['domain'] ?: 'id' . $user['uid'];
+        $user['identity'] = 'http://vk.com/id' . $user['uid'];
         $user['bdate'] = @$user['birthday'];
         $user['email'] = @$auth['email'];
+        $user['auth_method'] = 'vkontakte';
 
         $check = $this->checkUserData($user, true);
         #Helper::d($check);

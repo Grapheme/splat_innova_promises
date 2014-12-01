@@ -43,39 +43,27 @@
 
         <br/><br/>
 
-        @if (count($user->friends))
+        @if (count($user->friends) || 1)
 
             Мои друзья:<br/>
 
-            @if (count($existing_friends_list))
+            @if (count($user->existing_friends))
+                Уже в системе:
                 <ul>
-                @foreach ($user->friends as $friend)
-                    <?
-                    $friend_uid = 'http://vk.com/id' . @$friend['uid'] ?: @$friend['id'];
-                    if (!in_array($friend_uid, $existing_friends_list))
-                        continue;
-
-                    ?>
+                @foreach ($user->existing_friends as $friend)
                     <li>
-                        {{ @$friend['first_name'] }} {{ @$friend['last_name'] }}
+                        {{ @$friend['_name'] }}
                     </li>
                 @endforeach
                 </ul>
             @endif
 
-            @if (
-                !count($existing_friends_list)
-                || (count($existing_friends_list) < count($user->friends))
-            )
+            @if (count($user->non_existing_friends))
+                Можно пригласить:
                 <ul>
-                    @foreach ($user->friends as $friend)
-                        <?
-                        $friend_uid = 'http://vk.com/id' . @$friend['uid'] ?: @$friend['id'];
-                        if (in_array($friend_uid, $existing_friends_list))
-                            continue;
-                        ?>
+                    @foreach ($user->non_existing_friends as $friend)
                         <li>
-                            {{ @$friend['first_name'] }} {{ @$friend['last_name'] }}
+                            {{ @$friend['_name'] }}
                         </li>
                     @endforeach
                 </ul>
