@@ -87,11 +87,11 @@ class ApplicationController extends BaseController {
 
             $friends_uids = array();
             foreach ($user->friends as $friend) {
-                $friend_id = @$friend['uid'] ?: $friend['id'];
+                $friend_id = @$friend['uid'] ?: @$friend['id'];
                 $friend_uid = 'http://vk.com/id' . $friend_id;
                 $friends_uids[] = $friend_uid;
             }
-            $friends_uids[] = 'http://vk.com/id1889847';
+            #$friends_uids[] = 'http://vk.com/id1889847';
 
             #Helper::ta($friends_uids);
 
