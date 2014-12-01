@@ -556,6 +556,23 @@ class ApplicationController extends BaseController {
                 die;
             }
 
+
+
+
+            $friends_get_url = "http://api.odnoklassniki.ru/fb.do?method=friends.get&application_key="
+                . $AUTH['application_key']
+                . "&sig=" . md5('application_key=' . $AUTH['application_key'] . 'method=friends.get' . md5($auth['access_token'] . $AUTH['client_secret']));
+
+            $curl = curl_init($friends_get_url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            $friends = curl_exec($curl);
+            curl_close($curl);
+            #$user = json_decode($s, true);
+            Helper::dd($friends);
+
+
+
+
             setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
 
             echo "
@@ -568,11 +585,14 @@ class ApplicationController extends BaseController {
 
             die;
 
-            header('Location: /'); // редиректим после авторизации на главную страницу
+            #header('Location: /'); // редиректим после авторизации на главную страницу
 
         } else {
 
-            header('Location: http://www.odnoklassniki.ru/oauth/authorize?client_id=' . $AUTH['client_id'] . '&scope=VALUABLE ACCESS&response_type=code&redirect_uri=' . urlencode($HOST . 'auth.php?name=odnoklassniki'));
+            echo "Не удается выполнить вход. Повторите попытку позднее (0).";
+            die;
+
+            #header('Location: http://www.odnoklassniki.ru/oauth/authorize?client_id=' . $AUTH['client_id'] . '&scope=VALUABLE ACCESS&response_type=code&redirect_uri=' . urlencode($HOST . 'auth.php?name=odnoklassniki'));
         }
 
     }
