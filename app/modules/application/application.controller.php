@@ -534,7 +534,8 @@ class ApplicationController extends BaseController {
 
             echo "
             <script>
-            parent.location = parent.location;
+            //parent.location = parent.location;
+            window.close();
             </script>
             ";
 
