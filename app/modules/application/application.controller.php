@@ -628,14 +628,14 @@ class ApplicationController extends BaseController {
 
         $auth = json_decode($s, true);
 
-        Helper::dd($auth);
+        Helper::d($auth);
 
         if (!@$auth['access_token']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (1).";
             die;
         }
 
-        $curl = curl_init('http://api.odnoklassniki.ru/fb.do?access_token=' . $auth['access_token'] . '&application_key=' . $AUTH['application_key'] . '&method=users.getCurrentUser&sig=' . md5('application_key=' . $AUTH['application_key'] . 'method=users.getCurrentUser' . md5($auth['access_token'] . $AUTH['client_secret'])));
+        $curl = curl_init('https://api.vk.com/method/users.get?access_token=' . $auth['access_token']);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         curl_close($curl);
@@ -658,7 +658,9 @@ class ApplicationController extends BaseController {
         ...
         */
 
-        #Helper::d($user);
+        Helper::d($user);
+
+        die;
 
         if (!@$user['uid']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (2).";
