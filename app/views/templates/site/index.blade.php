@@ -176,10 +176,8 @@ $fb_friends_limit = 99;
                                 url: base_url + '/user-update-friends',
                                 type: 'POST',
                                 dataType: 'json',
-                                data: {user_id: user_data.user.id, friends: friends}
-                            })
-                                .beforeSend(function() {
-
+                                data: {user_id: user_data.user.id, friends: friends},
+                                beforeSend: function() {
                                     // get taggable friends
                                     FB.api('/me/taggable_friends?limit=<?=$fb_friends_limit?>', function(response) {
 
@@ -210,7 +208,8 @@ $fb_friends_limit = 99;
 
                                         friends.friends = response.data;
                                     });
-                                })
+                                }
+                            })
                                 .done(function (response) {
                                     //alert("SUCCESS");
                                     console.log(response);
