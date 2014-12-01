@@ -54,6 +54,7 @@
                     $friend_uid = 'http://vk.com/id' . @$friend['uid'] ?: @$friend['id'];
                     if (!in_array($friend_uid, $existing_friends_list))
                         continue;
+
                     ?>
                     <li>
                         {{ @$friend['first_name'] }} {{ @$friend['last_name'] }}
