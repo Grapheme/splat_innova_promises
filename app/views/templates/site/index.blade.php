@@ -3,8 +3,8 @@
 
 
 <?
-$fb_app_id = '567109573422383';
-$fb_friends_limit = 9;
+$fb_app_id = '1010986995584773';
+$fb_friends_limit = 99;
 ?>
 
 
