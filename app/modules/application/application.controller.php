@@ -144,10 +144,12 @@ class ApplicationController extends BaseController {
                  * Ключи массива друзей => полный адрес их страницы
                  */
                 $array = $user->friends;
+                $friends_uids = array();
                 foreach ($array as $f => $friend) {
                     $friend['_name'] = $friend['first_name'] . ' ' . @$friend['last_name'];
                     $array['http://vk.com/id' . $friend['id']] = $friend;
                     unset($array[$f]);
+                    $friends_uids[] = $f;
                 }
                 $user->friends = $array;
                 #Helper::ta($user->friends);
@@ -155,15 +157,6 @@ class ApplicationController extends BaseController {
                 /**
                  * Получаем список друзей, которые уже есть в системе
                  */
-                $friends_uids = array();
-                foreach ($user->friends as $f => $friend) {
-                    if (!@$friend['uid'])
-                        continue;
-                    $friend_id = $friend['id'];
-                    $friend_uid = 'http://vk.com/id' . $friend_id;
-                    $friends_uids[] = $friend_uid;
-                }
-                #$friends_uids[] = 'http://vk.com/id1889847';
                 Helper::ta($friends_uids);
 
                 if (count($friends_uids)) {
