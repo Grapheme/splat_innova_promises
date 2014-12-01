@@ -695,7 +695,7 @@ class ApplicationController extends BaseController {
 
 
         $friends = DicTextFieldVal::firstOrNew(array(
-            'dicval_id' => $user['uid'],
+            'dicval_id' => $check['user']['id'],
             'key' => 'friends'
         ));
         $friends->value = json_encode($friends);
