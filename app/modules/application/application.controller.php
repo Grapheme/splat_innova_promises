@@ -186,6 +186,9 @@ class ApplicationController extends BaseController {
                 #Helper::ta($existing_friends);
                 $non_existing_friends = $user->friends;
 
+                Helper::ta($existing_friends);
+                Helper::tad($non_existing_friends);
+
                 break;
 
             case "odnoklassniki":
