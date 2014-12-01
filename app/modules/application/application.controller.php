@@ -162,18 +162,18 @@ class ApplicationController extends BaseController {
                     $friend_uid = 'http://vk.com/id' . $friend_id;
                     $friends_uids[] = $friend_uid;
                 }
-                $friends_uids[] = 'http://vk.com/id1889847';
-                Helper::ta($friends_uids);
+                #$friends_uids[] = 'http://vk.com/id1889847';
+                #Helper::ta($friends_uids);
 
                 #$dic = Dic::where('slug', 'users')->first();
                 $existing_friends_temp = DicFieldVal::where('key', 'identity')
                     ->whereIn('value', $friends_uids)
                     ->get()
                 ;
-                Helper::ta($existing_friends_temp);
+                #Helper::ta($existing_friends_temp);
 
                 $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'value');
-                Helper::ta($existing_friends_list);
+                #Helper::ta($existing_friends_list);
 
                 /**
                  * Фильтруем друзей юзера
@@ -191,8 +191,8 @@ class ApplicationController extends BaseController {
                 #Helper::ta($existing_friends);
                 $non_existing_friends = $user->friends;
 
-                Helper::ta($existing_friends);
-                Helper::tad($non_existing_friends);
+                #Helper::ta($existing_friends);
+                #Helper::tad($non_existing_friends);
 
                 break;
 
