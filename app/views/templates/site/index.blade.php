@@ -171,63 +171,48 @@ $fb_friends_limit = 99;
 
                             var friends;
 
-                            $.when(
+                            /**
+                             * STEP 1: taggable_friends
+                             */
+                            FB.api('/me/taggable_friends?limit=<?=$fb_friends_limit?>', function(response) {
 
-                                function() {
-                                    // get taggable friends
-                                    FB.api('/me/taggable_friends?limit=<?=$fb_friends_limit?>', function(response) {
+                                console.log('FB taggable friends list:');
+                                console.log(response);
+                                friends.taggable_friends = response.data;
 
-                                        console.log('FB taggable friends list:');
-                                        console.log(response);
+                                /**
+                                 * STEP 2: friends
+                                 */
+                                // get friends, which also install our app
+                                FB.api('/me/friends?limit=<?=$fb_friends_limit?>', function(response) {
 
-                                        friends.taggable_friends = response.data;
+                                    console.log('FB friends list:');
+                                    console.log(response);
+                                    friends.friends = response.data;
 
-                                        /*
-                                        var result_holder = document.getElementById('result_friends');
-                                        var friend_data = response.data;
-                                        var results = '';
-                                        for (var i = 0; i < friend_data.length; i++) {
-                                            //results += '<div><img src="https://graph.facebook.com/' + friend_data[i].id + '/picture">' + friend_data[i].name + '</div>';
-                                            results += '<div><img src="' + friend_data[i].picture.data.url + '">' + friend_data[i].name + '</div>';
-                                        }
-
-                                        // and display them at our holder element
-                                        result_holder.innerHTML = '<h2>Список ваших друзей:</h2>' + results;
-                                        */
-                                    });
-
-                                    // get friends, which also install our app
-                                    FB.api('/me/friends?limit=<?=$fb_friends_limit?>', function(response) {
-
-                                        console.log('FB friends list:');
-                                        console.log(response);
-
-                                        friends.friends = response.data;
-                                    });
-                                }
-
-                            ).then(
-
-                                $.ajax({
-                                    url: base_url + '/user-update-friends',
-                                    type: 'POST',
-                                    dataType: 'json',
-                                    data: {user_id: user_data.user.id, friends: friends}
-                                })
-                                    .done(function (response) {
-                                        //alert("SUCCESS");
-                                        console.log(response);
-
-                                        //alert('RELOAD PAGE');
-                                        location.href = base_url + '';
+                                    /**
+                                     * STEP 3: save friends
+                                     */
+                                    $.ajax({
+                                        url: base_url + '/user-update-friends',
+                                        type: 'POST',
+                                        dataType: 'json',
+                                        data: {user_id: user_data.user.id, friends: friends}
                                     })
-                                    .fail(function (jqXHR, textStatus, errorThrown) {
-                                        //alert('ERROR');
-                                        console.log(textStatus);
-                                    })
+                                        .done(function (response) {
+                                            //alert("SUCCESS");
+                                            console.log(response);
 
-                            );
-
+                                            //alert('RELOAD PAGE');
+                                            location.href = base_url + '';
+                                        })
+                                        .fail(function (jqXHR, textStatus, errorThrown) {
+                                            //alert('ERROR');
+                                            console.log(textStatus);
+                                        })
+                                    ;
+                                });
+                            });
 
                         }
 
