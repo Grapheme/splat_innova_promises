@@ -12,6 +12,8 @@ class ApplicationController extends BaseController {
 
         Route::group(array(), function() {
 
+            Route::get('/ok-oauth', array('as' => 'app.ok-oauth', 'uses' => __CLASS__.'@getOkOauth'));
+
             Route::get('/', array('as' => 'app.mainpage', 'uses' => __CLASS__.'@getAppMainPage'));
             Route::get('/profile', array('as' => 'app.profile', 'uses' => __CLASS__.'@getUserProfile'));
             Route::get('/new_promise', array('as' => 'app.new_promise', 'uses' => __CLASS__.'@getNewPromise'));
@@ -476,6 +478,59 @@ class ApplicationController extends BaseController {
         }
 
         return $promises;
+    }
+
+
+    public function ok_oauth() {
+
+        $HOST = $_SERVER['HTTP_HOST'];
+        $AUTH['client_id'] = '1110811904';
+        $AUTH['client_secret'] = '3AA5F4157946E5DED5F7544B';
+        $AUTH['application_key'] = 'CBAGKGDDEBABABABA';
+
+        if (isset($_GET['code'])) {
+
+            $curl = curl_init('http://api.odnoklassniki.ru/oauth/token.do');
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, 'code=' . $_GET['code'] . '&redirect_uri=' . urlencode($HOST . 'auth.php?name=odnoklassniki') . '&grant_type=authorization_code&client_id=' . $AUTH['client_id'] . '&client_secret=' . $AUTH['client_secret']);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            $s = curl_exec($curl);
+            curl_close($curl);
+
+            $auth = json_decode($s, true);
+
+            $curl = curl_init('http://api.odnoklassniki.ru/fb.do?access_token=' . $auth['access_token'] . '&application_key=' . $AUTH['application_key'] . '&method=users.getCurrentUser&sig=' . md5('application_key=' . $AUTH['application_key'] . 'method=users.getCurrentUser' . md5($auth['access_token'] . $AUTH['client_secret'])));
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            $s = curl_exec($curl);
+            curl_close($curl);
+            $user = json_decode($s, true);
+
+            Helper::dd($user);
+
+            /*
+            Массив $user содержит следующие поля:
+            uid - уникальный номер пользователя
+            first_name - имя пользователя
+            last_name - фамилия пользователя
+            birthday - дата рождения пользователя
+            gender - пол пользователя
+            pic_1 - маленькое фото
+            pic_2 - большое фото
+            */
+
+            /*
+            ...
+            Записываем полученные данные в базу, устанавливаем cookies
+            ...
+            */
+
+            header('Location: /'); // редиректим после авторизации на главную страницу
+
+        } else {
+
+            header('Location: http://www.odnoklassniki.ru/oauth/authorize?client_id=' . $AUTH['client_id'] . '&scope=VALUABLE ACCESS&response_type=code&redirect_uri=' . urlencode($HOST . 'auth.php?name=odnoklassniki'));
+        }
+
     }
 
 }

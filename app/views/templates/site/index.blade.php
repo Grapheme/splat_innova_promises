@@ -216,15 +216,34 @@ $fb_friends_limit = 99;
     -->
 
     <div id="fb-root"></div>
-
     <fb:login-button scope="public_profile,email,user_birthday,user_photos,user_friends" onlogin="checkLoginState();">
     </fb:login-button>
-
     <div id="status"></div>
-
     <div id="result_friends"></div>
 
 
+
+
+
+
+
+    <hr/>
+
+
+
+
+
+    <!--
+    http://api.mail.ru/docs/guides/ok_sites/
+    -->
+    <link href="http://www.odnoklassniki.ru/oauth/resources.do?type=css" rel="stylesheet">
+    <script src="http://www.odnoklassniki.ru/oauth/resources.do?type=js" type="text/javascript" charset="utf-8">
+    </script>
+
+    <a class="odkl-oauth-lnk"
+         href=""
+         onclick="ODKL.Oauth2(this, 1110811904, 'SET_STATUS;VALUABLE_ACCESS;PHOTO_CONTENT', 'http://splat.dev.grapheme.ru/ok-oauth' );return false;">
+    </a>
 
 @stop
 
