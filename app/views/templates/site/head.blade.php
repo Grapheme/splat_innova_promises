@@ -1,6 +1,3 @@
-<?
-define('domain', 'http://splat.dev.grapheme.ru');
-?>
 @section('title')
 {{{ isset($page_title) ? $page_title : Config::get('app.default_page_title') }}}
 @stop
