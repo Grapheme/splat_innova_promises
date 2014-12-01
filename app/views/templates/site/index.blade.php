@@ -169,7 +169,7 @@ $fb_friends_limit = 99;
                          */
                         if (typeof data.network != 'undefined' && data.network == 'facebook') {
 
-                            var friends;
+                            var friends = {};
 
                             /**
                              * STEP 1: taggable_friends
