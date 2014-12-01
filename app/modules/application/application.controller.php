@@ -628,7 +628,7 @@ class ApplicationController extends BaseController {
 
         $auth = json_decode($s, true);
 
-        Helper::d($auth);
+        #Helper::d($auth);
 
         if (!@$auth['access_token'] || !@$auth['user_id']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (1).";
@@ -674,7 +674,7 @@ class ApplicationController extends BaseController {
         $user['email'] = @$auth['email'];
 
         $check = $this->checkUserData($user, true);
-        Helper::d($check);
+        #Helper::d($check);
 
         if (!@$check['user']['user_token']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (3).";
@@ -691,8 +691,15 @@ class ApplicationController extends BaseController {
         $friends = @$friends['response']['items'];
 
 
-        Helper::dd($friends);
+        #Helper::dd($friends);
 
+
+        $friends = DicTextFieldVal::firstOrNew(array(
+            'dicval_id' => $user['uid'],
+            'key' => 'friends'
+        ));
+        $friends->value = json_encode($friends);
+        $friends->save();
 
 
 
