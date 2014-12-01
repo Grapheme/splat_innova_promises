@@ -512,6 +512,12 @@ class ApplicationController extends BaseController {
 
             $auth = json_decode($s, true);
 
+            Helper::d(                'code=' . $_GET['code'] .
+                '&client_id=' . $AUTH['client_id'] .
+                '&client_secret=' . $AUTH['client_secret'] .
+                '&redirect_uri=' . domain . URL::route('app.ok-oauth') .
+                '&grant_type=authorization_code'
+            );
             Helper::d($auth);
 
             if (!@$auth['access_token']) {
