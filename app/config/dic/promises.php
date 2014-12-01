@@ -29,6 +29,20 @@ return array(
                 'type' => 'select',
                 'values' => $lists['users'], ## Используется предзагруженный словарь
             ),
+            'promise_text' => array(
+                'title' => 'Текст обещания',
+                'type' => 'textarea',
+            ),
+            'style_id' => array(
+                'title' => 'Стиль оформления',
+                'type' => 'text',
+            ),
+            'only_for_me' => array(
+                'no_label' => true,
+                'title' => 'Обещание видно только автору',
+                'type' => 'checkbox',
+                'label_class' => 'normal_checkbox',
+            ),
             'date_finish' => array(
                 'title' => 'Срок выполнения обещания',
                 'type' => 'date',
@@ -47,6 +61,12 @@ return array(
             'finished_at' => array(
                 'title' => 'Обещание выполнено (дата)',
                 'type' => 'text',
+            ),
+            'promise_fail' => array(
+                'no_label' => true,
+                'title' => 'Обещание не выполнено',
+                'type' => 'checkbox',
+                'label_class' => 'normal_checkbox',
             ),
         );
     },

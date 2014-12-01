@@ -427,6 +427,7 @@ class DicVal extends BaseModel {
      * @return Collection
      */
     public static function extracts($elements, $unset = false, $extract_ids = true) {
+
         $return = new Collection;
         #Helper::dd($return);
         foreach ($elements as $e => $element) {
@@ -448,43 +449,46 @@ class DicVal extends BaseModel {
         #Helper::ta($this);
 
         ## Extract all fields (without language & all i18n)
-        if (isset($this->allfields) && @is_object($this->allfields) && count($this->allfields)) {
+        if (isset($this->allfields) && @is_object($this->allfields)) {
 
-            foreach ($this->allfields as $field) {
-                $this->{$field->key} = $field->value;
-            }
+            if (count($this->allfields))
+                foreach ($this->allfields as $field) {
+                    $this->{$field->key} = $field->value;
+                }
             if ($unset)
                 unset($this->allfields);
 
-        } elseif (isset($this->fields) && @is_object($this->fields) && count($this->fields)) {
+        } elseif (isset($this->fields) && @is_object($this->fields)) {
 
             ## Extract fields (with NULL language or language = default locale)
-            foreach ($this->fields as $field) {
-                $this->{$field->key} = $field->value;
-            }
+            if (count($this->fields))
+                foreach ($this->fields as $field) {
+                    $this->{$field->key} = $field->value;
+                }
             if ($unset)
                 unset($this->fields);
 
         }
 
         ## Extract all text fields (without language & all i18n)
-        if (isset($this->alltextfields) && @is_object($this->alltextfields) && count($this->alltextfields)) {
+        if (isset($this->alltextfields) && @is_object($this->alltextfields)) {
 
-            foreach ($this->alltextfields as $textfield) {
-                $this->{$textfield->key} = $textfield->value;
-            }
+            if (count($this->alltextfields))
+                foreach ($this->alltextfields as $textfield) {
+                    $this->{$textfield->key} = $textfield->value;
+                }
             if ($unset)
                 unset($this->alltextfields);
 
-        } elseif (isset($this->textfields) && @is_object($this->textfields) && count($this->textfields)) {
+        } elseif (isset($this->textfields) && @is_object($this->textfields)) {
 
             ## Extract text fields (with NULL language or language = default locale)
-            foreach ($this->textfields as $textfield) {
-                $this->{$textfield->key} = $textfield->value;
-            }
+            if (count($this->textfields))
+                foreach ($this->textfields as $textfield) {
+                    $this->{$textfield->key} = $textfield->value;
+                }
             if ($unset)
                 unset($this->textfields);
-
         }
 
         ## Extract SEOs
@@ -520,7 +524,7 @@ class DicVal extends BaseModel {
         }
 
         ## Extract meta
-        if (isset($this->meta)) {
+        if (isset($this->relations['meta'])) {
 
             if (
                 is_object($this->meta)
@@ -528,22 +532,22 @@ class DicVal extends BaseModel {
             ) {
                 if ($this->meta->name != '')
                     $this->name = $this->meta->name;
-
             }
 
             if ($unset)
-                unset($this->meta);
+                unset($this->relations['meta']);
         }
 
         #Helper::ta($this);
 
         ## Extract versions
         if (isset($this->versions)) {
-            foreach ($this->versions as $v => $version) {
-                $this->versions[$version->id] = $version;
-                if ($v != $version->id || (int)$v === 0)
-                    unset($this->versions[$v]);
-            }
+            if (count($this->versions))
+                foreach ($this->versions as $v => $version) {
+                    $this->versions[$version->id] = $version;
+                    if ($v != $version->id || (int)$v === 0)
+                        unset($this->versions[$v]);
+                }
         }
 
         return $this;
@@ -788,4 +792,23 @@ class DicVal extends BaseModel {
         return $this->related_dicvals();
     }
 
+
+
+    public function update_field($key, $value, $lang = NULL) {
+
+        if (!$this->id)
+            return false;
+
+        $dicval = DicFieldVal::firstOrNew(array(
+            'dicval_id' => $this->id,
+            'language' => $lang,
+            'key' => $key,
+        ));
+        $dicval->value = $value;
+        $dicval->save();
+
+        $this->$key = $value;
+
+        return $dicval;
+    }
 }
