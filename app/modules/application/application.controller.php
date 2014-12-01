@@ -161,6 +161,7 @@ class ApplicationController extends BaseController {
                 #Helper::ta($friends_uids);
 
                 if (count($friends_uids)) {
+
                     #$dic = Dic::where('slug', 'users')->first();
                     $existing_friends_temp = DicFieldVal::where('key', 'identity')
                         ->whereIn('value', $friends_uids)
@@ -168,22 +169,41 @@ class ApplicationController extends BaseController {
                     ;
                     Helper::ta($existing_friends_temp);
 
-                    $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'value');
-                    Helper::ta($existing_friends_list);
+                    if (count($existing_friends_temp)) {
 
-                    /**
-                     * Фильтруем друзей юзера
-                     */
-                    $array = $user->friends;
-                    foreach ($existing_friends_list as $friend_url) {
-                        #Helper::d($friend_url);
-                        if (!isset($array[$friend_url]))
-                            continue;
-                        $friend = $array[$friend_url];
-                        $existing_friends[$friend_url] = $friend;
-                        unset($array[$friend_url]);
+                        $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'dicval_id', 'value');
+                        Helper::ta($existing_friends_list);
+
+                        /**
+                         * Фильтруем друзей юзера
+                         */
+                        $array = $user->friends;
+                        foreach ($existing_friends_list as $friend_url) {
+                            #Helper::d($friend_url);
+                            if (!isset($array[$friend_url]))
+                                continue;
+                            $friend = $array[$friend_url];
+                            $existing_friends[$friend_url] = $friend;
+                            unset($array[$friend_url]);
+                        }
+                        $user->friends = $array;
+
+                        /**
+                         * Сопоставляем установивших приложение друзей и ID профиля в системе
+                         */
+                        $friends = $existing_friends;
+                        foreach ($friends as $f => $friend) {
+                            $profile_id = @$existing_friends_list[$friend['identity']];
+                            if (!$profile_id)
+                                continue;
+                            $friend['profile_id'] = $profile_id;
+                            $friends[$f] = $friend;
+                        }
+                        $existing_friends = $friends;
+                        #Helper::tad($existing_friends);
+
                     }
-                    $user->friends = $array;
+
                 }
 
 
