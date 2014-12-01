@@ -640,6 +640,7 @@ class ApplicationController extends BaseController {
         $s = curl_exec($curl);
         curl_close($curl);
         $user = json_decode($s, true);
+        $user = $user['response'][0];
 
         /*
         Массив $user содержит следующие поля:
