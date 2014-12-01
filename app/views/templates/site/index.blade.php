@@ -245,7 +245,7 @@ $fb_friends_limit = 99;
     </script>
 
     <a class="odkl-oauth-lnk" href=""
-         onclick="ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT', '{{ domain }}}/ok-oauth' ); return false;">
+         onclick="ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT', '{{ domain }}/ok-oauth' ); return false;">
     </a>
 
 
