@@ -19,6 +19,7 @@ class ApplicationController extends BaseController {
             Route::get('/profile', array('as' => 'app.profile', 'uses' => __CLASS__.'@getUserProfile'));
             Route::get('/new_promise', array('as' => 'app.new_promise', 'uses' => __CLASS__.'@getNewPromise'));
 
+            Route::get('/profile/{id}', array('as' => 'app.profile_id', 'uses' => __CLASS__.'@getProfileByID'));
             Route::get('/promise/{id}', array('as' => 'app.promise', 'uses' => __CLASS__.'@getPromise'));
 
             Route::any('/update_profile', array('as' => 'app.update_profile', 'uses' => __CLASS__.'@postUserUpdateProfile'));
@@ -218,7 +219,7 @@ class ApplicationController extends BaseController {
                     $friends_uids[] = $friend['identity'];
                 }
                 $existing_friends = $friends;
-                Helper::ta($friends_uids);
+                #Helper::ta($friends_uids);
 
                 #$dic = Dic::where('slug', 'users')->first();
                 $existing_friends_temp = DicFieldVal::where('key', 'identity')
@@ -227,7 +228,7 @@ class ApplicationController extends BaseController {
                 ;
                 Helper::ta($existing_friends_temp);
 
-                $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'value');
+                $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'value', 'dicval_id');
                 Helper::tad($existing_friends_list);
 
 
@@ -876,6 +877,13 @@ class ApplicationController extends BaseController {
 
         #header('Location: /'); // редиректим после авторизации на главную страницу
 
+    }
+
+
+
+    public function getProfileByID($id) {
+
+        Helper::dd($id);
     }
 
 }
