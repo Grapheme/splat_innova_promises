@@ -150,7 +150,7 @@ class ApplicationController extends BaseController {
                     unset($array[$f]);
                 }
                 $user->friends = $array;
-                Helper::ta($user->friends);
+                #Helper::ta($user->friends);
 
                 /**
                  * Получаем список друзей, которые уже есть в системе
