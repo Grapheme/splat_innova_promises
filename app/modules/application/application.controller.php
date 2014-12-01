@@ -510,6 +510,7 @@ class ApplicationController extends BaseController {
             $s = curl_exec($curl);
             curl_close($curl);
 
+
             $auth = json_decode($s, true);
 
             Helper::d(                'code=' . $_GET['code'] .
