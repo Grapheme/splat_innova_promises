@@ -521,7 +521,7 @@ class ApplicationController extends BaseController {
             $user['identity'] = 'http://ok.ru/profile/' . $user['uid'];
             $user['bdate'] = $user['birthday'];
 
-            $check = $this->checkUserData($user);
+            $check = $this->checkUserData($user, true);
 
             Helper::d($check);
 
