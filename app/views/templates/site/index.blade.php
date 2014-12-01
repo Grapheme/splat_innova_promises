@@ -166,9 +166,9 @@ $fb_friends_limit = 99;
                         setCookie("user_token", user_data.user.user_token, "Mon, 01-Jan-2018 00:00:00 GMT", "/");
 
                         /**
-                         * Отправляем запрос к VK для получения списка друзей
+                         * Отправляем запрос к FB для получения списка друзей
                          */
-                        if (typeof data.network != 'undefined' && data.network == 'facebook') {
+                        if (typeof data.auth_method != 'undefined' && data.auth_method == 'facebook') {
 
                             var friends = {};
 
@@ -205,7 +205,7 @@ $fb_friends_limit = 99;
                                             console.log(response);
 
                                             //alert('RELOAD PAGE');
-                                            location.href = base_url + '';
+                                            //location.href = base_url + '';
                                             location.href = location.href;
                                         })
                                         .fail(function (jqXHR, textStatus, errorThrown) {
