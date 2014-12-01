@@ -88,7 +88,7 @@ class ApplicationController extends BaseController {
         $existing_friends = array();
         $non_existing_friends = array();
 
-        Helper::tad($user);
+        Helper::d('Count user friends: ' . count($user->friends));
 
         if (count($user->friends)) {
 
@@ -135,7 +135,8 @@ class ApplicationController extends BaseController {
         switch ($user->auth_method) {
 
             case "vkontakte":
-                #echo "Это Яблоко";
+
+                echo "Это Яблоко";
 
                 /**
                  * Ключи массива друзей => полный адрес их страницы
@@ -160,17 +161,17 @@ class ApplicationController extends BaseController {
                     $friends_uids[] = $friend_uid;
                 }
                 $friends_uids[] = 'http://vk.com/id1889847';
-                #Helper::ta($friends_uids);
+                Helper::ta($friends_uids);
 
                 #$dic = Dic::where('slug', 'users')->first();
                 $existing_friends_temp = DicFieldVal::where('key', 'identity')
                     ->whereIn('value', $friends_uids)
                     ->get()
                 ;
-                #Helper::ta($existing_friends_temp);
+                Helper::ta($existing_friends_temp);
 
                 $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'value');
-                #Helper::ta($existing_friends_list);
+                Helper::ta($existing_friends_list);
 
                 /**
                  * Фильтруем друзей юзера
