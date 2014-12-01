@@ -146,7 +146,7 @@ class ApplicationController extends BaseController {
                 $array = $user->friends;
                 foreach ($array as $f => $friend) {
                     $friend['_name'] = $friend['first_name'] . ' ' . @$friend['last_name'];
-                    $array['http://vk.com/id' . $friend['uid']] = $friend;
+                    $array['http://vk.com/id' . $friend['id']] = $friend;
                     unset($array[$f]);
                 }
                 $user->friends = $array;
@@ -158,7 +158,7 @@ class ApplicationController extends BaseController {
                 foreach ($user->friends as $f => $friend) {
                     if (!@$friend['uid'])
                         continue;
-                    $friend_id = $friend['uid'];
+                    $friend_id = $friend['id'];
                     $friend_uid = 'http://vk.com/id' . $friend_id;
                     $friends_uids[] = $friend_uid;
                 }
