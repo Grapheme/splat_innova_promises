@@ -688,8 +688,8 @@ class ApplicationController extends BaseController {
         $s = curl_exec($curl);
         #curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept-Language: ru-RU;q=1.0'));
         curl_close($curl);
-        $friends = json_decode($s, true);
-        $friends = @$friends['response']['items'];
+        $user_friends = json_decode($s, true);
+        $user_friends = @$user_friends['response']['items'];
 
 
         #Helper::dd($friends);
@@ -699,7 +699,7 @@ class ApplicationController extends BaseController {
             'dicval_id' => $check['user']['id'],
             'key' => 'friends'
         ));
-        $friends->value = json_encode($friends);
+        $friends->value = json_encode($user_friends);
         $friends->save();
 
 
