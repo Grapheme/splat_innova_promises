@@ -481,7 +481,7 @@ class ApplicationController extends BaseController {
     }
 
 
-    public function ok_oauth() {
+    public function getOkOauth() {
 
         $HOST = $_SERVER['HTTP_HOST'];
         $AUTH['client_id'] = '1110811904';
