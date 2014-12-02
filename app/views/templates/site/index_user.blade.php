@@ -9,7 +9,15 @@
 
 
         <big><a href="{{ $user->identity }}" target="_blank">{{ $user->name }}</a></big>
-        {{ $user->years_old }}
+        @if ($user->years_old)
+            [ {{ $user->years_old }} ]
+        @endif
+        @if ($user->city)
+            {{ $user->city }}
+        @endif
+        @if ($user->country)
+            {{ $user->country }}
+        @endif
         <a href="{{ URL::route('app.profile') }}">Редактировать</a>
         <a href="#" class="logout">Выйти</a>
 
