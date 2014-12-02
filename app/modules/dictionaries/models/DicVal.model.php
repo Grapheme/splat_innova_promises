@@ -790,7 +790,7 @@ class DicVal extends BaseModel {
             return false;
 
         ## Find dicval
-        $dicval = DicVal::find(dicval_id);
+        $dicval = DicVal::find($dicval_id);
         if (!is_object($dicval))
             return false;
 
