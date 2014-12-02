@@ -658,7 +658,7 @@ class ApplicationController extends BaseController {
 
                     $now = (new \Carbon\Carbon())->now();
 
-                    echo $now->format('d.m.Y') . "<br/>";
+                    #echo $now->format('d.m.Y') . "<br/>";
 
                     /**
                      * Определение страны, города, пола и возраста
@@ -699,7 +699,7 @@ class ApplicationController extends BaseController {
                                 $user->city = $user->full_social_info['hometown']['name'];
                             }
                             if (isset($user->full_social_info['birthday']) && $user->full_social_info['birthday']) {
-                                if (preg_match('~\d{2}/\d{2}/\d{4}~is', $user->full_social_info['birthday'])) {
+                                if (preg_match('~\d{2}\/\d{2}\/\d{4}~is', $user->full_social_info['birthday'])) {
                                     $stamp = (new \Carbon\Carbon())->createFromFormat('d/m/Y', $user->full_social_info['birthday']);
                                     $user->years_old = $stamp->diffInYears($now);
                                 }
@@ -709,7 +709,7 @@ class ApplicationController extends BaseController {
 
                     echo $stamp->format('d.m.Y');
 
-                    #Helper::tad($user);
+                    Helper::ta($user);
                 }
             }
 
