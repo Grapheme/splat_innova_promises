@@ -1,3 +1,7 @@
+<?
+$fb_app_id = '1010986995584773';
+$fb_friends_limit = 99;
+?>
 @section('title')
 {{{ isset($page_title) ? $page_title : Config::get('app.default_page_title') }}}
 @stop

@@ -1,13 +1,6 @@
 @extends(Helper::layout())
 
 
-
-<?
-$fb_app_id = '1010986995584773';
-$fb_friends_limit = 99;
-?>
-
-
 @section('style')
     <script>
     var fb_app_id = {{ $fb_app_id  }};
