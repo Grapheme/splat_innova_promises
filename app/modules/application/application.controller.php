@@ -694,11 +694,11 @@ class ApplicationController extends BaseController {
 
                 if ($hide_private_promises) {
 
-                    $tbl_alias_only_for_me = $query->join_field('only_for_my', 'only_for_my', function ($join, $value) use ($user) {
+                    $tbl_alias_only_for_me = $query->join_field('only_for_me', 'only_for_me', function ($join, $value) use ($user) {
                         $join->where($value, '=', NULL);
                     });
 
-                    $query->where('only_for_my', NULL);
+                    $query->where($tbl_alias_only_for_me.'.value', NULL);
                 }
 
             });
