@@ -21,9 +21,11 @@ class ApplicationController extends BaseController {
 
             Route::get('/profile/{id}', array('as' => 'app.profile_id', 'uses' => __CLASS__.'@getProfileByID'));
             Route::get('/invite/{data}', array('as' => 'app.send_invite', 'uses' => __CLASS__.'@getSendInvite'));
+
             Route::get('/promise/{id}', array('as' => 'app.promise', 'uses' => __CLASS__.'@getPromise'));
 
             Route::any('/update_profile', array('as' => 'app.update_profile', 'uses' => __CLASS__.'@postUserUpdateProfile'));
+            Route::any('/send_invite_message', array('as' => 'app.send_invite_message', 'uses' => __CLASS__.'@postSendInviteMessage'));
             Route::any('/add_promise', array('as' => 'app.add_promise', 'uses' => __CLASS__.'@postAddPromise'));
 
             Route::post('/user-auth', array('as' => 'app.user-auth', 'uses' => __CLASS__.'@postUserAuth'));
@@ -962,7 +964,15 @@ class ApplicationController extends BaseController {
 
         $data = base64_decode($data);
 
-        Helper::dd($data);
+        $user_name = $data;
+
+        #Helper::dd($data);
+        return View::make(Helper::layout('send_invite'), compact('user_name'));
+    }
+
+    public function postSendInviteMessage() {
+
+        Helper::dd("Send msg...");
     }
 
 }
