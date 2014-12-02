@@ -943,7 +943,7 @@ class DicVal extends BaseModel {
             #$dicval->relations['metas'] = $metas;
         }
 
-        $dicval->load('fields', 'fields_i18n', 'textfields', 'textfields_i18n', 'metas');
+        $dicval->load('allfields', 'alltextfields', 'metas');
 
         ## RETURN EXTRACTED DICVAL
         return $dicval;
