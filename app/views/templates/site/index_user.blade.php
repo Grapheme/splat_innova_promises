@@ -8,36 +8,32 @@
 @section('content')
 
 
-        Вы вошли как: <a href="{{ $user->identity }}" target="_blank">{{ $user->name }}</a>
-        <a href="{{ URL::route('app.profile') }}">Профиль</a>
+        <big><a href="{{ $user->identity }}" target="_blank">{{ $user->name }}</a></big>
+        <a href="{{ URL::route('app.profile') }}">Редактировать</a>
         <a href="#" class="logout">Выйти</a>
 
         <br/>
 
         Контактов: {{ @count($user->friends) }}<br/>
-        Обещаний: {{ @count($promises) }}
-        @if (@count($promises) && 0)
-            <a href="{{ URL::route('app.promises') }}">просмотр</a>
+        Обещаний: {{ @count($promises) }}<br/>
+
+        @if (isset($promises) && is_object($promises) && count($promises))
+
+            Мои обещания:
+
+            <ul>
+            @foreach ($promises as $promise)
+                {{ Helper::ta_($promise) }}
+                <li><a href="{{ URL::route('app.promise', $promise->id) }}">{{ $promise->name }}</a></li>
+            @endforeach
+            </ul>
+        @else
+
+            Вы еще не давали обещаний.
+
         @endif
+
         <br/>
-
-            @if (isset($promises) && is_object($promises) && count($promises))
-
-                <ul>
-                @foreach ($promises as $promise)
-
-                    {{ Helper::ta_($promise) }}
-
-                    <li><a href="{{ URL::route('app.promise', $promise->id) }}">{{ $promise->name }}</a></li>
-
-                @endforeach
-                </ul>
-
-            @else
-
-                Вы еще не давали обещаний.
-
-            @endif
 
         <a href="{{ URL::route('app.new_promise') }}">Дать обещание</a>
 
@@ -48,7 +44,7 @@
             Мои друзья:<br/>
 
             @if (count($user->existing_friends))
-                Уже в системе:
+                Уже в системе <sup>{{ count($user->existing_friends) }}</sup>:
                 <ul>
                 @foreach ($user->existing_friends as $friend)
                     <li>
@@ -67,7 +63,7 @@
             @endif
 
             @if (count($user->non_existing_friends))
-                Можно пригласить:
+                Можно пригласить ({{ count($user->non_existing_friends) }}):
                 <ul>
                     @foreach ($user->non_existing_friends as $friend)
                         <li>
