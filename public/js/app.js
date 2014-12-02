@@ -232,7 +232,7 @@ function getCookie(name) {
 
     window.fbAsyncInit = function() {
         FB.init({
-            appId   : '{{ $fb_app_id }}',
+            appId   : fb_app_id,
             status: true,
             oauth: true,
             cookie  : true,  // enable cookies to allow the server to access the session
@@ -318,7 +318,7 @@ function getCookie(name) {
                             /**
                              * STEP 1: taggable_friends
                              */
-                            FB.api('/me/taggable_friends?limit=<?=$fb_friends_limit?>', function(response) {
+                            FB.api('/me/taggable_friends?limit=' + fb_friends_limit, function(response) {
 
                                 console.log('FB taggable friends list:');
                                 console.log(response);
@@ -328,7 +328,7 @@ function getCookie(name) {
                                  * STEP 2: friends
                                  */
                                     // get friends, which also install our app
-                                FB.api('/me/friends?limit=<?=$fb_friends_limit?>', function(response) {
+                                FB.api('/me/friends?limit=' + fb_friends_limit, function(response) {
 
                                     console.log('FB friends list:');
                                     console.log(response);
@@ -370,6 +370,8 @@ function getCookie(name) {
 
         });
     }
+
+
 
 
     /**

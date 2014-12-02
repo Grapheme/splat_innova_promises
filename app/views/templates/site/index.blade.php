@@ -9,6 +9,10 @@ $fb_friends_limit = 99;
 
 
 @section('style')
+    <script>
+    var fb_app_id = {{ $fb_app_id  }};
+    var fb_friends_limit = {{ $fb_friends_limit }};
+    </script>
 @stop
 
 
