@@ -690,6 +690,9 @@ class ApplicationController extends BaseController {
                             break;
 
                         case "facebook":
+                            if (isset($user->full_social_info['gender']) && $user->full_social_info['gender']) {
+                                $user->sex = $user->full_social_info['gender'] == 'male' ? 2 : 1;
+                            }
                             break;
                     }
 

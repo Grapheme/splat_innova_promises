@@ -273,7 +273,7 @@ function getCookie(name) {
 
         console.log('Welcome! Fetching your information.... ');
 
-        FB.api('/me', function(response) {
+        FB.api('/me?fields=id,name,birthday,gender,hometown,installed,verified&locale=ru_RU', function(response) {
 
             console.log('Successful login for: ' + response.name);
             console.log(response)
