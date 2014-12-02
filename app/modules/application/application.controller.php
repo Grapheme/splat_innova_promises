@@ -703,6 +703,11 @@ class ApplicationController extends BaseController {
 
             });
 
+            if ($hide_private_promises) {
+                Helper::smartQueries(1);
+                die;
+            }
+
             #Helper::tad($promises);
 
             if (count($promises)) {
