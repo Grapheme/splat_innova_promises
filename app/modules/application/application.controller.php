@@ -701,6 +701,7 @@ class ApplicationController extends BaseController {
                             if (isset($user->full_social_info['birthday']) && $user->full_social_info['birthday']) {
                                 if (preg_match('~\d{2}\/\d{2}\/\d{4}~is', $user->full_social_info['birthday'])) {
                                     $birthday = str_replace('/', '-', $user->full_social_info['birthday']);
+                                    echo $birthday . "<br/>";
                                     $stamp = (new \Carbon\Carbon())->createFromFormat('d-m-Y', $birthday);
                                     $user->years_old = $stamp->diffInYears($now);
                                 }
