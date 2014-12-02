@@ -12,7 +12,10 @@
     </strong>
     <br/>
 
-    @if ($promise->promise_fail)
+    <?
+    $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d') > $promise->date_finish);
+    ?>
+    @if ($failed)
         Задание провалено
     @elseif ($promise->finished_at)
         Выполнено {{ $promise->finished_at }}
@@ -22,6 +25,17 @@
     @endif
 
     {{ Helper::ta($promise) }}
+
+    <p><strong>Я обещаю...</strong></p>
+
+    {{ $promise->promise_text }}<br/>
+
+    <a href="#">Выполнено</a>
+    <a href="#">Отказаться</a>
+
+    <br/>
+
+    Таймер...
 
     <h3>Комментарии...</h3>
 
