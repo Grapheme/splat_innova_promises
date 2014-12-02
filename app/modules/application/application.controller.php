@@ -20,6 +20,7 @@ class ApplicationController extends BaseController {
             Route::get('/new_promise', array('as' => 'app.new_promise', 'uses' => __CLASS__.'@getNewPromise'));
 
             Route::get('/profile/{id}', array('as' => 'app.profile_id', 'uses' => __CLASS__.'@getProfileByID'));
+            Route::get('/invite/{data}', array('as' => 'app.send_invite', 'uses' => __CLASS__.'@getSendInvite'));
             Route::get('/promise/{id}', array('as' => 'app.promise', 'uses' => __CLASS__.'@getPromise'));
 
             Route::any('/update_profile', array('as' => 'app.update_profile', 'uses' => __CLASS__.'@postUserUpdateProfile'));
@@ -954,6 +955,14 @@ class ApplicationController extends BaseController {
     public function getProfileByID($id) {
 
         Helper::dd($id);
+    }
+
+
+    public function getSendInvite($data) {
+
+        $data = base64_decode($data);
+
+        Helper::dd($data);
     }
 
 }

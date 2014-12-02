@@ -44,7 +44,7 @@
             Мои друзья:<br/>
 
             @if (count($user->existing_friends))
-                Уже в системе <sup>{{ count($user->existing_friends) }}</sup>:
+                Уже в системе<sup>{{ count($user->existing_friends) }}</sup>:
                 <ul>
                 @foreach ($user->existing_friends as $friend)
                     <li>
@@ -63,11 +63,11 @@
             @endif
 
             @if (count($user->non_existing_friends))
-                Можно пригласить ({{ count($user->non_existing_friends) }}):
+                Можно пригласить<sup>{{ count($user->non_existing_friends) }}</sup>:
                 <ul>
                     @foreach ($user->non_existing_friends as $friend)
                         <li>
-                            {{ @$friend['_name'] }}
+                            <a href="{{ URL::route('app.send_invite', @base64_encode($friend['_name'])) }}">{{ @$friend['_name'] }}</a>
                         </li>
                     @endforeach
                 </ul>
