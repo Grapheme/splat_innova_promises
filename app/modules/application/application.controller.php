@@ -691,7 +691,16 @@ class ApplicationController extends BaseController {
 
                         case "facebook":
                             if (isset($user->full_social_info['gender']) && $user->full_social_info['gender']) {
-                                $user->sex = $user->full_social_info['gender'] == 'male' ? 2 : 1;
+                                $user->sex = $user->full_social_info['gender'] == 'мужской' ? 2 : 1;
+                            }
+                            if (isset($user->full_social_info['hometown']) && isset($user->full_social_info['hometown']['name'])) {
+                                $user->city = $user->full_social_info['hometown']['name'];
+                            }
+                            if (isset($user->full_social_info['birthday']) && $user->full_social_info['birthday']) {
+                                if (preg_match('~\d{2}/\d{2}/\d{4}~is', $user->full_social_info['birthday'])) {
+                                    $stamp = (new \Carbon\Carbon())->createFromFormat('d/m/Y', $user->full_social_info['birthday']);
+                                    $user->years_old = $stamp->diffInYears($now);
+                                }
                             }
                             break;
                     }
