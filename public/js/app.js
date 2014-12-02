@@ -190,6 +190,8 @@ function getCookie(name) {
      *
      */
     /*
+    https://developers.facebook.com/tools/explorer/
+
     https://developers.facebook.com/docs/javascript/reference/v2.2?locale=ru_RU
     https://developers.facebook.com/docs/facebook-login/permissions/v2.2?locale=ru_RU
     http://stackoverflow.com/questions/23417356/facebook-graph-api-v2-0-me-friends-returns-empty-or-only-friends-who-also-u
@@ -273,7 +275,7 @@ function getCookie(name) {
 
         console.log('Welcome! Fetching your information.... ');
 
-        FB.api('/me?fields=id,name,birthday,gender,hometown,installed,verified&locale=ru_RU', function(response) {
+        FB.api('/me?fields=id,name,birthday,gender,hometown,installed,verified,first_name,last_name&locale=ru_RU', function(response) {
 
             console.log('Successful login for: ' + response.name);
             console.log(response)
