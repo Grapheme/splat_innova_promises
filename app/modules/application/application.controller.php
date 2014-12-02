@@ -956,7 +956,28 @@ class ApplicationController extends BaseController {
 
     public function getProfileByID($id) {
 
-        Helper::dd($id);
+        #Helper::dd($id);
+
+        $user = Dic::valueBySlugAndId('users', $id);
+
+        /**
+         * Если юзер не авторизован - показываем стандартную главную страницу
+         */
+        if (!is_object($user) || !$user->id) {
+
+            App::abort(404);
+            #return View::make(Helper::layout('index'), compact('user', 'promises'));
+        }
+
+        /**
+         * Получаем обещания юзера !!!!!!!!!!!!!!!
+         */
+        $promises = $this->promises;
+
+        /**
+         * Показываем страницу профиля
+         */
+        return View::make(Helper::layout('profile_id'), compact('user', 'promises'));
     }
 
 
@@ -971,6 +992,10 @@ class ApplicationController extends BaseController {
     }
 
     public function postSendInviteMessage() {
+
+        /**
+         * В зависимости от того, какой будет механика отправки запроса (аякс или native)...
+         */
 
         Helper::dd("Send msg...");
     }
