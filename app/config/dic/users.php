@@ -160,6 +160,19 @@ return array(
 
     'versions' => 0,
 
+    'first_line_modifier' => function($line, $dic, $dicval) {
+
+        $prefix = '';
+        if ($dicval->auth_method == 'facebook') {
+            $prefix = '<i class="fa fa-facebook-square" style="color:#8498BD"></i>';
+        } elseif ($dicval->auth_method == 'vkontakte') {
+            $prefix = '<i class="fa fa-vk" style="color:#8EA7C9"></i>';
+        } elseif ($dicval->auth_method == 'odnoklassniki') {
+            $prefix = '<i class="fa fa-dribbble" style="color:#F5B57B"></i>';
+        }
+        return $prefix . ' ' . $line;
+    },
+
     /*
     'group_actions' => array(
         'moderator' => function() {
