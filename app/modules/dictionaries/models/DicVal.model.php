@@ -634,7 +634,7 @@ class DicVal extends BaseModel {
      * @param $array
      * @return DicVal
      */
-    public static function inject($dic_slug, $array) {
+    public static function inject($dic_slug, $array, $dicval_id = NULL) {
 
         #Helper::d($dic_slug);
         #Helper::d($array);
@@ -647,10 +647,10 @@ class DicVal extends BaseModel {
         ## Create DICVAL
         $dicval = new DicVal;
         $dicval->dic_id = $dic->id;
+        $dicval->dic_id = $dic->id;
         $dicval->slug = @$array['slug'] ?: NULL;
         $dicval->name = @$array['name'] ?: NULL;
         $dicval->save();
-
 
         ## CREATE FIELDS
         if (@isset($array['fields']) && is_array($array['fields']) && count($array['fields'])) {
@@ -773,6 +773,177 @@ class DicVal extends BaseModel {
             }
             $dicval->relations['metas'] = $metas;
         }
+
+        ## RETURN EXTRACTED DICVAL
+        return $dicval;
+    }
+
+
+    public static function refresh($dic_slug, $dicval_id, $array) {
+
+        #Helper::d($dic_slug);
+        #Helper::d($array);
+
+        ## Find DIC
+        $dic = Dic::where('slug', $dic_slug)->first();
+        if (!is_object($dic))
+            return false;
+
+        ## Find dicval
+        $dicval = DicVal::find(dicval_id);
+        if (!is_object($dicval))
+            return false;
+
+
+        if ($dicval->dic_id != $dic->id)
+            $dicval->dic_id = $dic->id;
+
+        if (isset($array['slug']))
+            $dicval->slug = $array['slug'];
+        if (isset($array['name']))
+            $dicval->name = $array['name'];
+
+        $dicval->save();
+
+
+        ## UPDATE FIELDS
+        if (@isset($array['fields']) && is_array($array['fields']) && count($array['fields'])) {
+
+            #$fields = new Collection();
+
+            foreach ($array['fields'] as $key => $value) {
+
+                $dicval_field_search_array = array(
+                    'dicval_id' => $dicval->id,
+                    'key' => $key,
+                );
+                if (is_array($value) && isset($value['language'])) {
+                    $dicval_field_search_array['language'] = @$value['language'] ?: NULL;
+                }
+                $dicval_field = DicFieldVal::firstOrNew($dicval_field_search_array);
+                $dicval_field->value = is_array($value) ? @$value['value'] : $value;
+                $dicval_field->save();
+
+                #$fields[] = $dicval_field;
+            }
+            #$dicval->relations['fields'] = $fields;
+        }
+
+        ## CREATE FIELDS_I18N
+        if (@isset($array['fields_i18n']) && is_array($array['fields_i18n']) && count($array['fields_i18n'])) {
+
+            #$fields_i18n = new Collection();
+
+            foreach ($array['fields_i18n'] as $locale_sign => $fields) {
+
+                if (!@is_array($fields) || !@count($fields))
+                    continue;
+
+                #$temp = new Collection();
+
+                foreach ($fields as $key => $value) {
+
+                    $dicval_field_search_array = array(
+                        'dicval_id' => $dicval->id,
+                        'language' => $locale_sign,
+                        'key' => $key,
+                    );
+                    $dicval_field = DicFieldVal::firstOrNew($dicval_field_search_array);
+                    $dicval_field->value = is_array($value) ? @$value['value'] : $value;
+                    $dicval_field->save();
+
+                    #$temp[] = $dicval_field_i18n;
+                }
+                #$fields_i18n[$locale_sign] = $temp;
+            }
+            #$dicval->relations['fields_i18n'] = $fields_i18n;
+        }
+
+
+        ## CREATE TEXT FIELDS
+        if (@isset($array['textfields']) && is_array($array['textfields']) && count($array['textfields'])) {
+
+            #$textfields = new Collection();
+
+            foreach ($array['textfields'] as $key => $value) {
+
+                $dicval_field_search_array = array(
+                    'dicval_id' => $dicval->id,
+                    'key' => $key,
+                );
+                if (is_array($value) && isset($value['language'])) {
+                    $dicval_field_search_array['language'] = @$value['language'] ?: NULL;
+                }
+                $dicval_field = DicTextFieldVal::firstOrNew($dicval_field_search_array);
+                $dicval_field->value = is_array($value) ? @$value['value'] : $value;
+                $dicval_field->save();
+
+                #$textfields[] = $dicval_textfield;
+            }
+            #$dicval->relations['textfields'] = $textfields;
+        }
+
+        ## CREATE TEXT FIELDS_I18N
+        if (@isset($array['textfields_i18n']) && is_array($array['textfields_i18n']) && count($array['textfields_i18n'])) {
+
+            #$textfields_i18n = new Collection();
+
+            foreach ($array['textfields_i18n'] as $locale_sign => $textfields) {
+
+                if (!@is_array($textfields) || !@count($textfields))
+                    continue;
+
+                #$temp = new Collection();
+
+                foreach ($textfields as $key => $value) {
+
+                    $dicval_field_search_array = array(
+                        'dicval_id' => $dicval->id,
+                        'language' => $locale_sign,
+                        'key' => $key,
+                    );
+                    $dicval_field = DicTextFieldVal::firstOrNew($dicval_field_search_array);
+                    $dicval_field->value = is_array($value) ? @$value['value'] : $value;
+                    $dicval_field->save();
+
+                    #$temp[] = $dicval_textfield_i18n;
+                }
+                #$textfields_i18n[$locale_sign] = $temp;
+            }
+            #$dicval->relations['textfields_i18n'] = $textfields_i18n;
+        }
+
+
+        ## CREATE META
+        if (@isset($array['meta']) && is_array($array['meta']) && count($array['meta'])) {
+
+            #$metas = new Collection();
+
+            foreach ($array['meta'] as $locale_sign => $fields) {
+
+                if (!@is_array($fields) || !@count($fields))
+                    continue;
+
+                $temp = new Collection();
+
+                foreach ($fields as $key => $value) {
+
+                    $dicval_field_search_array = array(
+                        'dicval_id' => $dicval->id,
+                        'language' => $locale_sign,
+                    );
+                    $dicval_field = DicValMeta::firstOrNew($dicval_field_search_array);
+                    $dicval_field->name = is_array($value) ? @$value['name'] : $value;
+                    $dicval_field->save();
+
+                    #$temp[] = $dicval_meta;
+                }
+                #$metas[$locale_sign] = $temp;
+            }
+            #$dicval->relations['metas'] = $metas;
+        }
+
+        $dicval->load('fields', 'fields_i18n', 'textfields', 'textfields_i18n', 'metas');
 
         ## RETURN EXTRACTED DICVAL
         return $dicval;

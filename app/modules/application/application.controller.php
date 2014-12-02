@@ -503,7 +503,32 @@ class ApplicationController extends BaseController {
                     ));
                     if ($user_record->id) {
 
-                        $user_record->load('fields', 'textfields');
+                        /**
+                         * Здесь нужно сделать update данных пользователя в БД
+                         *
+                         * DicVal::refresh
+                         *
+                         */
+                        $user_record = DicVal::refresh(
+                            'users',
+                            $user_record->id,
+                            array(
+                                'slug' => NULL,
+                                'name' => @$data['first_name'] . ' ' . @$data['last_name'],
+                                'fields' => array(
+                                    'auth_method' => @$data['auth_method'],
+                                    #'identity' => @$data['identity'],
+                                    'bdate' => @$data['bdate'],
+                                    #'user_token' => md5(md5(time() . '_' . rand(999999, 9999999))),
+                                    'user_last_action_time' => time(),
+                                ),
+                                'textfields' => array(
+                                    'full_social_info' => json_encode($data),
+                                ),
+                            )
+                        );
+
+                        #$user_record->load('fields', 'textfields');
                         $user_record->extract(1);
 
                         #Helper::ta($user_record);
