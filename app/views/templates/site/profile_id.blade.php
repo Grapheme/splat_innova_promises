@@ -18,6 +18,8 @@
 
         Обещания пользователя:
 
+        {{ Helper::ta($promises) }}
+
         <ul>
         @foreach ($promises as $promise)
             {{ Helper::ta_($promise) }}

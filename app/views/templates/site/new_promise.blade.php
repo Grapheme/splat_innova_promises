@@ -14,7 +14,10 @@
 
         {{ Form::textarea('promise_text', @$_SESSION['promise_text']) }}<br/>
 
-        Срок: {{ Form::text('time_limit', 14) }} дней
+        Срок: {{ Form::text('time_limit', 14) }} дней<br/>
+        <label>
+            {{ Form::checkbox('only_for_me') }} видно только мне
+        </label>
 
         <br/>
 

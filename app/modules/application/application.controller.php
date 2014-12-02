@@ -379,6 +379,7 @@ class ApplicationController extends BaseController {
 
         $promise_text = Input::get('promise_text');
         $time_limit = Input::get('time_limit');
+        $only_for_me = Input::get('only_for_me');
 
         if (!$promise_text || !$time_limit || $time_limit < 1)
             App::abort(404);
@@ -398,6 +399,7 @@ class ApplicationController extends BaseController {
                 'fields' => array(
                     'user_id' => $this->user->id,
                     'date_finish' => $date_finish,
+                    'only_for_me' => $only_for_me ? 1 : NULL,
                     'finished_at' => ''
                 ),
                 'textfields' => array(
@@ -671,7 +673,7 @@ class ApplicationController extends BaseController {
     }
 
 
-    private function get_promises($user = NULL) {
+    private function get_promises($user = NULL, $hide_private_promises = false) {
 
         if (!$user)
             $user = $this->user;
@@ -680,20 +682,16 @@ class ApplicationController extends BaseController {
 
         if (is_object($user)) {
 
-            $promises = Dic::valuesBySlug('promises', function($query) use ($user) {
+            $promises = Dic::valuesBySlug('promises', function($query) use ($user, $hide_private_promises) {
 
                 $table = $user->getTable();
                 $query->orderBy('created_at', 'DESC');
 
-                #/*
                 ## Подключаем доп. поле с помощью JOIN (т.е. неподходящие под условия записи не будут добавлены к выборке)
                 $tbl_alias_user_id = $query->join_field('user_id', 'user_id', function($join, $value) use ($user) {
-                    ## Подключаем только новости, у которых дата публикации меньше или совпадает с текущей датой,
-                    ## и дата публикации которых меньше или совпадает с датой текущей новости.
                     $join->where($value, '=', $user->id);
-                    #$join->where($value, '<=', $new->published_at);
                 });
-                #*/
+
             });
 
             #Helper::tad($promises);
@@ -973,7 +971,7 @@ class ApplicationController extends BaseController {
         /**
          * Получаем обещания юзера !!!!!!!!!!!!!!!
          */
-        $promises = $this->get_promises($user);
+        $promises = $this->get_promises($user, true);
 
         /**
          * Показываем страницу профиля
