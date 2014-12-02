@@ -658,6 +658,8 @@ class ApplicationController extends BaseController {
 
                     $now = (new \Carbon\Carbon(time()));
 
+                    echo $now->format('d.m.Y');
+
                     /**
                      * Определение страны, города, пола и возраста
                      */
@@ -704,6 +706,8 @@ class ApplicationController extends BaseController {
                             }
                             break;
                     }
+
+                    echo $stamp->format('d.m.Y');
 
                     #Helper::tad($user);
                 }
