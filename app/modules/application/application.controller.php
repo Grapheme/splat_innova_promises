@@ -671,9 +671,10 @@ class ApplicationController extends BaseController {
     }
 
 
-    private function get_promises() {
+    private function get_promises($user = NULL) {
 
-        $user = $this->user;
+        if (!$user)
+            $user = $this->user;
 
         $promises = NULL;
 
@@ -972,7 +973,7 @@ class ApplicationController extends BaseController {
         /**
          * Получаем обещания юзера !!!!!!!!!!!!!!!
          */
-        $promises = $this->promises;
+        $promises = $this->get_promises($user);
 
         /**
          * Показываем страницу профиля
