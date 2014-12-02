@@ -528,6 +528,8 @@ class ApplicationController extends BaseController {
                             )
                         );
 
+                        Helper::tad($user_record);
+
                         #$user_record->load('fields', 'textfields');
                         $user_record->extract(1);
 

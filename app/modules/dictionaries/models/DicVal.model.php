@@ -945,7 +945,7 @@ class DicVal extends BaseModel {
 
         $dicval->load('allfields', 'alltextfields', 'metas');
 
-        ## RETURN EXTRACTED DICVAL
+        ## RETURN DICVAL
         return $dicval;
     }
 
