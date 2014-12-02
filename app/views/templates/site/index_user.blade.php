@@ -9,6 +9,7 @@
 
 
         <big><a href="{{ $user->identity }}" target="_blank">{{ $user->name }}</a></big>
+        {{ $user->years_old }}
         <a href="{{ URL::route('app.profile') }}">Редактировать</a>
         <a href="#" class="logout">Выйти</a>
 

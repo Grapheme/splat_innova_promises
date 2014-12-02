@@ -656,6 +656,43 @@ class ApplicationController extends BaseController {
                     $user->full_social_info = json_decode($user->full_social_info, 1);
                     $user->friends = json_decode($user->friends, 1);
 
+                    $now = (new \Carbon\Carbon(time()));
+
+                    /**
+                     * Определение страны, города, пола и возраста
+                     */
+                    switch ($user->auth_method) {
+
+                        case "vkontakte":
+                            if (isset($user->full_social_info['country']) && isset($user->full_social_info['country']['title'])) {
+                                $user->country = $user->full_social_info['country']['title'];
+                            }
+                            if (isset($user->full_social_info['city']) && isset($user->full_social_info['city']['title'])) {
+                                $user->city = $user->full_social_info['city']['title'];
+                            }
+                            if (isset($user->full_social_info['sex']) && $user->full_social_info['sex']) {
+                                $user->sex = $user->full_social_info['sex'];
+                            }
+                            if (isset($user->bdate) && $user->bdate) {
+                                if (preg_match('~\d{4}\-\d{1,2}\-\d{1,2}~is', $user->bdate)) {
+                                    $stamp = (new \Carbon\Carbon())->createFromFormat('Y-m-d', $user->bdate);
+                                    $user->years_old = $stamp->diffInYears($now);
+                                }
+                            } elseif (isset($user->full_social_info['bdate']) && $user->full_social_info['bdate']) {
+                                if (preg_match('~\d{4}\-\d{1,2}\-\d{1,2}~is', $user->full_social_info['bdate'])) {
+                                    $stamp = (new \Carbon\Carbon())->createFromFormat('Y-m-d', $user->full_social_info['bdate']);
+                                    $user->years_old = $stamp->diffInYears($now);
+                                }
+                            }
+                            break;
+
+                        case "odnoklassniki":
+                            break;
+
+                        case "facebook":
+                            break;
+                    }
+
                     #Helper::tad($user);
                 }
             }
