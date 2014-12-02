@@ -957,6 +957,10 @@ class ApplicationController extends BaseController {
 
         #Helper::dd($id);
 
+        if (isset($this->user) && is_object($this->user) && $this->user->id && $this->user->id == $id && !Input::get('debug')) {
+            Redirect::route('app.mainpage');
+        }
+
         $user = Dic::valueBySlugAndId('users', $id);
 
         /**
@@ -969,7 +973,7 @@ class ApplicationController extends BaseController {
         }
 
         /**
-         * Получаем обещания юзера !!!!!!!!!!!!!!!
+         * Получаем обещания юзера
          */
         $promises = $this->get_promises($user, true);
 
@@ -989,6 +993,7 @@ class ApplicationController extends BaseController {
         #Helper::dd($data);
         return View::make(Helper::layout('send_invite'), compact('user_name'));
     }
+
 
     public function postSendInviteMessage() {
 
