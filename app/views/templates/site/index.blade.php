@@ -31,7 +31,7 @@
               the FB.login() function when clicked.
             -->
             <div id="fb-root"></div>
-            <fb:login-button scope="public_profile,email,user_birthday,user_photos,user_friends" onlogin="checkLoginState();">
+            <fb:login-button scope="public_profile,email,user_birthday,user_photos,user_friends,user_about_me,user_hometown" onlogin="checkLoginState();">
             </fb:login-button>
             <div id="status"></div>
             <div id="result_friends"></div>
