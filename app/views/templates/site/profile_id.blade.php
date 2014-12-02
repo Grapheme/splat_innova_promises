@@ -23,6 +23,10 @@
         <ul>
         @foreach ($promises as $promise)
             {{ Helper::ta_($promise) }}
+            <?
+            if ($promise->only_for_me)
+                continue;
+            ?>
             <li><a href="{{ URL::route('app.promise', $promise->id) }}">{{ $promise->name }}</a></li>
         @endforeach
         </ul>
