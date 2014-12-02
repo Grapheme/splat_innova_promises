@@ -656,9 +656,9 @@ class ApplicationController extends BaseController {
                     $user->full_social_info = json_decode($user->full_social_info, 1);
                     $user->friends = json_decode($user->friends, 1);
 
-                    $now = (new \Carbon\Carbon(time()));
+                    $now = (new \Carbon\Carbon())->now();
 
-                    echo $now->format('d.m.Y');
+                    echo $now->format('d.m.Y') . "<br/>";
 
                     /**
                      * Определение страны, города, пола и возраста
