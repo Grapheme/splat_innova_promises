@@ -28,3 +28,8 @@ $fb_friends_limit = 99;
         var base_url = '{{ URL::to('') }}';
         var domain = '<?=domain?>';
         </script>
+
+        <script>
+        var fb_app_id = {{ $fb_app_id  }};
+        var fb_friends_limit = {{ $fb_friends_limit }};
+        </script>
