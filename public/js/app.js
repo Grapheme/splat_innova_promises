@@ -191,6 +191,7 @@ function getCookie(name) {
      */
     /*
     https://developers.facebook.com/tools/explorer/
+    http://habrahabr.ru/post/132794/
 
     https://developers.facebook.com/docs/javascript/reference/v2.2?locale=ru_RU
     https://developers.facebook.com/docs/facebook-login/permissions/v2.2?locale=ru_RU
@@ -275,7 +276,7 @@ function getCookie(name) {
 
         console.log('Welcome! Fetching your information.... ');
 
-        FB.api('/me?fields=id,name,birthday,gender,hometown,installed,verified,first_name,last_name&locale=ru_RU', function(response) {
+        FB.api('/me?fields=id,name,birthday,gender,hometown,installed,verified,first_name,last_name,picture&locale=ru_RU', function(response) {
 
             console.log('Successful login for: ' + response.name);
             console.log(response)
