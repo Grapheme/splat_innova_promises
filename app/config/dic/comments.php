@@ -23,6 +23,11 @@ return array(
         #Helper::tad($dics);
         $lists = Dic::makeLists($dics, 'values', 'name', 'id');
 
+
+        $user = Dic::valueBySlugAndId('users', $dicval->user_id);
+        $promise = Dic::valueBySlugAndId('promises', $dicval->promise_id);
+
+
         #Helper::ta($dicval);
         #Helper::dd($lists);
 
@@ -30,12 +35,12 @@ return array(
             'promise_id' => array(
                 'title' => 'Обещание',
                 'type' => 'textline',
-                'view_text' => '<a href="' . URL::route('app.promise', $dicval->promise_id) . '" target="_blank">' . @$lists['promises'][$dicval->promise_id] . '</a>', ## Используется предзагруженный словарь
+                'view_text' => '<a href="' . URL::route('app.promise', $dicval->promise_id) . '" target="_blank">' . @$promise->name . '</a>', ## Используется предзагруженный словарь
             ),
             'user_id' => array(
                 'title' => 'Пользователь',
                 'type' => 'textline',
-                'view_text' => '<a href="' . URL::route('app.profile_id', $dicval->user_id) . '" target="_blank">' . @$lists['users'][$dicval->user_id] . '</a>', ## Используется предзагруженный словарь
+                'view_text' => '<a href="' . URL::route('app.profile_id', $dicval->user_id) . '" target="_blank">' . @$user->name . '</a>', ## Используется предзагруженный словарь
             ),
             'comment_text' => array(
                 'title' => 'Текст комментария',
