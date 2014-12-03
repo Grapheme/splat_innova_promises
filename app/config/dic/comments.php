@@ -26,9 +26,9 @@ return array(
         */
         if (is_object($dicval)) {
 
-            $user = Dic::valueBySlugAndId('users', $dicval->user_id);
-            $promise = Dic::valueBySlugAndId('promises', $dicval->promise_id);
         }
+        $user = Dic::valueBySlugAndId('users', is_object($dicval) ? $dicval->user_id : NULL);
+        $promise = Dic::valueBySlugAndId('promises', is_object($dicval) ? $dicval->promise_id : NULL);
 
 
         #Helper::ta($dicval);
