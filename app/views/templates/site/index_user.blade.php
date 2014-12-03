@@ -89,6 +89,7 @@
     DEBUG:
     {{ Helper::d(@$_SESSION) }}
     {{ Helper::d(@$_COOKIE) }}
+    {{ Helper::ta(@$user) }}
     {{ Helper::ta_(@$promises) }}
 
     <div id="fb-root"></div>
