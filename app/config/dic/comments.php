@@ -58,7 +58,20 @@ return array(
             $dics = Dic::modifyKeys($dics, 'slug');
             #Helper::tad($dics);
             Config::set('temp.index_dics', $dics);
-            */
+            #*/
+
+            $dicvals_ids = Dic::makeLists($dicvals, NULL, 'id');
+            #Config::set('temp.elements_ids', $dicvals_ids);
+            $textfields = DicTextFieldVal::where('key', 'comment_text')
+                ->whereIn('dicval_id', $dicvals_ids)
+                ->get()
+            ;
+            $comment_texts = array();
+            if (count($textfields)) {
+                $comment_texts = Dic::makeLists($textfields, NULL, 'value', 'dicval_id');
+            }
+            Config::set('temp.comment_texts', $comment_texts);
+            Helper::ta($comment_texts);
         },
 
     ),
@@ -66,8 +79,8 @@ return array(
     #/*
     'first_line_modifier' => function($line, $dic, $dicval) {
 
-        $dicval->load('alltextfields');
-        $dicval->extract(1);
+        #$dicval->load('alltextfields');
+        #$dicval->extract(1);
 
         $cut_text = mb_substr($dicval->comment_text, 0, 50);
 
