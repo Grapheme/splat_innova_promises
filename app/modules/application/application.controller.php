@@ -522,23 +522,25 @@ class ApplicationController extends BaseController {
         if (!is_object($promise))
             App::abort(404);
 
-        $comment = DicVal::inject(
-            'comments',
-            array(
-                'slug' => NULL,
-                'name' => '',
-                'fields' => array(
-                    'promise_id' => $promise_id,
-                    'user_id' => $user_id,
-                ),
-                'textfields' => array(
-                    'comment_text' => $comment_text,
-                ),
-            )
-        );
+        if ($comment_text) {
+
+            $comment = DicVal::inject(
+                'comments',
+                array(
+                    'slug' => NULL,
+                    'name' => '',
+                    'fields' => array(
+                        'promise_id' => $promise_id,
+                        'user_id' => $user_id,
+                    ),
+                    'textfields' => array(
+                        'comment_text' => $comment_text,
+                    ),
+                )
+            );
+        }
 
         return Redirect::route('app.promise', $promise_id);
-
     }
 
 
