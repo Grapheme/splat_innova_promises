@@ -606,8 +606,8 @@ HTML;
                 if (!$value)
                     $return = Form::text($name, NULL, $others_array);
                 else {
-                    Helper::ta($others_array);
-                    $return = @$others_array['view_text'];
+                    Helper::ta($array);
+                    $return = @$array['view_text'];
                 }
                 break;
 
