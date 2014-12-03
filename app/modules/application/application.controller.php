@@ -472,9 +472,9 @@ class ApplicationController extends BaseController {
             $tbl_alias_promise_id = $query->join_field('promise_id', 'promise_id', function($join, $value) use ($promise) {
                 $join->where($value, '=', $promise->id);
             });
-            $tbl_alias_user_id = $query->join_field('user_id', 'user_id', function($join, $value) use ($promise) {
-                $join->where($value, '=', $promise->user_id);
-            });
+            #$tbl_alias_user_id = $query->join_field('user_id', 'user_id', function($join, $value) use ($promise) {
+            #    $join->where($value, '=', $promise->user_id);
+            #});
 
         });
 
