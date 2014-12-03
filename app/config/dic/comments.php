@@ -34,8 +34,8 @@ return array(
             ),
             'user_id' => array(
                 'title' => 'Пользователь',
-                'type' => 'select',
-                'values' => $lists['users'], ## Используется предзагруженный словарь
+                'type' => 'textline',
+                'view_text' => '<a href="' . URL::route('app.profile_id', $dicval->user_id) . '" target="_blank">' . @$lists['users'][$dicval->user_id] . '</a>', ## Используется предзагруженный словарь
             ),
             'comment_text' => array(
                 'title' => 'Текст комментария',
