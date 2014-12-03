@@ -14,6 +14,7 @@ return array(
          * Предзагружаем нужные словари с данными, по системному имени словаря, для дальнейшего использования.
          * Делается это одним SQL-запросом, для снижения нагрузки на сервер БД.
          */
+        /*
         $dics_slugs = array(
             'users',
             'promises',
@@ -22,7 +23,7 @@ return array(
         $dics = Dic::modifyKeys($dics, 'slug');
         #Helper::tad($dics);
         $lists = Dic::makeLists($dics, 'values', 'name', 'id');
-
+        */
 
         $user = Dic::valueBySlugAndId('users', $dicval->user_id);
         $promise = Dic::valueBySlugAndId('promises', $dicval->promise_id);
