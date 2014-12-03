@@ -415,6 +415,9 @@ class ApplicationController extends BaseController {
             )
         );
 
+        /**
+         * Очищаем сохраненный текст обещания в сессии
+         */
         unset($_SESSION['promise_text']);
 
         return Redirect::route('app.mainpage');
@@ -916,6 +919,11 @@ class ApplicationController extends BaseController {
         if (!$code) {
             echo "Не удается выполнить вход. Повторите попытку позднее (0).";
             die;
+        }
+
+        $promise_text = Input::get('promise_text');
+        if ($promise_text != '') {
+            $_SESSION['promise_text'] = $promise_text;
         }
 
         $HOST = $_SERVER['HTTP_HOST'];

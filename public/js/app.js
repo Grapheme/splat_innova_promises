@@ -394,9 +394,12 @@ function getCookie(name) {
      * https://vk.com/editapp?id=4659025&section=options
      */
     $(document).on('click', '.vk-oauth-link', function(e){
+
         e.preventDefault();
 
+        var promise_text = $('.promise_text').val();
+
         var params = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=800,height=600"
-        window.open('https://oauth.vk.com/authorize?client_id=4659025&scope=friends,email,offline&redirect_uri=' + domain + '/vk-oauth&response_type=code&v=5.27', 'vk-oauth', params);
+        window.open('https://oauth.vk.com/authorize?client_id=4659025&scope=friends,email,offline&redirect_uri=' + domain + '/vk-oauth?promise_text='+ promise_text + '&response_type=code&v=5.27', 'vk-oauth', params);
         return false;
     });
