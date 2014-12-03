@@ -442,9 +442,9 @@ class ApplicationController extends BaseController {
             $promise->extract(1);
         }
 
-        if ($promise->user_id != $user->id) {
-            App::abort(404);
-        }
+        #if ($promise->user_id != $user->id) {
+        #    App::abort(404);
+        #}
 
 
         /**
