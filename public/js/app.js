@@ -394,7 +394,7 @@ function getCookie(name) {
 
         var promise_text = $('.promise_text').val();
 
-        ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT', '{{ domain }}/ok-oauth?promise_text=' + promise_text );
+        ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT', $(this).attr('data-domain') + '/ok-oauth?promise_text=' + promise_text );
 
         return false;
     });

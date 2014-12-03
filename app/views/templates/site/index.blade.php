@@ -47,7 +47,7 @@
             -->
             <link href="http://www.odnoklassniki.ru/oauth/resources.do?type=css" rel="stylesheet" />
             <script src="http://www.odnoklassniki.ru/oauth/resources.do?type=js" type="text/javascript" charset="utf-8"></script>
-            <a class="odkl-oauth-lnk ok-oauth-link" href="#"></a>
+            <a class="odkl-oauth-lnk ok-oauth-link" href="#" data-domain="{{ domain }}"></a>
 
         <hr/>
 
