@@ -467,6 +467,18 @@ class ApplicationController extends BaseController {
             }
         }
 
+        $comments = Dic::valuesBySlug('comments', function($query) use ($promise) {
+            $tbl_alias_promise_id = $query->join_field('promise_id', 'promise_id', function($join, $value) use ($promise) {
+                $join->where($value, '=', $promise->id);
+            });
+            $tbl_alias_user_id = $query->join_field('user_id', 'user_id', function($join, $value) use ($promise) {
+                $join->where($value, '=', $promise->user_id);
+            });
+
+        });
+
+        Helper::tad($comments);
+
         #Helper::tad($promise);
 
         return View::make(Helper::layout('promise'), compact('user', 'promise'));
