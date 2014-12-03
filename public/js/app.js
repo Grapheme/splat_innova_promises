@@ -282,10 +282,16 @@ function getCookie(name) {
             console.log(response)
             //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
 
+
+            /**
+             * Сохраняем текст в поле обещания
+             */
+            var promise_text = $('.promise_text').val();
+            //alert(promise_text); return;
+
             /**
              * FB - Отправляем запрос на сервер для добавления пользователя
              */
-            var promise_text = $('.promise_text').val();
             var data = response;
             data.auth_method = 'facebook';
             //data.identity = response.link;

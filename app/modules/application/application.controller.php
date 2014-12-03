@@ -81,6 +81,14 @@ class ApplicationController extends BaseController {
         }
 
         /**
+         * Если в сессии есть непустой текст обещания (введен перед авторизацией) -
+         * перенаправляем пользователя на страницу дачи обещания.
+         */
+        if (@$_SESSION['promise_text']) {
+            return Redirect::route('app.new_promise');
+        }
+
+        /**
          * Получаем обещания юзера
          */
         $promises = $this->promises;
@@ -90,7 +98,6 @@ class ApplicationController extends BaseController {
          */
         $existing_friends = array();
         $non_existing_friends = array();
-
 
         #Helper::d('Count user friends: ' . count($user->friends));
 
@@ -459,6 +466,11 @@ class ApplicationController extends BaseController {
         #Helper::dd(Input::all());
 
         $data = Input::get('data');
+
+        /**
+         * Если с авторизацией передан текст обещания - сохраняем его в сессию,
+         * чтобы после авторизации сразу перейти на страницу дачи обещания.
+         */
         $promise_text = Input::get('promise_text');
         if ($promise_text != '') {
             $_SESSION['promise_text'] = $promise_text;
@@ -509,10 +521,7 @@ class ApplicationController extends BaseController {
                     if ($user_record->id) {
 
                         /**
-                         * Здесь нужно сделать update данных пользователя в БД
-                         *
-                         * DicVal::refresh
-                         *
+                         * Обновляем данные пользователя в БД
                          */
                         $user_record = DicVal::refresh(
                             'users',
