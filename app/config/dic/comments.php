@@ -8,7 +8,7 @@ return array(
     },
     */
 
-    'fields' => function() {
+    'fields' => function($dicval = NULL) {
 
         /**
          * Предзагружаем нужные словари с данными, по системному имени словаря, для дальнейшего использования.
@@ -23,13 +23,14 @@ return array(
         #Helper::tad($dics);
         $lists = Dic::makeLists($dics, 'values', 'name', 'id');
 
+        Helper::ta($dicval);
         Helper::dd($lists);
 
         return array(
             'promise_id' => array(
                 'title' => 'Обещание',
                 'type' => 'textline',
-                'value' => $lists['promises'], ## Используется предзагруженный словарь
+                'value' => @$lists['promises'][$dicval->promise_id], ## Используется предзагруженный словарь
             ),
             'user_id' => array(
                 'title' => 'Пользователь',
