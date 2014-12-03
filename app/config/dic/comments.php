@@ -23,8 +23,8 @@ return array(
         #Helper::tad($dics);
         $lists = Dic::makeLists($dics, 'values', 'name', 'id');
 
-        Helper::ta($dicval);
-        Helper::dd($lists);
+        #Helper::ta($dicval);
+        #Helper::dd($lists);
 
         return array(
             'promise_id' => array(
