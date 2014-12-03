@@ -79,15 +79,8 @@ return array(
     #/*
     'first_line_modifier' => function($line, $dic, $dicval) {
 
-        #$dicval->load('alltextfields');
-        #$dicval->extract(1);
-
-        $cut_text = mb_substr($dicval->comment_text, 0, 50);
-
-        Helper::ta($dicval);
-        Helper::ta($dicval->comment_text);
-        Helper::ta($cut_text);
-
+        $comment_texts = Config::get('temp.comment_texts');
+        $cut_text = mb_substr(@$comment_texts[$dicval->id], 0, 50);
         return $cut_text . (mb_strlen($cut_text) < mb_strlen($dicval->comment_text) ? '...' : '');
     },
     #*/
