@@ -29,7 +29,7 @@ return array(
                 'type' => 'select',
                 'values' => $lists['users'], ## Используется предзагруженный словарь
             ),
-            'promise_text' => array(
+            'comment_text' => array(
                 'title' => 'Текст комментария',
                 'type' => 'textarea',
             ),
@@ -62,6 +62,13 @@ return array(
         },
 
     ),
+
+    #/*
+    'first_line_modifier' => function($line, $dic, $dicval) {
+        $cut_text = mb_substr($dicval->comment_text, 0, 50);
+        return $cut_text . (mb_strlen($cut_text) < mb_strlen($dicval->comment_text) ? '...' : '');
+    },
+    #*/
 
     #/*
     'second_line_modifier' => function($line, $dic, $dicval) {
