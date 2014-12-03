@@ -27,6 +27,7 @@ class ApplicationController extends BaseController {
             Route::any('/update_profile', array('as' => 'app.update_profile', 'uses' => __CLASS__.'@postUserUpdateProfile'));
             Route::any('/send_invite_message', array('as' => 'app.send_invite_message', 'uses' => __CLASS__.'@postSendInviteMessage'));
             Route::any('/add_promise', array('as' => 'app.add_promise', 'uses' => __CLASS__.'@postAddPromise'));
+            Route::any('/add_comment', array('as' => 'app.add_comment', 'uses' => __CLASS__.'@postAddComment'));
 
             Route::post('/user-auth', array('as' => 'app.user-auth', 'uses' => __CLASS__.'@postUserAuth'));
             Route::post('/user-update-friends', array('as' => 'app.user-update-friends', 'uses' => __CLASS__.'@postUserUpdateFriends'));
@@ -503,6 +504,41 @@ class ApplicationController extends BaseController {
         #Helper::tad($promise);
 
         return View::make(Helper::layout('promise'), compact('user', 'promise', 'comments', 'users'));
+    }
+
+
+
+    public function postAddComment() {
+
+        if (!is_object($this->user))
+            App::abort(404);
+
+        $promise_id = Input::get('promise_id');
+        $user_id = $this->user->id;
+        $comment_text = Input::get('comment_text');
+
+        $promise = Dic::valueBySlugAndId('promises', $promise_id);
+
+        if (!is_object($promise))
+            App::abort(404);
+
+        $comment = DicVal::inject(
+            'comments',
+            array(
+                'slug' => NULL,
+                'name' => '',
+                'fields' => array(
+                    'promise_id' => $promise_id,
+                    'user_id' => $user_id,
+                ),
+                'textfields' => array(
+                    'comment_text' => $comment_text,
+                ),
+            )
+        );
+
+        return Redirect::route('app.promise', $promise_id);
+
     }
 
 

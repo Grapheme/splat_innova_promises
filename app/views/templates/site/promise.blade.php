@@ -39,8 +39,8 @@
 
     <h3>Комментарии</h3>
 
-    {{ Helper::ta($comments) }}
-    {{ Helper::ta($users) }}
+    {{ Helper::ta_($comments) }}
+    {{ Helper::ta_($users) }}
 
     @if (count($comments))
         @foreach ($comments as $comment)
@@ -51,12 +51,17 @@
             ?>
             <strong>
                 {{ $user->name }}
-            </strong>
-            <p>
-                {{ $comment->comment_text }}
-            </p>
+            </strong><br/>
+            {{ $comment->comment_text }}
+            <br/><br/>
         @endforeach
     @endif
+
+    <form action="{{ URL::route('app.add_comment') }}" method="POST">
+        <input type="hidden" name="promise_id" value="{{ $promise->id }}">
+        <textarea name="comment_text" placeholder="Введите текст комментария"></textarea>
+        <button>Отправить</button>
+    </form>
 
 @stop
 
