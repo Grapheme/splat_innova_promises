@@ -385,6 +385,22 @@ function getCookie(name) {
 
     /**
      *
+     * ODNOKLASSNIKI
+     *
+     */
+    $(document).on('click', '.ok-oauth-link', function(e){
+
+        e.preventDefault();
+
+        var promise_text = $('.promise_text').val();
+
+        ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT', '{{ domain }}/ok-oauth?promise_text=' + promise_text );
+
+        return false;
+    });
+
+    /**
+     *
      * VKONTAKTE
      *
      */
@@ -401,5 +417,6 @@ function getCookie(name) {
 
         var params = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=800,height=600"
         window.open('https://oauth.vk.com/authorize?client_id=4659025&scope=friends,email,offline&redirect_uri=' + domain + '/vk-oauth?promise_text='+ promise_text + '&response_type=code&v=5.27', 'vk-oauth', params);
+
         return false;
     });

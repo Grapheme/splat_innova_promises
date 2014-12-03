@@ -47,7 +47,7 @@
             -->
             <link href="http://www.odnoklassniki.ru/oauth/resources.do?type=css" rel="stylesheet" />
             <script src="http://www.odnoklassniki.ru/oauth/resources.do?type=js" type="text/javascript" charset="utf-8"></script>
-            <a class="odkl-oauth-lnk" href="" onclick="ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT', '{{ domain }}/ok-oauth' ); return false;"></a>
+            <a class="odkl-oauth-lnk" href="" class="ok-oauth-link"></a>
 
         <hr/>
 
