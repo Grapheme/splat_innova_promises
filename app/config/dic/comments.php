@@ -40,12 +40,12 @@ return array(
             'promise_id' => array(
                 'title' => 'Обещание',
                 'type' => 'textline',
-                'view_text' => '<a href="' . URL::route('app.promise', is_object($dicval) ? $dicval->promise_id : NULL) . '" target="_blank">' . @$promise->name . '</a>', ## Используется предзагруженный словарь
+                'view_text' => !@$promise->name ? '[ обещание не найдено ]' : '<a href="' . URL::route('app.promise', is_object($dicval) ? $dicval->promise_id : NULL) . '" target="_blank">' . @$promise->name . '</a>', ## Используется предзагруженный словарь
             ),
             'user_id' => array(
                 'title' => 'Пользователь',
                 'type' => 'textline',
-                'view_text' => '<a href="' . URL::route('app.profile_id', is_object($dicval) ? $dicval->user_id : NULL) . '" target="_blank">' . @$user->name . '</a>', ## Используется предзагруженный словарь
+                'view_text' => !@$user->name ? '[ пользователь не найден ]' : '<a href="' . URL::route('app.profile_id', is_object($dicval) ? $dicval->user_id : NULL) . '" target="_blank">' . @$user->name . '</a>', ## Используется предзагруженный словарь
             ),
             'comment_text' => array(
                 'title' => 'Текст комментария',
