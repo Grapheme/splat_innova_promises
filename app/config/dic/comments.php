@@ -30,8 +30,8 @@ return array(
         $user = Dic::valueBySlugAndId('users', is_object($dicval) ? $dicval->user_id : NULL);
         $promise = Dic::valueBySlugAndId('promises', is_object($dicval) ? $dicval->promise_id : NULL);
 
-        Helper::d($user);
-        Helper::d($promise);
+        #Helper::d($user);
+        #Helper::d($promise);
 
         #Helper::ta($dicval);
         #Helper::dd($lists);
@@ -40,12 +40,12 @@ return array(
             'promise_id' => array(
                 'title' => 'Обещание',
                 'type' => 'textline',
-                'view_text' => '<a href="' . URL::route('app.promise', $dicval->promise_id) . '" target="_blank">' . @$promise->name . '</a>', ## Используется предзагруженный словарь
+                'view_text' => '<a href="' . URL::route('app.promise', is_object($dicval) ? $dicval->promise_id : NULL) . '" target="_blank">' . @$promise->name . '</a>', ## Используется предзагруженный словарь
             ),
             'user_id' => array(
                 'title' => 'Пользователь',
                 'type' => 'textline',
-                'view_text' => '<a href="' . URL::route('app.profile_id', $dicval->user_id) . '" target="_blank">' . @$user->name . '</a>', ## Используется предзагруженный словарь
+                'view_text' => '<a href="' . URL::route('app.profile_id', is_object($dicval) ? $dicval->user_id : NULL) . '" target="_blank">' . @$user->name . '</a>', ## Используется предзагруженный словарь
             ),
             'comment_text' => array(
                 'title' => 'Текст комментария',
