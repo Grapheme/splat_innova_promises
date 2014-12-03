@@ -481,7 +481,11 @@ class ApplicationController extends BaseController {
         #Helper::smartQueries(1);
 
         $comments = DicVal::extracts($comments, 1);
-        Helper::tad($comments);
+
+        $users_ids = Dic::makeLists($comments, NULL, 'user_id');
+
+        Helper::ta($comments);
+        Helper::tad($users_ids);
 
         #Helper::tad($promise);
 
