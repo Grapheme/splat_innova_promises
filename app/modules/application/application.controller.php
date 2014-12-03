@@ -589,7 +589,7 @@ class ApplicationController extends BaseController {
                     #Helper::tad($user_record);
 
                     $_SESSION['user_token'] = $user_record->user_token;
-                    $_SESSION['new_user'] = @$data['network'];
+                    $_SESSION['new_user'] = @$user_record->auth_method;
 
                     $json_request['responseText'] = 'Ok';
                     $json_request['new_user'] = true;
