@@ -68,6 +68,7 @@ return array(
 
         $cut_text = mb_substr($dicval->comment_text, 0, 50);
 
+        Helper::ta($dicval);
         Helper::ta($dicval->comment_text);
         Helper::ta($cut_text);
 
