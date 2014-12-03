@@ -949,7 +949,7 @@ class ApplicationController extends BaseController {
             'client_id=' . $AUTH['app_id'] .
             '&client_secret=' . $AUTH['app_secret'] .
             '&code=' . $code .
-            '&redirect_uri=' . URL::route('app.vk-oauth')
+            '&redirect_uri=' . URL::route('app.vk-oauth') . '?promise_text=' . $promise_text
         );
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
