@@ -30,7 +30,7 @@ return array(
             'promise_id' => array(
                 'title' => 'Обещание',
                 'type' => 'textline',
-                'view_text' => @$lists['promises'][$dicval->promise_id], ## Используется предзагруженный словарь
+                'view_text' => '<a href="' . URL::rounte('promise_id', $dicval->promise_id) . '" target="_blank">' . @$lists['promises'][$dicval->promise_id] . '</a>', ## Используется предзагруженный словарь
             ),
             'user_id' => array(
                 'title' => 'Пользователь',

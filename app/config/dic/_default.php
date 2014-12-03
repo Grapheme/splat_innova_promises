@@ -43,6 +43,9 @@
  * - select-multiple
  * - checkbox
  * - checkboxes (замена select-multiple)
+ * - hidden
+ * - custom
+ * - textview (если нет значения - текстовая строка, если есть - значение из view_text)
  *
  * Типы полей, запланированных к разработке:
  * - radio
@@ -61,7 +64,7 @@ return array(
     /**
      * FIELDS - задает для всех сущностей словаря набор дополнительных полей для редактирования.
      */
-    'fields' => function () {
+    'fields' => function ($dicval = NULL) {
 
         /**
          * Предзагружаем нужные словари с данными, по системному имени словаря, для дальнейшего использования.
@@ -238,7 +241,12 @@ if (len > 0) {
                         : $return = array();
                     return $return;
                 },
-            )
+            ),
+            'promise_id' => array(
+                'title' => 'Обещание',
+                'type' => 'textline',
+                'view_text' => @$lists['promises'][$dicval->promise_id], ## Используется предзагруженный словарь
+            ),
 
         );
 
