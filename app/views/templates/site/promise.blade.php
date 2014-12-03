@@ -37,7 +37,23 @@
 
     Таймер...
 
-    <h3>Комментарии...</h3>
+    <h3>Комментарии</h3>
+
+    @if (count($comments))
+        @foreach ($comments as $comment)
+            <?
+            $user = @$users[$comment->user_id];
+            if (!is_object($user))
+                continue;
+            ?>
+            <strong>
+                {{ $user->name }}
+            </strong>
+            <p>
+                {{ $comment->comment_text }}
+            </p>
+        @endforeach
+    @endif
 
 @stop
 
