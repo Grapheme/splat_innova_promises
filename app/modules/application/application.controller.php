@@ -478,8 +478,9 @@ class ApplicationController extends BaseController {
 
         });
 
-        Helper::smartQueries(1);
+        #Helper::smartQueries(1);
 
+        $comments = DicVal::extracts($comments, 1);
         Helper::tad($comments);
 
         #Helper::tad($promise);
