@@ -316,13 +316,16 @@ class Dictionary extends BaseModel {
             $query->with('meta', 'fields', 'textfields', 'seo', 'related_dicvals');
         }))
             ->first()
-            ->value
         ;
-        #Helper::tad($data);
 
-        if ($extract)
-            $data->extract(0);
-        #Helper::tad($data);
+        if (is_object($data)) {
+
+            $data = $data->value;
+            #Helper::tad($data);
+            if ($extract)
+                $data->extract(0);
+            #Helper::tad($data);
+        }
 
         return is_object($data) ? $data : self::firstOrNew(array('id' => 0));
     }
