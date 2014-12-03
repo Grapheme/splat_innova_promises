@@ -490,6 +490,7 @@ class ApplicationController extends BaseController {
 
             if (count($users_ids)) {
                 $users = Dic::valuesBySlugAndIds('users', $users_ids);
+                $users = Dic::modifyKeys($users, 'id');
             }
         }
 
