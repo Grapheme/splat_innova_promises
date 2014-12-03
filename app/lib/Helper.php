@@ -602,6 +602,13 @@ HTML;
             case 'custom':
                 $return = @$array['content'];
                 break;
+            case 'textline':
+                if (!$value)
+                    $return = Form::text($name, NULL, $others_array);
+                else
+                    $return = @$others_array['view_text'];
+                break;
+
         }
         return $return;
     }

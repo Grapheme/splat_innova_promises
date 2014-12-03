@@ -30,7 +30,7 @@ return array(
             'promise_id' => array(
                 'title' => 'Обещание',
                 'type' => 'textline',
-                'value' => @$lists['promises'][$dicval->promise_id], ## Используется предзагруженный словарь
+                'view_text' => @$lists['promises'][$dicval->promise_id], ## Используется предзагруженный словарь
             ),
             'user_id' => array(
                 'title' => 'Пользователь',
