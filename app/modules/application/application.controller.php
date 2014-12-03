@@ -574,6 +574,7 @@ class ApplicationController extends BaseController {
                             'fields' => array(
                                 'auth_method' => @$data['auth_method'],
                                 'identity' => @$data['identity'],
+                                'email' => @$data['email'],
                                 'bdate' => @$data['bdate'],
                                 'user_token' => md5(md5(time() . '_' . rand(999999, 9999999))),
                                 'user_last_action_time' => time(),
