@@ -23,7 +23,7 @@
 
         <br/>
 
-        Контактов: {{ @count($user->friends) }}<br/>
+        Контактов: {{ $count_user_friends }}<br/>
         Обещаний: {{ @count($promises) }}<br/>
 
         @if (isset($promises) && is_object($promises) && count($promises))

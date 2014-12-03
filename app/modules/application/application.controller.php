@@ -103,6 +103,8 @@ class ApplicationController extends BaseController {
 
         if (count($user->friends)) {
 
+            $count_user_friends = count($user->friends);
+
             $user = $this->processFriends($user);
             #Helper::tad($user);
 
@@ -130,7 +132,7 @@ class ApplicationController extends BaseController {
         /**
          * Показываем главную страницу юзера
          */
-        return View::make(Helper::layout('index_user'), compact('user', 'promises', 'existing_friends_list'));
+        return View::make(Helper::layout('index_user'), compact('user', 'promises', 'existing_friends_list', 'count_user_friends'));
     }
 
 
