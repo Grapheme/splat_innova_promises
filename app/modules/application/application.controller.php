@@ -450,17 +450,21 @@ class ApplicationController extends BaseController {
         /**
          * Тут еще нужна проверка - не закончилось ли время выполнения обещания?
          */
-        if (Input::get('fail')) {
+        if ($promise->user_id == $user->id) {
 
-            if (!$promise->promise_fail && !$promise->finished_at)
-                $promise->update_field('promise_fail', 1);
+            if (Input::get('fail')) {
 
-        } elseif (Input::get('finished')) {
+                if (!$promise->promise_fail && !$promise->finished_at) {
+                    $promise->update_field('promise_fail', 1);
+                }
 
-            if (!$promise->promise_fail && !$promise->finished_at)
-                $promise->update_field('finished_at', date('Y-m-d'));
+            } elseif (Input::get('finished')) {
+
+                if (!$promise->promise_fail && !$promise->finished_at) {
+                    $promise->update_field('finished_at', date('Y-m-d'));
+                }
+            }
         }
-
 
         #Helper::tad($promise);
 
