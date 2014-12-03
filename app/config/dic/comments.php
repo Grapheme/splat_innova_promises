@@ -16,14 +16,21 @@ return array(
          */
         $dics_slugs = array(
             'users',
+            'promises',
         );
         $dics = Dic::whereIn('slug', $dics_slugs)->with('values')->get();
         $dics = Dic::modifyKeys($dics, 'slug');
         #Helper::tad($dics);
         $lists = Dic::makeLists($dics, 'values', 'name', 'id');
-        #Helper::dd($lists);
+
+        Helper::dd($lists);
 
         return array(
+            'promise_id' => array(
+                'title' => 'Обещание',
+                'type' => 'textline',
+                'value' => $lists['promises'], ## Используется предзагруженный словарь
+            ),
             'user_id' => array(
                 'title' => 'Пользователь',
                 'type' => 'select',
@@ -71,7 +78,7 @@ return array(
                 $comment_texts = Dic::makeLists($textfields, NULL, 'value', 'dicval_id');
             }
             Config::set('temp.comment_texts', $comment_texts);
-            Helper::ta($comment_texts);
+            #Helper::ta($comment_texts);
         },
 
     ),
