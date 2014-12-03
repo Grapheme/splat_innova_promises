@@ -66,6 +66,9 @@ return array(
     #/*
     'first_line_modifier' => function($line, $dic, $dicval) {
 
+        $dicval->load('alltextfields');
+        $dicval->extract(1);
+
         $cut_text = mb_substr($dicval->comment_text, 0, 50);
 
         Helper::ta($dicval);
