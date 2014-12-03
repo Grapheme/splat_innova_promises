@@ -605,8 +605,10 @@ HTML;
             case 'textline':
                 if (!$value)
                     $return = Form::text($name, NULL, $others_array);
-                else
+                else {
+                    Helper::ta($others_array);
                     $return = @$others_array['view_text'];
+                }
                 break;
 
         }
