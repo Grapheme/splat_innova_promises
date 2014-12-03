@@ -40,6 +40,7 @@
     <h3>Комментарии</h3>
 
     {{ Helper::ta($comments) }}
+    {{ Helper::ta($users) }}
 
     @if (count($comments))
         @foreach ($comments as $comment)
