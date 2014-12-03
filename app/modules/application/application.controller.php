@@ -468,6 +468,7 @@ class ApplicationController extends BaseController {
         }
 
         $comments = Dic::valuesBySlug('comments', function($query) use ($promise) {
+
             $tbl_alias_promise_id = $query->join_field('promise_id', 'promise_id', function($join, $value) use ($promise) {
                 $join->where($value, '=', $promise->id);
             });
@@ -476,6 +477,8 @@ class ApplicationController extends BaseController {
             });
 
         });
+
+        Helper::smartQueries(1);
 
         Helper::tad($comments);
 
