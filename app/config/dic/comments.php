@@ -30,8 +30,8 @@ return array(
         $user = Dic::valueBySlugAndId('users', is_object($dicval) ? $dicval->user_id : NULL);
         $promise = Dic::valueBySlugAndId('promises', is_object($dicval) ? $dicval->promise_id : NULL);
 
-        Helper::ta($user);
-        Helper::tad($promise);
+        Helper::d($user);
+        Helper::d($promise);
 
         #Helper::ta($dicval);
         #Helper::dd($lists);
