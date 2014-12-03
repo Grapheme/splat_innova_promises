@@ -83,6 +83,7 @@
                     </section>
                     @endif
 
+                    @if (!@$dic_settings['hide_name'])
                     <section>
                         <label class="label">{{ $dic->name_title ?: 'Название' }}</label>
                         <label class="input">
@@ -92,6 +93,7 @@
                             @endif
                         </label>
                     </section>
+                    @endif
 
                 </fieldset>
 
