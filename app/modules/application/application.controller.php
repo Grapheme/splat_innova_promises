@@ -101,12 +101,14 @@ class ApplicationController extends BaseController {
 
         #Helper::d('Count user friends: ' . count($user->friends));
 
-        if (count($user->friends)) {
+        $count_user_friends = 0;
 
-            $count_user_friends = count($user->friends);
+        if (count($user->friends)) {
 
             $user = $this->processFriends($user);
             #Helper::tad($user);
+
+            $count_user_friends = @count($user->existing_friends) + @count($user->non_existing_friends);
 
             $friends_uids = array();
             foreach ($user->friends as $friend) {
