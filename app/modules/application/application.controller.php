@@ -467,6 +467,8 @@ class ApplicationController extends BaseController {
             }
         }
 
+
+
         $comments = Dic::valuesBySlug('comments', function($query) use ($promise) {
 
             $tbl_alias_promise_id = $query->join_field('promise_id', 'promise_id', function($join, $value) use ($promise) {
@@ -480,19 +482,26 @@ class ApplicationController extends BaseController {
 
         #Helper::smartQueries(1);
 
-        $comments = DicVal::extracts($comments, 1);
+        if (count($comments)) {
 
-        $users_ids = Dic::makeLists($comments, NULL, 'user_id');
-        $users = Dic::valuesBySlugAndIds('users', $users_ids);
+            $comments = DicVal::extracts($comments, 1);
 
-        Helper::ta($comments);
-        Helper::ta($users);
-        Helper::tad($users_ids);
+            $users_ids = Dic::makeLists($comments, NULL, 'user_id');
+
+            if (count($users_ids)) {
+                $users = Dic::valuesBySlugAndIds('users', $users_ids);
+            }
+        }
+
+
+        #Helper::ta($comments);
+        #Helper::ta($users_ids);
+        #Helper::tad($users);
 
 
         #Helper::tad($promise);
 
-        return View::make(Helper::layout('promise'), compact('user', 'promise'));
+        return View::make(Helper::layout('promise'), compact('user', 'promise', 'comments', 'users'));
     }
 
 
