@@ -24,9 +24,11 @@ return array(
         #Helper::tad($dics);
         $lists = Dic::makeLists($dics, 'values', 'name', 'id');
         */
+        if (is_object($dicval)) {
 
-        $user = Dic::valueBySlugAndId('users', $dicval->user_id);
-        $promise = Dic::valueBySlugAndId('promises', $dicval->promise_id);
+            $user = Dic::valueBySlugAndId('users', $dicval->user_id);
+            $promise = Dic::valueBySlugAndId('promises', $dicval->promise_id);
+        }
 
 
         #Helper::ta($dicval);
