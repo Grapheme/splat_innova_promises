@@ -169,7 +169,7 @@ return array(
         } elseif ($dicval->auth_method == 'odnoklassniki') {
             $prefix = '<i class="fa fa-dribbble" style="color:#F5B57B"></i>';
         } elseif ($dicval->auth_method == 'native') {
-            $prefix = '<i class="fa fa-envelope" style="color:#34B60F"></i>';
+            $prefix = '<i class="fa fa-envelope-o" style="color:#34B60F"></i>';
         }
         return $prefix . ' ' . $line;
     },
