@@ -431,7 +431,7 @@ function getCookie(name) {
  */
 $(document).on('submit', '#auth_form', function(e){
 
-    e.preventDefault();
+    //e.preventDefault();
 
     var promise_text = $('.promise_text').val();
     var email = $('.user-auth-email').val();
