@@ -747,7 +747,7 @@ class ApplicationController extends BaseController {
                     #$user->extract();
 
                     Helper::ta($user);
-                    Helper::ta(json_decode($user->friends, 1));
+                    Helper::ta(json_decode(json_decode($user->friends, 1), 1));
 
                     $user->full_social_info = json_decode($user->full_social_info, 1);
                     $user->friends = json_decode($user->friends, 1);
