@@ -14,6 +14,7 @@ class ApplicationController extends BaseController {
 
             Route::get('/ok-oauth', array('as' => 'app.ok-oauth', 'uses' => __CLASS__.'@getOkOauth'));
             Route::get('/vk-oauth', array('as' => 'app.vk-oauth', 'uses' => __CLASS__.'@getVkOauth'));
+            Route::any('/email-pass-auth', array('as' => 'app.email-pass-auth', 'uses' => __CLASS__.'@postEmailPassAuth'));
 
             Route::get('/', array('as' => 'app.mainpage', 'uses' => __CLASS__.'@getAppMainPage'));
             Route::get('/profile', array('as' => 'app.profile', 'uses' => __CLASS__.'@getUserProfile'));
@@ -1299,6 +1300,11 @@ class ApplicationController extends BaseController {
          */
 
         Helper::dd("Send msg...");
+    }
+
+    public function postEmailPassAuth() {
+
+        Helper::dd(Input::all());
     }
 
 }

@@ -7,11 +7,13 @@
 
 @section('content')
 
-    <form action="#" method="POST" id="auth_form">
+    <form action="#" method="POST" id="promise_form">
 
         Я обещаю, что...<br/>
         <textarea class="promise_text"></textarea><br/>
         <input type="button" value="Дать обещание">
+
+    </form>
 
         <br/>
         <br/>
@@ -57,9 +59,11 @@
 
         или адреса электронной почты:<br/>
 
-        почта <input type="text" name="email"><br/>
-        пароль <input type="password" name="pass">
-
+    <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" id="auth_form">
+        <input type="submit" name="promise_text" value=""><br/>
+        почта <input type="text" name="email" class="user-auth-email"><br/>
+        пароль <input type="password" name="pass" class="user-auth-pass"><br/>
+        <button class="user-auth-send">Войти</button>
     </form>
 
     <hr/>
