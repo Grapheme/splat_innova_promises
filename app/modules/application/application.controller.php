@@ -999,7 +999,7 @@ class ApplicationController extends BaseController {
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $friends = curl_exec($curl);
         curl_close($curl);
-        #$user = json_decode($s, true);
+        $friends = json_decode($friends, true);
 
         /**
          * + VALUABLE_ACCESS
