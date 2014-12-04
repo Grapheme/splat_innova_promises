@@ -112,24 +112,30 @@ class ApplicationController extends BaseController {
             $count_user_friends = @count($user->existing_friends) + @count($user->non_existing_friends);
 
             $friends_uids = array();
-            foreach ($user->friends as $friend) {
-                $friend_id = @$friend['uid'] ?: @$friend['id'];
-                $friend_uid = 'http://vk.com/id' . $friend_id;
-                $friends_uids[] = $friend_uid;
+            $existing_friends_list = array();
+
+            if (isset($user->friends) && is_array($user->friends) && count($user->friends)) {
+
+                foreach ($user->friends as $friend) {
+                    $friend_id = @$friend['uid'] ?: @$friend['id'];
+                    $friend_uid = 'http://vk.com/id' . $friend_id;
+                    $friends_uids[] = $friend_uid;
+                }
+                #$friends_uids[] = 'http://vk.com/id1889847';
+
+                #Helper::ta($friends_uids);
+
+                $dic = Dic::where('slug', 'users')->first();
+                $existing_friends = DicFieldVal::where('key', 'identity')
+                    ->whereIn('value', $friends_uids)
+                    ->get()
+                ;
+                #Helper::ta($existing_friends);
+
+                $existing_friends_list = Dic::makeLists($existing_friends, null, 'value');
+                #Helper::tad($existing_friends_list);
             }
-            #$friends_uids[] = 'http://vk.com/id1889847';
 
-            #Helper::ta($friends_uids);
-
-            $dic = Dic::where('slug', 'users')->first();
-            $existing_friends = DicFieldVal::where('key', 'identity')
-                ->whereIn('value', $friends_uids)
-                ->get()
-            ;
-            #Helper::ta($existing_friends);
-
-            $existing_friends_list = Dic::makeLists($existing_friends, null, 'value');
-            #Helper::tad($existing_friends_list);
         }
 
         /**
