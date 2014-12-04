@@ -982,4 +982,22 @@ class DicVal extends BaseModel {
 
         return $dicval;
     }
+
+
+    public function remove_field($key, $lang = NULL) {
+
+        if (!$this->id)
+            return false;
+
+        $dicval = DicFieldVal::firstOrNew(array(
+            'dicval_id' => $this->id,
+            'language' => $lang,
+            'key' => $key,
+        ));
+        $dicval->delete();
+
+        unset($this->$key);
+
+        return $dicval;
+    }
 }

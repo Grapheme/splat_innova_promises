@@ -288,10 +288,14 @@ class Dictionary extends BaseModel {
                 $query->where('version_of', NULL);
                 $query->where('slug', $val_slug);
                 $query->with('meta', 'fields', 'seo', 'related_dicvals');
-            }))->first()->value;
+            }))->first();
 
-        if ($extract) {
-            $data->extract(0);
+        if (is_object($data)) {
+            $data = $data->value;
+
+            if ($extract) {
+                $data->extract(0);
+            }
         }
 
         #Helper::tad($data);

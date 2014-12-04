@@ -56,6 +56,7 @@
         почта <input type="text" name="email" class="user-auth-email"><br/>
         пароль <input type="password" name="pass" class="user-auth-pass"><br/>
         <button type="submit" class="user-auth-send">Войти</button>
+        <a href="{{ URL::route('app.restore_password') }}">Забыли пароль?</a>
     </form>
 
     <hr/>

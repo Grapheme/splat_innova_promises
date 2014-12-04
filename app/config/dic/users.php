@@ -171,6 +171,16 @@ return array(
         } elseif ($dicval->auth_method == 'native') {
             $prefix = '<i class="fa fa-envelope-o" style="color:#34B60F"></i>';
         }
+
+        #Helper::d($line);
+
+        #/*
+        if (trim($line) == '') {
+            #$line = $dicval->email;
+            $line = 'без имени';
+        }
+        #*/
+
         return $prefix . ' ' . $line;
     },
 

@@ -9,7 +9,7 @@ return array(
 	'use_css_local' => FALSE,
 	'use_scripts_local' => FALSE,
 	
-	'default_page_title' => 'CMS DEV',
+	'default_page_title' => 'Я обещаю!',
 	'template' => 'site',
     'welcome_page_tpl' => 'templates.site.index', #'guests.welcome',
 

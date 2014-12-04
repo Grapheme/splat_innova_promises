@@ -20,6 +20,11 @@ class ApplicationController extends BaseController {
             Route::get('/profile', array('as' => 'app.profile', 'uses' => __CLASS__.'@getUserProfile'));
             Route::get('/new_promise', array('as' => 'app.new_promise', 'uses' => __CLASS__.'@getNewPromise'));
 
+            Route::get('/restore_password', array('as' => 'app.restore_password', 'uses' => __CLASS__.'@getRestorePassword'));
+            Route::any('/do_restore_password', array('as' => 'app.do_restore_password', 'uses' => __CLASS__.'@postDoRestorePassword'));
+            Route::get('/restore_password_open_link', array('as' => 'app.restore_password_open_link', 'uses' => __CLASS__.'@getRestorePasswordOpenLink'));
+            Route::any('/restore_password_set_new_password', array('as' => 'app.restore_password_set_new_password', 'uses' => __CLASS__.'@postRestorePasswordSetNewPassword'));
+
             Route::get('/profile/{id}', array('as' => 'app.profile_id', 'uses' => __CLASS__.'@getProfileByID'));
             Route::get('/invite/{data}', array('as' => 'app.send_invite', 'uses' => __CLASS__.'@getSendInvite'));
 
@@ -748,6 +753,7 @@ class ApplicationController extends BaseController {
 
                     if ($data['auth_method'] == 'native') {
                         $array['fields']['password'] = md5('splat.' . $data['password']);
+                        $new_password = $data['password'];
                     }
 
                     unset($data['password']);
@@ -766,6 +772,27 @@ class ApplicationController extends BaseController {
 
                     $_SESSION['user_token'] = $user_record->user_token;
                     $_SESSION['new_user'] = @$user_record->auth_method;
+
+                    /**
+                     * Если новый пользователь зарегистрировался через email/пароль - отправим ему на почту данные для входа
+                     */
+                    if ($data['auth_method'] == 'native') {
+
+                        $data['password'] = $new_password;
+
+                        Mail::send('emails.user-register', $data, function ($message) use ($data) {
+
+                            $from_email = Dic::valueBySlugs('options', 'from_email');
+                            $from_email = $from_email->name != '' ? $from_email->name : 'support@grapheme.ru';
+                            $from_name = Dic::valueBySlugs('options', 'from_name');
+                            $from_name = $from_name->name != '' ? $from_name->name : 'No-reply';
+
+                            $message->from($from_email, $from_name);
+                            $message->subject('Успешная регистрация');
+
+                            $message->to($data['email']);
+                        });
+                    }
 
                     $json_request['responseText'] = 'Ok';
                     $json_request['new_user'] = true;
@@ -1371,6 +1398,130 @@ class ApplicationController extends BaseController {
         }
 
         return Redirect::route('app.mainpage');
+    }
+
+
+    public function getRestorePassword() {
+
+        return View::make(Helper::layout('restore_password'), compact('user'));
+    }
+
+    public function postDoRestorePassword() {
+
+        $email = Input::get('email');
+
+        $user = Dic::valuesBySlug('users', function($query) use ($email) {
+
+            $query->join_field('identity', 'identity', function($join, $value) use ($email) {
+                $join->where($value, '=', $email);
+            });
+        });
+        $user = @$user[0];
+
+        #Helper::tad($user);
+
+        if (!is_object($user) || !@$user->id) {
+            return Redirect::route('app.restore_password')
+                ->with('msg', 'Пользователь не найден')
+                ;
+        }
+
+        #Helper::smartQueries(1);
+        #Helper::tad($user);
+
+        $user->extract(1);
+
+        $token = md5('splat.' . $user->id . '.' . time());
+        $user->update_field('restore_password_token', $token);
+
+        Mail::send('emails.restore_password_link_send', array('token' => $token), function ($message) use ($user) {
+
+            $from_email = Dic::valueBySlugs('options', 'from_email');
+            $from_email = $from_email->name != '' ? $from_email->name : 'support@grapheme.ru';
+            $from_name = Dic::valueBySlugs('options', 'from_name');
+            $from_name = $from_name->name != '' ? $from_name->name : 'No-reply';
+
+            $message->from($from_email, $from_name);
+            $message->subject('Запрос на сброс пароля');
+
+            $message->to($user->email);
+        });
+
+        return View::make(Helper::layout('link_to_refresh_password_send'), compact('user'));
+    }
+
+
+    public function getRestorePasswordOpenLink() {
+
+        $token = Input::get('token');
+
+        $user = Dic::valuesBySlug('users', function($query) use ($token) {
+
+            $query->join_field('restore_password_token', 'restore_password_token', function($join, $value) use ($token) {
+                $join->where($value, '=', $token);
+            });
+        });
+        $user = @$user[0];
+
+        if (!is_object($user) || !@$user->id) {
+            return View::make(Helper::layout('restore_password_user_not_found_by_token'), compact('user'));
+        }
+
+        #Helper::smartQueries(1);
+        #Helper::tad($user);
+
+        $user->extract(1);
+
+        #Helper::tad($user);
+
+        return View::make(Helper::layout('restore_password_set_new_password'), compact('user', 'token'));
+    }
+
+    public function postRestorePasswordSetNewPassword() {
+
+        $password = Input::get('password');
+        $token = Input::get('token');
+
+        $user = Dic::valuesBySlug('users', function($query) use ($token) {
+
+            $query->join_field('restore_password_token', 'restore_password_token', function($join, $value) use ($token) {
+                $join->where($value, '=', $token);
+            });
+        });
+        $user = @$user[0];
+
+        if (!is_object($user) || !@$user->id) {
+            return View::make(Helper::layout('restore_password_user_not_found_by_token'), compact('user'));
+        }
+
+        #Helper::smartQueries(1);
+        #Helper::tad($user);
+
+        $user->extract(1);
+
+        #Helper::tad($user);
+
+        $new_password_hash = md5('splat.' . $password);
+        $user->update_field('password', $new_password_hash);
+        $user->remove_field('restore_password_token');
+
+        unset($_COOKIE['user_token']);
+        unset($_SESSION['user_token']);
+
+        Mail::send('emails.restore_password_success', array('password' => $password, 'user' => $user), function ($message) use ($user) {
+
+            $from_email = Dic::valueBySlugs('options', 'from_email');
+            $from_email = $from_email->name != '' ? $from_email->name : 'support@grapheme.ru';
+            $from_name = Dic::valueBySlugs('options', 'from_name');
+            $from_name = $from_name->name != '' ? $from_name->name : 'No-reply';
+
+            $message->from($from_email, $from_name);
+            $message->subject('Пароль успешно изменен');
+
+            $message->to($user->email);
+        });
+
+        return View::make(Helper::layout('restore_password_success'), compact('user', 'token'));
     }
 
 }
