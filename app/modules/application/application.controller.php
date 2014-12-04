@@ -986,9 +986,14 @@ class ApplicationController extends BaseController {
 
 
         $friends_get_url = 'http://api.odnoklassniki.ru/fb.do?access_token=' . $auth['access_token']
-            . '&method=friends.get&application_key='
-            . $AUTH['application_key']
-            . '&sig=' . md5('application_key=' . $AUTH['application_key'] . 'method=friends.get' . md5($auth['access_token'] . $AUTH['client_secret']));
+            . '&application_key=' . $AUTH['application_key']
+            . '&method=friends.get'
+            . '&uid=' . $user['uid']
+            . '&sig=' . md5(
+                'application_key=' . $AUTH['application_key']
+                . 'method=friends.get'
+                . 'uid=' . $user['uid']
+                . md5($auth['access_token'] . $AUTH['client_secret']));
 
         $curl = curl_init($friends_get_url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -1001,7 +1006,7 @@ class ApplicationController extends BaseController {
          * http://apiok.ru/wiki/pages/viewpage.action?pageId=83034588
          * http://apiok.ru/wiki/pages/viewpage.action?pageId=81822097
          */
-        #Helper::dd($friends);
+        Helper::dd($friends);
 
 
 
