@@ -1304,7 +1304,41 @@ class ApplicationController extends BaseController {
 
     public function postEmailPassAuth() {
 
-        Helper::dd(Input::all());
+        #Helper::d(Input::all());
+
+        /**
+         * Если с авторизацией передан текст обещания - сохраняем его в сессию,
+         * чтобы после авторизации сразу перейти на страницу дачи обещания.
+         */
+        $promise_text = Input::get('promise_text');
+        if ($promise_text != '') {
+            $_SESSION['promise_text'] = $promise_text;
+        }
+
+        $email = Input::get('email');
+        $pass = Input::get('pass');
+
+        if (!$email || !$pass) {
+            App::abort(404);
+        }
+
+        $user['identity'] = $email;
+        $user['email'] = $email;
+        $user['password'] = $pass;
+        $user['auth_method'] = 'native';
+
+        $check = $this->checkUserData($user, true);
+        #Helper::d($check);
+
+        if (!@$check['user']['user_token']) {
+            return Redirect::route('app.mainpage');
+        }
+
+        setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
+
+        return Redirect::route('app.profile');
+
+        #Helper::dd('');
     }
 
 }
