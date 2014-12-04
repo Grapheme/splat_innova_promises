@@ -249,6 +249,7 @@ class Dictionary extends BaseModel {
      * @return mixed
      */
     public static function valuesBySlug($slug, Closure $conditions = NULL) {
+
         #Helper::dd($slug);
         $return = Dic::where('slug', $slug);
         #dd($conditions);
@@ -264,7 +265,7 @@ class Dictionary extends BaseModel {
         if (is_object($return))
             $return = isset($return->values_no_conditions) ? $return->values_no_conditions : $return->values;
         else
-            $return = Dic::firstOrNew(array('slug' => $slug, 'version_of' => NULL))->with('values')->first()->values;
+            $return = Dic::firstOrNew(array('slug' => $slug))->with('values')->first()->values;
         #return self::firstOrNew(array('slug' => $slug))->values;
         return $return;
     }

@@ -27,9 +27,8 @@ return array(
                 'default' => '',
             ),
             'password' => array(
-                'title' => 'Пароль (если пользователь регистрировался не через соц.сеть)',
-                'type' => 'text',
-                'default' => '',
+                'title' => 'Хеш пароля (если пользователь регистрировался не через соц.сеть)',
+                'type' => 'textline',
             ),
             'bdate' => array(
                 'title' => 'Дата рождения',
@@ -169,6 +168,8 @@ return array(
             $prefix = '<i class="fa fa-vk" style="color:#8EA7C9"></i>';
         } elseif ($dicval->auth_method == 'odnoklassniki') {
             $prefix = '<i class="fa fa-dribbble" style="color:#F5B57B"></i>';
+        } elseif ($dicval->auth_method == 'native') {
+            $prefix = '<i class="fa fa-envelope" style="color:#34B60F"></i>';
         }
         return $prefix . ' ' . $line;
     },

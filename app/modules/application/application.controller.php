@@ -509,11 +509,11 @@ class ApplicationController extends BaseController {
             App::abort(404);
 
         $promise->extract(1);
+        #Helper::tad($promise);
 
         #if ($promise->user_id != $user->id) {
         #    App::abort(404);
         #}
-
 
         /**
          * Тут еще нужна проверка - не закончилось ли время выполнения обещания?
@@ -535,19 +535,13 @@ class ApplicationController extends BaseController {
         }
 
 
-
         $comments = Dic::valuesBySlug('comments', function($query) use ($promise) {
 
             $tbl_alias_promise_id = $query->join_field('promise_id', 'promise_id', function($join, $value) use ($promise) {
                 $join->where($value, '=', $promise->id);
             });
-            #$tbl_alias_user_id = $query->join_field('user_id', 'user_id', function($join, $value) use ($promise) {
-            #    $join->where($value, '=', $promise->user_id);
-            #});
-
         });
 
-        #Helper::smartQueries(1);
 
         $users = NULL;
 
@@ -665,11 +659,34 @@ class ApplicationController extends BaseController {
                     /**
                      * Идентификатор юзера найден в базе - пытаемся получить его
                      */
-                    $user_record = DicVal::firstOrNew(array(
+                    $array = array(
                         'id' => $temp->dicval_id,
                         'dic_id' => $users_dic->id
-                    ));
+                    );
+
+                    $user_record = DicVal::firstOrNew($array);
                     if ($user_record->id) {
+
+                        /**
+                         * Если пользователь авторизуется через почту/пароль - проверим последний
+                         */
+                        if ($data['auth_method'] == 'native') {
+
+                            $user_record->load('fields');
+                            $user_record->extract(1);
+
+                            $password = md5('splat.' . $data['password']);
+
+                            #Helper::d($data);
+                            #Helper::ta($user_record);
+                            #Helper::dd($password);
+
+                            if ($user_record->password != $password) {
+                                Redirect(URL::route('app.mainpage'));
+                            }
+                        }
+
+                        unset($data['password']);
 
                         /**
                          * Обновляем данные пользователя в БД
@@ -714,23 +731,31 @@ class ApplicationController extends BaseController {
                     /**
                      * Пользователь авторизуется в первый раз - добавим его
                      */
+                    $array = array(
+                        'slug' => NULL,
+                        'name' => @$data['first_name'] . ' ' . @$data['last_name'],
+                        'fields' => array(
+                            'auth_method' => @$data['auth_method'],
+                            'identity' => @$data['identity'],
+                            'email' => @$data['email'],
+                            'bdate' => @$data['bdate'],
+                            'user_token' => md5(md5(time() . '_' . rand(999999, 9999999))),
+                            'user_last_action_time' => time(),
+                        ),
+                    );
+
+                    if ($data['auth_method'] == 'native') {
+                        $array['fields']['password'] = md5('splat.' . $data['password']);
+                    }
+
+                    unset($data['password']);
+
+                    $array['textfields']['full_social_info'] = json_encode($data);
+
+
                     $user_record = DicVal::inject(
                         'users',
-                        array(
-                            'slug' => NULL,
-                            'name' => @$data['first_name'] . ' ' . @$data['last_name'],
-                            'fields' => array(
-                                'auth_method' => @$data['auth_method'],
-                                'identity' => @$data['identity'],
-                                'email' => @$data['email'],
-                                'bdate' => @$data['bdate'],
-                                'user_token' => md5(md5(time() . '_' . rand(999999, 9999999))),
-                                'user_last_action_time' => time(),
-                            ),
-                            'textfields' => array(
-                                'full_social_info' => json_encode($data),
-                            ),
-                        )
+                        $array
                     );
 
                     $user_record->extract(1);
@@ -1336,9 +1361,14 @@ class ApplicationController extends BaseController {
 
         setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
 
-        return Redirect::route('app.profile');
+        /**
+         * Если есть пометка о том, что юзер новый - убираем ее и переадресовываем на страницу редактирования профиля
+         */
+        if (@$_SESSION['new_user']) {
+            return Redirect::route('app.profile');
+        }
 
-        #Helper::dd('');
+        return Redirect::route('app.mainpage');
     }
 
 }

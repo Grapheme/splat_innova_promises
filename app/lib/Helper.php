@@ -606,7 +606,7 @@ HTML;
                 if (!$value)
                     $return = Form::text($name, NULL, $others_array);
                 else
-                    $return = @$array['view_text'];
+                    $return = isset($array['view_text']) ? $array['view_text'] : $value;
                 break;
 
         }
