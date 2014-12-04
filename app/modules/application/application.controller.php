@@ -1017,7 +1017,7 @@ class ApplicationController extends BaseController {
                 . '&uids=' . implode(',', $friends)
                 . '&sig=' . md5(
                     'application_key=' . $AUTH['application_key']
-                    . 'method=friends.get'
+                    . 'method=users.getInfo'
                     . 'uids=' . implode(',', $friends)
                     . md5($auth['access_token'] . $AUTH['client_secret']));
 
