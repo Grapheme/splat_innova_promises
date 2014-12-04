@@ -1002,13 +1002,34 @@ class ApplicationController extends BaseController {
         #$user = json_decode($s, true);
 
         /**
-         * VALUABLE_ACCESS
+         * + VALUABLE_ACCESS
          * http://apiok.ru/wiki/pages/viewpage.action?pageId=83034588
          * http://apiok.ru/wiki/pages/viewpage.action?pageId=81822097
          */
+        #Helper::dd($friends);
+
+
+        if (count($friends)) {
+
+            $friends_info_get_url = 'http://api.odnoklassniki.ru/fb.do?access_token=' . $auth['access_token']
+                . '&application_key=' . $AUTH['application_key']
+                . '&method=users.getInfo'
+                . '&uids=' . implode(',', $friends)
+                . '&sig=' . md5(
+                    'application_key=' . $AUTH['application_key']
+                    . 'method=friends.get'
+                    . md5($auth['access_token'] . $AUTH['client_secret']));
+
+            $curl = curl_init($friends_get_url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            $friends = curl_exec($curl);
+            curl_close($curl);
+            #$user = json_decode($s, true);
+
+        }
+
+
         Helper::dd($friends);
-
-
 
 
         setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
