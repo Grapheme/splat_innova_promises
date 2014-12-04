@@ -746,13 +746,13 @@ class ApplicationController extends BaseController {
                     $user->extract(1);
                     #$user->extract();
 
-                    Helper::ta($user);
-                    Helper::ta(json_decode(json_decode($user->friends, 1), 1));
+                    #Helper::ta($user);
+                    #Helper::ta(json_decode(json_decode($user->friends, 1), 1));
 
                     $user->full_social_info = json_decode($user->full_social_info, 1);
                     $user->friends = json_decode($user->friends, 1);
 
-                    Helper::tad($user);
+                    #Helper::tad($user);
 
                     $now = (new \Carbon\Carbon())->now();
 
@@ -1022,7 +1022,7 @@ class ApplicationController extends BaseController {
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $user_friends = curl_exec($curl);
             curl_close($curl);
-            #$user = json_decode($s, true);
+            $user_friends = json_decode($user_friends, true);
 
             #Helper::dd($user_friends);
 
