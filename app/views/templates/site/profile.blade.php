@@ -14,7 +14,7 @@
 
     <form action="{{ URL::route('app.update_profile') }}" method="POST">
 
-        <input type="text" name="name" value="{{ $user->name }}"><br/>
+        <input type="text" name="name" value="{{ trim($user->name) }}"><br/>
 
         <input type="text" name="email" value="{{ $user->email }}" placeholder="Укажите ваш e-mail">
         Обязательно укажите емейл<br/>

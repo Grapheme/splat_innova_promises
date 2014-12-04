@@ -691,23 +691,25 @@ class ApplicationController extends BaseController {
                         /**
                          * Обновляем данные пользователя в БД
                          */
+                        $array = array(
+                            'slug' => NULL,
+                            'fields' => array(
+                                'auth_method' => @$data['auth_method'],
+                                'user_last_action_time' => time(),
+                            ),
+                            'textfields' => array(
+                                'full_social_info' => json_encode($data),
+                            ),
+                        );
+                        if ($data['auth_method'] != 'native') {
+                            $array['name'] = @$data['first_name'] . ' ' . @$data['last_name'];
+                            $array['bdate'] = @$data['bdate'];
+                        }
+
                         $user_record = DicVal::refresh(
                             'users',
                             $user_record->id,
-                            array(
-                                'slug' => NULL,
-                                'name' => @$data['first_name'] . ' ' . @$data['last_name'],
-                                'fields' => array(
-                                    'auth_method' => @$data['auth_method'],
-                                    #'identity' => @$data['identity'],
-                                    'bdate' => @$data['bdate'],
-                                    #'user_token' => md5(md5(time() . '_' . rand(999999, 9999999))),
-                                    'user_last_action_time' => time(),
-                                ),
-                                'textfields' => array(
-                                    'full_social_info' => json_encode($data),
-                                ),
-                            )
+                            $array
                         );
 
                         #Helper::tad($user_record);
