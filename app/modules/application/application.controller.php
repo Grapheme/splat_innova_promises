@@ -150,8 +150,8 @@ class ApplicationController extends BaseController {
         if (!isset($user->friends) || !$user->friends || !count($user->friends))
             return $user;
 
-        $existing_friends = new Collection();
-        $non_existing_friends = new Collection();
+        $existing_friends = array();
+        $non_existing_friends = array();
 
         #Helper::ta($user);
 
