@@ -483,6 +483,8 @@ class ApplicationController extends BaseController {
 
         #Helper::smartQueries(1);
 
+        $users = NULL;
+
         if (count($comments)) {
 
             $comments = DicVal::extracts($comments, 1);
