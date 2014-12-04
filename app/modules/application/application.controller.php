@@ -1018,6 +1018,7 @@ class ApplicationController extends BaseController {
                 . '&sig=' . md5(
                     'application_key=' . $AUTH['application_key']
                     . 'method=friends.get'
+                    . 'uids=' . implode(',', $friends)
                     . md5($auth['access_token'] . $AUTH['client_secret']));
 
             $curl = curl_init($friends_info_get_url);
