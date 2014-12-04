@@ -1006,7 +1006,7 @@ class ApplicationController extends BaseController {
          * http://apiok.ru/wiki/pages/viewpage.action?pageId=83034588
          * http://apiok.ru/wiki/pages/viewpage.action?pageId=81822097
          */
-        Helper::d($friends);
+        #Helper::d($friends);
 
 
         if (count($friends)) {
@@ -1025,14 +1025,21 @@ class ApplicationController extends BaseController {
 
             $curl = curl_init($friends_info_get_url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            $friends = curl_exec($curl);
+            $user_friends = curl_exec($curl);
             curl_close($curl);
             #$user = json_decode($s, true);
 
+            #Helper::dd($user_friends);
+
+            $friends = DicTextFieldVal::firstOrNew(array(
+                'dicval_id' => $check['user']['id'],
+                'key' => 'friends'
+            ));
+            $friends->value = json_encode($user_friends);
+            $friends->save();
         }
 
 
-        Helper::dd($friends);
 
 
         setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
