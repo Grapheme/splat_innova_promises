@@ -1013,14 +1013,14 @@ class ApplicationController extends BaseController {
 
             $friends_info_get_url = 'http://api.odnoklassniki.ru/fb.do?access_token=' . $auth['access_token']
                 . '&application_key=' . $AUTH['application_key']
+                . '&fields=uid,first_name,last_name,current_location,gender,pic_1,pic_2'
                 . '&method=users.getInfo'
                 . '&uids=' . implode(',', $friends)
-                . '&fields=uid,first_name,last_name,current_location,gender,pic_1,pic_2'
                 . '&sig=' . md5(
                     'application_key=' . $AUTH['application_key']
+                    . 'fields=uid,first_name,last_name,current_location,gender,pic_1,pic_2'
                     . 'method=users.getInfo'
                     . 'uids=' . implode(',', $friends)
-                    . 'fields=uid,first_name,last_name,current_location,gender,pic_1,pic_2'
                     . md5($auth['access_token'] . $AUTH['client_secret']));
 
             $curl = curl_init($friends_info_get_url);
