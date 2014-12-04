@@ -1006,7 +1006,7 @@ class ApplicationController extends BaseController {
          * http://apiok.ru/wiki/pages/viewpage.action?pageId=83034588
          * http://apiok.ru/wiki/pages/viewpage.action?pageId=81822097
          */
-        #Helper::dd($friends);
+        Helper::d($friends);
 
 
         if (count($friends)) {
@@ -1020,7 +1020,7 @@ class ApplicationController extends BaseController {
                     . 'method=friends.get'
                     . md5($auth['access_token'] . $AUTH['client_secret']));
 
-            $curl = curl_init($friends_get_url);
+            $curl = curl_init($friends_info_get_url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $friends = curl_exec($curl);
             curl_close($curl);
