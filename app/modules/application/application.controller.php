@@ -979,7 +979,7 @@ class ApplicationController extends BaseController {
          * http://apiok.ru/wiki/pages/viewpage.action?pageId=83034588
          * http://apiok.ru/wiki/pages/viewpage.action?pageId=81822097
          */
-        Helper::dd($friends);
+        #Helper::dd($friends);
 
 
 
