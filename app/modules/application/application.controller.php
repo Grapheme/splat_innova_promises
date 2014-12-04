@@ -992,7 +992,7 @@ class ApplicationController extends BaseController {
             . '&sig=' . md5(
                 'application_key=' . $AUTH['application_key']
                 . 'method=friends.get'
-                . 'uid=' . $user['uid']
+                #. 'uid=' . $user['uid']
                 . md5($auth['access_token'] . $AUTH['client_secret']));
 
         $curl = curl_init($friends_get_url);
