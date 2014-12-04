@@ -985,7 +985,7 @@ class ApplicationController extends BaseController {
 
 
 
-        $friends_get_url = 'http://api.odnoklassniki.ru/fb.do?'
+        $friends_get_url = 'http://api.odnoklassniki.ru/fb.do?access_token=' . $auth['access_token']
             . '&application_key=' . $AUTH['application_key']
             . '&method=friends.get'
             . '&uid=' . $user['uid']
