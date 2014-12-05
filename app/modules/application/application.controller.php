@@ -314,7 +314,7 @@ class ApplicationController extends BaseController {
                 $existing_friends_names = array();
                 $friends_uids = array();
                 $existing_friends_list = array();
-                $existing_friends = $friends;
+
                 /**
                  * Если есть друзья, установившие приложение...
                  */
@@ -328,6 +328,7 @@ class ApplicationController extends BaseController {
                         $friends_uids[] = $friend['identity'];
                     }
                     #Helper::ta($friends_uids);
+                    $existing_friends = $friends;
 
                     if (count($friends_uids)) {
                         $existing_friends_temp = DicFieldVal::where('key', 'identity')
@@ -348,7 +349,7 @@ class ApplicationController extends BaseController {
                 /**
                  * Сопоставляем установивших приложение друзей и ID профиля в системе
                  */
-                #if (count($existing_friends)) {
+                if (count($existing_friends)) {
                     $friends = $existing_friends;
                     foreach ($friends as $f => $friend) {
                         $profile_id = @$existing_friends_list[$friend['identity']];
@@ -359,7 +360,7 @@ class ApplicationController extends BaseController {
                     }
                     $existing_friends = $friends;
                     #Helper::tad($existing_friends);
-                #}
+                }
 
 
                 /**
