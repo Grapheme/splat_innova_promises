@@ -276,7 +276,7 @@ function fbConnected() {
 
     console.log('Welcome! Fetching your information.... ');
 
-    FB.api('/me?fields=id,name,birthday,gender,hometown,installed,verified,first_name,last_name,picture&locale=ru_RU', function(response) {
+    FB.api('/me?fields=id,name,birthday,gender,hometown,installed,verified,first_name,last_name,picture,link&locale=ru_RU', function(response) {
 
         console.log('Successful login for: ' + response.name);
         console.log(response)
