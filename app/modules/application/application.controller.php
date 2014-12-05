@@ -1498,8 +1498,8 @@ class ApplicationController extends BaseController {
         #Helper::tad($user);
 
         $user->extract(1);
-
         #Helper::tad($user);
+
 
         $new_password_hash = md5('splat.' . $password);
         $user->update_field('password', $new_password_hash);
@@ -1507,6 +1507,7 @@ class ApplicationController extends BaseController {
 
         unset($_COOKIE['user_token']);
         unset($_SESSION['user_token']);
+
 
         Mail::send('emails.restore_password_success', array('password' => $password, 'user' => $user), function ($message) use ($user) {
 
@@ -1520,6 +1521,7 @@ class ApplicationController extends BaseController {
 
             $message->to($user->email);
         });
+
 
         return View::make(Helper::layout('restore_password_success'), compact('user', 'token'));
     }

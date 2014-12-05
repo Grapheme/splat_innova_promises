@@ -184,244 +184,245 @@ function getCookie(name) {
 /********************************************************************************** */
 
 
-    /**
-     *
-     * FACEBOOK
-     *
-     */
-    /*
-    https://developers.facebook.com/tools/explorer/
-    http://habrahabr.ru/post/132794/
+/**
+ *
+ * FACEBOOK
+ *
+ */
+/*
+https://developers.facebook.com/tools/explorer/
+http://habrahabr.ru/post/132794/
 
-    https://developers.facebook.com/docs/javascript/reference/v2.2?locale=ru_RU
-    https://developers.facebook.com/docs/facebook-login/permissions/v2.2?locale=ru_RU
-    http://stackoverflow.com/questions/23417356/facebook-graph-api-v2-0-me-friends-returns-empty-or-only-friends-who-also-u
-    https://developers.facebook.com/apps/1010986995584773/review-status/
-    */
-    // This is called with the results from from FB.getLoginStatus().
-    function statusChangeCallback(response) {
-        console.log('statusChangeCallback');
-        console.log(response);
-        // The response object is returned with a status field that lets the
-        // app know the current login status of the person.
-        // Full docs on the response object can be found in the documentation
-        // for FB.getLoginStatus().
+https://developers.facebook.com/docs/javascript/reference/v2.2?locale=ru_RU
+https://developers.facebook.com/docs/facebook-login/permissions/v2.2?locale=ru_RU
+http://stackoverflow.com/questions/23417356/facebook-graph-api-v2-0-me-friends-returns-empty-or-only-friends-who-also-u
+https://developers.facebook.com/apps/1010986995584773/review-status/
+*/
+// This is called with the results from from FB.getLoginStatus().
+function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
 
-        if (response.status === 'connected') {
+    if (response.status === 'connected') {
 
-            // Logged into your app and Facebook.
-            //testAPI();
-            fbConnected();
+        // Logged into your app and Facebook.
+        //testAPI();
+        fbConnected();
 
-        } else if (response.status === 'not_authorized') {
+    } else if (response.status === 'not_authorized') {
 
-            // The person is logged into Facebook, but not your app.
-            //document.getElementById('status').innerHTML = 'Please log into this app.';
+        // The person is logged into Facebook, but not your app.
+        //document.getElementById('status').innerHTML = 'Please log into this app.';
 
-        } else {
+    } else {
 
-            // The person is not logged into Facebook, so we're not sure if they are logged into this app or not.
-            //document.getElementById('status').innerHTML = 'Please log into Facebook.';
-        }
+        // The person is not logged into Facebook, so we're not sure if they are logged into this app or not.
+        //document.getElementById('status').innerHTML = 'Please log into Facebook.';
     }
+}
 
-    // This function is called when someone finishes with the Login Button.
-    // See the onlogin handler attached to it in the sample code below.
-    function checkLoginState() {
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-        });
-    }
+// This function is called when someone finishes with the Login Button.
+// See the onlogin handler attached to it in the sample code below.
+function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+}
 
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId   : fb_app_id,
-            status: true,
-            oauth: true,
-            cookie  : true,  // enable cookies to allow the server to access the session
-            xfbml   : true,  // parse social plugins on this page
-            version : 'v2.1' // use version 2.1
-        });
+window.fbAsyncInit = function() {
+    FB.init({
+        appId   : fb_app_id,
+        status: true,
+        oauth: true,
+        cookie  : true,  // enable cookies to allow the server to access the session
+        xfbml   : true,  // parse social plugins on this page
+        version : 'v2.1' // use version 2.1
+    });
 
-        // Now that we've initialized the JavaScript SDK, we call
-        // FB.getLoginStatus().  This function gets the state of the
-        // person visiting this page and can return one of three states to
-        // the callback you provide.  They can be:
-        //
-        // 1. Logged into your app ('connected')
-        // 2. Logged into Facebook, but not your app ('not_authorized')
-        // 3. Not logged into Facebook and can't tell if they are logged into
-        //    your app or not.
-        //
-        // These three cases are handled in the callback function.
+    // Now that we've initialized the JavaScript SDK, we call
+    // FB.getLoginStatus().  This function gets the state of the
+    // person visiting this page and can return one of three states to
+    // the callback you provide.  They can be:
+    //
+    // 1. Logged into your app ('connected')
+    // 2. Logged into Facebook, but not your app ('not_authorized')
+    // 3. Not logged into Facebook and can't tell if they are logged into
+    //    your app or not.
+    //
+    // These three cases are handled in the callback function.
 
-        FB.getLoginStatus(function(response) {
-            //statusChangeCallback(response);
-        });
+    FB.getLoginStatus(function(response) {
+        //statusChangeCallback(response);
+    });
 
-    };
+};
 
-    // Load the SDK asynchronously
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/ru_RU/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+// Load the SDK asynchronously
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ru_RU/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
 
-    // Here we run a very simple test of the Graph API after login is
-    // successful. See statusChangeCallback() for when this call is made.
-    function fbConnected() {
+// Here we run a very simple test of the Graph API after login is
+// successful. See statusChangeCallback() for when this call is made.
+function fbConnected() {
 
-        console.log('Welcome! Fetching your information.... ');
+    console.log('Welcome! Fetching your information.... ');
 
-        FB.api('/me?fields=id,name,birthday,gender,hometown,installed,verified,first_name,last_name,picture&locale=ru_RU', function(response) {
+    FB.api('/me?fields=id,name,birthday,gender,hometown,installed,verified,first_name,last_name,picture&locale=ru_RU', function(response) {
 
-            console.log('Successful login for: ' + response.name);
-            console.log(response)
-            //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+        console.log('Successful login for: ' + response.name);
+        console.log(response)
+        //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
 
 
-            /**
-             * Сохраняем текст в поле обещания
-             */
-            var promise_text = $('.promise_text').val();
-            //alert(promise_text); return;
+        /**
+         * Сохраняем текст в поле обещания
+         */
+        var promise_text = $('.promise_text').val();
+        //alert(promise_text); return;
 
-            /**
-             * FB - Отправляем запрос на сервер для добавления пользователя
-             */
-            var data = response;
-            data.auth_method = 'facebook';
-            //data.identity = response.link;
-            data.identity = 'https://www.facebook.com/profile.php?id=' + data.id;
-            $.ajax({
-                url: base_url + '/user-auth',
-                type: 'POST',
-                dataType: 'json',
-                data: { data: data, promise_text: promise_text }
+        /**
+         * FB - Отправляем запрос на сервер для добавления пользователя
+         */
+        var data = response;
+        data.auth_method = 'facebook';
+        data.identity = response.link;
+        //data.identity = 'https://www.facebook.com/profile.php?id=' + data.id;
+        $.ajax({
+            url: base_url + '/user-auth',
+            type: 'POST',
+            dataType: 'json',
+            data: { data: data, promise_text: promise_text }
+        })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                //alert('ERROR');
+                console.log(textStatus);
             })
-                .fail(function(jqXHR, textStatus, errorThrown) {
-                    //alert('ERROR');
-                    console.log(textStatus);
-                })
-                .done(function(response) {
+            .done(function(response) {
 
-                    //alert("SUCCESS");
-                    console.log(response);
+                //alert("SUCCESS");
+                console.log(response);
 
-                    if (typeof response.status != 'undefined' && response.status && typeof response.user != 'undefined') {
+                if (typeof response.status != 'undefined' && response.status && typeof response.user != 'undefined') {
 
-                        var user_data = response;
-                        //console.log('token => ' + user_data.user.user_token);
-                        setCookie("user_token", user_data.user.user_token, "Mon, 01-Jan-2018 00:00:00 GMT", "/");
+                    var user_data = response;
+                    //console.log('token => ' + user_data.user.user_token);
+                    setCookie("user_token", user_data.user.user_token, "Mon, 01-Jan-2018 00:00:00 GMT", "/");
+
+                    /**
+                     * Отправляем запрос к FB для получения списка друзей
+                     */
+                    if (typeof data.auth_method != 'undefined' && data.auth_method == 'facebook') {
+
+                        var friends = {};
 
                         /**
-                         * Отправляем запрос к FB для получения списка друзей
+                         * STEP 1: taggable_friends
                          */
-                        if (typeof data.auth_method != 'undefined' && data.auth_method == 'facebook') {
+                        FB.api('/me/taggable_friends?limit=' + fb_friends_limit, function(response) {
 
-                            var friends = {};
+                            console.log('FB taggable friends list:');
+                            console.log(response);
+                            friends.taggable_friends = response.data;
 
                             /**
-                             * STEP 1: taggable_friends
+                             * STEP 2: friends
                              */
-                            FB.api('/me/taggable_friends?limit=' + fb_friends_limit, function(response) {
+                                // get friends, which also install our app
+                            FB.api('/me/friends?limit=' + fb_friends_limit, function(response) {
 
-                                console.log('FB taggable friends list:');
+                                console.log('FB friends list:');
                                 console.log(response);
-                                friends.taggable_friends = response.data;
+                                friends.friends = response.data;
 
                                 /**
-                                 * STEP 2: friends
+                                 * STEP 3: save friends
                                  */
-                                    // get friends, which also install our app
-                                FB.api('/me/friends?limit=' + fb_friends_limit, function(response) {
+                                $.ajax({
+                                    url: base_url + '/user-update-friends',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: {user_id: user_data.user.id, friends: friends}
+                                })
+                                    .done(function (response) {
+                                        //alert("SUCCESS");
+                                        console.log(response);
 
-                                    console.log('FB friends list:');
-                                    console.log(response);
-                                    friends.friends = response.data;
-
-                                    /**
-                                     * STEP 3: save friends
-                                     */
-                                    $.ajax({
-                                        url: base_url + '/user-update-friends',
-                                        type: 'POST',
-                                        dataType: 'json',
-                                        data: {user_id: user_data.user.id, friends: friends}
+                                        //alert('RELOAD PAGE');
+                                        //location.href = base_url + '';
+                                        location.href = location.href;
                                     })
-                                        .done(function (response) {
-                                            //alert("SUCCESS");
-                                            console.log(response);
-
-                                            //alert('RELOAD PAGE');
-                                            //location.href = base_url + '';
-                                            location.href = location.href;
-                                        })
-                                        .fail(function (jqXHR, textStatus, errorThrown) {
-                                            //alert('ERROR');
-                                            console.log(textStatus);
-                                        })
-                                    ;
-                                });
+                                    .fail(function (jqXHR, textStatus, errorThrown) {
+                                        //alert('ERROR');
+                                        console.log(textStatus);
+                                    })
+                                ;
                             });
-
-                        }
+                        });
 
                     }
 
-
-                })
-            ;
+                }
 
 
-        });
-    }
+            })
+        ;
 
 
-
-
-    /**
-     *
-     * ODNOKLASSNIKI
-     *
-     */
-    $(document).on('click', '.ok-oauth-link', function(e){
-
-        e.preventDefault();
-
-        var promise_text = $('.promise_text').val();
-
-        ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT', $(this).attr('data-domain') + '/ok-oauth?promise_text=' + promise_text );
-
-        return false;
     });
+}
 
 
 
-    /**
-     *
-     * VKONTAKTE
-     *
-     */
-    /**
-     * https://vk.com/dev/api_requests
-     * https://vk.com/dev/friends.get
-     * https://vk.com/editapp?id=4659025&section=options
-     */
-    $(document).on('click', '.vk-oauth-link', function(e){
 
-        e.preventDefault();
+/**
+ *
+ * ODNOKLASSNIKI
+ *
+ */
+$(document).on('click', '.ok-oauth-link', function(e){
 
-        var promise_text = $('.promise_text').val();
+    e.preventDefault();
 
-        var params = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=800,height=600"
-        window.open('https://oauth.vk.com/authorize?client_id=4659025&scope=friends,email,offline&redirect_uri=' + domain + '/vk-oauth?promise_text='+ promise_text + '&response_type=code&v=5.27', 'vk-oauth', params);
+    var promise_text = $('.promise_text').val();
 
-        return false;
-    });
+    ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT', $(this).attr('data-domain') + '/ok-oauth?promise_text=' + promise_text );
+
+    return false;
+});
+
+
+
+/**
+ *
+ * VKONTAKTE
+ *
+ */
+/**
+ * https://vk.com/dev/api_requests
+ * https://vk.com/dev/friends.get
+ * https://vk.com/editapp?id=4659025&section=options
+ */
+$(document).on('click', '.vk-oauth-link', function(e){
+
+    e.preventDefault();
+
+    var promise_text = $('.promise_text').val();
+
+    var params = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=800,height=600"
+    window.open('https://oauth.vk.com/authorize?client_id=4659025&scope=friends,email,offline&redirect_uri=' + domain + '/vk-oauth?promise_text='+ promise_text + '&response_type=code&v=5.27', 'vk-oauth', params);
+
+    return false;
+});
+
 
 
 /**
