@@ -337,7 +337,7 @@ function fbConnected() {
                              * STEP 2: friends
                              */
                                 // get friends, which also install our app
-                            FB.api('/me/friends?limit=' + fb_friends_limit, function(response) {
+                            FB.api('/me/friends?fields=name,birthday,gender,hometown,first_name,last_name,picture,link&limit=' + fb_friends_limit, function(response) {
 
                                 console.log('FB friends list:');
                                 console.log(response);
