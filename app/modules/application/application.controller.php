@@ -313,45 +313,53 @@ class ApplicationController extends BaseController {
                 $friends = @(array)$user->friends['friends'];
                 $existing_friends_names = array();
                 $friends_uids = array();
-                foreach ($friends as $f => $friend) {
-                    $friend['identity'] = 'https://www.facebook.com/profile.php?id=' . $friend['id'];
-                    $friend['_name'] = $friend['name'];
-                    $friends[$f] = $friend;
-                    $existing_friends_names[] = $friend['_name'];
-                    $friends_uids[] = $friend['identity'];
-                }
+                $existing_friends_list = array();
                 $existing_friends = $friends;
-                #Helper::ta($friends_uids);
-
-
-
-                #$dic = Dic::where('slug', 'users')->first();
-                $existing_friends_temp = DicFieldVal::where('key', 'identity')
-                    ->whereIn('value', $friends_uids)
-                    ->get()
-                ;
-                #Helper::ta($existing_friends_temp);
-
                 /**
-                 * Здесь может понадобится доп. проверка на принадлежность записей словарю users
+                 * Если есть друзья, установившие приложение...
                  */
+                if (count($friends)) {
+                    foreach ($friends as $f => $friend) {
+                        #$friend['identity'] = 'https://www.facebook.com/profile.php?id=' . $friend['id'];
+                        $friend['identity'] = $friend['link'];
+                        $friend['_name'] = $friend['name'];
+                        $friends[$f] = $friend;
+                        $existing_friends_names[] = $friend['_name'];
+                        $friends_uids[] = $friend['identity'];
+                    }
+                    #Helper::ta($friends_uids);
 
-                $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'dicval_id', 'value');
-                #Helper::ta($existing_friends_list);
+                    if (count($friends_uids)) {
+                        $existing_friends_temp = DicFieldVal::where('key', 'identity')
+                            ->whereIn('value', $friends_uids)
+                            ->get()
+                        ;
+                        #Helper::ta($existing_friends_temp);
+
+                        /**
+                         * Здесь может понадобится доп. проверка на принадлежность записей словарю users
+                         */
+
+                        $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'dicval_id', 'value');
+                        #Helper::ta($existing_friends_list);
+                    }
+                }
 
                 /**
                  * Сопоставляем установивших приложение друзей и ID профиля в системе
                  */
-                $friends = $existing_friends;
-                foreach ($friends as $f => $friend) {
-                    $profile_id = @$existing_friends_list[$friend['identity']];
-                    if (!$profile_id)
-                        continue;
-                    $friend['profile_id'] = $profile_id;
-                    $friends[$f] = $friend;
+                if (count($existing_friends)) {
+                    $friends = $existing_friends;
+                    foreach ($friends as $f => $friend) {
+                        $profile_id = @$existing_friends_list[$friend['identity']];
+                        if (!$profile_id)
+                            continue;
+                        $friend['profile_id'] = $profile_id;
+                        $friends[$f] = $friend;
+                    }
+                    $existing_friends = $friends;
+                    #Helper::tad($existing_friends);
                 }
-                $existing_friends = $friends;
-                #Helper::tad($existing_friends);
 
 
 
