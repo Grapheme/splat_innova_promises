@@ -74,8 +74,20 @@
 .promises-cont {
 	position: relative;
 	z-index: 2;
-	height: 480px;
 	background: #eeeeee;
+
+	.promises-fotorama {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		overflow: hidden;
+
+		.js-promises-fotorama {
+			margin-top: 40px;
+		}
+	}
 
 	.promises-amount {
 		position: absolute;
@@ -94,13 +106,34 @@
 		background-repeat: no-repeat;
 
 		.amount-cont {
+			position: relative;
 			text-align: center;
+			font-size: 18px;
+			font-weight: 300;
+			text-transform: uppercase;
+			top: 5px;
+
+			b {
+				font-weight: 700;
+			}
 		}
 	}
 
 	.promises-cloud {
-		margin: 0;
-		padding: 0;
 		list-style: none;
+		padding: 95px 0 70px;
+		width: 1000px;
+		margin: 0 auto;
+
+		li {
+			//display: inline-block;
+			height: 50px;
+			line-height: 50px;
+			color: #56565b;
+			font-size: 18px;
+			font-weight: 700;
+			text-transform: uppercase;
+			padding: 0 10px;
+		}
 	}
 }

@@ -17,13 +17,17 @@ block content
 				.hint Совет: Давайте только те обещания, которые можете выполнить.
 				button.us-btn Дать обещание
 	.promises-cont
+		.promises-fotorama
+			.js-promises-fotorama
+				img(src="images/promises/back1.png")
 		.promises-amount
-			.amount-cont уже 4 738 человек дали свои обещания
-		ul.promises-cloud
-			li С НОВОГО БРОШу КУРИТЬ
-			li ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ
-			li ОСТАВЛЮ ВСЕ КАК и ЕСТЬ!
-			li НАВЕЩУ РОДИТЕЛЕЙ
-			li КУПЛЮ СЕБЕ НОВЫЙ АЙФОН
-			li НЕ ОБЕЩАТЬ
-			li ПОХУДЕЮ НА 20 КИЛОГРАММ
+			.amount-cont уже <b>4 738</b> человек дали свои обещания
+		ul.promises-cloud.js-promises
+			each i in [1,2,3]
+				li(style="color: #3e9327; font-size: 20px;") С НОВОГО БРОШУ КУРИТЬ
+				li(style="color: #07cbcc;") ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ
+				li(style="color: #bbbbc3; font-size: 45px;") ОСТАВЛЮ ВСЕ КАК и ЕСТЬ!
+				li(style="color: #fee000; font-size: 30px;") НАВЕЩУ РОДИТЕЛЕЙ
+				li(style="color: #3e9327;") КУПЛЮ СЕБЕ НОВЫЙ АЙФОН
+				li(style="color: #56565b; font-size: 25px;") НЕ ОБЕЩАТЬ
+				li(style="color: #07cbcc; font-size: 20px;") ПОХУДЕЮ НА 20 КИЛОГРАММ
