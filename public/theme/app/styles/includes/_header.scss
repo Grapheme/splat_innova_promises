@@ -1,0 +1,132 @@
+.main-header {
+	position: relative;
+	height: 125px;
+	line-height: 125px;
+	text-align: center;
+	background: #fff;
+	z-index: 5;
+
+	.user-links, .soc-links, .logo-text {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.user-links {
+		font-size: 15px;
+		float: left;
+
+		a {
+			color: #363331;
+			text-decoration: none;
+
+			&:after {
+				content: "";
+				display: inline-block;
+				vertical-align: middle;
+				height: 6px;
+				width: 1px;
+				background: #909093;
+				margin: 0 15px;
+			}
+
+			&:last-child {
+				&:after {
+					display: none;
+				}
+			}
+
+			span {
+				border-bottom: 1px solid;
+				transition: border-color $default-anim-time $default-ease;
+			}
+
+			&:hover {
+				span {
+					border-color: transparent;
+				}
+			}
+		}
+	}
+
+	.soc-links {
+		float: right;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-size: 0;
+
+		li {
+			display: inline-block;
+			vertical-align: middle;
+			font-size: 20px;
+
+			.soc-icon {
+				display: inline-block;
+				vertical-align: middle;
+				width: 33px;
+				height: 33px;
+				border-radius: 33px;
+				text-align: center;
+				background: #56565b;
+				margin-left: 12px;
+				text-decoration: none;
+				transition: background $default-anim-time $default-ease;
+				color: #fff;
+
+				&:hover {
+					background: #07cbcc;
+				}
+
+				i {
+					line-height: 33px;
+				}
+			}
+		}
+	}
+
+	.logo-text {
+		position: absolute;
+		width: 350px;
+		left: 50%;
+		top: 0;
+		margin-left: -175px;
+		height: 125px;
+		font-size: 24px;
+		font-weight: 900;
+		text-transform: uppercase;
+		color: #56565b;
+	}
+
+	.header-desc {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		margin-left: -275.5px;
+		margin-top: -22px;
+		height: 40px;
+		line-height: 40px;
+		font-size: 13px;
+		font-weight: 700;
+		text-transform: uppercase;
+		width: 549px;
+		background-image: url(../images/header_bottom.png);
+		background-position: bottom center;
+		background-repeat: no-repeat;
+		color: #525252;
+
+		.desc-cont {
+			&:before, &:after {
+				content: "";
+				display: inline-block;
+				vertical-align: baseline;
+				position: relative;
+				top: -.2em;
+				width: 4px;
+				height: 4px;
+				border-radius: 4px;
+				background: #525252;
+				margin: 0 10px;
+			}
+		}
+	}
+}

@@ -1,0 +1,23 @@
+$wrap-width: 980px;
+$wrap-padding: 40px;
+$default-ease: ease;
+$default-anim-time: .2s;
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+	font-family: 'museo_sans_cyrl';
+}
+
+body {
+	min-width: $wrap-width;
+}
+
+.wrapper {
+	margin: 0 auto;
+	width: $wrap-width;
+	padding: 0 $wrap-padding;
+}

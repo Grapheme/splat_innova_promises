@@ -1,0 +1,29 @@
+extends layout
+
+block vars
+	- var bodyClass = "index-page"
+
+block content
+	.main-screen
+		.main-fotorama
+			.js-main-fotorama
+				each i in [1,2]
+					img(src="images/main_slider/slider-#{i}.jpg" alt="")
+		.main-content.wrapper
+			.title Пообещать и сдержать слово много стоит.
+			.desc Обещания имеют огромную силу. Они вселяют надежду, помогают достичь цели и изменить себя. Но всё это происходит лишь тогда, когда они перестают быть просто словами и тогда превращаются в дела.
+			.input-cont
+				input(placeholder="Я обещаю, что...").main-input
+				.hint Совет: Давайте только те обещания, которые можете выполнить.
+				button.us-btn Дать обещание
+	.promises-cont
+		.promises-amount
+			.amount-cont уже 4 738 человек дали свои обещания
+		ul.promises-cloud
+			li С НОВОГО БРОШу КУРИТЬ
+			li ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ
+			li ОСТАВЛЮ ВСЕ КАК и ЕСТЬ!
+			li НАВЕЩУ РОДИТЕЛЕЙ
+			li КУПЛЮ СЕБЕ НОВЫЙ АЙФОН
+			li НЕ ОБЕЩАТЬ
+			li ПОХУДЕЮ НА 20 КИЛОГРАММ

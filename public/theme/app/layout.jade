@@ -1,0 +1,84 @@
+block vars
+    - var title = "Splat"
+    - var bodyClass = ""
+
+doctype html.no-js
+head
+    meta(charset='utf-8')
+    title #{title}
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width')
+    link(rel='shortcut icon', href='/favicon.ico')
+    // Place favicon.ico and apple-touch-icon.png in the root directory
+    // build:css(.) styles/vendor.css
+    // bower:css
+    link(rel='stylesheet', href='bower_components/fotorama/fotorama.css')
+    // endbower
+    // endbuild
+    // build:css(.tmp) styles/main.css
+    link(rel='stylesheet', href='styles/main.css')
+    // endbuild
+    // build:js scripts/vendor/modernizr.js
+    script(src='bower_components/modernizr/modernizr.js')
+    // endbuild
+
+  body(class="#{bodyClass}")
+    //if lt IE 10 You are using an strong outdated browser. Please <a href='http://browsehappy.com/'>upgrade your browser</a> to improve your experience.
+
+    header.main-header
+        .wrapper
+            .user-links
+                a(href="#")
+                    span Войти
+                a(href="#")
+                    span Зарегистрироваться
+            ul.soc-links
+                li
+                    a(href="#").soc-icon
+                        i.fi.icon-fb
+                li
+                    a(href="#").soc-icon
+                        i.fi.icon-vk
+                li
+                    a(href="#").soc-icon
+                        i.fi.icon-ok
+
+            .logo-text Мои обещания
+            .header-desc
+                .desc-cont Обещания не просто слова. Когда о них говорят дела
+
+    block content
+
+    footer.main-footer
+        .wrapper
+            .footer-block.left-logo
+                span Мои<br>Обещания
+            .footer-block
+                ul.footer-links
+                    li
+                        a(href="#") О проекте
+                    li
+                        a(href="#") Правила использования
+            .footer-block
+                span Поделиться с друзьями:
+                ul.footer-soc
+                    li
+                        a(href="#").soc-icon
+                            i.fi.icon-fb
+                    li
+                        a(href="#").soc-icon
+                            i.fi.icon-vk
+                    li
+                        a(href="#").soc-icon
+                            i.fi.icon-twitter
+            .footer-block.right-logo
+
+    // build:js(.) scripts/vendor.js
+    // bower:js
+    script(src='bower_components/jquery/dist/jquery.js')
+    script(src='bower_components/fotorama/fotorama.js')
+    // endbower
+    // endbuild
+    // build:js({app,.tmp}) scripts/main.js
+    script(src='scripts/main.js')
+    // endbuild
