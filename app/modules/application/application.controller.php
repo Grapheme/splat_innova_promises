@@ -1407,20 +1407,37 @@ class ApplicationController extends BaseController {
         /**
          * Получаем друзей юзера - friends & taggable_friends
          */
+        $user_friends = array();
+
         $curl = curl_init('https://graph.facebook.com/v2.2/me/taggable_friends?locale=ru_RU&access_token=' . $access_token);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         curl_close($curl);
-        $user_friends = json_decode($s, true);
+        $friends = json_decode($s, true);
 
-        Helper::dd($user_friends);
+        #Helper::dd($friends);
 
-        $user_friends = @$user_friends['response']['items'];
+        $friends = @$friends['data'];
 
+        $user_friends['taggable_friends'] = $friends;
 
         #Helper::dd($friends);
 
 
+
+        $curl = curl_init('https://graph.facebook.com/v2.2/me/friends?fields=name,birthday,gender,hometown,first_name,last_name,picture,link&locale=ru_RU&access_token=' . $access_token);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $s = curl_exec($curl);
+        curl_close($curl);
+        $friends = json_decode($s, true);
+
+        Helper::dd($friends);
+
+        $friends = @$friends['data'];
+
+        /**
+         * Сохраняем друзей юзера
+         */
         $friends = DicTextFieldVal::firstOrNew(array(
             'dicval_id' => $check['user']['id'],
             'key' => 'friends'
