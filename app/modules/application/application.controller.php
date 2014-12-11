@@ -1360,7 +1360,7 @@ class ApplicationController extends BaseController {
 
         #$access_token = preg_replace("~^access_toke2n=([^\&]+?)\&expires.+?$~is", "$1", $s);
         preg_match("~^access_token=([^\&]+?)\&expires.+?$~is", $s, $matches);
-        $access_token = @$matches ?: NULL;
+        $access_token = @$matches[1] ?: NULL;
 
         /*
         Helper::d($url);
