@@ -388,11 +388,13 @@ function fbConnected() {
  * ODNOKLASSNIKI
  *
  */
-$(document).on('click', '.ok-oauth-link', function(e){
+$(document).on('click', '.ok-oauth-link, .soc-ok', function(e){
 
     e.preventDefault();
 
     var promise_text = $('.promise_text').val();
+
+    console.log(ODKL);
 
     ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT', $(this).attr('data-domain') + '/ok-oauth?promise_text=' + promise_text );
 
@@ -411,7 +413,7 @@ $(document).on('click', '.ok-oauth-link', function(e){
  * https://vk.com/dev/friends.get
  * https://vk.com/editapp?id=4659025&section=options
  */
-$(document).on('click', '.vk-oauth-link', function(e){
+$(document).on('click', '.vk-oauth-link, .soc-vk', function(e){
 
     e.preventDefault();
 

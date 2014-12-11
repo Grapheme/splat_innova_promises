@@ -38,7 +38,8 @@ class HTML extends BaseHTML {
         #print_r($url); die;
         #print_r($attributes); die;
 
-		return '<link'.$HtmlBuilder->attributes($attributes).'>'.PHP_EOL;
+		#return '<link'.$HtmlBuilder->attributes($attributes).'>'.PHP_EOL;
+		return '<link'.$HtmlBuilder->attributes($attributes).'>';
 	}
 
 
