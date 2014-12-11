@@ -388,13 +388,13 @@ function fbConnected() {
  * ODNOKLASSNIKI
  *
  */
-$(document).on('click', '.ok-oauth-link, .soc-ok', function(e){
+$(document).on('click', '.ok-oauth-link', function(e){
 
     e.preventDefault();
 
     var promise_text = $('.promise_text').val();
 
-    console.log(ODKL);
+    console.log(ODKL.Oauth2);
 
     ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT', $(this).attr('data-domain') + '/ok-oauth?promise_text=' + promise_text );
 
