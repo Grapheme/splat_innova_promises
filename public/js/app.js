@@ -415,7 +415,7 @@ $(document).on('click', '.ok-oauth-link', function(e){
  * https://vk.com/dev/friends.get
  * https://vk.com/editapp?id=4659025&section=options
  */
-$(document).on('click', '.vk-oauth-link, .soc-vk', function(e){
+$(document).on('click', '.vk-oauth-link', function(e){
 
     e.preventDefault();
 

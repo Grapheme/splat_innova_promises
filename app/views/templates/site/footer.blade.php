@@ -27,10 +27,10 @@
         <div class="wrapper">
           <div class="desc">Для того, чтобы сохранить ваше обещание, вам необходимо зарегистрироваться на нашем сайте<br>с помощью одной из этих социальных сетей:</div>
           <div class="soc-auth">
-            <a href="#" class="soc-fb">
-                <i class="fi icon-fb fb-oauth-link"></i>Facebook
+            <a href="#" class="soc-fb fb-oauth-link">
+                <i class="fi icon-fb"></i>Facebook
             </a>
-            <a href="#" class="soc-vk">
+            <a href="#" class="soc-vk vk-oauth-link">
                 <i class="fi icon-vk"></i>Вконтакте
             </a>
             <a href="#" class="soc-ok ok-oauth-link" data-domain="{{ domain }}">
