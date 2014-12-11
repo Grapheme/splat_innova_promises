@@ -2,6 +2,29 @@
 
 
 @section('style')
+<style>
+.FBConnectButton, .FBConnectButton_RTL {
+background:url("/images/connect_sprite.png") no-repeat scroll 0 0 #29447E;
+cursor:default;
+display:inline-block;
+outline:medium none;
+padding:0 0 0 1px;
+text-decoration:none;
+}
+
+.FBConnectButton .FBConnectButton_Text, .FBConnectButton_RTL .FBConnectButton_Text {
+background:url("/images/connect_sprite.png") repeat scroll 0 0 #5F78AB;
+border-bottom:1px solid #1A356E;
+border-top:1px solid #879AC0;
+color:#FFFFFF;
+display:block;
+font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+font-weight:bold;
+margin:1px 1px 0 0;
+padding:2px 6px 4px;
+text-shadow:none;
+}
+</style>
 @stop
 
 
