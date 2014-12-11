@@ -29,6 +29,10 @@
           <ul class="soc-auth">
             <li class="soc-fb">
                 <i class="fi icon-fb"></i>Facebook
+            </li>
+            <li class="soc-vk"><i class="fi icon-vk"></i>Вконтакте</li>
+            <li class="soc-ok"><i class="fi icon-ok"></i>Одноклассники<a href="#" class="ok-oauth-link" data-domain="{{ domain }}">ВОЙТИ</a></li>
+          </ul>
 
                 <!--
                   Below we include the Login Button social plugin. This button uses
@@ -39,10 +43,6 @@
                 <fb:login-button scope="public_profile,email,user_birthday,user_photos,user_friends,user_about_me,user_hometown" onlogin="checkLoginState();">
                 </fb:login-button>
 
-            </li>
-            <li class="soc-vk"><i class="fi icon-vk"></i>Вконтакте</li>
-            <li class="soc-ok"><i class="fi icon-ok"></i>Одноклассники<a href="#" class="ok-oauth-link" data-domain="{{ domain }}">ВОЙТИ</a></li>
-          </ul>
           <div class="desc">или с помощью адреса электронной почты:</div>
           <div data-type="auth" class="form-inputs js-pop-form">
             <form>
