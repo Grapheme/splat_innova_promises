@@ -1359,6 +1359,7 @@ class ApplicationController extends BaseController {
         $auth = json_decode($s, true);
 
         Helper::d($url);
+        Helper::d($s);
         Helper::dd($auth);
 
         if (!@$auth['access_token'] || !@$auth['user_id']) {
