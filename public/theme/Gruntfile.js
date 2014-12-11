@@ -36,7 +36,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint'],
+        //tasks: ['jshint'],
         options: {
           livereload: true
         }
@@ -88,7 +88,19 @@ module.exports = function (grunt) {
           src: '*.jade',
           ext: '.html'
         }]
-      }
+      },
+      compile: {
+            options: {
+                pretty: true
+            },
+            files: [{
+                expand: true,
+                cwd: '<%= config.app %>',
+                dest: '<%= config.app %>',
+                src: '*.jade',
+                ext: '.html'
+            }]
+        }
     },
     connect: {
       options: {
@@ -311,28 +323,28 @@ module.exports = function (grunt) {
     // By default, your `index.html`'s <!-- Usemin block --> will take care
     // of minification. These next options are pre-configured if you do not
     // wish to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= config.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css',
-    //         '<%= config.app %>/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= config.dist %>/scripts/scripts.js': [
-    //         '<%= config.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
+    cssmin: {
+      dist: {
+        files: {
+          '<%= config.dist %>/styles/main.css': [
+            '.tmp/styles/{,*/}*.css',
+            '<%= config.app %>/styles/{,*/}*.css'
+          ]
+        }
+      }
+    },
+    uglify: {
+      dist: {
+        files: {
+          '<%= config.dist %>/scripts/scripts.js': [
+            '<%= config.dist %>/scripts/scripts.js'
+          ]
+        }
+      }
+    },
+    concat: {
+      dist: {}
+    },
 
     // Copies remaining files to places other tasks can use
     copy: {
@@ -442,13 +454,14 @@ module.exports = function (grunt) {
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
+    'jade:compile',
     'autoprefixer',
     'concat',
     'cssmin',
     'uglify',
     'copy:dist',
     'modernizr',
-    'rev',
+    //'rev',
     'usemin'
     //'htmlmin'
   ]);

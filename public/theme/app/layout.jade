@@ -2,7 +2,7 @@ block vars
     - var title = "Splat"
     - var bodyClass = ""
 
-doctype html.no-js
+doctype html
 head
     meta(charset='utf-8')
     title #{title}
@@ -29,9 +29,9 @@ head
         .wrapper
             .user-links
                 a(href="#")
-                    span Войти
+                    span.js-open-box(data-box="auth") Войти
                 a(href="#")
-                    span Зарегистрироваться
+                    span.js-open-box(data-box="auth") Зарегистрироваться
             ul.soc-links
                 li
                     a(href="#").soc-icon
@@ -72,6 +72,54 @@ head
                         a(href="#").soc-icon
                             i.fi.icon-twitter
             .footer-block.right-logo
+
+    .overlay-shadow
+    .overlay
+        .popup.auth-popup.js-pop-up(data-box="auth")
+            a(href="#").popup-close.js-pop-close
+                span
+            .wrapper
+                .title.js-promise-title(style="display: none;")
+            .form-block
+                .wrapper
+                    .desc Для того, чтобы сохранить ваше обещание, вам необходимо зарегистрироваться на нашем сайте<br>с помощью одной из этих социальных сетей:
+                    ul.soc-auth
+                        li.soc-fb <i class="fi icon-fb"></i>Facebook
+                        li.soc-vk <i class="fi icon-vk"></i>Вконтакте
+                        li.soc-ok <i class="fi icon-ok"></i>Одноклассники
+                    .desc или с помощью адреса электронной почты:
+                    .form-inputs.js-pop-form(data-type="auth")
+                        form
+                            input(type="hidden" name="promise-text")
+                            .input-cont
+                                input(placeholder="Эл. почта")
+                            .input-cont
+                                input(placeholder="Пароль")
+                            .btns
+                                button.us-btn Войти
+                                a(href="#").right-link.js-form-pass восстановить пароль
+
+                    .form-inputs.js-pop-form(data-type="pass" style="display: none;")
+                        form
+                            .input-cont
+                                input(placeholder="Эл. почта")
+                            .btns
+                                button.us-btn Восстановить
+
+            .wrapper
+                ul.auth-desc
+                    li.about-soc
+                        span.icon
+                        span.text Выберите ту социальную сеть, в которой сможете рассказать о данном вами обещании.
+                    li.about-dif
+                        span.icon
+                        span.text У вас появится возможность выбрать различные варианты оформления карточек с обещаниями.
+                    li.about-sav
+                        span.icon
+                        span.text Вы сможете сохранить ваше обещание, а мы будем напоминать вам о нем.
+                    li.about-new
+                        span.icon
+                        span.text В новогоднюю ночь сбываются чудеса, а люди во всем мире дают друг другу обещания, которые порой так трудно исполнить.
 
     // build:js(.) scripts/vendor.js
     // bower:js
