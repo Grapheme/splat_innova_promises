@@ -1374,7 +1374,7 @@ class ApplicationController extends BaseController {
             die;
         }
 
-        $curl = curl_init('https://graph.facebook.com/v2.2/me/?id,name,birthday,gender,hometown,installed,verified,first_name,last_name,picture,link&locale=ru_RU');
+        $curl = curl_init('https://graph.facebook.com/v2.2/me/?id,name,birthday,gender,hometown,installed,verified,first_name,last_name,picture,link&locale=ru_RU&access_token=' . $access_token);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         #curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept-Language: ru-RU;q=1.0'));
