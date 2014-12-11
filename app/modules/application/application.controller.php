@@ -1360,24 +1360,29 @@ class ApplicationController extends BaseController {
 
         #$access_token = preg_replace("~^access_toke2n=([^\&]+?)\&expires.+?$~is", "$1", $s);
         preg_match("~^access_token=([^\&]+?)\&expires.+?$~is", $s, $matches);
+        $access_token = @$matches ?: NULL;
 
+        /*
         Helper::d($url);
         Helper::d($s);
-        Helper::dd($matches);
-        #Helper::dd($access_token);
+        Helper::d($matches);
+        Helper::dd($access_token);
+        */
 
-        if (!@$auth['access_token'] || !@$auth['user_id']) {
+        if (!@$access_token) {
             echo "Не удается выполнить вход. Повторите попытку позднее (1).";
             die;
         }
 
-        $curl = curl_init('https://api.vk.com/method/users.get?user_ids=' . @$auth['user_id'] . '&fields=sex,bdate,city,country,photo_200,domain&v=5.27&lang=ru');
+        $curl = curl_init('https://graph.facebook.com/v2.2/me/?id,name,birthday,gender,hometown,installed,verified,first_name,last_name,picture,link&locale=ru_RU');
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         #curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept-Language: ru-RU;q=1.0'));
         curl_close($curl);
         $user = json_decode($s, true);
-        $user = $user['response'][0];
+        #$user = $user['response'][0];
+
+        Helper::dd($user);
 
         $user['uid'] = @$user['id'];
 
