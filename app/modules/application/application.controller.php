@@ -1356,9 +1356,6 @@ class ApplicationController extends BaseController {
         $s = curl_exec($curl);
         curl_close($curl);
 
-        #$auth = json_decode($s, true);
-
-        #$access_token = preg_replace("~^access_toke2n=([^\&]+?)\&expires.+?$~is", "$1", $s);
         preg_match("~^access_token=([^\&]+?)\&expires.+?$~is", $s, $matches);
         $access_token = @$matches[1] ?: NULL;
 
@@ -1374,49 +1371,32 @@ class ApplicationController extends BaseController {
             die;
         }
 
-        $curl = curl_init('https://graph.facebook.com/v2.2/me/?id,name,birthday,gender,hometown,installed,verified,first_name,last_name,picture,link&locale=ru_RU&access_token=' . $access_token);
+        /**
+         * Получаем инфо о юзере
+         */
+        $curl = curl_init('https://graph.facebook.com/v2.2/me/?fields=id,name,birthday,gender,hometown,installed,verified,first_name,last_name,picture,link&locale=ru_RU&access_token=' . $access_token);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
-        #curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept-Language: ru-RU;q=1.0'));
         curl_close($curl);
         $user = json_decode($s, true);
-        #$user = $user['response'][0];
 
         Helper::dd($user);
 
         $user['uid'] = @$user['id'];
 
-        /*
-        Массив $user содержит следующие поля:
-        uid - уникальный номер пользователя
-        first_name - имя пользователя
-        last_name - фамилия пользователя
-        birthday - дата рождения пользователя
-        gender - пол пользователя
-        pic_1 - маленькое фото
-        pic_2 - большое фото
-        */
-
-        /*
-        ...
-        Записываем полученные данные в базу, устанавливаем cookies
-        ...
-        */
-
-        #Helper::d($user);
+        #Helper::dd($user);
 
         if (!@$user['uid']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (2).";
             die;
         }
 
-        $user['identity'] = 'http://vk.com/id' . $user['uid'];
+        $user['identity'] = @$user['link'];
         $user['bdate'] = @$user['birthday'];
-        $user['email'] = @$auth['email'];
-        $user['auth_method'] = 'vkontakte';
+        $user['auth_method'] = 'facebook';
 
         $check = $this->checkUserData($user, true);
-        #Helper::d($check);
+        Helper::dd($check);
 
         if (!@$check['user']['user_token']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (3).";
@@ -1424,10 +1404,12 @@ class ApplicationController extends BaseController {
         }
 
 
-        $curl = curl_init('https://api.vk.com/method/friends.get?user_id=' . @$auth['user_id'] . '&fields=sex,bdate,city,country,photo_200,domain&v=5.27&lang=ru');
+        /**
+         * Получаем друзей юзера - friends & fillable_friends
+         */
+        $curl = curl_init('https://graph.facebook.com/v2.2/me/?id,name,birthday,gender,hometown,installed,verified,first_name,last_name,picture,link&locale=ru_RU&access_token=' . $access_token);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
-        #curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept-Language: ru-RU;q=1.0'));
         curl_close($curl);
         $user_friends = json_decode($s, true);
         $user_friends = @$user_friends['response']['items'];
