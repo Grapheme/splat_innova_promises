@@ -84,9 +84,9 @@ head
                 .wrapper
                     .desc Для того, чтобы сохранить ваше обещание, вам необходимо зарегистрироваться на нашем сайте<br>с помощью одной из этих социальных сетей:
                     ul.soc-auth
-                        li.soc-fb <i class="fi icon-fb"></i>Facebook
-                        li.soc-vk <i class="fi icon-vk"></i>Вконтакте
-                        li.soc-ok <i class="fi icon-ok"></i>Одноклассники
+                        a(href="#").soc-fb <i class="fi icon-fb"></i>Facebook
+                        a(href="#").soc-vk <i class="fi icon-vk"></i>Вконтакте
+                        a(href="#").soc-ok <i class="fi icon-ok"></i>Одноклассники
                     .desc или с помощью адреса электронной почты:
                     .form-inputs.js-pop-form(data-type="auth")
                         form
@@ -134,8 +134,11 @@ head
     script(src='bower_components/outlayer/item.js')
     script(src='bower_components/outlayer/outlayer.js')
     script(src='bower_components/masonry/masonry.js')
+    script(src='bower_components/jquery-ui/jquery-ui.js')
     // endbower
     // endbuild
     // build:js({app,.tmp}) scripts/main.js
     script(src='scripts/main.js')
     // endbuild
+
+    block scripts

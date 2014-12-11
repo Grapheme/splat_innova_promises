@@ -1,0 +1,34 @@
+extends layout
+
+block vars
+	- var bodyClass = "index-page"
+
+block content
+	.wrapper
+		.profile-message
+			.icon
+				.fi.icon-smile
+			.text Вы успешно зарегистрировались в социальной сети Facebook.<br>Пожалуйста, подтвердите ваши данные.
+		.profile-edit
+			form
+				.photo-cont
+					.profile-photo(style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);")
+						.profile-hover
+							a(href="#").down-link
+								.fi.icon-arrow-down
+								input(type="file")
+							a(href="#").remove-link
+								.fi.icon-cross
+				.edit-cont
+					.input-cont
+						input.us-input(placeholder="Ваше имя")
+					.input-cont
+						input.us-input(placeholder="Укажите e-mail")
+					.input-hint Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.
+					.input-cont
+						input.us-input(placeholder="Ваша дата рождения").styledDate
+					.check-cont
+						input(type="checkbox" id="apply").styledCheck
+						label(for="apply") <span class="check-fake"><i class="fi icon-check"></i></span>Подтверждаю ознакомление с <a href="#">правилами пользования</a>
+					.btn-cont
+						button.us-btn Сохранить
