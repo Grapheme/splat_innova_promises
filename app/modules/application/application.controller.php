@@ -1380,7 +1380,7 @@ class ApplicationController extends BaseController {
         curl_close($curl);
         $user = json_decode($s, true);
 
-        Helper::dd($user);
+        #Helper::dd($user);
 
         $user['uid'] = @$user['id'];
 
@@ -1396,7 +1396,7 @@ class ApplicationController extends BaseController {
         $user['auth_method'] = 'facebook';
 
         $check = $this->checkUserData($user, true);
-        Helper::dd($check);
+        #Helper::dd($check);
 
         if (!@$check['user']['user_token']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (3).";
@@ -1405,13 +1405,16 @@ class ApplicationController extends BaseController {
 
 
         /**
-         * Получаем друзей юзера - friends & fillable_friends
+         * Получаем друзей юзера - friends & taggable_friends
          */
-        $curl = curl_init('https://graph.facebook.com/v2.2/me/?id,name,birthday,gender,hometown,installed,verified,first_name,last_name,picture,link&locale=ru_RU&access_token=' . $access_token);
+        $curl = curl_init('https://graph.facebook.com/v2.2/me/taggable_friends?locale=ru_RU&access_token=' . $access_token);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         curl_close($curl);
         $user_friends = json_decode($s, true);
+
+        Helper::dd($user_friends);
+
         $user_friends = @$user_friends['response']['items'];
 
 
