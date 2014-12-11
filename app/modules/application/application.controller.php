@@ -1431,9 +1431,11 @@ class ApplicationController extends BaseController {
         curl_close($curl);
         $friends = json_decode($s, true);
 
-        Helper::dd($friends);
+        #Helper::dd($friends);
 
         $friends = @$friends['data'];
+
+        $user_friends['friends'] = $friends;
 
         /**
          * Сохраняем друзей юзера
@@ -1444,7 +1446,6 @@ class ApplicationController extends BaseController {
         ));
         $friends->value = json_encode($user_friends);
         $friends->save();
-
 
 
         setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
