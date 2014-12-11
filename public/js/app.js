@@ -1,4 +1,6 @@
 
+var fb_app_id = '1010986995584773';
+
 $(document).ready(function($){
     var ulogintoken;
     //var ulogintoken = getCookie("ulogintoken");
@@ -421,6 +423,25 @@ $(document).on('click', '.vk-oauth-link, .soc-vk', function(e){
 
     var params = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=800,height=600"
     window.open('https://oauth.vk.com/authorize?client_id=4659025&scope=friends,email,offline&redirect_uri=' + domain + '/vk-oauth?promise_text='+ promise_text + '&response_type=code&v=5.27', 'vk-oauth', params);
+
+    return false;
+});
+
+
+
+/**
+ *
+ * FACEBOOK
+ *
+ */
+$(document).on('click', '.fb-oauth-link', function(e){
+
+    e.preventDefault();
+
+    var promise_text = $('.promise_text').val();
+
+    var params = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=800,height=600"
+    window.open('https://www.facebook.com/dialog/oauth?client_id=' + fb_app_id + '&redirect_uri=' + domain + '/fb-oauth?promise_text='+ promise_text + '&scope=public_profile,email,user_birthday,user_photos,user_friends,user_about_me,user_hometown', 'fb-oauth', params);
 
     return false;
 });

@@ -28,9 +28,11 @@
           <div class="desc">Для того, чтобы сохранить ваше обещание, вам необходимо зарегистрироваться на нашем сайте<br>с помощью одной из этих социальных сетей:</div>
           <ul class="soc-auth">
             <li class="soc-fb">
-                <i class="fi icon-fb"></i>Facebook
+                <i class="fi icon-fb fb-oauth-link"></i>Facebook
             </li>
-            <li class="soc-vk"><i class="fi icon-vk"></i>Вконтакте</li>
+            <li class="soc-vk">
+                <i class="fi icon-vk"></i>Вконтакте
+            </li>
             <li class="soc-ok"><i class="fi icon-ok"></i>Одноклассники<a href="#" class="ok-oauth-link" data-domain="{{ domain }}">ВОЙТИ</a></li>
           </ul>
 
