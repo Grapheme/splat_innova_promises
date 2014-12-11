@@ -1336,13 +1336,13 @@ class ApplicationController extends BaseController {
         $AUTH['client_id'] = '1010986995584773';
         $AUTH['client_secret'] = '3997207bd2372a15b1fd87e461b242a2';
 
-        $curl = curl_init('https://graph.facebook.com/oauth/access_token?'
+        $url = 'https://graph.facebook.com/oauth/access_token?'
             . '&client_id=' . $AUTH['client_id']
             . '&redirect_uri=' . URL::route('app.fb-oauth') . '?promise_text=' . $promise_text
             . '&client_secret=' . $AUTH['client_secret']
             . '&code=' . $code
-        );
-
+        ;
+        $curl = curl_init($url);
         /*
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_POSTFIELDS,
@@ -1358,6 +1358,7 @@ class ApplicationController extends BaseController {
 
         $auth = json_decode($s, true);
 
+        Helper::d($url);
         Helper::dd($auth);
 
         if (!@$auth['access_token'] || !@$auth['user_id']) {
