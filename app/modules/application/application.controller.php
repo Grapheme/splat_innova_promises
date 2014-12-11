@@ -1358,7 +1358,7 @@ class ApplicationController extends BaseController {
 
         #$auth = json_decode($s, true);
 
-        $access_token = preg_replace("~^access_token=([^\&]+?)\&expires.+?$~is", "$1", $s);
+        $access_token = preg_replace("~^access_toke2n=([^\&]+?)\&expires.+?$~is", "$1", $s);
 
         Helper::d($url);
         Helper::d($s);
