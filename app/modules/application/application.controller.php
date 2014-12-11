@@ -1337,8 +1337,8 @@ class ApplicationController extends BaseController {
         $AUTH['client_secret'] = '3997207bd2372a15b1fd87e461b242a2';
 
         $url = 'https://graph.facebook.com/oauth/access_token?'
-            . '&client_id=' . $AUTH['client_id']
-            . '&redirect_uri=' . URL::route('app.fb-oauth') . '?promise_text=' . $promise_text
+            . 'client_id=' . $AUTH['client_id']
+            . '&redirect_uri=' . URL::route('app.fb-oauth') . '%3Fpromise_text=' . $promise_text
             . '&client_secret=' . $AUTH['client_secret']
             . '&code=' . $code
         ;
