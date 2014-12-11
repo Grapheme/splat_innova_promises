@@ -1358,11 +1358,13 @@ class ApplicationController extends BaseController {
 
         #$auth = json_decode($s, true);
 
-        $access_token = preg_replace("~^access_toke2n=([^\&]+?)\&expires.+?$~is", "$1", $s);
+        #$access_token = preg_replace("~^access_toke2n=([^\&]+?)\&expires.+?$~is", "$1", $s);
+        preg_match("~^access_token=([^\&]+?)\&expires.+?$~is", $s, $matches);
 
         Helper::d($url);
         Helper::d($s);
-        Helper::dd($access_token);
+        Helper::dd($matches);
+        #Helper::dd($access_token);
 
         if (!@$auth['access_token'] || !@$auth['user_id']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (1).";
