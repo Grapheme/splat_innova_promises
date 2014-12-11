@@ -12,8 +12,9 @@ class ApplicationController extends BaseController {
 
         Route::group(array(), function() {
 
-            Route::get('/ok-oauth', array('as' => 'app.ok-oauth', 'uses' => __CLASS__.'@getOkOauth'));
             Route::get('/vk-oauth', array('as' => 'app.vk-oauth', 'uses' => __CLASS__.'@getVkOauth'));
+            Route::get('/fb-oauth', array('as' => 'app.fb-oauth', 'uses' => __CLASS__.'@getFbOauth'));
+            Route::get('/ok-oauth', array('as' => 'app.ok-oauth', 'uses' => __CLASS__.'@getOkOauth'));
             Route::any('/email-pass-auth', array('as' => 'app.email-pass-auth', 'uses' => __CLASS__.'@postEmailPassAuth'));
 
             Route::get('/', array('as' => 'app.mainpage', 'uses' => __CLASS__.'@getAppMainPage'));
@@ -1220,6 +1221,144 @@ class ApplicationController extends BaseController {
         $auth = json_decode($s, true);
 
         #Helper::d($auth);
+
+        if (!@$auth['access_token'] || !@$auth['user_id']) {
+            echo "Не удается выполнить вход. Повторите попытку позднее (1).";
+            die;
+        }
+
+        $curl = curl_init('https://api.vk.com/method/users.get?user_ids=' . @$auth['user_id'] . '&fields=sex,bdate,city,country,photo_200,domain&v=5.27&lang=ru');
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $s = curl_exec($curl);
+        #curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept-Language: ru-RU;q=1.0'));
+        curl_close($curl);
+        $user = json_decode($s, true);
+        $user = $user['response'][0];
+
+        $user['uid'] = @$user['id'];
+
+        /*
+        Массив $user содержит следующие поля:
+        uid - уникальный номер пользователя
+        first_name - имя пользователя
+        last_name - фамилия пользователя
+        birthday - дата рождения пользователя
+        gender - пол пользователя
+        pic_1 - маленькое фото
+        pic_2 - большое фото
+        */
+
+        /*
+        ...
+        Записываем полученные данные в базу, устанавливаем cookies
+        ...
+        */
+
+        #Helper::d($user);
+
+        if (!@$user['uid']) {
+            echo "Не удается выполнить вход. Повторите попытку позднее (2).";
+            die;
+        }
+
+        $user['identity'] = 'http://vk.com/id' . $user['uid'];
+        $user['bdate'] = @$user['birthday'];
+        $user['email'] = @$auth['email'];
+        $user['auth_method'] = 'vkontakte';
+
+        $check = $this->checkUserData($user, true);
+        #Helper::d($check);
+
+        if (!@$check['user']['user_token']) {
+            echo "Не удается выполнить вход. Повторите попытку позднее (3).";
+            die;
+        }
+
+
+        $curl = curl_init('https://api.vk.com/method/friends.get?user_id=' . @$auth['user_id'] . '&fields=sex,bdate,city,country,photo_200,domain&v=5.27&lang=ru');
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $s = curl_exec($curl);
+        #curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept-Language: ru-RU;q=1.0'));
+        curl_close($curl);
+        $user_friends = json_decode($s, true);
+        $user_friends = @$user_friends['response']['items'];
+
+
+        #Helper::dd($friends);
+
+
+        $friends = DicTextFieldVal::firstOrNew(array(
+            'dicval_id' => $check['user']['id'],
+            'key' => 'friends'
+        ));
+        $friends->value = json_encode($user_friends);
+        $friends->save();
+
+
+
+        setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
+
+        echo "
+        Авторизация прошла успешно, теперь это окно можно закрыть.
+        <script>
+        opener.location = '' + opener.location;
+        window.close();
+        </script>
+        ";
+
+        die;
+
+        #header('Location: /'); // редиректим после авторизации на главную страницу
+
+    }
+
+
+    public function getFbOauth() {
+
+        $code = Input::get('code');
+
+        if (!$code) {
+            echo "Не удается выполнить вход. Повторите попытку позднее (0).";
+            die;
+        }
+
+        /**
+         * Если с авторизацией передан текст обещания - сохраняем его в сессию,
+         * чтобы после авторизации сразу перейти на страницу дачи обещания.
+         */
+        $promise_text = Input::get('promise_text');
+        if ($promise_text != '') {
+            $_SESSION['promise_text'] = $promise_text;
+        }
+
+        $HOST = $_SERVER['HTTP_HOST'];
+
+        $AUTH['client_id'] = '1010986995584773';
+        $AUTH['client_secret'] = '3997207bd2372a15b1fd87e461b242a2';
+
+        $curl = curl_init('https://graph.facebook.com/oauth/access_token?'
+            . '&client_id=' . $AUTH['client_id']
+            . '&redirect_uri=' . URL::route('app.fb-oauth') . '?promise_text=' . $promise_text
+            . '&client_secret=' . $AUTH['client_secret']
+            . '&code=' . $code
+        );
+
+        /*
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS,
+            'client_id=' . $AUTH['app_id'] .
+            '&client_secret=' . $AUTH['app_secret'] .
+            '&code=' . $code .
+            '&redirect_uri=' . URL::route('app.vk-oauth') . '?promise_text=' . $promise_text
+        );
+        */
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $s = curl_exec($curl);
+        curl_close($curl);
+
+        $auth = json_decode($s, true);
+
+        Helper::dd($auth);
 
         if (!@$auth['access_token'] || !@$auth['user_id']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (1).";

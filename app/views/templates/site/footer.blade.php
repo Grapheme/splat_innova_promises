@@ -26,25 +26,17 @@
       <div class="form-block">
         <div class="wrapper">
           <div class="desc">Для того, чтобы сохранить ваше обещание, вам необходимо зарегистрироваться на нашем сайте<br>с помощью одной из этих социальных сетей:</div>
-          <ul class="soc-auth">
-            <li class="soc-fb">
+          <div class="soc-auth">
+            <a href="#" class="soc-fb">
                 <i class="fi icon-fb fb-oauth-link"></i>Facebook
-            </li>
-            <li class="soc-vk">
+            </a>
+            <a href="#" class="soc-vk">
                 <i class="fi icon-vk"></i>Вконтакте
-            </li>
-            <li class="soc-ok"><i class="fi icon-ok"></i>Одноклассники<a href="#" class="ok-oauth-link" data-domain="{{ domain }}">ВОЙТИ</a></li>
-          </ul>
-
-                <!--
-                  Below we include the Login Button social plugin. This button uses
-                  the JavaScript SDK to present a graphical Login button that triggers
-                  the FB.login() function when clicked.
-                -->
-                <div id="fb-root"></div>
-                <fb:login-button scope="public_profile,email,user_birthday,user_photos,user_friends,user_about_me,user_hometown" onlogin="checkLoginState();">
-                </fb:login-button>
-
+            </a>
+            <a href="#" class="soc-ok ok-oauth-link" data-domain="{{ domain }}">
+                <i class="fi icon-ok"></i>Одноклассники
+            </a>
+          </div>
           <div class="desc">или с помощью адреса электронной почты:</div>
           <div data-type="auth" class="form-inputs js-pop-form">
             <form>
