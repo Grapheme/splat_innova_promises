@@ -1,4 +1,4 @@
-  <header class="main-header">
+  <header class="main-header bordered">
     <div class="wrapper">
       <div class="user-links">
       @if (!isset($user) || !is_object($user) || !$user->id)
