@@ -107,9 +107,11 @@
             <div class="profile-info">
               <div class="info-cont">
                 <div class="name"><span>{{ $user->name }}</span><a href="{{ URL::route('app.profile') }}" class="us-link">Редактировать</a></div>
+                @if ($user->years_old)
                 <div class="age">
-                    {{ $user->years_old }} лет
+                    {{ trans_choice(':count год|:count года|:count лет', $user->years_old, array(), 'ru') }}
                 </div>
+                @endif
               </div>
             </div>
             <div class="btn-cont"><a href="{{ URL::route('app.new_promise') }}" class="us-btn">Дать обещание</a></div>
