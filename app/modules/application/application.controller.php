@@ -95,8 +95,11 @@ class ApplicationController extends BaseController {
          * Если в сессии есть непустой текст обещания (введен перед авторизацией) -
          * перенаправляем пользователя на страницу дачи обещания.
          */
-        if (@$_SESSION['promise_text'] && $_SESSION['promise_text'] != 'undefined' && @$_SESSION['redirect_to_new_promise']) {
+        if (@$_SESSION['promise_text'] && @$_SESSION['redirect_to_new_promise']) {
             unset($_SESSION['redirect_to_new_promise']);
+            if ($_SESSION['promise_text'] == 'undefined') {
+                unset($_SESSION['promise_text']);
+            }
             return Redirect::route('app.new_promise');
         }
 
