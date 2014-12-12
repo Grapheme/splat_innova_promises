@@ -125,8 +125,10 @@
             <ul class="promises-list">
             @foreach ($promises as $promise)
             <?
-            if (!$promise->style_id)
-                $promise->style_id = 'green';
+            if (!$promise->style_id) {
+                $styles = array('green', 'aqua', 'yellow', 'blue', 'pink');
+                $promise->style_id = $styles[array_rand($styles)];
+            }
             ?>
               <li class="promise-item type-{{ $promise->style_id }}">
                 <div class="promise-content">
