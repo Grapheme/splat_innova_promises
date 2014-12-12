@@ -1253,11 +1253,13 @@ class ApplicationController extends BaseController {
         }
 
         /**
+         * ВК отдает почту.
+         * ВК может как отдавать дату рождения, так и не отдавать. Причем может отдавать только день и месяц (без ведущего нуля)
          * Приводим дату рождения к нужному формату
          */
         if (strpos($user['bdate'], '.')) {
             $bdate = explode('.', $user['bdate']);
-            $birthday = $bdate[0] . '-' . $bdate[1];
+            $birthday = ((int)$bdate[0]<10 ? '0'.$bdate[0] : $bdate[0]) . '-' . ((int)$bdate[1]<10 ? '0'.$bdate[1] : $bdate[1]);
             if (isset($bdate[2]) && $bdate[0] != '')
                 $birthday .= '-' . $bdate[2];
             else
@@ -1383,6 +1385,23 @@ class ApplicationController extends BaseController {
         curl_close($curl);
         $user = json_decode($s, true);
 
+        /**
+         * FB не отдает почту.
+         * FB отдавет дату рождения
+         * Приводим дату рождения к нужному формату
+         */
+        if (strpos($user['birthday'], '/')) {
+            $bdate = explode('/', $user['birthday']);
+            $birthday = $bdate[0] . '-' . $bdate[1];
+            if (isset($bdate[2]) && $bdate[0] != '')
+                $birthday .= '-' . $bdate[2];
+            else
+                $birthday .= '-0000';
+            $user['bdate'] = $birthday;
+            #$user['bdate'] = @$user['birthday'];
+        }
+
+
         #Helper::dd($user);
 
         $user['uid'] = @$user['id'];
@@ -1395,7 +1414,6 @@ class ApplicationController extends BaseController {
         }
 
         $user['identity'] = @$user['link'];
-        $user['bdate'] = @$user['birthday'];
         $user['auth_method'] = 'facebook';
 
         $check = $this->checkUserData($user, true);
