@@ -12,7 +12,7 @@
 
         Я обещаю, что...<br/>
 
-        {{ Form::textarea('promise_text', @$_SESSION['promise_text']) }}<br/>
+        {{ Form::textarea('promise_text', (@$_SESSION['promise_text'] && $_SESSION['promise_text'] != 'undefined' ? $_SESSION['promise_text'] : '')) }}<br/>
 
         Срок: {{ Form::text('time_limit', 14) }} дней<br/>
         <label>
