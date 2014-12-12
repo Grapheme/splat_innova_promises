@@ -1259,11 +1259,11 @@ class ApplicationController extends BaseController {
          */
         if (strpos($user['bdate'], '.')) {
             $bdate = explode('.', $user['bdate']);
-            $birthday = ((int)$bdate[0]<10 ? '0'.$bdate[0] : $bdate[0]) . '-' . ((int)$bdate[1]<10 ? '0'.$bdate[1] : $bdate[1]);
-            if (isset($bdate[2]) && $bdate[0] != '')
-                $birthday .= '-' . $bdate[2];
+            $birthday = ((int)$bdate[1]<10 ? '0'.$bdate[1] : $bdate[1]) . '-' . ((int)$bdate[0]<10 ? '0'.$bdate[0] : $bdate[0]);
+            if (isset($bdate[2]) && $bdate[2] != '')
+                $birthday = $bdate[2] . '-' . $birthday;
             else
-                $birthday .= '-0000';
+                $birthday = '0000-' . $birthday;
             $user['bdate'] = $birthday;
         }
 
@@ -1392,11 +1392,11 @@ class ApplicationController extends BaseController {
          */
         if (strpos($user['birthday'], '/')) {
             $bdate = explode('/', $user['birthday']);
-            $birthday = $bdate[0] . '-' . $bdate[1];
-            if (isset($bdate[2]) && $bdate[0] != '')
-                $birthday .= '-' . $bdate[2];
+            $birthday = $bdate[1] . '-' . $bdate[0];
+            if (isset($bdate[2]) && $bdate[2] != '')
+                $birthday = $bdate[2] . '-' . $birthday;
             else
-                $birthday .= '-0000';
+                $birthday = '0000-' . $birthday;
             $user['bdate'] = $birthday;
             #$user['bdate'] = @$user['birthday'];
         }
