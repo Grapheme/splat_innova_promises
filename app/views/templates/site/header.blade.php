@@ -5,8 +5,8 @@
         <a href="#"><span data-box="auth" class="js-open-box">Войти</span></a>
         <a href="#"><span data-box="auth" class="js-open-box">Зарегистрироваться</span></a>
       @else
-        <a href="{{ URL::route('app.mainpage') }}"><span data-box="auth_" class="js-open-box_">Мой Профиль</span></a>
         <a href="{{ URL::route('app.mainpage') }}"><span data-box="auth_" class="js-open-box_">Мои Обещания</span></a>
+        <a href="{{ URL::route('app.profile') }}"><span data-box="auth_" class="js-open-box_">Мой Профиль</span></a>
         <a href="#"><span data-box="auth_" class="js-open-box_ logout">Выйти</span></a>
       @endif
       </div>
