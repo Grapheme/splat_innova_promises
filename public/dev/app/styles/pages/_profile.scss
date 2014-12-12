@@ -1,3 +1,274 @@
-.profile {
-	
+.profile-page {
+	.profile-card {
+		margin-top: 80px;
+
+		.us-link {
+			font-size: 14px;
+			margin-left: 30px;
+		}
+		.profile-photo {
+			width: 140px;
+			height: 140px;
+		}
+		.profile-info {
+			display: inline-block;
+			vertical-align: top;
+			margin-left: 30px;
+			height: 140px;
+			line-height: 140px;
+
+			.info-cont {
+				display: inline-block;
+				vertical-align: middle;
+				line-height: normal;
+			}
+
+			.name {
+				font-weight: 100;
+				font-size: 38px;
+				max-width: 500px;
+			}
+
+			.age {
+				font-weight: 100;
+				font-size: 26px;
+				margin-top: 5px;
+			}
+		}
+		.btn-cont {
+			display: inline-block;
+			vertical-align: top;
+			height: 140px;
+			line-height: 140px;
+			float: right;
+		}
+	}
+
+	.promises-title {
+		margin-top: 80px;
+	}
+
+	.promises-list {
+		margin: 40px auto 0;
+		padding: 0;
+		list-style: none;
+		overflow: hidden;
+
+		.promise-item {
+			position: relative;
+			float: left;
+			height: 290px;
+			width: 33.3333%;
+			padding: 35px 30px;
+			box-sizing: border-box;
+			color: #fff;
+
+			&:before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 0;
+				opacity: .14;
+				background-size: cover;
+				background-position: center center;
+			}
+
+			.promise-content {
+				position: relative;
+				z-index: 1;
+				height: 100%;
+			}
+
+			.title {
+				font-size: 24px;
+				font-weight: 700;
+				text-transform: uppercase;
+				line-height: 1.5;
+				width: 315px;
+			}
+
+			.bottom-block {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				font-size: 26px;
+				font-weight: 300;
+
+				.bottom-floor {
+					margin-top: 15px;
+				}
+
+				.top-floor {
+					text-align: right;
+				}
+
+				.comments, .views {
+					display: inline-block;
+					vertical-align: middle;
+
+					&:before {
+						@extend .fi;
+						margin-right: 10px;
+						font-size: .8em;
+					}
+				}
+
+				.comments {
+					margin-left: 30px;
+
+					&:before {
+						content: "\e606";
+					}
+				}
+
+				.views {
+					&:before {
+						content: "\e604";
+					}
+				}
+
+				.time {
+					display: inline-block;
+					vertical-align: middle;
+					float: right;
+					font-weight: 700;
+					color: rgba(255, 255, 255, .5);
+
+					&:after {
+						@extend .fi;
+						content: "\e605";
+						display: inline-block;
+						vertical-align: top;
+						margin-left: 10px;
+						color: #fff;
+						font-size: 1.2em;
+					}
+				}
+
+				.eye {
+					position: relative;
+					left: .2em;
+
+					&:before {
+						@extend .fi;
+						content: "\e60d";
+						display: inline-block;
+						vertical-align: middle;
+						font-size: .8em;
+					}
+
+					&.eye-cross {
+						&:before {
+							font-size: 1em;
+							content: "\e60c";
+						}
+					}
+				}
+
+				.smile, .unsmile {
+					float: right;
+					position: relative;
+					top: -.2em;
+					left: 0.2em;
+
+					&:before {
+						@extend .fi;
+						display: inline-block;
+						vertical-align: top;
+						font-size: 1.5em;
+					}
+				}
+
+				.smile {
+					&:before {
+						content: "\e608";
+					}
+				}
+
+				.unsmile {
+					&:before {
+						content: "\e607";
+					}
+				} 
+			}
+
+			&.type-promo {
+				line-height: 220px;
+				color: #434041;
+
+				.promise-content {
+					display: inline-block;
+					vertical-align: middle;
+					line-height: normal;
+					height: auto;
+				}
+
+				.logo {
+					width: 151px;
+					height: 40px;
+					background-image: url(../images/promo-logo.png);
+					background-size: 100% auto;
+					background-repeat: no-repeat;
+					margin-bottom: 30px;
+				}
+
+				.text {
+					font-weight: 300;
+					font-size: 14px;
+					text-transform: uppercase;
+  					line-height: 1.326;
+
+  					a {
+  						color: #07cbcc;
+  					}
+				}
+			}
+		}
+	}
+
+	.friends {
+		padding-top: 80px;
+		background-image: url(../images/friends-back.png);
+		background-position: 80% 100px;
+		background-repeat: no-repeat;
+
+		.us-title {
+			sup {
+				font-weight: 500;
+				font-size: 20px;
+				margin-left: .2em;
+			}
+		}
+
+		.friends-list {
+			padding: 50px 0 40px;
+			margin: 0 auto;
+			list-style: none;
+			width: 1040px;
+
+			.friend-item {
+				display: inline-block;
+				vertical-align: top;
+				width: 130px;
+				margin: 0 20px 45px;
+				text-align: center;
+
+				.profile-photo {
+					width: 130px;
+					height: 130px;
+				}
+
+				.name {
+					margin-top: 10px;
+					font-weight: 300;
+					font-size: 15px;
+					line-height: 1.177;
+				}
+			}
+		}
+	}
 }

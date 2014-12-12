@@ -1,0 +1,40 @@
+.promise-item {
+	&.type-green {
+		background-color: #7bc800;
+		
+		&:before {
+			background-image: url(../images/patterns/3.png);
+		}
+	}
+	&.type-aqua {
+		background-color: #07cbcc;
+
+		&:before {
+			background-image: url(../images/patterns/4.png);
+		}
+	}
+	&.type-yellow {
+		background-color: #fee000;
+
+		&:before {
+			background-image: url(../images/patterns/5.png);
+		}
+	}
+	&.type-blue {
+		background-color: #0f9fce;
+
+		&:before {
+			background-image: url(../images/patterns/1.png);
+		}
+	}
+	&.type-pink {
+		background-color: #dbabc8;
+
+		&:before {
+			background-image: url(../images/patterns/2.png);
+		}
+	}
+	&.type-promo {
+		background-color: #b9f1f7;
+	}
+}

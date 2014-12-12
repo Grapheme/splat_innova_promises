@@ -3,12 +3,13 @@
 	padding: 0 30px;
 	height: 60px;
 	line-height: 60px;
-	border-radius: 60px;
 	background: #11b8b8;
-	border: 0;
 	font-size: 21px;
 	font-weight: 500;
+	text-decoration: none;
 	outline: 0;
+	border: 0;
+	border-radius: 60px;
 	color: #fff;
 	cursor: pointer;
 	transition: opacity $default-anim-time $default-ease;
@@ -27,4 +28,21 @@
 	padding: 0 20px;
 	font-size: 18px;
 	box-sizing: border-box;
+}
+
+.us-link {
+	border-bottom: 1px solid;
+	text-decoration: none;
+	color: inherit;
+	font-weight: 300;
+	transition: border-color $default-anim-time $default-ease;
+
+	&:hover {
+		border-color: transparent;
+	}
+}
+
+.us-title {
+	font-size: 32px;
+	font-weight: 100;
 }
