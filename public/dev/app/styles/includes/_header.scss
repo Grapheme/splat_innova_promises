@@ -119,4 +119,13 @@
 			}
 		}
 	}
+
+	&.bordered {
+		border-bottom: 1px solid #f0f0f0;
+
+		.header-desc {
+			background-image: url(../images/header_bottom_bordered.png);
+			margin-top: -21px;
+		}
+	}
 }

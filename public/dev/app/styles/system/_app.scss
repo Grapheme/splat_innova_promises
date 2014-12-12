@@ -14,7 +14,7 @@ html {
 }
 
 body {
-	min-width: $wrap-width;
+	min-width: $wrap-width + $wrap-padding*2;
 }
 
 .wrapper {
