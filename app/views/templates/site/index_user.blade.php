@@ -120,8 +120,6 @@
 
         @if (isset($promises) && is_object($promises) && count($promises))
 
-            Мои обещания:
-
             <ul class="promises-list">
             @foreach ($promises as $promise)
             <?
@@ -160,7 +158,7 @@
 
         @endif
 
-
+        @if (0)
         <ul class="promises-list">
           <li class="promise-item type-green">
             <div class="promise-content">
@@ -246,13 +244,54 @@
             </div>
           </li>
         </ul>
+        @endif
 
 
         <div class="friends">
           <div class="wrapper">
             <div class="us-title">Мои друзья <sup>8</sup></div>
           </div>
+
           <ul class="friends-list">
+
+            @if (count($user->existing_friends))
+
+                @foreach ($user->existing_friends as $friend)
+
+                    <li class="friend-item registered-user">
+
+                        @if (@$friend['profile_id'])
+                            <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}">
+                        @endif
+
+                            <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
+                            <div class="name">{{ @$friend['_name'] }}</div>
+
+                        @if (@$friend['profile_id'])
+                            </a>
+                        @endif
+                    </li>
+                @endforeach
+
+            @endif
+
+            @if (count($user->non_existing_friends))
+
+                @foreach ($user->non_existing_friends as $friend)
+
+                    <li class="friend-item registered-user">
+
+                        <a href="{{ URL::route('app.send_invite', @base64_encode($friend['_name'])) }}">
+
+                            <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
+                            <div class="name">{{ @$friend['_name'] }}</div>
+
+                        </a>
+                    </li>
+                @endforeach
+
+            @endif
+
             <li class="friend-item">
               <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
               <div class="name">Анастасия Коротец</div>
@@ -291,6 +330,8 @@
             </li>
           </ul>
         </div>
+
+
       </div>
 
 
