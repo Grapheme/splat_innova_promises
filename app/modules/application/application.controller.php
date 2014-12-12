@@ -1019,10 +1019,19 @@ class ApplicationController extends BaseController {
                 $promises = DicVal::extracts($promises, 1);
 
                 $promises_ids = Dic::makeLists($promises, null, 'id');
-                #Helper::dd($promises_ids);
+                Helper::d($promises_ids);
 
                 $comments_counts = Dic::valuesBySlug('comments', function($query) use ($promises_ids) {
-                    $query->whereIn('promise_id', $promises_ids);
+
+                    /**
+                     * Подключаем значения promise_id
+                     */
+                    $tbl_alias_only_for_me = $query->join_field('promise_id', 'promise_id', function ($join, $value) {
+                        #$join->where($value, '=', NULL);
+                    });
+                    $query->whereIn($tbl_alias_only_for_me.'.promise_id', $promises_ids);
+
+                    #$query->whereIn('promise_id', $promises_ids);
                     $query->select('promise_id', DB::raw('COUNT(*)'));
                     $query->groupBy('promise_id');
                 });
