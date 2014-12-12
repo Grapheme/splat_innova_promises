@@ -1244,19 +1244,24 @@ class ApplicationController extends BaseController {
 
         $user['uid'] = @$user['id'];
 
-        Helper::d($url);
-        Helper::dd($user);
+        #Helper::d($url);
+        #Helper::dd($user);
 
         if (!@$user['uid']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (2).";
             die;
         }
 
+        /**
+         * Приводим дату рождения к нужному формату
+         */
         if (strpos($user['bdate'], '.')) {
             $bdate = explode('.', $user['bdate']);
             $birthday = $bdate[0] . '-' . $bdate[1];
             if (isset($bdate[2]) && $bdate[0] != '')
                 $birthday .= '-' . $bdate[2];
+            else
+                $birthday .= '-0000';
             $user['bdate'] = $birthday;
         }
 
