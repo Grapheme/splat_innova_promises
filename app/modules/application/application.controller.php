@@ -1029,7 +1029,7 @@ class ApplicationController extends BaseController {
                     $tbl_alias_only_for_me = $query->join_field('promise_id', 'promise_id', function ($join, $value) {
                         #$join->where($value, '=', NULL);
                     });
-                    $query->whereIn($tbl_alias_only_for_me.'.promise_id', $promises_ids);
+                    $query->whereIn($tbl_alias_only_for_me.'.value', $promises_ids);
 
                     #$query->whereIn('promise_id', $promises_ids);
                     $query->select('promise_id', DB::raw('COUNT(*)'));
