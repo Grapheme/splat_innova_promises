@@ -303,11 +303,13 @@
 
             @endif
 
+              @if ($friends_count > 12)
+                <a href="#" class="show-more-friends" data-limit="12">Показать еще 12 друзей</a>
+              @endif
+
           </ul>
 
-          @if ($friends_count > 12)
-            <a href="#" class="show-more-friends" data-limit="12">Показать еще 12 друзей</a>
-          @endif
+
 
         </div>
 
