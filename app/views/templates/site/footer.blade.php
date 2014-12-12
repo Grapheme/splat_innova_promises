@@ -26,7 +26,17 @@
       <div class="form-block">
         <div class="wrapper">
           <div class="desc">Для того, чтобы сохранить ваше обещание, вам необходимо зарегистрироваться на нашем сайте<br>с помощью одной из этих социальных сетей:</div>
-          <ul class="soc-auth"><a href="#" class="soc-fb"><i class="fi icon-fb"></i>Facebook</a><a href="#" class="soc-vk"><i class="fi icon-vk"></i>Вконтакте</a><a href="#" class="soc-ok"><i class="fi icon-ok"></i>Одноклассники</a></ul>
+          <div class="soc-auth">
+            <a href="#" class="soc-fb fb-oauth-link">
+                <i class="fi icon-fb"></i>Facebook
+            </a>
+            <a href="#" class="soc-vk vk-oauth-link">
+                <i class="fi icon-vk"></i>Вконтакте
+            </a>
+            <a href="#" class="soc-ok ok-oauth-link" data-domain="{{ domain }}">
+                <i class="fi icon-ok"></i>Одноклассники
+            </a>
+          </div>
           <div class="desc">или с помощью адреса электронной почты:</div>
           <div data-type="auth" class="form-inputs js-pop-form">
             <form>
