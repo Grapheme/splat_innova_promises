@@ -247,9 +247,12 @@
         @endif
 
 
+        <?
+        $friends_count = @count($user->existing_friends) + @count($user->non_existing_friends);
+        ?>
         <div class="friends">
           <div class="wrapper">
-            <div class="us-title">Мои друзья <sup>{{ @count($user->existing_friends) + @count($user->non_existing_friends) }}</sup></div>
+            <div class="us-title">Мои друзья <sup>{{ $friends_count }}</sup></div>
           </div>
 
           <ul class="friends-list">
@@ -301,6 +304,11 @@
             @endif
 
           </ul>
+
+          @if ($friends_count > 12)
+            <a href="#" class="show-more-friends" data-limit="12">Показать еще 12 друзей</a>
+          @endif
+
         </div>
 
 
