@@ -1015,6 +1015,8 @@ class ApplicationController extends BaseController {
 
             #Helper::tad($promises);
 
+            $comments_counts = array();
+
             if (count($promises)) {
                 $promises = DicVal::extracts($promises, 1);
 
@@ -1035,15 +1037,25 @@ class ApplicationController extends BaseController {
                     $query->addSelect(DB::raw('COUNT(*) AS count'));
                     $query->groupBy('promise_id');
                 });
-                Helper::smartQueries(1);
+                #Helper::smartQueries(1);
 
                 $comments_counts = Dic::makeLists($comments_counts, null, 'count', 'promise_id');
+                #Helper::tad($comments_counts);
 
-                Helper::tad($comments_counts);
+                if (count($comments_counts)) {
+                    foreach ($comments_counts as $promise_id => $comments_count) {
+                        if (isset($promises[$promise_id])) {
+                            $obj = $promises[$promise_id];
+                            $obj->count = $comments_count;
+                            $promises[$promise_id] = $obj;
+                        }
+                    }
+                }
+
 
             }
 
-            #Helper::tad($promises);
+            Helper::tad($promises);
         }
 
         return $promises;
