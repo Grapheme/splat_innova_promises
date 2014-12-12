@@ -304,6 +304,7 @@
             @endif
 
               @if ($friends_count > 12)
+                <div style="float:none; clear:both;"></div>
                 <a href="#" class="show-more-friends" data-limit="12">Показать еще 12 друзей</a>
               @endif
 
