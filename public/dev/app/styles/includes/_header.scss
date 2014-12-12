@@ -18,31 +18,20 @@
 		a {
 			color: #363331;
 			text-decoration: none;
-
-			&:after {
-				content: "";
-				display: inline-block;
-				vertical-align: middle;
-				height: 6px;
-				width: 1px;
-				background: #909093;
-				margin: 0 15px;
-			}
+			margin-right: 30px;
 
 			&:last-child {
-				&:after {
-					display: none;
-				}
+				margin-right: 0;
 			}
 
 			span {
-				border-bottom: 1px solid;
+				color: #54545a;
 				transition: border-color $default-anim-time $default-ease;
 			}
 
 			&:hover {
 				span {
-					border-color: transparent;
+					color: #0bdadc;
 				}
 			}
 		}
@@ -68,7 +57,7 @@
 				height: 33px;
 				border-radius: 33px;
 				text-align: center;
-				background: #56565b;
+				background: #444444;
 				margin-left: 12px;
 				text-decoration: none;
 				transition: background $default-anim-time $default-ease;
@@ -95,7 +84,7 @@
 		font-size: 24px;
 		font-weight: 900;
 		text-transform: uppercase;
-		color: #56565b;
+		color: #0bdadc;
 	}
 
 	.header-desc {

@@ -1,0 +1,181 @@
+.profile-message {
+  font-size: 20px;
+  font-weight: 300;
+  color: rgb(86, 86, 91);
+  line-height: 1.6;
+  margin-top: 60px;
+
+  .icon {
+    display: inline-block;
+    vertical-align: top;
+    width: 50px;
+    font-size: 35px;
+    color: #07cbcb;
+  }
+
+  .text {
+    display: inline-block;
+    vertical-align: top;
+    width: 680px;
+  }
+}
+
+.profile-edit {
+  margin: 60px 0 130px;
+
+  .photo-cont {
+    display: inline-block;
+    vertical-align: top;
+    width: 230px;
+    margin-right: 25px;
+  }
+
+  .edit-cont {
+    display: inline-block;
+    vertical-align: top;
+    width: 480px;
+
+    .input-cont {
+      margin-bottom: 20px;
+
+      .us-input {
+        background: #f6f6f6;
+        height: 65px;
+      }
+    }
+
+    .input-hint {
+      font-size: 14px;
+      color: rgb(68, 68, 68);
+      line-height: 1.4;
+      font-weight: 300;
+      margin-bottom: 30px;
+    }
+
+    .check-cont {
+      font-size: 14px;
+
+      .ui-helper-hidden-accessible {
+        display: none;
+      }
+      
+      .ui-button {
+        .check-fake {
+          display: inline-block;
+          vertical-align: middle;
+          width: 27px;
+          height: 27px;
+          line-height: 27px;
+          border-radius: 3px;
+          background: #f6f6f6;
+          margin-right: 10px;
+          color: #07cbcb;
+          font-size: 22px;
+          text-align: center;
+          
+          .fi {
+            opacity: 0;
+            transition: opacity $default-anim-time $default-ease;
+          }
+        }
+
+        &.ui-state-active {
+          .check-fake {
+            .fi {
+              opacity: 1;
+            }
+          }
+        }
+      }
+
+      a {
+        color: inherit;
+        border-bottom: 1px solid;
+        transition: border-color $default-anim-time $default-ease;
+        text-decoration: none;
+
+        &:hover {
+          border-color: transparent;
+        }
+      }
+    }
+
+    .btn-cont {
+      margin-top: 35px;
+    }
+  }
+}
+
+.profile-photo {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 195px;
+  height: 195px;
+  border-radius: 195px;
+  background-size: cover;
+  background-position: center center;
+
+  .profile-hover {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    line-height: 195px;
+    border-radius: 195px;
+    text-align: center;
+    background: rgba(255, 255, 255, .8);
+    transition: opacity $default-anim-time $default-ease;
+
+    a {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 4px;
+      width: 30px;
+      height: 30px;
+      border-radius: 30px;
+      border: 2px solid #07cbcc;
+      background: #fff;
+      color: #07cbcc;
+      text-decoration: none;
+      font-size: 25px;
+      transition: all $default-anim-time $default-ease;
+
+      .fi {
+        position: relative;
+        left: .005em;
+        top: .05em;
+        line-height: 30px;
+      }
+
+      &:hover {
+        background: #07cbcc;
+        color: #fff;
+      }
+    }
+
+    .down-link {
+      position: relative;
+      overflow: hidden;
+
+      input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        opacity: 0;
+      }
+    }
+
+
+  }
+
+  &:hover {
+    .profile-hover {
+      opacity: 1;
+    }
+  }
+}

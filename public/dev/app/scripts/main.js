@@ -47,6 +47,8 @@ SplatSite.tabs = function() {
 		var link = $('.js-opened-from');
 		var box_name = link.attr('data-box');
 		var box = $('.js-pop-up[data-box="' + box_name + '"]');
+		link.removeClass('js-opened-from');
+		this.retPos(link);
 		overlay_shadow.removeClass('active');
 		box.removeClass('active');
 		setTimeout(function(){
@@ -121,11 +123,13 @@ SplatSite.index = function() {
 
 	init();
 }
+SplatSite.ProfileEdit = function() {
+
+}
 
 $(function(){
 	var body = $('body');
 	SplatSite.tabs();
-	if(body.hasClass('index-page')) {
-		SplatSite.index();
-	}
+	$('.styledCheck').button();
+	$('.styledDate').datepicker();
 });

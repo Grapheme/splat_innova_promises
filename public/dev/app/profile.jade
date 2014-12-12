@@ -1,0 +1,35 @@
+extends layout
+
+block vars
+	- var bodyClass = "index-page"
+
+block content
+	.wrapper
+		.profile-card
+			.profile-photo(style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);")
+			.profile-info
+				.name
+					span Кирилл Черенков
+					a(href="#") Редактировать
+				.age 28 лет
+			.btn-cont
+				a(href="#").us-btn Дать обещание
+		.promises-title
+		ul.promises-list
+			li.promise-item
+				.title ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ
+				.bottom-block
+					.top-floor
+						.eye
+					.bottom-floor
+						.views 15
+						.comments 2
+	.friends
+		.wrapper
+			.title Мои друзья <sup>8</sup>
+			ul.friends-list
+				li.friend-item
+					.photo(style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);")
+					.name Анастасия Коротец
+
+
