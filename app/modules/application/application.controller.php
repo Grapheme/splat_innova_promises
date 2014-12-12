@@ -1252,8 +1252,15 @@ class ApplicationController extends BaseController {
             die;
         }
 
+        if (strpos($user['bdate'], '.')) {
+            $bdate = explode('.', $user['bdate']);
+            $birthday = $bdate[0] . '-' . $bdate[1];
+            if (isset($bdate[2]) && $bdate[0] != '')
+                $birthday .= '-' . $bdate[2];
+            $user['bdate'] = $birthday;
+        }
+
         $user['identity'] = 'http://vk.com/id' . $user['uid'];
-        $user['bdate'] = @$user['birthday'];
         $user['email'] = @$auth['email'];
         $user['auth_method'] = 'vkontakte';
 
