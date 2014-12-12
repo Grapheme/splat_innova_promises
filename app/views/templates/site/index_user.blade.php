@@ -8,6 +8,8 @@
 @section('content')
 
 
+        <br/>
+
         <big><a href="{{ $user->identity }}" target="_blank">{{ $user->name }}</a></big>
         @if ($user->years_old)
             [ {{ $user->years_old }} ]
