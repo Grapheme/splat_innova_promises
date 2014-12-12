@@ -249,16 +249,22 @@
 
         <div class="friends">
           <div class="wrapper">
-            <div class="us-title">Мои друзья <sup>8</sup></div>
+            <div class="us-title">Мои друзья <sup>{{ @count($user->existing_friends) + @count($user->non_existing_friends) }}</sup></div>
           </div>
 
           <ul class="friends-list">
 
+            <?
+            $i = 0;
+            ?>
+
             @if (count($user->existing_friends))
 
                 @foreach ($user->existing_friends as $friend)
-
-                    <li class="friend-item registered-user">
+                    <?
+                    ++$i;
+                    ?>
+                    <li class="friend-item registered-user{{ $i > 12 ? ' hidden' : '' }}">
 
                         @if (@$friend['profile_id'])
                             <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}">
@@ -278,8 +284,10 @@
             @if (count($user->non_existing_friends))
 
                 @foreach ($user->non_existing_friends as $friend)
-
-                    <li class="friend-item registered-user">
+                    <?
+                    ++$i;
+                    ?>
+                    <li class="friend-item registered-user{{ $i > 12 ? ' hidden' : '' }}">
 
                         <a href="{{ URL::route('app.send_invite', @base64_encode($friend['_name'])) }}">
 
@@ -292,42 +300,6 @@
 
             @endif
 
-            <li class="friend-item">
-              <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-              <div class="name">Анастасия Коротец</div>
-            </li>
-            <li class="friend-item">
-              <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-              <div class="name">Анастасия Коротец</div>
-            </li>
-            <li class="friend-item">
-              <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-              <div class="name">Анастасия Коротец</div>
-            </li>
-            <li class="friend-item">
-              <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-              <div class="name">Анастасия Коротец</div>
-            </li>
-            <li class="friend-item">
-              <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-              <div class="name">Анастасия Коротец</div>
-            </li>
-            <li class="friend-item">
-              <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-              <div class="name">Анастасия Коротец</div>
-            </li>
-            <li class="friend-item">
-              <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-              <div class="name">Анастасия Коротец</div>
-            </li>
-            <li class="friend-item">
-              <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-              <div class="name">Анастасия Коротец</div>
-            </li>
-            <li class="friend-item">
-              <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-              <div class="name">Анастасия Коротец</div>
-            </li>
           </ul>
         </div>
 
