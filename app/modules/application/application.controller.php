@@ -1433,7 +1433,7 @@ class ApplicationController extends BaseController {
          * FB отдает дату рождения, но день и месяц поменяны местами
          * Приводим дату рождения к нужному формату
          */
-        if (strpos($user['birthday'], '/')) {
+        if (isset($user['birthday']) && strpos($user['birthday'], '/')) {
             $bdate = explode('/', $user['birthday']);
             $birthday = $bdate[0] . '-' . $bdate[1];
             if (isset($bdate[2]) && $bdate[2] != '')
