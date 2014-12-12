@@ -1032,8 +1032,8 @@ class ApplicationController extends BaseController {
                     });
                     $query->whereIn($tbl_alias_1.'.value', $promises_ids);
 
-                    #$query->select(DB::raw($tbl_alias_1.'.value AS promise_id'), DB::raw('COUNT(*)'));
-                    $query->groupBy('promise_id');
+                    $query->addSelect(DB::raw('COUNT(*)'));
+                    #$query->groupBy('promise_id');
                 });
                 Helper::smartQueries(1);
                 Helper::tad($comments_counts);
