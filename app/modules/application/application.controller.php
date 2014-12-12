@@ -1046,7 +1046,7 @@ class ApplicationController extends BaseController {
                     foreach ($comments_counts as $promise_id => $comments_count) {
                         if (isset($promises[$promise_id])) {
                             $obj = $promises[$promise_id];
-                            $obj->count = $comments_count;
+                            $obj->comments_count = $comments_count;
                             $promises[$promise_id] = $obj;
                         }
                     }
@@ -1055,7 +1055,7 @@ class ApplicationController extends BaseController {
 
             }
 
-            Helper::tad($promises);
+            #Helper::tad($promises);
         }
 
         return $promises;
