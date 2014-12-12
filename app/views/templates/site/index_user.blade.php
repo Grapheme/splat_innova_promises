@@ -124,8 +124,11 @@
 
             <ul class="promises-list">
             @foreach ($promises as $promise)
-
-              <li class="promise-item type-green">
+            <?
+            if (!$promise->style_id)
+                $promise->style_id = 'green';
+            ?>
+              <li class="promise-item type-{{ $promise->style_id }}">
                 <div class="promise-content">
                   <div class="title">
                     <a href="{{ URL::route('app.promise', $promise->id) }}">
