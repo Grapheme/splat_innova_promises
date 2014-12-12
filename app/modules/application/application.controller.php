@@ -75,6 +75,8 @@ class ApplicationController extends BaseController {
 
         $user = $this->user;
 
+        Helper::ta($user);
+
         /**
          * Если юзер не авторизован - показываем стандартную главную страницу
          */
