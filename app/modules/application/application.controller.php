@@ -1019,7 +1019,14 @@ class ApplicationController extends BaseController {
                 $promises = DicVal::extracts($promises, 1);
 
                 $promises_ids = Dic::makeLists($promises, null, 'id');
-                Helper::dd($promises_ids);
+                #Helper::dd($promises_ids);
+
+                $comments_counts = Dic::valuesBySlug('comments', function($query) use ($promises_ids) {
+                    $query->whereIn('promise_id', $promises_ids);
+                    $query->select('promise_id', DB::raw('COUNT(*)'));
+                    $query->groupBy('promise_id');
+                });
+                Helper::dd($comments_counts);
 
             }
 
