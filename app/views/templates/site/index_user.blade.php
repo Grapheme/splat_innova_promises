@@ -130,7 +130,7 @@
                 $promise->style_id = $styles[array_rand($styles)];
             }
             ?>
-              <li class="promise-item type-{{ $promise->style_id }}">
+              <li class="promise-item type-{{ $promise->style_id }}" data-finish="{{ $promise->date_finish }}">
                 <div class="promise-content">
                   <div class="title">
                     <a href="{{ URL::route('app.promise', $promise->id) }}">
