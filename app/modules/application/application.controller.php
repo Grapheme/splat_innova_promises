@@ -1437,6 +1437,8 @@ class ApplicationController extends BaseController {
 
         $user_friends['friends'] = $friends;
 
+
+
         /**
          * Сохраняем друзей юзера
          */
