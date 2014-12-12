@@ -1037,7 +1037,7 @@ class ApplicationController extends BaseController {
                 });
                 Helper::smartQueries(1);
 
-                $comments_counts = Dic::makeLists($comments_counts, null, 'count', 'promise_id')
+                $comments_counts = Dic::makeLists($comments_counts, null, 'count', 'promise_id');
 
                 Helper::tad($comments_counts);
 
