@@ -1026,11 +1026,11 @@ class ApplicationController extends BaseController {
                     /**
                      * Подключаем значения promise_id
                      */
-                    $tbl_alias_only_for_me = $query->join_field('promise_id', 'promise_id', function ($join, $value) use ($promises_ids) {
+                    $tbl_alias_1 = $query->join_field('promise_id', 'promise_id', function ($join, $value) use ($promises_ids) {
                         #$join->where($value, '=', NULL);
-                        $join->whereIn($value, $promises_ids);
+                        #$join->whereIn($value, $promises_ids);
                     });
-                    #$query->whereIn($tbl_alias_only_for_me.'.value', $promises_ids);
+                    $query->whereIn($tbl_alias_1.'.value', $promises_ids);
 
                     #$query->whereIn('promise_id', $promises_ids);
                     #$query->select(DB::raw($tbl_alias_only_for_me.'.value AS promise_id'), DB::raw('COUNT(*)'));
