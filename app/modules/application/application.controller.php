@@ -635,7 +635,7 @@ class ApplicationController extends BaseController {
          * чтобы после авторизации сразу перейти на страницу дачи обещания.
          */
         $promise_text = Input::get('promise_text');
-        if ($promise_text != '') {
+        if ($promise_text != '' && $promise_text != 'undefined') {
             $_SESSION['promise_text'] = $promise_text;
             $_SESSION['redirect_to_new_promise'] = 1;
         }
