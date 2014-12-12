@@ -137,11 +137,13 @@
                   </div>
                   <div class="bottom-block">
                     <div class="top-floor">
-                      <div class="eye"></div>
+                      <div class="eye{{ ( $promise->only_for_me ? ' eye-cross' : '') }}"></div>
                     </div>
                     <div class="bottom-floor">
+                      <!--
                       <div class="views">15</div>
-                      <div class="comments">2</div>
+                      -->
+                      <div class="comments">{{ $promise->comments_count }}</div>
                       <div class="time">02:01:23</div>
                     </div>
                   </div>
