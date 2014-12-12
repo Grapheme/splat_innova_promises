@@ -108,6 +108,8 @@ class ApplicationController extends BaseController {
          */
         $promises = $this->promises;
 
+        Helper::tad($promises);
+
         /**
          * Определим, какие друзья пользователя уже зареганы в системе
          */
@@ -724,8 +726,8 @@ class ApplicationController extends BaseController {
                             ),
                         );
                         if ($data['auth_method'] != 'native') {
-                            $array['name'] = @$data['first_name'] . ' ' . @$data['last_name'];
-                            $array['bdate'] = @$data['bdate'];
+                            #$array['name'] = @$data['first_name'] . ' ' . @$data['last_name'];
+                            #$array['bdate'] = @$data['bdate'];
                         }
 
                         $user_record = DicVal::refresh(
