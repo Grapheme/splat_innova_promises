@@ -1,7 +1,7 @@
   <header class="main-header">
     <div class="wrapper">
       <div class="user-links">
-      @if (!isset($user) || !is_object($user) || $user->id)
+      @if (!isset($user) || !is_object($user) || !$user->id)
         <a href="#"><span data-box="auth" class="js-open-box">Войти</span></a>
         <a href="#"><span data-box="auth" class="js-open-box">Зарегистрироваться</span></a>
       @else
