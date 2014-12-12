@@ -126,6 +126,30 @@ SplatSite.index = function() {
 SplatSite.ProfileEdit = function() {
 
 }
+SplatSite.Promise = function() {
+	var select = {};
+	select.init = function() {
+		this.events();
+		$('.js-types li').first().trigger('click');
+	}
+	select.setStyle = function(type) {
+		$('.js-type-select').val(type).trigger('change', [type]);
+	}
+	select.events = function() {
+		var self = this;
+		$('.js-type-select').on('change', function(data, type){
+			$('.js-type-parent').removeClass('type-blue type-yellow type-aqua type-green type-pink');
+			$('.js-type-parent').addClass('type-' + type);
+			$('.js-types .type-' + type).addClass('active')
+				.siblings().removeClass('active');
+		});
+		$('.js-types li').on('click', function(){
+			var type = $(this).attr('data-type');
+			self.setStyle(type);
+		});
+	}
+	select.init();
+}
 
 $(function(){
 	var body = $('body');

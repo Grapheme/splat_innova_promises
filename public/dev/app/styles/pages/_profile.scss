@@ -1,47 +1,49 @@
+.profile-card {
+	.us-link {
+		font-size: 14px;
+		margin-left: 30px;
+	}
+	.profile-photo {
+		width: 140px;
+		height: 140px;
+	}
+	.profile-info {
+		display: inline-block;
+		vertical-align: top;
+		margin-left: 30px;
+		height: 140px;
+		line-height: 140px;
+
+		.info-cont {
+			display: inline-block;
+			vertical-align: middle;
+			line-height: normal;
+		}
+
+		.name {
+			font-weight: 100;
+			font-size: 38px;
+			max-width: 500px;
+		}
+
+		.age {
+			font-weight: 100;
+			font-size: 26px;
+			margin-top: 5px;
+		}
+	}
+	.btn-cont {
+		display: inline-block;
+		vertical-align: top;
+		height: 140px;
+		line-height: 140px;
+		float: right;
+	}
+}
+
 .profile-page {
 	.profile-card {
 		margin-top: 80px;
-
-		.us-link {
-			font-size: 14px;
-			margin-left: 30px;
-		}
-		.profile-photo {
-			width: 140px;
-			height: 140px;
-		}
-		.profile-info {
-			display: inline-block;
-			vertical-align: top;
-			margin-left: 30px;
-			height: 140px;
-			line-height: 140px;
-
-			.info-cont {
-				display: inline-block;
-				vertical-align: middle;
-				line-height: normal;
-			}
-
-			.name {
-				font-weight: 100;
-				font-size: 38px;
-				max-width: 500px;
-			}
-
-			.age {
-				font-weight: 100;
-				font-size: 26px;
-				margin-top: 5px;
-			}
-		}
-		.btn-cont {
-			display: inline-block;
-			vertical-align: top;
-			height: 140px;
-			line-height: 140px;
-			float: right;
-		}
 	}
 
 	.promises-title {

@@ -22,3 +22,8 @@ body {
 	width: $wrap-width;
 	padding: 0 $wrap-padding;
 }
+
+.hidden {
+	visibility: hidden;
+	display: none;
+}
