@@ -1067,6 +1067,9 @@ class ApplicationController extends BaseController {
             die;
         }
 
+        /**
+         * OK не отдают е-мейл
+         */
         $curl = curl_init('http://api.odnoklassniki.ru/fb.do?access_token=' . $auth['access_token'] . '&application_key=' . $AUTH['application_key'] . '&method=users.getCurrentUser&sig=' . md5('application_key=' . $AUTH['application_key'] . 'method=users.getCurrentUser' . md5($auth['access_token'] . $AUTH['client_secret'])));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
@@ -1230,7 +1233,8 @@ class ApplicationController extends BaseController {
             die;
         }
 
-        $curl = curl_init('https://api.vk.com/method/users.get?user_ids=' . @$auth['user_id'] . '&fields=sex,bdate,city,country,photo_200,domain&v=5.27&lang=ru');
+        $url = 'https://api.vk.com/method/users.get?user_ids=' . @$auth['user_id'] . '&fields=sex,bdate,city,country,photo_200,domain&v=5.27&lang=ru';
+        $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         #curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept-Language: ru-RU;q=1.0'));
@@ -1240,24 +1244,8 @@ class ApplicationController extends BaseController {
 
         $user['uid'] = @$user['id'];
 
-        /*
-        Массив $user содержит следующие поля:
-        uid - уникальный номер пользователя
-        first_name - имя пользователя
-        last_name - фамилия пользователя
-        birthday - дата рождения пользователя
-        gender - пол пользователя
-        pic_1 - маленькое фото
-        pic_2 - большое фото
-        */
-
-        /*
-        ...
-        Записываем полученные данные в базу, устанавливаем cookies
-        ...
-        */
-
-        #Helper::d($user);
+        Helper::d($url);
+        Helper::dd($user);
 
         if (!@$user['uid']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (2).";
