@@ -108,7 +108,7 @@ class ApplicationController extends BaseController {
          */
         $promises = $this->promises;
 
-        #Helper::tad($promises);
+        Helper::tad($promises);
 
         /**
          * Определим, какие друзья пользователя уже зареганы в системе
