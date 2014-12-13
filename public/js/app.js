@@ -24,7 +24,7 @@ function uloginauth(token) {
 
     if(typeof ulogintoken == "undefined")
         setCookie("ulogintoken", token, "Mon, 01-Jan-2018 00:00:00 GMT", "/");
-        
+
     $.getJSON("//ulogin.ru/token.php?host=" + encodeURIComponent(location.toString()) + "&token=" + token + "&callback=?", function(data){
 
         data = $.parseJSON(data.toString());

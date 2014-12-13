@@ -28,11 +28,17 @@
 
     @endif
 
+    <?
+    $default_avatar = '/theme/images/man.png';
+    if (isset($user->sex) && $user->sex == 1)
+        $default_avatar = '/theme/images/woman.png';
+    ?>
+
       <div class="promise-make js-type-parent">
         <div class="wrapper">
           <div class="title">Новое обещание</div>
           <div class="profile-card">
-            <div style="background-image: url({{ $user->avatar }});" class="profile-photo"></div>
+            <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo"></div>
             <div class="profile-info">
               <div class="info-cont">
                 <div class="name"><span>{{ $user->name }}</span></div>
