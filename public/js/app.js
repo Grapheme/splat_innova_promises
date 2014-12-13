@@ -12,7 +12,7 @@ $(document).ready(function($){
 $(document).on('click', '.logout', function(e){
 	e.preventDefault();
     setCookie("user_token", null);
-    location.href = location.href;
+    location.href = '/';
 });
 
 
