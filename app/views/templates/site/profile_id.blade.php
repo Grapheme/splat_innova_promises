@@ -33,7 +33,9 @@
             </ul>
         @else
 
-            Пользователь еще не давал обещаний.
+            <div class="wrapper">
+              <div class="us-text">Пользователь еще не давал обещаний.</div>
+            </div>
 
         @endif
 
@@ -90,8 +92,10 @@
             </ul>
         @else
 
-            Пользователь еще не давал обещаний.
-
+            <div class="wrapper">
+              <div class="us-text">Пользователь еще не давал обещаний.</div>
+            </div>
+            
         @endif
 
 @stop
