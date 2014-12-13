@@ -50,11 +50,16 @@
 .us-text {
 	font-weight: 300;
 	margin: 20px 0;
+	padding-bottom: 40px;
 }
 
 .clean-a {
 	color: inherit;
 	text-decoration: none;
+}
+
+.inp-error {
+	background: #FFEBEB;
 }
 
 .input-class {

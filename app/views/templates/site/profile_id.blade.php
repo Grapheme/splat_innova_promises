@@ -73,11 +73,10 @@
             }
             ?>
               <li class="promise-item type-{{ $promise->style_id }}" data-finish="{{ $promise->date_finish }}">
+                <a href="{{ URL::route('app.promise', $promise->id) }}" class="fullsizelink"></a>
                 <div class="promise-content">
                   <div class="title">
-                    <a href="{{ URL::route('app.promise', $promise->id) }}">
-                        {{ $promise->name }}
-                    </a>
+                    {{ $promise->name }}
                   </div>
                   <div class="bottom-block">
                     <div class="top-floor">
