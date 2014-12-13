@@ -50,11 +50,25 @@
 .us-text {
 	font-weight: 300;
 	margin: 20px 0;
+	padding-bottom: 40px;
 }
 
 .clean-a {
 	color: inherit;
 	text-decoration: none;
+}
+
+.fullsizelink {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 2;
+}
+
+.inp-error {
+	background: #FFEBEB;
 }
 
 .input-class {
