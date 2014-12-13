@@ -66,7 +66,7 @@
 
                     <a href="#" class="down-link">
                         <div class="fi icon-arrow-down"></div>
-                        <input name="avatar" type="file">
+                        <input name="avatar" type="file" accept="image/*">
                     </a>
 
                     <a href="#" class="remove-link">
