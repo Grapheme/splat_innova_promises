@@ -1540,6 +1540,7 @@ class ApplicationController extends BaseController {
         }
 
         $user = Dic::valueBySlugAndId('users', $id);
+        Helper::ta($user);
 
         /**
          * Если юзер не авторизован - показываем стандартную главную страницу
