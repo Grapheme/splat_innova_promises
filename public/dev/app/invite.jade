@@ -1,0 +1,29 @@
+extends layout
+
+block vars
+	- var bodyClass = "index-page"
+
+block content
+	.profile-page
+		.wrapper
+			.profile-card
+				.profile-photo(style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);")
+				.profile-info.profile-invite
+					.info-cont
+						.name
+							span Кирилл Черенков
+						.age 28 лет
+						.invite-info
+							p Ваш друг  из Facebook не дал еще ни одного обещания. 
+							p Пригласите вашего друга и расскажите ему о том, почему так важно сдерживать данные обещания.
+							.inv-form
+								.inv-btn.js-inv-btn-cont
+									a(href="#").us-btn.js-inv-btn Пригласить друга
+								.form.js-inv-form(style="display: none;")
+									input.us-input(placeholder="E-mail друга")
+									button.us-btn Пригласить
+
+block scripts
+	script.
+		SplatSite.InviteForm();
+

@@ -150,6 +150,15 @@ SplatSite.Promise = function() {
 	}
 	select.init();
 }
+SplatSite.InviteForm = function() {
+	$('.js-inv-btn').on('click', function(){
+		$('.js-inv-btn-cont').slideUp();
+		$('.js-inv-form').slideDown(function(){
+			$(this).find('input').trigger('focus');
+		});
+		return false;
+	});
+}
 
 $(function(){
 	var body = $('body');
