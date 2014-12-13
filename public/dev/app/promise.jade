@@ -1,0 +1,50 @@
+extends layout
+
+block vars
+	- var bodyClass = "index-page"
+
+block content
+	.promise-make.promise-page.type-blue
+		.wrapper
+			.profile-card
+				.profile-photo(style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);")
+				.profile-info
+					.info-cont
+						.name
+							span Кирилл Черенков
+						.age 28 лет
+			.promise-text Научусь садиться на поперечный шпагат
+			.promise-time
+				i.fi.icon-progress
+				span.time-day <span>1</span> день
+				span.time-time 00:02:43
+			.progress-btns
+				button.pr-btn.active
+					i.fi.icon-smile
+					span Выполнено
+				button.pr-btn
+					i.fi.icon-unsmile
+					span Отказаться
+	.promo-block
+		.wrapper
+			.logo
+			.text Каждый раз, выполняя обещания, вы становитесь чуточку лучше. Мы тоже хотим вам пообещать <a href="#">кое-что</a>
+	.wrapper
+		ul.comments-list
+			each i in [1,2,3]
+				li.comment
+					.profile-photo(style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);")
+					.comment-content
+						.name Яна Блидер
+						.text Блять, я очень рада что ты решил удлиннить свой член
+	.leave-comment
+		.wrapper
+			.profile-photo(style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);")
+			.comment-form
+				.textarea-cont
+					textarea.input-class
+				.us-btn Оставить комментарий
+
+block scripts
+	script.
+		//- SplatSite.Promise();

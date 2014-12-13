@@ -6,9 +6,17 @@
   <meta name="viewport" content="width=device-width">
   <link rel="shortcut icon" href="/favicon.ico">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
-  <link rel="stylesheet" href="styles/vendor.css">
+  <!-- build:css(.) styles/vendor.css-->
+  <!-- bower:css-->
+  <link rel="stylesheet" href="bower_components/fotorama/fotorama.css">
+  <!-- endbower-->
+  <!-- endbuild-->
+  <!-- build:css(.tmp) styles/main.css-->
   <link rel="stylesheet" href="styles/main.css">
-  <script src="scripts/vendor/modernizr.js"></script>
+  <!-- endbuild-->
+  <!-- build:js scripts/vendor/modernizr.js-->
+  <script src="bower_components/modernizr/modernizr.js"></script>
+  <!-- endbuild-->
 </head>
 <body class="index-page">
   <!--if lt IE 10 You are using an strong outdated browser. Please <a href='http://browsehappy.com/'>upgrade your browser</a> to improve your experience.-->
@@ -26,9 +34,8 @@
       </div>
     </div>
   </header>
-  <div class="promise-make js-type-parent">
+  <div class="promise-make promise-page type-blue">
     <div class="wrapper">
-      <div class="title">Новое обещание</div>
       <div class="profile-card">
         <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
         <div class="profile-info">
@@ -38,47 +45,11 @@
           </div>
         </div>
       </div>
-      <div class="promise-form">
-        <form>
-          <div class="input-cont">
-            <textarea placeholder="Я ОБЕЩАЮ ..."></textarea>
-          </div>
-          <div class="time-inputs">
-            <div class="desc">Я выполню обещание к</div>
-            <div class="input-cont">
-              <div class="input-div time-div">
-                <input class="time-input input-class">
-              </div><span class="bet-text">часам</span>
-              <div class="input-div date-div">
-                <input class="date-input input-class">
-              </div>
-            </div>
-          </div>
-          <div class="color-inputs">
-            <div class="desc">Выберите оформление</div>
-            <select class="js-type-select hidden">
-              <option value="blue"></option>
-              <option value="yellow"></option>
-              <option value="aqua"></option>
-              <option value="pink"></option>
-              <option value="green"></option>
-            </select>
-            <ul class="color-select js-types">
-              <li data-type="blue" class="color-item type-blue"></li>
-              <li data-type="yellow" class="color-item type-yellow"></li>
-              <li data-type="aqua" class="color-item type-aqua"></li>
-              <li data-type="pink" class="color-item type-pink"></li>
-              <li data-type="green" class="color-item type-green"></li>
-            </ul>
-            <div class="check-cont">
-              <input type="checkbox" id="apply" class="styledCheck">
-              <label for="apply"><span class="check-fake"><i class="fi icon-check"></i></span> Сделать обещание видимым только мне</label>
-            </div>
-            <div class="btn-cont">
-              <button class="us-btn">Дать обещание</button>
-            </div>
-          </div>
-        </form>
+      <div class="promise-text">Научусь садиться на поперечный шпагат</div>
+      <div class="promise-time"><i class="fi icon-progress"></i><span class="time-day"><span>1</span> день</span><span class="time-time">00:02:43</span></div>
+      <div class="progress-btns">
+        <button class="pr-btn active"><i class="fi icon-smile"></i><span>Выполнено</span></button>
+        <button class="pr-btn"><i class="fi icon-unsmile"></i><span>Отказаться</span></button>
       </div>
     </div>
   </div>
@@ -86,6 +57,42 @@
     <div class="wrapper">
       <div class="logo"></div>
       <div class="text">Каждый раз, выполняя обещания, вы становитесь чуточку лучше. Мы тоже хотим вам пообещать <a href="#">кое-что</a></div>
+    </div>
+  </div>
+  <div class="wrapper">
+    <ul class="comments-list">
+      <li class="comment">
+        <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
+        <div class="comment-content">
+          <div class="name">Яна Блидер</div>
+          <div class="text">Блять, я очень рада что ты решил удлиннить свой член</div>
+        </div>
+      </li>
+      <li class="comment">
+        <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
+        <div class="comment-content">
+          <div class="name">Яна Блидер</div>
+          <div class="text">Блять, я очень рада что ты решил удлиннить свой член</div>
+        </div>
+      </li>
+      <li class="comment">
+        <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
+        <div class="comment-content">
+          <div class="name">Яна Блидер</div>
+          <div class="text">Блять, я очень рада что ты решил удлиннить свой член</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="leave-comment">
+    <div class="wrapper">
+      <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
+      <div class="comment-form">
+        <div class="textarea-cont">
+          <textarea class="input-class"></textarea>
+        </div>
+        <div class="us-btn">Оставить комментарий</div>
+      </div>
     </div>
   </div>
   <footer class="main-footer">
@@ -154,7 +161,24 @@
       </div>
     </div>
   </div>
-  <script src="scripts/vendor.js"></script>
+  <!-- build:js(.) scripts/vendor.js-->
+  <!-- bower:js-->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/fotorama/fotorama.js"></script>
+  <script src="bower_components/get-style-property/get-style-property.js"></script>
+  <script src="bower_components/get-size/get-size.js"></script>
+  <script src="bower_components/eventie/eventie.js"></script>
+  <script src="bower_components/doc-ready/doc-ready.js"></script>
+  <script src="bower_components/eventEmitter/EventEmitter.js"></script>
+  <script src="bower_components/matches-selector/matches-selector.js"></script>
+  <script src="bower_components/outlayer/item.js"></script>
+  <script src="bower_components/outlayer/outlayer.js"></script>
+  <script src="bower_components/masonry/masonry.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+  <!-- endbower-->
+  <!-- endbuild-->
+  <!-- build:js({app,.tmp}) scripts/main.js-->
   <script src="scripts/main.js"></script>
-  <script>SplatSite.Promise();</script>
+  <!-- endbuild-->
+  <script>//- SplatSite.Promise();</script>
 </body>
