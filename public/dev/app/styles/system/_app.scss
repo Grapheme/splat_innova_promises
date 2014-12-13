@@ -27,3 +27,22 @@ body {
 	visibility: hidden !important;
 	display: none !important;
 }
+
+html, body {
+  height: 100%;
+}
+.main-wrapper {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -100px; 
+}
+.main-wrapper:after {
+  content: "";
+  display: block;
+}
+.main-footer, .main-wrapper:after {
+  height: 100px;
+}
+.main-footer {
+  background: orange;
+}

@@ -25,29 +25,30 @@ head
   body(class="#{bodyClass}")
     //if lt IE 10 You are using an strong outdated browser. Please <a href='http://browsehappy.com/'>upgrade your browser</a> to improve your experience.
 
-    header.main-header.bordered
-        .wrapper
-            .user-links
-                a(href="#")
-                    span.js-open-box(data-box="auth") Войти
-                a(href="#")
-                    span.js-open-box(data-box="auth") Зарегистрироваться
-            ul.soc-links
-                li
-                    a(href="#").soc-icon
-                        i.fi.icon-fb
-                li
-                    a(href="#").soc-icon
-                        i.fi.icon-vk
-                li
-                    a(href="#").soc-icon
-                        i.fi.icon-ok
+    .main-wrapper
+        header.main-header.bordered
+            .wrapper
+                .user-links
+                    a(href="#")
+                        span.js-open-box(data-box="auth") Войти
+                    a(href="#")
+                        span.js-open-box(data-box="auth") Зарегистрироваться
+                ul.soc-links
+                    li
+                        a(href="#").soc-icon
+                            i.fi.icon-fb
+                    li
+                        a(href="#").soc-icon
+                            i.fi.icon-vk
+                    li
+                        a(href="#").soc-icon
+                            i.fi.icon-ok
 
-            .logo-text Мои обещания
-            .header-desc
-                .desc-cont Обещания не просто слова. Когда о них говорят дела
+                .logo-text Мои обещания
+                .header-desc
+                    .desc-cont Обещания не просто слова. Когда о них говорят дела
 
-    block content
+        block content
 
     footer.main-footer
         .wrapper

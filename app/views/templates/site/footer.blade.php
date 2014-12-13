@@ -1,3 +1,4 @@
+  </div>
   <footer class="main-footer">
     <div class="wrapper">
       <div class="footer-block left-logo"><span>Мои<br>Обещания</span></div>
