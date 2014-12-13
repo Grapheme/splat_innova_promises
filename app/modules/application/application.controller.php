@@ -1569,12 +1569,14 @@ class ApplicationController extends BaseController {
 
         $this->check_auth();
 
-        $data = base64_decode($data);
+        #$user = base64_decode($data);
 
-        $user_name = $data;
+        $user = Input::all();
+
+        #$user_name = $data;
 
         #Helper::dd($data);
-        return View::make(Helper::layout('send_invite'), compact('user_name'));
+        return View::make(Helper::layout('send_invite'), compact('user'));
     }
 
 

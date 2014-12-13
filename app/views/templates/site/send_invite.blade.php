@@ -9,11 +9,11 @@
 
     @if (0)
 
-        <big>{{ $user_name }}</big>
+        <big>{{ $user['name'] }}</big>
 
         <br/>
 
-        {{ $user_name }} не дал еще ни одного обещания. Пригласите!
+        {{ $user['name'] }} не дал еще ни одного обещания. Пригласите!
         <form action="{{ URL::route('app.send_invite_message') }}" method="POST">
             <input type="text" name="email" placeholder="Введите e-mail">
             <button>Пригласить</button>
@@ -31,11 +31,10 @@
       <div class="profile-page">
         <div class="wrapper">
           <div class="profile-card">
-            <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
+            <div style="background-image: url({{ @$user['avatar'] }});" class="profile-photo"></div>
             <div class="profile-info profile-invite">
               <div class="info-cont">
-                <div class="name"><span>{{ $user_name }}</span></div>
-                <div class="age">28 лет</div>
+                <div class="name"><span>{{ @$user['name'] }}</span></div>
                 <div class="invite-info">
                   <p>Ваш друг {{-- из Facebook --}} не дал еще ни одного обещания. </p>
                   <p>Пригласите вашего друга и расскажите ему о том, почему так важно сдерживать данные обещания.</p>
@@ -47,7 +46,7 @@
                       </div>
                       <form action="{{ URL::route('app.send_invite_message') }}" method="POST" id="invite-form">
                           <input name="email" placeholder="E-mail друга" class="us-input">
-                          <input type="hidden" name="name" value="{{ $user_name }}">
+                          <input type="hidden" name="name" value="{{ $user['name'] }}">
                           <button class="us-btn">Пригласить</button>
                       </form>
                     </div>
