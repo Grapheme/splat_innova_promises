@@ -40,6 +40,7 @@ return array(
                 'type' => 'text',
                 'default' => '',
             ),
+
             'friends' => array(
                 'title' => 'Полная информация о друзьях',
                 'type' => 'textarea',
