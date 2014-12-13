@@ -1448,7 +1448,6 @@ class ApplicationController extends BaseController {
         #Helper::dd($user);
 
         $user['uid'] = @$user['id'];
-        $user['avatar'] = @$user['picture']['data']['url'];
 
         #Helper::dd($user);
 
@@ -1457,6 +1456,17 @@ class ApplicationController extends BaseController {
             die;
         }
 
+        /**
+         * Получаем большую картинку юзера
+         */
+        $curl = curl_init('https://graph.facebook.com/v2.2/me/picture??redirect=false&type=large&locale=ru_RU&access_token=' . $access_token);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $s = curl_exec($curl);
+        curl_close($curl);
+        $avatar = json_decode($s, true);
+
+        $user['picture'] = @$avatar;
+        $user['avatar'] = @$avatar['data']['url'];
         $user['identity'] = @$user['link'];
         $user['auth_method'] = 'facebook';
 
