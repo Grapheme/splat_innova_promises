@@ -273,7 +273,7 @@
                     <?
                     ++$i;
                     $default_avatar = '/theme/images/man.png';
-                    if (isset($friend['sex']) && $friend['sex'] == 2)
+                    if (isset($friend['sex']) && $friend['sex'] == 1)
                         $default_avatar = '/theme/images/woman.png';
                     ?>
                     <li class="friend-item registered-user{{ $i > 12 ? ' hidden' : '' }}">
