@@ -1540,16 +1540,18 @@ class ApplicationController extends BaseController {
         }
 
         $user = Dic::valueBySlugAndId('users', $id);
-        Helper::ta($user);
+        #Helper::ta($user);
 
         /**
-         * Если юзер не авторизован - показываем стандартную главную страницу
+         * Если юзер не найден
          */
         if (!is_object($user) || !$user->id) {
 
             App::abort(404);
             #return View::make(Helper::layout('index'), compact('user', 'promises'));
         }
+
+        $user-extract(1);
 
         /**
          * Получаем обещания юзера
