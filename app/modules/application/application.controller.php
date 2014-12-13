@@ -1459,7 +1459,7 @@ class ApplicationController extends BaseController {
         /**
          * Получаем большую картинку юзера
          */
-        $curl = curl_init('https://graph.facebook.com/v2.2/me/picture??redirect=false&type=large&locale=ru_RU&access_token=' . $access_token);
+        $curl = curl_init('https://graph.facebook.com/v2.2/me/picture?redirect=false&type=large&access_token=' . $access_token);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         curl_close($curl);
