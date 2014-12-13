@@ -59,8 +59,8 @@
             $default_avatar = '/theme/images/woman.png';
         ?>
 
-          <form action="{{ URL::route('app.update_avatar') }}" method="POST" enctype="multipart/form-data">
-            <div class="photo-cont">
+          <form action="{{ URL::route('app.update_avatar') }}" method="POST" enctype="multipart/form-data" class="photo-cont">
+            <div>
               <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo">
                 <div class="profile-hover">
 
@@ -78,8 +78,8 @@
             </div>
           </form>
 
-          <form action="{{ URL::route('app.update_profile') }}" method="POST">
-            <div class="edit-cont">
+          <form action="{{ URL::route('app.update_profile') }}" method="POST" class="edit-cont">
+            <div>
               <div class="input-cont">
                 <input name="name" value="{{ trim($user->name) }}" placeholder="Ваше имя" class="us-input">
               </div>
