@@ -49,10 +49,10 @@
                 <div class="desc">Я выполню обещание к</div>
                 <div class="input-cont">
                   <div class="input-div time-div">
-                    <input class="time-input input-class">
+                    <input name="limit_time" class="time-input input-class">
                   </div><span class="bet-text">часам</span>
                   <div class="input-div date-div">
-                    <input class="date-input input-class">
+                    <input name="limit_date" class="date-input input-class">
                   </div>
                 </div>
               </div>
@@ -73,7 +73,7 @@
                   <li data-type="green" class="color-item type-green"></li>
                 </ul>
                 <div class="check-cont">
-                  {{ Form::checkbox('only_for_me', 1, NULL, array('id' => 'apply', 'class' => 'styledCheck')) }} видно только мне
+                  {{ Form::checkbox('only_for_me', 1, NULL, array('id' => 'apply', 'class' => 'styledCheck')) }}
                   <label for="apply"><span class="check-fake"><i class="fi icon-check"></i></span> Сделать обещание видимым только мне</label>
                 </div>
                 <div class="btn-cont">
