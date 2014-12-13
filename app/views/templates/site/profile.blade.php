@@ -68,11 +68,11 @@
                         <div class="fi icon-arrow-down"></div>
                         <input name="avatar" type="file" accept="image/*">
                     </a>
-
+                    {{--
                     <a href="#" class="remove-link">
                         <div class="fi icon-cross"></div>
                     </a>
-
+                    --}}
                 </div>
               </div>
             </div>
@@ -121,10 +121,10 @@
 
     $("#avatar-form").validate({
         rules: {
-            'avatar': { required: true },
+            //'avatar': { required: true },
         },
         messages: {
-            'avatar': "",
+            //'avatar': "",
         },
         errorClass: "inp-error",
         submitHandler: function(form) {
