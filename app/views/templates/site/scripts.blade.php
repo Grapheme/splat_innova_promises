@@ -10,3 +10,6 @@
     <script src="http://www.odnoklassniki.ru/oauth/resources.do?type=js" type="text/javascript" charset="utf-8"></script>
 
     {{ HTML::scriptmod('js/app.js') }}
+
+    {{ HTML::script("private/js/vendor/jquery.validate.min.js") }}
+    {{ HTML::script("private/js/vendor/jquery-form.min.js") }}

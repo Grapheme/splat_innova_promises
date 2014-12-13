@@ -42,7 +42,7 @@
                   <div class="inv-form">
                     <div class="inv-btn js-inv-btn-cont"><a href="#" class="us-btn js-inv-btn">Пригласить друга</a></div>
                     <div style="display: none;" class="form js-inv-form">
-                      <form action="{{ URL::route('app.send_invite_message') }}" method="POST">
+                      <form action="{{ URL::route('app.send_invite_message') }}" method="POST" id="invite-form">
                           <input name="email" placeholder="E-mail друга" class="us-input">
                           <input type="hidden" name="name" value="{{ $user_name }}">
                           <button class="us-btn">Пригласить</button>
@@ -62,4 +62,65 @@
 
 @section('scripts')
   <script>SplatSite.InviteForm();</script>
+  <script>
+
+    $("#invite-form").validate({
+        rules: {
+            'email': { required: true, email: true },
+        },
+        messages: {
+            'email': "",
+        },
+        errorClass: "inp-error",
+        submitHandler: function(form) {
+            //console.log(form);
+            sendInviteForm(form);
+            return false;
+        }
+    });
+
+    function sendInviteForm(form) {
+
+        //console.log(form);
+        var options = { target: null, type: $(form).attr('method'), dataType: 'json' };
+
+        options.beforeSubmit = function(formData, jqForm, options){
+            $(form).find('button').addClass('loading').attr('disabled', 'disabled');
+            $(form).find('.error-msg').text('');
+            //$('.error').text('').hide();
+        }
+
+        options.success = function(response, status, xhr, jqForm){
+            //console.log(response);
+            //$('.success').hide().removeClass('hidden').slideDown();
+            //$(form).slideUp();
+
+            if (response.status) {
+                /*
+                $(form).find('button').addClass('success').text('Отправлено');
+                $(form).find('.popup-body').slideUp(function(){
+                    setTimeout(function(){ $('.popup .js-popup-close').trigger('click'); }, 3000);
+                });
+                */
+
+            } else {
+                //$('.response').text(response.responseText).show();
+            }
+
+        }
+
+        options.error = function(xhr, textStatus, errorThrown){
+            console.log(xhr);
+            $(form).find('button').removeAttr('disabled');
+            $(form).find('.error-msg').text('Ошибка при отправке, попробуйте позднее');
+        }
+
+        options.complete = function(data, textStatus, jqXHR){
+            $(form).find('button').removeClass('loading');
+        }
+
+        $(form).ajaxSubmit(options);
+    }
+
+</script>
 @stop
