@@ -478,13 +478,16 @@ class ApplicationController extends BaseController {
 
         #Helper::dd(Input::all());
 
+        $json_request = array('status' => FALSE, 'responseText' => '');
+
         if (Input::hasFile('avatar')) {
 
             $file = Input::file('avatar');
             $path = '/uploads/avatar/';
             $destinationPath = public_path($path);
             $fileName = md5(time() . '.splat.' . rand(99999, 999999)) . '.' . $file->getClientOriginalExtension();
-            $file->move($destinationPath, $fileName);
+            $result = $file->move($destinationPath, $fileName);
+            Helper::dd($result);
 
             $new_avatar_path = $path . $fileName;
 
@@ -502,7 +505,6 @@ class ApplicationController extends BaseController {
             $avatar->value = $new_avatar_path;
             $avatar->save();
 
-            $json_request = array('status' => FALSE, 'responseText' => '');
             $json_request['new_avatar'] = $new_avatar_path;
             $json_request['status'] = TRUE;
         }
