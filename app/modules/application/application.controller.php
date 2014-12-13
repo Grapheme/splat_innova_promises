@@ -474,7 +474,40 @@ class ApplicationController extends BaseController {
 
     public function postUserUpdateAvatar() {
 
-        Helper::dd(Input::all());
+        $this->check_auth();
+
+        #Helper::dd(Input::all());
+
+        if (Input::hasFile('avatar')) {
+
+            $file = Input::file('avatar');
+            $path = '/uploads/avatar/';
+            $destinationPath = public_path($path);
+            $fileName = md5(time() . '.splat.' . rand(99999, 999999)) . '.' . $file->getClientOriginalExtension();
+            $file->move($destinationPath, $fileName);
+
+            $new_avatar_path = $path . $fileName;
+
+            $avatar = DicFieldVal::firstOrNew(array(
+                'dicval_id' => $this->user->id,
+                'key' => 'avatar',
+            ));
+            if ($avatar->value != '') {
+
+                $old_avatar = public_path($avatar->value);
+                if (@$old_avatar && @file_exists($old_avatar)) {
+                    unlink($old_avatar);
+                }
+            }
+            $avatar->value = $new_avatar_path;
+            $avatar->save();
+
+            $json_request = array('status' => FALSE, 'responseText' => '');
+            $json_request['new_avatar'] = $new_avatar_path;
+            $json_request['status'] = TRUE;
+        }
+
+        return Response::json($json_request, 200);
     }
 
 
