@@ -258,6 +258,7 @@ class ApplicationController extends BaseController {
                         continue;
 
                     $friend['_name'] = @$friend['first_name'] . ' ' . @$friend['last_name'];
+                    $friend['avatar'] = @$friend['pic_3'];
                     $friend_ident = 'http://ok.ru/profile/' . $friend['uid'];
                     $array[$friend_ident] = $friend;
                     unset($array[$f]);

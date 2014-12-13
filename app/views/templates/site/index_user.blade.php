@@ -275,7 +275,7 @@
                             <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}">
                         @endif
 
-                            <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
+                            <div style="background-image: url({{ $friend['avatar'] }});" class="profile-photo"></div>
                             <div class="name">{{ @$friend['_name'] }}</div>
 
                         @if (@$friend['profile_id'])
