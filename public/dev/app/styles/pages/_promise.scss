@@ -1,0 +1,130 @@
+.promise-page {
+	padding: 1px 0 50px;
+
+	.promise-text {
+		font-size: 48px;
+		font-weight: 700;
+		text-transform: uppercase;
+		margin-top: 55px;
+		width: 630px;
+		line-height: 1.3;
+	}
+
+	.promise-time {
+		margin-top: 40px;
+		font-size: 48px;
+		font-weight: 300;
+
+		.time-day, .time-time {
+			margin-left: 20px;
+		}
+	}
+
+	.progress-btns {
+		margin-top: 45px;
+
+		.pr-btn {
+			display: inline-block;
+			vertical-align: middle;
+			outline: 0;
+			border: 2px solid #fff;
+			background: transparent;
+			color: #fff;
+			font-size: 18px;
+			font-weight: 300;
+			height: 42px;
+			border-radius: 42px;
+			text-decoration: none;
+			margin-right: 20px;
+			padding: 0 20px;
+			box-sizing: border-box;
+			transition: all $default-anim-time $default-ease;
+
+			&:hover, &.active {
+				border-color: #434546;
+				color: #434546;
+			}
+
+			span {
+				display: inline-block;
+				vertical-align: middle;
+			}
+
+			.fi {
+				display: inline-block;
+				vertical-align: middle;
+				font-size: 25px;
+				margin-right: 10px;
+			}
+		}
+
+		a.pr-btn {
+			line-height: 40px;
+		}
+	}
+}
+
+.comments-list, .leave-comment {
+	.profile-photo {
+		height: 70px;
+		width: 70px;
+	}
+}
+
+.comments-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	.comment {
+		padding: 35px 0 45px;
+		border-bottom: 1px solid #ededed;
+
+		&:last-child {
+			border: 0;
+		}
+
+		.comment-content {
+			display: inline-block;
+			vertical-align: top;
+			width: 635px;
+			margin: 15px 0 0 20px;
+			font-size: 15px;
+
+			.name {
+				margin-bottom: 5px;
+				font-weight: 500;
+			}
+
+			.text {
+				font-weight: 300;
+			}
+		}
+	}
+}
+
+.leave-comment {
+	padding: 45px 0;
+	background: #ededed;
+
+	.comment-form {
+		display: inline-block;
+		vertical-align: top;
+		width: 635px;
+		margin: 0 0 0 20px;
+		font-size: 15px;
+
+		.us-btn {
+			margin-top: 20px;
+		}
+
+		.textarea-cont {
+			textarea {
+				padding: 20px;
+				resize: none;
+				width: 100%;
+				height: 120px;
+			}
+		}
+	}
+}
