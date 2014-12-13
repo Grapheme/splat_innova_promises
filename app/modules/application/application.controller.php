@@ -763,6 +763,7 @@ class ApplicationController extends BaseController {
                             'identity' => @$data['identity'],
                             'email' => @$data['email'],
                             'bdate' => @$data['bdate'],
+                            'avatar' => @$data['avatar'],
                             'user_token' => md5(md5(time() . '_' . rand(999999, 9999999))),
                             'user_last_action_time' => time(),
                         ),
@@ -1263,6 +1264,7 @@ class ApplicationController extends BaseController {
         $user = $user['response'][0];
 
         $user['uid'] = @$user['id'];
+        $user['avatar'] = @$user['photo_200'];
 
         #Helper::d($url);
         #Helper::dd($user);

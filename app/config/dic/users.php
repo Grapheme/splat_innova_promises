@@ -35,6 +35,11 @@ return array(
                 'type' => 'text',
                 'default' => '',
             ),
+            'avatar' => array(
+                'title' => 'Фотография пользователя',
+                'type' => 'text',
+                'default' => '',
+            ),
             'friends' => array(
                 'title' => 'Полная информация о друзьях',
                 'type' => 'textarea',
