@@ -483,13 +483,13 @@ class ApplicationController extends BaseController {
         if (Input::hasFile('avatar')) {
 
             $file = Input::file('avatar');
-            $path = '/uploads/avatar/';
+            $path = 'uploads/avatar/';
             $destinationPath = public_path($path);
             $fileName = md5(time() . '.splat.' . rand(99999, 999999)) . '.' . $file->getClientOriginalExtension();
             $result = $file->move($destinationPath, $fileName);
             Helper::dd($result);
 
-            $new_avatar_path = $path . $fileName;
+            $new_avatar_path = '/' . $path . $fileName;
 
             $avatar = DicFieldVal::firstOrNew(array(
                 'dicval_id' => $this->user->id,
