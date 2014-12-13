@@ -56,7 +56,7 @@
 
           <form action="{{ URL::route('app.update_profile') }}" method="POST">
             <div class="photo-cont">
-              <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo">
+              <div style="background-image: url({{ $user->avatar }});" class="profile-photo">
                 <div class="profile-hover"><a href="#" class="down-link">
                     <div class="fi icon-arrow-down"></div>
                     <input type="file"></a><a href="#" class="remove-link">
