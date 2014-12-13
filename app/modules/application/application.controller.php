@@ -1579,8 +1579,32 @@ class ApplicationController extends BaseController {
         /**
          * В зависимости от того, какой будет механика отправки запроса (аякс или native)...
          */
+        #Helper::dd("Send msg...");
 
-        Helper::dd("Send msg...");
+        if (!isset($this->user) || !is_object($this->user))
+            App::abort(404);
+
+        $data = Input::all();
+
+        if (!$data['email'])
+            App::abort(404);
+
+        $json_request = array('status' => FALSE, 'responseText' => '');
+
+        $data['user'] = $this->user;
+
+        Mail::send('emails.send-invite', $data, function ($message) use ($data) {
+
+            $message->from(Config::get('mail.from.address'), Config::get('mail.from.name'));
+            $message->subject('Приглашение от ' . $this->user->name);
+
+            #$email = Config::get('mail.feedback.address');
+
+            $message->to($data['email']);
+        });
+
+        $json_request['status'] = TRUE;
+        return Response::json($json_request, 200);
     }
 
     public function postEmailPassAuth() {
