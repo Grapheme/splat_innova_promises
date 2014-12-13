@@ -410,11 +410,9 @@ class ApplicationController extends BaseController {
 
     public function getUserProfile() {
 
+        $this->check_auth();
+
         $user = $this->user;
-
-        if (!is_object($user))
-            App::abort(404);
-
         $msg = false;
 
         if (@$_SESSION['new_user']) {
@@ -428,10 +426,9 @@ class ApplicationController extends BaseController {
 
     public function postUserUpdateProfile() {
 
-        $user = $this->user;
+        $this->check_auth();
 
-        if (!is_object($user))
-            App::abort(404);
+        $user = $this->user;
 
         $name = Input::get('name');
         $email = Input::get('email');
@@ -465,11 +462,9 @@ class ApplicationController extends BaseController {
 
     public function getNewPromise() {
 
+        $this->check_auth();
+
         $user = $this->user;
-
-        if (!is_object($user))
-            App::abort(404);
-
         $promises = $this->promises;
 
         return View::make(Helper::layout('new_promise'), compact('user', 'promises'));
@@ -478,8 +473,7 @@ class ApplicationController extends BaseController {
 
     public function postAddPromise() {
 
-        if (!is_object($this->user))
-            App::abort(404);
+        $this->check_auth();
 
         #Helper::ta(Input::all());
 
@@ -525,11 +519,9 @@ class ApplicationController extends BaseController {
 
     public function getPromise($id) {
 
+        $this->check_auth();
+
         $user = $this->user;
-
-        if (!is_object($user))
-            App::abort(404);
-
         $promise = Dic::valueBySlugAndId('promises', $id);
         #Helper::tad($promise);
 
@@ -600,8 +592,7 @@ class ApplicationController extends BaseController {
 
     public function postAddComment() {
 
-        if (!is_object($this->user))
-            App::abort(404);
+        $this->check_auth();
 
         $promise_id = Input::get('promise_id');
         $user_id = $this->user->id;
@@ -1123,24 +1114,6 @@ class ApplicationController extends BaseController {
         $s = curl_exec($curl);
         curl_close($curl);
         $user = json_decode($s, true);
-
-        /*
-        Массив $user содержит следующие поля:
-        uid - уникальный номер пользователя
-        first_name - имя пользователя
-        last_name - фамилия пользователя
-        birthday - дата рождения пользователя
-        gender - пол пользователя
-        pic_1 - маленькое фото
-        pic_2 - большое фото
-        */
-
-        /*
-        ...
-        Записываем полученные данные в базу, устанавливаем cookies
-        ...
-        */
-
         #Helper::d($user);
 
         if (!@$user['uid']) {
@@ -1159,8 +1132,6 @@ class ApplicationController extends BaseController {
             echo "Не удается выполнить вход. Повторите попытку позднее (3).";
             die;
         }
-
-
 
 
         $friends_get_url = 'http://api.odnoklassniki.ru/fb.do?access_token=' . $auth['access_token']
@@ -1569,6 +1540,8 @@ class ApplicationController extends BaseController {
 
     public function getSendInvite($data) {
 
+        $this->check_auth();
+
         $data = base64_decode($data);
 
         $user_name = $data;
@@ -1585,8 +1558,7 @@ class ApplicationController extends BaseController {
          */
         #Helper::dd("Send msg...");
 
-        if (!isset($this->user) || !is_object($this->user))
-            App::abort(404);
+        $this->check_auth();
 
         $data = Input::all();
 
@@ -1779,6 +1751,13 @@ class ApplicationController extends BaseController {
 
 
         return View::make(Helper::layout('restore_password_success'), compact('user', 'token'));
+    }
+
+    private function check_auth() {
+        $user = $this->user;
+        if (!is_object($user) || !$user->id)
+            App::abort(404);
+        return true;
     }
 
 }
