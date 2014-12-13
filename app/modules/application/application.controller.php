@@ -1551,7 +1551,7 @@ class ApplicationController extends BaseController {
             #return View::make(Helper::layout('index'), compact('user', 'promises'));
         }
 
-        $user-extract(1);
+        $user->extract(1);
 
         /**
          * Получаем обещания юзера
