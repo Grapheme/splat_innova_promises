@@ -151,7 +151,7 @@
                       <!--
                       <div class="views">15</div>
                       -->
-                      <div class="comments">{{ $promise->comments_count }}</div>
+                      <div class="comments">{{ (int)$promise->comments_count }}</div>
                       <div class="time">02:01:23</div>
                     </div>
                   </div>
