@@ -51,6 +51,7 @@
 			right: 30px;
 			width: 100px;
 			height: 100px;
+			z-index: 99;
 
 			span {
 				position: absolute;
@@ -260,6 +261,70 @@
 						text-align: right;
 					}
 				}
+			}
+		}
+		&.promo-popup {
+			background-color: rgba(184, 241, 250, 1);
+			height: 100%;
+			font-size: 16px;
+			text-transform: uppercase;
+
+			&:before, &:after {
+				content: "";
+				position: absolute;
+				z-index: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+			}
+
+			&:before {
+				background-color: rgba(184, 241, 250, .5);
+				z-index: 1;
+			}
+
+			&:after {
+				background-image: url(../images/patterns/1.png);
+				background-repeat: no-repeat;
+				background-position: center center;
+				opacity: 1;
+				z-index: 0;
+			}
+
+			.logo {
+				display: inline-block;
+				width: 240px;
+				height: 60px;
+				background-image: url(../images/promo-logo.png);
+				background-repeat: no-repeat;
+				background-position: center center;
+			}
+
+			.text {
+				line-height: 1.7;
+				font-weight: 300;
+				margin-top: 40px;
+			}
+
+			.spec-link {
+				margin-top: 50px;
+
+				a {
+					color: #07cbcc;
+				}
+			}
+
+			.promo-box {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -400px;
+				margin-top: -160px;
+				width: 800px;
+				height: 320px;
+				text-align: center;
+				z-index: 2;
 			}
 		}
 	}
