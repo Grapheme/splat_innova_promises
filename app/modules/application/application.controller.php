@@ -1120,7 +1120,7 @@ class ApplicationController extends BaseController {
             '&method=users.getCurrentUser' .
             '&sig=' . md5(
                 'application_key=' . $AUTH['application_key'] .
-                'fields=fields=uid,first_name,last_name,location,gender,birthday,pic_3,email' .
+                'fields=uid,first_name,last_name,location,gender,birthday,pic_3,email' .
                 'method=users.getCurrentUser' .
                 md5($auth['access_token'] . $AUTH['client_secret'])
             )
