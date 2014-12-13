@@ -65,7 +65,8 @@ class ApplicationController extends BaseController {
 
         @session_start();
 
-        define('domain', 'http://splat.dev.grapheme.ru');
+        #define('domain', 'http://splat.dev.grapheme.ru');
+        define('domain', 'http://' . $_SERVER['HTTP_HOST']);
 
         $this->user = $this->auth();
         $this->promises = $this->get_promises();
