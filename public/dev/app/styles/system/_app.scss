@@ -24,6 +24,6 @@ body {
 }
 
 .hidden {
-	visibility: hidden;
-	display: none;
+	visibility: hidden !important;
+	display: none !important;
 }
