@@ -190,6 +190,7 @@ class ApplicationController extends BaseController {
                 foreach ($array as $f => $friend) {
                     $friend['_name'] = $friend['first_name'] . ' ' . @$friend['last_name'];
                     $friend['avatar'] = @$friend['photo_200'];
+                    $friend['sex'] = @$friend['sex'];
                     $friend_ident = 'http://vk.com/id' . $friend['id'];
                     $array[$friend_ident] = $friend;
                     unset($array[$f]);

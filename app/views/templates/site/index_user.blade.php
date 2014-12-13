@@ -272,17 +272,20 @@
                 @foreach ($user->existing_friends as $friend)
                     <?
                     ++$i;
+                    $default_avatar = '/theme/images/man.png';
+                    if (isset($friend['sex']) && $friend['sex'] == 2)
+                        $default_avatar = '/theme/images/woman.png';
                     ?>
                     <li class="friend-item registered-user{{ $i > 12 ? ' hidden' : '' }}">
 
                         @if (@$friend['profile_id'])
 
-                            <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}" style="background-image: url({{ @$friend['avatar'] }});" class="profile-photo clean-a"></a>
+                            <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}" style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></a>
                             <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}" class="name clean-a">{{ @$friend['_name'] }}</a>
                         
                         @else
 
-                            <div style="background-image: url({{ @$friend['avatar'] }});" class="profile-photo clean-a"></div>
+                            <div style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></div>
                             <div class="name clean-a">{{ @$friend['_name'] }}</div>
 
                         @endif
