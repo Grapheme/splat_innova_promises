@@ -300,12 +300,9 @@
                     ?>
                     <li class="friend-item registered-user{{ $i > 12 ? ' hidden' : '' }}">
 
-                        <a href="{{ URL::route('app.send_invite', array('name' => $friend['_name'], 'avatar' => @$friend['avatar'])) }}">
+                            <a href="{{ URL::route('app.send_invite', array('name' => $friend['_name'], 'avatar' => @$friend['avatar'])) }}" style="background-image: url({{ @$friend['avatar'] }});" class="profile-photo clean-a"></a>
+                            <a href="{{ URL::route('app.send_invite', array('name' => $friend['_name'], 'avatar' => @$friend['avatar'])) }}" class="name clean-a">{{ @$friend['_name'] }}</a>
 
-                            <div style="background-image: url({{ @$friend['avatar'] }});" class="profile-photo"></div>
-                            <div class="name">{{ @$friend['_name'] }}</div>
-
-                        </a>
                     </li>
                 @endforeach
 
