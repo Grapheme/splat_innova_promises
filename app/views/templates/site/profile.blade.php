@@ -72,10 +72,10 @@
               </div>
               <div class="input-hint">Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.</div>
               <div class="input-cont">
-                <input name="bdate" value="{{ $user->bdate }}" placeholder="Ваша дата рождения" class="us-input js-time">
+                <input name="bdate" value="{{ $user->bdate }}" placeholder="Ваша дата рождения" class="us-input js-mask-date">
               </div>
               <div class="check-cont">
-                <input type="checkbox" name="confirmation" id="apply" class="js-mask-date">
+                <input type="checkbox" name="confirmation" id="apply" class="styledCheck">
                 <label for="apply"><span class="check-fake"><i class="fi icon-check"></i></span>Подтверждаю ознакомление с <a href="#">правилами пользования</a></label>
               </div>
               <div class="btn-cont">
