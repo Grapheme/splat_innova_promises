@@ -71,6 +71,8 @@ class ApplicationController extends BaseController {
         $this->user = $this->auth();
         $this->promises = $this->get_promises();
 
+        View::share('user', $this->user);
+
         if (Input::get('debug')) {
             Helper::ta($this->user);
         }
