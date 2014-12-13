@@ -169,7 +169,7 @@ SplatSite.ShowFriends = function() {
 		});
 	};
 	$('.show-more-friends').on('click', function(){
-		var self = this;
+		var self = $(this);
 		check();
 		for(var i = 0; i < 12; i++) {
 			$('.friend-item.hidden[data-number="' + i + '"]').removeClass('hidden');
