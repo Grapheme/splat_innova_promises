@@ -347,6 +347,7 @@ class ApplicationController extends BaseController {
                         $friend['identity'] = @$friend['link'];
                         $friend['_name'] = @$friend['name'];
                         $friend['avatar'] = @$friend['picture']['data']['url'];
+                        $friend['sex'] = @mb_strtolower($friend['gender']) == 'мужской' ? 2 : 1;
                         $friends[$f] = $friend;
                         $existing_friends_names[] = $friend['_name'];
                         $friends_uids[] = $friend['identity'];
