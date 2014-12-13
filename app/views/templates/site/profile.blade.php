@@ -76,7 +76,7 @@
               </div>
               <div class="check-cont">
                 <input type="checkbox" name="confirmation" id="apply" class="styledCheck">
-                <label for="apply"><span class="check-fake"><i class="fi icon-check"></i></span>Подтверждаю ознакомление с <a href="http://mypromises.ru/privacy_policy.pdf">правилами пользования</a></label>
+                <label for="apply"><span class="check-fake"><i class="fi icon-check"></i></span>Подтверждаю ознакомление с <a target="_blank" href="http://mypromises.ru/privacy_policy.pdf">правилами пользования</a></label>
               </div>
               <div class="btn-cont">
                 <button class="us-btn">Сохранить</button>
