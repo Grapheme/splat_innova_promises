@@ -42,14 +42,14 @@
                   <div class="inv-form">
                     <div class="inv-btn js-inv-btn-cont"><a href="#" class="us-btn js-inv-btn">Пригласить друга</a></div>
                     <div style="display: none;" class="form js-inv-form">
+                      <div id="send-invite-success" style="display:none">
+                        Приглашение успешно отправлено.
+                      </div>
                       <form action="{{ URL::route('app.send_invite_message') }}" method="POST" id="invite-form">
                           <input name="email" placeholder="E-mail друга" class="us-input">
                           <input type="hidden" name="name" value="{{ $user_name }}">
                           <button class="us-btn">Пригласить</button>
                       </form>
-                      <div id="send-invite-success" style="display:none">
-                        Приглашение успешно отправлено
-                      </div>
                     </div>
                   </div>
                 </div>

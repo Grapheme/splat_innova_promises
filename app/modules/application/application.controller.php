@@ -70,6 +70,10 @@ class ApplicationController extends BaseController {
 
         $this->user = $this->auth();
         $this->promises = $this->get_promises();
+
+        if (Input::get('debug')) {
+            Helper::ta($user);
+        }
     }
 
 
