@@ -165,4 +165,7 @@ $(function(){
 	SplatSite.tabs();
 	$('.styledCheck').button();
 	$('.styledDate').datepicker();
+
+	$('.js-mask-time').mask('00:00', {placeholder: "00:00"});
+	$('.js-mask-date').mask('0000-00-00', {placeholder: "0000-00-00"});
 });
