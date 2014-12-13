@@ -34,37 +34,29 @@
       </div>
     </div>
   </header>
-  <div class="main-screen">
-    <div class="main-fotorama">
-      <div class="js-main-fotorama"><img src="images/main_slider/slider-1.jpg" alt=""><img src="images/main_slider/slider-2.jpg" alt="">
+  <div class="profile-page">
+    <div class="wrapper">
+      <div class="profile-card">
+        <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
+        <div class="profile-info profile-invite">
+          <div class="info-cont">
+            <div class="name"><span>Кирилл Черенков</span></div>
+            <div class="age">28 лет</div>
+            <div class="invite-info">
+              <p>Ваш друг  из Facebook не дал еще ни одного обещания. </p>
+              <p>Пригласите вашего друга и расскажите ему о том, почему так важно сдерживать данные обещания.</p>
+              <div class="inv-form">
+                <div class="inv-btn js-inv-btn-cont"><a href="#" class="us-btn js-inv-btn">Пригласить друга</a></div>
+                <div style="display: none;" class="form js-inv-form">
+                  <input placeholder="E-mail друга" class="us-input">
+                  <button class="us-btn">Пригласить</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="main-content wrapper">
-      <div class="title">Пообещать и сдержать слово много стоит.</div>
-      <div class="desc">Обещания имеют огромную силу. Они вселяют надежду, помогают достичь цели и изменить себя. Но всё это происходит лишь тогда, когда они перестают быть просто словами и тогда превращаются в дела.</div>
-      <div class="input-cont">
-        <input placeholder="Я обещаю, что..." class="main-input js-promise-input">
-        <div class="hint">Совет: Давайте только те обещания, которые можете выполнить.</div><a data-box="auth" class="js-open-box js-promise-btn us-btn">Дать обещание</a>
-      </div>
-    </div>
-  </div>
-  <div class="promises-cont">
-    <div class="promises-fotorama">
-      <div class="js-promises-fotorama"><img src="images/promises/back0.png"><img src="images/promises/back1.png"><img src="images/promises/back2.png"><img src="images/promises/back3.png"><img src="images/promises/back4.png">
-      </div>
-    </div>
-    <div class="promises-amount">
-      <div class="amount-cont">уже <b>4 738</b> человек дали свои обещания</div>
-    </div>
-    <ul class="promises-cloud js-promises">
-      <li style="color: #3e9327; font-size: 20px;">С НОВОГО БРОШУ КУРИТЬ</li>
-      <li style="color: #07cbcc;">ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ</li>
-      <li style="color: #bbbbc3; font-size: 45px;">ОСТАВЛЮ ВСЕ КАК и ЕСТЬ!</li>
-      <li style="color: #fee000; font-size: 30px;">НАВЕЩУ РОДИТЕЛЕЙ</li>
-      <li style="color: #3e9327;">КУПЛЮ СЕБЕ НОВЫЙ АЙФОН</li>
-      <li style="color: #56565b; font-size: 25px;">НЕ ОБЕЩАТЬ</li>
-      <li style="color: #07cbcc; font-size: 20px;">ПОХУДЕЮ НА 20 КИЛОГРАММ</li>
-    </ul>
   </div>
   <footer class="main-footer">
     <div class="wrapper">
@@ -151,5 +143,5 @@
   <!-- build:js({app,.tmp}) scripts/main.js-->
   <script src="scripts/main.js"></script>
   <!-- endbuild-->
-  <script>SplatSite.index();</script>
+  <script>SplatSite.InviteForm();</script>
 </body>

@@ -65,7 +65,8 @@ class ApplicationController extends BaseController {
 
         @session_start();
 
-        define('domain', 'http://splat.dev.grapheme.ru');
+        #define('domain', 'http://splat.dev.grapheme.ru');
+        define('domain', 'http://' . $_SERVER['HTTP_HOST']);
 
         $this->user = $this->auth();
         $this->promises = $this->get_promises();
@@ -1276,11 +1277,10 @@ class ApplicationController extends BaseController {
             die;
         }
 
-        $url = 'https://api.vk.com/method/users.get?user_ids=' . @$auth['user_id'] . '&fields=sex,bdate,city,country,photo_200,domain&v=5.27&lang=ru';
+        $url = 'https://api.vk.com/method/users.get?user_ids=' . @$auth['user_id'] . '&fields=email,sex,bdate,city,country,photo_200,domain&v=5.27&lang=ru';
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
-        #curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept-Language: ru-RU;q=1.0'));
         curl_close($curl);
         $user = json_decode($s, true);
         $user = $user['response'][0];

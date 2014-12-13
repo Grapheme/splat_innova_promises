@@ -1,0 +1,27 @@
+.invite-info {
+  font-size: 18px;
+  font-weight: 300;
+  color: rgb(68, 68, 68);
+  line-height: 1.4;
+  width: 560px;
+  margin-top: 30px;
+
+  p {
+    margin: 10px 0;
+  }
+
+  .inv-form {
+    margin-top: 40px;
+
+    .us-input {
+      background: #f6f6f6;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.profile-invite {
+  height: auto !important;
+  margin-bottom: 150px;
+  padding-top: 15px;
+}
