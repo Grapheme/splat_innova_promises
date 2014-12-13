@@ -169,6 +169,7 @@ SplatSite.ShowFriends = function() {
 		if($('.friend-item.hidden').length == 0) {
 			self.hide();
 		}
+		return false;
 	});
 }
 
