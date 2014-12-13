@@ -72,7 +72,7 @@ class ApplicationController extends BaseController {
         $this->promises = $this->get_promises();
 
         if (Input::get('debug')) {
-            Helper::ta($user);
+            Helper::ta($this->user);
         }
     }
 
