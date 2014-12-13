@@ -254,7 +254,7 @@ class ApplicationController extends BaseController {
                 $array = $user->friends;
                 $friends_uids = array();
                 foreach ($array as $f => $friend) {
-                    $friend['_name'] = $friend['first_name'] . ' ' . @$friend['last_name'];
+                    $friend['_name'] = @$friend['first_name'] . ' ' . @$friend['last_name'];
                     $friend_ident = 'http://ok.ru/profile/' . $friend['uid'];
                     $array[$friend_ident] = $friend;
                     unset($array[$f]);
@@ -1181,7 +1181,7 @@ class ApplicationController extends BaseController {
 
             $friends_info_get_url = 'http://api.odnoklassniki.ru/fb.do?access_token=' . $auth['access_token']
                 . '&application_key=' . $AUTH['application_key']
-                . '&fields=uid,first_name,last_name,current_location,gender,pic_1,pic_2'
+                . '&fields=uid,first_name,last_name,current_location,gender,pic_3'
                 . '&method=users.getInfo'
                 . '&uids=' . implode(',', $friends)
                 . '&sig=' . md5(
