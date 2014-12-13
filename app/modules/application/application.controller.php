@@ -1300,7 +1300,7 @@ class ApplicationController extends BaseController {
          * ВК может как отдавать дату рождения, так и не отдавать. Причем может отдавать только день и месяц (без ведущего нуля)
          * Приводим дату рождения к нужному формату
          */
-        if (strpos($user['bdate'], '.')) {
+        if (isset($user['bdate']) && strpos(@$user['bdate'], '.')) {
             $bdate = explode('.', $user['bdate']);
             $birthday = ((int)$bdate[1]<10 ? '0'.$bdate[1] : $bdate[1]) . '-' . ((int)$bdate[0]<10 ? '0'.$bdate[0] : $bdate[0]);
             if (isset($bdate[2]) && $bdate[2] != '')
