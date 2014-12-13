@@ -12,57 +12,59 @@
 </head>
 <body class="index-page">
   <!--if lt IE 10 You are using an strong outdated browser. Please <a href='http://browsehappy.com/'>upgrade your browser</a> to improve your experience.-->
-  <header class="main-header bordered">
+  <div class="main-wrapper">
+    <header class="main-header bordered">
+      <div class="wrapper">
+        <div class="user-links"><a href="#"><span data-box="auth" class="js-open-box">Войти</span></a><a href="#"><span data-box="auth" class="js-open-box">Зарегистрироваться</span></a></div>
+        <ul class="soc-links">
+          <li><a href="#" class="soc-icon"><i class="fi icon-fb"></i></a></li>
+          <li><a href="#" class="soc-icon"><i class="fi icon-vk"></i></a></li>
+          <li><a href="#" class="soc-icon"><i class="fi icon-ok"></i></a></li>
+        </ul>
+        <div class="logo-text">Мои обещания</div>
+        <div class="header-desc">
+          <div class="desc-cont">Обещания не просто слова. Когда о них говорят дела</div>
+        </div>
+      </div>
+    </header>
     <div class="wrapper">
-      <div class="user-links"><a href="#"><span data-box="auth" class="js-open-box">Войти</span></a><a href="#"><span data-box="auth" class="js-open-box">Зарегистрироваться</span></a></div>
-      <ul class="soc-links">
-        <li><a href="#" class="soc-icon"><i class="fi icon-fb"></i></a></li>
-        <li><a href="#" class="soc-icon"><i class="fi icon-vk"></i></a></li>
-        <li><a href="#" class="soc-icon"><i class="fi icon-ok"></i></a></li>
-      </ul>
-      <div class="logo-text">Мои обещания</div>
-      <div class="header-desc">
-        <div class="desc-cont">Обещания не просто слова. Когда о них говорят дела</div>
-      </div>
-    </div>
-  </header>
-  <div class="wrapper">
-    <div class="profile-message">
-      <div class="icon">
-        <div class="fi icon-smile"></div>
-      </div>
-      <div class="text">Вы успешно зарегистрировались в социальной сети Facebook.<br>Пожалуйста, подтвердите ваши данные.</div>
-    </div>
-    <div class="profile-edit">
-      <form>
-        <div class="photo-cont">
-          <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo">
-            <div class="profile-hover"><a href="#" class="down-link">
-                <div class="fi icon-arrow-down"></div>
-                <input type="file"></a><a href="#" class="remove-link">
-                <div class="fi icon-cross"></div></a></div>
-          </div>
+      <div class="profile-message">
+        <div class="icon">
+          <div class="fi icon-smile"></div>
         </div>
-        <div class="edit-cont">
-          <div class="input-cont">
-            <input placeholder="Ваше имя" class="us-input">
+        <div class="text">Вы успешно зарегистрировались в социальной сети Facebook.<br>Пожалуйста, подтвердите ваши данные.</div>
+      </div>
+      <div class="profile-edit">
+        <form>
+          <div class="photo-cont">
+            <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo">
+              <div class="profile-hover"><a href="#" class="down-link">
+                  <div class="fi icon-arrow-down"></div>
+                  <input type="file"></a><a href="#" class="remove-link">
+                  <div class="fi icon-cross"></div></a></div>
+            </div>
           </div>
-          <div class="input-cont">
-            <input placeholder="Укажите e-mail" class="us-input">
+          <div class="edit-cont">
+            <div class="input-cont">
+              <input placeholder="Ваше имя" class="us-input">
+            </div>
+            <div class="input-cont">
+              <input placeholder="Укажите e-mail" class="us-input">
+            </div>
+            <div class="input-hint">Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.</div>
+            <div class="input-cont">
+              <input placeholder="Ваша дата рождения" class="us-input styledDate">
+            </div>
+            <div class="check-cont">
+              <input type="checkbox" id="apply" class="styledCheck">
+              <label for="apply"><span class="check-fake"><i class="fi icon-check"></i></span>Подтверждаю ознакомление с <a href="#">правилами пользования</a></label>
+            </div>
+            <div class="btn-cont">
+              <button class="us-btn">Сохранить</button>
+            </div>
           </div>
-          <div class="input-hint">Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.</div>
-          <div class="input-cont">
-            <input placeholder="Ваша дата рождения" class="us-input styledDate">
-          </div>
-          <div class="check-cont">
-            <input type="checkbox" id="apply" class="styledCheck">
-            <label for="apply"><span class="check-fake"><i class="fi icon-check"></i></span>Подтверждаю ознакомление с <a href="#">правилами пользования</a></label>
-          </div>
-          <div class="btn-cont">
-            <button class="us-btn">Сохранить</button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
   <footer class="main-footer">
