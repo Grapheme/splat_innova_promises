@@ -99,6 +99,7 @@ class ApplicationController extends BaseController {
 
         /**
          * Если есть пометка о том, что юзер новый - убираем ее и переадресовываем на страницу редактирования профиля
+         * Если есть пометка о том, что юзер новый - убираем ее и переадресовываем на страницу редактирования профиля
          */
         if (@$_SESSION['new_user']) {
             return Redirect::route('app.profile');
@@ -539,8 +540,8 @@ class ApplicationController extends BaseController {
         $time_limit = Input::get('time_limit');
         $only_for_me = Input::get('only_for_me');
 
-        if (!$promise_text || !$time_limit || $time_limit < 1)
-            App::abort(404);
+        #if (!$promise_text || !$time_limit || $time_limit < 1)
+        #    App::abort(404);
 
         $date_finish = (new \Carbon\Carbon())->now()->addDays($time_limit)->format('Y-m-d');
 
