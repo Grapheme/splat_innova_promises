@@ -1465,6 +1465,8 @@ class ApplicationController extends BaseController {
         curl_close($curl);
         $avatar = json_decode($s, true);
 
+        Helper::dd($avatar);
+
         $user['picture'] = @$avatar;
         $user['avatar'] = @$avatar['data']['url'];
         $user['identity'] = @$user['link'];
