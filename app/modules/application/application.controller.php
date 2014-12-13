@@ -1596,7 +1596,7 @@ class ApplicationController extends BaseController {
         Mail::send('emails.send-invite', $data, function ($message) use ($data) {
 
             $message->from(Config::get('mail.from.address'), Config::get('mail.from.name'));
-            $message->subject('Приглашение от ' . $this->user->name);
+            $message->subject('Test');
 
             #$email = Config::get('mail.feedback.address');
 
