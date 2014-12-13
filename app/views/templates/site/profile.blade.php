@@ -158,7 +158,7 @@
                 });
                 */
                 //$(form).slideUp();
-                $(form).find('.profile-photo').css('background-image', response.new_avatar);
+                $(form).find('.profile-photo').attr('style', 'background-image: url(' + response.new_avatar + ');');
 
             } else {
                 //$('.response').text(response.responseText).show();

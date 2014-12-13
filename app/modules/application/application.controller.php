@@ -487,7 +487,7 @@ class ApplicationController extends BaseController {
             $destinationPath = public_path($path);
             $fileName = md5(time() . '.splat.' . rand(99999, 999999)) . '.' . $file->getClientOriginalExtension();
             $result = $file->move($destinationPath, $fileName);
-            Helper::dd($result);
+            #Helper::dd($result);
 
             $new_avatar_path = '/' . $path . $fileName;
 
