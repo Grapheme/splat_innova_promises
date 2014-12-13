@@ -43,7 +43,7 @@
       <div class="profile-page">
         <div class="wrapper">
           <div class="profile-card">
-            <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
+            <div style="background-image: url({{ $user->avatar }});" class="profile-photo"></div>
             <div class="profile-info">
               <div class="info-cont">
                 <div class="name"><span>{{ $user->name }}</span></div>
