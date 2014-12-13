@@ -28,7 +28,7 @@ class ApplicationController extends BaseController {
             Route::any('/restore_password_set_new_password', array('as' => 'app.restore_password_set_new_password', 'uses' => __CLASS__.'@postRestorePasswordSetNewPassword'));
 
             Route::get('/profile/{id}', array('as' => 'app.profile_id', 'uses' => __CLASS__.'@getProfileByID'));
-            Route::get('/invite/{data}', array('as' => 'app.send_invite', 'uses' => __CLASS__.'@getSendInvite'));
+            Route::get('/invite/', array('as' => 'app.send_invite', 'uses' => __CLASS__.'@getSendInvite'));
 
             Route::get('/promise/{id}', array('as' => 'app.promise', 'uses' => __CLASS__.'@getPromise'));
 
@@ -1565,7 +1565,7 @@ class ApplicationController extends BaseController {
     }
 
 
-    public function getSendInvite($data) {
+    public function getSendInvite() {
 
         $this->check_auth();
 

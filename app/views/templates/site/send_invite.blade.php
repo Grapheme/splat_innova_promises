@@ -46,7 +46,7 @@
                       </div>
                       <form action="{{ URL::route('app.send_invite_message') }}" method="POST" id="invite-form">
                           <input name="email" placeholder="E-mail друга" class="us-input">
-                          <input type="hidden" name="name" value="{{ $user['name'] }}">
+                          <input type="hidden" name="name" value="{{ @$user['name'] }}">
                           <button class="us-btn">Пригласить</button>
                       </form>
                     </div>
