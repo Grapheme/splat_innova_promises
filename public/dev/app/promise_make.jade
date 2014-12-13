@@ -1,0 +1,55 @@
+extends layout
+
+block vars
+	- var bodyClass = "index-page"
+
+block content
+	.promise-make.js-type-parent
+		.wrapper
+			.title Новое обещание
+			.profile-card
+				.profile-photo(style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);")
+				.profile-info
+					.info-cont
+						.name
+							span Кирилл Черенков
+						.age 28 лет
+			.promise-form
+				form
+					.input-cont
+						textarea(placeholder="Я ОБЕЩАЮ ...")
+					.time-inputs
+						.desc Я выполню обещание к
+						.input-cont
+							.input-div.time-div
+								input.time-input.input-class
+							span.bet-text часам
+							.input-div.date-div
+								input.date-input.input-class
+					.color-inputs
+						.desc Выберите оформление
+						select.js-type-select.hidden
+							option(value="blue")
+							option(value="yellow")
+							option(value="aqua")
+							option(value="pink")
+							option(value="green")
+						ul.color-select.js-types
+							li.color-item.type-blue(data-type="blue")
+							li.color-item.type-yellow(data-type="yellow")
+							li.color-item.type-aqua(data-type="aqua")
+							li.color-item.type-pink(data-type="pink")
+							li.color-item.type-green(data-type="green")
+						.check-cont
+							input(type="checkbox" id="apply").styledCheck
+							label(for="apply") <span class="check-fake"><i class="fi icon-check"></i></span> Сделать обещание видимым только мне
+						.btn-cont
+							button.us-btn Дать обещание
+	.promo-block
+		.wrapper
+			.text Каждый раз, выполняя обещания, вы становитесь чуточку лучше.Мы тоже хотим вам пообещать <a href="#">кое-что</a>
+			.logo
+
+block scripts
+	script.
+		SplatSite.Promise();

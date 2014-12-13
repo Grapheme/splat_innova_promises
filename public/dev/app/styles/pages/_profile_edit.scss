@@ -54,50 +54,6 @@
 
     .check-cont {
       font-size: 14px;
-
-      .ui-helper-hidden-accessible {
-        display: none;
-      }
-      
-      .ui-button {
-        .check-fake {
-          display: inline-block;
-          vertical-align: middle;
-          width: 27px;
-          height: 27px;
-          line-height: 27px;
-          border-radius: 3px;
-          background: #f6f6f6;
-          margin-right: 10px;
-          color: #07cbcb;
-          font-size: 22px;
-          text-align: center;
-          
-          .fi {
-            opacity: 0;
-            transition: opacity $default-anim-time $default-ease;
-          }
-        }
-
-        &.ui-state-active {
-          .check-fake {
-            .fi {
-              opacity: 1;
-            }
-          }
-        }
-      }
-
-      a {
-        color: inherit;
-        border-bottom: 1px solid;
-        transition: border-color $default-anim-time $default-ease;
-        text-decoration: none;
-
-        &:hover {
-          border-color: transparent;
-        }
-      }
     }
 
     .btn-cont {
@@ -176,6 +132,52 @@
   &:hover {
     .profile-hover {
       opacity: 1;
+    }
+  }
+}
+
+.check-cont {
+  .ui-helper-hidden-accessible {
+    display: none;
+  }
+  
+  .ui-button {
+    .check-fake {
+      display: inline-block;
+      vertical-align: middle;
+      width: 27px;
+      height: 27px;
+      line-height: 27px;
+      border-radius: 3px;
+      background: #f6f6f6;
+      margin-right: 10px;
+      color: #07cbcb;
+      font-size: 22px;
+      text-align: center;
+      
+      .fi {
+        opacity: 0;
+        transition: opacity $default-anim-time $default-ease;
+      }
+    }
+
+    &.ui-state-active {
+      .check-fake {
+        .fi {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  a {
+    color: inherit;
+    border-bottom: 1px solid;
+    transition: border-color $default-anim-time $default-ease;
+    text-decoration: none;
+
+    &:hover {
+      border-color: transparent;
     }
   }
 }

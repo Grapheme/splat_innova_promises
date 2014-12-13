@@ -34,37 +34,67 @@
       </div>
     </div>
   </header>
-  <div class="main-screen">
-    <div class="main-fotorama">
-      <div class="js-main-fotorama"><img src="images/main_slider/slider-1.jpg" alt=""><img src="images/main_slider/slider-2.jpg" alt="">
+  <div class="promise-make js-type-parent">
+    <div class="wrapper">
+      <div class="title">Новое обещание</div>
+      <div class="profile-card">
+        <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
+        <div class="profile-info">
+          <div class="info-cont">
+            <div class="name"><span>Кирилл Черенков</span></div>
+            <div class="age">28 лет</div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="main-content wrapper">
-      <div class="title">Пообещать и сдержать слово много стоит.</div>
-      <div class="desc">Обещания имеют огромную силу. Они вселяют надежду, помогают достичь цели и изменить себя. Но всё это происходит лишь тогда, когда они перестают быть просто словами и тогда превращаются в дела.</div>
-      <div class="input-cont">
-        <input placeholder="Я обещаю, что..." class="main-input js-promise-input">
-        <div class="hint">Совет: Давайте только те обещания, которые можете выполнить.</div><a data-box="auth" class="js-open-box js-promise-btn us-btn">Дать обещание</a>
+      <div class="promise-form">
+        <form>
+          <div class="input-cont">
+            <textarea placeholder="Я ОБЕЩАЮ ..."></textarea>
+          </div>
+          <div class="time-inputs">
+            <div class="desc">Я выполню обещание к</div>
+            <div class="input-cont">
+              <div class="input-div time-div">
+                <input class="time-input input-class">
+              </div><span class="bet-text">часам</span>
+              <div class="input-div date-div">
+                <input class="date-input input-class">
+              </div>
+            </div>
+          </div>
+          <div class="color-inputs">
+            <div class="desc">Выберите оформление</div>
+            <select class="js-type-select hidden">
+              <option value="blue"></option>
+              <option value="yellow"></option>
+              <option value="aqua"></option>
+              <option value="pink"></option>
+              <option value="green"></option>
+            </select>
+            <ul class="color-select js-types">
+              <li data-type="blue" class="color-item type-blue"></li>
+              <li data-type="yellow" class="color-item type-yellow"></li>
+              <li data-type="aqua" class="color-item type-aqua"></li>
+              <li data-type="pink" class="color-item type-pink"></li>
+              <li data-type="green" class="color-item type-green"></li>
+            </ul>
+            <div class="check-cont">
+              <input type="checkbox" id="apply" class="styledCheck">
+              <label for="apply"><span class="check-fake"><i class="fi icon-check"></i></span> Сделать обещание видимым только мне</label>
+            </div>
+            <div class="btn-cont">
+              <button class="us-btn">Дать обещание</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  <div class="promises-cont">
-    <div class="promises-fotorama">
-      <div class="js-promises-fotorama"><img src="images/promises/back0.png"><img src="images/promises/back1.png"><img src="images/promises/back2.png"><img src="images/promises/back3.png"><img src="images/promises/back4.png">
-      </div>
+  <div class="promo-block">
+    <div class="wrapper">
+      <div class="text">Каждый раз, выполняя обещания, вы становитесь чуточку лучше.Мы тоже хотим вам пообещать <a href="#">кое-что</a></div>
+      <div class="logo"></div>
     </div>
-    <div class="promises-amount">
-      <div class="amount-cont">уже <b>4 738</b> человек дали свои обещания</div>
-    </div>
-    <ul class="promises-cloud js-promises">
-      <li style="color: #3e9327; font-size: 20px;">С НОВОГО БРОШУ КУРИТЬ</li>
-      <li style="color: #07cbcc;">ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ</li>
-      <li style="color: #bbbbc3; font-size: 45px;">ОСТАВЛЮ ВСЕ КАК и ЕСТЬ!</li>
-      <li style="color: #fee000; font-size: 30px;">НАВЕЩУ РОДИТЕЛЕЙ</li>
-      <li style="color: #3e9327;">КУПЛЮ СЕБЕ НОВЫЙ АЙФОН</li>
-      <li style="color: #56565b; font-size: 25px;">НЕ ОБЕЩАТЬ</li>
-      <li style="color: #07cbcc; font-size: 20px;">ПОХУДЕЮ НА 20 КИЛОГРАММ</li>
-    </ul>
   </div>
   <footer class="main-footer">
     <div class="wrapper">
@@ -151,5 +181,5 @@
   <!-- build:js({app,.tmp}) scripts/main.js-->
   <script src="scripts/main.js"></script>
   <!-- endbuild-->
-  <script>SplatSite.index();</script>
+  <script>SplatSite.Promise();</script>
 </body>
