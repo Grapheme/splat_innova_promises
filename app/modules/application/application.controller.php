@@ -1112,7 +1112,7 @@ class ApplicationController extends BaseController {
         }
 
         /**
-         * OK не отдают е-мейл
+         * OK теперь отдают е-мейл (нужно было запрашивать у Ozhiganov Valery <valery.ozhiganov@corp.mail.ru>)
          */
         $curl = curl_init('http://api.odnoklassniki.ru/fb.do?access_token=' . $auth['access_token'] . '&application_key=' . $AUTH['application_key'] . '&method=users.getCurrentUser&sig=' . md5('application_key=' . $AUTH['application_key'] . 'method=users.getCurrentUser' . md5($auth['access_token'] . $AUTH['client_secret'])));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
