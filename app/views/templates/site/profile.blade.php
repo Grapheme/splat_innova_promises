@@ -58,15 +58,27 @@
         if (isset($user->sex) && $user->sex == 1)
             $default_avatar = '/theme/images/woman.png';
         ?>
-          <form action="{{ URL::route('app.update_profile') }}" method="POST">
+
+          <form action="{{ URL::route('app.update_avatar') }}" method="POST" enctype="multipart/form-data">
             <div class="photo-cont">
               <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo">
-                <div class="profile-hover"><a href="#" class="down-link">
-                    <div class="fi icon-arrow-down"></div>
-                    <input type="file"></a><a href="#" class="remove-link">
-                    <div class="fi icon-cross"></div></a></div>
+                <div class="profile-hover">
+
+                    <a href="#" class="down-link">
+                        <div class="fi icon-arrow-down"></div>
+                        <input name="avatar" type="file">
+                    </a>
+
+                    <a href="#" class="remove-link">
+                        <div class="fi icon-cross"></div>
+                    </a>
+
+                </div>
               </div>
             </div>
+          </form>
+
+          <form action="{{ URL::route('app.update_profile') }}" method="POST">
             <div class="edit-cont">
               <div class="input-cont">
                 <input name="name" value="{{ trim($user->name) }}" placeholder="Ваше имя" class="us-input">
@@ -102,7 +114,7 @@
 @section('scripts')
     <script>
         $('input[type="file"]').on('change', function(){
-            alert("123");
+            $(this).parents('form').submit();
         });
     </script>
 @stop

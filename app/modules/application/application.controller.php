@@ -33,6 +33,7 @@ class ApplicationController extends BaseController {
             Route::get('/promise/{id}', array('as' => 'app.promise', 'uses' => __CLASS__.'@getPromise'));
 
             Route::any('/update_profile', array('as' => 'app.update_profile', 'uses' => __CLASS__.'@postUserUpdateProfile'));
+            Route::any('/update_avatar', array('as' => 'app.update_avatar', 'uses' => __CLASS__.'@postUserUpdateAvatar'));
             Route::any('/send_invite_message', array('as' => 'app.send_invite_message', 'uses' => __CLASS__.'@postSendInviteMessage'));
             Route::any('/add_promise', array('as' => 'app.add_promise', 'uses' => __CLASS__.'@postAddPromise'));
             Route::any('/add_comment', array('as' => 'app.add_comment', 'uses' => __CLASS__.'@postAddComment'));
@@ -468,6 +469,12 @@ class ApplicationController extends BaseController {
         }
 
         return Redirect::route('app.mainpage');
+    }
+
+
+    public function postUserUpdateAvatar() {
+
+        Helper::dd(Input::all());
     }
 
 
