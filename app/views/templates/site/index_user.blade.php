@@ -275,7 +275,7 @@
                             <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}">
                         @endif
 
-                            <div style="background-image: url({{ $friend['avatar'] }});" class="profile-photo"></div>
+                            <div style="background-image: url({{ @$friend['avatar'] }});" class="profile-photo"></div>
                             <div class="name">{{ @$friend['_name'] }}</div>
 
                         @if (@$friend['profile_id'])
@@ -296,7 +296,7 @@
 
                         <a href="{{ URL::route('app.send_invite', @base64_encode($friend['_name'])) }}">
 
-                            <div style="background-image: url({{ $friend['avatar'] }});" class="profile-photo"></div>
+                            <div style="background-image: url({{ @$friend['avatar'] }});" class="profile-photo"></div>
                             <div class="name">{{ @$friend['_name'] }}</div>
 
                         </a>
