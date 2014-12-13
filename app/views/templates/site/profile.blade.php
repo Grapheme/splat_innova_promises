@@ -59,7 +59,7 @@
             $default_avatar = '/theme/images/woman.png';
         ?>
 
-          <form action="{{ URL::route('app.update_avatar') }}" method="POST" enctype="multipart/form-data" class="photo-cont">
+          <form action="{{ URL::route('app.update_avatar') }}" method="POST" enctype="multipart/form-data" class="photo-cont" id="avatar-form">
             <div>
               <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo">
                 <div class="profile-hover">
@@ -112,9 +112,72 @@
 
 
 @section('scripts')
-    <script>
-        $('input[type="file"]').on('change', function(){
-            $(this).parents('form').submit();
-        });
+<script>
+
+    $('input[type="file"]').on('change', function(){
+        $(this).parents('form').submit();
+    });
+
+
+    $("#avatar-form").validate({
+        rules: {
+            'avatar': { required: true },
+        },
+        messages: {
+            'avatar': "",
+        },
+        errorClass: "inp-error",
+        submitHandler: function(form) {
+            //console.log(form);
+            sendAvatarForm(form);
+            return false;
+        }
+    });
+
+    function sendAvatarForm(form) {
+
+        //console.log(form);
+        var options = { target: null, type: $(form).attr('method'), dataType: 'json' };
+
+        options.beforeSubmit = function(formData, jqForm, options){
+            //$(form).find('button').addClass('loading').attr('disabled', 'disabled');
+            //$(form).find('.error-msg').text('');
+            //$('.error').text('').hide();
+        }
+
+        options.success = function(response, status, xhr, jqForm){
+            //console.log(response);
+            //$('.success').hide().removeClass('hidden').slideDown();
+            //$(form).slideUp();
+
+            if (response.status) {
+                /*
+                $(form).find('button').addClass('success').text('Отправлено');
+                $(form).find('.popup-body').slideUp(function(){
+                    setTimeout(function(){ $('.popup .js-popup-close').trigger('click'); }, 3000);
+                });
+                */
+                //$(form).slideUp();
+                $(form).find('.profile-photo').css('background-image', response.new_avatar);
+
+            } else {
+                //$('.response').text(response.responseText).show();
+            }
+
+        }
+
+        options.error = function(xhr, textStatus, errorThrown){
+            console.log(xhr);
+            $(form).find('button').removeAttr('disabled');
+            $(form).find('.error-msg').text('Ошибка при отправке, попробуйте позднее');
+        }
+
+        options.complete = function(data, textStatus, jqXHR){
+            //$(form).find('button').removeClass('loading').removeAttribute('disabled');
+        }
+
+        $(form).ajaxSubmit(options);
+    }
+
     </script>
 @stop
