@@ -343,8 +343,9 @@ class ApplicationController extends BaseController {
                 if (count($friends)) {
                     foreach ($friends as $f => $friend) {
                         #$friend['identity'] = 'https://www.facebook.com/profile.php?id=' . $friend['id'];
-                        $friend['identity'] = $friend['link'];
-                        $friend['_name'] = $friend['name'];
+                        $friend['identity'] = @$friend['link'];
+                        $friend['_name'] = @$friend['name'];
+                        $friend['avatar'] = @$friend['picture']['data']['url'];
                         $friends[$f] = $friend;
                         $existing_friends_names[] = $friend['_name'];
                         $friends_uids[] = $friend['identity'];
@@ -392,6 +393,7 @@ class ApplicationController extends BaseController {
                 foreach ($friends as $f => $friend) {
                     #$friend['identity'] = 'https://www.facebook.com/profile.php?id=' . $friend['id'];
                     $friend['_name'] = $friend['name'];
+                    $friend['avatar'] = @$friend['picture']['data']['url'];
 
                     if (in_array($friend['_name'], $existing_friends_names)) {
                         unset($friends[$f]);
