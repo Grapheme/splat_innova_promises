@@ -3,18 +3,18 @@
       <div class="footer-block left-logo"><span>Мои<br>Обещания</span></div>
       <div class="footer-block">
         <ul class="footer-links">
-          <li><a href="#">О проекте</a></li>
-          <li><a href="#">Правила использования</a></li>
+          <!-- <li><a href="#">О проекте</a></li> -->
+          <li><a href="http://mypromises.ru/privacy_policy.pdf">Правила использования</a></li>
         </ul>
       </div>
       <div class="footer-block"><span>Поделиться с друзьями:</span>
         <ul class="footer-soc">
-          <li><a href="#" class="soc-icon"><i class="fi icon-fb"></i></a></li>
-          <li><a href="#" class="soc-icon"><i class="fi icon-vk"></i></a></li>
-          <li><a href="#" class="soc-icon"><i class="fi icon-twitter"></i></a></li>
+          <li><a href="http://www.facebook.com/sharer.php?u=http://mypromises.ru" target="_blank" class="soc-icon"><i class="fi icon-fb"></i></a></li>
+          <li><a href="http://vk.com/share.php?url=http://mypromises.ru&event=button_share" target="_blank" class="soc-icon"><i class="fi icon-vk"></i></a></li>
+          <li><a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl=mypromises.ru" target="_blank" class="soc-icon"><i class="fi icon-twitter"></i></a></li>
         </ul>
       </div>
-      <div class="footer-block right-logo"></div>
+      <a href="http://ru.innova-oralcare.com" target="_blank" class="footer-block right-logo"></a>
     </div>
   </footer>
   <div class="overlay-shadow"></div>
