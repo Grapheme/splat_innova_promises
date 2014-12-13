@@ -41,7 +41,9 @@
             </ul>
         @else
 
-            Вы еще не давали обещаний.
+            <div class="wrapper">
+              <div class="us-text">Вы еще не давали обещаний.</div>
+            </div>
 
         @endif
 
@@ -156,7 +158,9 @@
             </ul>
         @else
 
-            Вы еще не давали обещаний.
+            <div class="wrapper">
+              <div class="us-text">Вы еще не давали обещаний.</div>
+            </div>
 
         @endif
 

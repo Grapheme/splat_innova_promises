@@ -6,17 +6,9 @@
   <meta name="viewport" content="width=device-width">
   <link rel="shortcut icon" href="/favicon.ico">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
-  <!-- build:css(.) styles/vendor.css-->
-  <!-- bower:css-->
-  <link rel="stylesheet" href="bower_components/fotorama/fotorama.css">
-  <!-- endbower-->
-  <!-- endbuild-->
-  <!-- build:css(.tmp) styles/main.css-->
+  <link rel="stylesheet" href="styles/vendor.css">
   <link rel="stylesheet" href="styles/main.css">
-  <!-- endbuild-->
-  <!-- build:js scripts/vendor/modernizr.js-->
-  <script src="bower_components/modernizr/modernizr.js"></script>
-  <!-- endbuild-->
+  <script src="scripts/vendor/modernizr.js"></script>
 </head>
 <body class="index-page">
   <!--if lt IE 10 You are using an strong outdated browser. Please <a href='http://browsehappy.com/'>upgrade your browser</a> to improve your experience.-->
@@ -34,64 +26,27 @@
       </div>
     </div>
   </header>
-  <div class="promise-make promise-page type-blue">
+  <div class="profile-page">
     <div class="wrapper">
       <div class="profile-card">
         <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-        <div class="profile-info">
+        <div class="profile-info profile-invite">
           <div class="info-cont">
             <div class="name"><span>Кирилл Черенков</span></div>
             <div class="age">28 лет</div>
+            <div class="invite-info">
+              <p>Ваш друг  из Facebook не дал еще ни одного обещания. </p>
+              <p>Пригласите вашего друга и расскажите ему о том, почему так важно сдерживать данные обещания.</p>
+              <div class="inv-form">
+                <div class="inv-btn js-inv-btn-cont"><a href="#" class="us-btn js-inv-btn">Пригласить друга</a></div>
+                <div style="display: none;" class="form js-inv-form">
+                  <input placeholder="E-mail друга" class="us-input">
+                  <button class="us-btn">Пригласить</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="promise-text">Научусь садиться на поперечный шпагат</div>
-      <div class="promise-time"><i class="fi icon-progress"></i><span class="time-day"><span>1</span> день</span><span class="time-time">00:02:43</span></div>
-      <div class="progress-btns">
-        <button class="pr-btn active"><i class="fi icon-smile"></i><span>Выполнено</span></button>
-        <button class="pr-btn"><i class="fi icon-unsmile"></i><span>Отказаться</span></button>
-      </div>
-    </div>
-  </div>
-  <div class="promo-block">
-    <div class="wrapper">
-      <div class="logo"></div>
-      <div class="text">Каждый раз, выполняя обещания, вы становитесь чуточку лучше. Мы тоже хотим вам пообещать <a href="#">кое-что</a></div>
-    </div>
-  </div>
-  <div class="wrapper">
-    <ul class="comments-list">
-      <li class="comment">
-        <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-        <div class="comment-content">
-          <div class="name">Яна Блидер</div>
-          <div class="text">Блять, я очень рада что ты решил удлиннить свой член</div>
-        </div>
-      </li>
-      <li class="comment">
-        <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-        <div class="comment-content">
-          <div class="name">Яна Блидер</div>
-          <div class="text">Блять, я очень рада что ты решил удлиннить свой член</div>
-        </div>
-      </li>
-      <li class="comment">
-        <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-        <div class="comment-content">
-          <div class="name">Яна Блидер</div>
-          <div class="text">Блять, я очень рада что ты решил удлиннить свой член</div>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div class="leave-comment">
-    <div class="wrapper">
-      <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-      <div class="comment-form">
-        <div class="textarea-cont">
-          <textarea class="input-class"></textarea>
-        </div>
-        <div class="us-btn">Оставить комментарий</div>
       </div>
     </div>
   </div>
@@ -161,25 +116,7 @@
       </div>
     </div>
   </div>
-  <!-- build:js(.) scripts/vendor.js-->
-  <!-- bower:js-->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/fotorama/fotorama.js"></script>
-  <script src="bower_components/get-style-property/get-style-property.js"></script>
-  <script src="bower_components/get-size/get-size.js"></script>
-  <script src="bower_components/eventie/eventie.js"></script>
-  <script src="bower_components/doc-ready/doc-ready.js"></script>
-  <script src="bower_components/eventEmitter/EventEmitter.js"></script>
-  <script src="bower_components/matches-selector/matches-selector.js"></script>
-  <script src="bower_components/outlayer/item.js"></script>
-  <script src="bower_components/outlayer/outlayer.js"></script>
-  <script src="bower_components/masonry/masonry.js"></script>
-  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
-  <script src="bower_components/jQuery-Mask-Plugin/dist/jquery.mask.js"></script>
-  <!-- endbower-->
-  <!-- endbuild-->
-  <!-- build:js({app,.tmp}) scripts/main.js-->
+  <script src="scripts/vendor.js"></script>
   <script src="scripts/main.js"></script>
-  <!-- endbuild-->
-  <script>//- SplatSite.Promise();</script>
+  <script>SplatSite.InviteForm();</script>
 </body>
