@@ -1448,7 +1448,7 @@ class ApplicationController extends BaseController {
         #Helper::dd($user);
 
         $user['uid'] = @$user['id'];
-        $user['avatar'] = @$user['picture']['url'];
+        $user['avatar'] = @$user['picture']['data']['url'];
 
         #Helper::dd($user);
 
