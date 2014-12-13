@@ -165,6 +165,7 @@ SplatSite.ShowFriends = function() {
 		var i = 0;
 		$('.friend-item.hidden').each(function(){
 			$(this).attr('data-number', i);
+			i++;
 		});
 	};
 	$('.show-more-friends').on('click', function(){
