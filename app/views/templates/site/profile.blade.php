@@ -53,10 +53,14 @@
         </div>
         <div class="profile-edit">
 
-
+        <?
+        $default_avatar = '/theme/images/man.png';
+        if (isset($user->sex) && $user->sex == 1)
+            $default_avatar = '/theme/images/woman.png';
+        ?>
           <form action="{{ URL::route('app.update_profile') }}" method="POST">
             <div class="photo-cont">
-              <div style="background-image: url({{ $user->avatar }});" class="profile-photo">
+              <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo">
                 <div class="profile-hover"><a href="#" class="down-link">
                     <div class="fi icon-arrow-down"></div>
                     <input type="file"></a><a href="#" class="remove-link">
@@ -96,5 +100,9 @@
 
 
 @section('scripts')
-
+    <script>
+        $('input[type="file"]').on('change', function(){
+            alert("123");
+        });
+    </script>
 @stop
