@@ -92,7 +92,7 @@
           </div>
         </div>
         <div class="promises-amount">
-          <div class="amount-cont">уже <b>4 738</b> человек дали свои обещания</div>
+          <div class="amount-cont">уже <b>{{ $total_promises }}</b> человек дали свои обещания</div>
         </div>
         <ul class="promises-cloud js-promises">
           <li style="color: #3e9327; font-size: 20px;">С НОВОГО БРОШУ КУРИТЬ</li>

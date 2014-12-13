@@ -89,8 +89,13 @@ class ApplicationController extends BaseController {
         /**
          * Если юзер не авторизован - показываем стандартную главную страницу
          */
-        if (!is_object($user) || !$user->id)
-            return View::make(Helper::layout('index'), compact('user', 'promises'));
+        if (!is_object($user) || !$user->id) {
+
+            $dic_promises = Dic::where('slug', 'promises')->first();
+            $total_promises = DicVal::where('dic_id', $dic_promises->id)->count();
+
+            return View::make(Helper::layout('index'), compact('user', 'promises', 'total_promises'));
+        }
 
         /**
          * Если есть пометка о том, что юзер новый - убираем ее и переадресовываем на страницу редактирования профиля
