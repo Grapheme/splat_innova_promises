@@ -1112,7 +1112,20 @@ class ApplicationController extends BaseController {
         /**
          * OK теперь отдают е-мейл (нужно было запрашивать у Ozhiganov Valery <valery.ozhiganov@corp.mail.ru>)
          */
-        $curl = curl_init('http://api.odnoklassniki.ru/fb.do?access_token=' . $auth['access_token'] . '&application_key=' . $AUTH['application_key'] . '&method=users.getCurrentUser&sig=' . md5('application_key=' . $AUTH['application_key'] . 'method=users.getCurrentUser' . md5($auth['access_token'] . $AUTH['client_secret'])));
+        $curl = curl_init(
+            'http://api.odnoklassniki.ru/fb.do?' .
+            'access_token=' . $auth['access_token'] .
+            '&application_key=' . $AUTH['application_key'] .
+            '&fields=uid,first_name,last_name,location,gender,birthday,pic_3,email' .
+            '&method=users.getCurrentUser' .
+            '&sig=' . md5(
+                'application_key=' . $AUTH['application_key'] .
+                'fields=fields=uid,first_name,last_name,location,gender,birthday,pic_3,email' .
+                'method=users.getCurrentUser' .
+                'method=users.getCurrentUser' .
+                md5($auth['access_token'] . $AUTH['client_secret'])
+            )
+        );
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         curl_close($curl);
@@ -1170,7 +1183,7 @@ class ApplicationController extends BaseController {
                 . '&uids=' . implode(',', $friends)
                 . '&sig=' . md5(
                     'application_key=' . $AUTH['application_key']
-                    . 'fields=uid,first_name,last_name,current_location,gender,pic_1,pic_2'
+                    . 'fields=uid,first_name,last_name,current_location,gender,pic_3'
                     . 'method=users.getInfo'
                     . 'uids=' . implode(',', $friends)
                     . md5($auth['access_token'] . $AUTH['client_secret']));
