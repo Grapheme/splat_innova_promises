@@ -47,6 +47,9 @@
                           <input type="hidden" name="name" value="{{ $user_name }}">
                           <button class="us-btn">Пригласить</button>
                       </form>
+                      <div id="send-invite-success" style="display:none">
+                        Приглашение успешно отправлено
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -102,6 +105,8 @@
                     setTimeout(function(){ $('.popup .js-popup-close').trigger('click'); }, 3000);
                 });
                 */
+                $(form).slideUp();
+                $("#send-invite-success").slideDown();
 
             } else {
                 //$('.response').text(response.responseText).show();
@@ -116,7 +121,7 @@
         }
 
         options.complete = function(data, textStatus, jqXHR){
-            $(form).find('button').removeClass('loading');
+            $(form).find('button').removeClass('loading').removeAttribute('disabled');
         }
 
         $(form).ajaxSubmit(options);
