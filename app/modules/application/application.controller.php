@@ -1122,7 +1122,6 @@ class ApplicationController extends BaseController {
                 'application_key=' . $AUTH['application_key'] .
                 'fields=fields=uid,first_name,last_name,location,gender,birthday,pic_3,email' .
                 'method=users.getCurrentUser' .
-                'method=users.getCurrentUser' .
                 md5($auth['access_token'] . $AUTH['client_secret'])
             )
         );
@@ -1134,11 +1133,15 @@ class ApplicationController extends BaseController {
 
         if (!@$user['uid']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (2).";
+            echo "<!--\n";
+            Helper::d($user);
+            echo "-->\n";
             die;
         }
 
         $user['identity'] = 'http://ok.ru/profile/' . $user['uid'];
         $user['bdate'] = @$user['birthday'];
+        $user['avatar'] = @$user['pic_3'];
         $user['auth_method'] = 'odnoklassniki';
 
         $check = $this->checkUserData($user, true);
