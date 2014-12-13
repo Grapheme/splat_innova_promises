@@ -161,10 +161,17 @@ SplatSite.InviteForm = function() {
 }
 
 SplatSite.ShowFriends = function() {
+	var check = function() {
+		var i = 0;
+		$('.friend-item.hidden').each(function(){
+			$(this).attr('data-number', i);
+		});
+	};
 	$('.show-more-friends').on('click', function(){
 		var self = this;
+		check();
 		for(var i = 0; i < 12; i++) {
-			$('.friend-item.hidden').eq(i).removeClass('hidden');
+			$('.friend-item.hidden[data-number="' + i + '"]').removeClass('hidden');
 		}
 		if($('.friend-item.hidden').length == 0) {
 			self.hide();
