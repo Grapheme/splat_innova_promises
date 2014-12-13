@@ -59,10 +59,10 @@
                 <div class="desc">Я выполню обещание к</div>
                 <div class="input-cont">
                   <div class="input-div time-div">
-                    <input name="limit_time" class="time-input input-class">
+                    <input name="limit_time" class="time-input input-class js-mask-time">
                   </div><span class="bet-text">часам</span>
                   <div class="input-div date-div">
-                    <input name="limit_date" class="date-input input-class">
+                    <input name="limit_date" class="date-input input-class js-mask-date">
                   </div>
                 </div>
               </div>
