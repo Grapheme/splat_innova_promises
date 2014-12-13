@@ -160,9 +160,22 @@ SplatSite.InviteForm = function() {
 	});
 }
 
+SplatSite.ShowFriends = function() {
+	$('.show-more-friends').on('click', function(){
+		var self = this;
+		for(var i = 0; i < 12; i++) {
+			$('.friend-item.hidden').eq(i).removeClass('hidden');
+		}
+		if($('.friend-item.hidden').length == 0) {
+			self.hide();
+		}
+	});
+}
+
 $(function(){
 	var body = $('body');
 	SplatSite.tabs();
+	SplatSite.ShowFriends();
 	$('.styledCheck').button();
 
 	$('.js-mask-time').mask('00:00', {placeholder: "00:00"});
