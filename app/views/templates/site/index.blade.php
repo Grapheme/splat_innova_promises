@@ -94,7 +94,6 @@
         <div class="promises-amount">
           <div class="amount-cont">
             уже <b>
-            {{ $total_promises }}
             {{ trans_choice(':count человек|:count человека|:count человек', $total_promises, array(), 'ru') }}
             </b> дали свои обещания</div>
         </div>
