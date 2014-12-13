@@ -254,6 +254,9 @@ class ApplicationController extends BaseController {
                 $array = $user->friends;
                 $friends_uids = array();
                 foreach ($array as $f => $friend) {
+                    if (!is_array($friend) || !count($friend))
+                        continue;
+
                     $friend['_name'] = @$friend['first_name'] . ' ' . @$friend['last_name'];
                     $friend_ident = 'http://ok.ru/profile/' . $friend['uid'];
                     $array[$friend_ident] = $friend;
