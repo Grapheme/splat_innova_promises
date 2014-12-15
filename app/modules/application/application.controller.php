@@ -609,13 +609,17 @@ class ApplicationController extends BaseController {
             if (Input::get('fail')) {
 
                 if (!$promise->promise_fail && !$promise->finished_at) {
+
                     $promise->update_field('promise_fail', 1);
+                    return Redirect::route('app.promise', $id);
                 }
 
             } elseif (Input::get('finished')) {
 
                 if (!$promise->promise_fail && !$promise->finished_at) {
-                    $promise->update_field('finished_at', date('Y-m-d'));
+
+                    $promise->update_field('finished_at', date('Y-m-d H:i:s'));
+                    return Redirect::route('app.promise', $id);
                 }
             }
         }

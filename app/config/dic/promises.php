@@ -65,7 +65,7 @@ return array(
             ),
             */
             'finished_at' => array(
-                'title' => 'Обещание выполнено (дата)',
+                'title' => 'Обещание выполнено (дата/время)',
                 'type' => 'text',
             ),
             'promise_fail' => array(
