@@ -158,7 +158,7 @@
                         @if ($failed)
                             <i class="fi icon-unsmile"></i>
                         @elseif ($promise->finished_at)
-                            <i class="fi icon-smile">
+                            <i class="fi icon-smile"></i>
                         @else
                             <div class="time">02:01:23</div>
                         @endif
