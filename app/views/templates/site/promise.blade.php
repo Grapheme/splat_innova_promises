@@ -113,6 +113,7 @@
                 @else
                     <a href="?finished=1" class="pr-btn active"><i class="fi icon-smile"></i><span>Выполнено</span></a>
                     <a href="?fail=1" class="pr-btn"><i class="fi icon-unsmile"></i><span>Отказаться</span></a>
+                    <a href="?delete=1" class="pr-btn" title="Удалить"><span>X</span></a>
                 @endif
             </div>
         </div>
