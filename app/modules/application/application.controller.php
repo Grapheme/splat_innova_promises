@@ -1153,6 +1153,7 @@ class ApplicationController extends BaseController {
         $promise_text = Input::get('promise_text');
         if ($promise_text != '') {
             $_SESSION['promise_text'] = $promise_text;
+            $_SESSION['redirect_to_new_promise'] = 1;
         }
 
         $postfields = 'code=' . $_GET['code'] .
