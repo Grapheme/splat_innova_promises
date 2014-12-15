@@ -72,7 +72,7 @@
                 $promise->style_id = $styles[array_rand($styles)];
             }
             ?>
-              <li class="promise-item type-{{ $promise->style_id }}" data-finish="{{ $promise->date_finish }}">
+              <li class="promise-item type-{{ $promise->style_id }}" data-finish="{{ $promise->time_limit }}">
                 <a href="{{ URL::route('app.promise', $promise->id) }}" class="fullsizelink"></a>
                 <div class="promise-content">
                   <div class="title">
