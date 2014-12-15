@@ -135,16 +135,18 @@
     @endif
 
     <div class="leave-comment">
-        <div class="wrapper">
-            <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-            <div class="comment-form">
-                <div class="textarea-cont">
-                    <textarea class="input-class"></textarea>
+        <form action="{{ URL::route('app.add_comment') }}" method="POST">
+            <input type="hidden" name="promise_id" value="{{ $promise->id }}">
+            <div class="wrapper">
+                <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo"></div>
+                <div class="comment-form">
+                    <div class="textarea-cont">
+                        <textarea name="comment_text" class="input-class"></textarea>
+                    </div>
+                    <div class="us-btn">Оставить комментарий</div>
                 </div>
-                <div class="us-btn">Оставить комментарий</div>
             </div>
-        </div>
-    </div>
+        </form>
     </div>
 
 @stop
