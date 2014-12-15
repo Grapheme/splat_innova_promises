@@ -454,6 +454,23 @@ $(document).on('click', '.fb-oauth-link', function(e){
  * EMAIL & PASSWORD
  *
  */
+$("#auth_form").validate({
+    rules: {
+        'email': { required: true, email: true },
+        'password': { required: true }
+    },
+    messages: {
+        'email': "",
+        'password': ""
+    },
+    errorClass: "inp-error",
+    submitHandler: function(form) {
+        //console.log(form);
+        //return false;
+    }
+});
+
+
 $(document).on('submit', '#auth_form', function(e){
 
     //e.preventDefault();
