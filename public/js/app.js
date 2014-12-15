@@ -476,7 +476,7 @@ function gotome() {
 
 $(document).on('click', '.make-new-promise-btn', function(e){
 
-    e.preventDefault();
+    //e.preventDefault();
 
     //alert(user_id);
     //return false;
