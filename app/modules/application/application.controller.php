@@ -478,7 +478,7 @@ class ApplicationController extends BaseController {
             return Redirect::route('app.new_promise');
         }
 
-        return Redirect::route('app.mainpage');
+        return Redirect::route('app.me');
     }
 
 
