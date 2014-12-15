@@ -17,10 +17,6 @@
     @section('style')
         <!-- section style -->
     @show
-
-    <script>
-        var user_id = {{ isset($auth_user) && is_object($auth_user) && $auth_user->id ? "'" . $auth_user->id . "'" : 'NULL' }};
-    </script>
     </head>
 <body class="index-page">
     <!--[if lt IE 7]>
