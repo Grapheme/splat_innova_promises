@@ -1158,7 +1158,7 @@ class ApplicationController extends BaseController {
         $postfields = 'code=' . $_GET['code'] .
             '&client_id=' . $AUTH['client_id'] .
             '&client_secret=' . $AUTH['client_secret'] .
-            '&redirect_uri=' . URL::route('app.ok-oauth') . '?promise_text=' . $promise_text .
+            '&redirect_uri=' . URL::route('app.ok-oauth') . '?promise_text=' . urlencode($promise_text) .
             '&grant_type=authorization_code'
         ;
 
