@@ -152,18 +152,20 @@
                       -->
                       <div class="comments">{{ (int)$promise->comments_count }}</div>
 
-                      <div class="time">
                         <?
                         $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
                         ?>
                         @if ($failed)
-                            <i class="fi icon-unsmile"></i>
+                            <div class="promise-fail">
+                                <i class="fi icon-unsmile"></i>
+                            </div>
                         @elseif ($promise->finished_at)
-                            <i class="fi icon-smile"></i>
+                            <div class="promise-success">
+                                <i class="fi icon-smile"></i>
+                            </div>
                         @else
-                            02:01:23
+                            <div class="time">02:01:23</div>
                         @endif
-                      </div>
 
                     </div>
                   </div>
