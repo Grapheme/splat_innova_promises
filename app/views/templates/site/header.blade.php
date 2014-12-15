@@ -8,7 +8,7 @@
         @else
             <!-- <a href="{{ URL::route('app.mainpage') }}"><span data-box="auth_" class="js-open-box_">Главная</span></a> -->
             <!-- <a href="{{ URL::route('app.me') }}"><span data-box="auth_" class="js-open-box_">Мои Обещания</span></a> -->
-            <a href="{{ URL::route('app.mainpage') }}"><span data-box="auth_" class="js-open-box_">Мои Обещания</span></a>
+            <a href="{{ URL::route('app.me') }}"><span data-box="auth_" class="js-open-box_">Мои Обещания</span></a>
             <a href="#"><span data-box="auth_" class="js-open-box_ logout">Выйти</span></a>
         @endif
         </div>
@@ -17,7 +17,7 @@
           <li><a href="http://vk.com/share.php?url=http://mypromises.ru&event=button_share" class="soc-icon"><i class="fi icon-vk"></i></a></li>
           <li><a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl=mypromises.ru" class="soc-icon"><i class="fi icon-ok"></i></a></li>
         </ul>
-        <a href="{{ URL::route('app.me') }}" class="logo-text">Мои обещания</a>
+        <a href="{{ URL::route('app.mainpage') }}" class="logo-text">Мои обещания</a>
         <div class="header-desc">
           <div class="desc-cont">Обещания не просто слова. Когда о них говорят дела</div>
         </div>
