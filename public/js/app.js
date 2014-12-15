@@ -481,4 +481,5 @@ $('.make-new-promise-btn').click(function(){
         return true;
 
     gotome();
+    return false;
 });
