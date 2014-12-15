@@ -562,3 +562,23 @@ $("#promise-form").validate({
         form.submit();
     }
 });
+
+$("#profile_form").validate({
+    rules: {
+        'name': { required: true },
+        'email': { required: true, email: true },
+        'bdate': { required: true, customDate: true },
+        'confirmation': { required: true }
+    },
+    messages: {
+        'name': '',
+        'email': '',
+        'bdate': '',
+        'confirmation': ''
+    },
+    errorClass: "inp-error",
+    submitHandler: function(form) {
+        //console.log(form);
+        form.submit();
+    }
+});

@@ -78,7 +78,7 @@
             </div>
           </form>
 
-          <form action="{{ URL::route('app.update_profile') }}" method="POST" class="edit-cont">
+          <form action="{{ URL::route('app.update_profile') }}" method="POST" class="edit-cont" id="profile_form">
             <div>
               <div class="input-cont">
                 <input name="name" value="{{ trim($user->name) }}" placeholder="Ваше имя" class="us-input">
