@@ -12,9 +12,9 @@
         @endif
         </div>
         <ul class="soc-links">
-          <li><a href="#" class="soc-icon"><i class="fi icon-fb"></i></a></li>
-          <li><a href="#" class="soc-icon"><i class="fi icon-vk"></i></a></li>
-          <li><a href="#" class="soc-icon"><i class="fi icon-ok"></i></a></li>
+          <li><a href="http://www.facebook.com/sharer.php?u=http://mypromises.ru" class="soc-icon"><i class="fi icon-fb"></i></a></li>
+          <li><a href="http://vk.com/share.php?url=http://mypromises.ru&event=button_share" class="soc-icon"><i class="fi icon-vk"></i></a></li>
+          <li><a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl=mypromises.ru" class="soc-icon"><i class="fi icon-ok"></i></a></li>
         </ul>
         <div class="logo-text">Мои обещания</div>
         <div class="header-desc">
