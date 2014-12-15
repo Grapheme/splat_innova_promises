@@ -473,13 +473,14 @@ $("#auth_form").validate({
 
         //$(form).submit();
 
-        //var promise_text = $('.promise_text').val();
         //var email = $('.user-auth-email').val();
         //var pass = $('.user-auth-pass').val();
+        var promise_text = $('.promise_text').val();
 
-        //$('input[type=hidden][name=promise_text]').val(promise_text);
+        $('input[type=hidden][name=promise_text]').val(promise_text);
+        form.submit();
 
-        return true;
+        //return true;
     }
 });
 //*/
