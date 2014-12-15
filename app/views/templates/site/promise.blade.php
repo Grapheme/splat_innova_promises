@@ -98,7 +98,8 @@
                 @if ($failed)
                     Задание провалено
                 @elseif ($promise->finished_at)
-                    Выполнено {{ $promise->finished_at }}
+                    {{-- Обещание выполнено $promise->finished_at --}}
+                    <div class="pr-btn active"><i class="fi icon-smile"></i><span>Обещание выполнено</span></div>
                 @else
                     <a href="?finished=1" class="pr-btn active"><i class="fi icon-smile"></i><span>Выполнено</span></a>
                     <a href="?fail=1" class="pr-btn"><i class="fi icon-unsmile"></i><span>Отказаться</span></a>
