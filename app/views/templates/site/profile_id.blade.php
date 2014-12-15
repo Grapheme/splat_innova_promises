@@ -86,8 +86,7 @@
             }
             ?>
               <li class="promise-item type-{{ $promise->style_id }}" data-finish="{{ $promise->time_limit }}">
-                <a href="{{ URL::route('app.promise', $promise->id) }}" class="fullsizelink"></a>
-                <div class="promise-content">
+                <a href="{{ URL::route('app.promise', $promise->id) }}" class="promise-content">
                   <div class="title">
                     {{ $promise->name }}
                   </div>
@@ -123,7 +122,7 @@
 
                     </div>
                   </div>
-                </div>
+                </a>
               </li>
 
                 @if ($p == 2)
