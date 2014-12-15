@@ -45,10 +45,10 @@
             <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" id="auth_form">
               <input type="hidden" name="promise_text">
               <div class="input-cont">
-                <input type="email" name="email" placeholder="Эл. почта" required>
+                <input type="email" name="email" placeholder="Эл. почта">
               </div>
               <div class="input-cont">
-                <input type="password" name="pass" placeholder="Пароль" required>
+                <input type="password" name="pass" placeholder="Пароль">
               </div>
               <div class="btns">
                 <button class="us-btn">Войти</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-form-pass">восстановить пароль</a>

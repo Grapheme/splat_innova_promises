@@ -454,7 +454,7 @@ $(document).on('click', '.fb-oauth-link', function(e){
  * EMAIL & PASSWORD
  *
  */
-/*
+//*
 $("#auth_form").validate({
     rules: {
         'email': { required: true, email: true },
@@ -467,24 +467,24 @@ $("#auth_form").validate({
     errorClass: "inp-error",
     submitHandler: function(form) {
         //alert(111);
-        //console.log(form);
+        console.log(form);
         //return false;
         //return true;
 
         //$(form).submit();
 
-        var promise_text = $('.promise_text').val();
+        //var promise_text = $('.promise_text').val();
         //var email = $('.user-auth-email').val();
         //var pass = $('.user-auth-pass').val();
 
-        $('input[type=hidden][name=promise_text]').val(promise_text);
+        //$('input[type=hidden][name=promise_text]').val(promise_text);
 
         return true;
     }
 });
-*/
+//*/
 
-//*
+/*
 $(document).on('submit', '#auth_form', function(e){
 
     //e.preventDefault();
