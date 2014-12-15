@@ -442,7 +442,7 @@ $(document).on('click', '.fb-oauth-link', function(e){
     var promise_text = $('.promise_text').val();
 
     var params = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=800,height=600"
-    window.open('https://www.facebook.com/dialog/oauth?client_id=' + fb_app_id + '&redirect_uri=' + domain + '/fb-oauth%3Fpromise_text='+ promise_text + '&scope=public_profile,email,user_birthday,user_photos,user_friends,user_about_me,user_hometown', 'fb-oauth', params);
+    window.open('https://www.facebook.com/dialog/oauth?client_id=' + fb_app_id + '&redirect_uri=' + domain + '/fb-oauth&scope=public_profile,email,user_birthday,user_photos,user_friends,user_about_me,user_hometown', 'fb-oauth', params);
 
     return false;
 });
