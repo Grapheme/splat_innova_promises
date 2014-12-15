@@ -3,6 +3,7 @@ SplatSite.tabs = function() {
 	var open_link = $('.js-open-box'),
 		close_link = $('.js-pop-close'),
 		overlay_shadow = $('.overlay-shadow'),
+		change_link = $('.js-change-box'),
 		overlay = $('.overlay'),
 		popup = {};
 
@@ -64,7 +65,12 @@ SplatSite.tabs = function() {
 			return false;
 		});
 		close_link.on('click', function(){
-			popup.close($(this));
+			popup.close();
+			return false;
+		});
+		change_link.on('click', function(){
+			popup.close();
+			popup.open($('.js-open-box[data-box="' + $(this).attr('data-box') + '"]').first());
 			return false;
 		});
 		$('.js-form-pass').on('click', function(){
