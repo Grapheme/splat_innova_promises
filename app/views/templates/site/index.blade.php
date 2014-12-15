@@ -94,9 +94,11 @@
         </div>
         <div class="promises-amount">
           <div class="amount-cont">
-            уже <b>
-            {{ trans_choice(':count человек|:count человека|:count человек', $total_promises, array(), 'ru') }}
-            </b> дали свои обещания</div>
+            {{--уже <b>--}}
+            <b>
+            {{ trans_choice(':count обещание|:count обещания|:count обещаний', $finished_promises, array(), 'ru') }}
+            </b> уже сдержано</div>
+            {{--</b> дали свои обещания</div>--}}
         </div>
         <ul class="promises-cloud js-promises">
           <li style="color: #3e9327; font-size: 20px;">С НОВОГО БРОШУ КУРИТЬ</li>

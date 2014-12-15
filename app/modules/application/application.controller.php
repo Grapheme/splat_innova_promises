@@ -83,10 +83,18 @@ class ApplicationController extends BaseController {
 
     public function getAppMainPage() {
 
-        $dic_promises = Dic::where('slug', 'promises')->first();
-        $total_promises = DicVal::where('dic_id', $dic_promises->id)->count();
+        /**
+         * Всего обещаний дано
+         */
+        #$dic_promises = Dic::where('slug', 'promises')->first();
+        #$total_promises = DicVal::where('dic_id', $dic_promises->id)->count();
 
-        return View::make(Helper::layout('index'), compact('user', 'promises', 'total_promises'));
+        /**
+         * Всего выполненных обещаний
+         */
+        $finished_promises = DicFieldVal::where('key', 'finished_at')->where('value', '>', 0)->count();
+
+        return View::make(Helper::layout('index'), compact('user', 'promises', 'finished_promises'));
     }
 
 
@@ -873,10 +881,14 @@ class ApplicationController extends BaseController {
 
                         Mail::send('emails.user-register', $data, function ($message) use ($data) {
 
+                            /*
                             $from_email = Dic::valueBySlugs('options', 'from_email');
                             $from_email = $from_email->name != '' ? $from_email->name : 'support@grapheme.ru';
                             $from_name = Dic::valueBySlugs('options', 'from_name');
                             $from_name = $from_name->name != '' ? $from_name->name : 'No-reply';
+                            */
+                            $from_email = Config::get('mail.from.address');
+                            $from_name = Config::get('mail.from.name');
 
                             $message->from($from_email, $from_name);
                             $message->subject('Успешная регистрация');
