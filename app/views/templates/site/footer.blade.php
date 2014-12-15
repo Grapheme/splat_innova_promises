@@ -27,7 +27,7 @@
       </div>
       <div class="form-block">
         <div class="wrapper">
-          <div class="desc">Для того, чтобы сохранить ваше обещание, вам необходимо зарегистрироваться на нашем сайте<br>с помощью одной из этих социальных сетей:</div>
+          <div class="desc">Для того, чтобы сохранить ваше обещание, вам необходимо авторизоваться на нашем сайте<br>с помощью одной из этих социальных сетей:</div>
           <div class="soc-auth">
             <a href="#" class="soc-fb fb-oauth-link">
                 <i class="fi icon-fb"></i>Facebook
@@ -65,6 +65,52 @@
                 <button class="us-btn">Восстановить</button>
               </div>
             </form>
+          </div>
+        </div>
+      </div>
+      <div class="wrapper">
+        <ul class="auth-desc">
+          <li class="about-soc"><span class="icon"></span><span class="text">Выберите ту социальную сеть, в которой сможете рассказать о данном вами обещании.</span></li>
+          <li class="about-dif"><span class="icon"></span><span class="text">У вас появится возможность выбрать различные варианты оформления карточек с обещаниями.</span></li>
+          <li class="about-sav"><span class="icon"></span><span class="text">Вы сможете сохранить ваше обещание, а мы будем напоминать вам о нем.</span></li>
+          <li class="about-new"><span class="icon"></span><span class="text">В новогоднюю ночь сбываются чудеса, а люди во всем мире дают друг другу обещания, которые порой так трудно исполнить.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div data-box="reg" class="popup auth-popup js-pop-up"><a href="#" class="popup-close js-pop-close"><span></span></a>
+      <div class="wrapper">
+        <div style="display: none;" class="title js-promise-title"></div>
+      </div>
+      <div class="form-block">
+        <div class="wrapper">
+          <div class="desc">Для того, чтобы сохранить ваше обещание, вам необходимо зарегистрироваться на нашем сайте<br>с помощью одной из этих социальных сетей:</div>
+          <div class="soc-auth">
+            <a href="#" class="soc-fb fb-oauth-link">
+                <i class="fi icon-fb"></i>Facebook
+            </a>
+            <a href="#" class="soc-vk vk-oauth-link">
+                <i class="fi icon-vk"></i>Вконтакте
+            </a>
+            <a href="#" class="soc-ok ok-oauth-link" data-domain="{{ domain }}">
+                <i class="fi icon-ok"></i>Одноклассники
+            </a>
+          </div>
+          <div class="desc">или с помощью адреса электронной почты:</div>
+          <div data-type="auth" class="form-inputs js-pop-form">
+
+            <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" id="auth_form">
+              <input type="hidden" name="promise_text">
+              <div class="input-cont">
+                <input type="email" name="email" placeholder="Эл. почта">
+              </div>
+              <div class="input-cont">
+                <input type="password" name="pass" placeholder="Пароль">
+              </div>
+              <div class="btns">
+                <button class="us-btn">Войти</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-open-box" data-box="auth">у меня уже есть аккаунт</a>
+              </div>
+            </form>
+
           </div>
         </div>
       </div>
