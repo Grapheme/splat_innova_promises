@@ -1175,6 +1175,7 @@ class ApplicationController extends BaseController {
         if (!@$auth['access_token']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (1).";
             echo "<!--";
+            Helper::d($postfields);
             Helper::d($auth);
             echo "-->";
             die;
