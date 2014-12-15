@@ -181,10 +181,40 @@ SplatSite.ShowFriends = function() {
 	});
 }
 
+SplatSite.Tooltips = {
+	init: function() {
+		var self = this;
+		var html = '<div class="js-tooltip"><div class="js-tooltip-body"></div></div>';
+		$('body').append(html);
+		$('[data-tooltip]').on('mouseover', function(){
+			var text = $(this).attr('data-tooltip');
+			var elem = $(this);
+			self.show(text, elem);
+		});
+		$('[data-tooltip]').on('mouseout', function(){
+			self.close();
+		});
+	},
+	show: function(text, elem) {
+		var pos = {};
+		pos.x = elem.offset().left + elem.width() + 20;
+		pos.y = elem.offset().top + elem.height()/2;
+		$('.js-tooltip').css({
+			top: pos.y,
+			left: pos.x
+		}).show();
+		$('.js-tooltip-body').text(text);
+	},
+	close: function() {
+		$('.js-tooltip').hide();
+	}
+}
+
 $(function(){
 	var body = $('body');
 	SplatSite.tabs();
 	SplatSite.ShowFriends();
+	SplatSite.Tooltips.init();
 	$('.styledCheck').button();
 
 	$('.js-mask-time').mask('00:00', {placeholder: "00:00"});
