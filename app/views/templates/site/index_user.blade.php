@@ -179,12 +179,12 @@
                         $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
                         ?>
                         @if ($failed)
-                            <div class="promise-fail" data-tooltip="Обещание не было выполнено.">
-                                <i class="fi icon-unsmile"></i>
+                            <div class="unsmile" data-tooltip="Обещание не было выполнено.">
+                                <!-- <i class="fi icon-unsmile"></i> -->
                             </div>
                         @elseif ($promise->finished_at)
-                            <div class="promise-success" data-tooltip="Обещание выполнено.">
-                                <i class="fi icon-smile"></i>
+                            <div class="smile" data-tooltip="Обещание выполнено.">
+                                <!-- <i class="fi icon-smile"></i> -->
                             </div>
                         @else
                             <div class="time">02:01:23</div>
