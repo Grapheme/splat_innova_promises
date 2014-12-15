@@ -468,7 +468,7 @@ $("#auth_form").validate({
     errorClass: "inp-error",
     submitHandler: function(form) {
         //alert(111);
-        console.log(form);
+        //console.log(form);
         //return false;
         //return true;
 
@@ -518,4 +518,47 @@ $('.make-new-promise-btn').click(function(e){
 
     gotome();
     return false;
+});
+
+
+
+
+$.validator.addMethod(
+    "customDate",
+    function(value, element) {
+        // put your own logic here, this is just a (crappy) example
+        return value.match(/^\d\d\.\d\d\.\d\d\d\d$/);
+    },
+    "Please enter a date in the format dd.mm.yyyy."
+);
+$.validator.addMethod(
+    "customTime",
+    function(value, element) {
+        // put your own logic here, this is just a (crappy) example
+        return value.match(/^\d\d\:\d\d$/);
+    },
+    "Please enter a time in the format hh:mm."
+);
+
+
+
+
+$("#promise-form").validate({
+    rules: {
+        'promise_text': { required: true },
+        'limit_date': { required: true, customDate: true },
+        'limit_time': { required: true, customTime: true },
+        'style_id': { required: true }
+    },
+    messages: {
+        'promise_text': '',
+        'limit_date': '',
+        'limit_time': '',
+        'style_id': ''
+    },
+    errorClass: "inp-error",
+    submitHandler: function(form) {
+        //console.log(form);
+        form.submit();
+    }
 });
