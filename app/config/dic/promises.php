@@ -43,8 +43,13 @@ return array(
                 'type' => 'checkbox',
                 'label_class' => 'normal_checkbox',
             ),
+            'time_limit' => array(
+                'title' => 'Крайнее время выполнения обещания',
+                'type' => 'text',
+            ),
+            /*
             'date_finish' => array(
-                'title' => 'Срок выполнения обещания',
+                'title' => 'Крайняя дата выполнения обещания (dd.mm.yyyy)',
                 'type' => 'date',
                 'others' => array(
                     'class' => 'text-center',
@@ -58,6 +63,7 @@ return array(
                     return $value ? date('d.m.Y', strtotime($value)) : date('d.m.Y');
                 },
             ),
+            */
             'finished_at' => array(
                 'title' => 'Обещание выполнено (дата)',
                 'type' => 'text',

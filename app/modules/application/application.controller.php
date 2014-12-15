@@ -537,13 +537,18 @@ class ApplicationController extends BaseController {
         #Helper::ta(Input::all());
 
         $promise_text = Input::get('promise_text');
-        $time_limit = Input::get('time_limit');
+        $limit_time = Input::get('limit_time');
+        $limit_date = Input::get('limit_date');
         $only_for_me = Input::get('only_for_me');
 
         #if (!$promise_text || !$time_limit || $time_limit < 1)
         #    App::abort(404);
 
-        $date_finish = (new \Carbon\Carbon())->now()->addDays($time_limit)->format('Y-m-d');
+        /**
+         * Старый формат
+         */
+        #$date_finish = (new \Carbon\Carbon())->now()->addDays($limit_date)->format('Y-m-d');
+        $date_finish = (new \Carbon\Carbon())->createFromFormat('d.m.Y', $limit_date)->format('Y-m-d') . ' ' . $limit_time . ':00';
 
         #Helper::d($date_finish);
 
@@ -557,7 +562,7 @@ class ApplicationController extends BaseController {
                 'name' => mb_substr($promise_text, 0, 64) . (mb_strlen($promise_text) > 64 ? '...' : ''),
                 'fields' => array(
                     'user_id' => $this->user->id,
-                    'date_finish' => $date_finish,
+                    'time_limit' => $time_limit,
                     'only_for_me' => $only_for_me ? 1 : NULL,
                     'finished_at' => ''
                 ),
