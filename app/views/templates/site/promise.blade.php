@@ -96,10 +96,11 @@
                 $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
                 ?>
                 @if ($failed)
-                    Задание провалено
+                    {{-- Задание провалено --}}
+                    <div class="pr-btn"><i class="fi icon-unsmile"></i><span>Не удалось выполнить обещание</span></div>
                 @elseif ($promise->finished_at)
                     {{-- Обещание выполнено $promise->finished_at --}}
-                    <div class="pr-btn active"><i class="fi icon-smile"></i><span>Обещание выполнено</span></div>
+                    <div class="pr-btn"><i class="fi icon-smile"></i><span>Обещание выполнено</span></div>
                 @else
                     <a href="?finished=1" class="pr-btn active"><i class="fi icon-smile"></i><span>Выполнено</span></a>
                     <a href="?fail=1" class="pr-btn"><i class="fi icon-unsmile"></i><span>Отказаться</span></a>
