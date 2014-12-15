@@ -399,7 +399,8 @@ $(document).on('click', '.ok-oauth-link', function(e){
 
     console.log(ODKL.Oauth2);
 
-    ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT;GET_EMAIL', $(this).attr('data-domain') + '/ok-oauth' );
+    //ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;SET_STATUS;PHOTO_CONTENT;GET_EMAIL', $(this).attr('data-domain') + '/ok-oauth' );
+    ODKL.Oauth2(this, 1110811904, 'VALUABLE_ACCESS;GET_EMAIL', $(this).attr('data-domain') + '/ok-oauth' );
 
     return false;
 });
