@@ -137,6 +137,7 @@
             <div class="btn-cont"><a href="{{ URL::route('app.new_promise') }}" class="us-btn">Дать обещание</a></div>
           </div>
           <div class="promises-title us-title">Мои обещания</div>
+          <div class="little-title">Активные</div>
         </div>
 
 
@@ -212,6 +213,10 @@
             </div>
 
         @endif
+
+        <div class="wrapper">
+          <div class="little-title">Неактивные</div>
+        </div>
 
         @if (0)
         <ul class="promises-list">
