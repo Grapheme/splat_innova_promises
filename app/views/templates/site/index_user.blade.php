@@ -2,6 +2,7 @@
 
 
 @section('style')
+    @parent
 @stop
 
 
