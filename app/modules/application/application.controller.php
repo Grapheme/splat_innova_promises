@@ -101,6 +101,11 @@ class ApplicationController extends BaseController {
             return Redirect::route('app.profile');
         }
 
+        if (NULL !== ($promise_text = Input::get('promise_text'))) {
+            $_SESSION['promise_text'] = $promise_text;
+            $_SESSION['redirect_to_new_promise'] = 1;
+        }
+
         /**
          * Если в сессии есть непустой текст обещания (введен перед авторизацией) -
          * перенаправляем пользователя на страницу дачи обещания.
