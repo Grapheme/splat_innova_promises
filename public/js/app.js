@@ -474,8 +474,8 @@ function gotome() {
 }
 
 
-$(document).on('click', '.make-new-promise-btn', function(e){
-
+$('.make-new-promise-btn').click(function(e){
+//$(document).on('click', '.make-new-promise-btn', function(e){
     //e.preventDefault();
 
     //alert(user_id);
