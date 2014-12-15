@@ -578,7 +578,7 @@ $("#profile_form").validate({
         'name': '',
         'email': '',
         'bdate': '',
-        'confirmation': ''
+        'confirmation': 'Необходимо ознакомиться с правилами'
     },
     errorClass: "inp-error",
     submitHandler: function(form) {

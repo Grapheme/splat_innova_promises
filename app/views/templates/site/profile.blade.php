@@ -91,8 +91,8 @@
                 <input name="bdate" value="{{ $user->bdate }}" placeholder="Ваша дата рождения" class="us-input js-mask-date">
               </div>
               <div class="check-cont">
-                <input type="checkbox" name="confirmation" id="apply" class="styledCheck">
                 <label for="apply"><span class="check-fake"><i class="fi icon-check"></i></span>Подтверждаю ознакомление с <a target="_blank" href="http://mypromises.ru/privacy_policy.pdf">правилами пользования</a></label>
+                  <input type="checkbox" name="confirmation" id="apply" class="styledCheck">
               </div>
               <div class="btn-cont">
                 <button class="us-btn">Сохранить</button>
