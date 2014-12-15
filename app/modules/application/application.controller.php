@@ -1159,7 +1159,7 @@ class ApplicationController extends BaseController {
         $postfields = 'code=' . $_GET['code'] .
             '&client_id=' . $AUTH['client_id'] .
             '&client_secret=' . $AUTH['client_secret'] .
-            '&redirect_uri=' . URL::route('app.ok-oauth') . '?promise_text=' . urlencode($promise_text) .
+            '&redirect_uri=' . URL::route('app.ok-oauth') . #'?promise_text=' . urlencode($promise_text) .
             '&grant_type=authorization_code'
         ;
 
@@ -1291,7 +1291,7 @@ class ApplicationController extends BaseController {
         echo "
         Авторизация прошла успешно, теперь это окно можно закрыть.
         <script>
-        opener.location = '" . URL::route('app.me') . "';
+        opener.location = '" . URL::route('app.me', array('promise_text' => $promise_text)) . "';
         window.close();
         </script>
         ";
