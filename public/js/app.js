@@ -467,6 +467,7 @@ $("#auth_form").validate({
     submitHandler: function(form) {
         //console.log(form);
         //return false;
+        return true;
     }
 });
 
