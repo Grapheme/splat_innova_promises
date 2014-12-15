@@ -361,6 +361,7 @@ function fbConnected() {
                                         //alert('RELOAD PAGE');
                                         //location.href = base_url + '';
                                         location.href = location.href;
+                                        location.reload();
                                     })
                                     .fail(function (jqXHR, textStatus, errorThrown) {
                                         //alert('ERROR');
