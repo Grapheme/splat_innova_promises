@@ -977,7 +977,8 @@ class ApplicationController extends BaseController {
             }
 
             if (isset($_SESSION['user_token'])) {
-                #Helper::dd($_SESSION);
+                if (Input::get('debug') == 1)
+                    Helper::dd($_SESSION);
                 unset($_SESSION['user_token']);
             }
 
