@@ -79,9 +79,17 @@
         </div>
         <div class="main-content wrapper">
           <div class="title">Пообещать и сдержать слово много стоит.</div>
-          <div class="desc">Обещания имеют огромную силу. Они вселяют надежду, помогают достичь цели и изменить себя. Но всё это происходит лишь тогда, когда они перестают быть просто словами и тогда превращаются в дела.</div>
-          <div class="input-cont">
+          <div class="desc">Обещания имеют огромную силу. Они вселяют надежду, помогают достичь цели и изменить себя. Но всё это происходит лишь тогда, когда они перестают быть просто словами и тогда превращаются в дела.</div>
+          <!-- <div class="input-cont">
             <input placeholder="Я обещаю, что..." class="main-input js-promise-input promise_text">
+            <div class="hint">Совет: Давайте только те обещания, которые можете выполнить.</div>
+            <a data-box="auth" class="js-open-box js-promise-btn us-btn make-new-promise-btn">Дать обещание</a>
+          </div> -->
+          <div class="input-cont js-promise-placeholder">
+            <div class="index-promise-input">
+              <div class="promise-placeholder">Я обещаю, что <span>...</span></div>
+              <input class="main-input js-promise-input promise-text">
+            </div>
             <div class="hint">Совет: Давайте только те обещания, которые можете выполнить.</div>
             <a data-box="auth" class="js-open-box js-promise-btn us-btn make-new-promise-btn">Дать обещание</a>
           </div>

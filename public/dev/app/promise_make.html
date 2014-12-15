@@ -50,7 +50,10 @@
         <div class="promise-form">
           <form>
             <div class="input-cont">
-              <textarea placeholder="Я ОБЕЩАЮ ..."></textarea>
+              <div class="make-promise-placeholder js-promise-placeholder">
+                <div class="promise-placeholder">Я ОБЕЩАЮ <span>...</span></div>
+                <textarea></textarea>
+              </div>
             </div>
             <div class="time-inputs">
               <div class="desc">Я выполню обещание к</div>
@@ -186,6 +189,7 @@
   <script src="bower_components/masonry/masonry.js"></script>
   <script src="bower_components/jquery-ui/jquery-ui.js"></script>
   <script src="bower_components/jQuery-Mask-Plugin/dist/jquery.mask.js"></script>
+  <script src="bower_components/jquery-autosize/jquery.autosize.js"></script>
   <!-- endbower-->
   <!-- endbuild-->
   <!-- build:js({app,.tmp}) scripts/main.js-->

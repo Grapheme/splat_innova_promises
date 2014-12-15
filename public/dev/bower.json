@@ -8,6 +8,7 @@
     "fotorama": "~4.6.2",
     "masonry": "~3.2.1",
     "jquery-ui": "~1.11.2",
-    "jQuery-Mask-Plugin": "~1.10.13"
+    "jQuery-Mask-Plugin": "~1.10.13",
+    "jquery-autosize": "~1.18.17"
   }
 }

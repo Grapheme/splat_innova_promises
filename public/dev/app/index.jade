@@ -12,8 +12,10 @@ block content
 		.main-content.wrapper
 			.title Пообещать и сдержать слово много стоит.
 			.desc Обещания имеют огромную силу. Они вселяют надежду, помогают достичь цели и изменить себя. Но всё это происходит лишь тогда, когда они перестают быть просто словами и тогда превращаются в дела.
-			.input-cont
-				input(placeholder="Я обещаю, что...").main-input.js-promise-input
+			.input-cont.js-promise-placeholder
+				.index-promise-input
+					.promise-placeholder Я обещаю, что <span>...</span>
+					input.main-input.js-promise-input
 				.hint Совет: Давайте только те обещания, которые можете выполнить.
 				a.js-open-box(data-box="auth").js-promise-btn.us-btn Дать обещание
 	.promises-cont

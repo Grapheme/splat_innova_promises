@@ -52,8 +52,14 @@
           </div>
           <div class="promise-form">
             {{ Form::model(NULL, array('url' => URL::route('app.add_promise'), 'class' => 'smart-form', 'id' => 'promise-form', 'role' => 'form', 'method' => 'PUT', 'files' => true)) }}
-              <div class="input-cont">
+              <!-- <div class="input-cont">
                 {{ Form::textarea('promise_text', (@$_SESSION['promise_text'] && $_SESSION['promise_text'] != 'undefined' ? $_SESSION['promise_text'] : ''), array('placeholder' => "Я ОБЕЩАЮ ...")) }}<br/>
+              </div> -->
+              <div class="input-cont">
+                <div class="make-promise-placeholder js-promise-placeholder">
+                  <div class="promise-placeholder">Я ОБЕЩАЮ <span>...</span></div>
+                  {{ Form::textarea('promise_text', (@$_SESSION['promise_text'] && $_SESSION['promise_text'] != 'undefined' ? $_SESSION['promise_text'] : ''), array('placeholder' => "Я ОБЕЩАЮ ...")) }}<br/>
+                </div>
               </div>
               <div class="time-inputs">
                 <div class="desc">Я выполню обещание к</div>
