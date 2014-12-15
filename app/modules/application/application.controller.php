@@ -112,6 +112,8 @@ class ApplicationController extends BaseController {
         if (NULL !== ($promise_text = Input::get('promise_text'))) {
             $_SESSION['promise_text'] = $promise_text;
             $_SESSION['redirect_to_new_promise'] = 1;
+        } elseif (isset($_GET['promise_text'])) {
+            return Redirect::route('app.me');
         }
 
         /**
