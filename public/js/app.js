@@ -467,3 +467,8 @@ $(document).on('submit', '#auth_form', function(e){
     return true;
 });
 
+
+function gotome() {
+    var promise_text = $('.promise_text').val();
+    location.href = '/me?promise_text=' + promise_text;
+}

@@ -1150,11 +1150,13 @@ class ApplicationController extends BaseController {
          * Если с авторизацией передан текст обещания - сохраняем его в сессию,
          * чтобы после авторизации сразу перейти на страницу дачи обещания.
          */
+        /*
         $promise_text = Input::get('promise_text');
         if ($promise_text != '') {
             $_SESSION['promise_text'] = $promise_text;
             $_SESSION['redirect_to_new_promise'] = 1;
         }
+        */
 
         $postfields = 'code=' . $_GET['code'] .
             '&client_id=' . $AUTH['client_id'] .
@@ -1291,7 +1293,8 @@ class ApplicationController extends BaseController {
         echo "
         Авторизация прошла успешно, теперь это окно можно закрыть.
         <script>
-        opener.location = '" . URL::route('app.me', array('promise_text' => $promise_text)) . "';
+        //opener.location = '" . URL::route('app.me', array('promise_text' => Input::get('promise_text'))) . "';
+        opener.gotome();;
         window.close();
         </script>
         ";
