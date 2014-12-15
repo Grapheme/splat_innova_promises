@@ -82,7 +82,8 @@
           <div class="desc">Обещания имеют огромную силу. Они вселяют надежду, помогают достичь цели и изменить себя. Но всё это происходит лишь тогда, когда они перестают быть просто словами и тогда превращаются в дела.</div>
           <div class="input-cont">
             <input placeholder="Я обещаю, что..." class="main-input js-promise-input promise_text">
-            <div class="hint">Совет: Давайте только те обещания, которые можете выполнить.</div><a data-box="auth" class="js-open-box js-promise-btn us-btn">Дать обещание</a>
+            <div class="hint">Совет: Давайте только те обещания, которые можете выполнить.</div>
+            <a data-box="auth" class="js-open-box js-promise-btn us-btn make-new-promise-btn">Дать обещание</a>
           </div>
         </div>
       </div>

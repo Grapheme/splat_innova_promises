@@ -472,3 +472,9 @@ function gotome() {
     var promise_text = $('.promise_text').val();
     location.href = '/me?promise_text=' + promise_text;
 }
+
+
+$('.make-new-promise-btn').click(function(){
+    alert(user_id);
+    return false;
+});
