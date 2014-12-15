@@ -29,6 +29,7 @@
         {{ @$content }}
     @show
 
+    [
     @section('koe-chto')
         <li class="promise-item type-promo">
             <div class="promise-content">
@@ -40,6 +41,7 @@
             </div>
         </li>
     @stop
+    ]
 
     @include(Helper::layout('footer'))
     @include(Helper::layout('scripts'))
