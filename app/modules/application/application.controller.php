@@ -1197,7 +1197,10 @@ class ApplicationController extends BaseController {
         }
 
         $user['identity'] = 'http://ok.ru/profile/' . $user['uid'];
-        $user['bdate'] = @$user['birthday'];
+        if (@$user['birthday']) {
+            $birthday = (new \Carbon\Carbon())->createFromFormat('Y-m-d', $user['birthday']);
+            $user['bdate'] = $birthday->format('d.m.Y');
+        }
         $user['avatar'] = @$user['pic_3'];
         $user['auth_method'] = 'odnoklassniki';
 
