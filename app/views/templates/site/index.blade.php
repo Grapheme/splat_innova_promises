@@ -74,7 +74,12 @@
 
       <div class="main-screen">
         <div class="main-fotorama">
-          <div class="js-main-fotorama"><img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-1.jpg" alt=""><img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-2.jpg" alt="">
+          <div class="js-main-fotorama">
+            <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-1.jpg" alt="">
+            <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-2.jpg" alt="">
+            <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-3.jpg" alt="">
+            <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-4.jpg" alt="">
+            <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-5.jpg" alt="">
           </div>
         </div>
         <div class="main-content wrapper">
@@ -90,7 +95,7 @@
               <div class="promise-placeholder">Я обещаю, что <span>...</span></div>
               <input class="main-input js-promise-input promise-text">
             </div>
-            <div class="hint">Совет: Давайте только те обещания, которые можете выполнить.</div>
+            <div class="hint">Совет: Давайте только те обещания, которые сможете выполнить.</div>
             <a data-box="auth" class="js-open-box js-promise-btn us-btn make-new-promise-btn">Дать обещание</a>
           </div>
         </div>
@@ -102,35 +107,27 @@
         </div>
         <div class="promises-amount">
           <div class="amount-cont">
-            {{--уже <b>--}}
-            <b>
+            Выполнено <b>
             {{ trans_choice(':count обещание|:count обещания|:count обещаний', $finished_promises, array(), 'ru') }}
-            </b> уже сдержано</div>
-            {{--</b> дали свои обещания</div>--}}
+            </b>
+          </div>
         </div>
         <ul class="promises-cloud js-promises">
-          <li style="color: #3e9327; font-size: 20px;">С НОВОГО БРОШУ КУРИТЬ</li>
-          <li style="color: #07cbcc;">ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ</li>
-          <li style="color: #bbbbc3; font-size: 45px;">ОСТАВЛЮ ВСЕ КАК и ЕСТЬ!</li>
-          <li style="color: #fee000; font-size: 30px;">НАВЕЩУ РОДИТЕЛЕЙ</li>
-          <li style="color: #3e9327;">КУПЛЮ СЕБЕ НОВЫЙ АЙФОН</li>
-          <li style="color: #56565b; font-size: 25px;">НЕ ОБЕЩАТЬ</li>
-          <li style="color: #07cbcc; font-size: 20px;">ПОХУДЕЮ НА 20 КИЛОГРАММ</li>
-          <li>Встречу Новый Год с семьей</li>
-          <li>Начну бегать по утрам</li>
-          <li>Буду радоваться мелочам</li>
-          <li>Поеду в город моей мечты</li>
-          <li>Прыгну с парашютом</li>
+          <li style="color: #84c80f; font-size: 20px;">Встречу Новый Год с семьей</li>
+          <li style="color: #07cbcc; font-size: 26px;">Начну бегать по утрам</li>
+          <li style="color: #d9aabe; font-size: 45px;">Буду радоваться мелочам</li>
+          <li style="color: #84c80f; font-size: 20px;">Поеду в город моей мечты</li>
+          <li style="color: #f8e115; font-size: 30px;">Прыгну с парашютом</li>
           <li>Буду чаще видеться с семьей</li>
-          <li>Брошу курить с понедельника</li>
-          <li>Не буду думать о работе на выходных</li>
-          <li>Читать по книге в месяц</li>
-          <li>Не буду есть фастфуд</li>
+          <li style="color: #07cbcc;">Брошу курить с понедельника</li>
+          <li style="color: #b7b7b9;">Не буду думать о работе на выходных</li>
+          <li style="color: #84c80f; font-size: 20px;">Читать по книге в месяц</li>
+          <li style="color: #84c80f; font-size: 20px;">Не буду есть фастфуд</li>
           <li>Ложиться спать не позже 12</li>
-          <li>Запишусь в спортзал</li>
-          <li>Скину 5кг или научусь любить себя с ними</li>
-          <li>Буду откладывать средства в течение 6 месяцев</li>
-          <li>Выучу английский язык</li>
+          <li style="color: #d9aabe; font-size: 45px;">Запишусь в спортзал</li>
+          <li style="color: #f8e115; font-size: 30px;">Выучу английский язык</li>
+          <li style="color: #07cbcc;">Скину 5кг или научусь любить себя с ними</li>
+          <li style="color: #b7b7b9;">Буду откладывать средства в течение 6 месяцев</li>
         </ul>
       </div>
 

@@ -51,7 +51,7 @@
                 <input type="password" name="pass" placeholder="Пароль">
               </div>
               <div class="btns">
-                <button class="us-btn">Войти</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-form-pass">восстановить пароль</a>
+                <button class="us-btn">Войти</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-form-pass">Забыли пароль?</a>
               </div>
             </form>
 
@@ -107,7 +107,7 @@
                 <input type="password" name="pass" placeholder="Пароль">
               </div>
               <div class="btns">
-                <button class="us-btn">Войти</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-change-box" data-box="auth">у меня уже есть аккаунт</a>
+                <button class="us-btn">Зарегистрироваться</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-change-box" data-box="auth">У меня уже есть аккаунт!</a>
               </div>
             </form>
 
