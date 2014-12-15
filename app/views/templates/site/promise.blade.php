@@ -103,31 +103,37 @@
             <div class="text">Каждый раз, выполняя обещания, вы становитесь чуточку лучше. Мы тоже хотим вам пообещать <a href="#">кое-что</a></div>
         </div>
     </div>
-    <div class="wrapper">
-        <ul class="comments-list">
-            <li class="comment">
-                <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-                <div class="comment-content">
-                    <div class="name">Яна Блидер</div>
-                    <div class="text">Блять, я очень рада что ты решил удлиннить свой член</div>
-                </div>
-            </li>
-            <li class="comment">
-                <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-                <div class="comment-content">
-                    <div class="name">Яна Блидер</div>
-                    <div class="text">Блять, я очень рада что ты решил удлиннить свой член</div>
-                </div>
-            </li>
-            <li class="comment">
-                <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
-                <div class="comment-content">
-                    <div class="name">Яна Блидер</div>
-                    <div class="text">Блять, я очень рада что ты решил удлиннить свой член</div>
-                </div>
-            </li>
-        </ul>
-    </div>
+
+
+    @if (count($comments))
+        <div class="wrapper">
+            <ul class="comments-list">
+
+                @foreach ($comments as $comment)
+                <?
+                $commentator = @$users[$comment->user_id];
+                if (!is_object($commentator))
+                    continue;
+                $default_avatar = '/theme/images/man.png';
+                if (isset($commentator->sex) && $user->sex == 1)
+                    $default_avatar = '/theme/images/woman.png';
+                ?>
+                <li class="comment">
+                    <div style="background-image: url({{ $commentator->avatar ?: $default_avatar }});" class="profile-photo"></div>
+                    <div class="comment-content">
+                        <div class="name">
+                            {{ $commentator->name }}
+                        </div>
+                        <div class="text">
+                            {{ $comment->comment_text }}
+                        </div>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="leave-comment">
         <div class="wrapper">
             <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="profile-photo"></div>
