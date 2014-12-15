@@ -482,7 +482,8 @@ class ApplicationController extends BaseController {
             $user->update_field('bdate', $bdate);
         }
 
-        if (@$_SESSION['promise_text']) {
+        if (@$_SESSION['promise_text'] && @$_SESSION['redirect_to_new_promise']) {
+            unset($_SESSION['redirect_to_new_promise']);
             return Redirect::route('app.new_promise');
         }
 

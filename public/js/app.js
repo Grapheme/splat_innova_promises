@@ -15,6 +15,10 @@ $(document).on('click', '.logout', function(e){
     location.href = '/';
 });
 
+$.validator.setDefaults({
+    ignore: [],
+    // any other default options and/or rules
+});
 
 /**
  * Callback-функция, вызывается после авторизации через ulogin
