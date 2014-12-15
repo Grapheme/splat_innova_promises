@@ -602,6 +602,7 @@ class ApplicationController extends BaseController {
 
     public function getPromise($id) {
 
+        /*
         Helper::d('$_SESSION');
         Helper::d($_SESSION);
 
@@ -611,6 +612,7 @@ class ApplicationController extends BaseController {
         Helper::d('$user');
         $user = $this->user;
         Helper::tad($user);
+        */
 
         $this->check_auth();
 
