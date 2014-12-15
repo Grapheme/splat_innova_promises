@@ -87,7 +87,22 @@
                       <div class="views">15</div>
                       -->
                       <div class="comments">{{ $promise->comments_count }}</div>
-                      <div class="time">02:01:23</div>
+
+                        <?
+                        $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
+                        ?>
+                        @if ($failed)
+                            <div class="promise-fail">
+                                <i class="fi icon-unsmile"></i>
+                            </div>
+                        @elseif ($promise->finished_at)
+                            <div class="promise-success">
+                                <i class="fi icon-smile"></i>
+                            </div>
+                        @else
+                            <div class="time">02:01:23</div>
+                        @endif
+
                     </div>
                   </div>
                 </div>
