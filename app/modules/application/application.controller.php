@@ -90,7 +90,7 @@ class ApplicationController extends BaseController {
     }
 
 
-    public function getMe() {
+    public function getMePage() {
 
         $this->check_auth();
 
