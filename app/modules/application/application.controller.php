@@ -13,6 +13,7 @@ class ApplicationController extends BaseController {
         Route::group(array(), function() {
 
             Route::get('/', array('as' => 'app.mainpage', 'uses' => __CLASS__.'@getAppMainPage'));
+            Route::get('/me', array('as' => 'app.me', 'uses' => __CLASS__.'@getMePage'));
 
             Route::get('/vk-oauth', array('as' => 'app.vk-oauth', 'uses' => __CLASS__.'@getVkOauth'));
             Route::get('/fb-oauth', array('as' => 'app.fb-oauth', 'uses' => __CLASS__.'@getFbOauth'));
@@ -82,23 +83,18 @@ class ApplicationController extends BaseController {
 
     public function getAppMainPage() {
 
-        $user = $this->user;
+        $dic_promises = Dic::where('slug', 'promises')->first();
+        $total_promises = DicVal::where('dic_id', $dic_promises->id)->count();
 
-        #Helper::ta($user);
+        return View::make(Helper::layout('index'), compact('user', 'promises', 'total_promises'));
+    }
 
-        /**
-         * Если юзер не авторизован - показываем стандартную главную страницу
-         */
-        if (!is_object($user) || !$user->id) {
 
-            $dic_promises = Dic::where('slug', 'promises')->first();
-            $total_promises = DicVal::where('dic_id', $dic_promises->id)->count();
+    public function getMe() {
 
-            return View::make(Helper::layout('index'), compact('user', 'promises', 'total_promises'));
-        }
+        $this->check_auth();
 
         /**
-         * Если есть пометка о том, что юзер новый - убираем ее и переадресовываем на страницу редактирования профиля
          * Если есть пометка о том, что юзер новый - убираем ее и переадресовываем на страницу редактирования профиля
          */
         if (@$_SESSION['new_user']) {
@@ -118,22 +114,25 @@ class ApplicationController extends BaseController {
         }
 
         /**
+         * Авторизованный пользователь
+         */
+        $user = $this->user;
+        #Helper::tad($user);
+
+        /**
          * Получаем обещания юзера
          */
         $promises = $this->promises;
-
         #Helper::tad($promises);
 
         /**
          * Определим, какие друзья пользователя уже зареганы в системе
          */
-        $existing_friends = array();
-        $non_existing_friends = array();
-
+        #$existing_friends = array();
+        #$non_existing_friends = array();
         #Helper::d('Count user friends: ' . count($user->friends));
 
         $count_user_friends = 0;
-
         if (count($user->friends)) {
 
             $user = $this->processFriends($user);
