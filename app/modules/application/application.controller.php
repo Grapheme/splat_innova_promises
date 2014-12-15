@@ -602,12 +602,14 @@ class ApplicationController extends BaseController {
 
     public function getPromise($id) {
 
-        $user = $this->user;
         Helper::d('$_SESSION');
         Helper::d($_SESSION);
+
         Helper::d('$_COOKIE');
         Helper::d($_COOKIE);
+
         Helper::d('$user');
+        $user = $this->user;
         Helper::tad($user);
 
         $this->check_auth();
@@ -968,6 +970,9 @@ class ApplicationController extends BaseController {
             || $_COOKIE['user_token'] == '' || $_SESSION['user_token'] == ''
             || $_COOKIE['user_token'] != $_SESSION['user_token']
         ) {
+
+            Helper::d($_COOKIE);
+            Helper::dd($_SESSION);
 
             unset($_COOKIE['user_token']);
             unset($_SESSION['user_token']);
