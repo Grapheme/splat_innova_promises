@@ -602,7 +602,8 @@ class ApplicationController extends BaseController {
 
     public function getPromise($id) {
 
-        Helper::dd(Input::all());
+        $user = $this->user;
+        Helper::tad($user);
 
         $this->check_auth();
 
@@ -1926,11 +1927,13 @@ class ApplicationController extends BaseController {
     private function check_auth($redirect = false) {
 
         $user = $this->user;
-        if (!is_object($user) || !$user->id)
-            if ($redirect)
+        if (!is_object($user) || !$user->id) {
+            if ($redirect) {
                 Redirect($redirect);
-            else
+            } else {
                 App::abort(404);
+            }
+        }
 
         return true;
     }
