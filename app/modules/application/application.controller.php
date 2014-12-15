@@ -1155,23 +1155,21 @@ class ApplicationController extends BaseController {
             $_SESSION['promise_text'] = $promise_text;
         }
 
-        $curl = curl_init('https://api.odnoklassniki.ru/oauth/token.do');
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS,
-            'code=' . $_GET['code'] .
+        $postfields = 'code=' . $_GET['code'] .
             '&client_id=' . $AUTH['client_id'] .
             '&client_secret=' . $AUTH['client_secret'] .
             '&redirect_uri=' . URL::route('app.ok-oauth') . '?promise_text=' . $promise_text .
             '&grant_type=authorization_code'
-        );
+        ;
+
+        $curl = curl_init('https://api.odnoklassniki.ru/oauth/token.do');
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $postfields);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         curl_close($curl);
 
-
         $auth = json_decode($s, true);
-
-
         #Helper::d($auth);
 
         if (!@$auth['access_token']) {
