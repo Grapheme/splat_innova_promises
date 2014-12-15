@@ -474,7 +474,10 @@ function gotome() {
 }
 
 
-$('.make-new-promise-btn').click(function(){
+$(document).on('click', '.make-new-promise-btn', function(e){
+
+    e.preventDefault();
+
     //alert(user_id);
     //return false;
     if (!user_id)
