@@ -68,7 +68,7 @@
               </div>
               <div class="color-inputs">
                 <div class="desc">Выберите оформление</div>
-                <select class="js-type-select hidden">
+                <select name="style_id" class="js-type-select hidden">
                   <option value="blue"></option>
                   <option value="yellow"></option>
                   <option value="aqua"></option>
