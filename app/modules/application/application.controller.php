@@ -1378,7 +1378,7 @@ class ApplicationController extends BaseController {
         }
 
 
-        $curl = curl_init('https://api.vk.com/method/friends.get?user_id=' . @$auth['user_id'] . '&fields=sex,bdate,city,country,photo_200,domain&v=5.27&lang=ru');
+        $curl = curl_init('https://api.vk.com/method/friends.get?user_id=' . @$auth['user_id'] . '&fields=sex,bdate,city,country,photo_200,domain&v=5.27&order=hints&lang=ru');
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         #curl_setopt($curl, CURLOPT_HTTPHEADER, array('Accept-Language: ru-RU;q=1.0'));
