@@ -602,11 +602,13 @@ class ApplicationController extends BaseController {
 
     public function getPromise($id) {
 
+        Helper::dd(Input::all());
+
         $this->check_auth();
 
         $user = $this->user;
         $promise = Dic::valueBySlugAndId('promises', $id);
-        Helper::tad($promise);
+        #Helper::tad($promise);
 
         if (!is_object($promise) || !$promise->id)
             App::abort(404);
