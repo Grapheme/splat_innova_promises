@@ -475,6 +475,10 @@ function gotome() {
 
 
 $('.make-new-promise-btn').click(function(){
-    alert(user_id);
-    return false;
+    //alert(user_id);
+    //return false;
+    if (!user_id)
+        return true;
+
+    gotome();
 });
