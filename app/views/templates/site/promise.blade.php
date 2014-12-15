@@ -97,7 +97,16 @@
                 ?>
                 @if ($failed)
                     {{-- Задание провалено --}}
-                    <div class="pr-btn"><i class="fi icon-unsmile"></i><span>Не удалось выполнить обещание</span></div>
+                    <div class="pr-btn">
+                        <i class="fi icon-unsmile"></i>
+                        <span>
+                            @if ($promise->user_id == $user->id)
+                                Вы не смогли выполнить данное обещание
+                            @else
+                                Обещание выполнить не удалось
+                            @endif
+                        </span>
+                    </div>
                 @elseif ($promise->finished_at)
                     {{-- Обещание выполнено $promise->finished_at --}}
                     <div class="pr-btn"><i class="fi icon-smile"></i><span>Обещание выполнено</span></div>
