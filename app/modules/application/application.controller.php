@@ -971,14 +971,19 @@ class ApplicationController extends BaseController {
             || $_COOKIE['user_token'] != $_SESSION['user_token']
         ) {
 
+
+            if (Input::get('debug') == 1) {
+                Helper::d('$_COOKIE');
+                Helper::d($_COOKIE);
+                Helper::d('$_SESSION');
+                Helper::dd($_SESSION);
+            }
+
             if (isset($_COOKIE['user_token'])) {
-                #Helper::d($_COOKIE);
                 unset($_COOKIE['user_token']);
             }
 
             if (isset($_SESSION['user_token'])) {
-                if (Input::get('debug') == 1)
-                    Helper::dd($_SESSION);
                 unset($_SESSION['user_token']);
             }
 
