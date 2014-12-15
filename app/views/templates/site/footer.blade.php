@@ -41,18 +41,20 @@
           </div>
           <div class="desc">или с помощью адреса электронной почты:</div>
           <div data-type="auth" class="form-inputs js-pop-form">
-            <form>
-              <input type="hidden" name="promise-text">
+
+            <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" id="auth_form">
+              <input type="hidden" name="promise_text">
               <div class="input-cont">
-                <input placeholder="Эл. почта">
+                <input type="text" name="email" placeholder="Эл. почта">
               </div>
               <div class="input-cont">
-                <input placeholder="Пароль">
+                <input type="password" name="pass" placeholder="Пароль">
               </div>
               <div class="btns">
-                <button class="us-btn">Войти</button><a href="#" class="right-link js-form-pass">восстановить пароль</a>
+                <button class="us-btn">Войти</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-form-pass">восстановить пароль</a>
               </div>
             </form>
+
           </div>
           <div data-type="pass" style="display: none;" class="form-inputs js-pop-form">
             <form>
