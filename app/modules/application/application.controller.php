@@ -1354,11 +1354,11 @@ class ApplicationController extends BaseController {
          */
         if (isset($user['bdate']) && strpos(@$user['bdate'], '.')) {
             $bdate = explode('.', $user['bdate']);
-            $birthday = ((int)$bdate[1]<10 ? '0'.$bdate[1] : $bdate[1]) . '-' . ((int)$bdate[0]<10 ? '0'.$bdate[0] : $bdate[0]);
+            $birthday = ((int)$bdate[0]<10 ? '0'.$bdate[0] : $bdate[0]) . '.' . ((int)$bdate[1]<10 ? '0'.$bdate[1] : $bdate[1]);
             if (isset($bdate[2]) && $bdate[2] != '')
-                $birthday = $bdate[2] . '-' . $birthday;
+                $birthday .= '.' . $bdate[2];
             else
-                $birthday = '0000-' . $birthday;
+                $birthday .= '.0000';
             $user['bdate'] = $birthday;
         }
 
