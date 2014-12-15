@@ -72,7 +72,7 @@
     if (isset($user->sex) && $user->sex == 1)
         $default_avatar = '/theme/images/woman.png';
     ?>
-    <div class="promise-make promise-page type-blue">
+    <div class="promise-make promise-page type-blue" data-finish="{{ $promise->time_limit }}">
         <div class="wrapper">
             <div class="profile-card">
                 <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo"></div>
@@ -92,8 +92,17 @@
             </div>
             <div class="promise-time"><i class="fi icon-progress"></i><span class="time-day"><span>1</span> день</span><span class="time-time">00:02:43</span></div>
             <div class="progress-btns">
-                <button class="pr-btn active"><i class="fi icon-smile"></i><span>Выполнено</span></button>
-                <button class="pr-btn"><i class="fi icon-unsmile"></i><span>Отказаться</span></button>
+                <?
+                $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d') > $promise->date_finish);
+                ?>
+                @if ($failed)
+                    Задание провалено
+                @elseif ($promise->finished_at)
+                    Выполнено {{ $promise->finished_at }}
+                @else
+                    <a href="?finished=1" class="pr-btn active"><i class="fi icon-smile"></i><span>Выполнено</span></a>
+                    <a href="?fail=1" class="pr-btn"><i class="fi icon-unsmile"></i><span>Отказаться</span></a>
+                @endif
             </div>
         </div>
     </div>
