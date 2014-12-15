@@ -5,6 +5,7 @@ SplatSite.tabs = function() {
 		overlay_shadow = $('.overlay-shadow'),
 		change_link = $('.js-change-box'),
 		overlay = $('.overlay'),
+		close_timeout = false,
 		popup = {};
 
 	popup.retPos = function(link) {
@@ -21,6 +22,7 @@ SplatSite.tabs = function() {
 		});
 	}
 	popup.open = function(link) {
+		clearTimeout(close_timeout);
 		if(link.hasClass('js-promise-btn')) {
 			if($('.js-promise-input').val() != '') {
 				$('.js-promise-title').show();
@@ -52,7 +54,7 @@ SplatSite.tabs = function() {
 		this.retPos(link);
 		overlay_shadow.removeClass('active');
 		box.removeClass('active');
-		setTimeout(function(){
+		close_timeout = setTimeout(function(){
 			overlay.hide();
 			overlay_shadow.removeClass('anim').removeAttr('style');
 			box.hide();
