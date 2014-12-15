@@ -10,8 +10,6 @@ class ApplicationController extends BaseController {
     ## Routing rules of module
     public static function returnRoutes($prefix = null) {
 
-        @session_start();
-
         Route::group(array(), function() {
 
             Route::get('/', array('as' => 'app.mainpage', 'uses' => __CLASS__.'@getAppMainPage'));
@@ -605,8 +603,11 @@ class ApplicationController extends BaseController {
     public function getPromise($id) {
 
         $user = $this->user;
+        Helper::d('$_SESSION');
         Helper::d($_SESSION);
+        Helper::d('$_COOKIE');
         Helper::d($_COOKIE);
+        Helper::d('$user');
         Helper::tad($user);
 
         $this->check_auth();
