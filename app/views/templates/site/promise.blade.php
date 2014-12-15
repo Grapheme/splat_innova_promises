@@ -143,7 +143,7 @@
                     <div class="textarea-cont">
                         <textarea name="comment_text" class="input-class"></textarea>
                     </div>
-                    <div class="us-btn">Оставить комментарий</div>
+                    <button class="us-btn">Оставить комментарий</button>
                 </div>
             </div>
         </form>
