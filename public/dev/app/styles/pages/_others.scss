@@ -29,3 +29,37 @@
 .show-more-friends {
   color: inherit;
 }
+
+.index-promise-input {
+  position: relative;
+
+  .promise-placeholder {
+    position: absolute;
+    color: #A8A8A8;
+    line-height: 71px;
+    top: 0;
+    left: 40px;
+    font-size: 24px;
+  }
+
+  input {
+    padding-left: 220px !important;
+  }
+}
+
+.make-promise-placeholder {
+  position: relative;
+
+  .promise-placeholder {
+    position: absolute;
+    color: #A8A8A8;
+    line-height: 87px;
+    top: 0;
+    left: 30px;
+    font-size: 24px;
+  }
+
+  textarea {
+    text-indent: 145px;
+  }
+}

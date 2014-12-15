@@ -210,11 +210,28 @@ SplatSite.Tooltips = {
 	}
 }
 
+SplatSite.PromisePlaceholder = function() {
+	var input = $('.js-promise-placeholder input, .js-promise-placeholder textarea');
+	var dots = $('.js-promise-placeholder .promise-placeholder span');
+	input.on('focus', function(){
+		console.log(dots);
+		dots.hide();
+	});
+	input.on('focusout', function(){
+		if(input.val() == '') {
+			dots.show();
+		}
+	});
+	$('.js-promise-placeholder textarea').autosize();
+}
+
 $(function(){
 	var body = $('body');
 	SplatSite.tabs();
 	SplatSite.ShowFriends();
 	SplatSite.Tooltips.init();
+	SplatSite.PromisePlaceholder();
+
 	$('.styledCheck').button();
 
 	$('.js-mask-time').mask('00:00', {placeholder: "00:00"});

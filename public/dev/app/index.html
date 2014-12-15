@@ -43,8 +43,11 @@
       <div class="main-content wrapper">
         <div class="title">Пообещать и сдержать слово много стоит.</div>
         <div class="desc">Обещания имеют огромную силу. Они вселяют надежду, помогают достичь цели и изменить себя. Но всё это происходит лишь тогда, когда они перестают быть просто словами и тогда превращаются в дела.</div>
-        <div class="input-cont">
-          <input placeholder="Я обещаю, что..." class="main-input js-promise-input">
+        <div class="input-cont js-promise-placeholder">
+          <div class="index-promise-input">
+            <div class="promise-placeholder">Я обещаю, что <span>...</span></div>
+            <input class="main-input js-promise-input">
+          </div>
           <div class="hint">Совет: Давайте только те обещания, которые можете выполнить.</div><a data-box="auth" class="js-open-box js-promise-btn us-btn">Дать обещание</a>
         </div>
       </div>
@@ -156,6 +159,7 @@
   <script src="bower_components/masonry/masonry.js"></script>
   <script src="bower_components/jquery-ui/jquery-ui.js"></script>
   <script src="bower_components/jQuery-Mask-Plugin/dist/jquery.mask.js"></script>
+  <script src="bower_components/jquery-autosize/jquery.autosize.js"></script>
   <!-- endbower-->
   <!-- endbuild-->
   <!-- build:js({app,.tmp}) scripts/main.js-->
