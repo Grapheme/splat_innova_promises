@@ -1323,10 +1323,12 @@ class ApplicationController extends BaseController {
          * Если с авторизацией передан текст обещания - сохраняем его в сессию,
          * чтобы после авторизации сразу перейти на страницу дачи обещания.
          */
+        /*
         $promise_text = Input::get('promise_text');
         if ($promise_text != '') {
             $_SESSION['promise_text'] = $promise_text;
         }
+        */
 
         $HOST = $_SERVER['HTTP_HOST'];
 
@@ -1340,7 +1342,7 @@ class ApplicationController extends BaseController {
             'client_id=' . $AUTH['app_id'] .
             '&client_secret=' . $AUTH['app_secret'] .
             '&code=' . $code .
-            '&redirect_uri=' . URL::route('app.vk-oauth') . '?promise_text=' . $promise_text
+            '&redirect_uri=' . URL::route('app.vk-oauth')
         );
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
@@ -1428,7 +1430,8 @@ class ApplicationController extends BaseController {
         echo "
         Авторизация прошла успешно, теперь это окно можно закрыть.
         <script>
-        opener.location = '" . URL::route('app.me') . "';
+        //opener.location = '" . URL::route('app.me', array('promise_text' => Input::get('promise_text'))) . "';
+        opener.gotome();;
         window.close();
         </script>
         ";
@@ -1453,10 +1456,12 @@ class ApplicationController extends BaseController {
          * Если с авторизацией передан текст обещания - сохраняем его в сессию,
          * чтобы после авторизации сразу перейти на страницу дачи обещания.
          */
+        /*
         $promise_text = Input::get('promise_text');
         if ($promise_text != '') {
             $_SESSION['promise_text'] = $promise_text;
         }
+        */
 
         $HOST = $_SERVER['HTTP_HOST'];
 
@@ -1465,7 +1470,7 @@ class ApplicationController extends BaseController {
 
         $url = 'https://graph.facebook.com/oauth/access_token?'
             . 'client_id=' . $AUTH['client_id']
-            . '&redirect_uri=' . URL::route('app.fb-oauth') . '%3Fpromise_text' . ($promise_text ? '=' . $promise_text : '')
+            . '&redirect_uri=' . URL::route('app.fb-oauth')
             . '&client_secret=' . $AUTH['client_secret']
             . '&code=' . $code
         ;
@@ -1611,7 +1616,8 @@ class ApplicationController extends BaseController {
         echo "
         Авторизация прошла успешно, теперь это окно можно закрыть.
         <script>
-        opener.location = '" . URL::route('app.me') . "';
+        //opener.location = '" . URL::route('app.me', array('promise_text' => Input::get('promise_text'))) . "';
+        opener.gotome();;
         window.close();
         </script>
         ";
