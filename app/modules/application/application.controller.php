@@ -100,7 +100,7 @@ class ApplicationController extends BaseController {
 
     public function getMePage() {
 
-        $this->check_auth();
+        $this->check_auth(URL::route('app.mainpage'));
 
         /**
          * Если есть пометка о том, что юзер новый - убираем ее и переадресовываем на страницу редактирования профиля
@@ -1899,10 +1899,15 @@ class ApplicationController extends BaseController {
         return View::make(Helper::layout('restore_password_success'), compact('user', 'token'));
     }
 
-    private function check_auth() {
+    private function check_auth($redirect = false) {
+
         $user = $this->user;
         if (!is_object($user) || !$user->id)
-            App::abort(404);
+            if ($redirect)
+                Redirect($redirect);
+            else
+                App::abort(404);
+
         return true;
     }
 
