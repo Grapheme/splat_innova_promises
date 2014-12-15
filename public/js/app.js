@@ -470,11 +470,11 @@ $("#auth_form").validate({
         //return false;
         //return true;
 
-        $(form).submit();
+        //$(form).submit();
 
         var promise_text = $('.promise_text').val();
-        var email = $('.user-auth-email').val();
-        var pass = $('.user-auth-pass').val();
+        //var email = $('.user-auth-email').val();
+        //var pass = $('.user-auth-pass').val();
 
         $('input[type=hidden][name=promise_text]').val(promise_text);
 
