@@ -15,6 +15,7 @@
 	@include(Helper::layout('head'))
 
     @section('style')
+        <!-- section style -->
     @show
 
     </head>
