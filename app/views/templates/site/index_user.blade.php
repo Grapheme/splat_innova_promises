@@ -194,6 +194,11 @@
                 @endif
 
             @endforeach
+
+            @if ($p == 1)
+                @yield('koe-chto')
+            @endif
+
             </ul>
         @else
 
