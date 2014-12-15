@@ -77,9 +77,13 @@
 
         @if (isset($promises) && is_object($promises) && count($promises))
 
+            <?
+            $p = 0;
+            ?>
             <ul class="promises-list">
             @foreach ($promises as $promise)
             <?
+            ++$p;
             if (!$promise->style_id) {
                 $styles = array('green', 'aqua', 'yellow', 'blue', 'pink');
                 $promise->style_id = $styles[array_rand($styles)];
@@ -125,13 +129,13 @@
                 </a>
               </li>
 
-                @if ($p == 2)
+                @if (@$p == 2)
                     @yield('koe-chto')
                 @endif
 
             @endforeach
 
-            @if ($p == 1)
+            @if (@$p == 1)
                 @yield('koe-chto')
             @endif
 
