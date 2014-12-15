@@ -142,12 +142,16 @@
         @if (isset($promises) && is_object($promises) && count($promises))
 
             <ul class="promises-list">
+            <?
+            $p = 0;
+            ?>
             @foreach ($promises as $promise)
             <?
-            if (!$promise->style_id) {
-                $styles = array('green', 'aqua', 'yellow', 'blue', 'pink');
-                $promise->style_id = $styles[array_rand($styles)];
-            }
+                ++$p;
+                if (!$promise->style_id) {
+                    $styles = array('green', 'aqua', 'yellow', 'blue', 'pink');
+                    $promise->style_id = $styles[array_rand($styles)];
+                }
             ?>
               <li class="promise-item type-{{ $promise->style_id }}" data-finish="{{ $promise->time_limit }}">
                 <a href="{{ URL::route('app.promise', $promise->id) }}" class="fullsizelink"></a>
@@ -184,6 +188,10 @@
                   </div>
                 </div>
               </li>
+
+                @if ($p == 2)
+                    @yield('koe-chto')
+                @endif
 
             @endforeach
             </ul>
