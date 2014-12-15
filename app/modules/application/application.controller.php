@@ -972,12 +972,12 @@ class ApplicationController extends BaseController {
         ) {
 
             if (isset($_COOKIE['user_token'])) {
-                Helper::d($_COOKIE);
+                #Helper::d($_COOKIE);
                 unset($_COOKIE['user_token']);
             }
 
             if (isset($_SESSION['user_token'])) {
-                Helper::dd($_SESSION);
+                #Helper::dd($_SESSION);
                 unset($_SESSION['user_token']);
             }
 
