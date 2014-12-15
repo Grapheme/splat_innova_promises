@@ -618,20 +618,26 @@ class ApplicationController extends BaseController {
          */
         if ($promise->user_id == $user->id) {
 
-            if (Input::get('fail')) {
+            if (!$promise->promise_fail && !$promise->finished_at) {
 
-                if (!$promise->promise_fail && !$promise->finished_at) {
+                if (Input::get('fail')) {
 
                     $promise->update_field('promise_fail', 1);
                     return Redirect::route('app.promise', $id);
-                }
 
-            } elseif (Input::get('finished')) {
-
-                if (!$promise->promise_fail && !$promise->finished_at) {
+                } elseif (Input::get('finished')) {
 
                     $promise->update_field('finished_at', date('Y-m-d H:i:s'));
                     return Redirect::route('app.promise', $id);
+
+                } elseif (Input::get('delete')) {
+
+                    /**
+                     * Вот тут не хватает API для удаления объектов
+                     */
+                    #$promise->full_delete();
+                    $promise->delete();
+                    return Redirect::route('app.me');
                 }
             }
         }
