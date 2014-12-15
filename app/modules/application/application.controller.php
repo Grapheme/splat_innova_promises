@@ -606,7 +606,7 @@ class ApplicationController extends BaseController {
 
         $user = $this->user;
         $promise = Dic::valueBySlugAndId('promises', $id);
-        #Helper::tad($promise);
+        Helper::tad($promise);
 
         if (!is_object($promise) || !$promise->id)
             App::abort(404);
