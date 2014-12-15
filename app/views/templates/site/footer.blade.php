@@ -13,7 +13,7 @@
         <ul class="footer-soc">
           <li><a href="http://www.facebook.com/sharer.php?u=http://mypromises.ru" target="_blank" class="soc-icon"><i class="fi icon-fb"></i></a></li>
           <li><a href="http://vk.com/share.php?url=http://mypromises.ru&event=button_share" target="_blank" class="soc-icon"><i class="fi icon-vk"></i></a></li>
-          <li><a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl=mypromises.ru" target="_blank" class="soc-icon"><i class="fi icon-twitter"></i></a></li>
+          <li><a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl=mypromises.ru" target="_blank" class="soc-icon"><i class="fi icon-ok"></i></a></li>
         </ul>
       </div>
       <a href="http://ru.innova-oralcare.com" target="_blank" class="footer-block right-logo"></a>
@@ -79,7 +79,7 @@
       <div class="promo-box">
         <div class="logo"></div>
         <div class="text">Мы обещаем, что через месяц использования зубных средств <b>innova</b><br>ваши зубы станут менее чувствительными, эмаль восстановится,<br>а вы почувствуете уверенность в себе и раскрепощённость.</div>
-        <div class="spec-link"><a href="http://ru.innova-oralcare.com/" target="_blank">Узнать больше</a></div>
+        <div class="spec-link"><a href="http://www.splat-innova.com" target="_blank">Узнать больше</a></div>
       </div>
     </div>
   </div>
