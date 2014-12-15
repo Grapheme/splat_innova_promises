@@ -96,7 +96,7 @@
             </a>
           </div>
           <div class="desc">или с помощью адреса электронной почты:</div>
-          <div data-type="auth" class="form-inputs js-pop-form">
+          <div data-type="auth" class="form-inputs">
 
             <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" id="auth_form">
               <input type="hidden" name="promise_text">
