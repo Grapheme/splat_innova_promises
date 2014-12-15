@@ -465,6 +465,7 @@ $("#auth_form").validate({
     },
     errorClass: "inp-error",
     submitHandler: function(form) {
+        alert(111);
         //console.log(form);
         //return false;
         return true;
