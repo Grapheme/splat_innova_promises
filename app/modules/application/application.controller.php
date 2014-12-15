@@ -1078,8 +1078,10 @@ class ApplicationController extends BaseController {
 
             #Helper::tad($promises);
 
-            $comments_counts = array();
-
+            /**
+             * Посчитаем кол-во комментариев к каждому обещанию
+             */
+            #$comments_counts = array();
             if (count($promises)) {
                 $promises = DicVal::extracts($promises, 1);
 
