@@ -1288,7 +1288,7 @@ class ApplicationController extends BaseController {
         echo "
         Авторизация прошла успешно, теперь это окно можно закрыть.
         <script>
-        opener.location = '' + opener.location;
+        opener.location = '" . URL::route('app.me') . "';
         window.close();
         </script>
         ";
@@ -1417,7 +1417,7 @@ class ApplicationController extends BaseController {
         echo "
         Авторизация прошла успешно, теперь это окно можно закрыть.
         <script>
-        opener.location = '' + opener.location;
+        opener.location = '" . URL::route('app.me') . "';
         window.close();
         </script>
         ";
@@ -1600,7 +1600,7 @@ class ApplicationController extends BaseController {
         echo "
         Авторизация прошла успешно, теперь это окно можно закрыть.
         <script>
-        opener.location = '' + opener.location;
+        opener.location = '" . URL::route('app.me') . "';
         window.close();
         </script>
         ";
