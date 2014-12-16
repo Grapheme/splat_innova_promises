@@ -510,7 +510,7 @@ function gotome() {
     //location.href = '/me?promise_text=' + promise_text;
 
     var new_location = '/me';
-    if (promise_text != '')
+    if (typeof promise_text != 'undefined' && promise_text != 'undefined' && promise_text != '')
         new_location += '?promise_text=' + promise_text;
     location.href = new_location;
 }
