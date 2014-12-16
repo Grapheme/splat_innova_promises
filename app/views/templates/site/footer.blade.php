@@ -107,7 +107,7 @@
           <div class="desc">или с помощью адреса электронной почты:</div>
           <div data-type="auth" class="form-inputs">
 
-            <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" class="auth_form_validate">
+            <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" class="reg_form_validate">
               <input type="hidden" name="promise_text">
               <div class="input-cont">
                 <input type="email" name="email" placeholder="Эл. почта">

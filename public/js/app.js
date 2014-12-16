@@ -488,6 +488,23 @@ $(".auth_form_validate").validate({
         //return true;
     }
 });
+
+$(".reg_form_validate").validate({
+    rules: {
+        'email': { required: true, email: true },
+        'pass': { required: true }
+    },
+    messages: {
+        'email': "",
+        'pass': ""
+    },
+    errorClass: "inp-error",
+    submitHandler: function(form) {
+        var promise_text = $('.promise-text').val();
+        $('input[type=hidden][name=promise_text]').val(promise_text);
+        form.submit();
+    }
+});
 //*/
 
 /*
