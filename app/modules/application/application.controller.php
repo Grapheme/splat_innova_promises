@@ -654,6 +654,8 @@ class ApplicationController extends BaseController {
          */
         if ($promise->user_id == $user->id) {
 
+            $promise_user = $user;
+
             if (!$promise->promise_fail && !$promise->finished_at) {
 
                 if (Input::get('fail')) {
@@ -676,6 +678,9 @@ class ApplicationController extends BaseController {
                     return Redirect::route('app.me');
                 }
             }
+        } else {
+
+            $promise_user = Dic::valueBySlugAndId('users', $promise->user_id);
         }
 
 
@@ -710,7 +715,7 @@ class ApplicationController extends BaseController {
 
         #Helper::tad($promise);
 
-        return View::make(Helper::layout('promise'), compact('user', 'promise', 'comments', 'users'));
+        return View::make(Helper::layout('promise'), compact('user', 'promise_user', 'promise', 'comments', 'users'));
     }
 
 

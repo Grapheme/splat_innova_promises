@@ -69,8 +69,13 @@
 
     <?
     $default_avatar = '/theme/images/man.png';
-    if (isset($user->sex) && $user->sex == 1)
+    if (isset($promise_user->sex) && $user->sex == 1)
         $default_avatar = '/theme/images/woman.png';
+
+    if (!$promise->style_id) {
+        $styles = array('green', 'aqua', 'yellow', 'blue', 'pink');
+        $promise->style_id = $styles[array_rand($styles)];
+    }
     ?>
     <div class="promise-make promise-page type-{{ $promise->style_id }}" data-finish="{{ $promise->time_limit }}">
         <div class="wrapper">
