@@ -21,7 +21,7 @@ SplatSite.tabs = function() {
 			'right': pos.right
 		});
 	}
-	popup.open = function(link, native) {
+	popup.open = function(link) {
 		clearTimeout(close_timeout);
 		if(link.hasClass('js-promise-btn')) {
 			if($('.js-promise-input').val() != '') {
@@ -72,7 +72,7 @@ SplatSite.tabs = function() {
 		});
 		change_link.on('click', function(){
 			popup.close();
-			popup.open($('.js-open-box[data-box="' + $(this).attr('data-box') + '"]'), true);
+			popup.open($('.js-open-box[data-box="' + $(this).attr('data-box') + '"]').first());
 			return false;
 		});
 		$('.js-form-pass').on('click', function(){
