@@ -1,0 +1,48 @@
+.error404 {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 125px 0 100px;
+	text-align: center;
+	background-image: url(../images/patterns/3.png);
+	background-position: center 150px;
+	background-repeat: no-repeat;
+
+	&:before {
+		content: "";
+		display: inline-block;
+		vertical-align: middle;
+		width: 0;
+		height: 100%;
+	}
+
+	.error404-cont {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.icon {
+		font-size: 45px;
+		color: #07cbcc;
+	}
+
+	.title {
+		font-size: 38px;
+		font-weight: 100;
+		margin-top: 45px;
+		text-transform: uppercase;
+	}
+
+	.text {
+		font-size: 20px;
+		font-weight: 300;
+		line-height: 1.4;
+		margin-top: 20px;
+
+		a {
+			color: #07cbcc;
+		}
+	}
+}
