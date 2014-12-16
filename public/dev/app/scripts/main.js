@@ -53,11 +53,11 @@ SplatSite.tabs = function() {
 		link.removeClass('js-opened-from');
 		this.retPos(link);
 		overlay_shadow.removeClass('active');
-		box.removeClass('active');
+		box.removeClass('active').siblings().removeClass('active');
 		close_timeout = setTimeout(function(){
 			overlay.hide();
 			overlay_shadow.removeClass('anim').removeAttr('style');
-			box.hide();
+			box.hide().siblings().hide();
 			$('.js-promise-title').hide();
 		}, 500);
 	}
