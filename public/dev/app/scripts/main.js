@@ -63,8 +63,8 @@ SplatSite.tabs = function() {
 	}
 	popup.change = function(box_name) {
 		var box = $('.js-pop-up[data-box="' + box_name + '"]');
-		box.fadeIn()
-			.siblings().fadeOut();
+		box.show().addClass('active')
+			.siblings().hide();
 	}
 	var setEvents = function() {
 		open_link.on('click', function(){
