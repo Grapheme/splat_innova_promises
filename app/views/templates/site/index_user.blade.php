@@ -155,11 +155,11 @@
 
         @if (isset($active_promises) && count($active_promises))
 
-              <div class="wrapper">
-                  <div class="little-title">Активные</div>
-              </div>
+            <div class="wrapper">
+                <div class="little-title">Активные</div>
+            </div>
 
-              <ul class="promises-list">
+            <ul class="promises-list">
             <?
             $p = 0;
             ?>
@@ -185,17 +185,46 @@
             @endif
 
             </ul>
-        @else
-
-            <div class="wrapper">
-              <div class="us-text">Вы еще не давали обещаний.</div>
-            </div>
 
         @endif
 
-        <div class="wrapper">
-          <div class="little-title">Неактивные</div>
-        </div>
+
+
+        @if (isset($inactive_promises) && count($inactive_promises))
+
+            <div class="wrapper">
+                <div class="little-title">Неактивные</div>
+            </div>
+
+            <ul class="promises-list">
+                <?
+                $p = 0;
+                ?>
+                @foreach ($inactive_promises as $promise)
+                    <?
+                    ++$p;
+                    if (!$promise->style_id) {
+                        $styles = array('green', 'aqua', 'yellow', 'blue', 'pink');
+                        $promise->style_id = $styles[array_rand($styles)];
+                    }
+                    ?>
+
+                    @include(Helper::layout('promise_inc'))
+
+              @endforeach
+
+            </ul>
+        @endif
+
+
+        @if (isset($active_promises) && count($active_promises) && isset($inactive_promises) && count($inactive_promises))
+            {{-- do nothing --}}
+        @else
+            <div class="wrapper">
+                <div class="us-text">Вы еще не давали обещаний.</div>
+            </div>
+        @endif
+
 
         @if (0)
         <ul class="promises-list">
