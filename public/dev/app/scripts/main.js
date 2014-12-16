@@ -240,10 +240,16 @@ SplatSite.CountDown = function(elem) {
 			date_str = date_str.replace('-', '/');
 		}
 		$(this).countdown(date_str, function(event){
-			$(this).text(event.strftime('%D days %H:%M:%S'));
+			console.log(event);
+			$(this).text(event.strftime('<span class="time-day"><span>%D</span> день</span><span class="time-time">%H:%M:%S</span>'));
 		});
 	}
 	$(elem).MyCount();
+}
+
+function declOfNum(number, titles) {  
+    cases = [2, 0, 1, 1, 1, 2];  
+    return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];  
 }
 
 $(function(){
@@ -252,7 +258,9 @@ $(function(){
 	SplatSite.ShowFriends();
 	SplatSite.Tooltips.init();
 	SplatSite.PromisePlaceholder();
-	SplatSite.CountDown('.js-countdown');
+	if($('[data-finish]').length) {
+		SplatSite.CountDown('.js-countdown');
+	}
 
 	$('.styledCheck').button();
 
