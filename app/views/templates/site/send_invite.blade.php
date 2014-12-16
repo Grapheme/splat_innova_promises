@@ -87,6 +87,7 @@
 
       });
       $("#send-invite-success").slideDown();
+      $(".js-inv-form").slideUp();
       return false;
   });
   </script>
