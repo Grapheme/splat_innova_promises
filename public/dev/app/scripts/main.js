@@ -61,6 +61,11 @@ SplatSite.tabs = function() {
 			$('.js-promise-title').hide();
 		}, 500);
 	}
+	popup.change = function(box_name) {
+		var box = $('.js-pop-up[data-box="' + box_name + '"]');
+		box.fadeIn()
+			.siblings().fadeOut();
+	}
 	var setEvents = function() {
 		open_link.on('click', function(){
 			popup.open($(this));
@@ -71,8 +76,7 @@ SplatSite.tabs = function() {
 			return false;
 		});
 		change_link.on('click', function(){
-			popup.close();
-			popup.open($('.js-open-box[data-box="' + $(this).attr('data-box') + '"]').first());
+			popup.change($(this).attr('data-box'));
 			return false;
 		});
 		$('.js-form-pass').on('click', function(){
