@@ -295,6 +295,18 @@ $(function(){
 
 	$('.styledCheck').button();
 
-	$('.js-mask-time').mask('00:00', {placeholder: "00:00"});
-	$('.js-mask-date').mask('00.00.0000', {placeholder: "дд.мм.гггг"});
+	$.extend($.inputmask.defaults.definitions, {
+        'i': { //minute
+            "validator": "[0-5][0-9]",
+            "cardinality": 2,
+            "prevalidator": [{ "validator": "[0-5]", "cardinality": 1}]
+        },
+        'H': { //hour
+            "validator": "[01][0-9]|2[0-3]",
+            "cardinality": 2,
+            "prevalidator": [{ "validator": "[0-2]", "cardinality": 1}]
+        }
+    });
+	$('.js-mask-time').inputmask('H:i', {"placeholder": "чч:мм"});
+	$('.js-mask-date').inputmask('d.m.y', {"placeholder": "дд.мм.гггг"});
 });
