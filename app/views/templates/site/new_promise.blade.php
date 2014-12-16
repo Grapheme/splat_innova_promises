@@ -57,8 +57,8 @@
               </div> -->
               <div class="input-cont">
                 <div class="make-promise-placeholder js-promise-placeholder">
-                  <div class="promise-placeholder">Я ОБЕЩАЮ <span>...</span></div>
-                  {{ Form::textarea('promise_text', (@$_SESSION['promise_text'] && $_SESSION['promise_text'] != 'undefined' ? $_SESSION['promise_text'] : ''), array('placeholder' => "Я ОБЕЩАЮ ...")) }}<br/>
+                  <div class="promise-placeholder">Я ОБЕЩАЮ, ЧТО <span>...</span></div>
+                  {{ Form::textarea('promise_text', (@$_SESSION['promise_text'] && $_SESSION['promise_text'] != 'undefined' ? $_SESSION['promise_text'] : '')) }}<br/>
                 </div>
               </div>
               <div class="time-inputs">

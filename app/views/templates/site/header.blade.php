@@ -4,13 +4,14 @@
         <div class="user-links">
         @if (!isset($auth_user) || !is_object($auth_user) || !$auth_user->id)
             <a href="#"><span data-box="auth" class="js-open-box">Войти</span></a>
-            <a href="#"><span data-box="auth" class="js-open-box">Зарегистрироваться</span></a>
+            <a href="#"><span data-box="reg" class="js-open-box">Зарегистрироваться</span></a>
         @else
             <!-- <a href="{{ URL::route('app.mainpage') }}"><span data-box="auth_" class="js-open-box_">Главная</span></a> -->
             <!-- <a href="{{ URL::route('app.me') }}"><span data-box="auth_" class="js-open-box_">Мои Обещания</span></a> -->
             <a href="{{ URL::route('app.me') }}"><span data-box="auth_" class="js-open-box_">Мои Обещания</span></a>
             <a href="#"><span data-box="auth_" class="js-open-box_ logout">Выйти</span></a>
         @endif
+          <a href="#"><span data-box="restore" class="js-open-box"></span></a>
         </div>
         <ul class="soc-links">
           <li><a href="http://www.facebook.com/sharer.php?u=http://mypromises.ru" class="soc-icon"><i class="fi icon-fb"></i></a></li>
@@ -19,7 +20,7 @@
         </ul>
         <a href="{{ URL::route('app.mainpage') }}" class="logo-text">Мои обещания</a>
         <div class="header-desc">
-          <div class="desc-cont">Обещания не просто слова. Когда о них говорят дела</div>
+          <div class="desc-cont">Когда мы меняемся изнутри, меняется мир снаружи</div>
         </div>
       </div>
     </header>

@@ -9,6 +9,7 @@
     "masonry": "~3.2.1",
     "jquery-ui": "~1.11.2",
     "jQuery-Mask-Plugin": "~1.10.13",
-    "jquery-autosize": "~1.18.17"
+    "jquery-autosize": "~1.18.17",
+    "jquery.countdown": "~2.0.4"
   }
 }
