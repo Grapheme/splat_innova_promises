@@ -93,7 +93,7 @@
             <?
             $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
             ?>
-            @if (!$failed)
+            @if (!$failed || $promise->finished_at)
                 <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div>
             @endif
             <!-- <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div> -->

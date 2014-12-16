@@ -154,7 +154,7 @@ class ApplicationController extends BaseController {
 
                 $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
 
-                if ($failed)
+                if ($failed || $promise->finished_at)
                     $inactive_promises[$p] = $promise;
                 else
                     $active_promises[$p] = $promise;
