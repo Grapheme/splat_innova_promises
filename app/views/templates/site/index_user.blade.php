@@ -398,7 +398,7 @@
                 data: {},
                 api: "//vk.com/js/api/openapi.js",
                 appID: 4659025,
-                appPermissions: YOUR_APP_PERMISSIONS,
+                //appPermissions: YOUR_APP_PERMISSIONS,
                 init: function(){
                     $.js(vk.api);
                     window.vkAsyncInit = function(){
