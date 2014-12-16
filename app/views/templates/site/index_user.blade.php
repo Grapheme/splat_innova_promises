@@ -391,4 +391,26 @@
 
 @section('scripts')
 
+    @if (@$post_to_social && @$auth_user->full_social_info['id'])
+        <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            VK.init({
+                apiId: 4659025
+            });
+        </script>
+        <script>
+            $(".invite-friend-show-form").on('click', function(){
+                VK.Api.call('wall.post', {
+                    owner_id: '{{ @$auth_user->full_social_info['id'] }}',
+                    message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
+                }, function(r) {
+                    //console.log(r);
+                    //alert('OK!');
+                    //$(".js-inv-btn-cont2").slideUp();
+                    //$("#send-invite-success").slideDown();
+                });
+                return false;
+            });
+        </script>
+    @endif
 @stop
