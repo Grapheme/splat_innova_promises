@@ -308,6 +308,6 @@ $(function(){
         }
     });
 	$('.js-mask-time').inputmask('H:i', {"placeholder": "чч:мм"});
-	$('.js-mask-time').val('12:00');
+	if($('.js-mask-time').val() == '') $('.js-mask-time').val('12:00');
 	$('.js-mask-date').inputmask('d.m.y', {"placeholder": "дд.мм.гггг"});
 });
