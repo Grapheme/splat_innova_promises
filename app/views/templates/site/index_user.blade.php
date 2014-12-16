@@ -226,7 +226,7 @@
               <div class="title">ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ</div>
               <div class="bottom-block">
                 <div class="top-floor">
-                  <div class="eye"></div>
+                  <div class="eye" data-tooltip="Обещание видно всем пользователям."></div>
                 </div>
                 <div class="bottom-floor">
                   <div class="views">15</div>
@@ -265,7 +265,7 @@
               <div class="title">ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ</div>
               <div class="bottom-block">
                 <div class="top-floor">
-                  <div class="eye"></div>
+                  <div class="eye" data-tooltip="Обещание видно всем пользователям."></div>
                 </div>
                 <div class="bottom-floor">
                   <div class="views">15</div>
@@ -279,7 +279,7 @@
               <div class="title">ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ</div>
               <div class="bottom-block">
                 <div class="top-floor">
-                  <div class="eye"></div>
+                  <div class="eye" data-tooltip="Обещание видно всем пользователям."></div>
                 </div>
                 <div class="bottom-floor">
                   <div class="views">15</div>
@@ -294,7 +294,7 @@
               <div class="title">ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ</div>
               <div class="bottom-block">
                 <div class="top-floor">
-                  <div class="eye"></div>
+                  <div class="eye" data-tooltip="Обещание видно всем пользователям."></div>
                 </div>
                 <div class="bottom-floor">
                   <div class="views">15</div>

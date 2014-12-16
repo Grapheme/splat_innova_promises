@@ -233,6 +233,10 @@ SplatSite.Tooltips = {
 		var pos = {};
 		pos.x = elem.offset().left + elem.width() + 20;
 		pos.y = elem.offset().top + elem.height()/2;
+		if(pos.x + $('.js-tooltip').width() > $(window).width()) {
+			pos.x = elem.offset().left - $('.js-tooltip').width() - 20;
+			$('.js-tooltip').addClass('tooltip-right');
+		}
 		$('.js-tooltip').css({
 			top: pos.y,
 			left: pos.x
@@ -240,7 +244,7 @@ SplatSite.Tooltips = {
 		$('.js-tooltip-body').text(text);
 	},
 	close: function() {
-		$('.js-tooltip').hide();
+		$('.js-tooltip').removeClass('tooltip-right').hide();
 	}
 }
 

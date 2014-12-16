@@ -32,7 +32,7 @@ body {
   position: absolute;
   display: none;
   z-index: 99;
-  width: 210px;
+  width: 230px;
   height: 200px;
   line-height: 200px;
   margin-top: -100px;
@@ -60,6 +60,24 @@ body {
       border-style: solid;
       border-width: 10px 10px 10px 0;
       border-color: transparent #fff transparent transparent;
+    }
+  }
+
+  &.tooltip-right {
+    .js-tooltip-body {
+      &:before {
+        content: "";
+        position: absolute;
+        right: auto;
+        left: 100%;
+        top: 50%;
+        margin-top: -10px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 10px 0 10px 10px;
+        border-color: transparent transparent transparent #fff;
+      }
     }
   }
 }
