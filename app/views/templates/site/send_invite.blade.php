@@ -82,12 +82,11 @@
         owner_id: 1889847,
         message: 'Post via VK Open API'
       }, function(r) {
-        //console.log(r);
-        //alert('OK!');
-
+          //console.log(r);
+          //alert('OK!');
+          $("#send-invite-success").slideDown();
+          $(".js-inv-form").slideUp();
       });
-      $("#send-invite-success").slideDown();
-      $(".js-inv-form").slideUp();
       return false;
   });
   </script>
