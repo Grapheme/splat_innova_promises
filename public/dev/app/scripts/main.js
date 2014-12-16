@@ -235,13 +235,13 @@ SplatSite.PromisePlaceholder = function() {
 
 SplatSite.CountDown = function(elem) {
 	$.fn.MyCount = function() {
-		var date_str = $(this).parents('[data-finish]').attr('data-finish');
+		var parent = $(this).parents('[data-finish]');
+		var date_str = parent.attr('data-finish');
 		for(var i = 0; i < 2; i++) {
 			date_str = date_str.replace('-', '/');
 		}
 		$(this).countdown(date_str, function(event){
-			console.log(event);
-			$(this).text(event.strftime('<span class="time-day"><span>%D</span> день</span><span class="time-time">%H:%M:%S</span>'));
+			$(this).html(event.strftime('<span class="time-day"><span>%D</span> день</span><span class="time-time">%H:%M:%S</span>'));
 		});
 	}
 	$(elem).MyCount();
