@@ -391,7 +391,7 @@
 
 @section('scripts')
 
-    @if ($auth_user->auth_method == 'vkontakte')
+    @if (Input::get('new_promise') && $auth_user->auth_method == 'vkontakte')
         <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
         <script type="text/javascript">
             VK.init({
