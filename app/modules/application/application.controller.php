@@ -1758,6 +1758,7 @@ class ApplicationController extends BaseController {
 
         $data['user'] = $this->user;
 
+        /*
         Mail::send('emails.send-invite', $data, function ($message) use ($data) {
 
             $message->from(Config::get('mail.from.address'), Config::get('mail.from.name'));
@@ -1767,6 +1768,7 @@ class ApplicationController extends BaseController {
 
             $message->to($data['email']);
         });
+        */
 
         $json_request['status'] = TRUE;
         return Response::json($json_request, 200);
