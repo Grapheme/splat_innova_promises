@@ -163,11 +163,11 @@
                   <div class="bottom-block">
                     <div class="top-floor">
                       @if ($promise->only_for_me)
-                        <div class="eye"></div>
-                      @else
                         <div class="eye eye-cross" data-tooltip="Обещание защищено настройками приватности и видимо только вам."></div>
+                      @else
+                        <div class="eye"></div>
                       @endif
-                      <!-- <div class="eye{{ ( $promise->only_for_me ? ' eye-cross' : '') }}"></div> -->
+                            <!-- <div class="eye{{ ( $promise->only_for_me ? ' eye-cross' : '') }}"></div> -->
                     </div>
                     <div class="bottom-floor">
                       <!--
