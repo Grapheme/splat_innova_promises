@@ -158,6 +158,8 @@
 				.eye {
 					position: relative;
 					left: .2em;
+					display: inline-block;
+					vertical-align: top;
 
 					&:before {
 						@extend .fi;
