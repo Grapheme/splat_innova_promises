@@ -16,7 +16,7 @@
         @elseif ($msg == 'facebook')
             Вы успешно зарегистрировались через соц.сеть Facebook.<br/>
         @endif
-        Подтвердите пожалуйста свои данные.
+        Пожалуйста подтвердите свои данные.
 
         <form action="{{ URL::route('app.update_profile') }}" method="POST">
 
