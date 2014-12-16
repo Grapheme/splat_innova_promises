@@ -392,6 +392,49 @@
 @section('scripts')
 
     @if (Input::get('new_promise') && $auth_user->auth_method == 'vkontakte')
+
+        <script>
+            var vk = {
+                data: {},
+                api: "//vk.com/js/api/openapi.js",
+                appID: 4659025,
+                appPermissions: YOUR_APP_PERMISSIONS,
+                init: function(){
+                    $.js(vk.api);
+                    window.vkAsyncInit = function(){
+                        VK.init({apiId: vk.appID});
+                        sendPostToWall();
+                    }
+
+                    function sendPostToWall(){
+
+                        VK.Api.call('wall.post', {
+                            owner_id: '{{ @$auth_user->full_social_info['id'] }}',
+                            message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
+                        }, function(r) {
+                            //console.log(r);
+                            //alert('OK!');
+                            //$(".js-inv-btn-cont2").slideUp();
+                            //$("#send-invite-success").slideDown();
+                        });
+
+                        /*
+                        VK.Auth.login(authInfo, vk.appPermissions);
+                        function authInfo(response){
+                            if(response.session){ // Авторизация успешна
+                                vk.data.user = response.session.user;
+                                vk.getFriends();
+                            }else alert("Авторизоваться не удалось!");
+                        }
+                        */
+                    }
+                },
+            }
+
+            $.ready(vk.init);
+        </script>
+
+        @if (0)
         <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
         <script type="text/javascript">
             VK.init({
@@ -411,5 +454,7 @@
                 });
             });
         </script>
+        @endif
+
     @endif
 @stop
