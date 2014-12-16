@@ -102,6 +102,8 @@
                 <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div>
             @endif
             <!-- <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div> -->
+
+            @if($promise_user->id == $auth_user->id)
             <div class="progress-btns">
                 @if ($failed)
                     {{-- Задание провалено --}}
@@ -124,6 +126,8 @@
                     <a href="?delete=1" class="pr-btn" title="Удалить"><span>Удалить обещание</span></a>
                 @endif
             </div>
+            @endif
+
         </div>
     </div>
     <div class="promo-block">
