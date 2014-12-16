@@ -68,13 +68,18 @@
     <div data-box="restore" class="popup auth-popup js-pop-up"><a href="#" class="popup-close js-pop-close"><span></span></a>
       <div class="restore-form">
         <div class="form-inputs">
-          <form>
-            <div class="input-title">Восстановление пароля</div>
-            <div class="input-cont">
-              <input placeholder="Укажите е-мейл" class="us-input">
+          <form action="{{ URL::route('app.do_restore_password') }}" class="js-ajax-form">
+            <div class="js-ajax-before">
+              <div class="input-title">Восстановление пароля</div>
+              <div class="input-cont">
+                <input name="email" placeholder="Укажите е-мейл" class="us-input">
+              </div>
+              <div class="btns">
+                <button class="us-btn" type="submit">Восстановить</button>
+              </div>
             </div>
-            <div class="btns">
-              <button class="us-btn">Восстановить</button>
+            <div class="js-ajax-after">
+              <div class="input-title js-ajax-result"></div>
             </div>
           </form>
         </div>

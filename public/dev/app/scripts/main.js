@@ -252,6 +252,27 @@ SplatSite.CountDown = function(elem) {
 	$(elem).MyCount();
 }
 
+$.fn.AjaxForm = function() {
+	var action = $(this).attr('action');
+	var form = $(this);
+	form.find('.js-ajax-after').hide();
+	$(this).on('submit', function(e){
+		$.ajax({
+			url: action,
+			data: form.serialize(),
+			type: 'post'
+		}).done(function(data){
+			form.find('.js-ajax-result').text(data);
+			form.find('.js-ajax-before').slideUp();
+			form.find('.js-ajax-after').slideDown();
+		}).fail(function(){
+			console.log(data);
+		});
+		e.preventDefault();
+		return false;
+	});
+}
+
 function declOfNum(number, titles) {  
     cases = [2, 0, 1, 1, 1, 2];  
     return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];  
@@ -266,6 +287,7 @@ $(function(){
 	if($('[data-finish]').length) {
 		SplatSite.CountDown('.js-countdown');
 	}
+	$('.js-ajax-form').AjaxForm();
 
 	$('.styledCheck').button();
 
