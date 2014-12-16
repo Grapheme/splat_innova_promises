@@ -205,8 +205,6 @@
 
 
         @if (!@count($active_promises) && !@count($inactive_promises))
-            {{-- do nothing --}}
-        @else
             <div class="wrapper">
                 <div class="us-text">Вы еще не давали обещаний.</div>
             </div>
