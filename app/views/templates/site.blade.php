@@ -10,7 +10,9 @@
 @section('description'){{ $seo->description }}@stop
 @section('keywords'){{ $seo->keywords }}@stop
 @endif
-<!DOCTYPE html>
+<?
+define('domain', 'http://' . $_SERVER['HTTP_HOST']);
+?><!DOCTYPE html>
     <head>
 	@include(Helper::layout('head'))
 
