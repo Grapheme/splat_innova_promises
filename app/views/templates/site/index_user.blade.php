@@ -399,14 +399,16 @@
             });
         </script>
         <script>
-            VK.Api.call('wall.post', {
-                owner_id: '{{ @$auth_user->full_social_info['id'] }}',
-                message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
-            }, function(r) {
-                //console.log(r);
-                //alert('OK!');
-                //$(".js-inv-btn-cont2").slideUp();
-                //$("#send-invite-success").slideDown();
+            $(document).ready(function(){
+                VK.Api.call('wall.post', {
+                    owner_id: '{{ @$auth_user->full_social_info['id'] }}',
+                    message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
+                }, function(r) {
+                    //console.log(r);
+                    //alert('OK!');
+                    //$(".js-inv-btn-cont2").slideUp();
+                    //$("#send-invite-success").slideDown();
+                });
             });
         </script>
     @endif
