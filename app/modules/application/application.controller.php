@@ -682,6 +682,7 @@ class ApplicationController extends BaseController {
         } else {
 
             $promise_user = Dic::valueBySlugAndId('users', $promise->user_id);
+            $promise_user->extract(1);
         }
 
 
