@@ -266,10 +266,9 @@ $.fn.AjaxForm = function() {
 			data: form.serialize(),
 			type: 'post'
 		}).done(function(data){
-			form.find('.js-ajax-result').text(data);
+			form.find('.js-ajax-result').text(data.responseText);
 			form.find('.js-ajax-before').slideUp();
 			form.find('.js-ajax-after').slideDown();
-			console.log(data);
 		}).fail(function(){
 			console.log(data);
 		});
