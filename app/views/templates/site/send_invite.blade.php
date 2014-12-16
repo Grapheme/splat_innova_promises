@@ -38,12 +38,15 @@
                 <div class="invite-info">
                   <p>Ваш друг {{-- из Facebook --}} не дал еще ни одного обещания. </p>
                   <p>Пригласите вашего друга и расскажите ему о том, почему так важно сдерживать данные обещания.</p>
+
                   <div class="inv-form">
-                    <div class="inv-btn js-inv-btn-cont"><a href="#" class="us-btn js-inv-btn">Пригласить друга</a></div>
+
+                    <div class="inv-btn js-inv-btn-cont"><a href="#" class="us-btn js-inv-btn invite-friend-show-form">Пригласить друга</a></div>
+
+                    <div id="send-invite-success" style="display:none">
+                          Приглашение успешно отправлено.
+                    </div>
                     <div style="display: none;" class="form js-inv-form">
-                      <div id="send-invite-success" style="display:none">
-                        Приглашение успешно отправлено.
-                      </div>
                       <form action="{{ URL::route('app.send_invite_message') }}" method="POST" id="invite-form">
                           <input name="email" placeholder="E-mail друга" class="us-input">
                           <input type="hidden" name="name" value="{{ @$user['name'] }}">
@@ -51,6 +54,7 @@
                       </form>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -65,12 +69,28 @@
 @section('scripts')
   <script>SplatSite.InviteForm();</script>
 
+  @if ($auth_user->auth_method = 'vkontakte')
   <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
   <script type="text/javascript">
       VK.init({
           apiId: 4659025
       });
   </script>
+  <script>
+  $(".invite-friend-show-form").on('click', function(){
+      VK.Api.call('wall.post', {
+        owner_id: 1889847,
+        message: 'Post via VK Open API'
+      }, function(r) {
+        //console.log(r);
+        //alert('OK!');
+
+      });
+      $("#send-invite-success").slideDown();
+      return false;
+  });
+  </script>
+  @endif
 
   <script>
 
@@ -84,16 +104,7 @@
         errorClass: "inp-error",
         submitHandler: function(form) {
             //console.log(form);
-
-            VK.Api.call('wall.post', {
-                owner_id: 1889847,
-                message: 'Post via VK Open API'
-            }, function(r) {
-                console.log(r);
-                alert('OK!');
-            });
-
-            //sendInviteForm(form);
+            sendInviteForm(form);
             return false;
         }
     });
