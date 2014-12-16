@@ -506,8 +506,13 @@ $(document).on('submit', '#auth_form', function(e){
 //*/
 
 function gotome() {
-    var promise_text = $('.promise_text').val();
-    location.href = '/me?promise_text=' + promise_text;
+    var promise_text = $('.promise_text').val().trim();
+    //location.href = '/me?promise_text=' + promise_text;
+
+    var location = '/me';
+    if (promise_text != '')
+        location += '?promise_text=' + promise_text;
+    location.href = location;
 }
 
 

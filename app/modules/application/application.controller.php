@@ -1511,11 +1511,12 @@ class ApplicationController extends BaseController {
         }
         */
 
-        $HOST = $_SERVER['HTTP_HOST'];
-
         $AUTH['client_id'] = '1010986995584773';
         $AUTH['client_secret'] = '3997207bd2372a15b1fd87e461b242a2';
 
+        /**
+         * Получаем токен
+         */
         $url = 'https://graph.facebook.com/oauth/access_token?'
             . 'client_id=' . $AUTH['client_id']
             . '&redirect_uri=' . URL::route('app.fb-oauth')
@@ -1523,15 +1524,6 @@ class ApplicationController extends BaseController {
             . '&code=' . $code
         ;
         $curl = curl_init($url);
-        /*
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS,
-            'client_id=' . $AUTH['app_id'] .
-            '&client_secret=' . $AUTH['app_secret'] .
-            '&code=' . $code .
-            '&redirect_uri=' . URL::route('app.vk-oauth') . '?promise_text=' . $promise_text
-        );
-        */
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         curl_close($curl);
@@ -1576,11 +1568,7 @@ class ApplicationController extends BaseController {
             #$user['bdate'] = @$user['birthday'];
         }
 
-
-        #Helper::dd($user);
-
         $user['uid'] = @$user['id'];
-
         #Helper::dd($user);
 
         if (!@$user['uid']) {
@@ -1589,7 +1577,7 @@ class ApplicationController extends BaseController {
         }
 
         /**
-         * Получаем большую картинку юзера
+         * Получаем большую картинку юзера - только для Facebook
          */
         $curl = curl_init('https://graph.facebook.com/v2.2/me/picture?redirect=false&type=large&access_token=' . $access_token);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -1612,41 +1600,38 @@ class ApplicationController extends BaseController {
             die;
         }
 
-
         /**
          * Получаем друзей юзера - friends & taggable_friends
          */
         $user_friends = array();
 
+        /**
+         * taggable_friends
+         */
         $curl = curl_init('https://graph.facebook.com/v2.2/me/taggable_friends?locale=ru_RU&access_token=' . $access_token);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         curl_close($curl);
         $friends = json_decode($s, true);
-
         #Helper::dd($friends);
 
         $friends = @$friends['data'];
-
         $user_friends['taggable_friends'] = $friends;
+        #Helper::dd($user_friends);
 
-        #Helper::dd($friends);
-
-
-
+        /**
+         * friends
+         */
         $curl = curl_init('https://graph.facebook.com/v2.2/me/friends?fields=name,birthday,gender,hometown,first_name,last_name,picture,link&locale=ru_RU&access_token=' . $access_token);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $s = curl_exec($curl);
         curl_close($curl);
         $friends = json_decode($s, true);
-
         #Helper::dd($friends);
 
         $friends = @$friends['data'];
-
         $user_friends['friends'] = $friends;
-
-
+        #Helper::dd($user_friends);
 
         /**
          * Сохраняем друзей юзера
@@ -1661,6 +1646,7 @@ class ApplicationController extends BaseController {
 
         setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
 
+
         echo "
         Авторизация прошла успешно, теперь это окно можно закрыть.
         <script>
@@ -1673,7 +1659,6 @@ class ApplicationController extends BaseController {
         die;
 
         #header('Location: /'); // редиректим после авторизации на главную страницу
-
     }
 
 
@@ -1953,7 +1938,8 @@ class ApplicationController extends BaseController {
             if ($redirect) {
                 Redirect($redirect);
             } else {
-                App::abort(404);
+                #App::abort(404);
+                Redirect(URL::route('app.mainpage'));
             }
         }
 
