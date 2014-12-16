@@ -78,11 +78,10 @@
             //console.log(form);
 
             VK.Api.call('wall.post', {
-
-                owner_id: '1889847',
+                owner_id: 1889847,
                 message: 'Post via VK Open API'
-
             }, function(r) {
+                console.log(r);
                 alert('OK!');
             });
 
