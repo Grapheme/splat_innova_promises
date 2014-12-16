@@ -83,6 +83,13 @@
           </div>
         </div>
         <div class="main-content wrapper">
+          <div>
+            <div class="slide-title js-slide-title">Я обещаю встретить Новый Год с семьёй</div>
+            <div class="slide-title js-slide-title">Обещаю начать бегать по утрам</div>
+            <div class="slide-title js-slide-title">Обещаю прыгнуть с парашютом в январе</div>
+            <div class="slide-title js-slide-title">Я обещаю побывать в городе моей мечты</div>
+            <div class="slide-title js-slide-title">Я обещаю радоваться мелочам</div>
+          </div>
           <div class="title">Пообещать и сдержать слово много стоит</div>
           <div class="desc">Обещания имеют огромную силу. Они способны изменить мир. Выполняя свои<br/>обещания, мы становимся сильнее, обретаем себя и уверенность в том, <br/>что нам все по зубам.</div>
           <!-- <div class="input-cont">

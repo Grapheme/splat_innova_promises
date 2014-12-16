@@ -92,6 +92,17 @@ SplatSite.tabs = function() {
 	init();
 }
 SplatSite.index = function() {
+	var showSlide = function(id) {
+		var active = $('.js-slide-title.active');
+		active.addClass('faded');
+		setTimeout(function(){
+			$('.js-slide-title.faded.active').removeClass('active faded');
+		}, 1500);
+		setTimeout(function(){
+			$('.js-slide-title').eq(id).addClass('active');
+		}, 250);
+	}
+
 	var main_fotorama = function() {
 		var fsets = {
 			fit: 'cover',
@@ -103,7 +114,18 @@ SplatSite.index = function() {
 			arrows: false,
 			nav: false
 		};
-		$('.js-main-fotorama').fotorama(fsets);
+		var $fotorama_ = $('.js-main-fotorama').fotorama(fsets);
+		var fotorama = $fotorama_.data('fotorama');
+		var loaded = false;
+		$('.js-main-fotorama').on('fotorama:load', function (e, fotorama, extra){
+			if(!loaded) {
+				showSlide(0);
+				loaded = true;
+			}
+		});
+		$('.js-main-fotorama').on('fotorama:show', function (e, fotorama, extra){
+		    showSlide(fotorama.activeIndex);
+		});
 	}
 
 	var promises_fotorama = function() {
