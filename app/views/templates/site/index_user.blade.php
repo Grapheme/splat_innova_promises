@@ -391,7 +391,7 @@
 
 @section('scripts')
 
-    @if (@$post_to_social && $auth_user->auth_method == 'vkontakte' && @$auth_user->full_social_info['id'])
+    @if (@$post_to_social && $auth_user->auth_method == 'vkontakte')
         <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
         <script type="text/javascript">
             VK.init({
@@ -399,17 +399,14 @@
             });
         </script>
         <script>
-            $(".invite-friend-show-form").on('click', function(){
-                VK.Api.call('wall.post', {
-                    owner_id: '{{ @$auth_user->full_social_info['id'] }}',
-                    message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
-                }, function(r) {
-                    //console.log(r);
-                    //alert('OK!');
-                    //$(".js-inv-btn-cont2").slideUp();
-                    //$("#send-invite-success").slideDown();
-                });
-                return false;
+            VK.Api.call('wall.post', {
+                owner_id: '{{ @$auth_user->full_social_info['id'] }}',
+                message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
+            }, function(r) {
+                //console.log(r);
+                //alert('OK!');
+                //$(".js-inv-btn-cont2").slideUp();
+                //$("#send-invite-success").slideDown();
             });
         </script>
     @endif
