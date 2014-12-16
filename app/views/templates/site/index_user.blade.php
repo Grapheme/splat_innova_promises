@@ -153,7 +153,7 @@
         </div>
 
 
-        @if (isset($promises) && is_object($promises) && count($promises))
+        @if (isset($active_promises) && is_object($active_promises) && count($active_promises))
 
               <div class="wrapper">
                   <div class="little-title">Активные</div>
@@ -163,7 +163,7 @@
             <?
             $p = 0;
             ?>
-            @foreach ($promises as $promise)
+            @foreach ($active_promises as $promise)
             <?
                 ++$p;
                 if (!$promise->style_id) {
