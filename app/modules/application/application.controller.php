@@ -616,7 +616,9 @@ class ApplicationController extends BaseController {
          */
         unset($_SESSION['promise_text']);
 
-        return Redirect::route('app.me')->with('post_to_social', 1);
+        return Redirect::route('app.me')
+            ->with('post_to_social', 1)
+            ;
     }
 
 
