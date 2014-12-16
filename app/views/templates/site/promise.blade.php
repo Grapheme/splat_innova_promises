@@ -90,12 +90,14 @@
             <div class="promise-text">
                 {{ $promise->promise_text }}
             </div>
-            <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div>
+            <?
+            $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
+            ?>
+            @if (!$failed)
+                <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div>
+            @endif
             <!-- <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div> -->
             <div class="progress-btns">
-                <?
-                $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
-                ?>
                 @if ($failed)
                     {{-- Задание провалено --}}
                     <div class="pr-btn">

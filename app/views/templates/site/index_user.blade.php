@@ -19,19 +19,6 @@
 @stop
 
 
-@section('promise')
-    <li class="promise-item type-promo">
-        <div class="promise-content">
-            <div class="logo"></div>
-            <div class="text">
-                <p>Каждый раз, выполняя обещания,<br> вы становитесь чуточку лучше.</p>
-                <p>Мы тоже хотим вам пообещать<br><a href="#" class="js-open-box" data-box="promo">кое-что</a></p>
-            </div>
-        </div>
-    </li>
-@stop
-
-
 @section('content')
 
     @if (0)
@@ -209,7 +196,7 @@
                     }
                     ?>
 
-                    @include(Helper::layout('promise_inc'))
+                    @include(Helper::layout('promise_inc'), array('promise_type' => 'inactive'))
 
               @endforeach
 
