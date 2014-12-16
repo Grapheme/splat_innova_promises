@@ -1432,6 +1432,9 @@ class ApplicationController extends BaseController {
 
         if (!@$auth['access_token'] || !@$auth['user_id']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (1).";
+            echo "<!--";
+            Helper::d($auth);
+            echo "-->";
             die;
         }
 
