@@ -233,12 +233,26 @@ SplatSite.PromisePlaceholder = function() {
 	$('.js-promise-placeholder textarea').autosize();
 }
 
+SplatSite.CountDown = function(elem) {
+	$.fn.MyCount = function() {
+		var date_str = $(this).parents('[data-finish]').attr('data-finish');
+		for(var i = 0; i < 2; i++) {
+			date_str = date_str.replace('-', '/');
+		}
+		$(this).countdown(date_str, function(event){
+			$(this).text(event.strftime('%D days %H:%M:%S'));
+		});
+	}
+	$(elem).MyCount();
+}
+
 $(function(){
 	var body = $('body');
 	SplatSite.tabs();
 	SplatSite.ShowFriends();
 	SplatSite.Tooltips.init();
 	SplatSite.PromisePlaceholder();
+	SplatSite.CountDown('.js-countdown');
 
 	$('.styledCheck').button();
 
