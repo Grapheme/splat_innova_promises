@@ -23,7 +23,7 @@
   <div class="main-wrapper">
     <header class="main-header bordered">
       <div class="wrapper">
-        <div class="user-links"><a href="#"><span data-box="auth" class="js-open-box">Войти</span></a><a href="#"><span data-box="auth" class="js-open-box">Зарегистрироваться</span></a></div>
+        <div class="user-links"><a href="#"><span data-box="auth" class="js-open-box">Войти</span></a><a href="#"><span data-box="restore" class="js-open-box">Зарегистрироваться</span></a></div>
         <ul class="soc-links">
           <li><a href="#" class="soc-icon"><i class="fi icon-fb"></i></a></li>
           <li><a href="#" class="soc-icon"><i class="fi icon-vk"></i></a></li>
@@ -281,7 +281,7 @@
                 <input placeholder="Пароль">
               </div>
               <div class="btns">
-                <button class="us-btn">Войти</button><a href="#" class="right-link js-form-pass">восстановить пароль</a>
+                <button class="us-btn">Войти</button><a href="#" data-box="restore" class="right-link js-change-box">восстановить пароль</a>
               </div>
             </form>
           </div>
@@ -304,6 +304,21 @@
           <li class="about-sav"><span class="icon"></span><span class="text">Вы сможете сохранить ваше обещание, а мы будем напоминать вам о нем.</span></li>
           <li class="about-new"><span class="icon"></span><span class="text">В новогоднюю ночь сбываются чудеса, а люди во всем мире дают друг другу обещания, которые порой так трудно исполнить.</span></li>
         </ul>
+      </div>
+    </div>
+    <div data-box="restore" class="popup auth-popup js-pop-up"><a href="#" class="popup-close js-pop-close"><span></span></a>
+      <div class="restore-form">
+        <div class="form-inputs">
+          <form>
+            <div class="input-title">Восстановление пароля</div>
+            <div class="input-cont">
+              <input placeholder="Укажите е-мейл" class="us-input">
+            </div>
+            <div class="btns">
+              <button class="us-btn">Восстановить</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
     <div data-box="promo" class="popup promo-popup js-pop-up"><a href="#" class="popup-close js-pop-close"><span></span></a>
