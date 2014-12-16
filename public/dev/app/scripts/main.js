@@ -220,7 +220,11 @@ SplatSite.Tooltips = {
 
 SplatSite.PromisePlaceholder = function() {
 	var input = $('.js-promise-placeholder input, .js-promise-placeholder textarea');
-	var dots = $('.js-promise-placeholder .promise-placeholder span');
+	var place = $('.js-promise-placeholder .promise-placeholder');
+	var dots = place.find('span');
+	place.on('click', function(){
+		input.trigger('focus');
+	});
 	input.on('focus', function(){
 		console.log(dots);
 		dots.hide();
