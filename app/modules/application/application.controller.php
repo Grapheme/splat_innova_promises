@@ -467,13 +467,15 @@ class ApplicationController extends BaseController {
 
         $user = $this->user;
         $msg = false;
+        $new_user = false;
 
         if (@$_SESSION['new_user']) {
             $msg = @$_SESSION['new_user'];
+            $new_user = true;
             unset($_SESSION['new_user']);
         }
 
-        return View::make(Helper::layout('profile'), compact('user', 'msg'));
+        return View::make(Helper::layout('profile'), compact('user', 'msg', 'new_user'));
     }
 
 
