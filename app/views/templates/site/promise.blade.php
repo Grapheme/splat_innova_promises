@@ -72,7 +72,7 @@
     if (isset($user->sex) && $user->sex == 1)
         $default_avatar = '/theme/images/woman.png';
     ?>
-    <div class="promise-make promise-page type-blue" data-finish="{{ $promise->time_limit }}">
+    <div class="promise-make promise-page type-{{ $promise->style_id }}" data-finish="{{ $promise->time_limit }}">
         <div class="wrapper">
             <div class="profile-card">
                 <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo"></div>
