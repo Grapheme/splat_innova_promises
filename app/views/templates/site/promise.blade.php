@@ -90,7 +90,7 @@
             <div class="promise-text">
                 {{ $promise->promise_text }}
             </div>
-            <div class="promise-time"><i class="fi icon-progress"></i><span class="time-day js-countdown-days"></span><span class="time-time js-countdown"></span></div>
+            <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div>
             <!-- <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div> -->
             <div class="progress-btns">
                 <?
