@@ -480,7 +480,7 @@ $("#auth_form").validate({
 
         //var email = $('.user-auth-email').val();
         //var pass = $('.user-auth-pass').val();
-        var promise_text = $('.promise_text').val();
+        var promise_text = $('.promise-text').val();
 
         $('input[type=hidden][name=promise_text]').val(promise_text);
         form.submit();
