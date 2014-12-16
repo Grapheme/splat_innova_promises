@@ -54,6 +54,7 @@
                 <button class="us-btn">Войти</button><a class="right-link js-change-box" data-box="restore">Забыли пароль?</a><a href="#" class="right-link js-change-box" data-box="reg">Регистрация</a>
               </div>
             </form>
+          </div>
         </div>
       </div>
       <div class="wrapper">
