@@ -460,7 +460,7 @@ $(document).on('click', '.fb-oauth-link', function(e){
  *
  */
 //*
-$("#auth_form").validate({
+$(".auth_form_validate").validate({
     rules: {
         'email': { required: true, email: true },
         'pass': { required: true }
