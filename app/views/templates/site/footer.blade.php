@@ -16,7 +16,7 @@
           <li><a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl=mypromises.ru" target="_blank" class="soc-icon"><i class="fi icon-ok"></i></a></li>
         </ul>
       </div>
-      <a href="http://ru.innova-oralcare.com" target="_blank" class="footer-block right-logo"></a>
+      <a href="http://splat-innova.com" target="_blank" class="footer-block right-logo"></a>
     </div>
   </footer>
   <div class="overlay-shadow"></div>
@@ -27,7 +27,7 @@
       </div>
       <div class="form-block">
         <div class="wrapper">
-          <div class="desc">Данные вами обещания обязательно должны превратиться в дела.<br/>Зарегистрируйтесь на сайте через социальную сеть, чтобы ваши друзья могли поддержать вас. </div>
+          <div class="desc">Данные вами обещания обязательно должны превратиться в дела.<br>Авторизируйтесь на сайте через социальную сеть, чтобы ваши друзья могли поддержать вас.</div>
           <div class="soc-auth">
             <a href="#" class="soc-fb fb-oauth-link">
                 <i class="fi icon-fb"></i>Facebook
@@ -42,7 +42,7 @@
           <div class="desc">или с помощью адреса электронной почты:</div>
           <div data-type="auth" class="form-inputs js-pop-form">
 
-            <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" id="auth_form">
+            <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" class="auth_form_validate">
               <input type="hidden" name="promise_text">
               <div class="input-cont">
                 <input type="email" name="email" placeholder="Эл. почта">
@@ -92,7 +92,7 @@
       </div>
       <div class="form-block">
         <div class="wrapper">
-          <div class="desc">Для того, чтобы сохранить ваше обещание, вам необходимо зарегистрироваться на нашем сайте<br>с помощью одной из этих социальных сетей:</div>
+          <div class="desc">Данные вами обещания обязательно должны превратиться в дела.<br>Зарегистрируйтесь на сайте через социальную сеть, чтобы ваши друзья могли поддержать вас.</div>
           <div class="soc-auth">
             <a href="#" class="soc-fb fb-oauth-link">
                 <i class="fi icon-fb"></i>Facebook
@@ -107,7 +107,7 @@
           <div class="desc">или с помощью адреса электронной почты:</div>
           <div data-type="auth" class="form-inputs">
 
-            <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" id="auth_form">
+            <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" class="reg_form_validate">
               <input type="hidden" name="promise_text">
               <div class="input-cont">
                 <input type="email" name="email" placeholder="Эл. почта">

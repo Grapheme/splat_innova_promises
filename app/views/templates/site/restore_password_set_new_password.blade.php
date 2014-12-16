@@ -17,16 +17,16 @@
 
               <p>{{ Session::get('msg') }}</p>
 
+            <div class="restore-block">
               <p>Введите новый пароль:</p>
               <div class="input-container">
-              	<input class="us-btn" type="password" name="password" value="">
+              	<input class="us-input" type="password" name="password" value="">
               </div>
+              <input type="hidden" name="token" value="{{ $token }}">
               <div class="input-container">
-              	<input class="us-btn" type="hidden" name="token" value="{{ $token }}">
+              	<button class="us-btn" type="submit">Сбросить пароль</button>
               </div>
-              <div class="input-container">
-              	<button type="submit">Сбросить пароль</button>
-              </div>
+            </div>
 
           </form>
         </div>
