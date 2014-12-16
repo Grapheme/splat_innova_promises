@@ -1,4 +1,4 @@
-<li class="promise-item type-{{ $promise->style_id }}" @if(@promise_type != 'inactive') data-finish="{{ $promise->time_limit }}" @endif>
+<li class="promise-item type-{{ $promise->style_id }}" @if(@promise_type == 'active') data-finish="{{ $promise->time_limit }}" @endif>
     <a href="{{ URL::route('app.promise', $promise->id) }}" class="promise-content">
         <div class="title">
             {{ $promise->name }}

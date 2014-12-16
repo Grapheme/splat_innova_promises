@@ -159,7 +159,7 @@
                 }
             ?>
 
-                @include(Helper::layout('promise_inc'))
+                @include(Helper::layout('promise_inc'), array('promise_type' => 'active'))
 
                 @if ($p == 2)
                     @yield('koe-chto')
