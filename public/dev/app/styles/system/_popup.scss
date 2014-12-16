@@ -39,6 +39,7 @@
 		min-width: $wrap-width + $wrap-padding*2;
 		opacity: 0;
 		transition: opacity .2s ease;
+		min-height: 100%;
 
 		&.active {
 			opacity: 1;

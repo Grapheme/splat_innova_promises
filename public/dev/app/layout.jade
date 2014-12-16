@@ -32,7 +32,7 @@ head
                     a(href="#")
                         span.js-open-box(data-box="auth") Войти
                     a(href="#")
-                        span.js-open-box(data-box="auth") Зарегистрироваться
+                        span.js-open-box(data-box="restore") Зарегистрироваться
                 ul.soc-links
                     li
                         a(href="#").soc-icon
@@ -98,7 +98,7 @@ head
                                 input(placeholder="Пароль")
                             .btns
                                 button.us-btn Войти
-                                a(href="#").right-link.js-form-pass восстановить пароль
+                                a(href="#" data-box="restore").right-link.js-change-box восстановить пароль
 
                     .form-inputs.js-pop-form(data-type="pass" style="display: none;")
                         form
@@ -121,6 +121,18 @@ head
                     li.about-new
                         span.icon
                         span.text В новогоднюю ночь сбываются чудеса, а люди во всем мире дают друг другу обещания, которые порой так трудно исполнить.
+        .popup.auth-popup.js-pop-up(data-box="restore")
+            a(href="#").popup-close.js-pop-close
+                span
+            .restore-form
+                .form-inputs
+                    form
+                        .input-title Восстановление пароля
+                        .input-cont
+                            input(placeholder="Укажите е-мейл").us-input
+                        .btns
+                            button.us-btn Восстановить
+
         .popup.promo-popup.js-pop-up(data-box="promo")
             a(href="#").popup-close.js-pop-close
                 span
@@ -147,6 +159,8 @@ head
     script(src='bower_components/jquery-ui/jquery-ui.js')
     script(src='bower_components/jQuery-Mask-Plugin/dist/jquery.mask.js')
     script(src='bower_components/jquery-autosize/jquery.autosize.js')
+    script(src='bower_components/jquery.countdown/dist/jquery.countdown.js')
+    script(src='bower_components/jquery.countdown/dist/jquery.countdown.min.js')
     // endbower
     // endbuild
     // build:js({app,.tmp}) scripts/main.js

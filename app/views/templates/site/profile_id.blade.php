@@ -121,7 +121,7 @@
                                 <!-- <i class="fi icon-smile"></i> -->
                             </div>
                         @else
-                            <div class="time">02:01:23</div>
+                            <!-- <div class="time">02:01:23</div> -->
                         @endif
 
                     </div>

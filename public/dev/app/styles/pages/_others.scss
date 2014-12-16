@@ -60,6 +60,28 @@
   }
 
   textarea {
-    text-indent: 145px;
+    text-indent: 205px;
+  }
+}
+
+.input-title {
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.restore-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -240px;
+  width: 480px;
+  height: 200px;
+
+  .us-input {
+    background: #f6f6f6;
+    height: 65px;
+    margin-bottom: 20px;
   }
 }

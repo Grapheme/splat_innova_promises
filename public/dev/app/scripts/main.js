@@ -21,7 +21,7 @@ SplatSite.tabs = function() {
 			'right': pos.right
 		});
 	}
-	popup.open = function(link) {
+	popup.open = function(link, native) {
 		clearTimeout(close_timeout);
 		if(link.hasClass('js-promise-btn')) {
 			if($('.js-promise-input').val() != '') {
@@ -72,7 +72,7 @@ SplatSite.tabs = function() {
 		});
 		change_link.on('click', function(){
 			popup.close();
-			popup.open($('.js-open-box[data-box="' + $(this).attr('data-box') + '"]').first());
+			popup.open($('.js-open-box[data-box="' + $(this).attr('data-box') + '"]'), true);
 			return false;
 		});
 		$('.js-form-pass').on('click', function(){
@@ -220,7 +220,11 @@ SplatSite.Tooltips = {
 
 SplatSite.PromisePlaceholder = function() {
 	var input = $('.js-promise-placeholder input, .js-promise-placeholder textarea');
-	var dots = $('.js-promise-placeholder .promise-placeholder span');
+	var place = $('.js-promise-placeholder .promise-placeholder');
+	var dots = place.find('span');
+	place.on('click', function(){
+		input.trigger('focus');
+	});
 	input.on('focus', function(){
 		console.log(dots);
 		dots.hide();
@@ -233,12 +237,57 @@ SplatSite.PromisePlaceholder = function() {
 	$('.js-promise-placeholder textarea').autosize();
 }
 
+SplatSite.CountDown = function(elem) {
+	$.fn.MyCount = function() {
+		var parent = $(this).parents('[data-finish]');
+		var date_str = parent.attr('data-finish');
+		for(var i = 0; i < 2; i++) {
+			date_str = date_str.replace('-', '/');
+		}
+		$(this).countdown(date_str, function(event){
+			var days_name = declOfNum(event.offset.days, ['день', 'дня', 'дней']);
+			$(this).html(event.strftime('<span class="time-day"><span>' + event.offset.days + '</span> ' + days_name + '</span><span class="time-time">%H:%M:%S</span>'));
+		});
+	}
+	$(elem).MyCount();
+}
+
+$.fn.AjaxForm = function() {
+	var action = $(this).attr('action');
+	var form = $(this);
+	form.find('.js-ajax-after').hide();
+	$(this).on('submit', function(e){
+		$.ajax({
+			url: action,
+			data: form.serialize(),
+			type: 'post'
+		}).done(function(data){
+			form.find('.js-ajax-result').text(data);
+			form.find('.js-ajax-before').slideUp();
+			form.find('.js-ajax-after').slideDown();
+		}).fail(function(){
+			console.log(data);
+		});
+		e.preventDefault();
+		return false;
+	});
+}
+
+function declOfNum(number, titles) {  
+    cases = [2, 0, 1, 1, 1, 2];  
+    return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];  
+}
+
 $(function(){
 	var body = $('body');
 	SplatSite.tabs();
 	SplatSite.ShowFriends();
 	SplatSite.Tooltips.init();
 	SplatSite.PromisePlaceholder();
+	if($('[data-finish]').length) {
+		SplatSite.CountDown('.js-countdown');
+	}
+	$('.js-ajax-form').AjaxForm();
 
 	$('.styledCheck').button();
 

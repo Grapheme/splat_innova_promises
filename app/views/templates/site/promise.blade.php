@@ -90,7 +90,8 @@
             <div class="promise-text">
                 {{ $promise->promise_text }}
             </div>
-            <div class="promise-time"><i class="fi icon-progress"></i><span class="time-day"><span>1</span> день</span><span class="time-time">00:02:43</span></div>
+            <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div>
+            <!-- <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div> -->
             <div class="progress-btns">
                 <?
                 $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);

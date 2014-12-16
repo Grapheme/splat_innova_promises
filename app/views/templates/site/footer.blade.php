@@ -51,18 +51,7 @@
                 <input type="password" name="pass" placeholder="Пароль">
               </div>
               <div class="btns">
-                <button class="us-btn">Войти</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-form-pass">Забыли пароль?</a>
-              </div>
-            </form>
-
-          </div>
-          <div data-type="pass" style="display: none;" class="form-inputs js-pop-form">
-            <form>
-              <div class="input-cont">
-                <input placeholder="Эл. почта">
-              </div>
-              <div class="btns">
-                <button class="us-btn">Восстановить</button>
+                <button class="us-btn">Войти</button><a class="right-link js-change-box" data-box="restore">Забыли пароль?</a><a href="#" class="right-link js-change-box" data-box="reg">Регистрация</a>
               </div>
             </form>
           </div>
@@ -75,6 +64,26 @@
           <li class="about-sav"><span class="icon"></span><span class="text">Вы сможете сохранить ваше обещание, а мы будем напоминать вам о нем.</span></li>
           <li class="about-new"><span class="icon"></span><span class="text">В новогоднюю ночь сбываются чудеса, а люди во всем мире дают друг другу обещания, которые порой так трудно исполнить.</span></li>
         </ul>
+      </div>
+    </div>
+    <div data-box="restore" class="popup auth-popup js-pop-up"><a href="#" class="popup-close js-pop-close"><span></span></a>
+      <div class="restore-form">
+        <div class="form-inputs">
+          <form action="{{ URL::route('app.do_restore_password') }}" class="js-ajax-form">
+            <div class="js-ajax-before">
+              <div class="input-title">Восстановление пароля</div>
+              <div class="input-cont">
+                <input name="email" placeholder="Укажите е-мейл" class="us-input">
+              </div>
+              <div class="btns">
+                <button class="us-btn" type="submit">Восстановить</button>
+              </div>
+            </div>
+            <div class="js-ajax-after">
+              <div class="input-title js-ajax-result"></div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
     <div data-box="reg" class="popup auth-popup js-pop-up"><a href="#" class="popup-close js-pop-close"><span></span></a>
