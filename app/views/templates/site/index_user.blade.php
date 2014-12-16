@@ -188,17 +188,25 @@
                 $p = 0;
                 ?>
                 @foreach ($inactive_promises as $promise)
-                    <?
+                <?
                     ++$p;
                     if (!$promise->style_id) {
                         $styles = array('green', 'aqua', 'yellow', 'blue', 'pink');
                         $promise->style_id = $styles[array_rand($styles)];
                     }
-                    ?>
+                ?>
 
                     @include(Helper::layout('promise_inc'), array('promise_type' => 'inactive'))
 
-              @endforeach
+                    @if ($p == 2 && !@count($active_promises))
+                        @yield('koe-chto')
+                    @endif
+
+                @endforeach
+
+                @if ($p == 1 && !@count($active_promises))
+                    @yield('koe-chto')
+                @endif
 
             </ul>
         @endif
