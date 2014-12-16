@@ -145,6 +145,23 @@ class ApplicationController extends BaseController {
         #Helper::tad($promises);
 
         /**
+         * Разделим обещания на активные и неактуальные
+         */
+        $active_promises = array();
+        $inactive_promises = array();
+        if (count($promises)) {
+            foreach ($promises as $p => $promise) {
+
+                $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
+
+                if ($failed)
+                    $inactive_promises[$p] = $promise;
+                else
+                    $active_promises[$p] = $promise;
+            }
+        }
+
+        /**
          * Определим, какие друзья пользователя уже зареганы в системе
          */
         #$existing_friends = array();
@@ -189,7 +206,7 @@ class ApplicationController extends BaseController {
         /**
          * Показываем главную страницу юзера
          */
-        return View::make(Helper::layout('index_user'), compact('user', 'promises', 'existing_friends_list', 'count_user_friends'));
+        return View::make(Helper::layout('index_user'), compact('user', 'promises', 'active_promises', 'inactive_promises', 'existing_friends_list', 'count_user_friends'));
     }
 
 
@@ -598,7 +615,7 @@ class ApplicationController extends BaseController {
          */
         unset($_SESSION['promise_text']);
 
-        return Redirect::route('app.mainpage');
+        return Redirect::route('app.me');
     }
 
 
