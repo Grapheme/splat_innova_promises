@@ -1,8 +1,10 @@
 .main-footer {
+	position: relative;
 	height: 100px;
 	background: #56565b;
 	font-size: 0;
 	line-height: 100px;
+	z-index: 1;
 
 	.footer-block {
 		display: inline-block;

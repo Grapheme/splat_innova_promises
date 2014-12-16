@@ -105,7 +105,7 @@
             <div class="progress-btns">
                 @if ($failed)
                     {{-- Задание провалено --}}
-                    <div class="pr-btn">
+                    <div class="pr-btn active">
                         <i class="fi icon-no"></i>
                         <span>
                             @if ($promise->user_id == $user->id)
@@ -117,11 +117,11 @@
                     </div>
                 @elseif ($promise->finished_at)
                     {{-- Обещание выполнено $promise->finished_at --}}
-                    <div class="pr-btn"><i class="fi icon-okey"></i><span>Обещание выполнено</span></div>
+                    <div class="pr-btn active"><i class="fi icon-okey"></i><span>Обещание выполнено</span></div>
                 @else
-                    <a href="?finished=1" class="pr-btn active"><i class="fi icon-okey"></i><span>Выполнено</span></a>
+                    <a href="?finished=1" class="pr-btn"><i class="fi icon-okey"></i><span>Выполнено</span></a>
                     <a href="?fail=1" class="pr-btn"><i class="fi icon-no"></i><span>Отказаться</span></a>
-                    <a href="?delete=1" class="pr-btn" title="Удалить"><span>X</span></a>
+                    <a href="?delete=1" class="pr-btn" title="Удалить"><span>Удалить обещание</span></a>
                 @endif
             </div>
         </div>
