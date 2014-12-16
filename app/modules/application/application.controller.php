@@ -102,21 +102,22 @@ class ApplicationController extends BaseController {
 
         $this->check_auth(URL::route('app.mainpage'));
 
-        /**
-         * Если есть пометка о том, что юзер новый - убираем ее и переадресовываем на страницу редактирования профиля
-         */
-        if (@$_SESSION['new_user']) {
-            return Redirect::route('app.profile');
-        }
-
+        /*
         if (isset($_GET['promise_text']) && $_GET['promise_text'] == '') {
             return Redirect::route('app.me');
         }
-
+        */
         $promise_text = trim(Input::get('promise_text'));
         if ($promise_text !== NULL && $promise_text != '') {
             $_SESSION['promise_text'] = $promise_text;
             $_SESSION['redirect_to_new_promise'] = 1;
+        }
+
+        /**
+         * Если есть пометка о том, что юзер новый - переадресовываем на страницу редактирования профиля
+         */
+        if (@$_SESSION['new_user']) {
+            return Redirect::route('app.profile');
         }
 
         /**
