@@ -163,12 +163,12 @@
 						content: "\e60d";
 						display: inline-block;
 						vertical-align: middle;
-						font-size: .8em;
+						font-size: 1.5em;
 					}
 
 					&.eye-cross {
 						&:before {
-							font-size: 1em;
+							font-size: 1.6em;
 							content: "\e60c";
 						}
 					}
@@ -190,13 +190,13 @@
 
 				.smile {
 					&:before {
-						content: "\e608";
+						content: "\e60f";
 					}
 				}
 
 				.unsmile {
 					&:before {
-						content: "\e607";
+						content: "\e60e";
 					}
 				} 
 			}
