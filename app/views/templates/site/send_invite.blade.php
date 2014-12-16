@@ -79,7 +79,7 @@
   <script>
   $(".invite-friend-show-form").on('click', function(){
       VK.Api.call('wall.post', {
-        owner_id: 1889847,
+        owner_id: '{{ Input::get('uid') }}',
         message: 'Post via VK Open API'
       }, function(r) {
           //console.log(r);
