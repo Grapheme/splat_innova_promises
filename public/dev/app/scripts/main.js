@@ -33,10 +33,8 @@ SplatSite.tabs = function() {
 		}
 		var box_name = link.attr('data-box');
 		var box = $('.js-pop-up[data-box="' + box_name + '"]');
-		if(!native) {
-			this.retPos(link);
-			link.addClass('js-opened-from');
-		}
+		this.retPos(link);
+		link.addClass('js-opened-from');
 		setTimeout(function(){
 			overlay_shadow.addClass('anim active');
 			setTimeout(function(){

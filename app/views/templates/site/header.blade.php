@@ -11,6 +11,7 @@
             <a href="{{ URL::route('app.me') }}"><span data-box="auth_" class="js-open-box_">Мои Обещания</span></a>
             <a href="#"><span data-box="auth_" class="js-open-box_ logout">Выйти</span></a>
         @endif
+          <a href="#"><span data-box="restore" class="js-open-box"></span></a>
         </div>
         <ul class="soc-links">
           <li><a href="http://www.facebook.com/sharer.php?u=http://mypromises.ru" class="soc-icon"><i class="fi icon-fb"></i></a></li>
