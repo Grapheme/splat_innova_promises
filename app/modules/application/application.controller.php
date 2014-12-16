@@ -1008,6 +1008,7 @@ class ApplicationController extends BaseController {
             }
 
             if (isset($_COOKIE['user_token'])) {
+                setcookie("user_token", '', 0, "/");
                 unset($_COOKIE['user_token']);
             }
 
@@ -1110,6 +1111,7 @@ class ApplicationController extends BaseController {
 
             if (!is_object($temp) || !is_object($temp->dicval)) {
 
+                setcookie("user_token", '', 0, "/");
                 unset($_COOKIE['user_token']);
                 unset($_SESSION['user_token']);
             }
