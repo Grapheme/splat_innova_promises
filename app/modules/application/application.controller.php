@@ -1852,10 +1852,15 @@ class ApplicationController extends BaseController {
 
         Mail::send('emails.restore_password_link_send', array('token' => $token), function ($message) use ($user) {
 
+            /*
             $from_email = Dic::valueBySlugs('options', 'from_email');
             $from_email = $from_email->name != '' ? $from_email->name : 'support@grapheme.ru';
             $from_name = Dic::valueBySlugs('options', 'from_name');
             $from_name = $from_name->name != '' ? $from_name->name : 'No-reply';
+            */
+
+            $from_email = Config::get('mail.from.address');
+            $from_name = Config::get('mail.from.name');
 
             $message->from($from_email, $from_name);
             $message->subject('Запрос на сброс пароля');
@@ -1933,10 +1938,15 @@ class ApplicationController extends BaseController {
 
         Mail::send('emails.restore_password_success', array('password' => $password, 'user' => $user), function ($message) use ($user) {
 
+            /*
             $from_email = Dic::valueBySlugs('options', 'from_email');
             $from_email = $from_email->name != '' ? $from_email->name : 'support@grapheme.ru';
             $from_name = Dic::valueBySlugs('options', 'from_name');
             $from_name = $from_name->name != '' ? $from_name->name : 'No-reply';
+            */
+
+            $from_email = Config::get('mail.from.address');
+            $from_name = Config::get('mail.from.name');
 
             $message->from($from_email, $from_name);
             $message->subject('Пароль успешно изменен');
