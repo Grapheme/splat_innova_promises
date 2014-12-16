@@ -1814,6 +1814,9 @@ class ApplicationController extends BaseController {
 
     public function postDoRestorePassword() {
 
+
+        $json_request = array('status' => FALSE, 'responseText' => '');
+
         $email = Input::get('email');
 
         $user = Dic::valuesBySlug('users', function($query) use ($email) {
@@ -1827,6 +1830,13 @@ class ApplicationController extends BaseController {
         #Helper::tad($user);
 
         if (!is_object($user) || !@$user->id) {
+
+            if (Request::ajax()) {
+                #$json_request['status'] = TRUE;
+                $json_request['responseText'] = 'Пользователь не найден';
+                return Response::json($json_request, 200);
+            }
+
             return Redirect::route('app.restore_password')
                 ->with('msg', 'Пользователь не найден')
                 ;
@@ -1852,6 +1862,12 @@ class ApplicationController extends BaseController {
 
             $message->to($user->email);
         });
+
+        if (Request::ajax()) {
+            $json_request['status'] = TRUE;
+            $json_request['responseText'] = 'На Ваш адрес электронной почты отправлена ссылка для сброса пароля.';
+            return Response::json($json_request, 200);
+        }
 
         return View::make(Helper::layout('link_to_refresh_password_send'), compact('user'));
     }
