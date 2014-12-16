@@ -92,7 +92,7 @@
           </div> -->
           <div class="input-cont js-promise-placeholder">
             <div class="index-promise-input">
-              <div class="promise-placeholder">Я обещаю, что <span>...</span></div>
+              <div class="promise-placeholder">Я обещаю <span>...</span></div>
               <input class="main-input js-promise-input promise-text">
             </div>
             <div class="hint">Совет: Давайте только те обещания, которые сможете выполнить.</div>

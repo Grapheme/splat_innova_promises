@@ -23,11 +23,11 @@
                 ?>
                 @if ($failed)
                     <div class="unsmile" data-tooltip="Обещание не было выполнено.">
-                        <!-- <i class="fi icon-unsmile"></i> -->
+                        <!-- <i class="fi icon-no"></i> -->
                     </div>
                 @elseif ($promise->finished_at)
                     <div class="smile" data-tooltip="Обещание выполнено.">
-                        <!-- <i class="fi icon-smile"></i> -->
+                        <!-- <i class="fi icon-okey"></i> -->
                     </div>
                 @else
                     <!-- <div class="time">02:01:23</div> -->
