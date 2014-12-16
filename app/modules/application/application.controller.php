@@ -1692,7 +1692,7 @@ class ApplicationController extends BaseController {
         #Helper::dd($id);
 
         if (isset($this->user) && is_object($this->user) && $this->user->id && $this->user->id == $id && !Input::get('debug')) {
-            return Redirect::route('app.mainpage');
+            return Redirect::route('app.me');
         }
 
         $user = Dic::valueBySlugAndId('users', $id);
