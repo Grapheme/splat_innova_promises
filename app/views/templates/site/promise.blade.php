@@ -80,13 +80,13 @@
     <div class="promise-make promise-page type-{{ $promise->style_id }}" data-finish="{{ $promise->time_limit }}">
         <div class="wrapper">
             <div class="profile-card">
-                <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo"></div>
+                <div style="background-image: url({{ $promise_user->avatar ?: $default_avatar }});" class="profile-photo"></div>
                 <div class="profile-info">
                     <div class="info-cont">
-                        <div class="name"><span>{{ $user->name }}</span></div>
-                        @if ($user->years_old)
+                        <div class="name"><span>{{ $promise_user->name }}</span></div>
+                        @if ($promise_user->years_old)
                             <div class="age">
-                                {{ trans_choice(':count год|:count года|:count лет', $user->years_old, array(), 'ru') }}
+                                {{ trans_choice(':count год|:count года|:count лет', $promise_user->years_old, array(), 'ru') }}
                             </div>
                         @endif
                     </div>
