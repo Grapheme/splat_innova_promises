@@ -28,7 +28,7 @@ SplatSite.tabs = function() {
 				$('.js-promise-title').show();
 				$('.js-promise-title').text($('.js-promise-input').val());
 			} else {
-				return;
+				$('[data-box="req"]').trigger('click');
 			}
 		}
 		var box_name = link.attr('data-box');
@@ -230,7 +230,6 @@ SplatSite.PromisePlaceholder = function() {
 		input.trigger('focus');
 	});
 	input.on('focus', function(){
-		console.log(dots);
 		dots.hide();
 	});
 	input.on('focusout', function(){
@@ -261,12 +260,13 @@ $.fn.AjaxForm = function() {
 	var form = $(this);
 	form.find('.js-ajax-after').hide();
 	$(this).on('submit', function(e){
+		form.find('[type=submit]').attr('disabled', 'disabled').addClass('loading');
 		$.ajax({
 			url: action,
 			data: form.serialize(),
 			type: 'post'
 		}).done(function(data){
-			form.find('.js-ajax-result').text(data);
+			form.find('.js-ajax-result').text(data.responseText);
 			form.find('.js-ajax-before').slideUp();
 			form.find('.js-ajax-after').slideDown();
 		}).fail(function(){

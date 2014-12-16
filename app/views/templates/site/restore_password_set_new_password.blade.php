@@ -25,7 +25,7 @@
               	<input class="us-btn" type="hidden" name="token" value="{{ $token }}">
               </div>
               <div class="input-container">
-              	<button type="submit">Сбросить пароль<button>
+              	<button type="submit">Сбросить пароль</button>
               </div>
 
           </form>
