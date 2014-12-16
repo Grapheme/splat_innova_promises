@@ -80,7 +80,7 @@
   $(".invite-friend-show-form").on('click', function(){
       VK.Api.call('wall.post', {
         owner_id: '{{ Input::get('uid') }}',
-        message: 'Post via VK Open API'
+        message: 'Сегодня — лучший день, чтобы измениться. Дай свое обещание на mypromises.ru'
       }, function(r) {
           //console.log(r);
           //alert('OK!');
