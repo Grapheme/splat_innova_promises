@@ -506,7 +506,7 @@ $(document).on('submit', '#auth_form', function(e){
 //*/
 
 function gotome() {
-    var promise_text = $('.promise_text').val();
+    var promise_text = $('.promise-text').val();
     //location.href = '/me?promise_text=' + promise_text;
 
     var new_location = '/me';
