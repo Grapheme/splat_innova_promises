@@ -204,7 +204,7 @@
         @endif
 
 
-        @if (isset($active_promises) && count($active_promises) && isset($inactive_promises) && count($inactive_promises))
+        @if (!@count($active_promises) && !@count($inactive_promises))
             {{-- do nothing --}}
         @else
             <div class="wrapper">
