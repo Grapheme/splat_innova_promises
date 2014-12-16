@@ -27,7 +27,7 @@
       </div>
       <div class="form-block">
         <div class="wrapper">
-          <div class="desc">Для того, чтобы сохранить ваше обещание, вам необходимо авторизоваться на нашем сайте<br>с помощью одной из этих социальных сетей:</div>
+          <div class="desc">Данные вами обещания обязательно должны превратиться в дела.<br/>Зарегистрируйтесь на сайте через социальную сеть, чтобы ваши друзья могли поддержать вас. </div>
           <div class="soc-auth">
             <a href="#" class="soc-fb fb-oauth-link">
                 <i class="fi icon-fb"></i>Facebook
@@ -51,7 +51,7 @@
                 <input type="password" name="pass" placeholder="Пароль">
               </div>
               <div class="btns">
-                <button class="us-btn">Войти</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-form-pass">восстановить пароль</a>
+                <button class="us-btn">Войти</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-form-pass">Забыли пароль?</a>
               </div>
             </form>
 
@@ -107,7 +107,7 @@
                 <input type="password" name="pass" placeholder="Пароль">
               </div>
               <div class="btns">
-                <button class="us-btn">Войти</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-change-box" data-box="auth">у меня уже есть аккаунт</a>
+                <button class="us-btn">Зарегистрироваться</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-change-box" data-box="auth">У меня уже есть аккаунт!</a>
               </div>
             </form>
 
