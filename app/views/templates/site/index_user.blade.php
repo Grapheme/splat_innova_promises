@@ -153,7 +153,7 @@
         </div>
 
 
-        @if (isset($active_promises) && is_object($active_promises) && count($active_promises))
+        @if (isset($active_promises) && count($active_promises))
 
               <div class="wrapper">
                   <div class="little-title">Активные</div>
