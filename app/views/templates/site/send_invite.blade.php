@@ -41,12 +41,12 @@
 
                   <div class="inv-form">
 
-                    <div class="inv-btn js-inv-btn-cont"><a href="#" class="us-btn js-inv-btn invite-friend-show-form">Пригласить друга</a></div>
+                    <div class="inv-btn js-inv-btn-cont2"><a href="#" class="us-btn js-inv-btn2 invite-friend-show-form">Пригласить друга</a></div>
 
                     <div id="send-invite-success" style="display:none">
                           Приглашение успешно отправлено.
                     </div>
-                    <div style="display: none;" class="form js-inv-form">
+                    <div style="display: none;" class="form js-inv-form2">
                       <form action="{{ URL::route('app.send_invite_message') }}" method="POST" id="invite-form">
                           <input name="email" placeholder="E-mail друга" class="us-input">
                           <input type="hidden" name="name" value="{{ @$user['name'] }}">
@@ -84,12 +84,20 @@
       }, function(r) {
           //console.log(r);
           //alert('OK!');
+          $(".js-inv-btn-cont2").slideUp();
           $("#send-invite-success").slideDown();
-          $(".js-inv-form").slideUp();
       });
       return false;
   });
   </script>
+  @else
+      <script>
+      $(".js-inv-btn2").on("click",function(){
+          return $(".js-inv-btn-cont2").slideUp(), $(".js-inv-form2").slideDown(function(){
+              $(this).find("input").trigger("focus")
+          }),!1
+      });
+      </script>
   @endif
 
   <script>
