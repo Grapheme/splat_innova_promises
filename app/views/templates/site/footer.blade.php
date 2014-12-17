@@ -7,6 +7,7 @@
         <ul class="footer-links">
           <!-- <li><a href="#">О проекте</a></li> -->
           <li><a target="_blank" href="http://mypromises.ru/privacy_policy.pdf">Правила использования</a></li>
+          <li><a href="mailto:hello@mypromises.ru?subject=У меня есть предложение&body=Здравствуйте! Я бы хотел предложить ...">Обратная связь</a></li>
         </ul>
       </div>
       <div class="footer-block"><span>Поделиться с друзьями:</span>
