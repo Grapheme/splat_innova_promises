@@ -147,7 +147,7 @@ class Dictionary extends BaseModel {
      */
     public static function makeLists($collection, $listed_key = 'values', $value, $key = '', $hasOne = false) {
 
-        Helper::ta($collection);
+        #Helper::ta($collection);
 
         #$lists = new Collection;
         $lists = array();
@@ -191,7 +191,7 @@ class Dictionary extends BaseModel {
                      */
                     if (isset($col->$listed_key) && is_object($col->$listed_key)) {
                         #Helper::d($col->$listed_key);
-                        Helper::d($key . ' => ' . $value);
+                        #Helper::d($key . ' => ' . $value);
                         #$col->$listed_key->attributes[$key]
                         if ($key != '') {
                             $lists[$col->$listed_key->attributes[$key]] = $col->$listed_key->attributes[$value];
