@@ -160,9 +160,11 @@
                         <div class="text">
                             {{ $comment->comment_text }}
                         </div>
+                        @if ($comment->user_id == $auth_user->id || $promise->user_id == $auth_user->id)
                         <div class="text">
                             <a href="?do=delete_comment&id={{ $comment->id }}">удалить</a>
                         </div>
+                        @endif
                     </div>
                 </li>
                 @endforeach
