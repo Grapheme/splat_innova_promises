@@ -1090,8 +1090,8 @@ class ApplicationController extends BaseController {
                                 $user->sex = $user->full_social_info['sex'];
                             }
                             if (isset($user->bdate) && $user->bdate) {
-                                if (preg_match('~[12]{1}\d{3}\-\d{1,2}\-\d{1,2}~is', $user->bdate)) {
-                                    $stamp = (new \Carbon\Carbon())->createFromFormat('Y-m-d', $user->bdate);
+                                if (preg_match('~\d{1,2}\.\d{1,2}\.\d{4}~is', $user->bdate)) {
+                                    $stamp = (new \Carbon\Carbon())->createFromFormat('d.m.Y', $user->bdate);
                                     $user->years_old = $stamp->diffInYears($now);
                                 }
                             } elseif (isset($user->full_social_info['bdate']) && $user->full_social_info['bdate']) {
