@@ -146,10 +146,13 @@ class Dictionary extends BaseModel {
      * @author Alexander Zelensky
      */
     public static function makeLists($collection, $listed_key = 'values', $value, $key = '') {
+
         #Helper::ta($collection);
         #$lists = new Collection;
         $lists = array();
+
         foreach ($collection as $c => $col) {
+
             if (!$listed_key) {
 
                 #Helper::d((int)$col->$value);
@@ -164,9 +167,11 @@ class Dictionary extends BaseModel {
 
                 $list = array();
                 if (isset($col->$listed_key) && count($col->$listed_key))
+
                     #Helper::ta($col->$listed_key);
                     foreach ($col->$listed_key as $e => $el) {
-                        #Helper::d("$e => $el");
+                        Helper::d($e);
+                        Helper::d($el);
                         if ($key != '')
                             $list[$el->$key] = $el->$value;
                         else
