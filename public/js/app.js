@@ -585,7 +585,24 @@ $("#promise-form").validate({
     errorClass: "inp-error",
     submitHandler: function(form) {
         //console.log(form);
-        form.submit();
+
+        //e.preventDefault();
+
+        VK.Api.call('wall.post', {
+
+            owner_id: auth_user_id,
+            message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
+        }, function(r) {
+
+            form.submit();
+
+            //return true;
+
+            //console.log(r);
+            //alert('OK!');
+            //$(".js-inv-btn-cont2").slideUp();
+            //$("#send-invite-success").slideDown();
+        });
     }
 });
 
