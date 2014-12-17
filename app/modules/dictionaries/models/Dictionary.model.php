@@ -187,14 +187,14 @@ class Dictionary extends BaseModel {
                     if (isset($col->$listed_key) && is_object($col->$listed_key)) {
                         #Helper::d($col->$listed_key);
                         #$col->$listed_key->attributes[$key]
-                        if ($key != '')
-                            $list[$col->$listed_key->attributes[$key]] = $col->$listed_key->attributes[$value];
-                        else
-                            $list[] = $col->$listed_key->attributes[$value];
+                        if ($key != '') {
+                            $lists[$col->$listed_key->attributes[$key]] = $col->$listed_key->attributes[$value];
+                        } else {
+                            $lists[] = $col->$listed_key->attributes[$value];
+                        }
                     }
                     #Helper::dd($list);
-                    $lists[$c] = $list;
-
+                    #$lists[$c] = $list;
                 }
             }
             #Helper::ta($col);
