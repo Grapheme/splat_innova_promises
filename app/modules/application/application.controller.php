@@ -1112,8 +1112,16 @@ class ApplicationController extends BaseController {
                             if (isset($user->full_social_info['location']['city']) && isset($user->full_social_info['location']['city'])) {
                                 $user->city = $user->full_social_info['location']['city'];
                             }
+                            /*
                             if (isset($user->full_social_info['age']) && $user->full_social_info['age']) {
                                 $user->years_old = $user->full_social_info['age'];
+                            }
+                            */
+                            if (isset($user->bdate) && $user->bdate) {
+                                if (preg_match('~\d{1,2}\.\d{1,2}\.\d{4}~is', $user->bdate)) {
+                                    $stamp = (new \Carbon\Carbon())->createFromFormat('d.m.Y', $user->bdate);
+                                    $user->years_old = $stamp->diffInYears($now);
+                                }
                             }
                             break;
 
