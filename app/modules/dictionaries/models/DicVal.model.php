@@ -426,11 +426,13 @@ class DicVal extends BaseModel {
      * @param bool $extract_ids
      * @return Collection
      */
-    public static function extracts($elements, $unset = false, $extract_ids = true) {
+    public static function extracts($elements, $field = null, $unset = false, $extract_ids = true) {
 
         $return = new Collection;
         #Helper::dd($return);
         foreach ($elements as $e => $element) {
+            if (isset($field) && $field != '')
+                $element = @$element->$field;
             $return[($extract_ids ? $element->id : $e)] = $element->extract($unset);
         }
         return $return;
