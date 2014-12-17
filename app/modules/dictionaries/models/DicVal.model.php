@@ -432,7 +432,7 @@ class DicVal extends BaseModel {
         #Helper::dd($return);
         foreach ($elements as $e => $element) {
             if (isset($field) && $field != '')
-                $element = @$element->$field;
+                $element = is_object($element) ? @$element->$field : @$element[$field];
             $return[($extract_ids ? $element->id : $e)] = $element->extract($unset);
         }
         return $return;

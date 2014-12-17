@@ -713,7 +713,7 @@ class ApplicationController extends BaseController {
 
         if (count($comments)) {
 
-            $comments = DicVal::extracts($comments, 1);
+            $comments = DicVal::extracts($comments, null, 1);
 
             $users_ids = Dic::makeLists($comments, NULL, 'user_id');
 
@@ -1183,7 +1183,7 @@ class ApplicationController extends BaseController {
              */
             #$comments_counts = array();
             if (count($promises)) {
-                $promises = DicVal::extracts($promises, 1);
+                $promises = DicVal::extracts($promises, null, 1);
 
                 $promises_ids = Dic::makeLists($promises, null, 'id');
                 #Helper::d($promises_ids);
