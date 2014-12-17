@@ -104,7 +104,10 @@
       </div>
       <div class="promo-block">
         <div class="wrapper">
-          <div class="text">Каждый раз, выполняя обещания, вы становитесь чуточку лучше.Мы тоже хотим вам пообещать <a href="#" class="js-open-box" data-box="promo">кое-что</a></div>
+          <div class="text">
+              КАЖДЫЙ РАЗ, ВЫПОЛНЯЯ ОБЕЩАНИЯ, ВЫ СТАНОВИТЕСЬ СИЛЬНЕЕ.</br>
+              МЫ ТОЖЕ ХОТИМ <a href="#" class="js-open-box" data-box="promo">ДАТЬ ВАМ ОБЕЩАНИЕ</a>
+          </div>
           <div class="logo"></div>
         </div>
       </div>

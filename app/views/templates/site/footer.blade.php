@@ -136,7 +136,11 @@
     <div data-box="promo" class="popup promo-popup js-pop-up"><a href="#" class="popup-close js-pop-close"><span></span></a>
       <div class="promo-box">
         <div class="logo"></div>
-        <div class="text">Мы обещаем, что через месяц использования зубных средств <b>innova</b><br>ваши зубы станут менее чувствительными, эмаль восстановится,<br>а вы почувствуете уверенность в себе и раскрепощённость.</div>
+        <div class="text">
+          МЫ ОБЕЩАЕМ, ЧТО УЖЕ ПОСЛЕ ПЕРВОГО ПРИМЕНЕНИЯ СРЕДСТВ ПО УХОДУ ЗА ПОЛОСТЬЮ РТА <b>INNOVA</b><br> СНИЗИТСЯ ПОВЫШЕННАЯ ЧУВСТВИТЕЛЬНОСТЬ ЗУБОВ.<br>
+          А ЧЕРЕЗ МЕСЯЦ - УСТРАНЯТСЯ ПРИЧИНЫ ЕЕ ВОЗНИКНОВЕНИЯ, ЭМАЛЬ ВОССТАНОВИТСЯ,<br>
+          А ВЫ ПОЧУВСТВУЕТЕ УВЕРЕННОСТЬ В СЕБЕ И СВОИХ СИЛАХ.
+        </div>
         <div class="spec-link"><a href="http://www.splat-innova.com" target="_blank">Узнать больше</a></div>
       </div>
     </div>

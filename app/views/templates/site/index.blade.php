@@ -90,7 +90,7 @@
             <div class="slide-title js-slide-title">Я обещаю побывать в городе моей мечты</div>
             <div class="slide-title js-slide-title">Я обещаю радоваться мелочам</div>
           </div>
-          <div class="title">Пообещать и сдержать слово много стоит</div>
+          <div class="title">Пообещать и сдержать слово многого стоит</div>
           <div class="desc">Обещания имеют огромную силу. Они способны изменить мир. Выполняя свои<br/>обещания, мы становимся сильнее, обретаем себя и уверенность в том, <br/>что нам все по зубам.</div>
           <!-- <div class="input-cont">
             <input placeholder="Я обещаю, что..." class="main-input js-promise-input promise_text">
