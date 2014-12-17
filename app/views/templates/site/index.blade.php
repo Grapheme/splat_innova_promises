@@ -149,7 +149,7 @@
             var update_mainpage_counter = function() {
 
                 $.ajax({
-                    url: '{{ URL::route('app.mainpage_counter') }}}',
+                    url: '{{ URL::route('app.mainpage_counter') }}',
                     type: 'GET'
                     //dataType: 'json',
                     //data: { data: data, promise_text: promise_text }
