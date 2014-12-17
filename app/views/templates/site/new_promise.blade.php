@@ -115,4 +115,31 @@
 
 @section('scripts')
   <script>SplatSite.Promise();</script>
+
+  <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    VK.init({
+      apiId: 4659025
+    });
+  </script>
+  <script>
+    $("#promise-form").on('submit', function(e){
+
+      e.preventDefault();
+
+      VK.Api.call('wall.post', {
+        owner_id: '{{ @$auth_user->full_social_info['id'] }}',
+        message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
+      }, function(r) {
+
+        return true;
+
+        //console.log(r);
+        //alert('OK!');
+        //$(".js-inv-btn-cont2").slideUp();
+        //$("#send-invite-success").slideDown();
+      });
+    });
+  </script>
+
 @stop

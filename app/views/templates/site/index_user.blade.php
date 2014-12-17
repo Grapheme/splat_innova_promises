@@ -391,7 +391,7 @@
 
 @section('scripts')
 
-    @if (Input::get('new_promise') && $auth_user->auth_method == 'vkontakte')
+    @if (Input::get('new_promise') && $auth_user->auth_method == 'vkontakte' && 0)
 
         <script>
             //alert(0);
