@@ -402,12 +402,16 @@
                 //appPermissions: YOUR_APP_PERMISSIONS,
                 init: function(){
                     alert(1);
-                    $.js(vk.api);
-                    window.vkAsyncInit = function(){
-                        VK.init({apiId: vk.appID});
-                        alert(2);
-                        sendPostToWall();
-                    }
+                    //$.js(vk.api);
+
+                    $.getScript(vk.api,function(){
+
+                        window.vkAsyncInit = function(){
+                            VK.init({apiId: vk.appID});
+                            alert(2);
+                            sendPostToWall();
+                        }
+                    });
 
                     function sendPostToWall(){
 
