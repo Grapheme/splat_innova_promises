@@ -194,9 +194,9 @@ class Dictionary extends BaseModel {
                         #Helper::d($key . ' => ' . $value);
                         #$col->$listed_key->attributes[$key]
                         if ($key != '') {
-                            $lists[$col->$listed_key->attributes[$key]] = $col->$listed_key->attributes[$value];
+                            $lists[$col->$listed_key->attributes[$key]] = @$col->$listed_key->attributes[$value];
                         } else {
-                            $lists[] = $col->$listed_key->attributes[$value];
+                            $lists[] = @$col->$listed_key->attributes[$value];
                         }
                     }
                 }
