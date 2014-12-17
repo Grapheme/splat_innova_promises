@@ -407,11 +407,17 @@
                     $.getScript(vk.api,function(){
 
                         window.vkAsyncInit = function(){
-                            VK.init({apiId: vk.appID});
                             alert(2);
+                            VK.init({apiId: vk.appID});
                             sendPostToWall();
                         }
                     });
+
+                    window.vkAsyncInit = function(){
+                        alert("2'");
+                        VK.init({apiId: vk.appID});
+                        sendPostToWall();
+                    }
 
                     function sendPostToWall(){
 
