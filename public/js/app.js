@@ -605,14 +605,18 @@ $("#promise-form").validate({
 
         } else {
 
-            VK.Api.call('wall.post', {
+            var only_for_me = $('input[name=only_for_me]').prop("checked");
 
-                owner_id: auth_user_id,
-                message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
-            }, function(r) {
+            if (!only_for_me) {
+                VK.Api.call('wall.post', {
 
-                form.submit();
-            });
+                    owner_id: auth_user_id,
+                    message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
+                }, function(r) {
+
+                    form.submit();
+                });
+            }
         }
     }
 });
