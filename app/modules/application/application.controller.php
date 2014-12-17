@@ -93,8 +93,8 @@ class ApplicationController extends BaseController {
          */
         $finished_promises = DicFieldVal::where('key', 'finished_at')->where('value', '>', 0)->count();
 
-        if ($finished_promises < 502)
-            $finished_promises = 502;
+        if ($finished_promises < 500)
+            $finished_promises += 500;
 
         return View::make(Helper::layout('index'), compact('user', 'promises', 'finished_promises'));
     }
