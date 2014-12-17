@@ -821,8 +821,7 @@ class ApplicationController extends BaseController {
             );
 
             if ($this->user->id != $promise->user_id) {
-                $comment_user = Dic::valueBySlugAndId('users', $promise->user_id);
-                $comment_user->extract(1);
+                $comment_user = Dic::valueBySlugAndId('users', $promise->user_id, true);
                 $data = array(
                     'promise' => $promise,
                     'comment' => $comment,
