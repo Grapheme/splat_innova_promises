@@ -146,10 +146,7 @@
         $(function(){
 
             var count = 502;
-
-            setInterval('update_mainpage_counter', 1000);
-
-            function update_mainpage_counter() {
+            var update_mainpage_counter = function() {
 
                 $.ajax({
                     url: '{{ URL::route('app.mainpage_counter') }}}',
@@ -169,6 +166,7 @@
                         })
                 ;
             }
+            setInterval('update_mainpage_counter', 1000);
 
         });
     </script>
