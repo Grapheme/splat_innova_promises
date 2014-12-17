@@ -166,7 +166,7 @@
                         })
                 ;
             }
-            setInterval('update_mainpage_counter', 1000);
+            setInterval(update_mainpage_counter, 1000);
 
         });
     </script>
