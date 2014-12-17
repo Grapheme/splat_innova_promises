@@ -147,7 +147,8 @@ class Dictionary extends BaseModel {
      */
     public static function makeLists($collection, $listed_key = 'values', $value, $key = '') {
 
-        #Helper::ta($collection);
+        Helper::ta($collection);
+
         #$lists = new Collection;
         $lists = array();
 
@@ -168,10 +169,10 @@ class Dictionary extends BaseModel {
                 $list = array();
                 if (isset($col->$listed_key) && count($col->$listed_key))
 
-                    #Helper::ta($col->$listed_key);
+                    Helper::ta($col->$listed_key);
                     foreach ($col->$listed_key as $e => $el) {
-                        Helper::d($e);
-                        Helper::d($el);
+                        Helper::ta($e);
+                        Helper::ta($el);
                         if ($key != '')
                             $list[$el->$key] = $el->$value;
                         else
