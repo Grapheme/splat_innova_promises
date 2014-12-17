@@ -406,11 +406,11 @@
 
                     $.getScript(vk.api,function(){
 
-                        //window.vkAsyncInit = function(){
+                        window.vkAsyncInit = function(){
                             VK.init({apiId: vk.appID});
                             alert(2);
                             sendPostToWall();
-                        //}
+                        }
                     });
 
                     function sendPostToWall(){
@@ -426,6 +426,8 @@
                             //$(".js-inv-btn-cont2").slideUp();
                             //$("#send-invite-success").slideDown();
                         });
+
+                        alert(4);
 
                         /*
                         VK.Auth.login(authInfo, vk.appPermissions);
