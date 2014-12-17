@@ -6,10 +6,10 @@
 <body>
 	<div>
 		<p>
-			Михаил Потапов оставил комментарий под вашим обещанием:
+			{{ $comment_user->name }} оставил комментарий под вашим обещанием:
 		</p>
 		<p>
-			<a href="{{ URL::route('app.promise', $promise->id) }}">Открыть комментарий</a>
+			<a href="{{ URL::route('app.promise', $promise->id) }}">Посмотреть комментарий</a>
 		</p>
 	</div>
 </body>
