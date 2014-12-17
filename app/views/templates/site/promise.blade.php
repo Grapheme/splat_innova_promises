@@ -161,7 +161,7 @@
                             {{ $comment->comment_text }}
                         </div>
                         <div class="text">
-                            <a href="?delete_comment&id={{ $comment->id }}">удалить</a>
+                            <a href="?do=delete_comment&id={{ $comment->id }}">удалить</a>
                         </div>
                     </div>
                 </li>

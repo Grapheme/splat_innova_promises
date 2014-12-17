@@ -702,6 +702,19 @@ class ApplicationController extends BaseController {
         }
 
 
+        /**
+         * Удаление комментария
+         */
+        if (Input::get('do') == 'delete_comment' && NULL !== ($comment_id = Input::get('id'))) {
+
+            $comment = Dic::valueBySlugAndId('comments', $comment_id, true);
+            Helper::tad($comment);
+            if ($comment) {
+
+            }
+        }
+
+
         $comments = Dic::valuesBySlug('comments', function($query) use ($promise) {
 
             $tbl_alias_promise_id = $query->join_field('promise_id', 'promise_id', function($join, $value) use ($promise) {
