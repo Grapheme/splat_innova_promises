@@ -11,8 +11,8 @@
         <div class="promise-content">
             <div class="logo"></div>
             <div class="text">
-                <p>Каждый раз, выполняя обещания,<br> вы становитесь чуточку лучше.</p>
-                <p>Мы тоже хотим вам пообещать<br><a href="#" class="js-open-box" data-box="promo">кое-что</a></p>
+                <p>КАЖДЫЙ РАЗ, ВЫПОЛНЯЯ ОБЕЩАНИЯ,<br>ВЫ СТАНОВИТЕСЬ СИЛЬНЕЕ.</p>
+                <p>МЫ ТОЖЕ ХОТИМ <a href="#" class="js-open-box" data-box="promo">ДАТЬ ВАМ ОБЕЩАНИЕ</a></p>
             </div>
         </div>
     </li>
