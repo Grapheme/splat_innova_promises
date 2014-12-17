@@ -1756,7 +1756,7 @@ class ApplicationController extends BaseController {
 
         $now = (new \Carbon\Carbon())->now();
         if (isset($user->bdate) && $user->bdate) {
-            if (preg_match('~\d{1,2}\.\d{1,2}\.\d{4}~is', $user->bdate)) {
+            if (preg_match('~\d{2}\.\d{2}\.\d{4}~is', $user->bdate)) {
                 $stamp = (new \Carbon\Carbon())->createFromFormat('d.m.Y', $user->bdate);
                 $user->years_old = $stamp->diffInYears($now);
             }
