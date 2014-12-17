@@ -219,94 +219,30 @@
         @endif
 
 
-        @if (0)
-        <ul class="promises-list">
-          <li class="promise-item type-green">
-            <div class="promise-content">
-              <div class="title">ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ</div>
-              <div class="bottom-block">
-                <div class="top-floor">
-                  <div class="eye" data-tooltip="Обещание видно всем пользователям."></div>
-                </div>
-                <div class="bottom-floor">
-                  <div class="views">15</div>
-                  <div class="comments">2</div>
-                  <div class="time">02:01:23</div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="promise-item type-aqua">
-            <div class="promise-content">
-              <div class="title">ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ</div>
-              <div class="bottom-block">
-                <div class="top-floor">
-                  <div class="eye eye-cross"></div>
-                </div>
-                <div class="bottom-floor">
-                  <div class="views">15</div>
-                  <div class="comments">2</div>
-                  <div class="time">02:01:23</div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="promise-item type-promo">
-            <div class="promise-content">
-              <div class="logo"></div>
-              <div class="text">
-                <p>Каждый раз, выполняя обещания,<br> вы становитесь чуточку лучше.</p>
-                <p>Мы тоже хотим вам пообещать<br><a href="#" class="js-open-box" data-box="promo">кое-что</a></p>
-              </div>
-            </div>
-          </li>
-          <li class="promise-item type-yellow">
-            <div class="promise-content">
-              <div class="title">ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ</div>
-              <div class="bottom-block">
-                <div class="top-floor">
-                  <div class="eye" data-tooltip="Обещание видно всем пользователям."></div>
-                </div>
-                <div class="bottom-floor">
-                  <div class="views">15</div>
-                  <div class="comments">2</div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="promise-item type-blue">
-            <div class="promise-content">
-              <div class="title">ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ</div>
-              <div class="bottom-block">
-                <div class="top-floor">
-                  <div class="eye" data-tooltip="Обещание видно всем пользователям."></div>
-                </div>
-                <div class="bottom-floor">
-                  <div class="views">15</div>
-                  <div class="comments">2</div>
-                  <div class="smile"></div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="promise-item type-pink">
-            <div class="promise-content">
-              <div class="title">ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ</div>
-              <div class="bottom-block">
-                <div class="top-floor">
-                  <div class="eye" data-tooltip="Обещание видно всем пользователям."></div>
-                </div>
-                <div class="bottom-floor">
-                  <div class="views">15</div>
-                  <div class="comments">2</div>
-                  <div class="unsmile"></div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-        @endif
+        @if ($auth_user->auth_method == 'native')
 
+              <div class="wrapper">
+                  <p>Пригласите вашего друга и расскажите ему о том, почему так важно сдерживать данные обещания.</p>
+
+                  <div class="inv-form">
+
+                      <div class="inv-btn js-inv-btn-cont2"><a href="#" class="us-btn js-inv-btn2 invite-friend-show-form">Пригласить друга</a></div>
+
+                      <div id="send-invite-success" style="display:none">
+                          Приглашение успешно отправлено.
+                      </div>
+                      <div style="display: none;" class="form js-inv-form2">
+                          <form action="{{ URL::route('app.send_invite_message') }}" method="POST" id="invite-form">
+                              <input name="email" placeholder="E-mail друга" class="us-input">
+                              <input type="hidden" name="name" value="{{ @$user['name'] }}">
+                              <button class="us-btn">Пригласить</button>
+                          </form>
+                      </div>
+                  </div>
+
+              </div>
+
+          @else
 
         <?
         $friends_count = @count($user->existing_friends) + @count($user->non_existing_friends);
@@ -381,7 +317,7 @@
 
 
         </div>
-
+        @endif
 
       </div>
 
@@ -454,4 +390,74 @@
         @endif
 
     @endif
+
+
+    <script>
+        $(".js-inv-btn2").on("click",function(){
+            return $(".js-inv-btn-cont2").slideUp(), $(".js-inv-form2").slideDown(function(){
+                $(this).find("input").trigger("focus")
+            }),!1
+        });
+
+        $("#invite-form").validate({
+            rules: {
+                'email': { required: true, email: true },
+            },
+            messages: {
+                'email': "",
+            },
+            errorClass: "inp-error",
+            submitHandler: function(form) {
+                //console.log(form);
+                sendInviteForm(form);
+                return false;
+            }
+        });
+
+        function sendInviteForm(form) {
+
+            //console.log(form);
+            var options = { target: null, type: $(form).attr('method'), dataType: 'json' };
+
+            options.beforeSubmit = function(formData, jqForm, options){
+                $(form).find('button').addClass('loading').attr('disabled', 'disabled');
+                $(form).find('.error-msg').text('');
+                //$('.error').text('').hide();
+            }
+
+            options.success = function(response, status, xhr, jqForm){
+                //console.log(response);
+                //$('.success').hide().removeClass('hidden').slideDown();
+                //$(form).slideUp();
+
+                if (response.status) {
+                    /*
+                     $(form).find('button').addClass('success').text('Отправлено');
+                     $(form).find('.popup-body').slideUp(function(){
+                     setTimeout(function(){ $('.popup .js-popup-close').trigger('click'); }, 3000);
+                     });
+                     */
+                    $(form).slideUp();
+                    $("#send-invite-success").slideDown();
+
+                } else {
+                    //$('.response').text(response.responseText).show();
+                }
+
+            }
+
+            options.error = function(xhr, textStatus, errorThrown){
+                console.log(xhr);
+                $(form).find('button').removeAttr('disabled');
+                $(form).find('.error-msg').text('Ошибка при отправке, попробуйте позднее');
+            }
+
+            options.complete = function(data, textStatus, jqXHR){
+                $(form).find('button').removeClass('loading').removeAttribute('disabled');
+            }
+
+            $(form).ajaxSubmit(options);
+        }
+
+    </script>
 @stop
