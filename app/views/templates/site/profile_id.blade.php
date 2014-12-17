@@ -47,7 +47,7 @@
         @else
 
             <div class="wrapper">
-              <div class="us-text">Пользователь еще не давал обещаний.</div>
+              <div class="us-text">Этот пользователь уже зарегистрирован на сайте, но пока не давал обещаний.</div>
             </div>
 
         @endif
@@ -143,7 +143,7 @@
         @else
 
             <div class="wrapper">
-              <div class="us-text">Пользователь еще не давал обещаний.</div>
+              <div class="us-text">Этот пользователь уже зарегистрирован на сайте, но пока не давал обещаний.</div>
             </div>
             
         @endif
