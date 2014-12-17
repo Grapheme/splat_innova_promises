@@ -114,9 +114,9 @@
         </div>
         <div class="promises-amount">
           <div class="amount-cont">
-            Выполнено <b>
+            Выполнено <b><span class="mainpage_counter">
             {{ trans_choice(':count обещание|:count обещания|:count обещаний', $finished_promises, array(), 'ru') }}
-            </b>
+            </span></b>
           </div>
         </div>
         <ul class="promises-cloud js-promises">
@@ -142,4 +142,34 @@
 
 
 @section('scripts')
+    <script>
+        $(function(){
+
+            var count = 502;
+
+            setInterval('update_mainpage_counter', 1000);
+
+            function update_mainpage_counter() {
+
+                $.ajax({
+                    url: '{{ URL::route('app.mainpage_counter') }}}',
+                    type: 'GET'
+                    //dataType: 'json',
+                    //data: { data: data, promise_text: promise_text }
+                })
+                        .fail(function(jqXHR, textStatus, errorThrown) {
+                            //alert('ERROR');
+                            console.log(textStatus);
+                        })
+                        .done(function(response) {
+                            count = response;
+                            //alert("SUCCESS");
+                            console.log(count);
+                            $('.mainpage_counter').text(count);
+                        })
+                ;
+            }
+
+        });
+    </script>
 @stop

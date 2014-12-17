@@ -20,6 +20,8 @@ class ApplicationController extends BaseController {
             Route::get('/ok-oauth', array('as' => 'app.ok-oauth', 'uses' => __CLASS__.'@getOkOauth'));
             Route::any('/email-pass-auth', array('as' => 'app.email-pass-auth', 'uses' => __CLASS__.'@postEmailPassAuth'));
 
+            Route::get('/get-mainpage-counter', array('as' => 'app.mainpage_counter', 'uses' => __CLASS__.'@getMainPageCounter'));
+
             Route::get('/profile', array('as' => 'app.profile', 'uses' => __CLASS__.'@getUserProfile'));
             Route::get('/new_promise', array('as' => 'app.new_promise', 'uses' => __CLASS__.'@getNewPromise'));
 
@@ -2104,6 +2106,16 @@ class ApplicationController extends BaseController {
         }
 
         return true;
+    }
+
+    public function getMainPageCounter() {
+
+        $finished_promises = DicFieldVal::where('key', 'finished_at')->where('value', '>', 0)->count();
+
+        if ($finished_promises < 500)
+            $finished_promises += 500;
+
+        return $finished_promises;
     }
 
 }
