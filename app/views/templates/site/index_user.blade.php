@@ -222,20 +222,21 @@
         @if ($auth_user->auth_method == 'native')
 
               <div class="wrapper">
-                  <p>Пригласите вашего друга и расскажите ему о том, почему так важно сдерживать данные обещания.</p>
-
                   <div class="inv-form">
-
+                      <p class="text">Пригласите вашего друга и расскажите ему о том, почему так важно сдерживать данные обещания.</p>
                       <div class="inv-btn js-inv-btn-cont2"><a href="#" class="us-btn js-inv-btn2 invite-friend-show-form">Пригласить друга</a></div>
-
                       <div id="send-invite-success" style="display:none">
                           Приглашение успешно отправлено.
                       </div>
                       <div style="display: none;" class="form js-inv-form2">
                           <form action="{{ URL::route('app.send_invite_message') }}" method="POST" id="invite-form">
                               <input name="email" placeholder="E-mail друга" class="us-input">
-                              <input type="hidden" name="name" value="{{ @$user['name'] }}">
-                              <button class="us-btn">Пригласить</button>
+                              <div class="input-cont">
+                                <input type="hidden" name="name" value="{{ @$user['name'] }}">
+                              </div>
+                              <div class="input-cont">
+                                <button class="us-btn">Пригласить</button>
+                              </div>
                           </form>
                       </div>
                   </div>
