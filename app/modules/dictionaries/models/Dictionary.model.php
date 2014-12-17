@@ -169,6 +169,9 @@ class Dictionary extends BaseModel {
 
                 if (!$hasOne) {
 
+                    /**
+                     * Если использовалась связь hasMany
+                     */
                     $list = array();
                     if (isset($col->$listed_key) && count($col->$listed_key)) {
                         foreach ($col->$listed_key as $e => $el) {
@@ -183,9 +186,12 @@ class Dictionary extends BaseModel {
 
                 } else {
 
-                    $list = array();
+                    /**
+                     * Если использовалась связь hasOne
+                     */
                     if (isset($col->$listed_key) && is_object($col->$listed_key)) {
                         #Helper::d($col->$listed_key);
+                        Helper::d($key . ' => ' . $value);
                         #$col->$listed_key->attributes[$key]
                         if ($key != '') {
                             $lists[$col->$listed_key->attributes[$value]] = $col->$listed_key->attributes[$key];
@@ -193,9 +199,6 @@ class Dictionary extends BaseModel {
                             $lists[] = $col->$listed_key->attributes[$key];
                         }
                     }
-
-                    #Helper::dd($list);
-                    #$lists[$c] = $list;
                 }
             }
             #Helper::ta($col);
