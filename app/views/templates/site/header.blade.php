@@ -20,7 +20,7 @@
         </ul>
         <a href="{{ URL::route('app.mainpage') }}" class="logo-text">Мои обещания</a>
         <div class="header-desc">
-          <div class="desc-cont">Наши слова меняют мир. Когда становятся делами.</div>
+          <div class="desc-cont">НАШИ СЛОВА МЕНЯЮТ МИР, КОГДА СТАНОВЯТСЯ ДЕЛАМИ</div>
         </div>
       </div>
     </header>
