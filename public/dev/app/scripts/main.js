@@ -339,4 +339,12 @@ $(function(){
 	$('.js-mask-time').inputmask('H:i', {"placeholder": "чч:мм"});
 	if($('.js-mask-time').val() == '') $('.js-mask-time').val('12:00');
 	$('.js-mask-date').inputmask('d.m.y', {"placeholder": "дд.мм.гггг"});
+
+	$(document).keypress(function(e) {
+	    if(e.which == 13) {
+	        if($('.js-promise-input').is(':focus')) {
+	        	$('.make-new-promise-btn').trigger('click');
+	        }
+	    }
+	});
 });
