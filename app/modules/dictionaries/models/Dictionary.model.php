@@ -190,7 +190,7 @@ class Dictionary extends BaseModel {
                         if ($key != '') {
                             $lists[$col->$listed_key->attributes[$value]] = $col->$listed_key->attributes[$key];
                         } else {
-                            $lists[] = $col->$listed_key->attributes[$value];
+                            $lists[] = $col->$listed_key->attributes[$key];
                         }
                     }
                     #Helper::dd($list);
