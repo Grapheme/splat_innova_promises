@@ -361,7 +361,7 @@
                     ?>
                     <li class="friend-item registered-user{{ $i > 12 ? ' hidden' : '' }}">
 
-                            <a href="{{ URL::route('app.send_invite', array('name' => $friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])) }}" style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></a>
+                            <a href="{{ URL::route('app.send_invite', array('name' => $friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])) }}" data-style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></a>
                             <a href="{{ URL::route('app.send_invite', array('name' => $friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])) }}" class="name clean-a">{{ @$friend['_name'] }}</a>
 
                     </li>
