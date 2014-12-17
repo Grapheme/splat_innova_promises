@@ -147,7 +147,7 @@
 
             var count = 502;
 
-            setInterval(update_mainpage_counter, 1000);
+            setInterval('update_mainpage_counter', 1000);
 
             function update_mainpage_counter() {
 
