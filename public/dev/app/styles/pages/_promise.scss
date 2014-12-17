@@ -109,7 +109,7 @@
 				color: #AEABAB;
 				transition: color $default-anim-time $default-ease;
 
-				.hover {
+				&:hover {
 					color: #444;
 				}
 			}
