@@ -130,7 +130,7 @@
                       <!--
                       <div class="views">15</div>
                       -->
-                      <div class="comments" data-tooltip="{{ (int)$promise->comments_count }} {{getNumEnding((int)$promise->comments_count, array('комментарий, комментария, комментариев'))}} к этой записи">{{ $promise->comments_count }}</div>
+                      <div class="comments" data-tooltip="{{ (int)$promise->comments_count }} к этой записи">{{ $promise->comments_count }}</div>
 
                         <?
                         $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
