@@ -280,7 +280,7 @@ class ApplicationController extends BaseController {
                             /**
                              * Установим актуальный аватар юзера
                              */
-                            $friend['avatar'] = $existing_friends_avatars[$profile_id];
+                            $friend['avatar'] = @$existing_friends_avatars[$profile_id];
 
                             $existing_friends[$friend_url] = $friend;
                             unset($array[$friend_url]);
