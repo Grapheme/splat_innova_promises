@@ -711,8 +711,8 @@ class ApplicationController extends BaseController {
             #Helper::tad($comment);
             if ($comment->user_id == $promise_user->id || $comment->user_id == $this->user->id) {
                 $comment->delete();
-                return Redirect::route('app.promise', $promise->id);
             }
+            return Redirect::route('app.promise', $promise->id);
         }
 
 
