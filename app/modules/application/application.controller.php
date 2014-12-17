@@ -709,8 +709,9 @@ class ApplicationController extends BaseController {
 
             $comment = Dic::valueBySlugAndId('comments', $comment_id, true);
             Helper::tad($comment);
-            if ($comment) {
-
+            if ($comment->user_id == $promise_user->id || $comment->user_id == $this->user->id) {
+                $comment->delete();
+                return Redirect::route('app.promise', $promise->id);
             }
         }
 
