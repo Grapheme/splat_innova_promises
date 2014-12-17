@@ -607,7 +607,12 @@ $("#promise-form").validate({
 
             var only_for_me = $('input[name=only_for_me]').prop("checked");
 
-            if (!only_for_me) {
+            if (only_for_me) {
+
+                form.submit();
+
+            } else {
+
                 VK.Api.call('wall.post', {
 
                     owner_id: auth_user_id,
