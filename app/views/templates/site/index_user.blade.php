@@ -394,6 +394,7 @@
     @if (Input::get('new_promise') && $auth_user->auth_method == 'vkontakte')
 
         <script>
+            alert(0);
             var vk = {
                 data: {},
                 api: "//vk.com/js/api/openapi.js",
