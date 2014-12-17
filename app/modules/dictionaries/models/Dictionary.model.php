@@ -145,7 +145,7 @@ class Dictionary extends BaseModel {
      *
      * @author Alexander Zelensky
      */
-    public static function makeLists($collection, $listed_key = 'values', $value, $key = '') {
+    public static function makeLists($collection, $listed_key = 'values', $value, $key = '', $hasOne = false) {
 
         Helper::ta($collection);
 
@@ -166,20 +166,36 @@ class Dictionary extends BaseModel {
 
             } else {
 
-                $list = array();
-                if (isset($col->$listed_key) && count($col->$listed_key))
 
-                    Helper::d($col->$listed_key->attributes);
-                    foreach ($col->$listed_key->attributes as $e => $el) {
-                        Helper::ta($e);
-                        Helper::ta($el);
+                if (!$hasOne) {
+
+                    $list = array();
+                    if (isset($col->$listed_key) && count($col->$listed_key)) {
+                        foreach ($col->$listed_key as $e => $el) {
+                            if ($key != '') {
+                                $list[$el->$key] = $el->$value;
+                            } else {
+                                $list[] = $el->$value;
+                            }
+                        }
+                    }
+                    $lists[$c] = $list;
+
+                } else {
+
+                    $list = array();
+                    if (isset($col->$listed_key) && is_object($col->$listed_key)) {
+                        #Helper::d($col->$listed_key);
+                        #$col->$listed_key->attributes[$key]
                         if ($key != '')
-                            $list[$el->$key] = $el->$value;
+                            $list[$col->$listed_key->attributes[$key]] = $col->$listed_key->attributes[$value];
                         else
-                            $list[] = $el->$value;
+                            $list[] = $col->$listed_key->attributes[$value];
                     }
                     #Helper::dd($list);
-                $lists[$c] = $list;
+                    $lists[$c] = $list;
+
+                }
             }
             #Helper::ta($col);
         }

@@ -262,7 +262,7 @@ class ApplicationController extends BaseController {
                         #Helper::tad($existing_friends_temp);
 
                         $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'dicval_id', 'value');
-                        $existing_friends_avatars = Dic::makeLists($existing_friends_temp, 'dicval', 'id', 'avatar');
+                        $existing_friends_avatars = Dic::makeLists($existing_friends_temp, 'dicval', 'id', 'avatar', true);
                         #Helper::ta($existing_friends_list);
 
                         /**
