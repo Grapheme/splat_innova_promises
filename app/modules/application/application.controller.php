@@ -617,7 +617,7 @@ class ApplicationController extends BaseController {
         unset($_SESSION['promise_text']);
 
         return Redirect::route('app.me', array(
-                #'new_promise' => 1
+                'new_promise' => 1
             ))
             #->with('new_promise', 1)
             ;
