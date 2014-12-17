@@ -160,6 +160,9 @@
                         <div class="text">
                             {{ $comment->comment_text }}
                         </div>
+                        <div class="text">
+                            <a href="?delete_comment&id={{ $comment->id }}">удалить</a>
+                        </div>
                     </div>
                 </li>
                 @endforeach
