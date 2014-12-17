@@ -400,13 +400,17 @@
                 appID: 4659025,
                 //appPermissions: YOUR_APP_PERMISSIONS,
                 init: function(){
+                    alert(1);
                     $.js(vk.api);
                     window.vkAsyncInit = function(){
                         VK.init({apiId: vk.appID});
+                        alert(2);
                         sendPostToWall();
                     }
 
                     function sendPostToWall(){
+
+                        alert(3);
 
                         VK.Api.call('wall.post', {
                             owner_id: '{{ @$auth_user->full_social_info['id'] }}',
