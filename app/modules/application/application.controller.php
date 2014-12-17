@@ -256,6 +256,9 @@ class ApplicationController extends BaseController {
 
                     if (count($existing_friends_temp)) {
 
+                        $existing_friends_temp->load('dicval.fields');
+                        Helper::tad($existing_friends_temp);
+
                         $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'dicval_id', 'value');
                         #Helper::ta($existing_friends_list);
 
@@ -272,6 +275,11 @@ class ApplicationController extends BaseController {
                              * Сопоставляем установивших приложение друзей и ID профиля в системе
                              */
                             $friend['profile_id'] = $profile_id;
+                            /**
+                             * Установим актуальный аватар юзера
+                             */
+                            #$friend['avatar'] = '';
+
                             $existing_friends[$friend_url] = $friend;
                             unset($array[$friend_url]);
                         }
@@ -617,7 +625,7 @@ class ApplicationController extends BaseController {
         unset($_SESSION['promise_text']);
 
         return Redirect::route('app.me', array(
-                'new_promise' => 1
+                #'new_promise' => 1
             ))
             #->with('new_promise', 1)
             ;
