@@ -460,6 +460,7 @@ $(document).on('click', '.fb-oauth-link', function(e){
  *
  */
 //*
+
 $(".auth_form_validate").validate({
     rules: {
         'email': { required: true, email: true },
@@ -568,11 +569,21 @@ $.validator.addMethod(
 
 
 
+jQuery.validator.addMethod("futureDate", function(value, element) {
+    var now = new Date();
+    var splitDate = value.split('.');
+    if(splitDate[0] && splitDate[1] && splitDate[2]) {
+        var ourDate = new Date(splitDate[2], splitDate[1], splitDate[0]);
+        return ourDate.getTime() > now.getTime();
+    } else {
+        return false;
+    }
+}, "Выбрана прошедшая дата");
 
 $("#promise-form").validate({
     rules: {
         'promise_text': { required: true },
-        'limit_date': { required: true, customDate: true },
+        'limit_date': { required: true, customDate: true, futureDate: true },
         'limit_time': { required: true, customTime: true },
         'style_id': { required: true }
     },
