@@ -828,7 +828,7 @@ class ApplicationController extends BaseController {
                     'comment' => $comment,
                     'comment_user' => $comment_user,
                 );
-                Mail::send('emails.promise_success', $data, function ($message) use ($promise, $comment_user) {
+                Mail::send('emails.comment_added', $data, function ($message) use ($promise, $comment_user) {
                     $from_email = Config::get('mail.from.address');
                     $from_name = Config::get('mail.from.name');
                     $message->from($from_email, $from_name);
