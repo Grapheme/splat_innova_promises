@@ -68,6 +68,11 @@
               <div class="info-cont">
                 <div class="name"><span>{{ $user->name }}</span></div>
               </div>
+                @if ($user->years_old)
+                    <div class="age">
+                        {{ trans_choice(':count год|:count года|:count лет', $user->years_old, array(), 'ru') }}
+                    </div>
+                @endif
             </div>
           </div>
           <div class="promises-title us-title">Обещания</div>
