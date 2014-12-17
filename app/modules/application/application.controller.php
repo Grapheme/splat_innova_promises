@@ -708,7 +708,7 @@ class ApplicationController extends BaseController {
         if (Input::get('do') == 'delete_comment' && NULL !== ($comment_id = Input::get('id'))) {
 
             $comment = Dic::valueBySlugAndId('comments', $comment_id, true);
-            Helper::tad($comment);
+            #Helper::tad($comment);
             if ($comment->user_id == $promise_user->id || $comment->user_id == $this->user->id) {
                 $comment->delete();
                 return Redirect::route('app.promise', $promise->id);
