@@ -394,35 +394,27 @@
     @if (Input::get('new_promise') && $auth_user->auth_method == 'vkontakte')
 
         <script>
-            alert(0);
+            //alert(0);
             var vk = {
                 data: {},
                 api: "//vk.com/js/api/openapi.js",
                 appID: 4659025,
-                //appPermissions: YOUR_APP_PERMISSIONS,
                 init: function(){
-                    alert(1);
+                    //alert(1);
                     //$.js(vk.api);
 
-                    $.getScript(vk.api,function(){
-
-                        window.vkAsyncInit = function(){
-                            alert(2);
-                            VK.init({apiId: vk.appID});
-                            sendPostToWall();
-                        }
-                    });
-
                     window.vkAsyncInit = function(){
-                        alert("2'");
+                        //alert("2'");
                         VK.init({apiId: vk.appID});
                         sendPostToWall();
                     }
 
+                    $.getScript(vk.api,function(){
+                        // nothing..
+                    });
+
                     function sendPostToWall(){
-
-                        alert(3);
-
+                        //alert(3);
                         VK.Api.call('wall.post', {
                             owner_id: '{{ @$auth_user->full_social_info['id'] }}',
                             message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
@@ -432,20 +424,8 @@
                             //$(".js-inv-btn-cont2").slideUp();
                             //$("#send-invite-success").slideDown();
                         });
-
-                        alert(4);
-
-                        /*
-                        VK.Auth.login(authInfo, vk.appPermissions);
-                        function authInfo(response){
-                            if(response.session){ // Авторизация успешна
-                                vk.data.user = response.session.user;
-                                vk.getFriends();
-                            }else alert("Авторизоваться не удалось!");
-                        }
-                        */
                     }
-                },
+                }
             }
 
             $(document).ready(vk.init);
