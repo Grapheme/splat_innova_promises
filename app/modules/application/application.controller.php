@@ -258,8 +258,10 @@ class ApplicationController extends BaseController {
 
                         $existing_friends_temp->load('dicval.fields');
                         #Helper::tad($existing_friends_temp);
+                        $existing_friends_temp = DicVal::extracts($existing_friends_temp);
 
                         $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'dicval_id', 'value');
+                        $existing_friends_avatars = Dic::makeLists($existing_friends_temp, null, 'dicval_id', 'avatar');
                         #Helper::ta($existing_friends_list);
 
                         /**
@@ -278,7 +280,7 @@ class ApplicationController extends BaseController {
                             /**
                              * Установим актуальный аватар юзера
                              */
-                            #$friend['avatar'] = '';
+                            $friend['avatar'] = $existing_friends_avatars[$profile_id];
 
                             $existing_friends[$friend_url] = $friend;
                             unset($array[$friend_url]);
