@@ -1,5 +1,28 @@
 @extends(Helper::layout())
 
+<?php
+
+    function getNumEnding($number, $endingArray)
+    {
+        $number = $number % 100;
+        if ($number>=11 && $number<=19) {
+            $ending=$endingArray[2];
+        }
+        else {
+            $i = $number % 10;
+            switch ($i)
+            {
+                case (1): $ending = $endingArray[0]; break;
+                case (2):
+                case (3):
+                case (4): $ending = $endingArray[1]; break;
+                default: $ending=$endingArray[2];
+            }
+        }
+        return $ending;
+    }
+
+?>
 
 @section('style')
 @stop
@@ -107,7 +130,7 @@
                       <!--
                       <div class="views">15</div>
                       -->
-                      <div class="comments" data-tooltip="{{ (int)$promise->comments_count }} человека оставили свои комментарии">{{ $promise->comments_count }}</div>
+                      <div class="comments" data-tooltip="{{ (int)$promise->comments_count }} {{getNumEnding((int)$promise->comments_count, array('комментарий, комментария, комментариев'))}} к этой записи">{{ $promise->comments_count }}</div>
 
                         <?
                         $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
