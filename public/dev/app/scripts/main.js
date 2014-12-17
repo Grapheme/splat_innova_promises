@@ -204,8 +204,9 @@ SplatSite.ShowFriends = function() {
 	};
 	var showImage = function() {
 		$('.friend-item').not('.hidden').each(function(){
-			var style_str = $(this).attr('data-style');
-			$(this).attr('style', style_str);
+			var photo_div = $(this).find('.profile-photo');
+			var style_str = photo_div.attr('data-style');
+			photo_div.attr('style', style_str);
 		});
 	}
 	showImage();
