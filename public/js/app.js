@@ -617,6 +617,7 @@ $("#promise-form").validate({
 
                     owner_id: auth_user_id,
                     message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
+                    // \n\nВсе мои обещания можно посмотреть здесь: http://mypromises.ru/profile/
                 }, function(r) {
 
                     form.submit();

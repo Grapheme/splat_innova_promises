@@ -626,6 +626,17 @@ class ApplicationController extends BaseController {
             )
         );
 
+        $data = array(
+            'promise' => $promise,
+        );
+        Mail::send('emails.promise_added', $data, function ($message) use ($promise) {
+            $from_email = Config::get('mail.from.address');
+            $from_name = Config::get('mail.from.name');
+            $message->from($from_email, $from_name);
+            $message->subject('Добавлено новое обещание');
+            $message->to($this->user->email);
+        });
+
         /**
          * Очищаем сохраненный текст обещания в сессии
          */
@@ -681,11 +692,35 @@ class ApplicationController extends BaseController {
                 if (Input::get('fail')) {
 
                     $promise->update_field('promise_fail', 1);
+
+                    $data = array(
+                        'promise' => $promise,
+                    );
+                    Mail::send('emails.promise_fail', $data, function ($message) use ($promise) {
+                        $from_email = Config::get('mail.from.address');
+                        $from_name = Config::get('mail.from.name');
+                        $message->from($from_email, $from_name);
+                        $message->subject('Не удалось выполнить обещание');
+                        $message->to($this->user->email);
+                    });
+
                     return Redirect::route('app.promise', $id);
 
                 } elseif (Input::get('finished')) {
 
                     $promise->update_field('finished_at', date('Y-m-d H:i:s'));
+
+                    $data = array(
+                        'promise' => $promise,
+                    );
+                    Mail::send('emails.promise_success', $data, function ($message) use ($promise) {
+                        $from_email = Config::get('mail.from.address');
+                        $from_name = Config::get('mail.from.name');
+                        $message->from($from_email, $from_name);
+                        $message->subject('Вы выполнили обещание!');
+                        $message->to($this->user->email);
+                    });
+
                     return Redirect::route('app.promise', $id);
 
                 } elseif (Input::get('delete')) {
@@ -784,6 +819,23 @@ class ApplicationController extends BaseController {
                     ),
                 )
             );
+
+            if ($this->user->id != $promise->user_id) {
+                $comment_user = Dic::valueBySlugAndId('users', $promise->user_id);
+                $comment_user->extract(1);
+                $data = array(
+                    'promise' => $promise,
+                    'comment' => $comment,
+                    'comment_user' => $comment_user,
+                );
+                Mail::send('emails.promise_success', $data, function ($message) use ($promise, $comment_user) {
+                    $from_email = Config::get('mail.from.address');
+                    $from_name = Config::get('mail.from.name');
+                    $message->from($from_email, $from_name);
+                    $message->subject('Добавлен комментарий к Вашему обещанию');
+                    $message->to($comment_user->email);
+                });
+            }
         }
 
         return Redirect::route('app.promise', $promise_id);
