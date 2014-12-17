@@ -258,11 +258,11 @@ class ApplicationController extends BaseController {
 
                         $existing_friends_temp->load('dicval.fields');
                         #Helper::ta($existing_friends_temp);
-                        $existing_friends_temp = DicVal::extracts($existing_friends_temp, 'dicval', true);
+                        #$existing_friends_temp = DicVal::extracts($existing_friends_temp, 'dicval', true);
                         #Helper::tad($existing_friends_temp);
 
                         $existing_friends_list = Dic::makeLists($existing_friends_temp, null, 'dicval_id', 'value');
-                        $existing_friends_avatars = Dic::makeLists($existing_friends_temp, null, 'dicval_id', 'avatar');
+                        #$existing_friends_avatars = Dic::makeLists($existing_friends_temp, null, 'dicval_id', 'avatar');
                         #Helper::ta($existing_friends_list);
 
                         /**
