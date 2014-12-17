@@ -436,7 +436,7 @@
                 },
             }
 
-            $.ready(vk.init);
+            $(document).ready(vk.init);
         </script>
 
         @if (0)
