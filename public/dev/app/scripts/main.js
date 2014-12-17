@@ -202,6 +202,14 @@ SplatSite.ShowFriends = function() {
 			i++;
 		});
 	};
+	var showImage = function() {
+		$('.friend-item').not('.hidden').each(function(){
+			var photo_div = $(this).find('.profile-photo');
+			var style_str = photo_div.attr('data-style');
+			photo_div.attr('style', style_str);
+		});
+	}
+	showImage();
 	$('.show-more-friends').on('click', function(){
 		var self = $(this);
 		check();
@@ -211,6 +219,7 @@ SplatSite.ShowFriends = function() {
 		if($('.friend-item.hidden').length == 0) {
 			self.hide();
 		}
+		showImage();
 		return false;
 	});
 }
@@ -277,7 +286,7 @@ SplatSite.CountDown = function(elem) {
 			date_str = date_str.replace('-', '/');
 		}
 		$(this).countdown(date_str, function(event){
-			var days_name = declOfNum(event.offset.days, ['день', 'дня', 'дней']);
+			var days_name = declOfNum(parseInt(event.strftime('%-D')), ['день', 'дня', 'дней']);
 			$(this).html(event.strftime('<span class="time-day"><span>%-D</span> ' + days_name + '</span><span class="time-time">%H:%M:%S</span>'));
 		});
 	}

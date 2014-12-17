@@ -161,9 +161,7 @@
                             {{ $comment->comment_text }}
                         </div>
                         @if ($comment->user_id == $auth_user->id || $promise->user_id == $auth_user->id)
-                        <div class="text">
-                            <a href="?do=delete_comment&id={{ $comment->id }}">удалить</a>
-                        </div>
+                            <a href="?do=delete_comment&id={{ $comment->id }}" class="delete-comment">Удалить комментарий</a>
                         @endif
                     </div>
                 </li>
