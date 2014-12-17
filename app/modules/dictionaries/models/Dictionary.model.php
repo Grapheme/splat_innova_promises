@@ -169,7 +169,7 @@ class Dictionary extends BaseModel {
                 $list = array();
                 if (isset($col->$listed_key) && count($col->$listed_key))
 
-                    Helper::d($col->$listed_key);
+                    Helper::d($col->$listed_key->attributes);
                     foreach ($col->$listed_key as $e => $el) {
                         Helper::ta($e);
                         Helper::ta($el);
