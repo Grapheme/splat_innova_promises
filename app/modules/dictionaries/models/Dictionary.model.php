@@ -193,6 +193,7 @@ class Dictionary extends BaseModel {
                             $lists[] = $col->$listed_key->attributes[$key];
                         }
                     }
+
                     #Helper::dd($list);
                     #$lists[$c] = $list;
                 }
