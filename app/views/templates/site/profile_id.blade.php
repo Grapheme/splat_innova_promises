@@ -106,7 +106,7 @@
                       <!--
                       <div class="views">15</div>
                       -->
-                      <div class="comments" data-tooltip="{{ (int)$promise->comments_count }} к этой записи">{{ $promise->comments_count }}</div>
+                      <div class="comments" data-tooltip="{{ trans_choice(':count комментарий|:count комментария|:count комментариев', (int)$promise->comments_count, array(), 'ru') }} к этому обещанию.">{{ $promise->comments_count }}</div>
 
                         <?
                         $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
