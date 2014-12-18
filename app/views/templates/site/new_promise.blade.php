@@ -106,7 +106,7 @@
         <div class="wrapper">
           <div class="text">
               КАЖДЫЙ РАЗ, ВЫПОЛНЯЯ ОБЕЩАНИЯ, ВЫ СТАНОВИТЕСЬ СИЛЬНЕЕ.</br>
-              МЫ ТОЖЕ ХОТИМ <a href="#" class="js-open-box" data-box="promo">ДАТЬ ВАМ ОБЕЩАНИЕ</a>
+              МЫ ТОЖЕ ХОТИМ <a href="#" class="js-open-box" data-box="promo" onclick="ga('send', 'event', 'brand', 'promise');">ДАТЬ ВАМ ОБЕЩАНИЕ</a>
           </div>
           <div class="logo"></div>
         </div>

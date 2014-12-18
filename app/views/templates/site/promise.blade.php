@@ -121,9 +121,9 @@
                     {{-- Обещание выполнено $promise->finished_at --}}
                     <div class="pr-btn active"><i class="fi icon-okey"></i><span>Обещание выполнено</span></div>
                 @else
-                    <a href="?finished=1" class="pr-btn"><i class="fi icon-okey"></i><span>Выполнено</span></a>
-                    <a href="?fail=1" class="pr-btn"><i class="fi icon-no"></i><span>Отказаться</span></a>
-                    <a href="?delete=1" class="pr-btn" title="Удалить"><span>Удалить обещание</span></a>
+                    <a href="?finished=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-okey"></i><span>Выполнено</span></a>
+                    <a href="?fail=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'failure');"><i class="fi icon-no"></i><span>Отказаться</span></a>
+                    <a href="?delete=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'delete');"><span>Удалить обещание</span></a>
                 @endif
             </div>
             @endif
@@ -135,7 +135,7 @@
             <div class="logo"></div>
             <div class="text">
                 КАЖДЫЙ РАЗ, ВЫПОЛНЯЯ ОБЕЩАНИЯ, ВЫ СТАНОВИТЕСЬ СИЛЬНЕЕ.</br>
-                МЫ ТОЖЕ ХОТИМ <a href="#" class="js-open-box" data-box="promo">ДАТЬ ВАМ ОБЕЩАНИЕ</a>
+                МЫ ТОЖЕ ХОТИМ <a href="#" class="js-open-box" data-box="promo" onclick="ga('send', 'event', 'brand', 'promise');">ДАТЬ ВАМ ОБЕЩАНИЕ</a>
             </div>
         </div>
     </div>
@@ -164,7 +164,7 @@
                             {{ $comment->comment_text }}
                         </div>
                         @if ($comment->user_id == $auth_user->id || $promise->user_id == $auth_user->id)
-                            <a href="?do=delete_comment&id={{ $comment->id }}" class="delete-comment">Удалить комментарий</a>
+                            <a onclick="ga('send', 'event', 'comment', 'delete');" href="?do=delete_comment&id={{ $comment->id }}" class="delete-comment">Удалить комментарий</a>
                         @endif
                     </div>
                 </li>
@@ -182,7 +182,7 @@
                     <div class="textarea-cont">
                         <textarea name="comment_text" class="input-class"></textarea>
                     </div>
-                    <button class="us-btn">Оставить комментарий</button>
+                    <button class="us-btn" onclick="ga('send', 'event', 'comment', 'new');">Оставить комментарий</button>
                 </div>
             </div>
         </form>

@@ -102,8 +102,8 @@
               <div class="promise-placeholder">Я обещаю <span>...</span></div>
               <input class="main-input js-promise-input promise-text">
             </div>
-            <div class="hint">Совет: Давайте только те обещания, которые сможете выполнить.</div>
-            <a data-box="auth" class="js-open-box js-promise-btn us-btn make-new-promise-btn">Дать обещание</a>
+            <div class="hint">Давайте только те обещания, которые сможете выполнить</div>
+            <a data-box="auth" class="js-open-box js-promise-btn us-btn make-new-promise-btn" onclick="ga('send', 'event', 'new_promise', 'main');">Дать обещание</a>
           </div>
         </div>
       </div>
