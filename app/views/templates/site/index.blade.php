@@ -78,9 +78,7 @@
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-1.jpg" alt="">
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-2.jpg" alt="">
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-3.jpg" alt="">
-              <!--
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-4.jpg" alt="">
-              -->
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-5.jpg" alt="">
           </div>
         </div>
@@ -129,9 +127,8 @@
           <li style="color: #d9aabe; font-size: 45px;">Буду радоваться мелочам</li>
           <li style="color: #84c80f; font-size: 20px;">Обещаю говорить только правду в течение месяца</li>
           <li style="color: #f8e115; font-size: 30px;">Прыгну с парашютом</li>
-          <li>Буду чаще видеться с семьей</li>
+          <li>Буду чаще играть с сыном</li>
           <li style="color: #07cbcc;">Брошу курить с понедельника</li>
-          <li style="color: #b7b7b9;">Не буду думать о работе на выходных</li>
           <li style="color: #84c80f; font-size: 20px;">Читать по книге в месяц</li>
           <li style="color: #84c80f; font-size: 20px;">Не буду есть фастфуд</li>
           <li>Ложиться спать не позже 12</li>
