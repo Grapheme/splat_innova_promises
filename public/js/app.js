@@ -599,30 +599,33 @@ $("#promise-form").validate({
 
         //e.preventDefault();
 
-        if (auth_method != 'vkontakte') {
+        var only_for_me = $('input[name=only_for_me]').prop("checked");
+
+        if (auth_method != 'vkontakte' || only_for_me) {
 
             form.submit();
 
         } else {
 
-            var only_for_me = $('input[name=only_for_me]').prop("checked");
+            VK.Api.call('photos.getWallUploadServer', {
+                'group_id': auth_user_id
+            }, function(r) {
 
-            if (only_for_me) {
+                console.log(r);
+                //form.submit();
+            });
+
+            /*
+            VK.Api.call('wall.post', {
+
+                owner_id: auth_user_id,
+                message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
+                // \n\nВсе мои обещания можно посмотреть здесь: http://mypromises.ru/profile/
+            }, function(r) {
 
                 form.submit();
-
-            } else {
-
-                VK.Api.call('wall.post', {
-
-                    owner_id: auth_user_id,
-                    message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
-                    // \n\nВсе мои обещания можно посмотреть здесь: http://mypromises.ru/profile/
-                }, function(r) {
-
-                    form.submit();
-                });
-            }
+            });
+            */
         }
     }
 });
