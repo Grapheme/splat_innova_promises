@@ -45,7 +45,7 @@ class ApplicationController extends BaseController {
             Route::post('/user-update-friends', array('as' => 'app.user-update-friends', 'uses' => __CLASS__.'@postUserUpdateFriends'));
 
 
-            Route::post('/ajax/vk-api/post-upload-image', array('as' => 'app.vk-api.post-upload', 'uses' => __CLASS__.'@postVkApiPostUpload'));
+            Route::any('/ajax/vk-api/post-upload-image', array('as' => 'app.vk-api.post-upload', 'uses' => __CLASS__.'@postVkApiPostUpload'));
 
 
             #Route::any('/ajax/feedback', array('as' => 'ajax.feedback', 'uses' => __CLASS__.'@postFeedback'));
@@ -2134,8 +2134,11 @@ class ApplicationController extends BaseController {
         $json_request = array('status' => FALSE, 'responseText' => '');
 
         $postfields = array(
-            'photo' => file_get_contents(public_path('promise_card.jpg'))
+            #'photo' => 'http://mypromises.ru/promise_card.jpg',
+            'photo' => file_get_contents(public_path('promise_card.jpg')),
         );
+
+        Helper::dd($postfields);
 
         $url = Input::get('url');
         $curl = curl_init($url);
