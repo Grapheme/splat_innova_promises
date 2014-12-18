@@ -123,7 +123,7 @@
           </div>
         </div>
         <ul class="promises-cloud js-promises">
-          <li style="color: #07cbcc; font-size: 26px;">Начну бегать по утрам</li>
+          <li style="color: #07cbcc;">Начну бегать по утрам</li>
           <li style="color: #d9aabe; font-size: 45px;">Буду радоваться мелочам</li>
           <li style="color: #84c80f; font-size: 20px;">Обещаю говорить только правду в течение месяца</li>
           <li style="color: #f8e115; font-size: 30px;">Прыгну с парашютом</li>
