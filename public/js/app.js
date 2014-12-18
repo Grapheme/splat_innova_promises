@@ -622,13 +622,23 @@ $("#promise-form").validate({
                 */
                 //form.submit();
 
+                $.ajax({
+                    url: vkapi_post_image_upload_url,
+                    type: 'POST',
+                    dataType: 'json',
+                    //dataType: 'jsonp',
+                    //jsonp: 'callback',
+                    data: { url: r.response.upload_url }
+                })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        //alert('ERROR');
+                        console.log(textStatus);
+                        console.log(jqXHR);
+                    })
+                    .done(function (response) {
 
-                $.post(r.response.upload_url, // загружаем
-                    {
-                        photo : 'http://mypromises.ru/promise_card.jpg'
-                    }, function (request) { // параметры для сохранения
-
-                        console.log(request);
+                        //alert("SUCCESS");
+                        console.log(response);
                     });
 
 

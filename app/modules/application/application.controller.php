@@ -44,6 +44,10 @@ class ApplicationController extends BaseController {
             Route::post('/user-auth', array('as' => 'app.user-auth', 'uses' => __CLASS__.'@postUserAuth'));
             Route::post('/user-update-friends', array('as' => 'app.user-update-friends', 'uses' => __CLASS__.'@postUserUpdateFriends'));
 
+
+            Route::post('/ajax/vk-api/post-upload-image', array('as' => 'app.vk-api.post-upload', 'uses' => __CLASS__.'@postVkApiPostUpload'));
+
+
             #Route::any('/ajax/feedback', array('as' => 'ajax.feedback', 'uses' => __CLASS__.'@postFeedback'));
             #Route::any('/ajax/search', array('as' => 'ajax.search', 'uses' => __CLASS__.'@postSearch'));
         });
@@ -2122,6 +2126,30 @@ class ApplicationController extends BaseController {
             $finished_promises += 500;
 
         return $finished_promises;
+    }
+
+
+    public function postVkApiPostUpload() {
+
+        $json_request = array('status' => FALSE, 'responseText' => '');
+
+        $postfields = array(
+            'photo' => 'http://mypromises.ru/promise_card.jpg'
+        );
+
+        $url = Input::get('url');
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $postfields);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $s = curl_exec($curl);
+        curl_close($curl);
+        $answer = json_decode($s, true);
+
+        $json_request['status'] = true;
+        $json_request['answer'] = $answer;
+
+        return Response::json($json_request, 200);
     }
 
 }
