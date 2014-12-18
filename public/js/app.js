@@ -11,7 +11,7 @@ $(document).ready(function($){
 
 $(document).on('click', '.logout', function(e){
 	e.preventDefault();
-    setCookie("user_token", null);
+    setCookie("user_token", 'logout');
     location.href = '/';
 });
 

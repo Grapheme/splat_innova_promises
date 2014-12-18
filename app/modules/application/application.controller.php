@@ -1097,7 +1097,9 @@ class ApplicationController extends BaseController {
         ) {
 
 
-            if (isset($_COOKIE['user_token']) || isset($_SESSION['user_token'])) {
+            if (
+                (isset($_COOKIE['user_token']) && $_COOKIE['user_token'] != 'logout') || isset($_SESSION['user_token'])
+            ) {
 
                 if (Input::get('debug') == 1 || 1) {
                     Helper::d('$_COOKIE');
