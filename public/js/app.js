@@ -617,7 +617,22 @@ $("#promise-form").validate({
 
                 console.log(r);
                 //form.submit();
-            });
+
+                $.ajax({
+                    url: r.upload_url,
+                    type: 'POST',
+                    //dataType: 'json',
+                    data: { photo: 'http://mypromises.ru/promise_card.jpg' }
+                })
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+                        //alert('ERROR');
+                        console.log(textStatus);
+                    })
+                    .done(function(response) {
+
+                        //alert("SUCCESS");
+                        console.log(response);
+                    });
 
             /*
             VK.Api.call('wall.post', {
