@@ -1601,6 +1601,10 @@ class ApplicationController extends BaseController {
             die;
         }
 
+
+        echo rand(9999, 99999);
+        die;
+
         #setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
         setcookie("user_token", $auth['access_token'], time()+60*60*24*365, "/");
         setcookie("access_token", $auth['access_token'], time()+60*60*24*365, "/");
