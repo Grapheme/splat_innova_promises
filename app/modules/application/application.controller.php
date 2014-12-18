@@ -2134,7 +2134,7 @@ class ApplicationController extends BaseController {
         $json_request = array('status' => FALSE, 'responseText' => '');
 
         $postfields = array(
-            'photo' => file_get_contents('http://mypromises.ru/promise_card.jpg')
+            'photo' => file_get_contents(public_path('promise_card.jpg'))
         );
 
         $url = Input::get('url');
