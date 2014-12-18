@@ -887,6 +887,10 @@ class ApplicationController extends BaseController {
 
             $users_dic = Dic::where('slug', 'users')->first();
 
+            $user_token = @$data['user_token'];
+            if (!$user_token)
+                $user_token = md5(md5(time() . '_' . rand(999999, 9999999)));
+
             if (is_object($users_dic) && $users_dic->id) {
 
                 $temp = DicFieldVal::firstOrNew(array(
@@ -937,7 +941,7 @@ class ApplicationController extends BaseController {
                         $array = array(
                             'slug' => NULL,
                             'fields' => array(
-                                'user_token' => @$data['user_token'],
+                                'user_token' => $user_token,
                                 'auth_method' => @$data['auth_method'],
                                 'user_last_action_time' => time(),
                             ),
@@ -987,7 +991,7 @@ class ApplicationController extends BaseController {
                             'bdate' => @$data['bdate'],
                             'avatar' => @$data['avatar'],
                             #'user_token' => md5(md5(time() . '_' . rand(999999, 9999999))),
-                            'user_token' => @$data['user_token'],
+                            'user_token' => $user_token,
                             'user_last_action_time' => time(),
                         ),
                     );
