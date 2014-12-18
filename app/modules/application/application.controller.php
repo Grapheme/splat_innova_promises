@@ -1513,6 +1513,8 @@ class ApplicationController extends BaseController {
             die;
         }
 
+        echo rand(9999, 99999) . "\n";
+
         /**
          * Если с авторизацией передан текст обещания - сохраняем его в сессию,
          * чтобы после авторизации сразу перейти на страницу дачи обещания.
@@ -1545,8 +1547,7 @@ class ApplicationController extends BaseController {
         $auth = json_decode($s, true);
         #Helper::d($auth);
 
-
-        echo rand(9999, 99999);
+        echo rand(9999, 99999) . "\n";
         die;
 
 
