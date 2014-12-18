@@ -615,11 +615,10 @@ $("#promise-form").validate({
 
             }, function(r) {
 
-                /*
+
                 console.log(r);
-                console.log(r.response);
-                console.log(r.response.upload_url);
-                */
+                //console.log(r.response);
+                //console.log(r.response.upload_url);
                 //form.submit();
 
                 $.ajax({

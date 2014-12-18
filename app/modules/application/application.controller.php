@@ -2142,7 +2142,6 @@ class ApplicationController extends BaseController {
 
         $url = Input::get('url');
         $curl = curl_init($url);
-
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $postfields);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
