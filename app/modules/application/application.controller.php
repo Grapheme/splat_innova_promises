@@ -1513,8 +1513,6 @@ class ApplicationController extends BaseController {
             die;
         }
 
-        echo rand(9999, 99999) . "\n";
-
         /**
          * Если с авторизацией передан текст обещания - сохраняем его в сессию,
          * чтобы после авторизации сразу перейти на страницу дачи обещания.
@@ -1532,7 +1530,6 @@ class ApplicationController extends BaseController {
         $AUTH['app_secret'] = 'kBoFXZ2zNmXuKZTu8IGA';
 
         $curl = curl_init('https://oauth.vk.com/access_token');
-
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_POSTFIELDS,
             'client_id=' . $AUTH['app_id'] .
@@ -1546,9 +1543,6 @@ class ApplicationController extends BaseController {
 
         $auth = json_decode($s, true);
         #Helper::d($auth);
-
-        echo rand(9999, 99999) . "\n";
-        die;
 
 
         if (!@$auth['access_token'] || !@$auth['user_id']) {
