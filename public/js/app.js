@@ -641,14 +641,7 @@ $("#promise-form").validate({
                         console.log(response);
 
 
-                        VK.Api.call('photos.saveWallPhoto', {
-
-                            server: response.answer.server,
-                            photo: response.answer.photo,
-                            hash: response.answer.hash,
-                            //user_id: auth_user_id
-
-                        }, function(r) {
+                        VK.Api.call('photos.saveWallPhoto', response.answer, function(r) {
 
                             console.log(r);
 
