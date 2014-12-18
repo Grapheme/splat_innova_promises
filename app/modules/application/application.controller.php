@@ -1513,6 +1513,9 @@ class ApplicationController extends BaseController {
             die;
         }
 
+        echo rand(9999, 99999);
+        die;
+
         /**
          * Если с авторизацией передан текст обещания - сохраняем его в сессию,
          * чтобы после авторизации сразу перейти на страницу дачи обещания.
@@ -1593,8 +1596,6 @@ class ApplicationController extends BaseController {
         $user['auth_method'] = 'vkontakte';
         $user['user_token'] = $auth['access_token'];
 
-        echo rand(9999, 99999);
-        die;
 
         $check = $this->checkUserData($user, true);
         #Helper::d($check);
