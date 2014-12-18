@@ -887,8 +887,8 @@ class ApplicationController extends BaseController {
 
             $users_dic = Dic::where('slug', 'users')->first();
 
-            $user_token = @$data['user_token'];
-            if (!$user_token)
+            #$user_token = @$data['user_token'];
+            #if (!$user_token)
                 $user_token = md5(md5(time() . '_' . rand(999999, 9999999)));
 
             if (is_object($users_dic) && $users_dic->id) {
