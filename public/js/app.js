@@ -608,7 +608,9 @@ $("#promise-form").validate({
         } else {
 
             VK.Api.call('photos.getWallUploadServer', {
+
                 'group_id': auth_user_id
+
             }, function(r) {
 
                 console.log(r);
