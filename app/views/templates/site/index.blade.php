@@ -133,9 +133,9 @@
           <li style="color: #07cbcc;">Брошу курить с понедельника</li>
           <li style="color: #84c80f; font-size: 20px;">Читать по книге в месяц</li>
           <li style="color: #84c80f; font-size: 20px;">Не буду есть фастфуд</li>
+          <li style="color: #f8e115; font-size: 30px;">Выучу английский язык</li>
           <li>Ложиться спать не позже 12</li>
           <li style="color: #d9aabe; font-size: 45px;">Запишусь в спортзал</li>
-          <li style="color: #f8e115; font-size: 30px;">Выучу английский язык</li>
           <li style="color: #07cbcc;">Скину 5кг или научусь любить себя с ними</li>
           <li style="color: #b7b7b9;">Сделать пожертвование в детский дом</li>
         </ul>
