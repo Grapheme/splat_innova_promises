@@ -609,6 +609,7 @@ $("#promise-form").validate({
 
             VK.Api.call('photos.getWallUploadServer', {
 
+                'access_token': auth_user_access_token,
                 'group_id': auth_user_id,
                 'version': 5.27
 
