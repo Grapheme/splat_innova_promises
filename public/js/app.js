@@ -616,12 +616,14 @@ $("#promise-form").validate({
             }, function(r) {
 
                 console.log(r);
+                console.log(r.response);
+                console.log(r.response.upload_url);
                 //form.submit();
 
                 $.ajax({
                     url: r.response.upload_url,
                     type: 'POST',
-                    dataType: 'json',
+                    dataType: 'jsonp',
                     data: { photo: 'http://mypromises.ru/promise_card.jpg' }
                 })
                     .fail(function (jqXHR, textStatus, errorThrown) {
