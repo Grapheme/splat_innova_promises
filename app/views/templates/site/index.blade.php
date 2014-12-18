@@ -78,7 +78,9 @@
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-1.jpg" alt="">
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-2.jpg" alt="">
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-3.jpg" alt="">
+              <!--
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-4.jpg" alt="">
+              -->
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-5.jpg" alt="">
           </div>
         </div>
