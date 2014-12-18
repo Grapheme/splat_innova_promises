@@ -1101,6 +1101,8 @@ class ApplicationController extends BaseController {
                 #unset($_COOKIE['user_token']);
             }
 
+            setcookie("access_token", '', 0, "/");
+
             if (isset($_SESSION['user_token'])) {
                 unset($_SESSION['user_token']);
             }
