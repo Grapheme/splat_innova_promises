@@ -428,7 +428,7 @@ $(document).on('click', '.vk-oauth-link', function(e){
     var promise_text = $('.promise_text').val();
 
     var params = "menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=800,height=600"
-    window.open('https://oauth.vk.com/authorize?client_id=4659025&scope=friends,email,offline,photos&redirect_uri=' + domain + '/vk-oauth' + '&response_type=code&v=5.27', 'vk-oauth', params);
+    window.open('https://oauth.vk.com/authorize?client_id=4659025&scope=friends,email,offline,photos,wall&redirect_uri=' + domain + '/vk-oauth' + '&response_type=code&v=5.27', 'vk-oauth', params);
 
     return false;
 });
@@ -645,8 +645,8 @@ $("#promise-form").validate({
 
                             server: response.answer.server,
                             photo: response.answer.photo,
-                            hash: response.answer.hash,
-                            user_id: auth_user_id
+                            hash: response.answer.hash
+                            //user_id: auth_user_id
 
                         }, function(r) {
 
