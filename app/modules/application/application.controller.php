@@ -1733,6 +1733,10 @@ class ApplicationController extends BaseController {
 
         if (!@$check['user']['user_token']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (3).";
+            echo "<!--";
+            echo '!$check[user][user_token]' . "\n";
+            Helper::d($check);
+            echo "-->";
             die;
         }
 
