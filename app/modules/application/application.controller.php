@@ -1513,9 +1513,6 @@ class ApplicationController extends BaseController {
             die;
         }
 
-        echo rand(9999, 99999);
-        die;
-
         /**
          * Если с авторизацией передан текст обещания - сохраняем его в сессию,
          * чтобы после авторизации сразу перейти на страницу дачи обещания.
@@ -1546,8 +1543,12 @@ class ApplicationController extends BaseController {
         curl_close($curl);
 
         $auth = json_decode($s, true);
-
         #Helper::d($auth);
+
+
+        echo rand(9999, 99999);
+        die;
+
 
         if (!@$auth['access_token'] || !@$auth['user_id']) {
             echo "Не удается выполнить вход. Повторите попытку позднее (1).";
