@@ -7,17 +7,17 @@
         <ul class="footer-links">
           <!-- <li><a href="#">О проекте</a></li> -->
           <li><a target="_blank" href="http://mypromises.ru/privacy_policy.pdf">Правила использования</a></li>
-          <li><a href="mailto:hello@mypromises.ru?subject=У меня есть предложение&body=Здравствуйте! Я бы хотел предложить ...">Обратная связь</a></li>
+          <li><a onclick="ga('send', 'event', 'footer', 'feedback');" href="mailto:hello@mypromises.ru?subject=У меня есть предложение&body=Здравствуйте! Я бы хотел предложить ...">Обратная связь</a></li>
         </ul>
       </div>
       <div class="footer-block"><span>Поделиться с друзьями:</span>
         <ul class="footer-soc">
-          <li><a href="http://www.facebook.com/sharer.php?u=http://mypromises.ru" target="_blank" class="soc-icon"><i class="fi icon-fb"></i></a></li>
-          <li><a href="http://vk.com/share.php?url=http://mypromises.ru&event=button_share" target="_blank" class="soc-icon"><i class="fi icon-vk"></i></a></li>
-          <li><a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl=mypromises.ru" target="_blank" class="soc-icon"><i class="fi icon-ok"></i></a></li>
+          <li><a onclick="ga('send', 'event', 'like', 'facebook');" href="http://www.facebook.com/sharer.php?u=http://mypromises.ru" target="_blank" class="soc-icon"><i class="fi icon-fb"></i></a></li>
+          <li><a onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url=http://mypromises.ru&event=button_share" target="_blank" class="soc-icon"><i class="fi icon-vk"></i></a></li>
+          <li><a onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl=mypromises.ru" target="_blank" class="soc-icon"><i class="fi icon-ok"></i></a></li>
         </ul>
       </div>
-      <a href="http://splat-innova.com" target="_blank" class="footer-block right-logo"></a>
+      <a onclick="ga('send', 'event', 'footer', 'brand');" href="http://splat-innova.com" target="_blank" class="footer-block right-logo"></a>
     </div>
   </footer>
   <div class="overlay-shadow"></div>
@@ -30,13 +30,13 @@
         <div class="wrapper">
           <div class="desc">Данные вами обещания обязательно должны превратиться в дела.<br>Авторизируйтесь на сайте через социальную сеть, чтобы ваши друзья могли поддержать вас.</div>
           <div class="soc-auth">
-            <a href="#" class="soc-fb fb-oauth-link">
+            <a href="#" class="soc-fb fb-oauth-link" onclick="ga('send', 'event', 'auth', 'facebook');">
                 <i class="fi icon-fb"></i>Facebook
             </a>
-            <a href="#" class="soc-vk vk-oauth-link">
+            <a href="#" class="soc-vk vk-oauth-link" onclick="ga('send', 'event', 'auth', 'vkontakte');">
                 <i class="fi icon-vk"></i>Вконтакте
             </a>
-            <a href="#" class="soc-ok ok-oauth-link" data-domain="{{ domain }}">
+            <a href="#" class="soc-ok ok-oauth-link" data-domain="{{ domain }}" onclick="ga('send', 'event', 'auth', 'odnoklassniki');">
                 <i class="fi icon-ok"></i>Одноклассники
             </a>
           </div>
@@ -52,7 +52,7 @@
                 <input type="password" name="pass" placeholder="Пароль">
               </div>
               <div class="btns">
-                <button class="us-btn">Войти</button><a href="#" class="right-link js-change-box" data-box="restore">Забыли пароль?</a><a href="#" class="right-link js-change-box" data-box="reg">Регистрация</a>
+                <button class="us-btn" onclick="ga('send', 'event', 'auth', 'email');">Войти</button><a href="#" class="right-link js-change-box" data-box="restore">Забыли пароль?</a><a href="#" class="right-link js-change-box" data-box="reg">Регистрация</a>
               </div>
             </form>
           </div>
@@ -95,13 +95,13 @@
         <div class="wrapper">
           <div class="desc">Данные вами обещания обязательно должны превратиться в дела.<br>Зарегистрируйтесь на сайте через социальную сеть, чтобы ваши друзья могли поддержать вас.</div>
           <div class="soc-auth">
-            <a href="#" class="soc-fb fb-oauth-link">
+            <a href="#" class="soc-fb fb-oauth-link" onclick="ga('send', 'event', 'auth', 'facebook');">
                 <i class="fi icon-fb"></i>Facebook
             </a>
-            <a href="#" class="soc-vk vk-oauth-link">
+            <a href="#" class="soc-vk vk-oauth-link" onclick="ga('send', 'event', 'auth', 'vkontakte');">
                 <i class="fi icon-vk"></i>Вконтакте
             </a>
-            <a href="#" class="soc-ok ok-oauth-link" data-domain="{{ domain }}">
+            <a href="#" class="soc-ok ok-oauth-link" data-domain="{{ domain }}" onclick="ga('send', 'event', 'auth', 'odnoklassniki');">
                 <i class="fi icon-ok"></i>Одноклассники
             </a>
           </div>
@@ -117,7 +117,7 @@
                 <input type="password" name="pass" placeholder="Пароль">
               </div>
               <div class="btns">
-                <button class="us-btn">Зарегистрироваться</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-change-box" data-box="auth">У меня уже есть аккаунт!</a>
+                <button class="us-btn" onclick="ga('send', 'event', 'register', 'email');">Зарегистрироваться</button><a href="{{ URL::route('app.restore_password') }}" class="right-link js-change-box" data-box="auth">У меня уже есть аккаунт!</a>
               </div>
             </form>
 

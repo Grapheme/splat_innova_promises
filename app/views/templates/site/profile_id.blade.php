@@ -10,7 +10,7 @@
             <div class="logo"></div>
             <div class="text">
                 <p>КАЖДЫЙ РАЗ, ВЫПОЛНЯЯ ОБЕЩАНИЯ,<br>ВЫ СТАНОВИТЕСЬ СИЛЬНЕЕ.</p>
-                <p>МЫ ТОЖЕ ХОТИМ <a href="#" class="js-open-box" data-box="promo">ДАТЬ ВАМ ОБЕЩАНИЕ</a></p>
+                <p>МЫ ТОЖЕ ХОТИМ <a href="#" class="js-open-box" data-box="promo" onclick="ga('send', 'event', 'brand', 'friend');">ДАТЬ ВАМ ОБЕЩАНИЕ</a></p>
             </div>
         </div>
     </li>

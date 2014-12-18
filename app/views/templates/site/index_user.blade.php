@@ -12,7 +12,7 @@
             <div class="logo"></div>
             <div class="text">
                 <p>КАЖДЫЙ РАЗ, ВЫПОЛНЯЯ ОБЕЩАНИЯ,<br>ВЫ СТАНОВИТЕСЬ СИЛЬНЕЕ.</p>
-                <p>МЫ ТОЖЕ ХОТИМ <a href="#" class="js-open-box" data-box="promo">ДАТЬ ВАМ ОБЕЩАНИЕ</a></p>
+                <p>МЫ ТОЖЕ ХОТИМ <a href="#" class="js-open-box" data-box="promo" onclick="ga('send', 'event', 'brand', 'profile');">ДАТЬ ВАМ ОБЕЩАНИЕ</a></p>
             </div>
         </div>
     </li>
@@ -63,7 +63,7 @@
 
         <br/>
 
-        <a href="{{ URL::route('app.new_promise') }}">Дать обещание</a>
+        <a href="{{ URL::route('app.new_promise') }}" onclick="ga('send', 'event', 'new_promise', 'profile');">Дать обещание</a>
 
         <br/><br/>
 
@@ -235,7 +235,7 @@
                                 <input type="hidden" name="name" value="{{ @$user['name'] }}">
                               </div>
                               <div class="input-cont">
-                                <button class="us-btn">Пригласить</button>
+                                <button class="us-btn" onclick="ga('send', 'event', 'invite', 'email');">Пригласить</button>
                               </div>
                           </form>
                       </div>
