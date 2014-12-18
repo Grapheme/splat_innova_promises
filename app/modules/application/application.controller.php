@@ -1097,25 +1097,29 @@ class ApplicationController extends BaseController {
         ) {
 
 
-            if (Input::get('debug') == 1 || 1) {
-                Helper::d('$_COOKIE');
-                Helper::d($_COOKIE);
-                Helper::d('$_SESSION');
-                Helper::dd($_SESSION);
+            if (isset($_COOKIE['user_token']) || isset($_SESSION['user_token'])) {
+
+                if (Input::get('debug') == 1 || 1) {
+                    Helper::d('$_COOKIE');
+                    Helper::d($_COOKIE);
+                    Helper::d('$_SESSION');
+                    Helper::dd($_SESSION);
+                }
+
+                if (isset($_COOKIE['user_token'])) {
+                    setcookie("user_token", '', 0, "/");
+                    #unset($_COOKIE['user_token']);
+                }
+
+                setcookie("access_token", '', 0, "/");
+
+                if (isset($_SESSION['user_token'])) {
+                    unset($_SESSION['user_token']);
+                }
+
+                die();
+
             }
-
-            if (isset($_COOKIE['user_token'])) {
-                setcookie("user_token", '', 0, "/");
-                #unset($_COOKIE['user_token']);
-            }
-
-            setcookie("access_token", '', 0, "/");
-
-            if (isset($_SESSION['user_token'])) {
-                unset($_SESSION['user_token']);
-            }
-
-            die();
 
         } else {
 
