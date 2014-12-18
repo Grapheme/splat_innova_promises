@@ -646,7 +646,7 @@ $("#promise-form").validate({
                             server: response.answer.server,
                             photo: response.answer.photo,
                             hash: response.answer.hash,
-                            user_id: auth_user_id
+                            //user_id: auth_user_id
 
                         }, function(r) {
 
