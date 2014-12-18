@@ -88,7 +88,7 @@
           <div>
             <div class="slide-title js-slide-title">Я обещаю встретить Новый Год с семьёй</div>
             <div class="slide-title js-slide-title">Обещаю начать бегать по утрам</div>
-            <div class="slide-title js-slide-title">Обещаю прыгнуть с парашютом в январе</div>
+            <!--<div class="slide-title js-slide-title">Обещаю прыгнуть с парашютом в январе</div>-->
             <div class="slide-title js-slide-title">Я обещаю побывать в городе моей мечты</div>
             <div class="slide-title js-slide-title">Я обещаю радоваться мелочам</div>
           </div>
