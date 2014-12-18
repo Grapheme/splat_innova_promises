@@ -124,6 +124,14 @@
     VK.init({
       apiId: 4659025
     });
+    VK.Auth.getLoginStatus(function(response) {
+      console.log(response);
+      if (response.session) {
+        /* Авторизованный в Open API пользователь */
+      } else {
+        /* Неавторизованный в Open API пользователь */
+      }
+    });
     var auth_method = '{{ @$auth_user->auth_method }}';
     var auth_user_id = '{{ @$auth_user->full_social_info['id'] }}';
     var auth_user_access_token = '{{ @$auth_user->access_token }}';
