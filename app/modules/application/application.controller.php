@@ -1577,6 +1577,9 @@ class ApplicationController extends BaseController {
             die;
         }
 
+        setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
+        #$_SESSION("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
+
 
         $curl = curl_init('https://api.vk.com/method/friends.get?user_id=' . @$auth['user_id'] . '&fields=sex,bdate,city,country,photo_200,domain&v=5.27&order=hints&lang=ru');
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -1597,9 +1600,6 @@ class ApplicationController extends BaseController {
         $friends->value = json_encode($user_friends);
         $friends->save();
 
-
-
-        setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
 
         echo "
         Авторизация прошла успешно, теперь это окно можно закрыть.
