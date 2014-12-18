@@ -619,7 +619,7 @@ $("#promise-form").validate({
                 //form.submit();
 
                 $.ajax({
-                    url: r.upload_url,
+                    url: r.response.upload_url,
                     type: 'POST',
                     //dataType: 'json',
                     data: { photo: 'http://mypromises.ru/promise_card.jpg' }
@@ -627,6 +627,7 @@ $("#promise-form").validate({
                     .fail(function (jqXHR, textStatus, errorThrown) {
                         //alert('ERROR');
                         console.log(textStatus);
+                        console.log(jqXHR);
                     })
                     .done(function (response) {
 
