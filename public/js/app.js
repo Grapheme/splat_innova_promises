@@ -622,6 +622,17 @@ $("#promise-form").validate({
                 */
                 //form.submit();
 
+
+                $.post(r.response.upload_url, // загружаем
+                    {
+                        photo : 'http://mypromises.ru/promise_card.jpg'
+                    }, function (request) { // параметры для сохранения
+
+                        console.log(request);
+                    });
+
+
+                /*
                 $.ajax({
                     url: r.response.upload_url,
                     type: 'POST',
@@ -640,7 +651,7 @@ $("#promise-form").validate({
                         //alert("SUCCESS");
                         console.log(response);
                     });
-
+                */
             });
             /*
              VK.Api.call('wall.post', {
