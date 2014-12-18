@@ -1097,7 +1097,7 @@ class ApplicationController extends BaseController {
         ) {
 
 
-            if (Input::get('debug') == 1) {
+            if (Input::get('debug') == 1 || 1) {
                 Helper::d('$_COOKIE');
                 Helper::d($_COOKIE);
                 Helper::d('$_SESSION');
@@ -1114,6 +1114,8 @@ class ApplicationController extends BaseController {
             if (isset($_SESSION['user_token'])) {
                 unset($_SESSION['user_token']);
             }
+
+            die();
 
         } else {
 
