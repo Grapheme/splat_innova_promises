@@ -624,18 +624,19 @@ $("#promise-form").validate({
                     //dataType: 'json',
                     data: { photo: 'http://mypromises.ru/promise_card.jpg' }
                 })
-                    .fail(function(jqXHR, textStatus, errorThrown) {
+                    .fail(function (jqXHR, textStatus, errorThrown) {
                         //alert('ERROR');
                         console.log(textStatus);
                     })
-                    .done(function(response) {
+                    .done(function (response) {
 
                         //alert("SUCCESS");
                         console.log(response);
                     });
 
+            });
             /*
-            VK.Api.call('wall.post', {
+             VK.Api.call('wall.post', {
 
                 owner_id: auth_user_id,
                 message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
