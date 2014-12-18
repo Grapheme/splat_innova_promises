@@ -2135,12 +2135,14 @@ class ApplicationController extends BaseController {
 
         $postfields = array(
             #'photo' => 'http://mypromises.ru/promise_card.jpg',
-            'photo' => file_get_contents(public_path('promise_card.jpg')),
+            #'photo' => file_get_contents(public_path('promise_card.jpg')),
+            'photo' => '@' . public_path('promise_card.jpg'),
         );
 
         #Helper::dd($postfields);
 
         $url = Input::get('url');
+
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $postfields);
