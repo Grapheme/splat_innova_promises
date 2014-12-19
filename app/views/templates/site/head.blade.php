@@ -20,9 +20,9 @@ $fb_friends_limit = 99;
         <!-- Open Graph Meta Data -->
         <meta property="og:url" content="http://mypromises.ru">
         <meta property="og:title" content="Мои обещания">
-        <meta property="og:description" content="Обещания не просто слова, когда о них говорят дела.">
+        <meta property="og:description" content="Наши слова меняют мир, когда становятся делами.">
         <meta property="og:image" content="http://mypromises.ru/ogg_image.jpg">
-        <meta property="og:site_name" content="MyPromises">
+        <meta property="og:site_name" content="mypromises.ru">
         <meta property="og:type" content="website">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
