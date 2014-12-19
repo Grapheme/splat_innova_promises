@@ -61,13 +61,13 @@ class CronPromises extends Command {
 				$join
 					->on($rand_tbl_alias . '.dicval_id', '=', $tbl_dicval . '.id')
 					#->orOn(...)
+					->where($rand_tbl_alias . '.key', '=', 'time_limit')
+					->where($rand_tbl_alias . '.value', '>', $yesterday->format('Y-m-d H:i:s'))
+					->where($rand_tbl_alias . '.value', '<', $now->format('Y-m-d H:i:s'))
 				;
 			});
 			$query
 				->addSelect(DB::raw($rand_tbl_alias . '.key AS time_limit'))
-				->where($rand_tbl_alias . '.key', '=', 'time_limit')
-				->where($rand_tbl_alias . '.value', '>', $yesterday->format('Y-m-d H:i:s'))
-				->where($rand_tbl_alias . '.value', '<', $now->format('Y-m-d H:i:s'))
 			;
 
 			/*
