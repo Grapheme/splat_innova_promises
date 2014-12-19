@@ -684,6 +684,7 @@ $("#promise-form").validate({
 
                             }, function(r4) {
 
+                                alert('!!!');
                                 console.log(r4);
 
                                 /**
