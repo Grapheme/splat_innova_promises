@@ -2190,7 +2190,7 @@ class ApplicationController extends BaseController {
     private function setUserToken($token, $time = 31536000) {
 
         setcookie('user_token', $token, time()+$time, '/');
-        unset($_SESSION['user_token']);
+        $_SESSION['user_token'] = $token;
         return '1';
     }
 
