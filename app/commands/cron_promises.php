@@ -75,6 +75,7 @@ class CronPromises extends Command {
 			;
 			#*/
 
+			/*
 			$rand_tbl_alias2 = md5(time() . rand(999999, 9999999));
 			$query->join(DB::raw('`' . $tbl_dic_field_val . '` AS `' . $rand_tbl_alias2 . '`'), function ($join) use ($rand_tbl_alias2, $tbl_dicval) {
 				$join
@@ -88,6 +89,7 @@ class CronPromises extends Command {
 			$query
 				->addSelect(DB::raw($rand_tbl_alias2 . '.value AS finished_at'))
 			;
+			*/
 
 		});
 
