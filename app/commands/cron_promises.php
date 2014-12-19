@@ -41,11 +41,22 @@ class CronPromises extends Command {
 		$tomorrow = (new \Carbon\Carbon())->tomorrow(); // завтра
 
 		$promises = Dic::valuesBySlug('promises', function($query) use ($yesterday){
-			$query->;
+
+			$tbl_dicval = (new DicVal())->getTable();
+			$tbl_dic_field_val = (new DicFieldVal())->getTable();
+			$rand_tbl_alias = md5(time() . rand(999999, 9999999));
+
+			$query->join($tbl_dic_field_val . ' AS ' . $rand_tbl_alias, $rand_tbl_alias . '.dicval_id', '=', $tbl_dicval . '.id')
+				->where($rand_tbl_alias . '.key', '=', 'time_limit')
+				->where($rand_tbl_alias . '.value', '>', $yesterday->format('Y-m-d H:i:s'))
+				->where($rand_tbl_alias . '.value', '<', $now->format('Y-m-d H:i:s'))
+			;
+
+
 		});
 
-		$temp = Dic::all();
-		Helper::tad($temp);
+		//$temp = Dic::all();
+		Helper::tad($promises);
 	}
 
 	/**

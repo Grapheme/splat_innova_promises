@@ -640,7 +640,7 @@ class ApplicationController extends BaseController {
             )
         );
 
-        #if (@$this->user->notifications['promise_status']) {
+        if (@$this->user->notifications['promise_status']) {
 
             $data = array(
                 'promise' => $promise,
@@ -652,7 +652,7 @@ class ApplicationController extends BaseController {
                 $message->subject('Добавлено новое обещание');
                 $message->to($this->user->email);
             });
-        #}
+        }
 
         /**
          * Очищаем сохраненный текст обещания в сессии
