@@ -110,7 +110,7 @@
                   <label for="n2"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                       Напоминать мне о дате выполнения моих обещаний
                   </label>
-                  <input type="checkbox" name="notifications[promise_dates]" id="n2" class="styledCheck" value="1">
+                  <input type="checkbox" name="notifications[promise_dates]" id="n2" class="styledCheck" value="1"{{ @$auth_user->notifications['promise_dates'] ? ' checked' : '' }}>
               </div>
               <div class="check-cont input-cont">
                   <label for="n3"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
