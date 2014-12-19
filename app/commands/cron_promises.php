@@ -25,6 +25,7 @@ class CronPromises extends Command {
 	 */
 	public function __construct() {
 		parent::__construct();
+		date_default_timezone_set("Europe/Moscow");
 	}
 
 	/**
@@ -61,11 +62,13 @@ class CronPromises extends Command {
 					->on($rand_tbl_alias . '.dicval_id', '=', $tbl_dicval . '.id')
 					#->orOn(...)
 					->where($rand_tbl_alias . '.key', '=', 'time_limit')
-					->where($rand_tbl_alias . '.value', '>', $yesterday->format('Y-m-d H:i:s'))
-					->where($rand_tbl_alias . '.value', '<', $now->format('Y-m-d H:i:s'))
 				;
 			});
-			$query->addSelect(DB::raw($rand_tbl_alias . '.key AS time_limit'));
+			$query
+				->addSelect(DB::raw($rand_tbl_alias . '.key AS time_limit'))
+				->where($rand_tbl_alias . '.value', '>', $yesterday->format('Y-m-d H:i:s'))
+				->where($rand_tbl_alias . '.value', '<', $now->format('Y-m-d H:i:s'))
+			;
 
 			/*
 			$rand_tbl_alias2 = md5(time() . rand(999999, 9999999));
