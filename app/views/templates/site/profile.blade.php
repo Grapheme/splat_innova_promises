@@ -104,7 +104,7 @@
                   <label for="n1"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                       Оповещать меня о новых комментариях
                   </label>
-                  <input type="checkbox" name="notifications[new_comment]" id="n1" class="styledCheck" value="1">
+                  <input type="checkbox" name="notifications[new_comment]" id="n1" class="styledCheck" value="1"{{ @$auth_user->notifications['new_comment'] ? ' checked' : '' }}>
               </div>
               <div class="check-cont input-cont">
                   <label for="n2"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
@@ -116,7 +116,7 @@
                   <label for="n3"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                       Оповещать о смене статуса моих обещаний
                   </label>
-                  <input type="checkbox" name="notifications[promise_status]" id="n3" class="styledCheck" value="1">
+                  <input type="checkbox" name="notifications[promise_status]" id="n3" class="styledCheck" value="1"{{ @$auth_user->notifications['promise_status'] ? ' checked' : '' }}>
               </div>
 
 
