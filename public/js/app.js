@@ -590,7 +590,7 @@ jQuery.validator.addMethod("futureDate", function(value, element) {
     if(splitDate[0] && splitDate[1] && splitDate[2]) {
         var ourDate = new Date();
         ourDate.setDate(splitDate[0]);
-        ourDate.setMonth(splitDate[1]);
+        ourDate.setMonth(parseInt(splitDate[1]) - 1);
         ourDate.setYear(splitDate[2]);
         console.log(ourDate);
         console.log('TODAY: ' + now);
