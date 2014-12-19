@@ -653,11 +653,18 @@ $("#promise-form").validate({
             console.log(attachment);
 
             /**
+             * Текст обещания
+             */
+            var promise_text = $('[name=promise_text]').val() || '';
+
+            /**
              * Открываем окно с предложением оставить запись на стене
              */
             VK.Api.call("wall.post", {
                 owner_id: auth_user_id,
-                message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания.\r\n\r\nВсе мои обещания можно посмотреть здесь: " + user_profile_url,
+                message: "Я обещаю " + promise_text + "\r\n\r\n"
+                    + "Каждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания.\r\n\r\n"
+                    + "Все мои обещания можно посмотреть здесь: " + user_profile_url,
                 //attachments: r3.response[0].id
                 //attachments: "photo1889847_350020035" // синий фон
                 //attachments: "photo1889847_350023713" // снеговик
