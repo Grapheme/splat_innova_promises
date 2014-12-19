@@ -37,11 +37,11 @@ class CronPromises extends Command {
 
 		#$this->info("111");
 
-		$now = (new \Carbon\Carbon())->now();
+		$now = (new \Carbon\Carbon())->now()->sub;
 		#$yesterday = (new \Carbon\Carbon())->yesterday(); // вчера
-		$yesterday = $now->subDay(); // вчера
+		$yesterday = $now->subDay(1); // вчера
 		#$tomorrow = (new \Carbon\Carbon())->tomorrow(); // завтра
-		$tomorrow = $now->addDay(); // завтра
+		$tomorrow = $now->addDay(1); // завтра
 
 		$promises = Dic::valuesBySlug('promises', function($query) use ($yesterday, $now){
 
