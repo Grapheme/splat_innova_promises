@@ -435,11 +435,12 @@ class DicVal extends BaseModel {
             if (isset($field) && $field != '') {
 
                 $el = is_object($element) ? @$element->$field : @$element[$field];
-                $el->extract($unset);
-                if (is_object($element))
+                if (is_object($element)) {
+                    $el->extract($unset);
                     $element->$field = $el;
-                else
+                } else {
                     $element[$field] = $el;
+                }
             } else {
 
                 $element->extract($unset);
