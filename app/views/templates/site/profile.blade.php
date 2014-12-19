@@ -102,28 +102,29 @@
                         <input type="checkbox" name="confirmation" id="apply" class="styledCheck">
                     </div>
 
+                    {{ Input::hidden('notifications[new_comment]', 1) }}
+                    {{ Input::hidden('notifications[promise_dates]', 1) }}
+                    {{ Input::hidden('notifications[promise_status]', 1) }}
+
                 @else
 
                     <div class="check-cont input-cont">
                         <label for="n1"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                             Оповещать меня о новых комментариях
                         </label>
-                        <input type="checkbox" name="notifications[new_comment]" id="n1" class="styledCheck"
-                               value="1"{{ @$auth_user->notifications['new_comment'] ? ' checked' : '' }}>
+                        <input type="checkbox" name="notifications[new_comment]" id="n1" class="styledCheck" value="1"{{ @$auth_user->notifications['new_comment'] ? ' checked' : '' }}>
                     </div>
                     <div class="check-cont input-cont">
                         <label for="n2"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                             Напоминать мне о дате выполнения моих обещаний
                         </label>
-                        <input type="checkbox" name="notifications[promise_dates]" id="n2" class="styledCheck"
-                               value="1"{{ @$auth_user->notifications['promise_dates'] ? ' checked' : '' }}>
+                        <input type="checkbox" name="notifications[promise_dates]" id="n2" class="styledCheck" value="1"{{ @$auth_user->notifications['promise_dates'] ? ' checked' : '' }}>
                     </div>
                     <div class="check-cont input-cont">
                         <label for="n3"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                             Оповещать о смене статуса моих обещаний
                         </label>
-                        <input type="checkbox" name="notifications[promise_status]" id="n3" class="styledCheck"
-                               value="1"{{ @$auth_user->notifications['promise_status'] ? ' checked' : '' }}>
+                        <input type="checkbox" name="notifications[promise_status]" id="n3" class="styledCheck" value="1"{{ @$auth_user->notifications['promise_status'] ? ' checked' : '' }}>
                     </div>
 
                 @endif
