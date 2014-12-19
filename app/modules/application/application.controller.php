@@ -20,6 +20,8 @@ class ApplicationController extends BaseController {
             Route::get('/ok-oauth', array('as' => 'app.ok-oauth', 'uses' => __CLASS__.'@getOkOauth'));
             Route::any('/email-pass-auth', array('as' => 'app.email-pass-auth', 'uses' => __CLASS__.'@postEmailPassAuth'));
 
+            Route::any('/user-logout', array('as' => 'app.user-logout', 'uses' => __CLASS__.'@postUserLogout'));
+
             Route::get('/get-mainpage-counter', array('as' => 'app.mainpage_counter', 'uses' => __CLASS__.'@getMainPageCounter'));
 
             Route::get('/profile', array('as' => 'app.profile', 'uses' => __CLASS__.'@getUserProfile'));
@@ -1101,7 +1103,7 @@ class ApplicationController extends BaseController {
                 !isset($_COOKIE['user_token']) && !isset($_SESSION['user_token'])
             ) {
                 ##
-            } elseif ($_COOKIE['user_token'] != 'logout' && isset($_SESSION['user_token'])) {
+            } elseif ($_COOKIE['user_token'] != 'logout' && isset($_SESSION['user_token']) && 0) {
 
 
                 if (Input::get('debug') == 1 || 1) {
@@ -2176,6 +2178,12 @@ class ApplicationController extends BaseController {
         $json_request['answer'] = $answer;
 
         return Response::json($json_request, 200);
+    }
+
+    public function postUserLogout() {
+
+        setcookie("user_token", '', 0, "/");
+        unset($_SESSION['user_token']);
     }
 
 }

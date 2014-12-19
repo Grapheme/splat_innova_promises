@@ -11,8 +11,21 @@ $(document).ready(function($){
 
 $(document).on('click', '.logout', function(e){
 	e.preventDefault();
-    setCookie("user_token", 'logout');
-    location.href = '/';
+
+    $.ajax({
+        url: base_url + '/user-logout',
+        type: 'POST',
+    })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            //alert('ERROR');
+            console.log(textStatus);
+        })
+        .done(function(response) {
+
+            //console.log(response);
+            //setCookie('user_token', '', 0, '/');
+            location.href = '/';
+        });
 });
 
 $.validator.setDefaults({
