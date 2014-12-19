@@ -204,6 +204,8 @@
         VK.init({
             apiId: 4659025
         });
+        var auth_method = '{{ @$auth_user->auth_method }}';
+        var auth_user_id = '{{ @$auth_user->full_social_info['id'] }}';
     </script>
 
 @stop

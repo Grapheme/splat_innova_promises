@@ -821,24 +821,32 @@ $("#profile_form").validate({
 
 $(".promise-finish-button").on('click', function(e){
 
-    e.preventDefault();
+    if (auth_method != 'vkontakte' || {{ (int)$promise->only_for_my }}) {
 
-    var href = $(this).attr('href');
+        return true;
 
-    /**
-     * Открываем окно с предложением оставить запись на стене
-     */
-    VK.Api.call("wall.post", {
-        owner_id: auth_user_id,
-        message: "Я выполнил обещание {{ $promise->promise_text }}."
+    } else {
+
+        e.preventDefault();
+
+        var href = $(this).attr('href');
+
+        /**
+         * Открываем окно с предложением оставить запись на стене
+         */
+        VK.Api.call("wall.post", {
+            owner_id: auth_user_id,
+            message: "Я выполнил обещание {{ $promise->promise_text }}."
             + "\r\n"
             + "Дайте свое обещание на сайте mypromises.ru"
-        //attachments: attachment // выбранный стиль
-    }, function(r) {
-        //console.log(r4);
-        //return true;
+            //attachments: attachment // выбранный стиль
+        }, function(r) {
+            //console.log(r4);
+            //return true;
 
-        location.href = href;
-    });
+            location.href = href;
+        });
+
+    }
 
 })
