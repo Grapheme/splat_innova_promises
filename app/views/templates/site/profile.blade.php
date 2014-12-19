@@ -93,32 +93,41 @@
                 <input name="bdate" value="{{ $user->bdate }}" placeholder="Ваша дата рождения" class="us-input js-mask-date">
               </div>
 
-              <div class="check-cont input-cont">
-                  <label for="n1"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
-                      Оповещать меня о новых комментариях
-                  </label>
-                  <input type="checkbox" name="notifications[new_comment]" id="n1" class="styledCheck" value="1"{{ @$auth_user->notifications['new_comment'] ? ' checked' : '' }}>
-              </div>
-              <div class="check-cont input-cont">
-                  <label for="n2"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
-                      Напоминать мне о дате выполнения моих обещаний
-                  </label>
-                  <input type="checkbox" name="notifications[promise_dates]" id="n2" class="styledCheck" value="1"{{ @$auth_user->notifications['promise_dates'] ? ' checked' : '' }}>
-              </div>
-              <div class="check-cont input-cont">
-                  <label for="n3"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
-                      Оповещать о смене статуса моих обещаний
-                  </label>
-                  <input type="checkbox" name="notifications[promise_status]" id="n3" class="styledCheck" value="1"{{ @$auth_user->notifications['promise_status'] ? ' checked' : '' }}>
-              </div>
 
 
                 @if ($new_user)
+
                     <div class="check-cont">
                         <label for="apply"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>Подтверждаю ознакомление с <a target="_blank" href="http://mypromises.ru/privacy_policy.pdf">правилами пользования</a></label>
                         <input type="checkbox" name="confirmation" id="apply" class="styledCheck">
                     </div>
+
+                @else
+
+                    <div class="check-cont input-cont">
+                        <label for="n1"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
+                            Оповещать меня о новых комментариях
+                        </label>
+                        <input type="checkbox" name="notifications[new_comment]" id="n1" class="styledCheck"
+                               value="1"{{ @$auth_user->notifications['new_comment'] ? ' checked' : '' }}>
+                    </div>
+                    <div class="check-cont input-cont">
+                        <label for="n2"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
+                            Напоминать мне о дате выполнения моих обещаний
+                        </label>
+                        <input type="checkbox" name="notifications[promise_dates]" id="n2" class="styledCheck"
+                               value="1"{{ @$auth_user->notifications['promise_dates'] ? ' checked' : '' }}>
+                    </div>
+                    <div class="check-cont input-cont">
+                        <label for="n3"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
+                            Оповещать о смене статуса моих обещаний
+                        </label>
+                        <input type="checkbox" name="notifications[promise_status]" id="n3" class="styledCheck"
+                               value="1"{{ @$auth_user->notifications['promise_status'] ? ' checked' : '' }}>
+                    </div>
+
                 @endif
+
 
 
                 <div class="btn-cont">

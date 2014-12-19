@@ -85,6 +85,8 @@ class ApplicationController extends BaseController {
         if (Input::get('debug')) {
             Helper::ta($this->user);
         }
+
+        date_default_timezone_set("Europe/Moscow");
     }
 
 
