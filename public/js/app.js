@@ -680,6 +680,7 @@ $("#promise-form").validate({
                             /**
                              * Открываем окно с предложением оставить запись на стене
                              */
+                            /*
                             VK.Api.call('wall.post', {
 
                                 owner_id: auth_user_id,
@@ -692,11 +693,10 @@ $("#promise-form").validate({
                                 alert('!!!');
                                 console.log(r4);
 
-                                /**
-                                 * В самом конце отправляем форму
-                                 */
+                                //// В самом конце отправляем форму
                                 //current_form.submit();
                             });
+                            */
 
                         });
 
