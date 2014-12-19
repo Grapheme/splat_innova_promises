@@ -816,3 +816,29 @@ $("#profile_form").validate({
         form.submit();
     }
 });
+
+
+
+$(".promise-finish-button").on('click', function(e){
+
+    e.preventDefault();
+
+    var href = $(this).attr('href');
+
+    /**
+     * Открываем окно с предложением оставить запись на стене
+     */
+    VK.Api.call("wall.post", {
+        owner_id: auth_user_id,
+        message: "Я выполнил обещание {{ $promise->promise_text }}."
+            + "\r\n"
+            + "Дайте свое обещание на сайте mypromises.ru"
+        //attachments: attachment // выбранный стиль
+    }, function(r) {
+        //console.log(r4);
+        //return true;
+
+        location.href = href;
+    });
+
+})
