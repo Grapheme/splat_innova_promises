@@ -1,6 +1,15 @@
 @extends(Helper::layout())
 
 
+@section('opengraph')
+    <!-- Open Graph Meta Data -->
+    <meta property="og:url" content="{{ URL::route('app.promise', $promise->id) }}">
+    <meta property="og:title" content="Мое обещание">
+    <meta property="og:description" content="Я обещаю {{ $promise->promise_text }}">
+    <meta property="og:image" content="http://mypromises.ru/ogg_image.jpg">
+@show
+
+
 @section('style')
 @stop
 
