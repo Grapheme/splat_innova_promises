@@ -77,21 +77,19 @@
           <div class="js-main-fotorama">
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-1.jpg" alt="">
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-2.jpg" alt="">
-            <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-21.jpg" alt="">
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-3.jpg" alt="">
-              <!--
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-4.jpg" alt="">
-              -->
+            <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-21.jpg" alt="">
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-5.jpg" alt="">
           </div>
         </div>
         <div class="main-content wrapper">
           <div>
-            <div class="slide-title js-slide-title">Я обещаю встретить Новый Год с семьей</div>
+            <div class="slide-title js-slide-title">Обещаю в выходные нарядить елку с сыном</div>
             <div class="slide-title js-slide-title">Я обещаю чаще улыбаться</div>
-            <div class="slide-title js-slide-title">Обещаю реализовать задуманное</div>
             <div class="slide-title js-slide-title">Обещаю прыгнуть с парашютом в январе</div>
-            <!--<div class="slide-title js-slide-title">Я обещаю побывать в городе моей мечты</div>-->
+            <div class="slide-title js-slide-title">Я обещаю начать бегать по утрам</div>
+            <div class="slide-title js-slide-title">Обещаю реализовать задуманное</div>
             <div class="slide-title js-slide-title">Я обещаю радоваться мелочам</div>
           </div>
           <div class="title">Пообещать и сдержать слово многого стоит</div>
