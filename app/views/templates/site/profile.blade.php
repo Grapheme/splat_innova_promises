@@ -101,22 +101,22 @@
               @endif
 
               <div class="check-cont">
-                  <label><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
+                  <label for="n1"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                       Оповещать меня о новых комментариях
                   </label>
-                  <input type="checkbox" name="notification_new_comment" class="styledCheck">
+                  <input type="checkbox" name="notification_new_comment" id="n1" class="styledCheck">
               </div>
               <div class="check-cont">
-                  <label><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
+                  <label for="n2"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                       Напоминать мне о дате выполнения моих обещаний
                   </label>
-                  <input type="checkbox" name="notification_promise_dates" class="styledCheck">
+                  <input type="checkbox" name="notification_promise_dates" id="n2" class="styledCheck">
               </div>
               <div class="check-cont">
-                  <label><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
+                  <label for="n3"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                       Оповещать о смене статуса моих обещаний
                   </label>
-                  <input type="checkbox" name="notification_promise_status" class="styledCheck">
+                  <input type="checkbox" name="notification_promise_status" id="n3" class="styledCheck">
               </div>
 
 
