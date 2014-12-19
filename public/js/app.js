@@ -670,7 +670,7 @@ $("#promise-form").validate({
                             VK.Api.call('wall.post', {
 
                                 owner_id: auth_user_id,
-                                message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания.\r\n\r\nВсе мои обещания можно посмотреть здесь: ". user_profile_url,
+                                message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания.\r\n\r\nВсе мои обещания можно посмотреть здесь: " + user_profile_url,
                                 attachments: r.response[0].id
                                 // \n\nВсе мои обещания можно посмотреть здесь: http://mypromises.ru/profile/
                             }, function(r) {
