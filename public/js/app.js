@@ -629,27 +629,6 @@ $("#promise-form").validate({
 
         } else {
 
-            /**
-             * Открываем окно с предложением оставить запись на стене
-             */
-            VK.Api.call('wall.post', {
-
-                owner_id: auth_user_id,
-                message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания.\r\n\r\nВсе мои обещания можно посмотреть здесь: " + user_profile_url,
-                //attachments: r3.response[0].id
-                attachments: 'photo1889847_350020035'
-
-            }, function(r4) {
-
-                alert('!!!');
-                console.log(r4);
-
-                /**
-                 * В самом конце отправляем форму
-                 */
-                //current_form.submit();
-            });
-            return;
 
             /**
              * Получим URL для загрузки изображения на сервер ВК
@@ -660,6 +639,29 @@ $("#promise-form").validate({
                 version: 5.27
 
             }, function(r1) {
+
+
+                /**
+                 * Открываем окно с предложением оставить запись на стене
+                 */
+                VK.Api.call('wall.post', {
+
+                    owner_id: auth_user_id,
+                    message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания.\r\n\r\nВсе мои обещания можно посмотреть здесь: " + user_profile_url,
+                    //attachments: r3.response[0].id
+                    attachments: 'photo1889847_350020035'
+
+                }, function(r4) {
+
+                    alert('!!!');
+                    console.log(r4);
+
+                    /**
+                     * В самом конце отправляем форму
+                     */
+                    //current_form.submit();
+                });
+                return;
 
                 //console.log(r);
 
