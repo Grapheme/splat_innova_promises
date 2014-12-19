@@ -113,12 +113,18 @@ class CronPromises extends Command {
 		/**
 		 * Получаем пользователей
 		 */
-		$users = Dic::makeLists($promises, NULL, 'user_id');
-		$this->info('Total users: ' . count($users));
-		Helper::d($users);
+		$users_ids = Dic::makeLists($promises, NULL, 'user_id');
+		$this->info('Total users: ' . count($users_ids));
+		Helper::d($users_ids);
 
-		$users = array_unique($users);
-		$this->info('Filtered users: ' . count($users));
+		$users_ids = array_unique($users_ids);
+		$this->info('Filtered users: ' . count($users_ids));
+		Helper::d($users_ids);
+
+
+		$users = Dic::valuesBySlugAndIds('users', $users_ids);
+		$users = DicVal::extracts($users, NULL, true, true);
+		$this->info('Users: ' . count($users));
 		Helper::d($users);
 
 
