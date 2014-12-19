@@ -127,9 +127,9 @@
                 @endif
                 <div class="promise-soc"><span>Расскажи об обещании:</span>
                   <ul class="soc-ul">
-                    <li><a href="#" class="soc-icon"><i class="fi icon-fb"></i></a></li>
-                    <li><a href="#" class="soc-icon"><i class="fi icon-vk"></i></a></li>
-                    <li><a href="#" class="soc-icon"><i class="fi icon-twitter"></i></a></li>
+                    <li><a onclick="ga('send', 'event', 'like', 'facebook');" href="http://www.facebook.com/sharer.php?u=http://mypromises.ru" class="soc-icon"><i class="fi icon-fb"></i></a></li>
+                    <li><a onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url=http://mypromises.ru&event=button_share" class="soc-icon"><i class="fi icon-vk"></i></a></li>
+                    <li><a onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl=mypromises.ru" class="soc-icon"><i class="fi icon-ok"></i></a></li>
                   </ul>
                 </div>
             </div>
