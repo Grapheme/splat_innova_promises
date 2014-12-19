@@ -14,6 +14,7 @@ class ApplicationController extends BaseController {
 
             Route::get('/', array('as' => 'app.mainpage', 'uses' => __CLASS__.'@getAppMainPage'));
             Route::get('/me', array('as' => 'app.me', 'uses' => __CLASS__.'@getMePage'));
+            Route::get('/about', array('as' => 'app.about', 'uses' => __CLASS__.'@getAboutPage'));
 
             Route::get('/vk-oauth', array('as' => 'app.vk-oauth', 'uses' => __CLASS__.'@getVkOauth'));
             Route::get('/fb-oauth', array('as' => 'app.fb-oauth', 'uses' => __CLASS__.'@getFbOauth'));
@@ -2211,6 +2212,12 @@ class ApplicationController extends BaseController {
         setcookie('user_token', '', 0, '/');
         unset($_SESSION['user_token']);
         return '1';
+    }
+
+
+    public function getAboutPage() {
+
+        return View::make(Helper::layout('about'), compact('token'));
     }
 
 }
