@@ -614,7 +614,7 @@ jQuery.validator.addMethod("futureTime", function(value, element) {
         ourDate.setHours(splitTime[0]);
         ourDate.setMinutes(splitTime[1]);
         console.log('OUR: ' + ourDate);
-        console.log('OUR: ' + now);
+        console.log('NOW: ' + now);
         if(ourDate.getTime() > now.getTime()) {
             return false;
         } else {
