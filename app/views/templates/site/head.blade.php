@@ -17,11 +17,13 @@ $fb_friends_limit = 99;
         <meta name="keywords" content="@yield('keywords')">
         <meta name="viewport" content="width=device-width">
 
+        @section('opengraph')
         <!-- Open Graph Meta Data -->
         <meta property="og:url" content="http://mypromises.ru">
         <meta property="og:title" content="Мои обещания">
         <meta property="og:description" content="Наши слова меняют мир, когда становятся делами.">
         <meta property="og:image" content="http://mypromises.ru/ogg_image.jpg">
+        @show
         <meta property="og:site_name" content="mypromises.ru">
         <meta property="og:type" content="website">
 
