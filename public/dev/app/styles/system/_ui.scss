@@ -100,4 +100,35 @@
   font-weight: 300;
   line-height: 1.4;
   padding-left: 5px;
+  
+  a {
+  	color: #0bdadc;
+  	text-decoration: none;
+  	border-bottom: 1px solid;
+  	transition: border-color $default-anim-time $default-ease;
+
+  	&:hover {
+  		border-bottom: 1px solid transparent;
+  	}
+  }
+}
+
+.normal-quote {
+	text-align: right;
+	font-style: italic;
+}
+
+.min-title {
+	text-align: center;
+	margin: 30px 0;
+}
+
+.ta-center {
+	text-align: center;
+}
+
+.normal-autor {
+	font-weight: 400;
+	text-align: right;
+	margin-top: 50px;
 }
