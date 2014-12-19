@@ -594,8 +594,6 @@ jQuery.validator.addMethod("futureDate", function(value, element) {
         ourDate.setYear(splitDate[2]);
         now.setHours(0);
         now.setMinutes(0);
-        console.log('YOU: ' + ourDate);
-        console.log('TOD: ' + now);
         return ourDate.getTime() > now.getTime();
     } else {
         return false;
