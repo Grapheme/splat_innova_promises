@@ -639,14 +639,18 @@ $("#promise-form").validate({
                 pink:   'photo1889847_350028619',
                 green:  'photo1889847_350028614'
             };
+
             /**
              * Текущий стиль
              */
-            var current_style_id = $('[name=style_id] :selected') || 'blue';
+            var current_style_id = $('.js-types .active').attr('data-type') || 'blue';
+            console.log(current_style_id);
+
             /**
              * Хеш картинки для текущего стиля
              */
             var attachment = photos[current_style_id];
+            console.log(attachment);
 
             /**
              * Открываем окно с предложением оставить запись на стене
@@ -659,7 +663,7 @@ $("#promise-form").validate({
                 //attachments: "photo1889847_350023713" // снеговик
                 attachments: attachment // выбранный стиль
             }, function(r4) {
-                console.log(r4);
+                //console.log(r4);
                 //// В самом конце отправляем форму
                 current_form.submit();
             });
