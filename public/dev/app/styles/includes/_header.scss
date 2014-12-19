@@ -38,6 +38,7 @@
 	}
 
 	.soc-links {
+		position: relative;
 		float: right;
 		margin: 0;
 		padding: 0;
@@ -71,6 +72,15 @@
 					line-height: 33px;
 				}
 			}
+		}
+
+		.soc-text {
+			position: absolute;
+			line-height: normal;
+			font-size: 12px;
+			top: 69%;
+			left: 4%;
+			white-space: nowrap;
 		}
 	}
 
