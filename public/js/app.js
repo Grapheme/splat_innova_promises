@@ -611,13 +611,7 @@ jQuery.validator.addMethod("futureTime", function(value, element) {
         ourDate.setYear(splitDate[2]);
         ourDate.setHours(splitTime[0]);
         ourDate.setMinutes(splitTime[1]);
-        console.log('OUR: ' + ourDate);
-        console.log('NOW: ' + now);
-        if(ourDate.getTime() > now.getTime()) {
-            return false;
-        } else {
-            return true;
-        }
+        return ourDate.getTime() > now.getTime();
     } else {
         return true;
     }
