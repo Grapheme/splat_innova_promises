@@ -24,6 +24,7 @@
 		margin-top: 45px;
 
 		.pr-btn {
+			position: relative;
 			display: inline-block;
 			vertical-align: middle;
 			outline: 0;
@@ -55,6 +56,65 @@
 				vertical-align: middle;
 				font-size: 25px;
 				margin-right: 10px;
+			}
+
+			.abs-hint {
+				position: absolute;
+				top: -25%;
+				left: 0;
+				right: 0;
+				opacity: 0;
+				transition: all $default-anim-time $default-ease;
+				color: #fff !important;
+			}
+
+			.fi-links {
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				line-height: 38px;
+				opacity: 0;
+				transition: all $default-anim-time $default-ease;
+
+				.fi-link {
+					margin: 0 10px;
+					font-size: 30px;
+					color: #fff !important;
+					text-decoration: none;
+					transition: all $default-anim-time $default-ease;
+				}
+			}
+
+			.btn-text {
+				transition: opacity $default-anim-time $default-ease;
+			}
+
+			&.clicked {
+				border-color: transparent;
+				color: #fff !important;
+
+				.abs-hint {
+					opacity: 1;
+					top: -75%;
+				}
+
+				.fi-links {
+					opacity: 1;
+
+					.fi-link {
+						margin: 0 20px;
+
+						&:hover {
+							color: #434546 !important;
+						}
+					}
+				}
+
+				.btn-text {
+					opacity: 0;
+				}
 			}
 		}
 
@@ -150,16 +210,37 @@
 			}
 
 			.delete-comment {
-				display: inline-block;
-				vertical-align: middle;
-				margin-top: 5px;
-				text-decoration: none;
-				font-size: 10px;
-				color: #AEABAB;
-				transition: color $default-anim-time $default-ease;
+				a {
+					display: inline-block;
+					vertical-align: middle;
+					margin-top: 5px;
+					text-decoration: none;
+					font-size: 10px;
+					color: #AEABAB;
+					margin-right: 15px;
+					transition: color $default-anim-time $default-ease;
 
-				&:hover {
+					&:hover {
+						color: #444;
+					}
+				}
+
+				.delete-confirm {
+					display: none;
+				}
+
+				.conf-text {
 					color: #444;
+				}
+
+				&.clicked {
+					& > a {
+						display: none;
+					}
+
+					.delete-confirm {
+						display: inline-block;
+					}
 				}
 			}
 		}
