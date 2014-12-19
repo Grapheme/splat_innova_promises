@@ -21,7 +21,7 @@ $fb_friends_limit = 99;
         <meta property="og:url" content="http://mypromises.ru">
         <meta property="og:title" content="Мои обещания">
         <meta property="og:description" content="Обещания не просто слова, когда о них говорят дела.">
-        <meta property="og:image" content="http://mypromises.ru/155x100.jpg">
+        <meta property="og:image" content="http://mypromises.ru/ogg_image.jpg">
         <meta property="og:site_name" content="MyPromises">
         <meta property="og:type" content="website">
 
