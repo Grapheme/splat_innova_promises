@@ -102,9 +102,9 @@
                         <input type="checkbox" name="confirmation" id="apply" class="styledCheck">
                     </div>
 
-                    {{ Input::hidden(notifications[new_comment], 1) }}
-                    {{ Input::hidden(notifications[promise_dates], 1) }}
-                    {{ Input::hidden(notifications[promise_status], 1) }}
+                    {{ Input::hidden('notifications[new_comment]', 1) }}
+                    {{ Input::hidden('notifications[promise_dates]', 1) }}
+                    {{ Input::hidden('notifications[promise_status]', 1) }}
 
                 @else
 
