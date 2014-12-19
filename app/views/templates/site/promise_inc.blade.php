@@ -2,9 +2,11 @@
     <a href="{{ URL::route('app.promise', $promise->id) }}" class="promise-content">
         <div class="title">
             {{ $promise->name }}
+            {{--
             <br/>
             prom: {{ $promise->time_limit }}<br/>
             date: {{ date('Y-m-d H:i:s') }}<br/>
+            --}}
         </div>
         <div class="bottom-block">
             <div class="top-floor">
