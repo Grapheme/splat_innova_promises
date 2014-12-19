@@ -6,7 +6,7 @@
 <body>
 	<div>
 		<p>
-			{{ $comment_user->name }} оставил комментарий под вашим обещанием:
+			{{ $comment_user->name }} оставил комментарий под вашим обещанием &laquo;{{ $promise->name }}&raquo;:
 		</p>
 		<p>
 			<a href="{{ URL::route('app.promise', $promise->id) }}">Посмотреть комментарий</a>
