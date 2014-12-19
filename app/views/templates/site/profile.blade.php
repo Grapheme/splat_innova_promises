@@ -93,13 +93,6 @@
                 <input name="bdate" value="{{ $user->bdate }}" placeholder="Ваша дата рождения" class="us-input js-mask-date">
               </div>
 
-              @if ($new_user)
-              <div class="check-cont">
-                <label for="apply"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>Подтверждаю ознакомление с <a target="_blank" href="http://mypromises.ru/privacy_policy.pdf">правилами пользования</a></label>
-                  <input type="checkbox" name="confirmation" id="apply" class="styledCheck">
-              </div>
-              @endif
-
               <div class="check-cont input-cont">
                   <label for="n1"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                       Оповещать меня о новых комментариях
@@ -120,7 +113,15 @@
               </div>
 
 
-              <div class="btn-cont">
+                @if ($new_user)
+                    <div class="check-cont">
+                        <label for="apply"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>Подтверждаю ознакомление с <a target="_blank" href="http://mypromises.ru/privacy_policy.pdf">правилами пользования</a></label>
+                        <input type="checkbox" name="confirmation" id="apply" class="styledCheck">
+                    </div>
+                @endif
+
+
+                <div class="btn-cont">
                 <button class="us-btn">Сохранить</button>
               </div>
             </div>
