@@ -76,7 +76,7 @@ class CronPromises extends Command {
 
 		$promises = DicVal::extracts($promises, NULL, true, true);
 		#Helper::ta($promises);
-		$this->info('Total promises: ' . count($promises));
+		$this->info('Total failed promises: ' . count($promises));
 
 		if (count($promises)) {
 
@@ -155,6 +155,8 @@ class CronPromises extends Command {
 		/************************************************************************************************************ */
 
 
+		$this->info('###################################################################');
+
 
 		/**
 		 * Получаем истекающие обещания
@@ -182,7 +184,7 @@ class CronPromises extends Command {
 
 		$promises = DicVal::extracts($promises, NULL, true, true);
 		#Helper::ta($promises);
-		$this->info('Total promises: ' . count($promises));
+		$this->info('Total expired promises: ' . count($promises));
 
 		if (count($promises)) {
 
