@@ -607,6 +607,7 @@ jQuery.validator.addMethod("futureTime", function(value, element) {
     var splitDate = $('[name="limit_date"]').val().split('.');
     if($('[name="limit_date"]').val() != '') {
         var splitTime = value.split(':');
+        var ourDate = new Date();
         ourDate.setDate(splitDate[0]);
         ourDate.setMonth(parseInt(splitDate[1]) - 1);
         ourDate.setYear(splitDate[2]);
