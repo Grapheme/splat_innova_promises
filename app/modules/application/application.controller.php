@@ -1961,19 +1961,19 @@ class ApplicationController extends BaseController {
         }
 
 
-        setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
+        #setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
 
+
+        if (NULL !== ($promise_text = Input::get('promise_text'))) {
+            $_SESSION['promise_text'] = $promise_text;
+            $_SESSION['redirect_to_new_promise'] = 1;
+        }
 
         /**
          * Если есть пометка о том, что юзер новый - убираем ее и переадресовываем на страницу редактирования профиля
          */
         if (@$_SESSION['new_user']) {
             return Redirect::route('app.profile');
-        }
-
-        if (NULL !== ($promise_text = Input::get('promise_text'))) {
-            $_SESSION['promise_text'] = $promise_text;
-            $_SESSION['redirect_to_new_promise'] = 1;
         }
 
         /**

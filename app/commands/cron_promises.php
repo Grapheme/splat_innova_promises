@@ -40,7 +40,7 @@ class CronPromises extends Command {
 		$yesterday = (new \Carbon\Carbon())->yesterday(); // вчера
 		$tomorrow = (new \Carbon\Carbon())->tomorrow(); // завтра
 
-		$promises = Dic::valuesBySlug('promises', function($query) use ($yesterday){
+		$promises = Dic::valuesBySlug('promises', function($query) use ($yesterday, $now){
 
 			$tbl_dicval = (new DicVal())->getTable();
 			$tbl_dic_field_val = (new DicFieldVal())->getTable();
