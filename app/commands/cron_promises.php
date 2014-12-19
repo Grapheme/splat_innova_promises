@@ -53,14 +53,6 @@ class CronPromises extends Command {
 			$tbl_dic_field_val = (new DicFieldVal())->getTable();
 
 			$rand_tbl_alias = md5(time() . rand(999999, 9999999));
-			/*
-			$query->join($tbl_dic_field_val . ' AS ' . $rand_tbl_alias, $rand_tbl_alias . '.dicval_id', '=', $tbl_dicval . '.id')
-				->where($rand_tbl_alias . '.key', '=', 'time_limit')
-				->where($rand_tbl_alias . '.value', '>', $yesterday->format('Y-m-d H:i:s'))
-				->where($rand_tbl_alias . '.value', '<', $now->format('Y-m-d H:i:s'))
-			;
-			*/
-
 			$query->join(DB::raw($tbl_dic_field_val . ' AS ' . $rand_tbl_alias), function ($join) use ($rand_tbl_alias, $tbl_dicval, $yesterday, $now) {
 				$join
 					->on($rand_tbl_alias . '.dicval_id', '=', $tbl_dicval . '.id')
@@ -82,6 +74,20 @@ class CronPromises extends Command {
 				->orWhere($rand_tbl_alias2 . '.value', NULL)
 			;
 			#*/
+
+			$rand_tbl_alias2 = md5(time() . rand(999999, 9999999));
+			$query->join(DB::raw($tbl_dic_field_val . ' AS ' . $rand_tbl_alias2), function ($join) use ($rand_tbl_alias2, $tbl_dicval) {
+				$join
+					->on($rand_tbl_alias2 . '.dicval_id', '=', $tbl_dicval . '.id')
+					#->orOn(...)
+					->where($rand_tbl_alias2 . '.key', '=', 'finished_at')
+					->where($rand_tbl_alias2 . '.value', '=', '')
+					->orWhere($rand_tbl_alias2 . '.value', NULL)
+				;
+			});
+			$query
+				->addSelect(DB::raw($rand_tbl_alias2 . '.value AS time_limit'))
+			;
 
 		});
 
