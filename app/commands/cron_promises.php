@@ -95,11 +95,14 @@ class CronPromises extends Command {
 
 		$promises = DicVal::extracts($promises, NULL, true, true);
 
-		Helper::smartQueries(1);
 
 		//$temp = Dic::all();
 		Helper::ta($promises);
+
 		$this->info(count($promises));
+
+		Helper::smartQueries(1);
+
 		die;
 	}
 
