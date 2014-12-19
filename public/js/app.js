@@ -592,10 +592,8 @@ jQuery.validator.addMethod("futureDate", function(value, element) {
         ourDate.setDate(splitDate[0]);
         ourDate.setMonth(parseInt(splitDate[1]) - 1);
         ourDate.setYear(splitDate[2]);
-        ourDate.setHours(0);
-        ourDate.setMinutes(0);
-        console.log('YOU: ' + ourDate);
-        console.log('TOD: ' + now);
+        now.setHours(0);
+        now.setMinutes(0);
         return ourDate.getTime() > now.getTime();
     } else {
         return false;
@@ -607,17 +605,13 @@ jQuery.validator.addMethod("futureTime", function(value, element) {
     var splitDate = $('[name="limit_date"]').val().split('.');
     if($('[name="limit_date"]').val() != '') {
         var splitTime = value.split(':');
+        var ourDate = new Date();
         ourDate.setDate(splitDate[0]);
         ourDate.setMonth(parseInt(splitDate[1]) - 1);
         ourDate.setYear(splitDate[2]);
         ourDate.setHours(splitTime[0]);
         ourDate.setMinutes(splitTime[1]);
-        var todayDate = new Date();
-        if(ourDate.getTime() > todayDate.getTime()) {
-            return false;
-        } else {
-            return true;
-        }
+        return ourDate.getTime() > now.getTime();
     } else {
         return true;
     }
