@@ -121,7 +121,7 @@
                     {{-- Обещание выполнено $promise->finished_at --}}
                     <div class="pr-btn active"><i class="fi icon-okey"></i><span>Обещание выполнено</span></div>
                 @else
-                    <a href="?finished=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-okey"></i><span>Выполнено</span></a>
+                    <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-okey"></i><span>Выполнено</span></a>
                     <a href="?fail=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'failure');"><i class="fi icon-no"></i><span>Отказаться</span></a>
                     <a href="?delete=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'delete');"><span>Удалить обещание</span></a>
                 @endif
