@@ -593,6 +593,7 @@ jQuery.validator.addMethod("futureDate", function(value, element) {
         ourDate.setMonth(splitDate[1]);
         ourDate.setYear(splitDate[2]);
         console.log(ourDate);
+        console.log('TODAY: 'now);
         return ourDate.getTime() > now.getTime();
     } else {
         return false;
