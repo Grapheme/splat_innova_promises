@@ -125,6 +125,13 @@
                     <a href="?fail=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'failure');"><i class="fi icon-no"></i><span>Отказаться</span></a>
                     <a href="?delete=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'delete');"><span>Удалить обещание</span></a>
                 @endif
+                <div class="promise-soc"><span>Расскажи об обещании:</span>
+                  <ul class="soc-ul">
+                    <li><a href="#" class="soc-icon"><i class="fi icon-fb"></i></a></li>
+                    <li><a href="#" class="soc-icon"><i class="fi icon-vk"></i></a></li>
+                    <li><a href="#" class="soc-icon"><i class="fi icon-twitter"></i></a></li>
+                  </ul>
+                </div>
             </div>
             @endif
 
