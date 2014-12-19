@@ -644,13 +644,13 @@ $("#promise-form").validate({
              * Текущий стиль
              */
             var current_style_id = $('.js-types .active').attr('data-type') || 'blue';
-            console.log(current_style_id);
+            //console.log(current_style_id);
 
             /**
              * Хеш картинки для текущего стиля
              */
             var attachment = photos[current_style_id];
-            console.log(attachment);
+            //console.log(attachment);
 
             /**
              * Текст обещания

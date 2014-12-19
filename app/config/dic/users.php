@@ -51,6 +51,11 @@ return array(
                 'type' => 'textarea',
                 'default' => '',
             ),
+            'notifications' => array(
+                'title' => 'Настройки уведомлений пользователя',
+                'type' => 'textarea',
+                'default' => '',
+            ),
             'user_token' => array(
                 'title' => 'Токен безопасности',
                 'type' => 'text',
