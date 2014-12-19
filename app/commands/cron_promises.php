@@ -37,19 +37,28 @@ class CronPromises extends Command {
 		#$this->info("111");
 
 		$now = (new \Carbon\Carbon())->now();
-		$yesterday = (new \Carbon\Carbon())->yesterday(); // вчера
-		$tomorrow = (new \Carbon\Carbon())->tomorrow(); // завтра
+		#$yesterday = (new \Carbon\Carbon())->yesterday(); // вчера
+		$yesterday = $now->subDay(); // вчера
+		#$tomorrow = (new \Carbon\Carbon())->tomorrow(); // завтра
+		$tomorrow = $now->addDay(); // завтра
 
 		$promises = Dic::valuesBySlug('promises', function($query) use ($yesterday, $now){
 
 			$tbl_dicval = (new DicVal())->getTable();
 			$tbl_dic_field_val = (new DicFieldVal())->getTable();
-			$rand_tbl_alias = md5(time() . rand(999999, 9999999));
 
+			$rand_tbl_alias = md5(time() . rand(999999, 9999999));
 			$query->join($tbl_dic_field_val . ' AS ' . $rand_tbl_alias, $rand_tbl_alias . '.dicval_id', '=', $tbl_dicval . '.id')
 				->where($rand_tbl_alias . '.key', '=', 'time_limit')
 				->where($rand_tbl_alias . '.value', '>', $yesterday->format('Y-m-d H:i:s'))
 				->where($rand_tbl_alias . '.value', '<', $now->format('Y-m-d H:i:s'))
+			;
+
+			$rand_tbl_alias2 = md5(time() . rand(999999, 9999999));
+			$query->join($tbl_dic_field_val . ' AS ' . $rand_tbl_alias2, $rand_tbl_alias2 . '.dicval_id', '=', $tbl_dicval . '.id')
+				->where($rand_tbl_alias2 . '.key', '=', 'finished_at')
+				->where($rand_tbl_alias2 . '.value', '=', '')
+				->orWhere($rand_tbl_alias2 . '.value', NULL)
 			;
 
 		});
