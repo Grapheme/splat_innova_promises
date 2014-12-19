@@ -53,7 +53,7 @@ return array(
             ),
             'notifications' => array(
                 'title' => 'Настройки уведомлений пользователя',
-                'type' => 'textarea',
+                'type' => 'text',
                 'default' => '',
             ),
             'user_token' => array(
