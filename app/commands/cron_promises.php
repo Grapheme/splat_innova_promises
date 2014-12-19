@@ -52,7 +52,6 @@ class CronPromises extends Command {
 				->where($rand_tbl_alias . '.value', '<', $now->format('Y-m-d H:i:s'))
 			;
 
-
 		});
 
 		//$temp = Dic::all();
