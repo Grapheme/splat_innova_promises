@@ -839,8 +839,8 @@ $(".promise-finish-button").on('click', function(e){
             owner_id: auth_user_id,
             message: "Я выполнил обещание " + promise_text
             + "\r\n"
-            + "Дайте свое обещание на сайте mypromises.ru"
-            //attachments: attachment // выбранный стиль
+            + "Дайте свое обещание на сайте mypromises.ru",
+            attachments: 'photo-62074862_348392589'
         }, function(r) {
             //console.log(r4);
             //return true;
