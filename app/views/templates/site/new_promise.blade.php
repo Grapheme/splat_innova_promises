@@ -134,7 +134,6 @@
     });
     var auth_method = '{{ @$auth_user->auth_method }}';
     var auth_user_id = '{{ @$auth_user->full_social_info['id'] }}';
-    var auth_user_access_token = '{{ @$auth_user->access_token }}';
     var vkapi_post_image_upload_url = '{{ URL::route('app.vk-api.post-upload') }}';
     var user_profile_url = '{{ URL::route('app.profile_id', $auth_user->id) }}';
   </script>
