@@ -887,3 +887,8 @@ function array_rand ( input, num_req ) {	// Pick one or more random entries out 
 
     return ( ( Ticks == 1 ) ? Indexes.join ( ) : Indexes );
 }
+
+function random(element) {
+    var los = Math.floor(Math.random() * element.length)
+    return element[los];
+}

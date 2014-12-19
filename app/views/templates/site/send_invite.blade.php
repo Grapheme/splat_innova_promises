@@ -83,7 +83,7 @@
   <script>
   $(".invite-friend-show-form").on('click', function(){
 
-      var attachment = photos[array_rand(photos)];
+      var attachment = random(photos);
 
       VK.Api.call('wall.post', {
           owner_id: '{{ Input::get('uid') }}',
