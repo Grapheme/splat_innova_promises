@@ -65,6 +65,7 @@ class CronPromises extends Command {
 					->where($rand_tbl_alias . '.value', '<', $now->format('Y-m-d H:i:s'))
 				;
 			});
+			$query->addSelect($rand_tbl_alias . '.' . 'time_limit');
 
 			/*
 			$rand_tbl_alias2 = md5(time() . rand(999999, 9999999));
