@@ -709,22 +709,22 @@ $("#promise-form").validate({
             /**
              * Открываем окно с предложением оставить запись на стене
              */
-            //*
-            VK.Api.call('wall.post', {
+            function vk_wall_post() {
 
-                owner_id: auth_user_id,
-                message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания.\r\n\r\nВсе мои обещания можно посмотреть здесь: " + user_profile_url,
-                //attachments: r3.response[0].id
-                attachments: 'photo1889847_350020035'
+                VK.Api.call("wall.post", {
+                    owner_id: auth_user_id,
+                    message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания.\r\n\r\nВсе мои обещания можно посмотреть здесь: " + user_profile_url,
+                    //attachments: r3.response[0].id
+                    attachments: "photo1889847_350020035"
+                }, function(r4) {
+                    console.log(r4);
+                    //// В самом конце отправляем форму
+                    //current_form.submit();
+                });
+            }
 
-            }, function(r4) {
+            setTimeout(vk_wall_post, 3000);
 
-                //alert('!!!');
-                console.log(r4);
-
-                //// В самом конце отправляем форму
-                //current_form.submit();
-            });
             //return;
             //*/
         }
