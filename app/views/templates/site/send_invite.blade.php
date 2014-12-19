@@ -75,13 +75,21 @@
       VK.init({
           apiId: 4659025
       });
+      var auth_method = '{{ @$auth_user->auth_method }}';
+      var auth_user_id = '{{ @$auth_user->full_social_info['id'] }}';
   </script>
+
+
   <script>
   $(".invite-friend-show-form").on('click', function(){
+
+      var attachment = photos[array_rand(photos)];
+
       VK.Api.call('wall.post', {
           owner_id: '{{ Input::get('uid') }}',
           message: 'Сегодня — лучший день, чтобы измениться. Дай свое обещание на mypromises.ru',
-          attachments: "photo1889847_350023713" // снеговик
+          //attachments: "photo1889847_350023713" // снеговик
+          attachments: attachment // снеговик
       }, function(r) {
           //console.log(r);
           //alert('OK!');
