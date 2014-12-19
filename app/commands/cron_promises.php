@@ -82,7 +82,7 @@ class CronPromises extends Command {
 					#->orOn(...)
 					->on($rand_tbl_alias2 . '.key', '=', 'finished_at')
 					->where($rand_tbl_alias2 . '.value', '=', '')
-					->orWhere($rand_tbl_alias2 . '.value', NULL)
+					->orWhere($rand_tbl_alias2 . '.value', '=', NULL)
 				;
 			});
 			$query
