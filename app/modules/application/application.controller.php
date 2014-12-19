@@ -512,7 +512,7 @@ class ApplicationController extends BaseController {
         $bdate = Input::get('bdate');
 
         $notifications = Input::get('notifications');
-        Helper::dd($notifications);
+        #Helper::dd($notifications);
 
         if ($name) {
             #$user->name = $name;
