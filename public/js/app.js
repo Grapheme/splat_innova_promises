@@ -588,7 +588,10 @@ jQuery.validator.addMethod("futureDate", function(value, element) {
     var now = new Date();
     var splitDate = value.split('.');
     if(splitDate[0] && splitDate[1] && splitDate[2]) {
-        var ourDate = new Date(splitDate[2], splitDate[1], splitDate[0]);
+        var ourDate = new Date();
+        ourDate.setDate(splitDate[0]);
+        ourDate.setMonth(splitDate[1]);
+        ourDate.setYear(splitDate[2]);
         return ourDate.getTime() > now.getTime();
     } else {
         return false;
