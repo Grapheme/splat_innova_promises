@@ -125,7 +125,7 @@ class CronPromises extends Command {
 		$users = Dic::valuesBySlugAndIds('users', $users_ids);
 		$users = DicVal::extracts($users, NULL, true, true);
 		$this->info('Users: ' . count($users));
-		Helper::d($users);
+		Helper::ta($users);
 
 
 		die;
