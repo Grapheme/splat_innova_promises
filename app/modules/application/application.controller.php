@@ -1160,6 +1160,7 @@ class ApplicationController extends BaseController {
 
                     $user->full_social_info = json_decode($user->full_social_info, 1);
                     $user->friends = json_decode($user->friends, 1);
+                    $user->notifications = json_decode($user->notifications, 1);
 
                     #Helper::tad($user);
 
