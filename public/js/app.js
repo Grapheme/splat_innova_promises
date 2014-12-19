@@ -821,7 +821,7 @@ $("#profile_form").validate({
 
 $(".promise-finish-button").on('click', function(e){
 
-    if (auth_method != 'vkontakte' || {{ (int)$promise->only_for_my }}) {
+    if (auth_method != 'vkontakte' || only_for_me) {
 
         return true;
 
@@ -836,7 +836,7 @@ $(".promise-finish-button").on('click', function(e){
          */
         VK.Api.call("wall.post", {
             owner_id: auth_user_id,
-            message: "Я выполнил обещание {{ $promise->promise_text }}."
+            message: "Я выполнил обещание " + promise_text
             + "\r\n"
             + "Дайте свое обещание на сайте mypromises.ru"
             //attachments: attachment // выбранный стиль
