@@ -80,13 +80,13 @@ class CronPromises extends Command {
 				$join
 					->on($rand_tbl_alias2 . '.dicval_id', '=', $tbl_dicval . '.id')
 					#->orOn(...)
-					->where($rand_tbl_alias2 . '.key', '=', 'finished_at')
+					->on($rand_tbl_alias2 . '.key', '=', 'finished_at')
 					->where($rand_tbl_alias2 . '.value', '=', '')
 					->orWhere($rand_tbl_alias2 . '.value', NULL)
 				;
 			});
 			$query
-				->addSelect(DB::raw($rand_tbl_alias2 . '.value AS time_limit'))
+				->addSelect(DB::raw($rand_tbl_alias2 . '.value AS finished_at'))
 			;
 
 		});
