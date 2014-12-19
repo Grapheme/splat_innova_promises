@@ -47,8 +47,11 @@ class CronPromises extends Command {
 		$tomorrow = clone $now;
 		$tomorrow->addDay(1); // завтра
 
+		$tomorrow2 = clone $now;
+		$tomorrow2->addDay(2); // послезавтра
+
 		/**
-		 * Получаем истекающие обещания
+		 * Получаем проваленные обещания
 		 */
 		$promises = Dic::valuesBySlug('promises', function($query) use ($yesterday, $now){
 
@@ -68,31 +71,6 @@ class CronPromises extends Command {
 			$query
 				->addSelect(DB::raw($rand_tbl_alias . '.value AS time_limit'))
 			;
-
-			/*
-			$rand_tbl_alias2 = md5(time() . rand(999999, 9999999));
-			$query->join($tbl_dic_field_val . ' AS ' . $rand_tbl_alias2, $rand_tbl_alias2 . '.dicval_id', '=', $tbl_dicval . '.id')
-				->where($rand_tbl_alias2 . '.key', '=', 'finished_at')
-				->where($rand_tbl_alias2 . '.value', '=', '')
-				->orWhere($rand_tbl_alias2 . '.value', NULL)
-			;
-			#*/
-
-			/*
-			$rand_tbl_alias2 = md5(time() . rand(999999, 9999999));
-			$query->join(DB::raw('`' . $tbl_dic_field_val . '` AS `' . $rand_tbl_alias2 . '`'), function ($join) use ($rand_tbl_alias2, $tbl_dicval) {
-				$join
-					->on($rand_tbl_alias2 . '.dicval_id', '=', $tbl_dicval . '.id')
-					#->orOn(...)
-					->on($rand_tbl_alias2 . '.key', '=', 'finished_at')
-					->where($rand_tbl_alias2 . '.value', '=', '')
-					->orWhere($rand_tbl_alias2 . '.value', '=', NULL)
-				;
-			});
-			$query
-				->addSelect(DB::raw($rand_tbl_alias2 . '.value AS finished_at'))
-			;
-			*/
 		});
 		#Helper::smartQueries(1);
 
@@ -100,32 +78,182 @@ class CronPromises extends Command {
 		#Helper::ta($promises);
 		$this->info('Total promises: ' . count($promises));
 
-		/**
-		 * Фильтруем обещания - оставляем только невыполненные и непроваленные
-		 */
-		foreach ($promises as $p => $promise) {
+		if (count($promises)) {
 
-			if ($promise->finished_at || $promise->promise_fail)
-				unset($promises[$p]);
+			/**
+			 * Фильтруем обещания - оставляем только невыполненные и непроваленные
+			 */
+			foreach ($promises as $p => $promise) {
+
+				if ($promise->finished_at || $promise->promise_fail)
+					unset($promises[$p]);
+			}
+			$this->info('Filtered promises: ' . count($promises));
+
+			/**
+			 * Получаем ID пользователей
+			 */
+			$users_ids = Dic::makeLists($promises, NULL, 'user_id');
+			$this->info('Total users: ' . count($users_ids));
+			Helper::d($users_ids);
+
+			$users_ids = array_unique($users_ids);
+			$this->info('Filtered users: ' . count($users_ids));
+			Helper::d($users_ids);
+
+			/**
+			 * Загружаем пользователей по ID
+			 */
+			$users = Dic::valuesBySlugAndIds('users', $users_ids);
+			$users = DicVal::extracts($users, NULL, true, true);
+			$this->info('Users objects: ' . count($users));
+			#Helper::ta($users);
+
+			$also_users = array();
+
+			$this->info('Отправляем письма с оповещением о проваленных обещаниях...');
+
+			if (count($users)) {
+
+				/**
+				 * Перебираем всех юзеров
+				 */
+				foreach ($users as $u => $user) {
+
+					$also_users[] = $user->id;
+
+					/**
+					 * Валидация
+					 */
+					$validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
+					if ($validator->fails()) {
+						continue;
+					}
+
+					/**
+					 * Если валидация пройдена - отправляем письмо
+					 */
+					$data = array(
+						#'promise' => $promise,
+						'user' => $user,
+					);
+					Mail::send('emails.cron_promise_fail', $data, function ($message) use ($user) {
+						$from_email = Config::get('mail.from.address');
+						$from_name = Config::get('mail.from.name');
+						$message->from($from_email, $from_name);
+						$message->subject('Не удалось выполнить обещание');
+						$message->to($user->email);
+					});
+					$this->info($user->email);
+				}
+			}
 		}
-		$this->info('Filtered promises: ' . count($promises));
+
+
+
+
+		/************************************************************************************************************ */
+
+
 
 		/**
-		 * Получаем пользователей
+		 * Получаем истекающие обещания
 		 */
-		$users_ids = Dic::makeLists($promises, NULL, 'user_id');
-		$this->info('Total users: ' . count($users_ids));
-		Helper::d($users_ids);
+		$promises = Dic::valuesBySlug('promises', function($query) use ($now, $tomorrow, $tomorrow2){
 
-		$users_ids = array_unique($users_ids);
-		$this->info('Filtered users: ' . count($users_ids));
-		Helper::d($users_ids);
+			$tbl_dicval = (new DicVal())->getTable();
+			$tbl_dic_field_val = (new DicFieldVal())->getTable();
 
+			$rand_tbl_alias = md5(time() . rand(999999, 9999999));
+			$query->join(DB::raw('`' . $tbl_dic_field_val . '` AS `' . $rand_tbl_alias . '`'), function ($join) use ($rand_tbl_alias, $tbl_dicval, $now, $tomorrow, $tomorrow2) {
+				$join
+					->on($rand_tbl_alias . '.dicval_id', '=', $tbl_dicval . '.id')
+					#->orOn(...)
+					->where($rand_tbl_alias . '.key', '=', 'time_limit')
+					->where($rand_tbl_alias . '.value', '>', $tomorrow->format('Y-m-d H:i:s'))
+					->where($rand_tbl_alias . '.value', '<', $tomorrow2->format('Y-m-d H:i:s'))
+				;
+			});
+			$query
+				->addSelect(DB::raw($rand_tbl_alias . '.value AS time_limit'))
+			;
+		});
+		#Helper::smartQueries(1);
 
-		$users = Dic::valuesBySlugAndIds('users', $users_ids);
-		$users = DicVal::extracts($users, NULL, true, true);
-		$this->info('Users: ' . count($users));
-		Helper::ta($users);
+		$promises = DicVal::extracts($promises, NULL, true, true);
+		#Helper::ta($promises);
+		$this->info('Total promises: ' . count($promises));
+
+		if (count($promises)) {
+
+			/**
+			 * Фильтруем обещания - оставляем только невыполненные и непроваленные
+			 */
+			foreach ($promises as $p => $promise) {
+
+				if ($promise->finished_at || $promise->promise_fail) {
+					unset($promises[$p]);
+				}
+			}
+			$this->info('Filtered promises: ' . count($promises));
+
+			/**
+			 * Получаем ID пользователей
+			 */
+			$users_ids = Dic::makeLists($promises, NULL, 'user_id');
+			$this->info('Total users: ' . count($users_ids));
+			Helper::d($users_ids);
+
+			$users_ids = array_unique($users_ids);
+			$this->info('Filtered users: ' . count($users_ids));
+			Helper::d($users_ids);
+
+			/**
+			 * Загружаем пользователей по ID
+			 */
+			$users = Dic::valuesBySlugAndIds('users', $users_ids);
+			$users = DicVal::extracts($users, NULL, true, true);
+			$this->info('Users objects: ' . count($users));
+			#Helper::ta($users);
+
+			$this->info('Отправляем письма с оповещением об истекающих обещаниях...');
+
+			if (count($users)) {
+
+				/**
+				 * Перебираем всех юзеров
+				 */
+				foreach ($users as $u => $user) {
+
+					if (in_array($user->id, $also_users)) {
+						continue;
+					}
+
+					/**
+					 * Валидация
+					 */
+					$validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
+					if ($validator->fails()) {
+						continue;
+					}
+
+					/**
+					 * Если валидация пройдена - отправляем письмо
+					 */
+					$data = array(#'promise' => $promise,
+						'user' => $user,);
+					Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
+						$from_email = Config::get('mail.from.address');
+						$from_name = Config::get('mail.from.name');
+						$message->from($from_email, $from_name);
+						$message->subject('Заканчивается срок выполнения обещания!');
+						$message->to($user->email);
+					});
+					$this->info($user->email);
+				}
+			}
+		}
+
 
 
 		die;
