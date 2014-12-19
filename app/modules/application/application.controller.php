@@ -511,6 +511,7 @@ class ApplicationController extends BaseController {
         $email = Input::get('email');
         $bdate = Input::get('bdate');
 
+        $notifications = Input::get('notifications');
 
         if ($name) {
             #$user->name = $name;
@@ -528,6 +529,8 @@ class ApplicationController extends BaseController {
         if ($bdate) {
             $user->update_field('bdate', $bdate);
         }
+
+        $user->update_field('notifications', json_encode($notifications));
 
         if (@$_SESSION['promise_text'] && @$_SESSION['redirect_to_new_promise']) {
             unset($_SESSION['redirect_to_new_promise']);
