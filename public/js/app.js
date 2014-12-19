@@ -595,11 +595,27 @@ jQuery.validator.addMethod("futureDate", function(value, element) {
     }
 }, "Выбрана прошедшая дата");
 
+jQuery.validator.addMethod("futureTime", function(value, element) {
+    var now = new Date();
+    var splitDate = $('[name="limit_date"]').val().split('.');
+    if($('[name="limit_date"]').val() != '') {
+        var ourDate = new Date(splitDate[2], splitDate[1], splitDate[0]);
+        var todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDay());
+        if(ourDate.getTime() == todayDate.getTime()) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return true;
+    }
+}, "");
+
 $("#promise-form").validate({
     rules: {
         'promise_text': { required: true },
         'limit_date': { required: true, customDate: true, futureDate: true },
-        'limit_time': { required: true, customTime: true },
+        'limit_time': { required: true, customTime: true, futureTime: true },
         'style_id': { required: true }
     },
     messages: {
@@ -779,7 +795,7 @@ $("#profile_form").validate({
     rules: {
         'name': { required: true },
         'email': { required: true, email: true },
-        'bdate': { required: true, customDate: true },
+        'bdate': { customDate: true },
         'confirmation': { required: true }
     },
     messages: {
