@@ -4,7 +4,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class cron_promises extends Command {
+class CronPromises extends Command {
 
 	/**
 	 * The console command name.
@@ -33,10 +33,19 @@ class cron_promises extends Command {
 	 * @return mixed
 	 */
 	public function fire() {
-		//
+
+		#$this->info("111");
+
+		$now = (new \Carbon\Carbon())->now();
+		$yesterday = (new \Carbon\Carbon())->yesterday(); // вчера
+		$tomorrow = (new \Carbon\Carbon())->tomorrow(); // завтра
+
+		$promises = Dic::valuesBySlug('promises', function($query) use ($yesterday){
+			$query->;
+		});
+
 		$temp = Dic::all();
 		Helper::tad($temp);
-		#$this->info("111");
 	}
 
 	/**

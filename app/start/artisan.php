@@ -12,3 +12,4 @@
 */
 
 Artisan::add(new helperr);
+Artisan::add(new CronPromises);
