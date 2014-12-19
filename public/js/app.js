@@ -629,9 +629,43 @@ $("#promise-form").validate({
 
         } else {
 
+            /**
+             * Хеши картинок из ВК
+             */
+            var photos = {
+                blue:   'photo1889847_350028615',
+                yellow: 'photo1889847_350028622',
+                aqua:   'photo1889847_350028618',
+                pink:   'photo1889847_350028619',
+                green:  'photo1889847_350028614'
+            };
+            /**
+             * Текущий стиль
+             */
+            var current_style_id = $('[name=style_id] :selected') || 'blue';
+            /**
+             * Хеш картинки для текущего стиля
+             */
+            var attachment = photos[current_style_id];
 
+            /**
+             * Открываем окно с предложением оставить запись на стене
+             */
+            VK.Api.call("wall.post", {
+                owner_id: auth_user_id,
+                message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания.\r\n\r\nВсе мои обещания можно посмотреть здесь: " + user_profile_url,
+                //attachments: r3.response[0].id
+                //attachments: "photo1889847_350020035" // синий фон
+                //attachments: "photo1889847_350023713" // снеговик
+                attachments: attachment // выбранный стиль
+            }, function(r4) {
+                console.log(r4);
+                //// В самом конце отправляем форму
+                current_form.submit();
+            });
+            return;
 
-
+            /******************************************************************************************************** */
 
             /**
              * Получим URL для загрузки изображения на сервер ВК
@@ -706,9 +740,7 @@ $("#promise-form").validate({
             });
 
 
-            /**
-             * Открываем окно с предложением оставить запись на стене
-             */
+            /*
             function vk_wall_post() {
 
                 VK.Api.call("wall.post", {
@@ -725,7 +757,7 @@ $("#promise-form").validate({
             }
 
             setTimeout(vk_wall_post, 3000);
-
+            */
             //return;
             //*/
         }
