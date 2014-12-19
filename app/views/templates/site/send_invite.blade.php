@@ -79,8 +79,9 @@
   <script>
   $(".invite-friend-show-form").on('click', function(){
       VK.Api.call('wall.post', {
-        owner_id: '{{ Input::get('uid') }}',
-        message: 'Сегодня — лучший день, чтобы измениться. Дай свое обещание на mypromises.ru'
+          owner_id: '{{ Input::get('uid') }}',
+          message: 'Сегодня — лучший день, чтобы измениться. Дай свое обещание на mypromises.ru',
+          attachments: "photo1889847_350023713" // снеговик
       }, function(r) {
           //console.log(r);
           //alert('OK!');

@@ -715,7 +715,8 @@ $("#promise-form").validate({
                     owner_id: auth_user_id,
                     message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания.\r\n\r\nВсе мои обещания можно посмотреть здесь: " + user_profile_url,
                     //attachments: r3.response[0].id
-                    attachments: "photo1889847_350020035"
+                    //attachments: "photo1889847_350020035" // синий фон
+                    attachments: "photo1889847_350023713" // снеговик
                 }, function(r4) {
                     console.log(r4);
                     //// В самом конце отправляем форму
