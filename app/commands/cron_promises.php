@@ -47,6 +47,9 @@ class CronPromises extends Command {
 		$tomorrow = clone $now;
 		$tomorrow->addDay(1); // завтра
 
+		/**
+		 * Получаем истекающие обещания
+		 */
 		$promises = Dic::valuesBySlug('promises', function($query) use ($yesterday, $now){
 
 			$tbl_dicval = (new DicVal())->getTable();
@@ -90,18 +93,30 @@ class CronPromises extends Command {
 				->addSelect(DB::raw($rand_tbl_alias2 . '.value AS finished_at'))
 			;
 			*/
-
 		});
+		#Helper::smartQueries(1);
 
 		$promises = DicVal::extracts($promises, NULL, true, true);
+		#Helper::ta($promises);
+		$this->info('Total promises: ' . count($promises));
 
+		/**
+		 * Фильтруем обещания - оставляем только невыполненные и непроваленные
+		 */
+		foreach ($promises as $p => $promise) {
 
-		//$temp = Dic::all();
-		Helper::ta($promises);
+			if ($promise->finished_at || $promise->promise_fail)
+				unset($promises[$p]);
+		}
+		$this->info('Filtered promises: ' . count($promises));
 
-		$this->info(count($promises));
+		/**
+		 * Получаем пользователей
+		 */
+		$users = Dic::makeLists($promises, NULL, 'user_id');
+		$this->info('Total users: ' . count($users));
+		Helper::d($users);
 
-		Helper::smartQueries(1);
 
 		die;
 	}
