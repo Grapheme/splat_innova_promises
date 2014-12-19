@@ -684,6 +684,8 @@ $("#promise-form").validate({
 
                             }, function(r4) {
 
+                                console.log(r4);
+
                                 /**
                                  * В самом конце отправляем форму
                                  */
