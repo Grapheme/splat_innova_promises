@@ -199,5 +199,11 @@
 
 
 @section('scripts')
+    <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        VK.init({
+            apiId: 4659025
+        });
+    </script>
 
 @stop
