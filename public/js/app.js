@@ -613,6 +613,8 @@ $("#promise-form").validate({
 
         //console.log(form);
 
+        var current_form = form;
+
         var only_for_me = $('input[name=only_for_me]').prop("checked");
 
         /**
@@ -685,7 +687,7 @@ $("#promise-form").validate({
                                 /**
                                  * В самом конце отправляем форму
                                  */
-                                form.submit();
+                                current_form.submit();
                             });
 
                         });
