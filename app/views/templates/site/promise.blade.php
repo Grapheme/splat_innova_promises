@@ -7,7 +7,7 @@
     <meta property="og:title" content="Мое обещание">
     <meta property="og:description" content="Я обещаю {{ $promise->promise_text }}">
     <meta property="og:image" content="http://mypromises.ru/ogg_image.jpg">
-@show
+@stop
 
 
 @section('style')
