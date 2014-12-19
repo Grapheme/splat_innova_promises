@@ -53,7 +53,7 @@ class CronPromises extends Command {
 			$tbl_dic_field_val = (new DicFieldVal())->getTable();
 
 			$rand_tbl_alias = md5(time() . rand(999999, 9999999));
-			$query->join(DB::raw($tbl_dic_field_val . ' AS ' . $rand_tbl_alias), function ($join) use ($rand_tbl_alias, $tbl_dicval, $yesterday, $now) {
+			$query->join(DB::raw('`' . $tbl_dic_field_val . '` AS `' . $rand_tbl_alias . '`'), function ($join) use ($rand_tbl_alias, $tbl_dicval, $yesterday, $now) {
 				$join
 					->on($rand_tbl_alias . '.dicval_id', '=', $tbl_dicval . '.id')
 					#->orOn(...)
@@ -76,7 +76,7 @@ class CronPromises extends Command {
 			#*/
 
 			$rand_tbl_alias2 = md5(time() . rand(999999, 9999999));
-			$query->join(DB::raw($tbl_dic_field_val . ' AS ' . $rand_tbl_alias2), function ($join) use ($rand_tbl_alias2, $tbl_dicval) {
+			$query->join(DB::raw('`' . $tbl_dic_field_val . '` AS `' . $rand_tbl_alias2 . '`'), function ($join) use ($rand_tbl_alias2, $tbl_dicval) {
 				$join
 					->on($rand_tbl_alias2 . '.dicval_id', '=', $tbl_dicval . '.id')
 					#->orOn(...)
