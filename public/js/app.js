@@ -1,6 +1,17 @@
 
 var fb_app_id = '1010986995584773';
 
+/**
+ * Хеши картинок из ВК
+ */
+var photos = {
+    blue:   'photo-62074862_348392589',
+    yellow: 'photo-62074862_348392593',
+    aqua:   'photo-62074862_348392590',
+    pink:   'photo-62074862_348392591',
+    green:  'photo-62074862_348392585'
+};
+
 $(document).ready(function($){
     var ulogintoken;
     //var ulogintoken = getCookie("ulogintoken");
@@ -651,16 +662,6 @@ $("#promise-form").validate({
 
         } else {
 
-            /**
-             * Хеши картинок из ВК
-             */
-            var photos = {
-                blue:   'photo1889847_350028615',
-                yellow: 'photo1889847_350028622',
-                aqua:   'photo1889847_350028618',
-                pink:   'photo1889847_350028619',
-                green:  'photo1889847_350028614'
-            };
 
             /**
              * Текущий стиль
@@ -850,3 +851,39 @@ $(".promise-finish-button").on('click', function(e){
     }
 
 })
+
+
+
+
+function array_rand ( input, num_req ) {	// Pick one or more random entries out of an array
+    //
+    // +   original by: _argos
+
+    var Indexes = [];
+    var Ticks = num_req || 1;
+    var Check = {
+        Duplicate	: function ( input, value ) {
+            var Exist = false, Index = 0;
+            while ( Index < input.length ) {
+                if ( input [ Index ] === value ) {
+                    Exist = true;
+                    break;
+                }
+                Index++;
+            }
+            return Exist;
+        }
+    };
+
+    if ( input instanceof Array && Ticks <= input.length ) {
+        while ( true ) {
+            var Rand = Math.floor ( ( Math.random ( ) * input.length ) );
+            if ( Indexes.length === Ticks ) { break; }
+            if ( !Check.Duplicate ( Indexes, Rand ) ) { Indexes.push ( input[Rand] ); }
+        }
+    } else {
+        Indexes = null;
+    }
+
+    return ( ( Ticks == 1 ) ? Indexes.join ( ) : Indexes );
+}
