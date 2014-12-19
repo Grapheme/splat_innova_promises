@@ -208,7 +208,7 @@
         var auth_user_id = '{{ @$auth_user->full_social_info['id'] }}';
 
         var promise_text = '{{ $promise->promise_text }}';
-        var only_for_me = {{ (int)$promise->promise_text }};
+        var only_for_me = {{ (int)$promise->only_for_me }};
     </script>
 
 @stop
