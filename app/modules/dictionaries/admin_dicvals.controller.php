@@ -324,7 +324,7 @@ class AdminDicvalsController extends BaseController {
             App::abort(404);
 
         $element->extract(0);
-        Helper::tad($element);
+        #Helper::tad($element);
 
         if (Config::get('debug') == 1)
             Helper::tad($element);
