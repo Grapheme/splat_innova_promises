@@ -592,9 +592,7 @@ jQuery.validator.addMethod("futureDate", function(value, element) {
         ourDate.setDate(splitDate[0]);
         ourDate.setMonth(parseInt(splitDate[1]) - 1);
         ourDate.setYear(splitDate[2]);
-        console.log(ourDate);
-        console.log('TODAY: ' + now);
-        return ourDate.getTime() > now.getTime();
+        return (ourDate.getTime()-100) > now.getTime();
     } else {
         return false;
     }
@@ -604,9 +602,14 @@ jQuery.validator.addMethod("futureTime", function(value, element) {
     var now = new Date();
     var splitDate = $('[name="limit_date"]').val().split('.');
     if($('[name="limit_date"]').val() != '') {
-        var ourDate = new Date(splitDate[2], splitDate[1], splitDate[0]);
-        var todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDay());
-        if(ourDate.getTime() == todayDate.getTime()) {
+        var splitTime = value.split(':');
+        ourDate.setDate(splitDate[0]);
+        ourDate.setMonth(parseInt(splitDate[1]) - 1);
+        ourDate.setYear(splitDate[2]);
+        ourDate.setHours(splitTime[0]);
+        ourDate.setMinutes(splitTime[1]);
+        var todayDate = new Date();
+        if(ourDate.getTime() > todayDate.getTime()) {
             return false;
         } else {
             return true;
