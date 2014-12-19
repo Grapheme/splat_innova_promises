@@ -117,6 +117,10 @@ class CronPromises extends Command {
 		$this->info('Total users: ' . count($users));
 		Helper::d($users);
 
+		$users = array_unique($users);
+		$this->info('Filtered users: ' . count($users));
+		Helper::d($users);
+
 
 		die;
 	}
