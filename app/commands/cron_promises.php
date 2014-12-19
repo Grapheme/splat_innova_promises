@@ -37,7 +37,7 @@ class CronPromises extends Command {
 
 		#$this->info("111");
 
-		$now = (new \Carbon\Carbon())->now()->sub;
+		$now = (new \Carbon\Carbon())->now();
 		#$yesterday = (new \Carbon\Carbon())->yesterday(); // вчера
 		$yesterday = $now->subDay(1); // вчера
 		#$tomorrow = (new \Carbon\Carbon())->tomorrow(); // завтра
