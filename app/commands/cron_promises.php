@@ -49,17 +49,19 @@ class CronPromises extends Command {
 
 			$rand_tbl_alias = md5(time() . rand(999999, 9999999));
 			$query->join($tbl_dic_field_val . ' AS ' . $rand_tbl_alias, $rand_tbl_alias . '.dicval_id', '=', $tbl_dicval . '.id')
-				->where($rand_tbl_alias . '.key', '=', 'time_limit')
-				->where($rand_tbl_alias . '.value', '>', $yesterday->format('Y-m-d H:i:s'))
-				->where($rand_tbl_alias . '.value', '<', $now->format('Y-m-d H:i:s'))
+				->on($rand_tbl_alias . '.key', '=', 'time_limit')
+				->on($rand_tbl_alias . '.value', '>', $yesterday->format('Y-m-d H:i:s'))
+				->on($rand_tbl_alias . '.value', '<', $now->format('Y-m-d H:i:s'))
 			;
 
+			#/*
 			$rand_tbl_alias2 = md5(time() . rand(999999, 9999999));
 			$query->join($tbl_dic_field_val . ' AS ' . $rand_tbl_alias2, $rand_tbl_alias2 . '.dicval_id', '=', $tbl_dicval . '.id')
-				->where($rand_tbl_alias2 . '.key', '=', 'finished_at')
-				->where($rand_tbl_alias2 . '.value', '=', '')
-				->orWhere($rand_tbl_alias2 . '.value', NULL)
+				->on($rand_tbl_alias2 . '.key', '=', 'finished_at')
+				->on($rand_tbl_alias2 . '.value', '=', '')
+				->orOn($rand_tbl_alias2 . '.value', NULL)
 			;
+			#*/
 
 		});
 
@@ -69,7 +71,8 @@ class CronPromises extends Command {
 
 		//$temp = Dic::all();
 		Helper::ta($promises);
-		Helper::tad(count($promises));
+		$this->info(count($promises));
+		die;
 	}
 
 	/**
