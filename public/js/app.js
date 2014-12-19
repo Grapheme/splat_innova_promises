@@ -10,9 +10,23 @@ $(document).ready(function($){
 
 
 $(document).on('click', '.logout', function(e){
+
 	e.preventDefault();
-    setCookie("user_token", 'logout');
-    location.href = '/';
+
+    $.ajax({
+        url: base_url + '/user-logout',
+        type: 'POST',
+    })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            //alert('ERROR');
+            console.log(textStatus);
+        })
+        .done(function(response) {
+
+            //console.log(response);
+            //setCookie('user_token', '', 0, '/');
+            location.href = '/';
+        });
 });
 
 $.validator.setDefaults({
@@ -596,101 +610,124 @@ $("#promise-form").validate({
     },
     errorClass: "inp-error",
     submitHandler: function(form) {
+
         //console.log(form);
 
-        //e.preventDefault();
+        var current_form = form;
 
         var only_for_me = $('input[name=only_for_me]').prop("checked");
 
+        /**
+         * Если юзер авторизовался не через ВК, или обещание видно только автору...
+         */
         if (auth_method != 'vkontakte' || only_for_me) {
 
+            /**
+             * ...отправляем форму сразу
+             */
             form.submit();
 
         } else {
 
+
+
+
+
+            /**
+             * Получим URL для загрузки изображения на сервер ВК
+             */
             VK.Api.call('photos.getWallUploadServer', {
 
-                //access_token: auth_user_access_token,
                 group_id: auth_user_id,
                 version: 5.27
 
-            }, function(r) {
+            }, function(r1) {
 
-                /*
-                console.log(r);
-                console.log(r.response);
-                console.log(r.response.upload_url);
-                */
-                //form.submit();
+                //console.log(r);
 
+                /**
+                 * Делаем запрос на собственный сервер для отправки картинки через POST-запрос на сервер ВК
+                 */
                 $.ajax({
                     url: vkapi_post_image_upload_url,
                     type: 'POST',
                     dataType: 'json',
-                    //dataType: 'jsonp',
-                    //jsonp: 'callback',
-                    data: { url: r.response.upload_url }
+                    data: { url: r1.response.upload_url }
                 })
                     .fail(function (jqXHR, textStatus, errorThrown) {
                         //alert('ERROR');
                         console.log(textStatus);
                         console.log(jqXHR);
                     })
-                    .done(function (response) {
+                    .done(function (r2) {
 
-                        //alert("SUCCESS");
-                        console.log(response);
+                        console.log(r2);
 
-
+                        /**
+                         * Сохраняем отправленную фотографию на сервере ВК
+                         */
                         VK.Api.call('photos.saveWallPhoto', {
 
-                            server: response.answer.server,
-                            photo: response.answer.photo,
-                            hash: response.answer.hash,
-                            group_id: auth_user_id
+                            server: r2.answer.server,
+                            photo: r2.answer.photo,
+                            hash: r2.answer.hash,
+                            group_id: auth_user_id // ВАЖНО! Без этой строки не работает
 
-                        }, function(r) {
+                        }, function(r3) {
 
-                            console.log(r);
+                            console.log(r3);
+
+                            /**
+                             * Открываем окно с предложением оставить запись на стене
+                             */
+                            /*
+                            VK.Api.call('wall.post', {
+
+                                owner_id: auth_user_id,
+                                message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания.\r\n\r\nВсе мои обещания можно посмотреть здесь: " + user_profile_url,
+                                //attachments: r3.response[0].id
+                                attachments: 'photo1889847_350020035'
+
+                            }, function(r4) {
+
+                                alert('!!!');
+                                console.log(r4);
+
+                                //// В самом конце отправляем форму
+                                //current_form.submit();
+                            });
+                            */
 
                         });
 
 
                     });
 
-
-                /*
-                $.ajax({
-                    url: r.response.upload_url,
-                    type: 'POST',
-                    dataType: 'json',
-                    //dataType: 'jsonp',
-                    //jsonp: 'callback',
-                    data: { photo: 'http://mypromises.ru/promise_card.jpg' }
-                })
-                    .fail(function (jqXHR, textStatus, errorThrown) {
-                        //alert('ERROR');
-                        console.log(textStatus);
-                        console.log(jqXHR);
-                    })
-                    .done(function (response) {
-
-                        //alert("SUCCESS");
-                        console.log(response);
-                    });
-                */
             });
-            /*
-             VK.Api.call('wall.post', {
 
-                owner_id: auth_user_id,
-                message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
-                // \n\nВсе мои обещания можно посмотреть здесь: http://mypromises.ru/profile/
-            }, function(r) {
 
-                form.submit();
-            });
-            */
+            /**
+             * Открываем окно с предложением оставить запись на стене
+             */
+            function vk_wall_post() {
+
+                VK.Api.call("wall.post", {
+                    owner_id: auth_user_id,
+                    message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания.\r\n\r\nВсе мои обещания можно посмотреть здесь: " + user_profile_url,
+                    //attachments: r3.response[0].id
+                    //attachments: "photo1889847_350020035" // синий фон
+                    attachments: "photo1889847_350023713" // снеговик
+                }, function(r4) {
+                    console.log(r4);
+                    //// В самом конце отправляем форму
+                    //current_form.submit();
+                });
+            }
+
+            setTimeout(vk_wall_post, 3000);
+
+            //return;
+            //*/
         }
     }
 });

@@ -20,6 +20,8 @@ class ApplicationController extends BaseController {
             Route::get('/ok-oauth', array('as' => 'app.ok-oauth', 'uses' => __CLASS__.'@getOkOauth'));
             Route::any('/email-pass-auth', array('as' => 'app.email-pass-auth', 'uses' => __CLASS__.'@postEmailPassAuth'));
 
+            Route::any('/user-logout', array('as' => 'app.user-logout', 'uses' => __CLASS__.'@postUserLogout'));
+
             Route::get('/get-mainpage-counter', array('as' => 'app.mainpage_counter', 'uses' => __CLASS__.'@getMainPageCounter'));
 
             Route::get('/profile', array('as' => 'app.profile', 'uses' => __CLASS__.'@getUserProfile'));
@@ -967,7 +969,9 @@ class ApplicationController extends BaseController {
 
                         #Helper::ta($user_record);
 
-                        $_SESSION['user_token'] = $user_record->user_token;
+                        #$_SESSION['user_token'] = $user_record->user_token;
+                        #setcookie('user_token', $user_record->user_token, time()+60*60+24+365, '/');
+                        $this->setUserToken($user_record->user_token);
 
                         $json_request['responseText'] = 'Ok';
                         $json_request['new_user'] = false;
@@ -1005,7 +1009,6 @@ class ApplicationController extends BaseController {
 
                     $array['textfields']['full_social_info'] = json_encode($data);
 
-
                     $user_record = DicVal::inject(
                         'users',
                         $array
@@ -1015,7 +1018,9 @@ class ApplicationController extends BaseController {
 
                     #Helper::tad($user_record);
 
-                    $_SESSION['user_token'] = $user_record->user_token;
+                    #$_SESSION['user_token'] = $user_record->user_token;
+                    $this->setUserToken($user_record->user_token);
+
                     $_SESSION['new_user'] = @$user_record->auth_method;
 
                     /**
@@ -1097,11 +1102,14 @@ class ApplicationController extends BaseController {
         ) {
 
 
+            $this->postUserLogout();
+
+            /*
             if (
                 !isset($_COOKIE['user_token']) && !isset($_SESSION['user_token'])
             ) {
                 ##
-            } elseif ($_COOKIE['user_token'] != 'logout' && isset($_SESSION['user_token'])) {
+            } elseif ($_COOKIE['user_token'] != 'logout' && isset($_SESSION['user_token']) && 0) {
 
 
                 if (Input::get('debug') == 1 || 1) {
@@ -1125,6 +1133,7 @@ class ApplicationController extends BaseController {
                 die();
 
             }
+            */
 
         } else {
 
@@ -1229,9 +1238,7 @@ class ApplicationController extends BaseController {
 
             if (!is_object($temp) || !is_object($temp->dicval)) {
 
-                setcookie("user_token", '', 0, "/");
-                #unset($_COOKIE['user_token']);
-                unset($_SESSION['user_token']);
+                $this->postUserLogout();
             }
 
             #Helper::tad($temp);
@@ -1485,9 +1492,8 @@ class ApplicationController extends BaseController {
         }
 
 
+        #setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
 
-
-        setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
 
         echo "
         Авторизация прошла успешно, теперь это окно можно закрыть.
@@ -1603,8 +1609,8 @@ class ApplicationController extends BaseController {
 
 
         #setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
-        setcookie("user_token", $auth['access_token'], time()+60*60*24*365, "/");
-        setcookie("access_token", $auth['access_token'], time()+60*60*24*365, "/");
+        #setcookie("access_token", $auth['access_token'], time()+60*60*24*365, "/");
+        #setcookie("user_token", $auth['access_token'], time()+60*60*24*365, "/");
 
 
         $curl = curl_init('https://api.vk.com/method/friends.get?user_id=' . @$auth['user_id'] . '&fields=sex,bdate,city,country,photo_200,domain&v=5.27&order=hints&lang=ru');
@@ -1800,7 +1806,7 @@ class ApplicationController extends BaseController {
         $friends->save();
 
 
-        setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
+        #setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
 
 
         echo "
@@ -1942,7 +1948,9 @@ class ApplicationController extends BaseController {
             return Redirect::route('app.mainpage');
         }
 
+
         setcookie("user_token", $check['user']['user_token'], time()+60*60+24+365, "/");
+
 
         /**
          * Если есть пометка о том, что юзер новый - убираем ее и переадресовываем на страницу редактирования профиля
@@ -2097,8 +2105,8 @@ class ApplicationController extends BaseController {
         $user->update_field('password', $new_password_hash);
         $user->remove_field('restore_password_token');
 
-        unset($_COOKIE['user_token']);
-        unset($_SESSION['user_token']);
+
+        $this->postUserLogout();
 
 
         Mail::send('emails.restore_password_success', array('password' => $password, 'user' => $user), function ($message) use ($user) {
@@ -2176,6 +2184,22 @@ class ApplicationController extends BaseController {
         $json_request['answer'] = $answer;
 
         return Response::json($json_request, 200);
+    }
+
+
+    private function setUserToken($token, $time = 31536000) {
+
+        setcookie('user_token', $token, time()+$time, '/');
+        $_SESSION['user_token'] = $token;
+        return '1';
+    }
+
+
+    public function postUserLogout() {
+
+        setcookie('user_token', '', 0, '/');
+        unset($_SESSION['user_token']);
+        return '1';
     }
 
 }
