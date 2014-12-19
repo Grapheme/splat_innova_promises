@@ -689,7 +689,7 @@ $("#promise-form").validate({
                                 /**
                                  * В самом конце отправляем форму
                                  */
-                                current_form.submit();
+                                //current_form.submit();
                             });
 
                         });
