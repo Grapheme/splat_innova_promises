@@ -11,11 +11,12 @@
         </ul>
       </div>
       <div class="footer-block"><span>Поделиться с друзьями:</span>
-        <ul class="footer-soc">
+        <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="small" data-yashareQuickServices="vkontakte,facebook,odnoklassniki" data-yashareTheme="counter"></div>
+        <!-- <ul class="footer-soc">
           <li><a onclick="ga('send', 'event', 'like', 'facebook');" href="http://www.facebook.com/sharer.php?u=http://mypromises.ru" target="_blank" class="soc-icon"><i class="fi icon-fb"></i></a></li>
           <li><a onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url=http://mypromises.ru&event=button_share" target="_blank" class="soc-icon"><i class="fi icon-vk"></i></a></li>
           <li><a onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl=mypromises.ru" target="_blank" class="soc-icon"><i class="fi icon-ok"></i></a></li>
-        </ul>
+        </ul> -->
       </div>
       <a onclick="ga('send', 'event', 'footer', 'brand');" href="http://splat-innova.com" target="_blank" class="footer-block right-logo"></a>
     </div>
