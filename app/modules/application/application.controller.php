@@ -694,9 +694,8 @@ class ApplicationController extends BaseController {
         $promise->extract(1);
         #Helper::tad($promise);
 
-        #if ($promise->user_id != $user->id) {
-        #    App::abort(404);
-        #}
+        if ($promise->only_for_me && (!is_object($user) || $user->id != $promise->user_id)) {
+            App::abort(404);
 
         /**
          * Тут еще нужна проверка - не закончилось ли время выполнения обещания?
