@@ -694,7 +694,7 @@ class ApplicationController extends BaseController {
         $promise->extract(1);
         #Helper::tad($promise);
 
-        if ($promise->only_for_me && (!is_object($user) || $user->id != $promise->user_id)) {
+        if ($promise->only_for_me && (!is_object($user) || $user->id != $promise->user_id))
             App::abort(404);
 
         /**
