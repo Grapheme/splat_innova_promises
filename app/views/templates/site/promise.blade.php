@@ -78,7 +78,7 @@
 
     <?
     $default_avatar = '/theme/images/man.png';
-    if (isset($promise_user->sex) && $user->sex == 1)
+    if (isset($promise_user->sex) && $promise_user->sex == 1)
         $default_avatar = '/theme/images/woman.png';
 
     if (!$promise->style_id) {
@@ -104,32 +104,37 @@
             <div class="promise-text">
                 {{ $promise->promise_text }}
             </div>
+
             <?
             $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
             ?>
             @if (!$failed && !$promise->finished_at)
                 <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div>
             @endif
-            <!-- <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div> -->
 
-            @if($promise_user->id == $auth_user->id)
             <div class="progress-btns">
+
                 @if ($failed)
+
                     {{-- Задание провалено --}}
                     <div class="pr-btn active">
                         <i class="fi icon-no"></i>
                         <span>
-                            @if ($promise->user_id == $user->id)
+                            @if (is_object($auth_user) && $auth_user->id == $promise->user_id)
                                 Вы не смогли выполнить данное обещание
                             @else
                                 Обещание выполнить не удалось
                             @endif
                         </span>
                     </div>
+
                 @elseif ($promise->finished_at)
+
                     {{-- Обещание выполнено $promise->finished_at --}}
                     <div class="pr-btn active"><i class="fi icon-okey"></i><span>Обещание выполнено</span></div>
-                @else
+
+                @elseif(is_object($auth_user) && $auth_user->id == $promise_user->id)
+
                     <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-okey"></i><span>Выполнено</span></a>
                     <a href="?fail=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'failure');"><i class="fi icon-no"></i><span>Отказаться</span></a>
                     <button data-href="?delete=1" class="pr-btn js-smart-btn">
@@ -140,16 +145,17 @@
                             <a href="#" class="fi icon-no fi-link js-no"></a>
                         </span>
                     </button>
+                    
                 @endif
-                <!-- <div class="promise-soc"><span>Расскажи об обещании:</span>
+
+                <div class="promise-soc"><span>Расскажи об обещании:</span>
                   <ul class="soc-ul">
                     <li><a onclick="ga('send', 'event', 'like', 'facebook');" href="http://www.facebook.com/sharer.php?u={{ URL::route('app.promise', $promise->id) }}" class="soc-icon" target="_blank"><i class="fi icon-fb"></i></a></li>
                     <li><a onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url={{ URL::route('app.promise', $promise->id) }}&event=button_share" class="soc-icon" target="_blank"><i class="fi icon-vk"></i></a></li>
                     <li><a onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl={{ URL::route('app.promise', $promise->id) }}" class="soc-icon" target="_blank"><i class="fi icon-ok"></i></a></li>
                   </ul>
-                </div> -->
+                </div> 
             </div>
-            @endif
 
         </div>
     </div>
@@ -171,10 +177,10 @@
                 @foreach ($comments as $comment)
                 <?
                 $commentator = @$users[$comment->user_id];
-                if (!is_object($commentator))
+                if (!@is_object($commentator))
                     continue;
                 $default_avatar = '/theme/images/man.png';
-                if (isset($commentator->sex) && $user->sex == 1)
+                if (isset($commentator->sex) && $commentator->sex == 1)
                     $default_avatar = '/theme/images/woman.png';
                 ?>
                 <li class="comment">
@@ -186,7 +192,7 @@
                         <div class="text">
                             {{ $comment->comment_text }}
                         </div>
-                        @if ($comment->user_id == $auth_user->id || $promise->user_id == $auth_user->id)
+                        @if (is_object($auth_user) && $comment->user_id == $auth_user->id || $promise->user_id == $auth_user->id)
                         <div class="delete-comment js-smart-btn" data-href="?do=delete_comment&id={{ $comment->id }}">
                             <a href="#">Удалить комментарий</a>
                             <span class="delete-confirm">
@@ -202,11 +208,12 @@
         </div>
     @endif
 
+    @if (is_object($auth_user) && $auth_user->id)
     <div class="leave-comment">
         <form action="{{ URL::route('app.add_comment') }}" method="POST">
             <input type="hidden" name="promise_id" value="{{ $promise->id }}">
             <div class="wrapper">
-                <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo"></div>
+                <div style="background-image: url({{ $auth_user->avatar ?: $default_avatar }});" class="profile-photo"></div>
                 <div class="comment-form">
                     <div class="textarea-cont">
                         <textarea name="comment_text" class="input-class"></textarea>
@@ -216,6 +223,7 @@
             </div>
         </form>
     </div>
+    @endif
 
 @stop
 

@@ -682,7 +682,7 @@ class ApplicationController extends BaseController {
         Helper::tad($user);
         */
 
-        $this->check_auth();
+        #$this->check_auth();
 
         $user = $this->user;
         $promise = Dic::valueBySlugAndId('promises', $id);
@@ -701,7 +701,7 @@ class ApplicationController extends BaseController {
         /**
          * Тут еще нужна проверка - не закончилось ли время выполнения обещания?
          */
-        if ($promise->user_id == $user->id) {
+        if (is_object($user) && $user->id == $promise->user_id) {
 
             $promise_user = $user;
 
@@ -767,7 +767,7 @@ class ApplicationController extends BaseController {
 
             $comment = Dic::valueBySlugAndId('comments', $comment_id, true);
             #Helper::tad($comment);
-            if ($comment->user_id == $promise_user->id || $promise_user->id == $this->user->id) {
+            if ($comment->user_id == $promise_user->id || (is_object($user) && $user->id == $promise_user->id)) {
                 $comment->delete();
             }
             return Redirect::route('app.promise', $promise->id);
