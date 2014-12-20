@@ -192,7 +192,7 @@
                         <div class="text">
                             {{ $comment->comment_text }}
                         </div>
-                        @if (is_object($auth_user) && $comment->user_id == $auth_user->id || $promise->user_id == $auth_user->id)
+                        @if (is_object($auth_user))
                         <div class="delete-comment js-smart-btn" data-href="?do=delete_comment&id={{ $comment->id }}">
                             <a href="#">Удалить комментарий</a>
                             <span class="delete-confirm">
