@@ -14,15 +14,15 @@
                     <div class="eye eye-cross" data-tooltip="Обещание защищено настройками приватности<br>и видимо только вам."></div>
                 @else
                     <div class="eye" data-tooltip="Обещание видно всем пользователям."></div>
-                    @endif
-                            <!-- <div class="eye{{ ( $promise->only_for_me ? ' eye-cross' : '') }}"></div> -->
+                @endif
+                <!-- <div class="eye{{ ( $promise->only_for_me ? ' eye-cross' : '') }}"></div> -->
             </div>
             <div class="bottom-floor">
                 <!--
                 <div class="views">15</div>
                 -->
 
-                <div class="comments" data-tooltip="{{ trans_choice(':count комментарий|:count комментария|:count комментариев', (int)$promise->comments_count, array(), 'ru') }} к этому обещанию.">{{ (int)$promise->comments_count }}</div>
+                <div class="comments" data-tooltip="{{ trans_choice(':count комментарий|:count комментария|:count комментариев', (int)$promise->comments_count, array(), 'ru') }} к этому обещанию.">{{ (int)$promise->comments_count ?: 0 }}</div>
 
                 <?
                 $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
