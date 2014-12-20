@@ -318,6 +318,39 @@ $.fn.AjaxForm = function() {
 	});
 }
 
+$.fn.SmartBtn = function() {
+	$(this).each(function(){
+		var self = $(this);
+		var opened = false;
+		self.on('click', function(){
+			if(!opened) {
+				$(this).addClass('clicked');
+				opened = true;
+				return false;
+			}
+		});
+		self.on('click', '.js-no', function(){
+			if(opened) {
+				self.removeClass('clicked');
+				opened = false;
+				return false;
+			}
+		});
+		self.on('click', '.js-yes', function(){
+			if(opened) {
+				if($(this).attr('data-ga') == 'promise-delete') {
+					ga('send', 'event', 'promise', 'delete');
+				}
+				if($(this).attr('data-ga') == 'comment-delete') {
+					ga('send', 'event', 'comment', 'delete');
+				}
+				window.location.href = self.attr('data-href');
+				return false;
+			}
+		});
+	});
+}
+
 function declOfNum(number, titles) {  
     cases = [2, 0, 1, 1, 1, 2];  
     return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];  
@@ -329,6 +362,7 @@ $(function(){
 	SplatSite.ShowFriends();
 	SplatSite.Tooltips.init();
 	SplatSite.PromisePlaceholder();
+	$('.js-smart-btn').SmartBtn();
 	if($('[data-finish]').length) {
 		SplatSite.CountDown('.js-countdown');
 	}

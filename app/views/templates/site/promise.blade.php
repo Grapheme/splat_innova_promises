@@ -137,8 +137,15 @@
 
                     <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-okey"></i><span>Выполнено</span></a>
                     <a href="?fail=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'failure');"><i class="fi icon-no"></i><span>Отказаться</span></a>
-                    <a href="?delete=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'delete');"><span>Удалить обещание</span></a>
-
+                    <button data-href="?delete=1" class="pr-btn js-smart-btn">
+                        <span class="btn-text">Удалить обещание</span>
+                        <span class="abs-hint">Вы уверены?</span>
+                        <span class="fi-links">
+                            <a href="#" class="fi icon-okey fi-link js-yes" data-ga="promise-delete"></a>
+                            <a href="#" class="fi icon-no fi-link js-no"></a>
+                        </span>
+                    </button>
+                    
                 @endif
 
                 <div class="promise-soc"><span>Расскажи об обещании:</span>
@@ -147,7 +154,7 @@
                     <li><a onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url={{ URL::route('app.promise', $promise->id) }}&event=button_share" class="soc-icon" target="_blank"><i class="fi icon-vk"></i></a></li>
                     <li><a onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl={{ URL::route('app.promise', $promise->id) }}" class="soc-icon" target="_blank"><i class="fi icon-ok"></i></a></li>
                   </ul>
-                </div>
+                </div> 
             </div>
 
         </div>
@@ -186,7 +193,13 @@
                             {{ $comment->comment_text }}
                         </div>
                         @if (is_object($auth_user) && $comment->user_id == $auth_user->id || $promise->user_id == $auth_user->id)
-                            <a onclick="ga('send', 'event', 'comment', 'delete');" href="?do=delete_comment&id={{ $comment->id }}" class="delete-comment">Удалить комментарий</a>
+                        <div class="delete-comment js-smart-btn" data-href="?do=delete_comment&id={{ $comment->id }}">
+                            <a href="#">Удалить комментарий</a>
+                            <span class="delete-confirm">
+                                <a class="conf-text">Вы уверены?</a>
+                                <a class="js-yes" href="#" data-ga="comment-delete">Да</a><a href="#" class="js-no">Нет</a>
+                            </span>
+                        </div>
                         @endif
                     </div>
                 </li>

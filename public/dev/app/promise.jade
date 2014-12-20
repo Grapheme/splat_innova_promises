@@ -25,6 +25,12 @@ block content
 				button.pr-btn
 					i.fi.icon-unsmile
 					span Отказаться
+				button(data-href="http://google.com").pr-btn.js-smart-btn
+					span.btn-text Удалить обещание
+					span.abs-hint Вы уверены?
+					span.fi-links
+						a(href="#").fi.icon-okey.fi-link.js-yes
+						a(href="#").fi.icon-no.fi-link.js-no
 				.promise-soc
 					span Расскажи об обещании:
 					ul.soc-ul
@@ -52,6 +58,12 @@ block content
 							a(href="#").delete-comment
 								i.fi.icon-cross
 						.text Блять, я очень рада что ты решил удлиннить свой член
+						.delete-comment.js-smart-btn
+							a(href="#") Удалить комментарий
+							span.delete-confirm
+								a.conf-text Вы уверены?
+								a(href="#").js-yes Да
+								a(href="#").js-no Нет
 	.leave-comment
 		.wrapper
 			.profile-photo(style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);")

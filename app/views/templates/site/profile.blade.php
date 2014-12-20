@@ -36,6 +36,7 @@
 
 
       <div class="wrapper">
+        @if ($msg == 'vkontakte' || $msg == 'odnoklassniki' || $msg == 'facebook')
         <div class="profile-message">
           <div class="icon">
             <div class="fi icon-smile"></div>
@@ -51,8 +52,9 @@
                 Вы успешно зарегистрировались через соц.сеть Facebook.<br/>
                   Пожалуйста, подтвердите ваши данные.
             @endif
+          </div>
         </div>
-        </div>
+        @endif
         <div class="profile-edit">
 
         <?
