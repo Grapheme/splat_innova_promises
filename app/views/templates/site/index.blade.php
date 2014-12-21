@@ -85,7 +85,7 @@
         </div>
         <div class="main-content wrapper">
           <div>
-            <div class="slide-title js-slide-title">Обещаю в выходные нарядить елку с сыном</div>
+            <div class="slide-title js-slide-title">Обещаю в выходные нарядить ёлку с сыном</div>
             <div class="slide-title js-slide-title">Я обещаю чаще улыбаться</div>
             <div class="slide-title js-slide-title">Обещаю прыгнуть с парашютом в январе</div>
             <div class="slide-title js-slide-title">Я обещаю начать бегать по утрам</div>
