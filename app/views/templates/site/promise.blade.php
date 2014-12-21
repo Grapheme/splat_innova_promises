@@ -1,8 +1,5 @@
 @extends(Helper::layout())
 
-<?php
-print_r($promise);
-?>
 @section('opengraph')
     <!-- Open Graph Meta Data -->
     <meta property="og:url" content="{{ URL::route('app.promise', $promise->id) }}">
