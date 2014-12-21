@@ -1,11 +1,13 @@
 @extends(Helper::layout())
 
-
+<?php
+print_r($promise);
+?>
 @section('opengraph')
     <!-- Open Graph Meta Data -->
     <meta property="og:url" content="{{ URL::route('app.promise', $promise->id) }}">
-    <meta property="og:title" content="Мое обещание">
-    <meta property="og:description" content="Я обещаю {{ $promise->promise_text }}">
+    <meta property="og:title" content="Я обещаю {{ $promise->promise_text }}">
+    <meta property="og:description" content="Каждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания.">
     <meta property="og:image" content="http://mypromises.ru/share_image.jpg">
 @stop
 
