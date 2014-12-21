@@ -6,7 +6,7 @@
     <meta property="og:url" content="{{ URL::route('app.promise', $promise->id) }}">
     <meta property="og:title" content="Мое обещание">
     <meta property="og:description" content="Я обещаю {{ $promise->promise_text }}">
-    <meta property="og:image" content="http://mypromises.ru/ogg_image.jpg">
+    <meta property="og:image" content="http://mypromises.ru/share_image.jpg">
 @stop
 
 
