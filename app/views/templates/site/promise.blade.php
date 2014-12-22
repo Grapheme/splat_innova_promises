@@ -97,8 +97,8 @@
                                 {{ trans_choice(':count год|:count года|:count лет', $promise_user->years_old, array(), 'ru') }}
                             </div>
                         @endif
-                        @if ($user->city)
-                            {{ $user->city }}
+                        @if ($promise_user->city)
+                            {{ $promise_user->city }}
                         @endif
                     </div>
                 </div>
