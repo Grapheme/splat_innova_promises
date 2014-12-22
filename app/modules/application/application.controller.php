@@ -2301,8 +2301,30 @@ class ApplicationController extends BaseController {
         $av_top_offset = 50; // отступ сверху
         $av_bottom_offset = 50; // отступ снизу
 
+        /**
+         * Создаем автар
+         */
         $av_img = ImageManipulation::make($avatar_path);
-        $av_img->resize($av_diameter, $av_diameter);
+        $av_width  = $av_img->width();
+        $av_height = $av_img->height();
+        /**
+         * Ресайз аватара по меньшей стороне
+         * Кроп середины аватара
+         */
+        if ($av_width >= $av_height) {
+
+            ## Альбом
+            $av_img->resize(null, $av_diameter);
+            $new_av_width = $av_img->width();
+            $av_img->crop($av_diameter, $av_diameter, ($new_av_width-$av_diameter)/2, 0);
+
+        } else {
+
+            ## Портрет
+            $av_img->resize($av_diameter, null);
+            $new_av_height = $av_img->height();
+            $av_img->crop($av_diameter, $av_diameter, 0, ($new_av_height-$av_diameter)/2);
+        }
 
         /**
          * Скругляем аватар - используем маску с альфаканалом
@@ -2317,7 +2339,7 @@ class ApplicationController extends BaseController {
          * Карточка обещания - создаем из источника, узнаем размеры
          */
         $img = ImageManipulation::make($source_path);
-        $img_width = $img->width();
+        $img_width  = $img->width();
         $img_height = $img->height();
         #Helper::d($img_width . " x " . $img_height);
 
