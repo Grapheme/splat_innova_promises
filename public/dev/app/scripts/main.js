@@ -273,7 +273,7 @@ SplatSite.Tooltips = {
 			top: pos.y,
 			left: pos.x
 		}).show();
-		$('.js-tooltip-body').text(text);
+		$('.js-tooltip-body').html(text);
 	},
 	close: function() {
 		$('.js-tooltip').removeClass('tooltip-right').hide();
