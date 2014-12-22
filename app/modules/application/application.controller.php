@@ -667,7 +667,7 @@ class ApplicationController extends BaseController {
         /**
          * Генерим картинку с текстом обещания для шеринга
          */
-        $this->genPromiseImage($promise->id, $promise_text, $promise->style_id, $this->user->avatar);
+        $this->genPromiseImage($promise->id, 'Я обещаю ' . trim($promise_text), $promise->style_id, $this->user->avatar);
 
 
         return Redirect::route('app.me', array(
