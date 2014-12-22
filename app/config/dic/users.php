@@ -177,6 +177,10 @@ return array(
 
     'first_line_modifier' => function($line, $dic, $dicval) {
 
+        echo "<!--";
+        Helper::d($dicval);
+        echo "-->";
+
         $prefix = '';
         if ($dicval->auth_method == 'facebook') {
             $prefix = '<i class="fa fa-facebook-square" style="color:#8498BD"></i>';
