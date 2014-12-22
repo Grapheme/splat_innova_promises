@@ -650,7 +650,10 @@ class ApplicationController extends BaseController {
             )
         );
 
-        if (@$this->user->notifications['promise_status']) {
+        /**
+         * Отсылаем уведомление на почту
+         */
+        if (@$this->user->notifications['promise_status'] && filter_var($this->user->email, FILTER_VALIDATE_EMAIL)) {
 
             $data = array(
                 'promise' => $promise,
@@ -725,7 +728,7 @@ class ApplicationController extends BaseController {
 
                     $promise->update_field('promise_fail', 1);
 
-                    if (@$this->user->notifications['promise_status']) {
+                    if (@$this->user->notifications['promise_status'] && filter_var($this->user->email, FILTER_VALIDATE_EMAIL)) {
 
                         $data = array('promise' => $promise,);
                         Mail::send('emails.promise_fail', $data, function ($message) use ($promise) {
@@ -743,7 +746,7 @@ class ApplicationController extends BaseController {
 
                     $promise->update_field('finished_at', date('Y-m-d H:i:s'));
 
-                    if (@$this->user->notifications['promise_status']) {
+                    if (@$this->user->notifications['promise_status'] && filter_var($this->user->email, FILTER_VALIDATE_EMAIL)) {
 
                         $data = array('promise' => $promise,);
                         Mail::send('emails.promise_success', $data, function ($message) use ($promise) {
@@ -856,9 +859,10 @@ class ApplicationController extends BaseController {
 
             if ($this->user->id != $promise->user_id) {
 
-                if (@$this->user->notifications['new_comment']) {
+                $comment_user = Dic::valueBySlugAndId('users', $promise->user_id, true);
 
-                    $comment_user = Dic::valueBySlugAndId('users', $promise->user_id, true);
+                if (@$this->user->notifications['new_comment'] && filter_var($comment_user->email, FILTER_VALIDATE_EMAIL)) {
+
                     $data = array('promise' => $promise, 'comment' => $comment, 'comment_user' => $comment_user,);
                     Mail::send('emails.comment_added', $data, function ($message) use ($promise, $comment_user) {
                         $from_email = Config::get('mail.from.address');
@@ -1051,7 +1055,7 @@ class ApplicationController extends BaseController {
                     /**
                      * Если новый пользователь зарегистрировался через email/пароль - отправим ему на почту данные для входа
                      */
-                    if ($data['auth_method'] == 'native') {
+                    if ($data['auth_method'] == 'native' && filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
 
                         $data['password'] = $new_password;
 
@@ -1930,15 +1934,18 @@ class ApplicationController extends BaseController {
         $data['user'] = $this->user;
 
         #/*
-        Mail::send('emails.send-invite', $data, function ($message) use ($data) {
+        if (filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
 
-            $message->from(Config::get('mail.from.address'), Config::get('mail.from.name'));
-            $message->subject($this->user->name . ' - Мои Обещания');
+            Mail::send('emails.send-invite', $data, function ($message) use ($data) {
 
-            #$email = Config::get('mail.feedback.address');
+                $message->from(Config::get('mail.from.address'), Config::get('mail.from.name'));
+                $message->subject($this->user->name . ' - Мои Обещания');
 
-            $message->to($data['email']);
-        });
+                #$email = Config::get('mail.feedback.address');
+
+                $message->to($data['email']);
+            });
+        }
         #*/
 
         $json_request['status'] = TRUE;
@@ -2052,23 +2059,27 @@ class ApplicationController extends BaseController {
         $token = md5('splat.' . $user->id . '.' . time());
         $user->update_field('restore_password_token', $token);
 
-        Mail::send('emails.restore_password_link_send', array('token' => $token), function ($message) use ($user) {
 
-            /*
-            $from_email = Dic::valueBySlugs('options', 'from_email');
-            $from_email = $from_email->name != '' ? $from_email->name : 'support@grapheme.ru';
-            $from_name = Dic::valueBySlugs('options', 'from_name');
-            $from_name = $from_name->name != '' ? $from_name->name : 'No-reply';
-            */
+        if (filter_var($user->email, FILTER_VALIDATE_EMAIL)) {
 
-            $from_email = Config::get('mail.from.address');
-            $from_name = Config::get('mail.from.name');
+            Mail::send('emails.restore_password_link_send', array('token' => $token), function ($message) use ($user) {
 
-            $message->from($from_email, $from_name);
-            $message->subject('Запрос на сброс пароля');
+                /*
+                $from_email = Dic::valueBySlugs('options', 'from_email');
+                $from_email = $from_email->name != '' ? $from_email->name : 'support@grapheme.ru';
+                $from_name = Dic::valueBySlugs('options', 'from_name');
+                $from_name = $from_name->name != '' ? $from_name->name : 'No-reply';
+                */
 
-            $message->to($user->email);
-        });
+                $from_email = Config::get('mail.from.address');
+                $from_name = Config::get('mail.from.name');
+
+                $message->from($from_email, $from_name);
+                $message->subject('Запрос на сброс пароля');
+
+                $message->to($user->email);
+            });
+        }
 
         if (Request::ajax()) {
             $json_request['status'] = TRUE;
@@ -2138,24 +2149,26 @@ class ApplicationController extends BaseController {
         $this->postUserLogout();
 
 
-        Mail::send('emails.restore_password_success', array('password' => $password, 'user' => $user), function ($message) use ($user) {
+        if (filter_var($user->email, FILTER_VALIDATE_EMAIL)) {
 
-            /*
-            $from_email = Dic::valueBySlugs('options', 'from_email');
-            $from_email = $from_email->name != '' ? $from_email->name : 'support@grapheme.ru';
-            $from_name = Dic::valueBySlugs('options', 'from_name');
-            $from_name = $from_name->name != '' ? $from_name->name : 'No-reply';
-            */
+            Mail::send('emails.restore_password_success', array('password' => $password, 'user' => $user), function ($message) use ($user) {
 
-            $from_email = Config::get('mail.from.address');
-            $from_name = Config::get('mail.from.name');
+                /*
+                $from_email = Dic::valueBySlugs('options', 'from_email');
+                $from_email = $from_email->name != '' ? $from_email->name : 'support@grapheme.ru';
+                $from_name = Dic::valueBySlugs('options', 'from_name');
+                $from_name = $from_name->name != '' ? $from_name->name : 'No-reply';
+                */
 
-            $message->from($from_email, $from_name);
-            $message->subject('Пароль успешно изменен');
+                $from_email = Config::get('mail.from.address');
+                $from_name = Config::get('mail.from.name');
 
-            $message->to($user->email);
-        });
+                $message->from($from_email, $from_name);
+                $message->subject('Пароль успешно изменен');
 
+                $message->to($user->email);
+            });
+        }
 
         return View::make(Helper::layout('restore_password_success'), compact('user', 'token'));
     }
