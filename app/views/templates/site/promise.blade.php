@@ -92,10 +92,13 @@
                 <div class="profile-info">
                     <div class="info-cont">
                         <div class="name"><span>{{ $promise_user->name }}</span></div>
-                        @if ($promise_user->years_old)
+                        @if ($promise_user->years_old && 0)
                             <div class="age">
                                 {{ trans_choice(':count год|:count года|:count лет', $promise_user->years_old, array(), 'ru') }}
                             </div>
+                        @endif
+                        @if ($user->city)
+                            {{ $user->city }}
                         @endif
                     </div>
                 </div>
