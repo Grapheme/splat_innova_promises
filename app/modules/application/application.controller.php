@@ -760,16 +760,20 @@ class ApplicationController extends BaseController {
 
                     return Redirect::route('app.promise', $id);
 
-                } elseif (Input::get('delete')) {
-
-                    /**
-                     * Вот тут не хватает API для удаления объектов
-                     */
-                    #$promise->full_delete();
-                    $promise->delete();
-                    return Redirect::route('app.me');
                 }
+
             }
+
+            if (Input::get('delete')) {
+
+                /**
+                 * Вот тут не хватает API для удаления объектов
+                 */
+                #$promise->full_delete();
+                $promise->delete();
+                return Redirect::route('app.me');
+            }
+
         } else {
 
             $promise_user = Dic::valueBySlugAndId('users', $promise->user_id);

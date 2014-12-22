@@ -139,6 +139,10 @@
 
                     <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-okey"></i><span>Выполнено</span></a>
                     <a href="?fail=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'failure');"><i class="fi icon-no"></i><span>Отказаться</span></a>
+
+                @endif
+
+                @if (is_object($auth_user) && $auth_user->id == $promise_user->id)
                     <button data-href="?delete=1" class="pr-btn js-smart-btn">
                         <span class="btn-text">Удалить обещание</span>
                         <span class="abs-hint">Вы уверены?</span>
@@ -147,7 +151,6 @@
                             <a href="#" class="fi icon-no fi-link js-no"></a>
                         </span>
                     </button>
-                    
                 @endif
 
                 <div class="promise-soc"><span>Расскажи об обещании:</span>
