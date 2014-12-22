@@ -227,21 +227,44 @@ SplatSite.ShowFriends = function() {
 SplatSite.Tooltips = {
 	init: function() {
 		var self = this;
+		var close_allow = true;
+		var close_timeout = false;
 		var html = '<div class="js-tooltip"><div class="js-tooltip-body"></div></div>';
 		$('body').append(html);
 		$('[data-tooltip]').on('mouseover', function(){
+			clearTimeout(close_timeout);
 			var text = $(this).attr('data-tooltip');
 			var elem = $(this);
 			self.show(text, elem);
 		});
 		$('[data-tooltip]').on('mouseout', function(){
-			self.close();
+			close_timeout = setTimeout(function(){
+				if(close_allow) {
+					self.close();
+				}
+			}, 5);
+		});
+		$('.js-tooltip').on('mouseover', function(){
+			clearTimeout(close_timeout);
+			close_allow = false;
+		});
+		$('.js-tooltip').on('mouseout', function(){
+			clearTimeout(close_timeout);
+			close_allow = true;
+			close_timeout = setTimeout(function(){
+				if(close_allow) {
+					self.close();
+				}
+			}, 5);
 		});
 	},
 	show: function(text, elem) {
 		var pos = {};
 		pos.x = elem.offset().left + elem.width() + 20;
 		pos.y = elem.offset().top + elem.height()/2;
+		if(elem.attr('data-tooltip-center') == 'on') {
+			pos.x = elem.offset().left + elem.width()/2;
+		} else
 		if(pos.x + $('.js-tooltip').width() > $(window).width()) {
 			pos.x = elem.offset().left - $('.js-tooltip').width() - 20;
 			$('.js-tooltip').addClass('tooltip-right');
@@ -385,6 +408,7 @@ $(function(){
 	$('.js-mask-time').inputmask('H:i', {"placeholder": "чч:мм"});
 	if($('.js-mask-time').val() == '') $('.js-mask-time').val('12:00');
 	$('.js-mask-date').inputmask('d.m.y', {"placeholder": "дд.мм.гггг"});
+	$('.js-future-date').inputmask('dd.mm.yyyy', {"placeholder": "дд.мм.гггг", yearrange: { minyear: new Date().getFullYear(), maxyear: 2099 }});
 
 	$(document).keypress(function(e) {
 	    if(e.which == 13) {

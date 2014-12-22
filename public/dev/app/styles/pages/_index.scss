@@ -97,6 +97,7 @@
 	position: relative;
 	z-index: 2;
 	background: #eeeeee;
+	padding: 95px 0 70px;
 
 	.promises-fotorama {
 		position: absolute;
@@ -143,9 +144,9 @@
 
 	.promises-cloud {
 		list-style: none;
-		padding: 95px 0 70px;
 		width: 1000px;
 		margin: 0 auto;
+		padding: 0;
 
 		li {
 			height: 50px;
@@ -155,6 +156,60 @@
 			font-weight: 100;
 			text-transform: uppercase;
 			padding: 0 10px;
+		}
+	}
+
+	.promise-week {
+		position: relative;
+		z-index: 1;
+		height: 80px;
+		line-height: 80px;
+		padding: 0 30px;
+		background: #b8f1f9;
+		margin-top: 20px;
+
+		.week-inline {
+			display: inline-block;
+			vertical-align: middle;
+			line-height: normal;
+			margin-right: 15px;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+
+		.left-word {
+			text-transform: uppercase;
+			font-size: 12px;
+		}
+
+		.logo {
+			width: 100px;
+			height: 30px;
+			background-image: url(../images/promo-logo.png);
+			background-size: 100% auto;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+
+		.profile-photo {
+			height: 50px;
+			width: 50px;
+		}
+
+		.promise-info {
+			.title {
+				font-size: 30px;
+				font-weight: 100;
+				text-transform: uppercase;
+			}
+
+			.name {
+				font-size: 16px;
+				font-weight: 300;
+				margin-top: 2px;
+			}
 		}
 	}
 }

@@ -69,7 +69,7 @@
                 <div class="input-cont">
                   <!-- <span class="bet-text">часам</span> -->
                   <div class="input-div date-div">
-                    <input name="limit_date" class="date-input input-class js-mask-date">
+                    <input name="limit_date" class="date-input input-class js-future-date">
                   </div>
                   <span class="bet-text"></span>
                   <div class="input-div time-div">
