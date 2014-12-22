@@ -1198,9 +1198,9 @@ class ApplicationController extends BaseController {
                             if (isset($user->full_social_info['country']) && isset($user->full_social_info['country']['title'])) {
                                 $user->country = $user->full_social_info['country']['title'];
                             }
-                            if (isset($user->full_social_info['city']) && isset($user->full_social_info['city']['title'])) {
-                                $user->city = $user->full_social_info['city']['title'];
-                            }
+                            #if (isset($user->full_social_info['city']) && isset($user->full_social_info['city']['title'])) {
+                            #    $user->city = $user->full_social_info['city']['title'];
+                            #}
                             if (isset($user->full_social_info['sex']) && $user->full_social_info['sex']) {
                                 $user->sex = $user->full_social_info['sex'];
                             }
@@ -1224,9 +1224,9 @@ class ApplicationController extends BaseController {
                             if (isset($user->full_social_info['location']['countryName']) && isset($user->full_social_info['location']['countryName'])) {
                                 $user->country = $user->full_social_info['location']['countryName'];
                             }
-                            if (isset($user->full_social_info['location']['city']) && isset($user->full_social_info['location']['city'])) {
-                                $user->city = $user->full_social_info['location']['city'];
-                            }
+                            #if (isset($user->full_social_info['location']['city']) && isset($user->full_social_info['location']['city'])) {
+                            #    $user->city = $user->full_social_info['location']['city'];
+                            #}
                             /*
                             if (isset($user->full_social_info['age']) && $user->full_social_info['age']) {
                                 $user->years_old = $user->full_social_info['age'];
@@ -1244,9 +1244,9 @@ class ApplicationController extends BaseController {
                             if (isset($user->full_social_info['gender']) && $user->full_social_info['gender']) {
                                 $user->sex = $user->full_social_info['gender'] == 'мужской' ? 2 : 1;
                             }
-                            if (isset($user->full_social_info['hometown']) && isset($user->full_social_info['hometown']['name'])) {
-                                $user->city = $user->full_social_info['hometown']['name'];
-                            }
+                            #if (isset($user->full_social_info['hometown']) && isset($user->full_social_info['hometown']['name'])) {
+                            #    $user->city = $user->full_social_info['hometown']['name'];
+                            #}
                             if (isset($user->full_social_info['birthday']) && $user->full_social_info['birthday']) {
                                 if (preg_match('~\d{2}\/\d{2}\/\d{4}~is', $user->full_social_info['birthday'])) {
                                     $stamp = (new \Carbon\Carbon())->createFromFormat('m/d/Y', $user->full_social_info['birthday']);
