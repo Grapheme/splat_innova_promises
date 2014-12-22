@@ -13,3 +13,4 @@
 
 Artisan::add(new helperr);
 Artisan::add(new CronPromises);
+Artisan::add(new ActivateNotifications);
