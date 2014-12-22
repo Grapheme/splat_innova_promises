@@ -91,8 +91,13 @@
                 <input name="email" value="{{ $user->email }}" placeholder="Укажите e-mail" class="us-input">
               </div>
               <div class="input-hint">Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.</div>
+              {{--
               <div class="input-cont">
                 <input name="bdate" value="{{ $user->bdate }}" placeholder="Ваша дата рождения" class="us-input js-mask-date">
+              </div>
+              --}}
+              <div class="input-cont">
+                <input name="city" value="{{ $user->city }}" placeholder="Ваш город" class="us-input js-mask-date">
               </div>
 
 

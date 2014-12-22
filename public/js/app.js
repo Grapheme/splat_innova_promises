@@ -802,13 +802,15 @@ $("#profile_form").validate({
     rules: {
         'name': { required: true },
         'email': { required: true, email: true },
-        'bdate': { customDate: true },
+        //'bdate': { customDate: true },
+        'city': { required: true },
         'confirmation': { required: true }
     },
     messages: {
         'name': '',
         'email': '',
-        'bdate': '',
+        //'bdate': '',
+        'city': '',
         'confirmation': 'Необходимо ознакомиться с правилами'
     },
     errorClass: "inp-error",

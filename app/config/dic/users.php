@@ -35,6 +35,11 @@ return array(
                 'type' => 'text',
                 'default' => '',
             ),
+            'city' => array(
+                'title' => 'Город',
+                'type' => 'text',
+                'default' => '',
+            ),
             'avatar' => array(
                 'title' => 'Фотография пользователя',
                 'type' => 'text',
