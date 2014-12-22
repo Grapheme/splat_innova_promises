@@ -107,7 +107,7 @@ SplatSite.index = function() {
 		var fsets = {
 			fit: 'cover',
 			width: '100%',
-			height: '600px',
+			height: '560px',
 			autoplay: 6000,
 			transitionduration: 1000,
 			transition: 'dissolve',
