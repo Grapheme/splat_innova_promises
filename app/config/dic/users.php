@@ -178,7 +178,7 @@ return array(
     'first_line_modifier' => function($line, $dic, $dicval) {
 
         echo "<!--";
-        Helper::d($dicval);
+        Helper::ta($dicval);
         echo "-->";
 
         $prefix = '';
