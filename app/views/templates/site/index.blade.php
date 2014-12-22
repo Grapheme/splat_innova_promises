@@ -139,6 +139,17 @@
           <li style="color: #07cbcc;">Скину 5кг или научусь любить себя с ними</li>
           <li style="color: #b7b7b9;">Сделать пожертвование в детский дом</li>
         </ul>
+        <div class="wrapper">
+          <div data-tooltip="Команда INNOVA обещает, что каждую неделю мы будем выбирать одно выполненное обещание и награждать того, кто сдержал свое слово призом-сюрпризом." data-tooltip-center="on" class="promise-week">
+            <div class="week-inline left-word">Выбор</div>
+            <div class="week-inline logo"></div>
+            <div style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg);" class="week-inline profile-photo"></div>
+            <div class="week-inline promise-info">
+              <div class="title">Сделать пожертвование в детский дом</div>
+              <div class="name">Николай Дроздов, Санкт-Петербург</div>
+            </div>
+          </div>
+        </div>
       </div>
 
 @stop
