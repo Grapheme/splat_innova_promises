@@ -2314,14 +2314,18 @@ class ApplicationController extends BaseController {
         if ($av_width >= $av_height) {
 
             ## Альбом
-            $av_img->resize(null, $av_diameter);
+            $av_img->resize(null, $av_diameter, function ($constraint) {
+                $constraint->aspectRatio();
+            });
             $new_av_width = $av_img->width();
             $av_img->crop($av_diameter, $av_diameter, ($new_av_width-$av_diameter)/2, 0);
 
         } else {
 
             ## Портрет
-            $av_img->resize($av_diameter, null);
+            $av_img->resize($av_diameter, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
             $new_av_height = $av_img->height();
             $av_img->crop($av_diameter, $av_diameter, 0, ($new_av_height-$av_diameter)/2);
         }
