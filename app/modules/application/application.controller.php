@@ -53,6 +53,10 @@ class ApplicationController extends BaseController {
 
             #Route::any('/ajax/feedback', array('as' => 'ajax.feedback', 'uses' => __CLASS__.'@postFeedback'));
             #Route::any('/ajax/search', array('as' => 'ajax.search', 'uses' => __CLASS__.'@postSearch'));
+
+
+            Route::get('/test/gen_image', array('as' => 'app.test.gen_image', 'uses' => __CLASS__.'@getTestGenImage'));
+
         });
     }
 
@@ -659,6 +663,12 @@ class ApplicationController extends BaseController {
          * Очищаем сохраненный текст обещания в сессии
          */
         unset($_SESSION['promise_text']);
+
+        /**
+         * Генерим картинку с текстом обещания для шеринга
+         */
+        $this->genPromiseImage($promise->id, $promise->promise_text, $promise->style_id, $this->user->avatar);
+
 
         return Redirect::route('app.me', array(
                 #'new_promise' => 1
@@ -2217,6 +2227,188 @@ class ApplicationController extends BaseController {
     public function getAboutPage() {
 
         return View::make(Helper::layout('about'), compact('token'));
+    }
+
+    public function getTestGenImage() {
+
+        $promise_id = 1;
+        $promise_text = 'Я обещаю скинуть 5кг или научусь любить себя с ними';
+        $promise_type = 'blue';
+        $avatar_path = public_path('uploads/avatar/ZZ0A4B96A6s.jpg');
+        $dest_url = $this->genPromiseImage($promise_id, $promise_text, $promise_type, $avatar_path);
+
+        return '<img src="' . $dest_url . '" />';
+    }
+
+    private function genPromiseImage($promise_id, $promise_text, $promise_type, $avatar_path) {
+
+        #$promise_text = 'Я обещаю скинуть 5кг или научусь любить себя с ними';
+        $font_size = 30;
+        $font_color = '#ffffff';
+
+        ## Способ выравнивания текста
+        #$align = "left";
+        $align = "center";
+        #$align = "right";
+
+        ## Вывод отладочной информации при форматировании текста вместо изображения
+        $debug_text_format = 0;
+
+        $font_path = public_path('uploads/webfont.ttf');
+
+        #$avatar_path = public_path('uploads/avatar/ZZ0A4B96A6s.jpg');
+        #$avatar_path = 'http://cs408619.vk.me/v408619847/4806/ZZ0A4B96A6s.jpg';
+        if (mb_substr($avatar_path, 0, 4) != 'http')
+            $avatar_path = public_path($avatar_path);
+
+        if (!isset($promise_type) || !$promise_type)
+            $promise_type = 'blue';
+        $source_path = public_path('uploads/card_' . $promise_type . '.jpg');
+
+        $dest_url = 'uploads/cards/' . @(int)$promise_id . '.jpg';
+        $dest_path = public_path($dest_url);
+        $dest_url = '/' . $dest_url;
+
+        /**
+         * Подготавливаем аватар
+         */
+        $av_diameter = 140; // диаметр аватара
+        $av_top_offset = 50; // отступ сверху
+        $av_bottom_offset = 50; // отступ снизу
+
+        $av_img = ImageManipulation::make($avatar_path);
+        $av_img->resize($av_diameter, $av_diameter);
+
+        /**
+         * Скругляем аватар - используем маску с альфаканалом
+         */
+        $circle = ImageManipulation::canvas($av_diameter, $av_diameter);
+        $circle->circle($av_diameter, $av_diameter/2, $av_diameter/2, function ($draw) {
+            $draw->background('#0000ff');
+        });
+        $av_img->mask($circle, true);
+
+        /**
+         * Карточка обещания - создаем из источника, узнаем размеры
+         */
+        $img = ImageManipulation::make($source_path);
+        $img_width = $img->width();
+        $img_height = $img->height();
+        #Helper::d($img_width . " x " . $img_height);
+
+        /**
+         * Вставляем аватар
+         */
+        $img->insert($av_img, 'top', 0, $av_top_offset);
+        $av_img->destroy();
+
+        /**
+         * Функция-замыкание, для вывода текста
+         */
+        $img_text_closure = function($font) use ($font_path, $font_size, $font_color) {
+            $font->file($font_path);
+            $font->size($font_size);
+            $font->color($font_color);
+            $font->align('center');
+            $font->valign('top');
+            //$font->angle(45);
+        };
+
+        /**
+         * Подготавливаем текст - делаем переносы, чтобы текст поместился в отведенные ему рамки
+         */
+        ## Поправочный коэффициент, непонятно почему его приходится вводить..
+        ## Видимо imagettfbbox считает ширину получаемого блока с ошибкой.
+        $text_format_coeff = 1.0;
+        $width_text = $img_width * $text_format_coeff;
+        #$width_text = 1000;
+
+        if ($debug_text_format) {
+            Helper::d('Real image size: ' . $img_width . " x " . $img_height);
+            Helper::d('Width limit = ' . $width_text . ' (' . $img_width . ' * ' . $text_format_coeff . ')');
+        }
+
+        $arr = explode(' ', $promise_text);
+        $ret = '';
+        // Перебираем наш массив слов
+        foreach($arr as $word) {
+
+            // Временная строка, добавляем в нее слово
+            $tmp_string = trim($ret . ' ' . $word);
+
+            // Получение параметров рамки обрамляющей текст, т.е. размер временной строки
+            $textbox = imagettfbbox($font_size, 0, $font_path, $tmp_string);
+
+            if ($debug_text_format)
+                Helper::d($textbox[2] . ' >= ' . $width_text . ' ? ' . ($textbox[2] >= $width_text ? 'yes' : 'no') . '<br/>' . $tmp_string);
+
+            // Если временная строка не укладывается в нужные нам границы, то делаем перенос строки, иначе добавляем еще одно слово
+            if($textbox[2] >= $width_text)
+                $ret .= ($ret == "" ? "" : "\n") . $word;
+            else
+                $ret .= ($ret == "" ? "" : " ") . $word;
+        }
+
+        if ($debug_text_format)
+            Helper::dd($ret);
+
+        $formatted_promise_text = $ret;
+
+
+
+        ## Выравнивание
+        if($align=="left") {
+
+            // Накладываем возращенный многострочный текст на изображение, отступим сверху и слева по 50px
+            #imagettftext($im, $font_size ,0 , 50, 50, $black, $font, $ret);
+            $img->text($formatted_promise_text, $img_width/2, $img_height/2, $img_text_closure);
+
+        } else {
+
+            // Разбиваем снова на массив строк уже подготовленный текст
+            $arr = explode("\n", $formatted_promise_text);
+
+            // Расчетная высота смещения новой строки
+            $height_tmp = $av_top_offset + $av_diameter + $av_bottom_offset; # высота аватара + отступ (50px)
+
+            //Выводить будем построчно с нужным смещением относительно левой границы
+            foreach($arr as $str) {
+                // Размер строки
+                $testbox = imagettfbbox($font_size, 0, $font_path, $str);
+
+                /*
+                // Рассчитываем смещение
+                if($align == 'center')
+                    $left_x = round(($width_text - ($testbox[2] - $testbox[0]))/2);
+                else
+                    $left_x = round($width_text - ($testbox[2] - $testbox[0]));
+                */
+
+                // Накладываем текст на картинку с учетом смещений
+                #imagettftext($im, $font_size, 0, 50 + $left_x, 50 + $height_tmp, $black, $font_path, $str); // 50 - это отступы от края
+                $img->text($str, $img_width/2, $height_tmp, function($font) use ($font_path, $font_size, $font_color) {
+                    $font->file($font_path);
+                    $font->size($font_size);
+                    $font->color($font_color);
+                    $font->align('center');
+                    $font->valign('top');
+                    //$font->angle(45);
+                });
+
+                // Смещение высоты для следующей строки
+                $height_tmp = $height_tmp + $font_size * 1.5;
+            }
+        }
+
+        /**
+         * Вставляем текст
+         */
+        #$img->text($formatted_promise_text, $img_width/2, $img_height/2, $img_text_closure);
+        $img->save($dest_path);
+        $img->destroy();
+
+        #return '<img src="' . $dest_url . '" />';
+        return $dest_url;
     }
 
 }
