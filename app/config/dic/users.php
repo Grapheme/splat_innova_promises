@@ -177,6 +177,8 @@ return array(
 
     'first_line_modifier' => function($line, $dic, $dicval) {
 
+        $dicval->extract(1);
+
         echo "<!--";
         Helper::ta($dicval);
         echo "-->";
