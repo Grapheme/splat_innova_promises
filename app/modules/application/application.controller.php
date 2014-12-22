@@ -2318,7 +2318,7 @@ class ApplicationController extends BaseController {
                 $constraint->aspectRatio();
             });
             $new_av_width = $av_img->width();
-            $av_img->crop($av_diameter, $av_diameter, ($new_av_width-$av_diameter)/2, 0);
+            $av_img->crop($av_diameter, $av_diameter, ceil(($new_av_width-$av_diameter)/2), 0);
 
         } else {
 
@@ -2327,7 +2327,7 @@ class ApplicationController extends BaseController {
                 $constraint->aspectRatio();
             });
             $new_av_height = $av_img->height();
-            $av_img->crop($av_diameter, $av_diameter, 0, ($new_av_height-$av_diameter)/2);
+            $av_img->crop($av_diameter, $av_diameter, 0, ceil(($new_av_height-$av_diameter)/2));
         }
 
         /**
