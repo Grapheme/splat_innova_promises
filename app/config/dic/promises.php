@@ -102,6 +102,14 @@ return array(
             */
         },
 
+        /**
+         * Вызывается в конце метода destroy, после удаления записи словаря
+         */
+        'after_destroy' => function ($dic, $dicval) {
+
+            @unlink(public_path('uploads/cards/' . $dicval->id . '.jpg'));
+        },
+
     ),
 
     #/*
