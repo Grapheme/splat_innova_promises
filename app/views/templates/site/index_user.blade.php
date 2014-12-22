@@ -127,10 +127,13 @@
             <div class="profile-info">
               <div class="info-cont">
                 <div class="name"><span>{{ $user->name }}</span><a href="{{ URL::route('app.profile') }}" class="us-link">Редактировать</a></div>
-                @if ($user->years_old)
+                @if ($user->years_old && 0)
                 <div class="age">
                     {{ trans_choice(':count год|:count года|:count лет', $user->years_old, array(), 'ru') }}
                 </div>
+                @endif
+                @if ($user->city)
+                    {{ $user->city }}
                 @endif
               </div>
             </div>
