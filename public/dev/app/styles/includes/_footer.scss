@@ -19,6 +19,10 @@
 		font-size: 13px;
 		color: #fff;
 
+		&:nth-of-type(3) {
+			text-align: right;
+		}
+
 		&.left-logo {
 			width: 20%;
 
