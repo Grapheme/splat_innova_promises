@@ -517,6 +517,7 @@ class ApplicationController extends BaseController {
         $name = Input::get('name');
         $email = Input::get('email');
         $bdate = Input::get('bdate');
+        $city = Input::get('city');
 
         $notifications = Input::get('notifications');
         #Helper::dd($notifications);
@@ -534,8 +535,12 @@ class ApplicationController extends BaseController {
             $user->update_field('email', $email);
         }
 
-        if ($bdate) {
+        if (@$bdate) {
             $user->update_field('bdate', $bdate);
+        }
+
+        if ($city) {
+            $user->update_field('city', $city);
         }
 
         $user->update_field('notifications', json_encode($notifications));
@@ -1447,6 +1452,7 @@ class ApplicationController extends BaseController {
             $user['bdate'] = $birthday->format('d.m.Y');
         }
         $user['avatar'] = @$user['pic_3'];
+        $user['city'] = @$user['location']['city'];
         $user['auth_method'] = 'odnoklassniki';
 
         $check = $this->checkUserData($user, true);
@@ -1590,6 +1596,7 @@ class ApplicationController extends BaseController {
 
         $user['uid'] = @$user['id'];
         $user['avatar'] = @$user['photo_200'];
+        $user['city'] = @$user['city']['title'];
 
         #Helper::d($url);
         #Helper::dd($user);
@@ -1768,6 +1775,7 @@ class ApplicationController extends BaseController {
 
         $user['picture'] = @$avatar;
         $user['avatar'] = @$avatar['data']['url'];
+        $user['city'] = @$user['hometown']['name'];
         $user['identity'] = @$user['link'];
         $user['auth_method'] = 'facebook';
 

@@ -97,7 +97,7 @@
               </div>
               --}}
               <div class="input-cont">
-                <input name="city" value="{{ $user->city }}" placeholder="Ваш город" class="us-input js-mask-date">
+                <input name="city" value="{{ $user->city }}" placeholder="Ваш город" class="us-input">
               </div>
 
 
