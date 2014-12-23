@@ -23,6 +23,18 @@
             </ul>
             <p>Поделитесь обещанием в соц. сетях, и друзья смогут поддержать вас - проверить крепость вашего слова, порадоваться успехам или вдохновиться вашим примером.</p>
             <p>Обещание можно оставить невидимым для других пользователей <a href="http://MyPromises.ru">www.MyPromises.ru</a> – достаточно изменить настройки приватности в своем профиле. А чтобы вы не забыли о сроках выполнения данных обещаний, сервис будет периодически напоминать вам о них по email.</p>
+            <br/>
+            <div class="fotorama" data-auto="true" data-arrows="true" data-click="true" data-swipe="false" data-nav="thumbs" data-fit="scaledown">
+              <img src="theme/images/about/1.jpg">
+              <img src="theme/images/about/2.jpg">
+              <img src="theme/images/about/3.jpg">
+              <img src="theme/images/about/4.jpg">
+              <img src="theme/images/about/5.jpg">
+              <img src="theme/images/about/6.jpg">
+              <img src="theme/images/about/7.jpg">
+              <img src="theme/images/about/8.jpg">
+            </div>
+            <br/><br/>
             <p>Что обещают ваши друзья? Какие самые популярные обещания в этом году у россиян? Чье слово крепче, чем любая валюта? – на все эти вопросы ответит MyPromises.</p>
             <p>Сдерживая свои обещания, мы становимся сильнее и обретаем уверенность. Начните прямо сейчас — пообещайте стать лучше в Новом году. </p>
             <p class="normal-autor">Мы обещаем, вам понравится!<br>MyPromises.ru </p>
