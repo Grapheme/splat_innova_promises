@@ -2283,7 +2283,8 @@ class ApplicationController extends BaseController {
 
         #$avatar_path = public_path('uploads/avatar/ZZ0A4B96A6s.jpg');
         #$avatar_path = 'http://cs408619.vk.me/v408619847/4806/ZZ0A4B96A6s.jpg';
-        if (!$avatar_path)
+        $avatar_path = trim($avatar_path);
+        if (!$avatar_path || $avatar_path == '')
             $avatar_path = public_path('theme/images/man.png');
         elseif (mb_substr($avatar_path, 0, 4) != 'http')
             $avatar_path = public_path($avatar_path);
