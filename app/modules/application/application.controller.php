@@ -1131,7 +1131,7 @@ class ApplicationController extends BaseController {
             || (isset($_COOKIE['user_token']) && !isset($_SESSION['user_token']))
             || (!isset($_COOKIE['user_token']) && isset($_SESSION['user_token']))
             || (isset($_COOKIE['user_token']) && isset($_SESSION['user_token']) && $_COOKIE['user_token'] != $_SESSION['user_token'])
-            || !$_SESSION['user_token']
+            || !@$_SESSION['user_token']
         ) {
 
             $this->userLogout(0);
