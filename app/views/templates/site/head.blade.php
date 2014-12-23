@@ -15,7 +15,6 @@ $fb_friends_limit = 99;
         <title>@yield('title')</title>
         <meta name="description" content="@yield('description')">
         <meta name="keywords" content="@yield('keywords')">
-        <meta name="viewport" content="width=device-width">
 
         @section('opengraph')
         <!-- Open Graph Meta Data -->
