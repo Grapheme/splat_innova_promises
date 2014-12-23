@@ -2250,7 +2250,7 @@ class ApplicationController extends BaseController {
             . '_SESSION\'s ' . "\n" . @print_r($_SESSION, 1) . "\n\n"
         ;
 
-        file_put_contents(storage_path('logs/' . time() . '_' . rand(999999, 9999999)), $log_line);
+        #file_put_contents(storage_path('logs/' . time() . '_' . rand(999999, 9999999)), $log_line);
 
         setcookie('user_token', '', 0, '/');
         unset($_SESSION['user_token']);
