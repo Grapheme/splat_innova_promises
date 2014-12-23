@@ -29,7 +29,7 @@
             <link rel="stylesheet" href="//fotorama.s3.amazonaws.com/c/style.css?20141223045122" />
             <link  href="//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.2/fotorama.css" rel="stylesheet">
             -->
-            <div class="fotorama" data-auto="true" data-arrows="true" data-click="true" data-swipe="false" data-nav="thumbs">
+            <div class="fotorama" data-auto="true" data-arrows="true" data-click="true" data-swipe="false" data-nav="thumbs" data-fit="scaledown">
               <img src="theme/images/about/1.jpg">
               <img src="theme/images/about/2.jpg">
               <img src="theme/images/about/3.jpg">
