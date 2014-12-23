@@ -1134,7 +1134,7 @@ class ApplicationController extends BaseController {
             || !$_SESSION['user_token']
         ) {
 
-            $this->userLogout(1);
+            $this->userLogout(0);
             return NULL;
 
         }
