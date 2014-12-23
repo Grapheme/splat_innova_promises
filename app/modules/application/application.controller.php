@@ -2246,6 +2246,8 @@ class ApplicationController extends BaseController {
         $log_line = ''
             . '_COOKIE[user_token] = ' . @$_COOKIE['user_token'] . "\n\n"
             . '_SESSION[user_token] = ' . @$_SESSION['user_token'] . "\n\n"
+            . '_COOKIE\'s ' . "\n" . @print_r($_COOKIE, 1) . "\n\n"
+            . '_SESSION\'s ' . "\n" . @print_r($_SESSION, 1) . "\n\n"
         ;
 
         file_put_contents(storage_path('logs/' . time() . '_' . rand(999999, 9999999)), $log_line);
