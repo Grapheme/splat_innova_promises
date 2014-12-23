@@ -19,7 +19,7 @@
             <ul class="normal-ul">
               <li>сформулируйте намерение, </li>
               <li>установите срок и </li>
-              <li>честно зафиксируйте результат, когда наступит dead-line. </li>
+              <li>честно зафиксируйте результат до наступления dead-line. </li>
             </ul>
             <p>Поделитесь обещанием в соц. сетях, и друзья смогут поддержать вас - проверить крепость вашего слова, порадоваться успехам или вдохновиться вашим примером.</p>
             <p>Обещание можно оставить невидимым для других пользователей <a href="http://MyPromises.ru">www.MyPromises.ru</a> – достаточно изменить настройки приватности в своем профиле. А чтобы вы не забыли о сроках выполнения данных обещаний, сервис будет периодически напоминать вам о них по email.</p>
@@ -30,8 +30,7 @@
               <img src="theme/images/about/3.jpg">
               <img src="theme/images/about/4.jpg">
               <img src="theme/images/about/5.jpg">
-              <img src="theme/images/about/6.jpg">
-              <img src="theme/images/about/7.jpg">
+              <img src="theme/images/about/6.png">
               <img src="theme/images/about/8.jpg">
             </div>
             <br/><br/>
