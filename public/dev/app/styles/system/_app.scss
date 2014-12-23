@@ -90,6 +90,7 @@ html, body {
 .main-wrapper {
   min-height: 100%;
   margin-bottom: -100px; 
+  overflow: hidden;
 }
 
 .main-wrapper:after {
