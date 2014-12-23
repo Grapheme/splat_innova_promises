@@ -1126,6 +1126,7 @@ class ApplicationController extends BaseController {
 
     private function auth() {
 
+        /*
         if (
             0
             || (isset($_COOKIE['user_token']) && (!isset($_SESSION['user_token']) || !$_SESSION['user_token']))
@@ -1137,6 +1138,7 @@ class ApplicationController extends BaseController {
             return NULL;
 
         }
+        */
 
         if (!@$_SESSION['user_token'])
             return NULL;
@@ -2211,7 +2213,7 @@ class ApplicationController extends BaseController {
 
     private function setUserToken($token, $time = 31536000) {
 
-        setcookie('user_token', $token, time()+$time, '/');
+        #setcookie('user_token', $token, time()+$time, '/');
         $_SESSION['user_token'] = $token;
         return '1';
     }
