@@ -1131,9 +1131,10 @@ class ApplicationController extends BaseController {
             || (isset($_COOKIE['user_token']) && !isset($_SESSION['user_token']))
             || (!isset($_COOKIE['user_token']) && isset($_SESSION['user_token']))
             || (isset($_COOKIE['user_token']) && isset($_SESSION['user_token']) && $_COOKIE['user_token'] != $_SESSION['user_token'])
+            || !$_SESSION['user_token']
         ) {
 
-            $this->userLogout(1);
+            $this->userLogout(0);
             return NULL;
 
         }
@@ -1142,7 +1143,7 @@ class ApplicationController extends BaseController {
 
         $temp = DicFieldVal::firstOrNew(array(
             'key' => 'user_token',
-            'value' => $_SESSION['user_token']
+            'value' => @$_SESSION['user_token']
         ));
 
         if ($temp->id) {
