@@ -1126,157 +1126,130 @@ class ApplicationController extends BaseController {
 
     private function auth() {
 
-        $user = NULL;
-
         if (
-            !isset($_COOKIE['user_token']) || !isset($_SESSION['user_token'])
-            || $_COOKIE['user_token'] == '' || $_SESSION['user_token'] == ''
-            || $_COOKIE['user_token'] != $_SESSION['user_token']
+            0
+            || (isset($_COOKIE['user_token']) && !isset($_SESSION['user_token']))
+            || (!isset($_COOKIE['user_token']) && isset($_SESSION['user_token']))
+            || (isset($_COOKIE['user_token']) && isset($_SESSION['user_token']) && $_COOKIE['user_token'] != $_SESSION['user_token'])
         ) {
 
+            $this->userLogout(1);
+            return NULL;
 
-            $this->postUserLogout();
-
-            /*
-            if (
-                !isset($_COOKIE['user_token']) && !isset($_SESSION['user_token'])
-            ) {
-                ##
-            } elseif ($_COOKIE['user_token'] != 'logout' && isset($_SESSION['user_token']) && 0) {
-
-
-                if (Input::get('debug') == 1 || 1) {
-                    Helper::d('$_COOKIE');
-                    Helper::d($_COOKIE);
-                    Helper::d('$_SESSION');
-                    Helper::dd($_SESSION);
-                }
-
-                if (isset($_COOKIE['user_token'])) {
-                    setcookie("user_token", '', 0, "/");
-                    #unset($_COOKIE['user_token']);
-                }
-
-                setcookie("access_token", '', 0, "/");
-
-                if (isset($_SESSION['user_token'])) {
-                    unset($_SESSION['user_token']);
-                }
-
-                die();
-
-            }
-            */
-
-        } else {
-
-            $temp = DicFieldVal::firstOrNew(array(
-                'key' => 'user_token',
-                'value' => $_SESSION['user_token']
-            ));
-
-            if ($temp->id) {
-
-                $temp->load('dicval.fields', 'dicval.textfields');
-                if (is_object($temp->dicval)) {
-                    $user = $temp->dicval;
-
-                    $user->extract(1);
-                    #$user->extract();
-
-                    #Helper::ta($user);
-                    #Helper::ta(json_decode(json_decode($user->friends, 1), 1));
-
-                    $user->full_social_info = json_decode($user->full_social_info, 1);
-                    $user->friends = json_decode($user->friends, 1);
-                    $user->notifications = json_decode($user->notifications, 1);
-
-                    #Helper::tad($user);
-
-                    $now = (new \Carbon\Carbon())->now();
-
-                    #echo $now->format('d.m.Y') . "<br/>";
-
-                    /**
-                     * Определение страны, города, пола и возраста
-                     */
-                    switch ($user->auth_method) {
-
-                        case "vkontakte":
-                            if (isset($user->full_social_info['country']) && isset($user->full_social_info['country']['title'])) {
-                                $user->country = $user->full_social_info['country']['title'];
-                            }
-                            #if (isset($user->full_social_info['city']) && isset($user->full_social_info['city']['title'])) {
-                            #    $user->city = $user->full_social_info['city']['title'];
-                            #}
-                            if (isset($user->full_social_info['sex']) && $user->full_social_info['sex']) {
-                                $user->sex = $user->full_social_info['sex'];
-                            }
-                            if (isset($user->bdate) && $user->bdate) {
-                                if (preg_match('~\d{1,2}\.\d{1,2}\.\d{4}~is', $user->bdate)) {
-                                    $stamp = (new \Carbon\Carbon())->createFromFormat('d.m.Y', $user->bdate);
-                                    $user->years_old = $stamp->diffInYears($now);
-                                }
-                            } elseif (isset($user->full_social_info['bdate']) && $user->full_social_info['bdate']) {
-                                if (preg_match('~[12]{1}\d{3}\-\d{1,2}\-\d{1,2}~is', $user->full_social_info['bdate'])) {
-                                    $stamp = (new \Carbon\Carbon())->createFromFormat('Y-m-d', $user->full_social_info['bdate']);
-                                    $user->years_old = $stamp->diffInYears($now);
-                                }
-                            }
-                            break;
-
-                        case "odnoklassniki":
-                            if (isset($user->full_social_info['gender']) && $user->full_social_info['gender']) {
-                                $user->sex = $user->full_social_info['gender'] == 'male' ? 2 : 1;
-                            }
-                            if (isset($user->full_social_info['location']['countryName']) && isset($user->full_social_info['location']['countryName'])) {
-                                $user->country = $user->full_social_info['location']['countryName'];
-                            }
-                            #if (isset($user->full_social_info['location']['city']) && isset($user->full_social_info['location']['city'])) {
-                            #    $user->city = $user->full_social_info['location']['city'];
-                            #}
-                            /*
-                            if (isset($user->full_social_info['age']) && $user->full_social_info['age']) {
-                                $user->years_old = $user->full_social_info['age'];
-                            }
-                            */
-                            if (isset($user->bdate) && $user->bdate) {
-                                if (preg_match('~\d{1,2}\.\d{1,2}\.\d{4}~is', $user->bdate)) {
-                                    $stamp = (new \Carbon\Carbon())->createFromFormat('d.m.Y', $user->bdate);
-                                    $user->years_old = $stamp->diffInYears($now);
-                                }
-                            }
-                            break;
-
-                        case "facebook":
-                            if (isset($user->full_social_info['gender']) && $user->full_social_info['gender']) {
-                                $user->sex = $user->full_social_info['gender'] == 'мужской' ? 2 : 1;
-                            }
-                            #if (isset($user->full_social_info['hometown']) && isset($user->full_social_info['hometown']['name'])) {
-                            #    $user->city = $user->full_social_info['hometown']['name'];
-                            #}
-                            if (isset($user->full_social_info['birthday']) && $user->full_social_info['birthday']) {
-                                if (preg_match('~\d{2}\/\d{2}\/\d{4}~is', $user->full_social_info['birthday'])) {
-                                    $stamp = (new \Carbon\Carbon())->createFromFormat('m/d/Y', $user->full_social_info['birthday']);
-                                    $user->years_old = $stamp->diffInYears($now);
-                                }
-                            }
-                            break;
-                    }
-
-                    #echo $stamp->format('d.m.Y');
-
-                    #Helper::ta($user);
-                }
-            }
-
-            if (!is_object($temp) || !is_object($temp->dicval)) {
-
-                $this->postUserLogout();
-            }
-
-            #Helper::tad($temp);
         }
+
+        $user = NULL;
+
+        $temp = DicFieldVal::firstOrNew(array(
+            'key' => 'user_token',
+            'value' => $_SESSION['user_token']
+        ));
+
+        if ($temp->id) {
+
+            $temp->load('dicval.fields', 'dicval.textfields');
+
+            if (is_object($temp->dicval)) {
+
+                $user = $temp->dicval;
+
+                $user->extract(1);
+                #$user->extract();
+
+                #Helper::ta($user);
+                #Helper::ta(json_decode(json_decode($user->friends, 1), 1));
+
+                $user->full_social_info = json_decode($user->full_social_info, 1);
+                $user->friends = json_decode($user->friends, 1);
+                $user->notifications = json_decode($user->notifications, 1);
+
+                #Helper::tad($user);
+
+
+                $this->setUserToken($user->user_token);
+
+
+                $now = (new \Carbon\Carbon())->now();
+                #echo $now->format('d.m.Y') . "<br/>";
+                /**
+                 * Определение страны, города, пола и возраста
+                 */
+                switch ($user->auth_method) {
+
+                    case "vkontakte":
+                        if (isset($user->full_social_info['country']) && isset($user->full_social_info['country']['title'])) {
+                            $user->country = $user->full_social_info['country']['title'];
+                        }
+                        #if (isset($user->full_social_info['city']) && isset($user->full_social_info['city']['title'])) {
+                        #    $user->city = $user->full_social_info['city']['title'];
+                        #}
+                        if (isset($user->full_social_info['sex']) && $user->full_social_info['sex']) {
+                            $user->sex = $user->full_social_info['sex'];
+                        }
+                        if (isset($user->bdate) && $user->bdate) {
+                            if (preg_match('~\d{1,2}\.\d{1,2}\.\d{4}~is', $user->bdate)) {
+                                $stamp = (new \Carbon\Carbon())->createFromFormat('d.m.Y', $user->bdate);
+                                $user->years_old = $stamp->diffInYears($now);
+                            }
+                        } elseif (isset($user->full_social_info['bdate']) && $user->full_social_info['bdate']) {
+                            if (preg_match('~[12]{1}\d{3}\-\d{1,2}\-\d{1,2}~is', $user->full_social_info['bdate'])) {
+                                $stamp = (new \Carbon\Carbon())->createFromFormat('Y-m-d', $user->full_social_info['bdate']);
+                                $user->years_old = $stamp->diffInYears($now);
+                            }
+                        }
+                        break;
+
+                    case "odnoklassniki":
+                        if (isset($user->full_social_info['gender']) && $user->full_social_info['gender']) {
+                            $user->sex = $user->full_social_info['gender'] == 'male' ? 2 : 1;
+                        }
+                        if (isset($user->full_social_info['location']['countryName']) && isset($user->full_social_info['location']['countryName'])) {
+                            $user->country = $user->full_social_info['location']['countryName'];
+                        }
+                        #if (isset($user->full_social_info['location']['city']) && isset($user->full_social_info['location']['city'])) {
+                        #    $user->city = $user->full_social_info['location']['city'];
+                        #}
+                        /*
+                        if (isset($user->full_social_info['age']) && $user->full_social_info['age']) {
+                            $user->years_old = $user->full_social_info['age'];
+                        }
+                        */
+                        if (isset($user->bdate) && $user->bdate) {
+                            if (preg_match('~\d{1,2}\.\d{1,2}\.\d{4}~is', $user->bdate)) {
+                                $stamp = (new \Carbon\Carbon())->createFromFormat('d.m.Y', $user->bdate);
+                                $user->years_old = $stamp->diffInYears($now);
+                            }
+                        }
+                        break;
+
+                    case "facebook":
+                        if (isset($user->full_social_info['gender']) && $user->full_social_info['gender']) {
+                            $user->sex = $user->full_social_info['gender'] == 'мужской' ? 2 : 1;
+                        }
+                        #if (isset($user->full_social_info['hometown']) && isset($user->full_social_info['hometown']['name'])) {
+                        #    $user->city = $user->full_social_info['hometown']['name'];
+                        #}
+                        if (isset($user->full_social_info['birthday']) && $user->full_social_info['birthday']) {
+                            if (preg_match('~\d{2}\/\d{2}\/\d{4}~is', $user->full_social_info['birthday'])) {
+                                $stamp = (new \Carbon\Carbon())->createFromFormat('m/d/Y', $user->full_social_info['birthday']);
+                                $user->years_old = $stamp->diffInYears($now);
+                            }
+                        }
+                        break;
+                }
+
+                #echo $stamp->format('d.m.Y');
+
+                #Helper::ta($user);
+            }
+        }
+
+        if (!is_object($temp) || !is_object($temp->dicval)) {
+
+            $this->userLogout(1);
+        }
+
+        #Helper::tad($temp);
 
         return $user;
     }
@@ -2243,14 +2216,22 @@ class ApplicationController extends BaseController {
 
     public function postUserLogout() {
 
-        $log_line = ''
-            . '_COOKIE[user_token] = ' . @$_COOKIE['user_token'] . "\n\n"
-            . '_SESSION[user_token] = ' . @$_SESSION['user_token'] . "\n\n"
-            . '_COOKIE\'s ' . "\n" . @print_r($_COOKIE, 1) . "\n\n"
-            . '_SESSION\'s ' . "\n" . @print_r($_SESSION, 1) . "\n\n"
-        ;
+        return $this->userLogout();
+    }
 
-        #file_put_contents(storage_path('logs/' . time() . '_' . rand(999999, 9999999)), $log_line);
+    public function userLogout($log = false) {
+
+        if ($log) {
+
+            $log_line = ''
+                . '_COOKIE[user_token] = ' . @$_COOKIE['user_token'] . "\n\n"
+                . '_SESSION[user_token] = ' . @$_SESSION['user_token'] . "\n\n"
+                . '_COOKIE\'s ' . "\n" . @print_r($_COOKIE, 1) . "\n\n"
+                . '_SESSION\'s ' . "\n" . @print_r($_SESSION, 1) . "\n\n"
+            ;
+
+            file_put_contents(storage_path('logs/' . time() . '_' . rand(999999, 9999999)), $log_line);
+        }
 
         setcookie('user_token', '', 0, '/');
         unset($_SESSION['user_token']);
