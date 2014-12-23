@@ -2243,6 +2243,13 @@ class ApplicationController extends BaseController {
 
     public function postUserLogout() {
 
+        $log_line = ''
+            . '_COOKIE[user_token] = ' . @$_COOKIE['user_token'] . "\n\n"
+            . '_SESSION[user_token] = ' . @$_SESSION['user_token'] . "\n\n"
+        ;
+
+        file_put_contents(storage_path('logs/' . time() . '_' . rand(999999, 9999999)), $log_line);
+
         setcookie('user_token', '', 0, '/');
         unset($_SESSION['user_token']);
         return '1';
