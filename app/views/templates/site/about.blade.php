@@ -31,7 +31,6 @@
               <img src="theme/images/about/4.jpg">
               <img src="theme/images/about/5.jpg">
               <img src="theme/images/about/6.png">
-              <img src="theme/images/about/7.jpg">
               <img src="theme/images/about/8.jpg">
             </div>
             <br/><br/>
