@@ -2490,7 +2490,7 @@ class ApplicationController extends BaseController {
             $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'));
             $query->orderBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), 'DESC');
         });
-        $users = DicVal::extracts($users, null, true);
+        $users = DicVal::extracts($users, null, true, false);
         $users = Dic::modifyKeys($users, 'day');
         #Helper::smartQueries(1);
         Helper::ta($users);
