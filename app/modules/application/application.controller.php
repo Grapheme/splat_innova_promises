@@ -2505,7 +2505,7 @@ class ApplicationController extends BaseController {
             });
             $users_full = DicVal::extracts($users_full, null, true, true);
         }
-        Helper::ta($users_full);
+        #Helper::ta($users_full);
 
 
         $promises = Dic::valuesBySlug('promises', function($query) use ($period) {
