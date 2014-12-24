@@ -2492,7 +2492,7 @@ class ApplicationController extends BaseController {
         });
         $users = Dic::modifyKeys($users, 'day');
         #Helper::smartQueries(1);
-        #Helper::ta($users);
+        Helper::ta($users);
 
         $users_full = false;
         if (count($users)) {
