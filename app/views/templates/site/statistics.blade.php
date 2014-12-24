@@ -18,10 +18,13 @@
 				</p>
 
 				<!--
-				{{ print_r($users) }}
+				{{ Helper::smartQueries(1) }}
 				-->
 				<!--
-				{{ print_r($promises) }}
+				{{ Helper::ta($users) }}
+				-->
+				<!--
+				{{ Helper::ta($promises) }}
 				-->
 
 				@if (@count($users))
