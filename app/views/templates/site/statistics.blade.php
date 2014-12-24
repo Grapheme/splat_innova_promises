@@ -41,7 +41,7 @@
 					</tr>
 					@if (isset($users[$day]) && is_object($users[$day]) && $users[$day]->count > 0)
 						<tr>
-							<td colspan="2">
+							<td colspan="3">
 								@foreach ($users_full as $u => $user)
 									@if ($user->day == $day)
 										<?
