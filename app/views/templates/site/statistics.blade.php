@@ -2,6 +2,11 @@
 
 
 @section('style')
+	<style>
+		.stat-table td {
+			padding: 5px;
+		}
+	</style>
 @stop
 
 
@@ -17,7 +22,7 @@
 					Пользователей за все время - {{ $total_users }}, обещаний за все время - {{ $total_promises }}.
 				</p>
 
-				<table border="1">
+				<table border="1" class="stat-table">
 				@foreach($days as $day)
 					<?
 					$users_count = isset($users[$day]) && is_object($users[$day]) ? $users[$day]->count : 0;
