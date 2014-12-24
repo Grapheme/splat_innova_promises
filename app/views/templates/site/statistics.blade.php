@@ -17,7 +17,7 @@
 					Пользователей за все время - {{ $total_users }}, обещаний за все время - {{ $total_promises }}.
 				</p>
 
-				<table border="1" cellpadding="5">
+				<table border="1">
 				@foreach($days as $day)
 					<tr>
 						<td>
@@ -35,7 +35,7 @@
 										<?
 											unset($users_full[$u]);
 										?>
-										<a href="{{ URL::route('app.profile_id', $user->id) }}" target="_blank">{{ $user->name }}</a><br/>
+										<a href="{{ URL::route('app.profile_id', $user->id) }}" target="_blank">{{ $user->name ?: $user->email }}</a><br/>
 									@endif
 								@endforeach
 							</td>
