@@ -6,6 +6,10 @@
 
     RewriteEngine On
 
+    ## Glue the mirrors
+    RewriteCond %{HTTP_HOST} ^www\.mypromises\.ru [NC]
+    RewriteRule ^(.*)$ http://mypromises.ru/$1 [L,R=301]
+
     # Redirect Trailing Slashes...
 	RewriteRule ^(.*)/$ /$1 [L,R=301]
 
