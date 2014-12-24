@@ -2493,7 +2493,7 @@ class ApplicationController extends BaseController {
         $users = DicVal::extracts($users, null, true, false);
         $users = Dic::modifyKeys($users, 'day');
         #Helper::smartQueries(1);
-        Helper::ta($users);
+        #Helper::ta($users);
 
         $users_full = false;
         if (count($users)) {
@@ -2502,6 +2502,8 @@ class ApplicationController extends BaseController {
                 $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*$period));
             });
         }
+        Helper::ta($users_full);
+
 
         $promises = Dic::valuesBySlug('promises', function($query) use ($period) {
             $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*$period));
