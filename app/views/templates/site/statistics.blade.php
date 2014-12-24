@@ -19,14 +19,28 @@
 
 				<table border="1" cellpadding="5">
 				@foreach($days as $day)
+					<tr>
+						<td>
+							{{ $day }}
+						</td>
+						<td>
+							{{ isset($users[$day]) && is_object($users[$day]) ? $users[$day]->count : '0' }}
+						</td>
+					</tr>
+					@if (isset($users[$day]) && is_object($users[$day]) && $users[$day]->count > 0)
 						<tr>
-							<td>
-								{{ $day }}
-							</td>
-							<td>
-								{{ isset($users[$day]) && is_object($users[$day]) ? $users[$day]->count : '0' }}
+							<td colspan="2">
+								@foreach ($users_full as $u => $user)
+									@if ($user->day == $day)
+										<?
+											unset($users_full[$u]);
+										?>
+										<a href="{{ URL::route('profile_id', $user->id) }}" target="_blank">{{ $user->name }}</a><br/>
+									@endif
+								@endforeach
 							</td>
 						</tr>
+					@endif
 				@endforeach
 				</table>
 

@@ -2500,6 +2500,8 @@ class ApplicationController extends BaseController {
 
             $users_full = Dic::valuesBySlug('users', function($query) use ($period) {
                 $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*$period));
+                $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") AS day'));
+                $query->orderBy('created_at', 'DESC');
             });
             $users_full = DicVal::extracts($users_full, null, true, true);
         }
