@@ -2501,6 +2501,7 @@ class ApplicationController extends BaseController {
             $users_full = Dic::valuesBySlug('users', function($query) use ($period) {
                 $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*$period));
             });
+            $users_full = DicVal::extracts($users_full, null, true, true);
         }
         Helper::ta($users_full);
 
