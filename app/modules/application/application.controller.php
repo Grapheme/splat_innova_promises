@@ -2477,6 +2477,7 @@ class ApplicationController extends BaseController {
             #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d") AS day, COUNT(*) AS count'));
             $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d") AS day, COUNT(*) AS count'));
             $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d")'));
+            $query->orderBy(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d")'), 'DESC');
         });
         #Helper::smartQueries(1);
         #Helper::ta($users);
@@ -2494,6 +2495,7 @@ class ApplicationController extends BaseController {
             #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d") AS day, COUNT(*) AS count'));
             $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d") AS day, COUNT(*) AS count'));
             $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d")'));
+            $query->orderBy(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d")'), 'DESC');
         });
         #Helper::smartQueries(1);
         #Helper::tad($promises);
