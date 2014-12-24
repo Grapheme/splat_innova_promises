@@ -2469,11 +2469,21 @@ class ApplicationController extends BaseController {
         $period = 7;
 
         $days = array();
+
+        $start = (new \Carbon\Carbon())->now();
+        for ($i = $period; $i > 0; $i++) {
+            $days[] = $start->subDay(1)->format('Y-m-d');
+        }
+        rsort($days);
+        Helper::dd($days);
+        /*
         $start = (new \Carbon\Carbon())->now()->subDay($period);
+        Helper::d($start);
         do {
             $days[] = $start->addDay()->format('Y-m-d');
         } while($start->format('Y-m-d') != date('Y-m-d'));
         Helper::dd($days);
+        */
 
         $total_users = Dic::valuesBySlug('users');
         $total_users = count($total_users);
