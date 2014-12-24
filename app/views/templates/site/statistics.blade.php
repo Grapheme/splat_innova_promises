@@ -17,6 +17,18 @@
 					Пользователей за все время - {{ $total_users }}, обещаний за все время - {{ $total_promises }}.
 				</p>
 
+				<table border="1">
+				@foreach($days as $day)
+						<tr>
+							<td>
+								{{ $day }}
+							</td>
+							<td>
+								{{ isset($users[$day]) && is_object($users[$day]) ? $users[$day]->count : '0' }}
+							</td>
+						</tr>
+				@endforeach
+				</table>
 
 
 				@if (@count($users) && 0)
