@@ -17,15 +17,9 @@
 					Пользователей за все время - {{ $total_users }}, обещаний за все время - {{ $total_promises }}.
 				</p>
 
-				<!--
 				{{ Helper::smartQueries(1) }}
-				-->
-				<!--
 				{{ Helper::ta($users) }}
-				-->
-				<!--
 				{{ Helper::ta($promises) }}
-				-->
 
 				@if (@count($users))
 					<table border="1">
