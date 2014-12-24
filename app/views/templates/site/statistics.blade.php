@@ -4,7 +4,7 @@
 @section('style')
 	<style>
 		.stat-table td {
-			padding: 5px;
+			padding: 5px 8px;
 		}
 	</style>
 @stop
@@ -41,18 +41,15 @@
 					</tr>
 					@if (isset($users[$day]) && is_object($users[$day]) && $users[$day]->count > 0)
 						<tr>
-							<td colspan="3">
+							<td colspan="2">
 								@foreach ($users_full as $u => $user)
 									@if ($user->day == $day)
 										<?
 											unset($users_full[$u]);
 										?>
-										<a href="{{ URL::route('app.profile_id', $user->id) }}" target="_blank">{{ trim($user->name) != '' ? $user->name : $user->identity }}</a><br/>
-										@if (!trim($user->name))
-										<!--
-											print_r($user);
-										-->
-										@endif
+										<a href="{{ URL::route('app.profile_id', $user->id) }}" target="_blank">{{ trim($user->name) != '' ? $user->name : $user->identity }}</a>
+										{{ $user->city }}
+										<br/>
 									@endif
 								@endforeach
 							</td>
@@ -60,22 +57,6 @@
 					@endif
 				@endforeach
 				</table>
-
-
-				@if (@count($users) && 0)
-					<table border="1">
-					@foreach($users as $user)
-						<tr>
-							<td>
-								{{ $user->day }}
-							</td>
-							<td>
-								{{ $user->count }}
-							</td>
-						</tr>
-					@endforeach
-					</table>
-				@endif
 
 			</div>
 		</div>
