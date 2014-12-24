@@ -2493,7 +2493,8 @@ class ApplicationController extends BaseController {
 
         $promises = Dic::valuesBySlug('promises', function($query){
             $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*7));
-            $query->select('id', DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y") AS day, COUNT(*) AS count'));
+            #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y") AS day, COUNT(*) AS count'));
+            $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y") AS day, COUNT(*) AS count'));
             $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y")'));
         });
         #Helper::smartQueries(1);
