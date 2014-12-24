@@ -35,7 +35,7 @@
 										<?
 											unset($users_full[$u]);
 										?>
-										<a href="{{ URL::route('profile_id', $user->id) }}" target="_blank">{{ $user->name }}</a><br/>
+										<a href="{{ URL::route('app.profile_id', $user->id) }}" target="_blank">{{ $user->name }}</a><br/>
 									@endif
 								@endforeach
 							</td>
