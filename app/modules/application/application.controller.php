@@ -2474,9 +2474,9 @@ class ApplicationController extends BaseController {
 
         $users = Dic::valuesBySlug('users', function($query){
             $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*7));
-            #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y") AS day, COUNT(*) AS count'));
-            $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y") AS day, COUNT(*) AS count'));
-            $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y")'));
+            #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d") AS day, COUNT(*) AS count'));
+            $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d") AS day, COUNT(*) AS count'));
+            $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d")'));
         });
         #Helper::smartQueries(1);
         #Helper::ta($users);
@@ -2486,16 +2486,14 @@ class ApplicationController extends BaseController {
 
             $users_full = Dic::valuesBySlug('users', function($query){
                 $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*7));
-                #$query->select(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y") AS day, COUNT(*) AS count'));
-                #$query->groupBy(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y")'));
             });
         }
 
         $promises = Dic::valuesBySlug('promises', function($query){
             $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*7));
-            #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y") AS day, COUNT(*) AS count'));
-            $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y") AS day, COUNT(*) AS count'));
-            $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y")'));
+            #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d") AS day, COUNT(*) AS count'));
+            $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d") AS day, COUNT(*) AS count'));
+            $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d")'));
         });
         #Helper::smartQueries(1);
         #Helper::tad($promises);
