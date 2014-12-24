@@ -2485,12 +2485,13 @@ class ApplicationController extends BaseController {
 
         $users = Dic::valuesBySlug('users', function($query) use ($period) {
             $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*$period));
-            #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d") AS day, COUNT(*) AS count'));
-            $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d") AS day, COUNT(*) AS count'));
-            $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d")'));
-            $query->orderBy(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d")'), 'DESC');
+            #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") AS day, COUNT(*) AS count'));
+            $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") AS day, COUNT(*) AS count'));
+            $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'));
+            $query->orderBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), 'DESC');
         });
         $users = Dic::modifyKeys($users, 'day');
+        $users = DicVal::extracts($users, null, true);
         #Helper::smartQueries(1);
         Helper::ta($users);
 
@@ -2504,10 +2505,10 @@ class ApplicationController extends BaseController {
 
         $promises = Dic::valuesBySlug('promises', function($query) use ($period) {
             $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*$period));
-            #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d") AS day, COUNT(*) AS count'));
-            $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d") AS day, COUNT(*) AS count'));
-            $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d")'));
-            $query->orderBy(DB::raw('DATE_FORMAT(created_at, "%Y.%m.%d")'), 'DESC');
+            #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") AS day, COUNT(*) AS count'));
+            $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") AS day, COUNT(*) AS count'));
+            $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'));
+            $query->orderBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), 'DESC');
         });
         #Helper::smartQueries(1);
         #Helper::tad($promises);
