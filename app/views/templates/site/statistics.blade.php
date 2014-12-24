@@ -17,7 +17,9 @@
 					Пользователей за все время - {{ $total_users }}, обещаний за все время - {{ $total_promises }}.
 				</p>
 
-				@if (@count($users))
+
+
+				@if (@count($users) && 0)
 					<table border="1">
 					@foreach($users as $user)
 						<tr>
