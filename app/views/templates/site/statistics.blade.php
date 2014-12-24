@@ -35,8 +35,8 @@
 										<?
 											unset($users_full[$u]);
 										?>
-										<a href="{{ URL::route('app.profile_id', $user->id) }}" target="_blank">{{ $user->name != '' ? $user->name : $user->identity }}</a><br/>
-										@if (!$user->name)
+										<a href="{{ URL::route('app.profile_id', $user->id) }}" target="_blank">{{ trim($user->name) != '' ? $user->name : $user->identity }}</a><br/>
+										@if (!trim($user->name))
 										<!--
 											print_r($user);
 										-->
