@@ -16,6 +16,22 @@
 				<p>
 					Пользователей за все время - {{ $total_users }}, обещаний за все время - {{ $total_promises }}.
 				</p>
+
+				@if (@count($users))
+					<table border="1">
+					@foreach($users as $user)
+						<tr>
+							<td>
+								{{ $user->day }}
+							</td>
+							<td>
+								{{ $user->count }}
+							</td>
+						</tr>
+					@endforeach
+					</table>
+				@endif
+
 			</div>
 		</div>
 	</div>
