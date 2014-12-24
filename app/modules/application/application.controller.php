@@ -57,6 +57,9 @@ class ApplicationController extends BaseController {
 
             Route::get('/test/gen_image', array('as' => 'app.test.gen_image', 'uses' => __CLASS__.'@getTestGenImage'));
 
+
+            Route::get('/statistics', array('as' => 'app.statistics', 'uses' => __CLASS__.'@getStatistics'));
+
         });
     }
 
@@ -2458,6 +2461,44 @@ class ApplicationController extends BaseController {
 
         #return '<img src="' . $dest_url . '" />';
         return $dest_url;
+    }
+
+
+    public function getStatistics() {
+
+        $total_users = Dic::valuesBySlug('users');
+        $total_users = count($total_users);
+
+        $total_promises = Dic::valuesBySlug('promises');
+        $total_promises = count($total_promises);
+
+        $users = Dic::valuesBySlug('users', function($query){
+            $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*7));
+            $query->select(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y") AS day, COUNT(*) AS count'));
+            $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y")'));
+        });
+        #Helper::smartQueries(1);
+        #Helper::ta($users);
+
+        $users_full = false;
+        if (count($users)) {
+
+            $users_full = Dic::valuesBySlug('users', function($query){
+                $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*7));
+                #$query->select(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y") AS day, COUNT(*) AS count'));
+                #$query->groupBy(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y")'));
+            });
+        }
+
+        $promises = Dic::valuesBySlug('promises', function($query){
+            $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*7));
+            $query->select(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y") AS day, COUNT(*) AS count'));
+            $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%d.%m.%Y")'));
+        });
+        #Helper::smartQueries(1);
+        #Helper::tad($promises);
+
+        return View::make(Helper::layout('statistics'), compact('total_users', 'total_promises', 'users', 'users_full', 'promises'));
     }
 
 }
