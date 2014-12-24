@@ -19,17 +19,24 @@
 
 				<table border="1">
 				@foreach($days as $day)
+					<?
+					$users_count = isset($users[$day]) && is_object($users[$day]) ? $users[$day]->count : 0;
+					$promises_count = isset($promises[$day]) && is_object($promises[$day]) ? $promises[$day]->count : 0;
+					?>
 					<tr>
 						<td>
 							{{ $day }}
 						</td>
 						<td>
-							{{ isset($users[$day]) && is_object($users[$day]) ? $users[$day]->count : '0' }}
+							{{ trans_choice(':count новый пользователь|:count новых пользователя|:count новых пользователей', $users_count, array(), 'ru') }}
+						</td>
+						<td>
+							{{ trans_choice(':count новое обещание|:count новых обещания|:count новых обещаний', $promises_count, array(), 'ru') }}
 						</td>
 					</tr>
 					@if (isset($users[$day]) && is_object($users[$day]) && $users[$day]->count > 0)
 						<tr>
-							<td colspan="2">
+							<td colspan="3">
 								@foreach ($users_full as $u => $user)
 									@if ($user->day == $day)
 										<?

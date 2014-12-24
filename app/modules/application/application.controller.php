@@ -2515,6 +2515,8 @@ class ApplicationController extends BaseController {
             $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'));
             $query->orderBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), 'DESC');
         });
+        $promises = DicVal::extracts($promises, null, true, false);
+        $promises = Dic::modifyKeys($promises, 'day');
         #Helper::smartQueries(1);
         #Helper::tad($promises);
 
