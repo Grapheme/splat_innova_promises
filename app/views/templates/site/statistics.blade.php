@@ -17,7 +17,7 @@
 					Пользователей за все время - {{ $total_users }}, обещаний за все время - {{ $total_promises }}.
 				</p>
 
-				<table border="1">
+				<table border="1" cellpadding="5">
 				@foreach($days as $day)
 						<tr>
 							<td>
