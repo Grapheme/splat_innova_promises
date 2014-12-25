@@ -2470,8 +2470,8 @@ class ApplicationController extends BaseController {
 
         $days = array();
 
-        $start = (new \Carbon\Carbon())->now();
-        for ($i = $period; $i >= 0; $i--) {
+        $start = (new \Carbon\Carbon())->now()->addDay(1);
+        for ($i = $period; $i > 0; $i--) {
             $days[] = $start->subDay(1)->format('Y-m-d');
         }
         rsort($days);
