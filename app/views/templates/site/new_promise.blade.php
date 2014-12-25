@@ -105,6 +105,7 @@
           </div>
         </div>
       </div>
+      <!--
       <div class="promo-block">
         <div class="wrapper">
           <div class="text">
@@ -114,6 +115,7 @@
           <div class="logo"></div>
         </div>
       </div>
+      -->
 
 
 @stop
