@@ -319,6 +319,29 @@ SplatSite.CountDown = function(elem) {
 	$(elem).MyCount();
 }
 
+SplatSite.CardCountDown = function(elem) {
+	$.fn.MyCount = function() {
+		var parent = $(this).parents('[data-finish]');
+		var date_str = parent.attr('data-finish');
+		for(var i = 0; i < 2; i++) {
+			date_str = date_str.replace('-', '/');
+		}
+		$(this).countdown(date_str, function(event){
+			//var days_name = declOfNum(parseInt(event.strftime('%-D')), ['день', 'дня', 'дней']);
+			//$(this).html(event.strftime('<span class="time-day"><span>%-D</span> ' + days_name + '</span><span class="time-time">%H:%M:%S</span>'));
+			if(event.type != 'stoped' || event.type != 'finish') {
+				var difference = event.finalDate.getTime() - new Date().getTime();
+				var oneDay = 86400000;
+				if(difference < oneDay && difference >= 0) {
+					$(this).html(event.strftime('%H:%M:%S'));
+				}
+			}
+		});
+	}
+	$(elem).MyCount();
+}
+
+
 $.fn.AjaxForm = function() {
 	var action = $(this).attr('action');
 	var form = $(this);
@@ -425,8 +448,11 @@ $(function(){
 	SplatSite.Tooltips.init();
 	SplatSite.PromisePlaceholder();
 	$('.js-smart-btn').SmartBtn();
-	if($('[data-finish]').length) {
+	if($('.js-countdown').length) {
 		SplatSite.CountDown('.js-countdown');
+	}
+	if($('.js-time-countdown').length) {
+		SplatSite.CardCountDown('.js-time-countdown');
 	}
 	$('.js-ajax-form').AjaxForm();
 
