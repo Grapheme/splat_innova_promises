@@ -461,7 +461,9 @@ $(function(){
       		changeYear: true,
       		minDate: 0,
       		onSelect: function (date) {
-				$('[name="limit_date"]').removeClass('inp-error');
+				//$('[name="limit_date"]').removeClass('inp-error');
+				$("[name=limit_date]").valid()
+				$("[name=limit_time]").valid();
 			}
 		});
 
