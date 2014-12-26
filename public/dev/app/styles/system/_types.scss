@@ -5,18 +5,12 @@
 		&:before {
 			background-image: url(../images/patterns/3.png);
 		}
-		&:hover {
-			background-color: darken(#7bc800, 17.5%);
-		}
 	}
 	&.type-aqua {
 		background-color: darken(#07cbcc, 10%);
 
 		&:before {
 			background-image: url(../images/patterns/4.png);
-		}
-		&:hover {
-			background-color: darken(#07cbcc, 17.5%);
 		}
 	}
 	&.type-yellow {
@@ -26,18 +20,12 @@
 			background-image: url(../images/patterns/5.png);
 			opacity: .24;
 		}
-		&:hover {
-			background-color: darken(#fee000, 17.5%);
-		}
 	}
 	&.type-blue {
 		background-color: darken(#0f9fce, 10%);
 
 		&:before {
 			background-image: url(../images/patterns/1.png);
-		}
-		&:hover {
-			background-color: darken(#0f9fce, 17.5%);
 		}
 	}
 	&.type-pink {
@@ -46,6 +34,34 @@
 		&:before {
 			background-image: url(../images/patterns/2.png);
 		}
+	}
+	&.type-promo {
+		background-color: darken(#b9f1f7, 10%);
+	}
+}
+
+.promise-item {
+	&.type-green {
+		&:hover {
+			background-color: darken(#7bc800, 17.5%);
+		}
+	}
+	&.type-aqua {
+		&:hover {
+			background-color: darken(#07cbcc, 17.5%);
+		}
+	}
+	&.type-yellow {
+		&:hover {
+			background-color: darken(#fee000, 17.5%);
+		}
+	}
+	&.type-blue {
+		&:hover {
+			background-color: darken(#0f9fce, 17.5%);
+		}
+	}
+	&.type-pink {
 		&:hover {
 			background-color: darken(#dbabc8, 17.5%);
 		}
