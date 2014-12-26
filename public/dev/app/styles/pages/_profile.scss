@@ -116,9 +116,10 @@
 						font-size: 19px;
 						text-decoration: none;
 						transition: opacity $default-anim-time $default-ease;
+						opacity: .7;
 
 						&:hover {
-							opacity: .7;
+							opacity: 1;
 						}
 					}
 				}

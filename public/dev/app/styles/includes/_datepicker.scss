@@ -1,0 +1,127 @@
+.ui-datepicker {
+  font-family: "Helvetica Neue","Trebuchet MS",Tahoma,Verdana,Arial,sans-serif;
+  background: #11b8b8;
+  border: none;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  box-shadow: 0 1px 3px #252525;
+}
+
+.ui-datepicker {
+  padding: 0;
+}
+
+.ui-datepicker-header {
+  border: none;
+  border-bottom: 1px solid #129393;
+  background: transparent;
+  font-weight: normal;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.ui-datepicker-header .ui-state-hover {
+  background: transparent;
+  border-color: transparent;
+  cursor: pointer;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+}
+
+.ui-datepicker .ui-datepicker-title {
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  color: #fff;
+}
+
+.ui-datepicker .ui-datepicker-prev-hover,
+.ui-datepicker .ui-datepicker-next-hover,
+.ui-datepicker .ui-datepicker-next,
+.ui-datepicker .ui-datepicker-prev {
+  top: 1.7em;
+  border:none;
+}
+
+.ui-datepicker .ui-datepicker-prev-hover {
+  left: 2px;
+}
+
+.ui-datepicker .ui-datepicker-next-hover {
+  right: 2px;
+}
+
+.ui-datepicker .ui-datepicker-next span,
+.ui-datepicker .ui-datepicker-prev span {
+  background-image: url(../images/ui-datepicker.png);
+  background-position: -32px -32px;
+  margin-top: 0;
+  top: 0;
+  font-weight: normal;
+  color: transparent;
+  width: 12px;
+  height: 12px;
+  font-size: 0;
+}
+
+.ui-datepicker .ui-datepicker-prev span {
+  background-position: -96px -32px;
+}
+
+.ui-datepicker .ui-datepicker-prev-hover span {
+  background-position: -96px -48px;
+}
+
+.ui-datepicker .ui-datepicker-next-hover span {
+  background-position: -32px -48px;
+}
+
+.ui-datepicker table {
+  margin: 0;
+}
+
+.ui-datepicker th {
+  padding: 3em 0;
+  color: #9fd9f1;
+  font-size: 8px;
+  font-weight: normal;
+  text-shadow: 0 0 2px #11b8b8;
+  text-transform: uppercase;
+  border: none;
+  border-top: 1px solid #1DD2D2;
+}
+
+.ui-datepicker td {
+  border: none;
+  padding: 0;
+}
+
+.ui-datepicker td .ui-state-default {
+  background: transparent;
+  border: none;
+  text-align: center;
+  padding: 1em 0;
+  margin: 0;
+  font-weight: normal;
+  color: #efefef;
+  font-size: 12px;
+}
+
+.ui-datepicker td .ui-state-active,
+.ui-datepicker td .ui-state-hover {
+  background: #1b7fb0;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+}
+
+.ui-datepicker select.ui-datepicker-year {
+  width: 60px;
+  background: transparent;
+  border: 0;
+}
+
+.ui-datepicker td.ui-datepicker-unselectable {
+  opacity: .5;
+}
