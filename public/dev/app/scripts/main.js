@@ -320,13 +320,16 @@ SplatSite.CountDown = function(elem) {
 }
 
 SplatSite.CardCountDown = function(elem) {
+	console.log('function started');
 	$.fn.MyCount = function() {
 		var parent = $(this).parents('[data-finish]');
+		consle.log(parent);
 		var date_str = parent.attr('data-finish');
 		for(var i = 0; i < 2; i++) {
 			date_str = date_str.replace('-', '/');
 		}
 		$(this).countdown(date_str, function(event){
+			console.log(event);
 			//var days_name = declOfNum(parseInt(event.strftime('%-D')), ['день', 'дня', 'дней']);
 			//$(this).html(event.strftime('<span class="time-day"><span>%-D</span> ' + days_name + '</span><span class="time-time">%H:%M:%S</span>'));
 			if(event.type != 'stoped' || event.type != 'finish') {
