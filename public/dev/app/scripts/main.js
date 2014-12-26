@@ -459,7 +459,10 @@ $(function(){
 		.datepicker({
 			showOtherMonths: true,
       		changeYear: true,
-      		minDate: 0
+      		minDate: 0,
+      		onSelect: function (date) {
+				$('[name="limit_date"]').removeClass('inp-error');
+			}
 		});
 
 	$(document).keypress(function(e) {
@@ -468,5 +471,8 @@ $(function(){
 	        	$('.make-new-promise-btn').trigger('click');
 	        }
 	    }
+	});
+	$('.date-div, .time-div').on('click', function(){
+		$(this).find('input').trigger('focus')
 	});
 });

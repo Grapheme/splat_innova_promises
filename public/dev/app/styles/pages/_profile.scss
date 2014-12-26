@@ -66,6 +66,7 @@
 			padding: 35px 30px;
 			box-sizing: border-box;
 			color: #fff;
+			transition: background-color .1s ease;
 
 			&:before {
 				content: "";
@@ -116,7 +117,7 @@
 						font-size: 19px;
 						text-decoration: none;
 						transition: opacity $default-anim-time $default-ease;
-						opacity: .7;
+						opacity: .5;
 
 						&:hover {
 							opacity: 1;
@@ -238,7 +239,7 @@
 
 				.promise-content {
 					display: inline-block;
-					vertical-align: middle;
+					vertical-align: top;
 					line-height: normal;
 					height: auto;
 				}

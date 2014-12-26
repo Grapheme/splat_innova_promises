@@ -5,12 +5,18 @@
 		&:before {
 			background-image: url(../images/patterns/3.png);
 		}
+		&:hover {
+			background-color: darken(#7bc800, 17.5%);
+		}
 	}
 	&.type-aqua {
 		background-color: darken(#07cbcc, 10%);
 
 		&:before {
 			background-image: url(../images/patterns/4.png);
+		}
+		&:hover {
+			background-color: darken(#07cbcc, 17.5%);
 		}
 	}
 	&.type-yellow {
@@ -20,6 +26,9 @@
 			background-image: url(../images/patterns/5.png);
 			opacity: .24;
 		}
+		&:hover {
+			background-color: darken(#fee000, 17.5%);
+		}
 	}
 	&.type-blue {
 		background-color: darken(#0f9fce, 10%);
@@ -27,12 +36,18 @@
 		&:before {
 			background-image: url(../images/patterns/1.png);
 		}
+		&:hover {
+			background-color: darken(#0f9fce, 17.5%);
+		}
 	}
 	&.type-pink {
 		background-color: darken(#dbabc8, 10%);
 
 		&:before {
 			background-image: url(../images/patterns/2.png);
+		}
+		&:hover {
+			background-color: darken(#dbabc8, 17.5%);
 		}
 	}
 	&.type-promo {
