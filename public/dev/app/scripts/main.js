@@ -323,7 +323,7 @@ SplatSite.CardCountDown = function(elem) {
 	console.log('function started');
 	$.fn.MyCount = function() {
 		var parent = $(this).parents('[data-finish]');
-		consle.log(parent);
+		console.log(parent);
 		var date_str = parent.attr('data-finish');
 		for(var i = 0; i < 2; i++) {
 			date_str = date_str.replace('-', '/');
