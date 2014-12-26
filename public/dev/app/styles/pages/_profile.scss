@@ -97,6 +97,32 @@
 				width: 315px;
 			}
 
+			.soc-block {
+				position: absolute;
+				right: 0;
+				top: 0;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				text-align: center;
+
+				li {
+					margin-bottom: 10px;
+					width: 30px;
+
+					a {
+						color: #fff;
+						font-size: 19px;
+						text-decoration: none;
+						transition: opacity $default-anim-time $default-ease;
+
+						&:hover {
+							opacity: .7;
+						}
+					}
+				}
+			}
+
 			.bottom-block {
 				position: absolute;
 				bottom: 0;
