@@ -8,11 +8,11 @@
             date: {{ date('Y-m-d H:i:s') }}<br/>
             --}}
         </div>
-        <ul class="soc-block">
+        <!-- <ul class="soc-block">
           <li><a onclick="ga('send', 'event', 'like', 'facebook');" href="http://www.facebook.com/sharer.php?u={{ URL::route('app.promise', $promise->id) }}" class="soc-icon" target="_blank"><i class="fi icon-fb"></i></a></li>
           <li><a onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url={{ URL::route('app.promise', $promise->id) }}&event=button_share" class="soc-icon" target="_blank"><i class="fi icon-vk"></i></a></li>
           <li><a onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl={{ URL::route('app.promise', $promise->id) }}" class="soc-icon" target="_blank"><i class="fi icon-ok"></i></a></li>
-        </ul>
+        </ul> -->
         <div class="bottom-block">
             <div class="top-floor">
                 @if ($promise->only_for_me)
