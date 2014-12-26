@@ -320,25 +320,22 @@ SplatSite.CountDown = function(elem) {
 }
 
 SplatSite.CardCountDown = function(elem) {
-	console.log('function started');
 	$.fn.MyCount = function() {
-		var parent = $(this).parents('[data-finish]');
-		console.log(parent);
-		var date_str = parent.attr('data-finish');
-		for(var i = 0; i < 2; i++) {
-			date_str = date_str.replace('-', '/');
-		}
-		$(this).countdown(date_str, function(event){
-			console.log(event);
-			//var days_name = declOfNum(parseInt(event.strftime('%-D')), ['день', 'дня', 'дней']);
-			//$(this).html(event.strftime('<span class="time-day"><span>%-D</span> ' + days_name + '</span><span class="time-time">%H:%M:%S</span>'));
-			if(event.type != 'stoped' || event.type != 'finish') {
-				var difference = event.finalDate.getTime() - new Date().getTime();
-				var oneDay = 86400000;
-				if(difference < oneDay && difference >= 0) {
-					$(this).html(event.strftime('%H:%M:%S'));
-				}
+		$(this).each(function(){
+			var parent = $(this).parents('[data-finish]');
+			var date_str = parent.attr('data-finish');
+			for(var i = 0; i < 2; i++) {
+				date_str = date_str.replace('-', '/');
 			}
+			$(this).countdown(date_str, function(event){
+				if(event.type != 'stoped' || event.type != 'finish') {
+					var difference = event.finalDate.getTime() - new Date().getTime();
+					var oneDay = 86400000;
+					if(difference < oneDay && difference >= 0) {
+						$(this).html(event.strftime('%H:%M:%S'));
+					}
+				}
+			});
 		});
 	}
 	$(elem).MyCount();
@@ -472,6 +469,9 @@ $(function(){
             "cardinality": 2,
             "prevalidator": [{ "validator": "[0-2]", "cardinality": 1}]
         }
+    });
+    $.extend($.inputmask.defaults, {
+    	clearMaskOnLostFocus: false
     });
 	$('.js-mask-time').inputmask('H:i', {"placeholder": "чч:мм"});
 	if($('.js-mask-time').val() == '') $('.js-mask-time').val('12:00');

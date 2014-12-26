@@ -263,6 +263,11 @@
 
   					a {
   						color: #07cbcc;
+  						transition: color .2s ease;
+
+  						&:hover {
+  							color: #434041;
+  						}
   					}
 				}
 			}
