@@ -379,6 +379,45 @@ function declOfNum(number, titles) {
     return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];  
 }
 
+/* Russian (UTF-8) initialisation for the jQuery UI date picker plugin. */
+/* Written by Andrew Stromnov (stromnov@gmail.com). */
+(function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define([ "../datepicker" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery.datepicker );
+	}
+}(function( datepicker ) {
+
+datepicker.regional['ru'] = {
+	closeText: 'Закрыть',
+	prevText: '&#x3C;Пред',
+	nextText: 'След&#x3E;',
+	currentText: 'Сегодня',
+	monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь',
+	'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+	monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн',
+	'Июл','Авг','Сен','Окт','Ноя','Дек'],
+	dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+	dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+	dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+	weekHeader: 'Нед',
+	dateFormat: 'dd.mm.yy',
+	firstDay: 1,
+	isRTL: false,
+	showMonthAfterYear: false,
+	yearSuffix: ''};
+datepicker.setDefaults(datepicker.regional['ru']);
+
+return datepicker.regional['ru'];
+
+}));
+$.datepicker.setDefaults( $.datepicker.regional[ "ru" ] );
+
 $(function(){
 	var body = $('body');
 	SplatSite.tabs();
@@ -407,8 +446,21 @@ $(function(){
     });
 	$('.js-mask-time').inputmask('H:i', {"placeholder": "чч:мм"});
 	if($('.js-mask-time').val() == '') $('.js-mask-time').val('12:00');
-	$('.js-mask-date').inputmask('d.m.y', {"placeholder": "дд.мм.гггг"});
-	$('.js-future-date').inputmask('dd.mm.yyyy', {"placeholder": "дд.мм.гггг", yearrange: { minyear: new Date().getFullYear(), maxyear: 2099 }});
+	$('.js-mask-date')
+		.inputmask('dd.mm.yyyy', {"placeholder": "дд.мм.гггг"})
+		.datepicker({
+			showOtherMonths: true,
+			defaultDate: new Date(1990, 00, 01),
+      		changeYear: true,
+      		maxDate: 0
+		});
+	$('.js-future-date')
+		.inputmask('dd.mm.yyyy', {"placeholder": "дд.мм.гггг", yearrange: { minyear: new Date().getFullYear(), maxyear: 2099 }})
+		.datepicker({
+			showOtherMonths: true,
+      		changeYear: true,
+      		minDate: 0
+		});
 
 	$(document).keypress(function(e) {
 	    if(e.which == 13) {
