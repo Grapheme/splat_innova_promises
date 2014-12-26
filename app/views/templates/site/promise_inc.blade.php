@@ -1,4 +1,4 @@
-<li class="promise-item type-{{ $promise->style_id }}" @if(@promise_type == 'active') data-finish="{{ $promise->time_limit }}" @endif>
+<li class="promise-item type-{{ $promise->style_id }}" data-finish="{{ $promise->time_limit }}">
     <ul class="soc-block">
       <li><a onclick="ga('send', 'event', 'like', 'facebook');" href="http://www.facebook.com/sharer.php?u={{ URL::route('app.promise', $promise->id) }}" class="soc-icon" target="_blank"><i class="fi icon-fb"></i></a></li>
       <li><a onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url={{ URL::route('app.promise', $promise->id) }}&event=button_share" class="soc-icon" target="_blank"><i class="fi icon-vk"></i></a></li>
