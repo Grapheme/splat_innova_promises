@@ -2527,7 +2527,17 @@ class ApplicationController extends BaseController {
     public function getStatisticsPromises() {
 
         $date = Input::get('date');
-        Helper::tad($date);
+        #Helper::tad($date);
+
+        $promises = Dic::valuesBySlug('promises', function($query) use ($date) {
+            $query->where(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), '=', $date);
+        });
+        $promises = DicVal::extracts($promises, null, true, false);
+        $promises = Dic::modifyKeys($promises, 'day');
+        Helper::smartQueries(1);
+        Helper::tad($promises);
+
+        return '';
     }
 
 }
