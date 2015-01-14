@@ -2474,8 +2474,8 @@ class ApplicationController extends BaseController {
 
         if ($date_start && $date_stop && $date_start <= $date_stop) {
 
-            $start = (new \Carbon\Carbon())->createFromFormat('Y-m-d H:i:s', $date_start . ' ' . date('H:i:s'))->addDay(1);
-            $stop = (new \Carbon\Carbon())->createFromFormat('Y-m-d H:i:s', $date_stop . ' ' . date('H:i:s'))->addDay(1);
+            $start = (new \Carbon\Carbon())->createFromFormat('Y-m-d H:i:s', $date_start . ' ' . date('H:i:s'));
+            $stop = (new \Carbon\Carbon())->createFromFormat('Y-m-d H:i:s', $date_stop . ' ' . date('H:i:s'));
 
         } else {
 
@@ -2491,8 +2491,9 @@ class ApplicationController extends BaseController {
             $days[] = $start->subDay(1)->format('Y-m-d');
         }
         */
-        while($start->format('Y-m-d') != $stop->format('Y-m-d')) {
-            $days[] = $start->addDay(1)->format('Y-m-d');
+        $start2 = clone $start;
+        while($start2->format('Y-m-d') != $stop->format('Y-m-d')) {
+            $days[] = $start2->addDay(1)->format('Y-m-d');
         }
         rsort($days);
         #Helper::tad($days);
@@ -2503,10 +2504,13 @@ class ApplicationController extends BaseController {
         $total_promises = Dic::valuesBySlug('promises');
         $total_promises = count($total_promises);
 
+        #Helper::ta($start->format('Y-m-d H:i:s'));
+        #Helper::tad($stop->format('Y-m-d H:i:s'));
+
         $users = Dic::valuesBySlug('users', function($query) use ($start, $stop) {
             #$query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*$period));
-            $query->where('created_at', '>=', date('Y-m-d H:i:s', $start->format('Y-m-d H:i:s')));
-            $query->where('created_at', '<=', date('Y-m-d H:i:s', $stop->format('Y-m-d H:i:s')));
+            $query->where('created_at', '>=', $start->format('Y-m-d H:i:s'));
+            $query->where('created_at', '<=', $stop->format('Y-m-d H:i:s'));
             #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") AS day, COUNT(*) AS count'));
             $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") AS day, COUNT(*) AS count'));
             $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'));
@@ -2532,8 +2536,8 @@ class ApplicationController extends BaseController {
 
         $promises = Dic::valuesBySlug('promises', function($query) use ($start, $stop) {
             #$query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*$period));
-            $query->where('created_at', '>=', date('Y-m-d H:i:s', $start->format('Y-m-d H:i:s')));
-            $query->where('created_at', '<=', date('Y-m-d H:i:s', $stop->format('Y-m-d H:i:s')));
+            $query->where('created_at', '>=', $start->format('Y-m-d H:i:s'));
+            $query->where('created_at', '<=', $stop->format('Y-m-d H:i:s'));
             #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") AS day, COUNT(*) AS count'));
             $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") AS day, COUNT(*) AS count'));
             $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'));
@@ -2544,7 +2548,7 @@ class ApplicationController extends BaseController {
         #Helper::smartQueries(1);
         #Helper::tad($promises);
 
-        return View::make(Helper::layout('statistics'), compact('period', 'start', 'stop', 'days', 'total_users', 'total_promises', 'users', 'users_full', 'promises'));
+        return View::make(Helper::layout('statistics'), compact('period', 'date_start', 'date_stop', 'start', 'stop', 'days', 'total_users', 'total_promises', 'users', 'users_full', 'promises'));
     }
 
     public function getStatisticsPromises() {

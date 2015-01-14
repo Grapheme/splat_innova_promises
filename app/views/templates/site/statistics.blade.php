@@ -24,8 +24,11 @@
 
 				<p>
 
-					{{ Form::text('date_start', null, ['placeholder' => 'yyyy-mm-dd']) }}
-					{{ Form::text('date_stop', null, ['placeholder' => 'yyyy-mm-dd']) }}
+					<form action="?" method="GET">
+						{{ Form::text('date_start', $start->format('Y-m-d'), ['placeholder' => 'yyyy-mm-dd']) }}
+						{{ Form::text('date_stop', $stop->format('Y-m-d'), ['placeholder' => 'yyyy-mm-dd']) }}
+						<button>Отправить</button>
+					</form>
 
 				</p>
 
