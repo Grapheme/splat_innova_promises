@@ -2533,7 +2533,7 @@ class ApplicationController extends BaseController {
             $query->where(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), '=', $date);
         });
         $promises = DicVal::extracts($promises, null, true, false);
-        $promises = Dic::modifyKeys($promises, 'day');
+        #$promises = Dic::modifyKeys($promises, 'day');
         Helper::smartQueries(1);
         Helper::tad($promises);
 
