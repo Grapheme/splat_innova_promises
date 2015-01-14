@@ -2467,16 +2467,33 @@ class ApplicationController extends BaseController {
 
     public function getStatistics() {
 
+        $date_start = Input::get('date_start');
+        $date_stop = Input::get('date_stop');
+
         $period = 7;
 
-        $days = array();
+        if ($date_start && $date_stop && $date_start <= $date_stop) {
 
-        $start = (new \Carbon\Carbon())->now()->addDay(1);
+            $start = (new \Carbon\Carbon())->createFromFormat('Y-m-d H:i:s', $date_start . ' ' . date('H:i:s'))->addDay(1);
+            $stop = (new \Carbon\Carbon())->createFromFormat('Y-m-d H:i:s', $date_stop . ' ' . date('H:i:s'))->addDay(1);
+
+        } else {
+
+            $start = (new \Carbon\Carbon())->now();
+            $stop = (new \Carbon\Carbon())->now()->subDay($period);
+        }
+
+        $days = array();
+        /*
         for ($i = $period; $i > 0; $i--) {
             $days[] = $start->subDay(1)->format('Y-m-d');
         }
+        */
+        while($start->format('Y-m-d') != $stop->format('Y-m-d')) {
+            $days[] = $start->subDay(1)->format('Y-m-d');
+        }
         rsort($days);
-        #Helper::dd($days);
+        Helper::tad($days);
 
         $total_users = Dic::valuesBySlug('users');
         $total_users = count($total_users);
@@ -2484,8 +2501,10 @@ class ApplicationController extends BaseController {
         $total_promises = Dic::valuesBySlug('promises');
         $total_promises = count($total_promises);
 
-        $users = Dic::valuesBySlug('users', function($query) use ($period) {
-            $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*$period));
+        $users = Dic::valuesBySlug('users', function($query) use ($start, $stop) {
+            #$query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*$period));
+            $query->where('created_at', '>=', date('Y-m-d H:i:s', $start->format('Y-m-d H:i:s')));
+            $query->where('created_at', '<=', date('Y-m-d H:i:s', $stop->format('Y-m-d H:i:s')));
             #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") AS day, COUNT(*) AS count'));
             $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") AS day, COUNT(*) AS count'));
             $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'));
@@ -2509,8 +2528,10 @@ class ApplicationController extends BaseController {
         #Helper::ta($users_full);
 
 
-        $promises = Dic::valuesBySlug('promises', function($query) use ($period) {
-            $query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*$period));
+        $promises = Dic::valuesBySlug('promises', function($query) use ($start, $stop) {
+            #$query->where('created_at', '>=', date('Y-m-d H:i:s', time()-60*60*24*$period));
+            $query->where('created_at', '>=', date('Y-m-d H:i:s', $start->format('Y-m-d H:i:s')));
+            $query->where('created_at', '<=', date('Y-m-d H:i:s', $stop->format('Y-m-d H:i:s')));
             #$query->select('id', DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") AS day, COUNT(*) AS count'));
             $query->addSelect(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d") AS day, COUNT(*) AS count'));
             $query->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'));
@@ -2521,7 +2542,7 @@ class ApplicationController extends BaseController {
         #Helper::smartQueries(1);
         #Helper::tad($promises);
 
-        return View::make(Helper::layout('statistics'), compact('period', 'days', 'total_users', 'total_promises', 'users', 'users_full', 'promises'));
+        return View::make(Helper::layout('statistics'), compact('period', 'start', 'stop', 'days', 'total_users', 'total_promises', 'users', 'users_full', 'promises'));
     }
 
     public function getStatisticsPromises() {
@@ -2540,7 +2561,7 @@ class ApplicationController extends BaseController {
         $users = DicVal::extracts($users, null, true, true);
         #Helper::ta($users);
 
-        $promises = DicLib::spreadByField($promises, 'user_id');
+        $promises = DicLib::groupByField($promises, 'user_id');
         #Helper::smartQueries(1);
         #Helper::ta($promises);
 

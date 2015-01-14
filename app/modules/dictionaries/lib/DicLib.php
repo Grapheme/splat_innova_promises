@@ -436,7 +436,7 @@ class DicLib extends BaseController {
     }
 
 
-    public static function spreadByField($values, $key) {
+    public static function groupByField($values, $key) {
 
         $return = new Collection();
         foreach ($values as $value) {

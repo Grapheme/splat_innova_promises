@@ -22,6 +22,13 @@
 					Пользователей за все время - {{ $total_users }}, обещаний за все время - {{ $total_promises }}.
 				</p>
 
+				<p>
+
+					{{ Form::text('date_start', null, ['placeholder' => 'yyyy-mm-dd']) }}
+					{{ Form::text('date_stop', null, ['placeholder' => 'yyyy-mm-dd']) }}
+
+				</p>
+
 				<table border="1" class="stat-table">
 				@foreach($days as $day)
 					<?
