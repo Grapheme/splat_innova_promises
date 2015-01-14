@@ -2564,9 +2564,12 @@ class ApplicationController extends BaseController {
         $expired_promises = DicVal::extracts($expired_promises, null, true, true);
         #$expired_promises = Dic::modifyKeys($expired_promises, 'id');
 
-        $expired_promises_users_ids = Dic::modifyKeys($expired_promises, null, 'id');
-        $expired_promises_users = Dic::valuesBySlugAndIds('users', $expired_promises_users_ids);
-        $expired_promises_users = DicVal::extracts($expired_promises_users, null, true, true);
+        $expired_promises_users = new Collection();
+        $expired_promises_users_ids = Dic::makeLists($expired_promises, null, 'user_id');
+        if (count($expired_promises_users_ids)) {
+            $expired_promises_users = Dic::valuesBySlugAndIds('users', $expired_promises_users_ids);
+            $expired_promises_users = DicVal::extracts($expired_promises_users, null, true, true);
+        }
 
         #Helper::smartQueries(1);
         #Helper::tad($expired_promises);
