@@ -75,7 +75,9 @@
       <div class="main-screen">
         <div class="main-fotorama">
           <div class="js-main-fotorama">
+            {{--
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-1.jpg" alt="">
+            --}}
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-2.jpg" alt="">
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-3.jpg" alt="">
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-4.jpg" alt="">
@@ -85,7 +87,9 @@
         </div>
         <div class="main-content wrapper">
           <div>
+            {{--
             <div class="slide-title js-slide-title">Обещаю в выходные нарядить ёлку с сыном</div>
+            --}}
             <div class="slide-title js-slide-title">Я обещаю чаще улыбаться</div>
             <div class="slide-title js-slide-title">Обещаю прыгнуть с парашютом в январе</div>
             <div class="slide-title js-slide-title">Я обещаю начать бегать по утрам</div>
