@@ -2536,14 +2536,15 @@ class ApplicationController extends BaseController {
         #$promises = Dic::modifyKeys($promises, 'day');
 
         $user_ids = Dic::makeLists($promises, null, 'user_id');
+        $users = Dic::valuesBySlugAndIds('users', $user_ids);
+        #Helper::ta($users);
 
         $promises = DicLib::spreadByField($promises, 'user_id');
-        Helper::smartQueries(1);
-        Helper::ta($promises);
+        #Helper::smartQueries(1);
+        #Helper::ta($promises);
 
-        Helper::ta($user_ids);
 
-        return '';
+        return View::make(Helper::layout('statistics_promises'), compact('date', 'promises', 'users'));
     }
 
 }
