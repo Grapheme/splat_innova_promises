@@ -81,7 +81,13 @@
 						@foreach($expired_promises as $promise)
 
 							<li>
-								<a href="{{ URL::route('app.promise', ['id' => $promise->id, 'private' => md5(date('Y-m-d') . '_' . $promise->id)]) }}" target="_blank">{{ $promise->id }}</a> - {{ $promise->time_limit }}:
+								<a href="{{ URL::route('app.promise', ['id' => $promise->id, 'private' => md5(date('Y-m-d') . '_' . $promise->id)]) }}" target="_blank">{{ $promise->id }}</a>
+								@if (isset($expired_promises_users[$promise->user_id]) && $expired_promises_users[$promise->user_id]->auth_method != 'native')
+									<a href="{{ $expired_promises_users[$promise->user_id]->identity }}">
+										<i class="fa fa-user"></i>
+									</a>
+								@endif
+								{{ $promise->time_limit }}
 								{{ $promise->promise_text }}
 								@if ($promise->only_for_me)
 									<i class="fa fa-lock"></i>
