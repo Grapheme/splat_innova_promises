@@ -2549,6 +2549,8 @@ class ApplicationController extends BaseController {
         #Helper::smartQueries(1);
         #Helper::tad($promises);
 
+
+
         $expired_promises = Dic::valuesBySlug('promises', function($query) {
 
             $query->join_field('time_limit', null, function($join, $value) {
@@ -2561,10 +2563,15 @@ class ApplicationController extends BaseController {
         });
         $expired_promises = DicVal::extracts($expired_promises, null, true, true);
         #$expired_promises = Dic::modifyKeys($expired_promises, 'id');
+
+        $expired_promises_users_ids = Dic::modifyKeys($expired_promises, null, 'id');
+        $expired_promises_users = Dic::valuesBySlugAndIds('users', $expired_promises_users_ids);
+        $expired_promises_users = DicVal::extracts($expired_promises_users, null, true, true);
+
         #Helper::smartQueries(1);
         #Helper::tad($expired_promises);
 
-        return View::make(Helper::layout('statistics'), compact('period', 'date_start', 'date_stop', 'start', 'stop', 'days', 'total_users', 'total_promises', 'users', 'users_full', 'promises', 'expired_promises'));
+        return View::make(Helper::layout('statistics'), compact('period', 'date_start', 'date_stop', 'start', 'stop', 'days', 'total_users', 'total_promises', 'users', 'users_full', 'promises', 'expired_promises', 'expired_promises_users'));
     }
 
     public function getStatisticsPromises() {
