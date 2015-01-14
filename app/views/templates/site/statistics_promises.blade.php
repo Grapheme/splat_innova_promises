@@ -28,12 +28,16 @@
 					@endif
 					<br/>
 
+					<ul>
 					@foreach ($promises[$user->id] as $promise)
 
-						Обещание №{{ $promise->id }}:<br/>
-						{{ $promise->promise_text }}<br/>
+						<li>
+							<a href="{{ URL::route('app.promise', ['id' => $promise->id]) }}" target="_blank">{{ $promise->id }}</a>:
+							{{ $promise->promise_text }}
+						</li>
 
 					@endforeach
+					</ul>
 
 				@endforeach
 
