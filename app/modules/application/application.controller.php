@@ -2551,10 +2551,9 @@ class ApplicationController extends BaseController {
 
         $expired_promises = Dic::valuesBySlug('promises', function($query) use ($start, $stop) {
 
-            $query->join_field('time_limit', 'time_limit', null, function($join) use ($start, $stop) {
-
-                $join->on('value', '>=', $start->format('Y-m-d H:i:s'));
-                $join->on('value', '<=', $stop->format('Y-m-d H:i:s'));
+            $query->join_field('time_limit', null, function($join, $value) use ($start, $stop) {
+                $join->where($value, '>=', $start->format('Y-m-d H:i:s'));
+                $join->where($value, '<=', $stop->format('Y-m-d H:i:s'));
             });
 
             #$query->where('created_at', '>=', $start->format('Y-m-d H:i:s'));
