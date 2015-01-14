@@ -2,6 +2,7 @@
 
 
 @section('style')
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<style>
 		.stat-table td {
 			padding: 5px 8px;
@@ -72,6 +73,15 @@
 					@endif
 				@endforeach
 				</table>
+
+				<h2>Истекающие обещания</h2>
+
+				@foreach($expired_promises as $promise)
+
+					{{ $promise->id }}:
+					{{ $promise->promise_text }}
+
+				@endforeach
 
 			</div>
 		</div>
