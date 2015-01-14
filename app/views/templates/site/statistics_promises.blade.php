@@ -34,6 +34,9 @@
 						<li>
 							<a href="{{ URL::route('app.promise', ['id' => $promise->id]) }}" target="_blank">{{ $promise->id }}</a>:
 							{{ $promise->promise_text }}
+							@if ($promise->only_for_me)
+								<i class="fa fa-lock"></i>
+							@endif
 						</li>
 
 					@endforeach
