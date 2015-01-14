@@ -2534,6 +2534,7 @@ class ApplicationController extends BaseController {
         });
         $promises = DicVal::extracts($promises, null, true, true);
         #$promises = Dic::modifyKeys($promises, 'day');
+        Helper::tad($promises);
 
         $user_ids = Dic::makeLists($promises, null, 'user_id');
         $users = Dic::valuesBySlugAndIds('users', $user_ids);
