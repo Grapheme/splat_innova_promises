@@ -2553,8 +2553,8 @@ class ApplicationController extends BaseController {
 
             $query->join_field('time_limit', 'time_limit', null, function($join) use ($start, $stop) {
 
-                $join->where('value', '>=', $start->format('Y-m-d H:i:s'));
-                $join->where('value', '<=', $stop->format('Y-m-d H:i:s'));
+                $join->on('value', '>=', $start->format('Y-m-d H:i:s'));
+                $join->on('value', '<=', $stop->format('Y-m-d H:i:s'));
             });
 
             #$query->where('created_at', '>=', $start->format('Y-m-d H:i:s'));
@@ -2562,7 +2562,7 @@ class ApplicationController extends BaseController {
         });
         $expired_promises = DicVal::extracts($expired_promises, null, true, true);
         #$expired_promises = Dic::modifyKeys($expired_promises, 'id');
-        #Helper::smartQueries(1);
+        Helper::smartQueries(1);
         Helper::tad($expired_promises);
 
         return View::make(Helper::layout('statistics'), compact('period', 'date_start', 'date_stop', 'start', 'stop', 'days', 'total_users', 'total_promises', 'users', 'users_full', 'promises', 'expired_promises'));
