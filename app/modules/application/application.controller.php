@@ -716,7 +716,7 @@ class ApplicationController extends BaseController {
         $promise->extract(1);
         #Helper::tad($promise);
 
-        if ($promise->only_for_me && (!is_object($user) || $user->id != $promise->user_id))
+        if ($promise->only_for_me && (!is_object($user) || $user->id != $promise->user_id) && Input::get('private') != md5(time() . '_' . $promise->id))
             App::abort(404);
 
         /**
@@ -2542,7 +2542,7 @@ class ApplicationController extends BaseController {
 
         $promises = DicLib::spreadByField($promises, 'user_id');
         #Helper::smartQueries(1);
-        Helper::ta($promises);
+        #Helper::ta($promises);
 
 
         return View::make(Helper::layout('statistics_promises'), compact('date', 'promises', 'users'));
