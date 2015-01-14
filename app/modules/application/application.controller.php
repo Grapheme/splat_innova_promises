@@ -2537,8 +2537,10 @@ class ApplicationController extends BaseController {
 
         $promises = DicLib::spreadByField($promises, 'user_id');
         Helper::smartQueries(1);
-        Helper::tad($promises);
+        Helper::ta($promises);
 
+        $user_ids = array_keys($promises);
+        Helper::ta($user_ids);
 
         return '';
     }
