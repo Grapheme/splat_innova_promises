@@ -36,7 +36,9 @@
 							{{ trans_choice(':count новый пользователь|:count новых пользователя|:count новых пользователей', $users_count, array(), 'ru') }}
 						</td>
 						<td>
-							{{ trans_choice(':count новое обещание|:count новых обещания|:count новых обещаний', $promises_count, array(), 'ru') }}
+							<a href="{{ URL::route('app.statistics_promises', ['date' => $day]) }}">
+								{{ trans_choice(':count новое обещание|:count новых обещания|:count новых обещаний', $promises_count, array(), 'ru') }}
+							</a>
 						</td>
 					</tr>
 					@if (isset($users[$day]) && is_object($users[$day]) && $users[$day]->count > 0)
