@@ -2535,11 +2535,12 @@ class ApplicationController extends BaseController {
         $promises = DicVal::extracts($promises, null, true, false);
         #$promises = Dic::modifyKeys($promises, 'day');
 
+        $user_ids = Dic::makeLists($promises, null, 'user_id');
+
         $promises = DicLib::spreadByField($promises, 'user_id');
         Helper::smartQueries(1);
         Helper::ta($promises);
 
-        $user_ids = array_keys($promises);
         Helper::ta($user_ids);
 
         return '';
