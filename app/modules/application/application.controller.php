@@ -716,7 +716,7 @@ class ApplicationController extends BaseController {
         $promise->extract(1);
         #Helper::tad($promise);
 
-        if ($promise->only_for_me && (!is_object($user) || $user->id != $promise->user_id) && Input::get('private') != md5(time() . '_' . $promise->id))
+        if ($promise->only_for_me && (!is_object($user) || $user->id != $promise->user_id) && Input::get('private') != md5(date('Y-m-d') . '_' . $promise->id))
             App::abort(404);
 
         /**
