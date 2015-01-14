@@ -2,11 +2,7 @@
 
 
 @section('style')
-	<style>
-		.stat-table td {
-			padding: 5px 8px;
-		}
-	</style>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 @stop
 
 
@@ -32,7 +28,7 @@
 					@foreach ($promises[$user->id] as $promise)
 
 						<li>
-							<a href="{{ URL::route('app.promise', ['id' => $promise->id]) }}" target="_blank">{{ $promise->id }}</a>:
+							<a href="{{ URL::route('app.promise', ['id' => $promise->id, 'private' => md5(time() . '_' . $promise->id)]) }}" target="_blank">{{ $promise->id }}</a>:
 							{{ $promise->promise_text }}
 							@if ($promise->only_for_me)
 								<i class="fa fa-lock"></i>
