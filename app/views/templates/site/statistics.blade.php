@@ -76,12 +76,23 @@
 
 				<h2>Истекающие обещания</h2>
 
-				@foreach($expired_promises as $promise)
+				@if ($expired_promises && count($expired_promises))
+					<ul>
+						@foreach($expired_promises as $promise)
 
-					{{ $promise->id }}:
-					{{ $promise->promise_text }}
+							<li>
+								<a href="{{ URL::route('app.promise', ['id' => $promise->id, 'private' => md5(date('Y-m-d') . '_' . $promise->id)]) }}" target="_blank">{{ $promise->id }}</a>:
+								{{ $promise->promise_text }}
+								@if ($promise->only_for_me)
+									<i class="fa fa-lock"></i>
+								@endif
+							</li>
 
-				@endforeach
+						@endforeach
+					</ul>
+				@else
+					Ничего не найдено.
+				@endif
 
 			</div>
 		</div>
