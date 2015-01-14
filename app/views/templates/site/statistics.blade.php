@@ -47,9 +47,12 @@
 										<?
 											unset($users_full[$u]);
 										?>
-										<a href="{{ URL::route('app.profile_id', $user->id) }}" target="_blank">{{ trim($user->name) != '' ? $user->name : $user->identity }}</a>
-										{{ $user->city }}
-										<br/>
+											<a href="{{ URL::route('app.profile_id', $user->id) }}" target="_blank">{{ trim($user->name) != '' ? $user->name : $user->identity }}</a>
+											{{ $user->city }}
+											@if ($user->auth_method != 'native')
+												<a href="{{ $user->identity }}" target="_blank">{{ $user->auth_method }}</a>
+											@endif
+											<br/>
 									@endif
 								@endforeach
 							</td>
