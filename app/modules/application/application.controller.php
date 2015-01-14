@@ -59,6 +59,7 @@ class ApplicationController extends BaseController {
 
 
             Route::get('/statistics', array('as' => 'app.statistics', 'uses' => __CLASS__.'@getStatistics'));
+            Route::get('/statistics/promises', array('as' => 'app.statistics_promises', 'uses' => __CLASS__.'@getStatisticsPromises'));
 
         });
     }
@@ -2521,6 +2522,12 @@ class ApplicationController extends BaseController {
         #Helper::tad($promises);
 
         return View::make(Helper::layout('statistics'), compact('period', 'days', 'total_users', 'total_promises', 'users', 'users_full', 'promises'));
+    }
+
+    public function getStatisticsPromises() {
+
+        $date = Input::get('date');
+        Helper::tad($date);
     }
 
 }
