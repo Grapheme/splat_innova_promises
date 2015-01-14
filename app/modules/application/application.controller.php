@@ -2479,9 +2479,11 @@ class ApplicationController extends BaseController {
 
         } else {
 
-            $start = (new \Carbon\Carbon())->now();
-            $stop = (new \Carbon\Carbon())->now()->subDay($period);
+            $start = (new \Carbon\Carbon())->now()->subDays($period);
+            $stop = (new \Carbon\Carbon())->now();
         }
+
+        #Helper::ta($start->format('Y-m-d') . ' - ' . $stop->format('Y-m-d'));
 
         $days = array();
         /*
@@ -2490,10 +2492,10 @@ class ApplicationController extends BaseController {
         }
         */
         while($start->format('Y-m-d') != $stop->format('Y-m-d')) {
-            $days[] = $start->subDay(1)->format('Y-m-d');
+            $days[] = $start->addDay(1)->format('Y-m-d');
         }
         rsort($days);
-        Helper::tad($days);
+        #Helper::tad($days);
 
         $total_users = Dic::valuesBySlug('users');
         $total_users = count($total_users);
