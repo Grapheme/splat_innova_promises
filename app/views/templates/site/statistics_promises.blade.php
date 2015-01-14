@@ -28,7 +28,7 @@
 					@foreach ($promises[$user->id] as $promise)
 
 						<li>
-							<a href="{{ URL::route('app.promise', ['id' => $promise->id, 'private' => md5(time() . '_' . $promise->id)]) }}" target="_blank">{{ $promise->id }}</a>:
+							<a href="{{ URL::route('app.promise', ['id' => $promise->id, 'private' => md5(date('Y-m-d') . '_' . $promise->id)]) }}" target="_blank">{{ $promise->id }}</a>:
 							{{ $promise->promise_text }}
 							@if ($promise->only_for_me)
 								<i class="fa fa-lock"></i>
