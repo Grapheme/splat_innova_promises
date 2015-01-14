@@ -2532,11 +2532,12 @@ class ApplicationController extends BaseController {
         $promises = Dic::valuesBySlug('promises', function($query) use ($date) {
             $query->where(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), '=', $date);
         });
-        $promises = DicVal::extracts($promises, null, true, false);
+        $promises = DicVal::extracts($promises, null, true, true);
         #$promises = Dic::modifyKeys($promises, 'day');
 
         $user_ids = Dic::makeLists($promises, null, 'user_id');
         $users = Dic::valuesBySlugAndIds('users', $user_ids);
+        $users = DicVal::extracts($users, null, true, true);
         #Helper::ta($users);
 
         $promises = DicLib::spreadByField($promises, 'user_id');
