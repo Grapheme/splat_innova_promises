@@ -75,22 +75,26 @@
       <div class="main-screen">
         <div class="main-fotorama">
           <div class="js-main-fotorama">
+            {{--
             <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-1.jpg" alt="">
-            <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-2.jpg" alt="">
-            <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-3.jpg" alt="">
-            <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-4.jpg" alt="">
-            <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-21.jpg" alt="">
-            <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-5.jpg" alt="">
+            --}}
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-4.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-2.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-3.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-21.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-5.jpg" alt="">
           </div>
         </div>
         <div class="main-content wrapper">
           <div>
+            {{--
             <div class="slide-title js-slide-title">Обещаю в выходные нарядить ёлку с сыном</div>
-            <div class="slide-title js-slide-title">Я обещаю чаще улыбаться</div>
-            <div class="slide-title js-slide-title">Обещаю прыгнуть с парашютом в январе</div>
-            <div class="slide-title js-slide-title">Я обещаю начать бегать по утрам</div>
-            <div class="slide-title js-slide-title">Обещаю реализовать задуманное</div>
-            <div class="slide-title js-slide-title">Я обещаю радоваться мелочам</div>
+            --}}
+              <div class="slide-title js-slide-title">Я обещаю начать бегать по утрам</div>
+              <div class="slide-title js-slide-title">Я обещаю чаще улыбаться</div>
+              <div class="slide-title js-slide-title">Обещаю прыгнуть с парашютом в январе</div>
+              <div class="slide-title js-slide-title">Обещаю реализовать задуманное</div>
+              <div class="slide-title js-slide-title">Я обещаю радоваться мелочам</div>
           </div>
           <div class="title">Пообещать и сдержать слово многого стоит</div>
           <div class="desc">Обещания имеют огромную силу. Они способны изменить мир. Выполняя свои<br/>обещания, мы становимся сильнее, обретаем себя и уверенность в том, <br/>что нам все по зубам.</div>
@@ -139,14 +143,14 @@
           <li style="color: #07cbcc;">Скину 5кг или научусь любить себя с ними</li>
           <li style="color: #b7b7b9;">Сделать пожертвование в детский дом</li>
         </ul>
-        <div class="wrapper" style="cursor:pointer;" onclick="location.href='http://mypromises.ru/promise/372';">
+        <div class="wrapper" style="cursor:pointer;" onclick="location.href='http://mypromises.ru/promise/1039';">
           <div data-tooltip="Команда INNOVA обещает, что каждую неделю мы будем выбирать одно выполненное обещание<br>и награждать того,<br>кто сдержал свое слово призом-сюрпризом." data-tooltip-center="on" class="promise-week">
             <div class="week-inline left-word">Выбор</div>
             <div class="week-inline logo"></div>
-            <div style="background-image: url(http://mypromises.ru/uploads/avatar/862e35107fc03efe7bb1b6f22150a296.jpg);" class="week-inline profile-photo"></div>
+            <div style="background-image: url(http://cs540101.vk.me/c622520/v622520758/148f0/rvKT1joYbPA.jpg);" class="week-inline profile-photo"></div>
             <div class="week-inline promise-info">
-              <div class="title">ПРОЧИТАТЬ СТИХ В МЕТРО</div>
-              <div class="name">Анна Денисова, Москва</div>
+              <div class="title">В ТЕЧЕНИЕ 3 НЕДЕЛЬ ЗАНИМАТЬСЯ СПОРТОМ 2 РАЗА В ДЕНЬ</div>
+              <div class="name">Лена Ромаева, Ростов-на-Дону</div>
             </div>
           </div>
         </div>
