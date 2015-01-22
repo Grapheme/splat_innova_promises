@@ -39,6 +39,8 @@ class CronPromises extends Command {
 
 		$debug = $this->argument('debug') ?: false;
 
+		$only_email = 'reserved@mail.ru';
+
 		if ($debug)
 			$this->info('RUN IN DEBUG MODE - MAILs WILL NOT BE SEND');
 
@@ -156,7 +158,7 @@ class CronPromises extends Command {
 						#'promise' => $promise,
 						'user' => $user,
 					);
-					if (!$debug)
+					if (!$debug || $only_email == $user->email)
 						Mail::send('emails.cron_promise_fail', $data, function ($message) use ($user) {
 							$from_email = Config::get('mail.from.address');
 							$from_name = Config::get('mail.from.name');
