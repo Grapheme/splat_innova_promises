@@ -39,7 +39,9 @@ class CronPromises extends Command {
 
 		$debug = $this->argument('debug') ?: false;
 
-		#$this->info($debug);
+		if ($debug)
+			$this->info('RUN IN DEBUG MODE - MAILs WILL NOT BE SEND');
+
 		#die;
 
 		$now = (new \Carbon\Carbon())->now();
@@ -96,6 +98,10 @@ class CronPromises extends Command {
 					unset($promises[$p]);
 			}
 			$this->info('Filtered promises: ' . count($promises));
+
+			$promises_ids = Dic::makeLists($promises, NULL, 'id');
+			Helper::d($promises_ids);
+
 
 			/**
 			 * Получаем ID пользователей - авторов обещаний
