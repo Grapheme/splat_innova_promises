@@ -4,6 +4,11 @@ var fb_app_id = '1010986995584773';
 /**
  * Хеши картинок из ВК
  */
+
+/**
+ * Без ссылки
+ */
+//*
 var photos = {
     blue:   'photo-62074862_348392589',
     yellow: 'photo-62074862_348392593',
@@ -11,6 +16,19 @@ var photos = {
     pink:   'photo-62074862_348392591',
     green:  'photo-62074862_348392585'
 };
+//*/
+/**
+ * Со ссылкой
+ */
+/*
+var photos = {
+    //blue:   '',
+    //yellow: '',
+    //aqua:   '',
+    //pink:   '',
+    green:  'photo-62074862_352055707'
+};
+*/
 
 $(document).ready(function($){
     var ulogintoken;
