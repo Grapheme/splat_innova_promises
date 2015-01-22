@@ -51,7 +51,7 @@ class CronPromises extends Command {
 		$tomorrow2->addDay(2); // послезавтра
 
 		/**
-		 * Получаем проваленные обещания
+		 * Получаем проваленные обещания - у которых срок вышел вчера
 		 */
 		$promises = Dic::valuesBySlug('promises', function($query) use ($yesterday, $now){
 
@@ -73,15 +73,17 @@ class CronPromises extends Command {
 			;
 		});
 		#Helper::smartQueries(1);
-
 		$promises = DicVal::extracts($promises, NULL, true, true);
 		#Helper::ta($promises);
 		$this->info('Total failed promises: ' . count($promises));
 
+		/**
+		 * Если что-то найдено...
+		 */
 		if (count($promises)) {
 
 			/**
-			 * Фильтруем обещания - оставляем только невыполненные и непроваленные
+			 * Фильтруем просроченные обещания - оставляем только те, у которых нет метки "выполнено" или "провалено"
 			 */
 			foreach ($promises as $p => $promise) {
 
@@ -91,18 +93,18 @@ class CronPromises extends Command {
 			$this->info('Filtered promises: ' . count($promises));
 
 			/**
-			 * Получаем ID пользователей
+			 * Получаем ID пользователей - авторов обещаний
 			 */
 			$users_ids = Dic::makeLists($promises, NULL, 'user_id');
 			$this->info('Total users: ' . count($users_ids));
 			Helper::d($users_ids);
 
 			$users_ids = array_unique($users_ids);
-			$this->info('Filtered users: ' . count($users_ids));
+			$this->info('Filtered (unique) users: ' . count($users_ids));
 			Helper::d($users_ids);
 
 			/**
-			 * Загружаем пользователей по ID
+			 * Загружаем пользователей по IDs
 			 */
 			$users = Dic::valuesBySlugAndIds('users', $users_ids);
 			$users = DicVal::extracts($users, NULL, true, true);
@@ -113,6 +115,9 @@ class CronPromises extends Command {
 
 			$this->info('Отправляем письма с оповещением о проваленных обещаниях...');
 
+			/**
+			 * Если есть юзеры, которым нужно отправить оповещение...
+			 */
 			if (count($users)) {
 
 				/**
@@ -120,10 +125,13 @@ class CronPromises extends Command {
 				 */
 				foreach ($users as $u => $user) {
 
+					/**
+					 * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
+					 */
 					$also_users[] = $user->id;
 
 					/**
-					 * Валидация
+					 * Валидация - установлен ли валидный адрес почты
 					 */
 					$validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
 					if ($validator->fails()) {
@@ -159,7 +167,7 @@ class CronPromises extends Command {
 
 
 		/**
-		 * Получаем истекающие обещания
+		 * Получаем истекающие обещания - которые истекают с завтра до послезавтра
 		 */
 		$promises = Dic::valuesBySlug('promises', function($query) use ($now, $tomorrow, $tomorrow2){
 
@@ -181,15 +189,17 @@ class CronPromises extends Command {
 			;
 		});
 		#Helper::smartQueries(1);
-
 		$promises = DicVal::extracts($promises, NULL, true, true);
 		#Helper::ta($promises);
 		$this->info('Total expired promises: ' . count($promises));
 
+		/**
+		 * Если что-то найдено...
+		 */
 		if (count($promises)) {
 
 			/**
-			 * Фильтруем обещания - оставляем только невыполненные и непроваленные
+			 * Фильтруем обещания - оставляем только те, у которых нет метки "выполнено" или "провалено"
 			 */
 			foreach ($promises as $p => $promise) {
 
@@ -207,7 +217,7 @@ class CronPromises extends Command {
 			Helper::d($users_ids);
 
 			$users_ids = array_unique($users_ids);
-			$this->info('Filtered users: ' . count($users_ids));
+			$this->info('Filtered (unique) users: ' . count($users_ids));
 			Helper::d($users_ids);
 
 			/**
@@ -220,6 +230,9 @@ class CronPromises extends Command {
 
 			$this->info('Отправляем письма с оповещением об истекающих обещаниях...');
 
+			/**
+			 * Если есть юзеры, которым нужно отправить оповещение...
+			 */
 			if (count($users)) {
 
 				/**
@@ -227,12 +240,15 @@ class CronPromises extends Command {
 				 */
 				foreach ($users as $u => $user) {
 
+					/**
+					 * Если юзеру уже было отправлено письмо раньше - не будем отправлять
+					 */
 					if (in_array($user->id, $also_users)) {
 						continue;
 					}
 
 					/**
-					 * Валидация
+					 * Валидация - есть ли у юзера валидный адрес почты
 					 */
 					$validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
 					if ($validator->fails()) {
@@ -242,8 +258,10 @@ class CronPromises extends Command {
 					/**
 					 * Если валидация пройдена - отправляем письмо
 					 */
-					$data = array(#'promise' => $promise,
-						'user' => $user,);
+					$data = array(
+						#'promise' => $promise,
+						'user' => $user,
+					);
 					Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
 						$from_email = Config::get('mail.from.address');
 						$from_name = Config::get('mail.from.name');
