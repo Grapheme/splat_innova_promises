@@ -37,6 +37,11 @@ class CronPromises extends Command {
 
 		#$this->info("111");
 
+		$debug = $this->argument('debug') ?: false;
+
+		#$this->info($debug);
+		#die;
+
 		$now = (new \Carbon\Carbon())->now();
 
 		#$yesterday = (new \Carbon\Carbon())->yesterday(); // вчера
@@ -145,14 +150,15 @@ class CronPromises extends Command {
 						#'promise' => $promise,
 						'user' => $user,
 					);
-					Mail::send('emails.cron_promise_fail', $data, function ($message) use ($user) {
-						$from_email = Config::get('mail.from.address');
-						$from_name = Config::get('mail.from.name');
-						$message->from($from_email, $from_name);
-						$message->subject('Не удалось выполнить обещание');
-						$message->to($user->email);
-					});
-					$this->info($user->email);
+					if (!$debug)
+						Mail::send('emails.cron_promise_fail', $data, function ($message) use ($user) {
+							$from_email = Config::get('mail.from.address');
+							$from_name = Config::get('mail.from.name');
+							$message->from($from_email, $from_name);
+							$message->subject('Не удалось выполнить обещание');
+							$message->to($user->email);
+						});
+					$this->info(' + ' . $user->email);
 				}
 			}
 		}
@@ -262,13 +268,14 @@ class CronPromises extends Command {
 						#'promise' => $promise,
 						'user' => $user,
 					);
-					Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
-						$from_email = Config::get('mail.from.address');
-						$from_name = Config::get('mail.from.name');
-						$message->from($from_email, $from_name);
-						$message->subject('Заканчивается срок выполнения обещания!');
-						$message->to($user->email);
-					});
+					if (!$debug)
+						Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
+							$from_email = Config::get('mail.from.address');
+							$from_name = Config::get('mail.from.name');
+							$message->from($from_email, $from_name);
+							$message->subject('Заканчивается срок выполнения обещания!');
+							$message->to($user->email);
+						});
 					$this->info($user->email);
 				}
 			}
@@ -287,6 +294,7 @@ class CronPromises extends Command {
 	protected function getArguments() {
 		return array(
 			#array('example', InputArgument::REQUIRED, 'An example argument.'),
+			array('debug', InputArgument::OPTIONAL, 'Debug or not debug.', null),
 		);
 	}
 
