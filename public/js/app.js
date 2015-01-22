@@ -8,7 +8,7 @@ var fb_app_id = '1010986995584773';
 /**
  * Без ссылки
  */
-//*
+/*
 var photos = {
     blue:   'photo-62074862_348392589',
     yellow: 'photo-62074862_348392593',
@@ -20,15 +20,15 @@ var photos = {
 /**
  * Со ссылкой
  */
-/*
+//*
 var photos = {
-    //blue:   '',
-    //yellow: '',
-    //aqua:   '',
-    //pink:   '',
+    blue:   'photo-62074862_352161152',
+    yellow: 'photo-62074862_352161148',
+    aqua:   'photo-62074862_352161151',
+    pink:   'photo-62074862_352161150',
     green:  'photo-62074862_352055707'
 };
-*/
+//*/
 
 $(document).ready(function($){
     var ulogintoken;
