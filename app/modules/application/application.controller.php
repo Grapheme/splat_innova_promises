@@ -2651,9 +2651,9 @@ class ApplicationController extends BaseController {
             elseif ($user->sex == 2)
                 $gender = 'М';
 
-            $promise_status = 'В ПРОЦЕССЕ';
+            $promise_status = '<font color="#bbb">В ПРОЦЕССЕ</font>';
             if ($promise->time_limit < date('Y-m-d H:i:s') && !$promise->finished_at)
-                $promise_status = '<font color="#a00">ПРОВАЛЕНО</font>font>';
+                $promise_status = '<font color="#a00">ПРОВАЛЕНО</font>';
             elseif ($promise->finished_at)
                 $promise_status = '<font color="#080">ВЫПОЛНЕНО</font>';
 
