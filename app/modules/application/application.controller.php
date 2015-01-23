@@ -2651,14 +2651,14 @@ class ApplicationController extends BaseController {
             elseif ($user->sex == 2)
                 $gender = 'М';
 
-            $promise_status = '<font color="#fdd">В ПРОЦЕССЕ</font>';
+            $promise_status = '<font color="#bbb">В ПРОЦЕССЕ</font>';
             if ($promise->time_limit < date('Y-m-d H:i:s') && !$promise->finished_at)
                 $promise_status = '<font color="#a00">ПРОВАЛЕНО</font>';
             elseif ($promise->finished_at)
                 $promise_status = '<font color="#080">ВЫПОЛНЕНО</font>';
 
 
-            echo "<tr style='" . ($promise->only_for_me ? 'background-color:#300' : '') . "'>
+            echo "<tr style='" . ($promise->only_for_me ? 'background-color:#fdd' : '') . "'>
     <td>" . $promise->created_at->format('d.m.Y') . "</td>
     <td><a href='" . URL::route('app.promise', $promise->id) . "' target='_blank'>" . $promise->promise_text . "</a></td>
     <td>" . $city . "</td>
