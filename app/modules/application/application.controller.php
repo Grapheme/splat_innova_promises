@@ -2645,11 +2645,25 @@ class ApplicationController extends BaseController {
             #processFriends($user)
 
             $city = $user->city;
+            $gender = '';
+            if ($user->sex == 1)
+                $gender = 'Ж';
+            elseif ($user->sex == 2)
+                $gender = 'М';
+
+            $promise_status = 'В ПРОЦЕССЕ';
+            if ($promise->time_limit < date('Y-m-d H:i:s') && !$promise->finished_at)
+                $promise_status = 'ПРОВАЛЕНО';
+            elseif ($promise->finished_at)
+                $promise_status = 'ВЫПОЛНЕНО';
+
 
             echo "<tr>
     <td>" . $promise->promise_text . "</td>
     <td>" . $city . "</td>
-    <td>" . @$city . "</td>
+    <td>" . $gender . "</td>
+    <td>" . $promise->time_limit . "</td>
+    <td>" . $promise_status . "</td>
 </tr>\n";
         }
         echo "</table>";
