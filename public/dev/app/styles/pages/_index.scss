@@ -200,9 +200,12 @@
 
 		.promise-info {
 			.title {
-				font-size: 30px;
+				font-size: 22px;
 				font-weight: 100;
 				text-transform: uppercase;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				max-width: 665px;
 			}
 
 			.name {
