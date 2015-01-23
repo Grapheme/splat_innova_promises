@@ -1178,75 +1178,7 @@ class ApplicationController extends BaseController {
 
                 $this->setUserToken($user->user_token);
 
-
-                $now = (new \Carbon\Carbon())->now();
-                #echo $now->format('d.m.Y') . "<br/>";
-                /**
-                 * Определение страны, города, пола и возраста
-                 */
-                switch ($user->auth_method) {
-
-                    case "vkontakte":
-                        if (isset($user->full_social_info['country']) && isset($user->full_social_info['country']['title'])) {
-                            $user->country = $user->full_social_info['country']['title'];
-                        }
-                        #if (isset($user->full_social_info['city']) && isset($user->full_social_info['city']['title'])) {
-                        #    $user->city = $user->full_social_info['city']['title'];
-                        #}
-                        if (isset($user->full_social_info['sex']) && $user->full_social_info['sex']) {
-                            $user->sex = $user->full_social_info['sex'];
-                        }
-                        if (isset($user->bdate) && $user->bdate) {
-                            if (preg_match('~\d{1,2}\.\d{1,2}\.\d{4}~is', $user->bdate)) {
-                                $stamp = (new \Carbon\Carbon())->createFromFormat('d.m.Y', $user->bdate);
-                                $user->years_old = $stamp->diffInYears($now);
-                            }
-                        } elseif (isset($user->full_social_info['bdate']) && $user->full_social_info['bdate']) {
-                            if (preg_match('~[12]{1}\d{3}\-\d{1,2}\-\d{1,2}~is', $user->full_social_info['bdate'])) {
-                                $stamp = (new \Carbon\Carbon())->createFromFormat('Y-m-d', $user->full_social_info['bdate']);
-                                $user->years_old = $stamp->diffInYears($now);
-                            }
-                        }
-                        break;
-
-                    case "odnoklassniki":
-                        if (isset($user->full_social_info['gender']) && $user->full_social_info['gender']) {
-                            $user->sex = $user->full_social_info['gender'] == 'male' ? 2 : 1;
-                        }
-                        if (isset($user->full_social_info['location']['countryName']) && isset($user->full_social_info['location']['countryName'])) {
-                            $user->country = $user->full_social_info['location']['countryName'];
-                        }
-                        #if (isset($user->full_social_info['location']['city']) && isset($user->full_social_info['location']['city'])) {
-                        #    $user->city = $user->full_social_info['location']['city'];
-                        #}
-                        /*
-                        if (isset($user->full_social_info['age']) && $user->full_social_info['age']) {
-                            $user->years_old = $user->full_social_info['age'];
-                        }
-                        */
-                        if (isset($user->bdate) && $user->bdate) {
-                            if (preg_match('~\d{1,2}\.\d{1,2}\.\d{4}~is', $user->bdate)) {
-                                $stamp = (new \Carbon\Carbon())->createFromFormat('d.m.Y', $user->bdate);
-                                $user->years_old = $stamp->diffInYears($now);
-                            }
-                        }
-                        break;
-
-                    case "facebook":
-                        if (isset($user->full_social_info['gender']) && $user->full_social_info['gender']) {
-                            $user->sex = $user->full_social_info['gender'] == 'мужской' ? 2 : 1;
-                        }
-                        #if (isset($user->full_social_info['hometown']) && isset($user->full_social_info['hometown']['name'])) {
-                        #    $user->city = $user->full_social_info['hometown']['name'];
-                        #}
-                        if (isset($user->full_social_info['birthday']) && $user->full_social_info['birthday']) {
-                            if (preg_match('~\d{2}\/\d{2}\/\d{4}~is', $user->full_social_info['birthday'])) {
-                                $stamp = (new \Carbon\Carbon())->createFromFormat('m/d/Y', $user->full_social_info['birthday']);
-                                $user->years_old = $stamp->diffInYears($now);
-                            }
-                        }
-                        break;
-                }
+                $user = $this->extract_user($user);
 
                 #echo $stamp->format('d.m.Y');
 
@@ -1260,6 +1192,81 @@ class ApplicationController extends BaseController {
         }
 
         #Helper::tad($temp);
+
+        return $user;
+    }
+
+
+    private function extract_user($user) {
+
+        $now = (new \Carbon\Carbon())->now();
+        #echo $now->format('d.m.Y') . "<br/>";
+        /**
+         * Определение страны, города, пола и возраста
+         */
+        switch ($user->auth_method) {
+
+            case "vkontakte":
+                if (isset($user->full_social_info['country']) && isset($user->full_social_info['country']['title'])) {
+                    $user->country = $user->full_social_info['country']['title'];
+                }
+                #if (isset($user->full_social_info['city']) && isset($user->full_social_info['city']['title'])) {
+                #    $user->city = $user->full_social_info['city']['title'];
+                #}
+                if (isset($user->full_social_info['sex']) && $user->full_social_info['sex']) {
+                    $user->sex = $user->full_social_info['sex'];
+                }
+                if (isset($user->bdate) && $user->bdate) {
+                    if (preg_match('~\d{1,2}\.\d{1,2}\.\d{4}~is', $user->bdate)) {
+                        $stamp = (new \Carbon\Carbon())->createFromFormat('d.m.Y', $user->bdate);
+                        $user->years_old = $stamp->diffInYears($now);
+                    }
+                } elseif (isset($user->full_social_info['bdate']) && $user->full_social_info['bdate']) {
+                    if (preg_match('~[12]{1}\d{3}\-\d{1,2}\-\d{1,2}~is', $user->full_social_info['bdate'])) {
+                        $stamp = (new \Carbon\Carbon())->createFromFormat('Y-m-d', $user->full_social_info['bdate']);
+                        $user->years_old = $stamp->diffInYears($now);
+                    }
+                }
+                break;
+
+            case "odnoklassniki":
+                if (isset($user->full_social_info['gender']) && $user->full_social_info['gender']) {
+                    $user->sex = $user->full_social_info['gender'] == 'male' ? 2 : 1;
+                }
+                if (isset($user->full_social_info['location']['countryName']) && isset($user->full_social_info['location']['countryName'])) {
+                    $user->country = $user->full_social_info['location']['countryName'];
+                }
+                #if (isset($user->full_social_info['location']['city']) && isset($user->full_social_info['location']['city'])) {
+                #    $user->city = $user->full_social_info['location']['city'];
+                #}
+                /*
+                if (isset($user->full_social_info['age']) && $user->full_social_info['age']) {
+                    $user->years_old = $user->full_social_info['age'];
+                }
+                */
+                if (isset($user->bdate) && $user->bdate) {
+                    if (preg_match('~\d{1,2}\.\d{1,2}\.\d{4}~is', $user->bdate)) {
+                        $stamp = (new \Carbon\Carbon())->createFromFormat('d.m.Y', $user->bdate);
+                        $user->years_old = $stamp->diffInYears($now);
+                    }
+                }
+                break;
+
+            case "facebook":
+                if (isset($user->full_social_info['gender']) && $user->full_social_info['gender']) {
+                    $user->sex = $user->full_social_info['gender'] == 'мужской' ? 2 : 1;
+                }
+                #if (isset($user->full_social_info['hometown']) && isset($user->full_social_info['hometown']['name'])) {
+                #    $user->city = $user->full_social_info['hometown']['name'];
+                #}
+                if (isset($user->full_social_info['birthday']) && $user->full_social_info['birthday']) {
+                    if (preg_match('~\d{2}\/\d{2}\/\d{4}~is', $user->full_social_info['birthday'])) {
+                        $stamp = (new \Carbon\Carbon())->createFromFormat('m/d/Y', $user->full_social_info['birthday']);
+                        $user->years_old = $stamp->diffInYears($now);
+                    }
+                }
+                break;
+        }
 
         return $user;
     }
