@@ -2617,16 +2617,16 @@ class ApplicationController extends BaseController {
         $promises = Dic::valuesBySlug('promises', function($query) {
             #$query->where(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), '=', $date);
             $query->orderBy('created_at', 'DESC');
-            $query->take(50);
+            #$query->take(50);
         });
         $promises = DicVal::extracts($promises, null, true, true);
         #$promises = Dic::modifyKeys($promises, 'day');
-        Helper::ta($promises);
+        #Helper::ta($promises);
 
         $user_ids = Dic::makeLists($promises, null, 'user_id');
         $users = Dic::valuesBySlugAndIds('users', $user_ids);
         $users = DicVal::extracts($users, null, true, true);
-        Helper::ta($users);
+        #Helper::ta($users);
 
         #$promises = DicLib::groupByField($promises, 'user_id');
         #Helper::tad($promises);
@@ -2641,7 +2641,7 @@ class ApplicationController extends BaseController {
                 continue;
 
             $user = $this->extract_user($user);
-            Helper::ta($user);
+            #Helper::ta($user);
             #processFriends($user)
 
             $city = $user->city ?: '&nbsp;';
