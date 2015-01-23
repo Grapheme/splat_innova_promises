@@ -2644,7 +2644,7 @@ class ApplicationController extends BaseController {
             Helper::ta($user);
             #processFriends($user)
 
-            $city = $user->city;
+            $city = $user->city ?: '&nbsp;';
             $gender = '&nbsp;';
             if ($user->sex == 1)
                 $gender = 'Ж';
@@ -2660,9 +2660,13 @@ class ApplicationController extends BaseController {
 
             echo "<tr>
     <td>" . $promise->created_at->format('d.m.Y') . "</td>
-    <td>" . $promise->promise_text . "</td>
+    <td><a href='" . URL::route('app.promise', $promise->id) . "' target='_blank'>" . $promise->promise_text . "</a></td>
     <td>" . $city . "</td>
     <td>" . $gender . "</td>
+    <td>
+        <a href='" . URL::route('app.profile_id', $user->id) . "' target='_blank'>" . $user->name . "</a>
+        " . ($user->auth_method != 'native' ? "<a href='" . $user->identity . "' target='_blank'>" . $user->auth_method . "</a>" : '') . "
+    </td>
     <td>" . $promise->time_limit . "</td>
     <td align='center'>" . $promise_status . "</td>
 </tr>\n";
