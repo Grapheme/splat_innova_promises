@@ -2645,7 +2645,7 @@ class ApplicationController extends BaseController {
             #processFriends($user)
 
             $city = $user->city;
-            $gender = '';
+            $gender = '&nbsp;';
             if ($user->sex == 1)
                 $gender = 'Ж';
             elseif ($user->sex == 2)
