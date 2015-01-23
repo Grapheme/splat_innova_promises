@@ -1199,6 +1199,9 @@ class ApplicationController extends BaseController {
 
     private function extract_user($user) {
 
+        if (!is_array($user->full_social_info))
+            $user->full_social_info = json_decode($user->full_social_info);
+
         $now = (new \Carbon\Carbon())->now();
         #echo $now->format('d.m.Y') . "<br/>";
         /**
