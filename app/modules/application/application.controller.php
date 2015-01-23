@@ -2614,7 +2614,7 @@ class ApplicationController extends BaseController {
         $promises = Dic::valuesBySlug('promises', function($query) {
             #$query->where(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), '=', $date);
             $query->orderBy('lft', 'DESC');
-            $query->take(5);
+            $query->take(50);
         });
         $promises = DicVal::extracts($promises, null, true, true);
         #$promises = Dic::modifyKeys($promises, 'day');
