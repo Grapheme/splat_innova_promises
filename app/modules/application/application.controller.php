@@ -2637,7 +2637,7 @@ class ApplicationController extends BaseController {
             if (!$user || !is_object($user))
                 continue;
 
-            $user = $this->processFriends($user);
+            $user = $this->extract_user($user);
             Helper::ta($user);
             #processFriends($user)
 
