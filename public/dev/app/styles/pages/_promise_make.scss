@@ -147,6 +147,13 @@
 
 	.btn-cont {
 		margin-top: 45px;
+
+		.us-btn {
+			&[disabled="disabled"] {
+				opacity: .8;
+				background: #56565b;
+			}
+		}
 	}
 }
 
