@@ -2664,7 +2664,7 @@ class ApplicationController extends BaseController {
     <td><a href='" . URL::route('app.promise', $promise->id) . "' target='_blank'>" . $promise->promise_text . "</a></td>
     <td>" . $city . "</td>
     <td nowrap>" . $gender . "</td>
-    <td nowrap>
+    <td>
         <a href='" . URL::route('app.profile_id', $user->id) . "' target='_blank'>" . $user->name . "</a>
         " . ($user->auth_method != 'native' ? "<a href='" . $user->identity . "' target='_blank'>" . $user->auth_method . "</a>" : '') . "
     </td>
