@@ -2633,7 +2633,7 @@ class ApplicationController extends BaseController {
         #Helper::smartQueries(1);
 
         #/*
-        echo "<table border='1'>";
+        echo "<table border='1' cellspacing='0' cellpadding='5'>";
         foreach ($promises as $promise) {
 
             $user = @$users[$promise->user_id];
@@ -2663,7 +2663,7 @@ class ApplicationController extends BaseController {
     <td>" . $city . "</td>
     <td>" . $gender . "</td>
     <td>" . $promise->time_limit . "</td>
-    <td>" . $promise_status . "</td>
+    <td align='center'>" . $promise_status . "</td>
 </tr>\n";
         }
         echo "</table>";
