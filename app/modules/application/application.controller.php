@@ -2653,9 +2653,9 @@ class ApplicationController extends BaseController {
 
             $promise_status = 'В ПРОЦЕССЕ';
             if ($promise->time_limit < date('Y-m-d H:i:s') && !$promise->finished_at)
-                $promise_status = 'ПРОВАЛЕНО';
+                $promise_status = '<font color="#a00">ПРОВАЛЕНО</font>font>';
             elseif ($promise->finished_at)
-                $promise_status = 'ВЫПОЛНЕНО';
+                $promise_status = '<font color="#080">ВЫПОЛНЕНО</font>';
 
 
             echo "<tr>
