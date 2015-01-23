@@ -2631,7 +2631,7 @@ class ApplicationController extends BaseController {
                 continue;
 
             $user = $this->processFriends($user);
-            Helepr::ta($user);
+            Helper::ta($user);
             #processFriends($user)
 
             $city = $user->city;
