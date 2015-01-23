@@ -2658,7 +2658,7 @@ class ApplicationController extends BaseController {
                 $promise_status = '<font color="#080">ВЫПОЛНЕНО</font>';
 
 
-            echo "<tr>
+            echo "<tr style='" . ($promise->only_for_me ? 'background-color:#300' : '') . "'>
     <td>" . $promise->created_at->format('d.m.Y') . "</td>
     <td><a href='" . URL::route('app.promise', $promise->id) . "' target='_blank'>" . $promise->promise_text . "</a></td>
     <td>" . $city . "</td>
