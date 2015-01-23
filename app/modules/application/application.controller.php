@@ -2616,7 +2616,7 @@ class ApplicationController extends BaseController {
 
         $promises = Dic::valuesBySlug('promises', function($query) {
             #$query->where(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), '=', $date);
-            $query->orderBy('lft', 'DESC');
+            $query->orderBy('created_at', 'DESC');
             $query->take(50);
         });
         $promises = DicVal::extracts($promises, null, true, true);
@@ -2659,6 +2659,7 @@ class ApplicationController extends BaseController {
 
 
             echo "<tr>
+    <td>" . $promise->created_at->format('d.m.Y') . "</td>
     <td>" . $promise->promise_text . "</td>
     <td>" . $city . "</td>
     <td>" . $gender . "</td>
