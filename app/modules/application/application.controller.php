@@ -61,6 +61,7 @@ class ApplicationController extends BaseController {
             Route::get('/statistics', array('as' => 'app.statistics', 'uses' => __CLASS__.'@getStatistics'));
             Route::get('/statistics/promises', array('as' => 'app.statistics_promises', 'uses' => __CLASS__.'@getStatisticsPromises'));
 
+            Route::get('/statistics/promises/all', array('as' => 'app.statistics_promises_all', 'uses' => __CLASS__.'@getStatisticsPromisesAll'));
         });
     }
 
@@ -2599,6 +2600,53 @@ class ApplicationController extends BaseController {
 
 
         return View::make(Helper::layout('statistics_promises'), compact('date', 'promises', 'users'));
+    }
+
+    public function getStatisticsPromisesAll() {
+
+        $promises = Dic::valuesBySlug('promises', function($query) {
+            #$query->where(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), '=', $date);
+            $query->orderBy('lft', 'DESC');
+            $query->take(5);
+        });
+        $promises = DicVal::extracts($promises, null, true, true);
+        #$promises = Dic::modifyKeys($promises, 'day');
+        Helper::ta($promises);
+
+        $user_ids = Dic::makeLists($promises, null, 'user_id');
+        $users = Dic::valuesBySlugAndIds('users', $user_ids);
+        $users = DicVal::extracts($users, null, true, true);
+        Helper::ta($users);
+
+        #$promises = DicLib::groupByField($promises, 'user_id');
+        #Helper::tad($promises);
+        #Helper::smartQueries(1);
+
+        #/*
+        echo "<table border='1'>";
+        foreach ($promises as $promise) {
+
+            $user = @$users[$promise->user_id];
+            if (!$user || !is_object($user))
+                continue;
+
+            $user = $this->processFriends($user);
+            Helepr::ta($user);
+            #processFriends($user)
+
+            $city = $user->city;
+
+            echo "<tr>
+    <td>" . $promise->promise_text . "</td>
+    <td>" . $city . "</td>
+    <td>" . @$city . "</td>
+</tr>\n";
+        }
+        echo "</table>";
+        #*/
+
+        return '';
+
     }
 
 }
