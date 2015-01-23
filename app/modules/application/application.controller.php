@@ -2659,7 +2659,7 @@ class ApplicationController extends BaseController {
 
 
             echo "<tr style='" . ($promise->only_for_me ? 'background-color:#fdd' : '') . "'>
-    <td>" . @$m++ . "</td>
+    <td>" . @++$m . "</td>
     <td>" . $promise->created_at->format('d.m.Y') . "</td>
     <td><a href='" . URL::route('app.promise', $promise->id) . "' target='_blank'>" . $promise->promise_text . "</a></td>
     <td>" . $city . "</td>
