@@ -2659,17 +2659,17 @@ class ApplicationController extends BaseController {
 
 
             echo "<tr style='" . ($promise->only_for_me ? 'background-color:#fdd' : '') . "'>
-    <td>" . @++$m . "</td>
-    <td>" . $promise->created_at->format('d.m.Y') . "</td>
-    <td><a href='" . URL::route('app.promise', $promise->id) . "' target='_blank'>" . $promise->promise_text . "</a></td>
-    <td>" . $city . "</td>
-    <td>" . $gender . "</td>
-    <td>
+    <td nowrap>" . @++$m . "</td>
+    <td nowrap>" . $promise->created_at->format('d.m.Y') . "</td>
+    <td nowrap><a href='" . URL::route('app.promise', $promise->id) . "' target='_blank'>" . $promise->promise_text . "</a></td>
+    <td nowrap>" . $city . "</td>
+    <td nowrap>" . $gender . "</td>
+    <td nowrap>
         <a href='" . URL::route('app.profile_id', $user->id) . "' target='_blank'>" . $user->name . "</a>
         " . ($user->auth_method != 'native' ? "<a href='" . $user->identity . "' target='_blank'>" . $user->auth_method . "</a>" : '') . "
     </td>
-    <td>" . $promise->time_limit . "</td>
-    <td align='center'>" . $promise_status . "</td>
+    <td nowrap>" . $promise->time_limit . "</td>
+    <td nowrap align='center'>" . $promise_status . "</td>
 </tr>\n";
         }
         echo "</table>";
