@@ -2661,8 +2661,8 @@ class ApplicationController extends BaseController {
             echo "<tr style='" . ($promise->only_for_me ? 'background-color:#fdd' : '') . "'>
     <td nowrap>" . @++$m . "</td>
     <td nowrap>" . $promise->created_at->format('d.m.Y') . "</td>
-    <td nowrap><a href='" . URL::route('app.promise', $promise->id) . "' target='_blank'>" . $promise->promise_text . "</a></td>
-    <td nowrap>" . $city . "</td>
+    <td><a href='" . URL::route('app.promise', $promise->id) . "' target='_blank'>" . $promise->promise_text . "</a></td>
+    <td>" . $city . "</td>
     <td nowrap>" . $gender . "</td>
     <td nowrap>
         <a href='" . URL::route('app.profile_id', $user->id) . "' target='_blank'>" . $user->name . "</a>
