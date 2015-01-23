@@ -664,8 +664,8 @@ $("#promise-form").validate({
 
         //console.log(form);
         var current_form = form;
-        current_form.find('.btn-cont .us-btn').attr('disabled', 'disabled');
-        return;
+        $(current_form).find('.btn-cont .us-btn').attr('disabled', 'disabled');
+        return false;
 
         var only_for_me = $('input[name=only_for_me]').prop("checked");
 
