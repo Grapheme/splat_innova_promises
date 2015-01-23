@@ -20,7 +20,7 @@
 			</div>
 			<div class="normal-text">
 				<p>
-					Пользователей за все время - {{ $total_users }}, обещаний за все время - {{ $total_promises }}.
+					Пользователей за все время - {{ $total_users }}, обещаний за все время - {{ $total_promises }}. <a href="{{ URL::route('app.statistics_promises_all') }}">Полный список</a>.
 				</p>
 
 				<p>
