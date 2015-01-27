@@ -143,14 +143,14 @@
           <li style="color: #07cbcc;">Скину 5кг или научусь любить себя с ними</li>
           <li style="color: #b7b7b9;">Сделать пожертвование в детский дом</li>
         </ul>
-        <div class="wrapper" style="cursor:pointer;" onclick="location.href='http://mypromises.ru/promise/1039';">
+        <div class="wrapper" style="cursor:pointer;" onclick="location.href='http://mypromises.ru/promise/2240';">
           <div data-tooltip="Команда INNOVA обещает, что каждую неделю мы будем выбирать одно выполненное обещание<br>и награждать того,<br>кто сдержал свое слово призом-сюрпризом." data-tooltip-center="on" class="promise-week">
             <div class="week-inline left-word">Выбор</div>
             <div class="week-inline logo"></div>
-            <div style="background-image: url(http://cs540101.vk.me/c622520/v622520758/148f0/rvKT1joYbPA.jpg);" class="week-inline profile-photo"></div>
+            <div style="background-image: url(http://cs623324.vk.me/v623324593/16339/dIRyMEhIpJg.jpg);" class="week-inline profile-photo"></div>
             <div class="week-inline promise-info">
-              <div class="title">В ТЕЧЕНИЕ 3 НЕДЕЛЬ ЗАНИМАТЬСЯ СПОРТОМ 2 РАЗА В ДЕНЬ</div>
-              <div class="name">Лена Ромаева, Ростов-на-Дону</div>
+              <div class="title">ВЫШИТЬ ЛОШАДЕЙ УЖЕ НАКОНЕЦ-ТО)))</div>
+              <div class="name">Дуня Мельникова, Евпатория</div>
             </div>
           </div>
         </div>
