@@ -3,14 +3,11 @@ $fb_app_id = '1010986995584773';
 $fb_friends_limit = 99;
 ?>
 @section('title')
-{{{ isset($page_title) ? $page_title : Config::get('app.default_page_title') }}}
-@stop
+{{{ isset($page_title) ? $page_title : Config::get('app.default_page_title') }}}@stop
 @section('description')
-{{{ isset($page_description) ? $page_description : Config::get('app.default_page_description') }}}
-@stop
+{{{ isset($page_description) ? $page_description : Config::get('app.default_page_description') }}}@stop
 @section('keywords')
-{{{ isset($page_keywords) ? $page_keywords : Config::get('app.default_page_keywords') }}}
-@stop
+{{{ isset($page_keywords) ? $page_keywords : Config::get('app.default_page_keywords') }}}@stop
         <meta charset="utf-8">
         <title>@yield('title')</title>
         <meta name="description" content="@yield('description')">
