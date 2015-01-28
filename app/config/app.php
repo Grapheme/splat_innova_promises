@@ -8,8 +8,11 @@ return array(
 	'use_googlefonts' => TRUE,
 	'use_css_local' => FALSE,
 	'use_scripts_local' => FALSE,
-	
-	'default_page_title' => 'Мои обещания',
+
+	'default_page_title' => 'Удобный и функциональный сервис, помогающий выполнять обещания',
+	'default_page_description' => 'Выполнять обещания теперь проще. Оставляйте свои обещания на сайте, устанавливайте сроки выполнения, а ваши друзья и наш сервис помогут превратить слова в дело',
+
+
 	'template' => 'site',
     'welcome_page_tpl' => 'templates.site.index', #'guests.welcome',
 
