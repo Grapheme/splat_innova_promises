@@ -111,7 +111,7 @@
             $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
 
             #/*
-            if (Input::get('dbg')) {
+            if (Input::get('dbg') || 0) {
                 $promise_full_failed_time = (new \Carbon\Carbon())->createFromFormat('Y-m-d H:i:s', $promise->time_limit)->addHours(48)->format('Y-m-d H:i:s');
                 $failed_finish_period =
                         !$promise->finished_at && !$promise->promise_fail
@@ -144,7 +144,8 @@
 
                     @if (@$failed_finish_period)
                         <br/>
-                        <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-okey"></i><span>Выполнено</span></a>
+                        <br/>
+                        <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-clock"></i><span>Выполнено</span></a>
                     @endif
 
 
