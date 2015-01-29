@@ -452,7 +452,7 @@ class CronPromises extends Command {
 								$message->subject('Заканчивается срок выполнения обещания!');
 								$message->to($user->email);
 							});
-					$this->info($user->email);
+					$this->info(' + ' . $user->email);
 				}
 			}
 		}
