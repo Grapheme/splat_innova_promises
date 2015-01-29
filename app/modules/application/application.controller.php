@@ -721,13 +721,28 @@ class ApplicationController extends BaseController {
             App::abort(404);
 
         /**
-         * Тут еще нужна проверка - не закончилось ли время выполнения обещания?
+         * Если обещание давал авторизованный юзер...
          */
         if (is_object($user) && $user->id == $promise->user_id) {
 
             $promise_user = $user;
 
+            /**
+             * Если обещание не было помечено как проваленное и нет даты фактического выполнения
+             */
             if (!$promise->promise_fail && !$promise->finished_at) {
+
+                /**
+                 * Тут еще нужна проверка - не закончилось ли время выполнения обещания?
+                 */
+                $promise_full_failed_time = (new \Carbon\Carbon())->createFromFormat('Y-m-d H:i:s', $promise->time_limit)->addHours(48)->format('Y-m-d H:i:s');
+                $failed_finish_period =
+                    !$promise->finished_at && !$promise->promise_fail
+                    && date('Y-m-d H:i:s') > $promise->time_limit
+                    && date('Y-m-d H:i:s') < $promise_full_failed_time
+                ;
+                $can_finish = date('Y-m-d H:i:s') < $promise_full_failed_time;
+
 
                 if (Input::get('fail')) {
 
@@ -747,7 +762,7 @@ class ApplicationController extends BaseController {
 
                     return Redirect::route('app.promise', $id);
 
-                } elseif (Input::get('finished')) {
+                } elseif (Input::get('finished') && $can_finish) {
 
                     $promise->update_field('finished_at', date('Y-m-d H:i:s'));
 
