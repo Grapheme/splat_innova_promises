@@ -114,7 +114,7 @@
             $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
 
             #/*
-            if (Input::get('dbg') || 0) {
+            if (Input::get('dbg') || TRUE) {
                 $promise_full_failed_time = (new \Carbon\Carbon())->createFromFormat('Y-m-d H:i:s', $promise->time_limit)->addHours(48)->format('Y-m-d H:i:s');
                 $failed_finish_period =
                         !$promise->finished_at && !$promise->promise_fail
