@@ -361,7 +361,7 @@ class CronPromises extends Command {
 				;
 			});
 			$query
-				->addSelect(DB::raw($rand_tbl_alias . '.value AS time_limit'))
+				->addSelect(DB::raw('`' . $rand_tbl_alias . '`.`value` AS time_limit'))
 			;
 		});
 		#Helper::smartQueries(1);
@@ -487,3 +487,4 @@ class CronPromises extends Command {
 	}
 
 }
+
