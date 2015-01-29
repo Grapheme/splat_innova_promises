@@ -37,12 +37,17 @@ class CronPromises extends Command {
 
 		#$this->info("111");
 
-		$debug = $this->argument('debug') ?: false;
+		$only_email = false;
 		#$only_email = 'reserved@mail.ru';
+		$only_email = $this->option('only_email');
+
+		$debug = $this->argument('debug') ?: false;
 
 		if ($debug)
 			$this->info('RUN IN DEBUG MODE - MAILs WILL NOT BE SEND');
 
+		if ($only_email)
+			$this->info('Mails will be send only to: ' . $only_email);
 
 		$this->info('System time: ' . date('Y-m-d H:i:s'));
 
@@ -174,7 +179,7 @@ class CronPromises extends Command {
 						#'promise' => $promise,
 						'user' => $user,
 					);
-					if (!$debug)
+					if (!$debug || ($only_email && $only_email == $user->email))
 						Mail::send('emails.cron_promise_fail', $data, function ($message) use ($user) {
 							$from_email = Config::get('mail.from.address');
 							$from_name = Config::get('mail.from.name');
@@ -299,7 +304,7 @@ class CronPromises extends Command {
 						#'promise' => $promise,
 						'user' => $user,
 					);
-					if (!$debug)
+					if (!$debug || ($only_email && $only_email == $user->email))
 						Mail::send('emails.cron_promise_prefail', $data, function ($message) use ($user) {
 							$from_email = Config::get('mail.from.address');
 							$from_name = Config::get('mail.from.name');
@@ -419,7 +424,7 @@ class CronPromises extends Command {
 						#'promise' => $promise,
 						'user' => $user,
 					);
-					if (!$debug)
+					if (!$debug || ($only_email && $only_email == $user->email))
 						Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
 							$from_email = Config::get('mail.from.address');
 							$from_name = Config::get('mail.from.name');
@@ -457,6 +462,7 @@ class CronPromises extends Command {
 	protected function getOptions() {
 		return array(
 			#array('example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null),
+			array('only_email', null, InputOption::VALUE_OPTIONAL, 'Only email option.', null),
 		);
 	}
 
