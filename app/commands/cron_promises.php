@@ -76,6 +76,8 @@ class CronPromises extends Command {
 		$tomorrow2->addHours(48); // послезавтра
 
 
+		$also_users = array();
+
 		/************************************************************************************************************ */
 
 
@@ -145,8 +147,6 @@ class CronPromises extends Command {
 			$this->info('Users objects: ' . count($users));
 			#Helper::ta($users);
 
-			$also_users = array();
-
 			$this->info('Отправляем письма с оповещением о полностью проваленных обещаниях...');
 
 			/**
@@ -158,6 +158,13 @@ class CronPromises extends Command {
 				 * Перебираем всех юзеров
 				 */
 				foreach ($users as $u => $user) {
+
+					/**
+					 * Если юзеру уже было отправлено письмо раньше - не будем отправлять
+					 */
+					if (in_array($user->id, $also_users)) {
+						continue;
+					}
 
 					/**
 					 * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
@@ -179,14 +186,15 @@ class CronPromises extends Command {
 						#'promise' => $promise,
 						'user' => $user,
 					);
-					if (!$debug || ($only_email && $only_email == $user->email))
-						Mail::send('emails.cron_promise_fail', $data, function ($message) use ($user) {
-							$from_email = Config::get('mail.from.address');
-							$from_name = Config::get('mail.from.name');
-							$message->from($from_email, $from_name);
-							$message->subject('Не удалось выполнить обещание');
-							$message->to($user->email);
-						});
+					if (!$debug)
+						if (!$only_email || $only_email == $user->email)
+							Mail::send('emails.cron_promise_fail', $data, function ($message) use ($user) {
+								$from_email = Config::get('mail.from.address');
+								$from_name = Config::get('mail.from.name');
+								$message->from($from_email, $from_name);
+								$message->subject('Не удалось выполнить обещание');
+								$message->to($user->email);
+							});
 					$this->info(' + ' . $user->email);
 				}
 			}
@@ -270,8 +278,6 @@ class CronPromises extends Command {
 			$this->info('Users objects: ' . count($users));
 			#Helper::ta($users);
 
-			$also_users = array();
-
 			$this->info('Отправляем письма с оповещением о проваленных обещаниях...');
 
 			/**
@@ -283,6 +289,13 @@ class CronPromises extends Command {
 				 * Перебираем всех юзеров
 				 */
 				foreach ($users as $u => $user) {
+
+					/**
+					 * Если юзеру уже было отправлено письмо раньше - не будем отправлять
+					 */
+					if (in_array($user->id, $also_users)) {
+						continue;
+					}
 
 					/**
 					 * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
@@ -304,14 +317,15 @@ class CronPromises extends Command {
 						#'promise' => $promise,
 						'user' => $user,
 					);
-					if (!$debug || ($only_email && $only_email == $user->email))
-						Mail::send('emails.cron_promise_prefail', $data, function ($message) use ($user) {
-							$from_email = Config::get('mail.from.address');
-							$from_name = Config::get('mail.from.name');
-							$message->from($from_email, $from_name);
-							$message->subject('Еще есть время выполнить свое обещание');
-							$message->to($user->email);
-						});
+					if (!$debug)
+						if (!$only_email || $only_email == $user->email)
+							Mail::send('emails.cron_promise_prefail', $data, function ($message) use ($user) {
+								$from_email = Config::get('mail.from.address');
+								$from_name = Config::get('mail.from.name');
+								$message->from($from_email, $from_name);
+								$message->subject('Еще есть время выполнить свое обещание');
+								$message->to($user->email);
+							});
 					$this->info(' + ' . $user->email);
 				}
 			}
@@ -410,6 +424,11 @@ class CronPromises extends Command {
 					}
 
 					/**
+					 * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
+					 */
+					$also_users[] = $user->id;
+
+					/**
 					 * Валидация - есть ли у юзера валидный адрес почты
 					 */
 					$validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
@@ -424,14 +443,15 @@ class CronPromises extends Command {
 						#'promise' => $promise,
 						'user' => $user,
 					);
-					if (!$debug || ($only_email && $only_email == $user->email))
-						Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
-							$from_email = Config::get('mail.from.address');
-							$from_name = Config::get('mail.from.name');
-							$message->from($from_email, $from_name);
-							$message->subject('Заканчивается срок выполнения обещания!');
-							$message->to($user->email);
-						});
+					if (!$debug)
+						if (!$only_email || $only_email == $user->email)
+							Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
+								$from_email = Config::get('mail.from.address');
+								$from_name = Config::get('mail.from.name');
+								$message->from($from_email, $from_name);
+								$message->subject('Заканчивается срок выполнения обещания!');
+								$message->to($user->email);
+							});
 					$this->info($user->email);
 				}
 			}
