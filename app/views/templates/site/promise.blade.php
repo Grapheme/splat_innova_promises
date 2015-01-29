@@ -1,6 +1,6 @@
 @extends(Helper::layout())
 
-@section('title'){{ $promise->name }}@stop
+@section('title')Я обещаю {{ $promise->name }}@stop
 
 
 @section('opengraph')
