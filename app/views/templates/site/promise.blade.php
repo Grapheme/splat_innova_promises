@@ -110,14 +110,16 @@
             <?
             $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
 
-            /*
-            $promise_full_failed_time = (new Carbon())->createFromFormat('Y-m-d H:i:s', $promise->time_limit)->addHours(48)->format('Y-m-d H:i:s');
-            $failed_finish_period =
-                    !$promise->finished_at && !$promise->promise_fail
-                    && date('Y-m-d H:i:s') > $promise->time_limit
-                    && date('Y-m-d H:i:s') < $promise_full_failed_time
-            ;
-            */
+            #/*
+            if (Input::get('debug')) {
+                $promise_full_failed_time = (new \Carbon\Carbon())->createFromFormat('Y-m-d H:i:s', $promise->time_limit)->addHours(48)->format('Y-m-d H:i:s');
+                $failed_finish_period =
+                        !$promise->finished_at && !$promise->promise_fail
+                        && date('Y-m-d H:i:s') > $promise->time_limit
+                        && date('Y-m-d H:i:s') < $promise_full_failed_time
+                ;
+            }
+            #*/
 
             ?>
             @if (!$failed && !$promise->finished_at)
