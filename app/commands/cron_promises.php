@@ -43,6 +43,10 @@ class CronPromises extends Command {
 		if ($debug)
 			$this->info('RUN IN DEBUG MODE - MAILs WILL NOT BE SEND');
 
+
+		$this->info('System time: ' . date('Y-m-d H:i:s'));
+
+
 		#die;
 
 
