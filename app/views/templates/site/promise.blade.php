@@ -129,7 +129,11 @@
                             @endif
                         </span>
                     </div>
-                    <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-okey"></i><span>Выполнено</span></a>
+
+                    @if (0)
+                        <br/>
+                        <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-okey"></i><span>Выполнено</span></a>
+                    @endif
 
 
                 @elseif ($promise->finished_at)
