@@ -30,6 +30,7 @@ $fb_friends_limit = 99;
         {{ HTML::stylemod(Config::get('site.theme_path') . '/styles/vendor.css') }}
         {{ HTML::stylemod(Config::get('site.theme_path') . '/styles/main.css') }}
         {{ HTML::scriptmod(Config::get('site.theme_path') . '/scripts/vendor/modernizr.js') }}
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
         <script>
         var base_url = '{{ URL::to('') }}';

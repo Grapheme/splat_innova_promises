@@ -145,7 +145,7 @@
                     @if (@$failed_finish_period)
                         <br/>
                         <br/>
-                        <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-clock"></i><span>Выполнено</span></a>
+                        <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fa fa-clock-o"></i><span>Выполнено</span></a>
                     @endif
 
 
