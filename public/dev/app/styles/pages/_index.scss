@@ -35,6 +35,7 @@
 		&.active {
 			opacity: 1;
 			transition: all 3s ease;
+			z-index: 2;
 		}
 
 		&.faded {
