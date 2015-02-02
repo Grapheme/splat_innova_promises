@@ -149,10 +149,17 @@ SplatSite.index = function() {
 		});
 	}
 
+	var promises_click = function() {
+		$(document).on('click', '[data-promise-text]', function(){
+			$('.js-promise-input').val($(this).attr('data-promise-text'));
+		});
+	}
+
 	var init = function() {
 		main_fotorama();
 		promises_fotorama();
 		promises_masonry();
+		promises_click();
 	}
 
 	init();
@@ -312,8 +319,7 @@ SplatSite.CountDown = function(elem) {
 			var days_name = declOfNum(parseInt(event.strftime('%-D')), ['день', 'дня', 'дней']);
 			$(this).html(event.strftime('<span class="time-day"><span>%-D</span> ' + days_name + '</span><span class="time-time">%H:%M:%S</span>'));
 			if(event.type == 'stoped' || event.type == 'finish') {
-				window.location.href = window.location.href;
-				window.location.reload();
+				window.location.href = '?prefail=1';
 			}
 		});
 	}

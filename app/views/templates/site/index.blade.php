@@ -84,11 +84,11 @@
         </div>
         <div class="main-content wrapper">
           <div>
-          	  <div class="slide-title js-slide-title">Я обещаю поиграть в снежки этой зимой</div>
-              <div class="slide-title js-slide-title">Я обещаю съездить с близкими в горы <!--до конца зимы--></div>
-              <div class="slide-title js-slide-title">Я обещаю улыбнуться всем прохожим сегодня<!--по дороге на работу--></div>
-              <div class="slide-title js-slide-title">Я обещаю читать по одной книге в месяц</div> 
-              <div class="slide-title js-slide-title">Я обещаю привести себя в форму к весне</div> 
+          	  <div class="slide-title js-slide-title" data-promise-text="поиграть в снежки этой зимой">Я обещаю поиграть в снежки этой зимой</div>
+              <div class="slide-title js-slide-title" data-promise-text="съездить с близкими в горы">Я обещаю съездить с близкими в горы <!--до конца зимы--></div>
+              <div class="slide-title js-slide-title" data-promise-text="улыбнуться всем прохожим сегодня">Я обещаю улыбнуться всем прохожим сегодня<!--по дороге на работу--></div>
+              <div class="slide-title js-slide-title" data-promise-text="читать по одной книге в месяц">Я обещаю читать по одной книге в месяц</div> 
+              <div class="slide-title js-slide-title" data-promise-text="привести себя в форму к весне">Я обещаю привести себя в форму к весне</div> 
           </div>
           <h1 class="title">Пообещать и сдержать слово многого стоит</h1>
           <div class="desc">Обещания имеют огромную силу. Они способны изменить мир. Выполняя свои<br/>обещания, мы становимся сильнее, обретаем себя и уверенность в том, <br/>что нам все по зубам.</div>
