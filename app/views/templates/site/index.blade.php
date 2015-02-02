@@ -75,26 +75,20 @@
       <div class="main-screen">
         <div class="main-fotorama">
           <div class="js-main-fotorama">
-            {{--
-            <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-1.jpg" alt="">
-            --}}
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-4.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-1.jpg" alt="">
               <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-2.jpg" alt="">
               <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-3.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-21.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-4.jpg" alt="">
               <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-5.jpg" alt="">
           </div>
         </div>
         <div class="main-content wrapper">
           <div>
-            {{--
-            <div class="slide-title js-slide-title">Обещаю в выходные нарядить ёлку с сыном</div>
-            --}}
-              <div class="slide-title js-slide-title">Я обещаю начать бегать по утрам</div>
-              <div class="slide-title js-slide-title">Я обещаю чаще улыбаться</div>
-              <div class="slide-title js-slide-title">Обещаю прыгнуть с парашютом в январе</div>
-              <div class="slide-title js-slide-title">Обещаю реализовать задуманное</div>
-              <div class="slide-title js-slide-title">Я обещаю радоваться мелочам</div>
+          	  <div class="slide-title js-slide-title">Я обещаю поиграть в снежки этой зимой</div>
+              <div class="slide-title js-slide-title">Я обещаю съездить с близкими в горы <!--до конца зимы--></div>
+              <div class="slide-title js-slide-title">Я обещаю улыбнуться всем прохожим сегодня<!--по дороге на работу--></div>
+              <div class="slide-title js-slide-title">Я обещаю читать по одной книге в месяц</div> 
+              <div class="slide-title js-slide-title">Я обещаю привести себя в форму к весне</div> 
           </div>
           <h1 class="title">Пообещать и сдержать слово многого стоит</h1>
           <div class="desc">Обещания имеют огромную силу. Они способны изменить мир. Выполняя свои<br/>обещания, мы становимся сильнее, обретаем себя и уверенность в том, <br/>что нам все по зубам.</div>
