@@ -62,6 +62,8 @@ class ApplicationController extends BaseController {
             Route::get('/statistics/promises', array('as' => 'app.statistics_promises', 'uses' => __CLASS__.'@getStatisticsPromises'));
 
             Route::get('/statistics/promises/all', array('as' => 'app.statistics_promises_all', 'uses' => __CLASS__.'@getStatisticsPromisesAll'));
+
+            Route::get('/sitemap', array('as' => 'app.sitemap', 'uses' => __CLASS__.'@getSitemap'));
         });
     }
 
@@ -2278,6 +2280,13 @@ class ApplicationController extends BaseController {
 
         return View::make(Helper::layout('about'), compact('token'));
     }
+
+
+    public function getSitemap() {
+
+        return View::make(Helper::layout('sitemap'), compact('token'));
+    }
+
 
     public function getTestGenImage() {
 
