@@ -312,7 +312,8 @@ SplatSite.CountDown = function(elem) {
 			var days_name = declOfNum(parseInt(event.strftime('%-D')), ['день', 'дня', 'дней']);
 			$(this).html(event.strftime('<span class="time-day"><span>%-D</span> ' + days_name + '</span><span class="time-time">%H:%M:%S</span>'));
 			if(event.type == 'stoped' || event.type == 'finish') {
-				window.location.href = "?fail=1";
+				window.location.href = window.location.href;
+				window.location.reload();
 			}
 		});
 	}
