@@ -151,7 +151,7 @@ SplatSite.index = function() {
 
 	var promises_click = function() {
 		$(document).on('click', '[data-promise-text]', function(){
-			$('.js-promise-input').val($(this).attr('data-promise-text'));
+			$('.js-promise-input').val($(this).attr('data-promise-text')).trigger('focus');
 		});
 	}
 
