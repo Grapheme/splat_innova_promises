@@ -111,21 +111,24 @@
             </div>
 
             <?
-            $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
+            $failed = (!$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit)) || Input::get('prefail') == 1;
 
             #/*
-            if (Input::get('dbg') || TRUE) {
+            #if (Input::get('dbg') || TRUE) {
                 $promise_full_failed_time = (new \Carbon\Carbon())->createFromFormat('Y-m-d H:i:s', $promise->time_limit)->addHours(48)->format('Y-m-d H:i:s');
                 $failed_finish_period =
+                    (
                         !$promise->finished_at && !$promise->promise_fail
                         && date('Y-m-d H:i:s') > $promise->time_limit
                         && date('Y-m-d H:i:s') < $promise_full_failed_time
+                    )
+                    || Input::get('prefail') == 1
                 ;
-            }
+            #}
             #*/
 
             ?>
-            @if (!$failed && !$promise->finished_at)
+            @if (!$failed && !$promise->finished_at && !$failed_finish_period)
                 <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div>
             @endif
 
@@ -157,7 +160,7 @@
                     {{-- Обещание выполнено $promise->finished_at --}}
                     <div class="pr-btn active"><i class="fi icon-okey"></i><span>Обещание выполнено</span></div>
 
-                @elseif(is_object($auth_user) && $auth_user->id == $promise_user->id)
+                @elseif (is_object($auth_user) && $auth_user->id == $promise_user->id)
 
                     <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-okey"></i><span>Выполнено</span></a>
                     <a href="?fail=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'failure');"><i class="fi icon-no"></i><span>Отказаться</span></a>
