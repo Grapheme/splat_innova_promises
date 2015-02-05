@@ -266,6 +266,11 @@ SplatSite.Tooltips = {
 		});
 	},
 	show: function(text, elem) {
+		if(elem.attr('data-tooltip-media')) {
+			if($(window).width() > elem.attr('data-tooltip-media')) {
+				return false;
+			}
+		}
 		var pos = {};
 		pos.x = elem.offset().left + elem.width() + 20;
 		pos.y = elem.offset().top + elem.height()/2;

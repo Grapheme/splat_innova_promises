@@ -170,7 +170,7 @@
 				.time {
 					display: inline-block;
 					vertical-align: middle;
-					float: right;
+					//float: right;
 					font-weight: 700;
 					color: rgba(255, 255, 255, .5);
 					width: 102px;
@@ -190,7 +190,7 @@
 					position: relative;
 					left: .2em;
 					display: inline-block;
-					vertical-align: top;
+					vertical-align: middle;
 
 					&:before {
 						@extend .fi;
