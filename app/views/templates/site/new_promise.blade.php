@@ -58,10 +58,19 @@
               <!-- <div class="input-cont">
                 {{ Form::textarea('promise_text', (@$_SESSION['promise_text'] && $_SESSION['promise_text'] != 'undefined' ? $_SESSION['promise_text'] : ''), array('placeholder' => "Я ОБЕЩАЮ ...")) }}<br/>
               </div> -->
-              <div class="input-cont">
+              <div class="input-cont input-advice-cont">
                 <div class="make-promise-placeholder js-promise-placeholder">
                   <div class="promise-placeholder">Я ОБЕЩАЮ <span>...</span></div>
-                  {{ Form::textarea('promise_text', (@$_SESSION['promise_text'] && $_SESSION['promise_text'] != 'undefined' ? $_SESSION['promise_text'] : '')) }}<br/>
+                  {{ Form::textarea('promise_text', (@$_SESSION['promise_text'] && $_SESSION['promise_text'] != 'undefined' ? $_SESSION['promise_text'] : ''), ['class' => 'js-advice-to']) }}
+                  <div class="promises-advice">
+                    <span>Например:</span>
+                    <a href="#" class="js-advice">Бросить курить</a>
+                    <a href="#" class="js-advice">Похудеть на 5 килогармм</a>
+                    <a href="#" class="js-advice">Навестить родителей</a>
+                    <a href="#" class="js-advice">Выйти замуж</a>
+                    <a href="#" class="js-advice">Спеть в трамвае</a>
+                    <a href="#" class="js-advice">Завести щенка</a>
+                  </div>
                 </div>
               </div>
               <div class="time-inputs">

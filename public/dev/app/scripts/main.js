@@ -353,6 +353,14 @@ SplatSite.CardCountDown = function(elem) {
 	$(elem).MyCount();
 }
 
+SplatSite.Common = function() {
+	$('.js-advice').on('click', function(){
+		$('.js-advice-to')
+			.val($(this).text())
+			.trigger('focus');
+		return false;
+	});
+}
 
 $.fn.AjaxForm = function() {
 	var action = $(this).attr('action');
@@ -455,6 +463,7 @@ $.datepicker.setDefaults( $.datepicker.regional[ "ru" ] );
 
 $(function(){
 	var body = $('body');
+	SplatSite.Common();
 	SplatSite.tabs();
 	SplatSite.ShowFriends();
 	SplatSite.Tooltips.init();

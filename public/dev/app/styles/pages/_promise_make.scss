@@ -50,6 +50,50 @@
 			border: 0;
 			border-radius: 3px;
 		}
+
+		&.input-advice-cont {
+			font-size: 0;
+
+			textarea {
+				border-bottom-left-radius: 0;
+				border-bottom-right-radius: 0;
+				resize: none !important;
+			}
+
+			.promises-advice {
+				box-sizing: border-box;
+				width: 600px;
+				padding: 20px 30px;
+				background: #f4f4f4;
+				font-size: 14px;
+				line-height: 1.75;
+				color: #555;
+				border-bottom-left-radius: 3px;
+				border-bottom-right-radius: 3px;
+
+				a {
+					display: inline-block;
+					margin-right: 5px;
+					color: #12b9b1;
+					text-decoration: none;
+					border-bottom: 1px dashed;
+					transition: color .2s ease;
+					line-height: normal;
+
+					&:hover {
+						color: #108b88;
+					}
+
+					&:not(:last-child):after {
+						content: ",";
+					}
+				}
+
+				span {
+					margin-right: 5px;	
+				}
+			}
+		}
 	}
 
 	.time-inputs {
