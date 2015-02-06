@@ -4,15 +4,15 @@
       <li><a onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url={{ URL::route('app.promise', $promise->id) }}&event=button_share" class="soc-icon" target="_blank"><i class="fi icon-vk"></i></a></li>
       <li><a onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl={{ URL::route('app.promise', $promise->id) }}" class="soc-icon" target="_blank"><i class="fi icon-ok"></i></a></li>
     </ul>
-    <div href="{{ URL::route('app.promise', $promise->id) }}" class="promise-content">
-        <div class="title">
+    <div class="promise-content">
+        <a href="{{ URL::route('app.promise', $promise->id) }}" class="title">
             {{ $promise->name }}
             {{--
             <br/>
             prom: {{ $promise->time_limit }}<br/>
             date: {{ date('Y-m-d H:i:s') }}<br/>
             --}}
-        </div>
+        </a>
         <div class="bottom-block">
             <div class="top-floor">
                 <div class="time js-time-countdown"></div>
