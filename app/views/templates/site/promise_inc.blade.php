@@ -15,6 +15,7 @@
         </div>
         <div class="bottom-block">
             <div class="top-floor">
+                <div class="time js-time-countdown"></div>
                 @if ($promise->only_for_me)
                     <div class="eye eye-cross" data-tooltip="Обещание защищено настройками приватности<br>и видно только вам."></div>
                 @else
@@ -28,8 +29,6 @@
                 -->
 
                 <div class="comments" data-tooltip="{{ trans_choice(':count комментарий|:count комментария|:count комментариев', (int)$promise->comments_count, array(), 'ru') }} к этому обещанию.">{{ (int)$promise->comments_count }}</div>
-
-                <div class="time js-time-countdown"></div>
 
                 <?
                 $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
