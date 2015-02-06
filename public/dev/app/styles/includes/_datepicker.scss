@@ -1,13 +1,11 @@
 .ui-datepicker {
   font-family: "Helvetica Neue","Trebuchet MS",Tahoma,Verdana,Arial,sans-serif;
-  //background: #11b8b8;
-  background: #fff;
+  background: #11b8b8;
   border: none;
   border-radius: 0;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   box-shadow: 0 1px 3px #252525;
-  padding: 14px !important;
 }
 
 .ui-datepicker {
@@ -106,7 +104,7 @@
   padding: 1em 0;
   margin: 0;
   font-weight: normal;
-  color: #11b8b8;
+  color: #efefef;
   font-size: 12px;
 }
 
@@ -125,6 +123,6 @@
   outline: 0;
 }
 
-.ui-datepicker td.ui-datepicker-unselectable .ui-state-default {
-  color: #dbdbdb;
+.ui-datepicker td.ui-datepicker-unselectable {
+  opacity: .5;
 }
