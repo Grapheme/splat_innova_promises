@@ -4,7 +4,7 @@
       <li><a onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url={{ URL::route('app.promise', $promise->id) }}&event=button_share" class="soc-icon" target="_blank"><i class="fi icon-vk"></i></a></li>
       <li><a onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl={{ URL::route('app.promise', $promise->id) }}" class="soc-icon" target="_blank"><i class="fi icon-ok"></i></a></li>
     </ul>
-    <a href="{{ URL::route('app.promise', $promise->id) }}" class="promise-content">
+    <div href="{{ URL::route('app.promise', $promise->id) }}" class="promise-content">
         <div class="title">
             {{ $promise->name }}
             {{--
@@ -59,5 +59,5 @@
 
             </div>
         </div>
-    </a>
+    </div>
 </li>
