@@ -29,19 +29,22 @@
 
                 <div class="comments" data-tooltip="{{ trans_choice(':count комментарий|:count комментария|:count комментариев', (int)$promise->comments_count, array(), 'ru') }} к этому обещанию.">{{ (int)$promise->comments_count }}</div>
 
-                <div class="fl-r">
-                    <a href="{{ URL::route('app.promise', [$promise->id, 'finished' => 1]) }}" data-tooltip="Выполнил" data-tooltip-media="1390" class="pr-btn">
-                        <i class="fi icon-okey"></i><span>Выполнил</span>
-                    </a>
-                    <a href="{{ URL::route('app.promise', [$promise->id, 'fail' => 1]) }}" data-tooltip="Отказаться" data-tooltip-media="1390" class="pr-btn">
-                        <i class="fi icon-no"></i><span>Отказаться</span>
-                    </a>
-                </div>
-
                 <div class="time js-time-countdown"></div>
                 <?
                 $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
                 ?>
+
+                @if (!$failed && !$promise->finished_at)
+                    <div class="fl-r">
+                        <a href="{{ URL::route('app.promise', [$promise->id, 'finished' => 1]) }}" data-tooltip="Выполнил" data-tooltip-media="1390" class="pr-btn">
+                            <i class="fi icon-okey"></i><span>Выполнил</span>
+                        </a>
+                        <a href="{{ URL::route('app.promise', [$promise->id, 'fail' => 1]) }}" data-tooltip="Отказаться" data-tooltip-media="1390" class="pr-btn">
+                            <i class="fi icon-no"></i><span>Отказаться</span>
+                        </a>
+                    </div>
+                @endif
+
                 @if ($failed)
                     <div class="unsmile" data-tooltip="Обещание не было выполнено.">
                         <!-- <i class="fi icon-no"></i> -->
