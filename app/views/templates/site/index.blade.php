@@ -123,9 +123,9 @@
           </div>
         </div>
         <div class="promises-cont">
-          <div class="promises-amount">
+          <!-- <div class="promises-amount">
             <div class="amount-cont">уже <b>4 738</b> человек дали свои обещания</div>
-          </div>
+          </div> -->
           <div class="indexpr-wrapper">
             <ul class="promises-index">
              <!--  <li class="promise-item innova-block">
