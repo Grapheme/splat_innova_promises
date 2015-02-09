@@ -173,7 +173,7 @@
                       <div class="user-info"><a href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/e9409610fb556cf414e6dc6997bd2cea.jpg)" class="user-photo"></a>
                         <div class="user-text">
                           <div class="name">Артем</div>
-                          <div class="city">Мск</div>
+                          <div class="city">Москва</div>
                         </div>
                       </div>
                     </div>
@@ -182,7 +182,7 @@
                     <div class="info-cont">
                       <div class="promise-stat pr-loc">
                         <div class="stat-title">45 Обещаний</div>
-                        <div class="stat-desc">из Мск</div>
+                        <div class="stat-desc">из Москвы</div>
                       </div>
                       <div class="btn-cont"><a href="#" class="stat-btn js-promise-card-btn">Пообещать тоже</a></div>
                     </div>
