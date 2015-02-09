@@ -122,7 +122,7 @@
               </b>
           </div>
         </div>
-        <div class="promises-cont">
+        <div>
           <!-- <div class="promises-amount">
             <div class="amount-cont">уже <b>4 738</b> человек дали свои обещания</div>
           </div> -->
