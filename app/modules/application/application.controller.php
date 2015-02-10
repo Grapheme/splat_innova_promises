@@ -2834,6 +2834,8 @@ class ApplicationController extends BaseController {
 
         if (Input::get('format') == 'csv') {
 
+            $lines = [];
+
             foreach ($promises as $promise) {
 
                 $user = @$users[$promise->user_id];
@@ -2873,14 +2875,19 @@ class ApplicationController extends BaseController {
                     $promise_status
                 ];
 
-                $content = implode(';', $line) . (Input::get('br') ? "<br/>\n" : "\r\n");
+                #$content = implode(';', $line) . (Input::get('br') ? "<br/>\n" : "\r\n");
+                $content = implode(';', $line);
+                $lines[] = $content;
 
-                header ("Content-Type: application/octet-stream");
-                header ("Content-Disposition: attachment; filename=report_" . date('Y-m-d') . ".csv");
-                header ("Content-Length: " . mb_strlen($content));
-
-                echo $content;
             }
+
+            $full_content = implode("\r\n", $lines);
+
+            header ("Content-Type: application/octet-stream");
+            header ("Content-Disposition: attachment; filename=report_" . date('Y-m-d') . ".csv");
+            header ("Content-Length: " . mb_strlen($full_content));
+
+            echo $full_content;
 
         } else {
 
