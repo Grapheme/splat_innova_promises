@@ -25,13 +25,13 @@ block content
 				.hint Совет: Давайте только те обещания, которые можете выполнить.
 				a.js-open-box(data-box="auth").js-promise-btn.us-btn Дать обещание
 	.promises-cont
-		.promises-fotorama
+		//- .promises-fotorama
 			.js-promises-fotorama
 				- for(var i = 0; i < 5; i++)
 					img(src="images/promises/back#{i}.png")
 		.promises-amount
 			.amount-cont уже <b>4 738</b> человек дали свои обещания
-		ul.promises-cloud.js-promises
+		//- ul.promises-cloud.js-promises
 			li(style="color: #3e9327; font-size: 20px;") С НОВОГО БРОШУ КУРИТЬ
 			li(style="color: #07cbcc;") ЛЕТОМ СЬЕЗЖУ С РОДИТЕЛЯМИ НА РЫБАЛКУ
 			li(style="color: #bbbbc3; font-size: 45px;") ОСТАВЛЮ ВСЕ КАК и ЕСТЬ!
@@ -39,7 +39,254 @@ block content
 			li(style="color: #3e9327;") КУПЛЮ СЕБЕ НОВЫЙ АЙФОН
 			li(style="color: #56565b; font-size: 25px;") НЕ ОБЕЩАТЬ
 			li(style="color: #07cbcc; font-size: 20px;") ПОХУДЕЮ НА 20 КИЛОГРАММ
-		.wrapper
+		.indexpr-wrapper
+			ul.promises-index
+				li.promise-item.innova-block
+					div(class="promise-cont type-#{i}")
+						.info-cont
+							.innova-choice Выбор
+							a(href="#").pr-title Купить новый телевизор на шпагате
+							.user-info
+								a.user-photo(href="#" style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg)")
+								.user-text
+									.name
+										a(href="#") Руслан Корнеев
+									.city
+										a(href="#") Ростов-на-Дону
+				li.promise-item.js-parent
+					.flipper
+						div(class="promise-cont type-blue")
+							.info-cont
+								a.comments-amount 0 комментариев
+								.pr-title.js-promise-text ВЫЙТИ ЗАМУЖ В ЭТОМ ГОДУ
+								.user-info
+									a.user-photo(href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/b0c82b4fbbcc66aef2b56083809596a2.jpg)")
+									.user-text
+										.name Кристина
+										.city Киев
+						div(class="promise-cont promise-hover type-blue")
+							.info-cont
+								.promise-stat.pr-loc
+									.stat-title 45 Обещаний
+									.stat-desc из Киева
+								//- .promise-stat.pr-user
+									.stat-title 29 Похожих
+									.stat-desc обещаний
+								.btn-cont
+									a(href="#").stat-btn.js-promise-card-btn Пообещать тоже
+				li.promise-item.js-parent
+					.flipper
+						div(class="promise-cont type-blue")
+							.info-cont
+								a.comments-amount 0 комментариев
+								.pr-title.js-promise-text БЫТЬ ЛУЧШИМ ОТЦОМ
+								.user-info
+									a.user-photo(href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/e9409610fb556cf414e6dc6997bd2cea.jpg)")
+									.user-text
+										.name Артем
+										.city Мск
+						div(class="promise-cont promise-hover type-blue")
+							.info-cont
+								.promise-stat.pr-loc
+									.stat-title 45 Обещаний
+									.stat-desc из Мск
+								//- .promise-stat.pr-user
+									.stat-title 29 Похожих
+									.stat-desc обещаний
+								.btn-cont
+									a(href="#").stat-btn.js-promise-card-btn Пообещать тоже
+				li.promise-item.js-parent
+					.flipper
+						div(class="promise-cont type-blue")
+							.info-cont
+								a.comments-amount 0 комментариев
+								.pr-title.js-promise-text НАУЧИТЬСЯ ТАНЦЕВАТЬ САЛЬСУ
+								.user-info
+									a.user-photo(href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/d98cd811d0ff77f1349dc4e76168689a.jpg)")
+									.user-text
+										.name Ксения
+										.city Питер
+						div(class="promise-cont promise-hover type-blue")
+							.info-cont
+								.promise-stat.pr-loc
+									.stat-title 45 Обещаний
+									.stat-desc из Питера
+								//- .promise-stat.pr-user
+									.stat-title 29 Похожих
+									.stat-desc обещаний
+								.btn-cont
+									a(href="#").stat-btn.js-promise-card-btn Пообещать тоже
+				li.promise-item.js-parent
+					.flipper
+						div(class="promise-cont type-green")
+							.info-cont
+								a.comments-amount 0 комментариев
+								.pr-title.js-promise-text НЕ РАССТРАИВАТЬСЯ ПО ПУСТЯКАМ
+								.user-info
+									a.user-photo(href="#" style="background-image: url(http://cs624627.vk.me/v624627062/225/lKcpY5Jh2jY.jpg)")
+									.user-text
+										.name Юлия Гафарова
+										.city Уфа
+						div(class="promise-cont promise-hover type-green")
+							.info-cont
+								.promise-stat.pr-loc
+									.stat-title 45 Обещаний
+									.stat-desc из Уфы
+								//- .promise-stat.pr-user
+									.stat-title 29 Похожих
+									.stat-desc обещаний
+								.btn-cont
+									a(href="#").stat-btn.js-promise-card-btn Пообещать тоже
+				li.promise-item.js-parent
+					.flipper
+						div(class="promise-cont type-blue")
+							.info-cont
+								a.comments-amount 0 комментариев
+								.pr-title.js-promise-text ЗАНЯТЬ ПРИЗОВОЕ МЕСТО НА ВОКАЛЬНОМ КОНКУРСЕ
+								.user-info
+									a.user-photo(href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/64b4ea9f026a25675e7f17b9df9a8f23.jpg)")
+									.user-text
+										.name Анна
+										.city Владимир
+						div(class="promise-cont promise-hover type-blue")
+							.info-cont
+								.promise-stat.pr-loc
+									.stat-title 45 Обещаний
+									.stat-desc из Владимира
+								//- .promise-stat.pr-user
+									.stat-title 29 Похожих
+									.stat-desc обещаний
+								.btn-cont
+									a(href="#").stat-btn.js-promise-card-btn Пообещать тоже
+				li.promise-item.js-parent
+					.flipper
+						div(class="promise-cont type-blue")
+							.info-cont
+								a.comments-amount 0 комментариев
+								.pr-title.js-promise-text БЫТЬ СЧАСТЛИВОЙ КАЖДУЮ МИНУТУ 2015 ГОДА
+								.user-info
+									a.user-photo(href="#" style="background-image: url(http://cs607919.vk.me/v607919721/61cb/ZuNjvJqdZ14.jpg)")
+									.user-text
+										.name Виктория Михайлова
+										.city Ростов-на-Дону
+						div(class="promise-cont promise-hover type-blue")
+							.info-cont
+								.promise-stat.pr-loc
+									.stat-title 45 Обещаний
+									.stat-desc из Ростова-на-Дону
+								//- .promise-stat.pr-user
+									.stat-title 29 Похожих
+									.stat-desc обещаний
+								.btn-cont
+									a(href="#").stat-btn.js-promise-card-btn Пообещать тоже
+				li.promise-item.js-parent
+					.flipper
+						div(class="promise-cont type-green")
+							.info-cont
+								a.comments-amount 0 комментариев
+								.pr-title.js-promise-text СТАТЬ ХОРОШИМ ВРАЧОМ
+								.user-info
+									a.user-photo(href="#" style="background-image: url(http://cs621226.vk.me/v621226487/8722/n4fAxxaN1Ig.jpg)")
+									.user-text
+										.name Никита Артемов
+										.city Заринск
+						div(class="promise-cont promise-hover type-green")
+							.info-cont
+								.promise-stat.pr-loc
+									.stat-title 45 Обещаний
+									.stat-desc из Заринска
+								//- .promise-stat.pr-user
+									.stat-title 29 Похожих
+									.stat-desc обещаний
+								.btn-cont
+									a(href="#").stat-btn.js-promise-card-btn Пообещать тоже
+				li.promise-item.js-parent
+					.flipper
+						div(class="promise-cont type-blue")
+							.info-cont
+								a.comments-amount 0 комментариев
+								.pr-title.js-promise-text ВЛЮБИТЬСЯ
+								.user-info
+									a.user-photo(href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/3356e062b0b4be1b8ef9604ab12ea7b2.jpg)")
+									.user-text
+										.name Карина
+										.city Сальск
+						div(class="promise-cont promise-hover type-blue")
+							.info-cont
+								.promise-stat.pr-loc
+									.stat-title 45 Обещаний
+									.stat-desc из Сальска
+								//- .promise-stat.pr-user
+									.stat-title 29 Похожих
+									.stat-desc обещаний
+								.btn-cont
+									a(href="#").stat-btn.js-promise-card-btn Пообещать тоже
+				li.promise-item.js-parent
+					.flipper
+						div(class="promise-cont type-green")
+							.info-cont
+								a.comments-amount 0 комментариев
+								.pr-title.js-promise-text НАУЧИТЬСЯ ИГРАТЬ НА ГИТАРЕ "SMOKE ON THE WATER"
+								.user-info
+									a.user-photo(href="#" style="background-image: url(http://cs411121.vk.me/v411121773/9d1a/SIxpfGvfpT0.jpg)")
+									.user-text
+										.name Павел Ханов
+										.city Екатеринбург
+						div(class="promise-cont promise-hover type-green")
+							.info-cont
+								.promise-stat.pr-loc
+									.stat-title 45 Обещаний
+									.stat-desc из Екатеринбурга
+								//- .promise-stat.pr-user
+									.stat-title 29 Похожих
+									.stat-desc обещаний
+								.btn-cont
+									a(href="#").stat-btn.js-promise-card-btn Пообещать тоже
+				li.promise-item.js-parent
+					.flipper
+						div(class="promise-cont type-aqua")
+							.info-cont
+								a.comments-amount 0 комментариев
+								.pr-title.js-promise-text ПРИХОДИТЬ НА РАБОТУ В ХОРОШЕМ НАСТРОЕНИИ
+								.user-info
+									a.user-photo(href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/bf0107c3df32ad80e336171fe425f5dd.jpg)")
+									.user-text
+										.name Владимир Манычев
+										.city Москва
+						div(class="promise-cont promise-hover type-aqua")
+							.info-cont
+								.promise-stat.pr-loc
+									.stat-title 45 Обещаний
+									.stat-desc из Москвы
+								//- .promise-stat.pr-user
+									.stat-title 29 Похожих
+									.stat-desc обещаний
+								.btn-cont
+									a(href="#").stat-btn.js-promise-card-btn Пообещать тоже
+				li.promise-item.js-parent
+					.flipper
+						div(class="promise-cont type-blue")
+							.info-cont
+								a.comments-amount 0 комментариев
+								.pr-title.js-promise-text УСТРОИТЬ ОГРОМНЫЙ ПРАЗДНИК НА ДЕНЬ РОЖДЕНИЯ ДОЧКИ
+								.user-info
+									a.user-photo(href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/49cf97b4e4171eaead6babef89003fbc.jpg)")
+									.user-text
+										.name Юлианна Никулина
+										.city Москва
+						div(class="promise-cont promise-hover type-blue")
+							.info-cont
+								.promise-stat.pr-loc
+									.stat-title 45 Обещаний
+									.stat-desc из Москвы
+								//- .promise-stat.pr-user
+									.stat-title 29 Похожих
+									.stat-desc обещаний
+								.btn-cont
+									a(href="#").stat-btn.js-promise-card-btn Пообещать тоже
+
+
+		//- .wrapper
 			.promise-week(data-tooltip="Команда INNOVA обещает, что каждую неделю мы будем выбирать одно выполненное обещание и награждать того, кто сдержал свое слово призом-сюрпризом." data-tooltip-center="on")
 				.week-inline.left-word Выбор
 				.week-inline.logo

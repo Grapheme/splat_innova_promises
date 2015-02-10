@@ -4,17 +4,18 @@
       <li><a onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url={{ URL::route('app.promise', $promise->id) }}&event=button_share" class="soc-icon" target="_blank"><i class="fi icon-vk"></i></a></li>
       <li><a onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl={{ URL::route('app.promise', $promise->id) }}" class="soc-icon" target="_blank"><i class="fi icon-ok"></i></a></li>
     </ul>
-    <a href="{{ URL::route('app.promise', $promise->id) }}" class="promise-content">
-        <div class="title">
+    <div class="promise-content">
+        <a href="{{ URL::route('app.promise', $promise->id) }}" class="title">
             {{ $promise->name }}
             {{--
             <br/>
             prom: {{ $promise->time_limit }}<br/>
             date: {{ date('Y-m-d H:i:s') }}<br/>
             --}}
-        </div>
+        </a>
         <div class="bottom-block">
             <div class="top-floor">
+                <div class="time js-time-countdown"></div>
                 @if ($promise->only_for_me)
                     <div class="eye eye-cross" data-tooltip="Обещание защищено настройками приватности<br>и видно только вам."></div>
                 @else
@@ -28,8 +29,6 @@
                 -->
 
                 <div class="comments" data-tooltip="{{ trans_choice(':count комментарий|:count комментария|:count комментариев', (int)$promise->comments_count, array(), 'ru') }} к этому обещанию.">{{ (int)$promise->comments_count }}</div>
-
-                <div class="time js-time-countdown"></div>
 
                 <?
                 $failed = !$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit);
@@ -60,5 +59,5 @@
 
             </div>
         </div>
-    </a>
+    </div>
 </li>

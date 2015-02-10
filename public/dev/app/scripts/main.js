@@ -142,11 +142,11 @@ SplatSite.index = function() {
 	}
 
 	var promises_masonry = function() {
-		var container = document.querySelector('.js-promises');
+		/*var container = document.querySelector('.js-promises');
 		var msnry = new Masonry( container, {
 		  columnWidth: 1,
 		  itemSelector: 'li'
-		});
+		});*/
 	}
 
 	var promises_click = function() {
@@ -155,11 +155,27 @@ SplatSite.index = function() {
 		});
 	}
 
+	var promise_card = function() {
+		$('.js-promise-card-btn').on('click', function(){
+			var parent = $(this).parents('.js-parent');
+			var pr_text = parent.find('.js-promise-text').text();
+			$('.js-promise-input').val(pr_text);
+			$('html, body').animate({
+				scrollTop: $('.js-promise-input').offset().top
+			}, function(){
+				$('.js-promise-input').trigger('focus');
+				$('.js-promise-btn').trigger('click');
+			});
+			return false;
+		});
+	}
+
 	var init = function() {
 		main_fotorama();
 		promises_fotorama();
 		promises_masonry();
 		promises_click();
+		promise_card();
 	}
 
 	init();
@@ -360,6 +376,7 @@ SplatSite.Common = function() {
 			.trigger('focus');
 		return false;
 	});
+	$('.ui-select').customSelect();
 }
 
 $.fn.AjaxForm = function() {

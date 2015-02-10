@@ -11,6 +11,8 @@
     "jQuery-Mask-Plugin": "~1.10.13",
     "jquery-autosize": "~1.18.17",
     "jquery.countdown": "~2.0.4",
-    "jquery.inputmask": "~3.1.48"
-  }
+    "jquery.inputmask": "~3.1.48",
+    "jquery.customSelect": "*"
+  },
+  "devDependencies": {}
 }

@@ -1,9 +1,13 @@
-.promise-item, .promise-make {
+.promise-item, .promise-make, .promise-cont {
 	&.type-green {
 		background-color: darken(#7bc800, 10%);
 		
 		&:before {
 			background-image: url(../images/patterns/3.png);
+		}
+
+		.pr-title {
+			color: darken(#7bc800, 10%);
 		}
 	}
 	&.type-aqua {
@@ -11,6 +15,10 @@
 
 		&:before {
 			background-image: url(../images/patterns/4.png);
+		}
+
+		.pr-title {
+			color: darken(#07cbcc, 10%);
 		}
 	}
 	&.type-yellow {
@@ -20,6 +28,10 @@
 			background-image: url(../images/patterns/5.png);
 			opacity: .24;
 		}
+
+		.pr-title {
+			color: darken(#fee000, 10%);
+		}
 	}
 	&.type-blue {
 		background-color: darken(#0f9fce, 10%);
@@ -27,12 +39,20 @@
 		&:before {
 			background-image: url(../images/patterns/1.png);
 		}
+
+		.pr-title {
+			color: darken(#0f9fce, 10%);
+		}
 	}
 	&.type-pink {
 		background-color: darken(#dbabc8, 10%);
 
 		&:before {
 			background-image: url(../images/patterns/2.png);
+		}
+
+		.pr-title {
+			color: darken(#dbabc8, 10%);
 		}
 	}
 	&.type-promo {

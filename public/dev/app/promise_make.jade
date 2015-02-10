@@ -53,6 +53,37 @@ block content
 						.check-cont
 							input(type="checkbox" id="apply").styledCheck
 							label(for="apply") <span class="check-fake"><i class="fi icon-check"></i></span> Сделать обещание видимым только мне
+						.check-title Напомнить о данном мною обещании
+						.check-cont
+							input(type="checkbox" id="soc").styledCheck
+							label(for="soc") <span class="check-fake"><i class="fi icon-check"></i></span> Через соц. сеть:
+							ul.check-desc
+								li
+									span Частота оповещений:
+									select.ui-select
+										option Каждый день
+										option Не каждый день
+						.check-cont
+							input(type="checkbox" id="mail").styledCheck
+							label(for="mail") <span class="check-fake"><i class="fi icon-check"></i></span> По электронной почте:
+							ul.check-desc
+								li
+									span Адрес почты: metlia@bk.com
+								li
+									span Частота оповещений:
+									select.ui-select
+										option Два раза в месяц
+						.check-cont
+							input(type="checkbox" id="phone").styledCheck
+							label(for="phone") <span class="check-fake"><i class="fi icon-check"></i></span> На мобильный телефон:
+							ul.check-desc
+								li
+									span Номер телефона:
+									input.ui-phone-input
+								li
+									span Частота оповещений:
+									select.ui-select
+										option Каждый день
 						.btn-cont
 							button.us-btn Дать обещание
 	.promo-block

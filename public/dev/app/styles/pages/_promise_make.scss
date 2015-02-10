@@ -185,8 +185,48 @@
 		}
 	}
 
+	.check-title {
+		margin: 50px 0 40px;
+	}
+
 	.check-cont {
 		margin-top: 35px;
+
+		.check-desc {
+			margin: 20px 0 0;
+			padding: 0;
+			list-style: none;
+			font-size: 15px;
+			line-height: 2;
+
+			.ui-select {
+				background: transparent;
+				border: none;
+				color: #07cbcc;
+				margin-left: 5px;
+
+				option {
+					background: #fff;
+					color: #000;
+					text-decoration: none;
+					border: none;
+				}
+			}
+
+			.customSelectInner {
+				width: auto !important;
+				border-bottom: 1px dashed;
+				line-height: 1;
+			}
+
+			.ui-phone-input {
+				border-radius: 3px;
+				height: 25px;
+				width: 130px;
+				padding: 0 10px;
+				border: none;
+			}
+		}
 	}
 
 	.btn-cont {
