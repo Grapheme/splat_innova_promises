@@ -166,7 +166,7 @@ class ApplicationController extends BaseController {
              * Подсчет обещаний людей из каждого города
              */
 
-            $promises_cities = Dic::valuesBySlug('promises', function($query) use ($cities) {
+            $promises_cities = Dic::valuesBySlug('users', function($query) use ($cities) {
                 $rand_tbl_alias = $query->leftJoin_field('city', 'city');
                 $query->whereIn($rand_tbl_alias.'.value', $cities);
             });
