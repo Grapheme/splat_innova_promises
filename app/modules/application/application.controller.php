@@ -148,8 +148,8 @@ class ApplicationController extends BaseController {
 
                         foreach ($users as $u => $user) {
                             #$city = mb_strtolower($user->city);
-                            if (isset($mainpage_promises_city_aliases[mb_strtolower($user->city)])) {
-                                $city = $mainpage_promises_city_aliases[mb_strtolower($user->city)];
+                            if (isset($mainpage_promises_city_aliases[mb_strtolower(trim($user->city))])) {
+                                $city = $mainpage_promises_city_aliases[mb_strtolower(trim($user->city))];
                                 $user->city = $city;
                                 $users[$u] = $user;
                             }
@@ -190,6 +190,13 @@ class ApplicationController extends BaseController {
                         $temp = [];
                         foreach ($promises_cities as $promise_city) {
                             $user = @$promises_cities_users[$promise_city->user_id];
+
+                            if (isset($mainpage_promises_city_aliases[mb_strtolower(trim($user->city))])) {
+                                $city = $mainpage_promises_city_aliases[mb_strtolower(trim($user->city))];
+                                $user->city = $city;
+                                #$users[$u] = $user;
+                            }
+
                             if (!$user || !$user->city)
                                 continue;
                             @++$temp[$user->city];
