@@ -2873,8 +2873,13 @@ class ApplicationController extends BaseController {
                     $promise_status
                 ];
 
+                $content = implode(';', $line) . (Input::get('br') ? "<br/>\n" : "\r\n");
 
-                echo implode(';', $line) . (Input::get('br') ? "<br/>\n" : "\r\n");
+                header ("Content-Type: application/octet-stream");
+                header ("Content-Disposition: attachment; filename=report_" . date('Y-m-d') . ".csv");
+                header ("Content-Length: " . mb_strlen($content));
+
+                echo $content;
             }
 
         } else {
