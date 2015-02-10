@@ -131,12 +131,28 @@ class ApplicationController extends BaseController {
             $mainpage_promises = DicVal::extracts($mainpage_promises, null, 1, 1);
 
             if (count($mainpage_promises)) {
+
                 $user_ids = Dic::makeLists($mainpage_promises, NULL, 'user_id');
+
                 if (count($user_ids)) {
+
                     $users = Dic::valuesBySlug('users', function($query) use ($user_ids) {
                         $query->whereIn('id', $user_ids);
                     });
                     $users = DicVal::extracts($users, null, 1, 1);
+
+                    if (count($users)) {
+
+                        $mainpage_promises_city_aliases = (array)Config::get('site.mainpage_promises_city_aliases');
+
+                        foreach ($users as $u => $user) {
+                            $city = mb_strtolower($user->city);
+                            if (isset($mainpage_promises_city_aliases[$city])) {
+                                $user->city = $mainpage_promises_city_aliases[$city];
+                                $users[$u] = $user;
+                            }
+                        }
+                    }
                 }
             }
         }
