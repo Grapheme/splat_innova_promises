@@ -124,8 +124,16 @@ class ApplicationController extends BaseController {
         $mainpage_promises = [];
         $user_ids = [];
         $cities = [];
+        $cities_promises_counts = [];
         $ids = (array)Config::get('site.mainpage_promises');
+        /**
+         * Если есть IDs карточек для вывода на главной...
+         */
         if (count($ids)) {
+
+            /**
+             * Берем все эти обещания
+             */
             $mainpage_promises = Dic::valuesBySlug('promises', function($query) use ($ids) {
                 $query->whereIn('id', $ids);
             });
@@ -133,16 +141,26 @@ class ApplicationController extends BaseController {
 
             if (count($mainpage_promises)) {
 
+                /**
+                 * Берем IDs пользователей, давших эти обещания
+                 */
                 $user_ids = Dic::makeLists($mainpage_promises, NULL, 'user_id');
 
                 if (count($user_ids)) {
 
+                    /**
+                     * Получаем этих пользователей
+                     */
                     $users = Dic::valuesBySlug('users', function($query) use ($user_ids) {
                         $query->whereIn('id', $user_ids);
                     });
                     $users = DicVal::extracts($users, null, 1, 1);
 
                     if (count($users)) {
+
+                        /**
+                         * Получаем города пользователей, давших эти обещания. С учетом автозамены "мск" => "Москва", и прочих
+                         */
 
                         $mainpage_promises_city_aliases = (array)Config::get('site.mainpage_promises_city_aliases');
 
@@ -160,25 +178,36 @@ class ApplicationController extends BaseController {
             }
         }
 
+        /**
+         * Если есть список городов, для которых нужно получить кол-во обещаний...
+         */
         if (count($cities)) {
-            $cities = array_unique($cities);
-            /**
-             * Подсчет обещаний людей из каждого города
-             */
 
+            $cities = array_unique($cities);
+
+            /**
+             * Получим всех пользователей из нужных городов
+             */
             $promises_cities_users = Dic::valuesBySlug('users', function($query) use ($cities) {
                 $rand_tbl_alias = $query->leftJoin_field('city', 'city');
                 $query->whereIn($rand_tbl_alias.'.value', $cities);
             });
             $promises_cities_users = DicVal::extracts($promises_cities_users, null, true, true);
 
+            /**
+             * Получим IDs всех пользователей
+             */
             $promises_cities_users_ids = [];
             if (count($promises_cities_users)) {
-                #$promises_cities_users_ids = [];
+
                 $promises_cities_users_ids = Dic::makeLists($promises_cities_users, null, 'id');
                 $promises_cities_users_ids = array_unique($promises_cities_users_ids);
 
                 if (count($promises_cities_users_ids)) {
+
+                    /**
+                     * Получим все обещания, данные всеми пользователями из списка городов
+                     */
                     $promises_cities = Dic::valuesBySlug('promises', function($query) use ($promises_cities_users_ids) {
                         $rand_tbl_alias = $query->leftJoin_field('user_id', 'user_id');
                         $query->whereIn($rand_tbl_alias.'.value', $promises_cities_users_ids);
@@ -186,8 +215,11 @@ class ApplicationController extends BaseController {
                     $promises_cities = DicVal::extracts($promises_cities, null, true, true);
 
                     if (count($promises_cities)) {
-                        #$promises_cities_count();
-                        $temp = [];
+
+                        /**
+                         * Посчитаем кол-во обещаний для каждого города. Пиздец.
+                         */
+                        $cities_promises_counts = [];
                         foreach ($promises_cities as $promise_city) {
                             $user = @$promises_cities_users[$promise_city->user_id];
 
@@ -202,7 +234,7 @@ class ApplicationController extends BaseController {
                             if (!$user || !$city)
                                 continue;
 
-                            @++$temp[$city];
+                            @++$cities_promises_counts[$city];
                         }
                     }
                 }
@@ -218,7 +250,7 @@ class ApplicationController extends BaseController {
             Helper::ta($promises_cities_users);
             Helper::ta($promises_cities_users_ids);
             #Helper::ta($promises_cities);
-            Helper::ta($temp);
+            Helper::ta($cities_promises_counts);
 
             Helper::smartQueries(1);
             die;
@@ -227,7 +259,7 @@ class ApplicationController extends BaseController {
         $mainpage_promises_innova = (array)Config::get('site.mainpage_promises_innova');
         $mainpage_promises_city_aliases = (array)Config::get('site.mainpage_promises_city_aliases');
 
-        return View::make(Helper::layout('index'), compact('user', 'promises', 'finished_promises', 'mainpage_promises', 'users', 'mainpage_promises_innova', 'mainpage_promises_city_aliases'));
+        return View::make(Helper::layout('index'), compact('user', 'promises', 'finished_promises', 'mainpage_promises', 'users', 'mainpage_promises_innova', 'mainpage_promises_city_aliases', 'cities_promises_counts'));
     }
 
 

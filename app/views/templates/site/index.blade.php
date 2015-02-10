@@ -137,6 +137,7 @@
                           $puser = isset($users[$promise->user_id]) ? $users[$promise->user_id] : NULL;
                           if (!$puser)
                               continue;
+                          $city_promises_count = @(int)$cities_promises_counts[mb_strtolower(trim($puser->city))];
                           ?>
                           <li class="promise-item js-parent">
                               <div class="flipper">
@@ -154,8 +155,10 @@
                                   <div class="promise-cont promise-hover type-{{ $promise->style_id }}">
                                       <div class="info-cont">
                                           <div class="promise-stat pr-loc">
-                                              <div class="stat-title">45 Обещаний</div>
-                                              <div class="stat-desc">{{ $puser->city }}</div>
+                                              @if ($city_promises_count)
+                                                  <div class="stat-title">{{ trans_choice(':count Обещание|:count Обещания|:count Обещаний', $city_promises_count, array(), 'ru') }}</div>
+                                                  <div class="stat-desc">{{ $puser->city }}</div>
+                                              @endif
                                           </div>
                                           <div class="btn-cont"><a href="#" class="stat-btn js-promise-card-btn">Пообещать тоже</a></div>
                                       </div>
