@@ -166,11 +166,18 @@ class ApplicationController extends BaseController {
              * Подсчет обещаний людей из каждого города
              */
 
-            $promises_cities = Dic::valuesBySlug('users', function($query) use ($cities) {
+            $promises_cities_users = Dic::valuesBySlug('users', function($query) use ($cities) {
                 $rand_tbl_alias = $query->leftJoin_field('city', 'city');
                 $query->whereIn($rand_tbl_alias.'.value', $cities);
             });
-            $promises_cities = DicVal::extracts($promises_cities, null, true, true);
+            $promises_cities_users = DicVal::extracts($promises_cities_users, null, true, true);
+
+            $promises_cities_users_ids = [];
+            if (count($promises_cities_users)) {
+                #$promises_cities_users_ids = [];
+                $promises_cities_users_ids = Dic::makeLists($promises_cities_users, null, 'id');
+            }
+
         }
 
         if (Input::get('debug_mainpage')) {
@@ -178,7 +185,8 @@ class ApplicationController extends BaseController {
             Helper::ta($user_ids);
             Helper::ta($users);
             Helper::ta($cities);
-            Helper::ta($promises_cities);
+            Helper::ta($promises_cities_users);
+            Helper::ta($promises_cities_users_ids);
 
             Helper::smartQueries(1);
             die;
