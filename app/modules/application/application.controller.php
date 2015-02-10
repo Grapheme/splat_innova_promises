@@ -125,6 +125,7 @@ class ApplicationController extends BaseController {
         $user_ids = [];
         $cities = [];
         $cities_promises_counts = [];
+        $promises_comments_count = [];
         $ids = (array)Config::get('site.mainpage_promises');
         /**
          * Если есть IDs карточек для вывода на главной...
@@ -252,6 +253,12 @@ class ApplicationController extends BaseController {
                 $rand_tbl_alias = $query->leftJoin_field('promise_id', 'promise_id');
                 $query->whereIn($rand_tbl_alias.'.value', $ids);
             });
+            $comments = DicVal::extracts($comments, null, true, true);
+            if (count($comments)) {
+                foreach ($comments as $comment) {
+                    @$promises_comments_count[$comment->promise_id]++;
+                }
+            }
         }
 
 
@@ -266,7 +273,8 @@ class ApplicationController extends BaseController {
             #Helper::ta($promises_cities);
             Helper::ta($cities_promises_counts);
             */
-            Helper::tad($comments);
+            Helper::ta($comments);
+            Helper::tad($promises_comments_count);
 
             Helper::smartQueries(1);
             die;
@@ -275,7 +283,7 @@ class ApplicationController extends BaseController {
         $mainpage_promises_innova = (array)Config::get('site.mainpage_promises_innova');
         $mainpage_promises_city_aliases = (array)Config::get('site.mainpage_promises_city_aliases');
 
-        return View::make(Helper::layout('index'), compact('user', 'promises', 'finished_promises', 'mainpage_promises', 'users', 'mainpage_promises_innova', 'mainpage_promises_city_aliases', 'cities_promises_counts'));
+        return View::make(Helper::layout('index'), compact('user', 'promises', 'finished_promises', 'mainpage_promises', 'users', 'mainpage_promises_innova', 'mainpage_promises_city_aliases', 'cities_promises_counts', 'promises_comments_count'));
     }
 
 

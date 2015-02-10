@@ -138,11 +138,13 @@
                           if (!$puser)
                               continue;
                           $city_promises_count = @(int)$cities_promises_counts[mb_strtolower(trim($puser->city))];
+                          $promise_comments_count = @(int)$promises_comments_count[$promise->id];
                           ?>
                           <li class="promise-item js-parent">
                               <div class="flipper">
                                   <div class="promise-cont type-{{ $promise->style_id }}">
-                                      <div class="info-cont"><a class="comments-amount">0 комментариев</a>
+                                      <div class="info-cont">
+                                          <a class="comments-amount">{{ trans_choice(':count комментарий|:count комментария|:count комментариев', $promise_comments_count, array(), 'ru') }}</a>
                                           <div class="pr-title js-promise-text">{{ mb_strtoupper($promise->name) }}</div>
                                           <div class="user-info"><a href="#" style="background-image: url({{ $puser->avatar }})" class="user-photo"></a>
                                               <div class="user-text">
