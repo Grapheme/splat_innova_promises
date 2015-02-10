@@ -162,13 +162,22 @@ class ApplicationController extends BaseController {
 
         if (count($cities)) {
             $cities = array_unique($cities);
+            /**
+             * Подсчет обещаний людей из каждого города
+             */
+
+            $promises_cities = Dic::valuesBySlug('promises', function($query) use ($cities) {
+                $query->whereIn('city', $cities);
+            });
+            $promises_cities = DicVal::extracts($promises_cities, null, true, true);
         }
 
         if (Input::get('debug_mainpage')) {
             Helper::ta($mainpage_promises);
             Helper::ta($user_ids);
             Helper::ta($users);
-            Helper::tad($cities);
+            Helper::ta($cities);
+            Helper::tad($promises_cities);
         }
 
         $mainpage_promises_innova = (array)Config::get('site.mainpage_promises_innova');
