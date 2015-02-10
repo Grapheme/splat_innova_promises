@@ -2669,37 +2669,79 @@ class ApplicationController extends BaseController {
 
         if (Input::get('format') == 'csv') {
 
-        }
+            foreach ($promises as $promise) {
+
+                $user = @$users[$promise->user_id];
+                if (!$user || !is_object($user))
+                    continue;
+
+                $user = $this->extract_user($user);
+                #Helper::ta($user);
+                #processFriends($user)
+
+                $city = $user->city ?: '';
+                $gender = '';
+                if ($user->sex == 1)
+                    $gender = 'Ж';
+                elseif ($user->sex == 2)
+                    $gender = 'М';
+
+                $promise_status = 'В ПРОЦЕССЕ';
+                if ($promise->time_limit < date('Y-m-d H:i:s') && !$promise->finished_at)
+                    $promise_status = 'ПРОВАЛЕНО';
+                elseif ($promise->finished_at)
+                    $promise_status = 'ВЫПОЛНЕНО';
 
 
-
-        #/*
-        echo "<table border='1' cellspacing='0' cellpadding='5'>";
-        foreach ($promises as $promise) {
-
-            $user = @$users[$promise->user_id];
-            if (!$user || !is_object($user))
-                continue;
-
-            $user = $this->extract_user($user);
-            #Helper::ta($user);
-            #processFriends($user)
-
-            $city = $user->city ?: '&nbsp;';
-            $gender = '&nbsp;';
-            if ($user->sex == 1)
-                $gender = 'Ж';
-            elseif ($user->sex == 2)
-                $gender = 'М';
-
-            $promise_status = '<font color="#bbb">В ПРОЦЕССЕ</font>';
-            if ($promise->time_limit < date('Y-m-d H:i:s') && !$promise->finished_at)
-                $promise_status = '<font color="#a00">ПРОВАЛЕНО</font>';
-            elseif ($promise->finished_at)
-                $promise_status = '<font color="#080">ВЫПОЛНЕНО</font>';
+                $line = [
+                    @++$m,
+                    $promise->created_at->format('d.m.Y'),
+                    $promise->promise_text,
+                    URL::route('app.promise', $promise->id),
+                    $city,
+                    $gender,
+                    $user->name,
+                    URL::route('app.profile_id', $user->id),
+                    $user->auth_method,
+                    $user->identity,
+                    $promise->time_limit,
+                    $promise_status
+                ];
 
 
-            echo "<tr style='" . ($promise->only_for_me ? 'background-color:#fdd' : '') . "'>
+                echo implode(';', $line) . "\r\n";
+            }
+
+        } else {
+
+
+            #/*
+            echo "<table border='1' cellspacing='0' cellpadding='5'>";
+            foreach ($promises as $promise) {
+
+                $user = @$users[$promise->user_id];
+                if (!$user || !is_object($user))
+                    continue;
+
+                $user = $this->extract_user($user);
+                #Helper::ta($user);
+                #processFriends($user)
+
+                $city = $user->city ?: '&nbsp;';
+                $gender = '&nbsp;';
+                if ($user->sex == 1)
+                    $gender = 'Ж';
+                elseif ($user->sex == 2)
+                    $gender = 'М';
+
+                $promise_status = '<font color="#bbb">В ПРОЦЕССЕ</font>';
+                if ($promise->time_limit < date('Y-m-d H:i:s') && !$promise->finished_at)
+                    $promise_status = '<font color="#a00">ПРОВАЛЕНО</font>';
+                elseif ($promise->finished_at)
+                    $promise_status = '<font color="#080">ВЫПОЛНЕНО</font>';
+
+
+                echo "<tr style='" . ($promise->only_for_me ? 'background-color:#fdd' : '') . "'>
     <td nowrap>" . @++$m . "</td>
     <td nowrap>" . $promise->created_at->format('d.m.Y') . "</td>
     <td><a href='" . URL::route('app.promise', $promise->id) . "' target='_blank'>" . $promise->promise_text . "</a></td>
@@ -2712,9 +2754,12 @@ class ApplicationController extends BaseController {
     <td nowrap>" . $promise->time_limit . "</td>
     <td nowrap align='center'>" . $promise_status . "</td>
 </tr>\n";
+            }
+            echo "</table>";
+            #*/
+
+
         }
-        echo "</table>";
-        #*/
 
         return '';
 
