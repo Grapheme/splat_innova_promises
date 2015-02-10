@@ -123,6 +123,7 @@ class ApplicationController extends BaseController {
          */
         $mainpage_promises = [];
         $user_ids = [];
+        $cities = [];
         $ids = (array)Config::get('site.mainpage_promises');
         if (count($ids)) {
             $mainpage_promises = Dic::valuesBySlug('promises', function($query) use ($ids) {
@@ -148,19 +149,26 @@ class ApplicationController extends BaseController {
                         foreach ($users as $u => $user) {
                             $city = mb_strtolower($user->city);
                             if (isset($mainpage_promises_city_aliases[$city])) {
-                                $user->city = $mainpage_promises_city_aliases[$city];
+                                $city = $mainpage_promises_city_aliases[$city];
+                                $user->city = $city;
                                 $users[$u] = $user;
                             }
+                            $cities[] = $city;
                         }
                     }
                 }
             }
         }
 
+        if (count($cities)) {
+            $cities = array_unique($cities);
+        }
+
         if (Input::get('debug_mainpage')) {
             Helper::ta($mainpage_promises);
             Helper::ta($user_ids);
-            Helper::tad($users);
+            Helper::ta($users);
+            Helper::tad($cities);
         }
 
         $mainpage_promises_innova = (array)Config::get('site.mainpage_promises_innova');

@@ -128,7 +128,7 @@
           </div> -->
           <div class="indexpr-wrapper">
 
-              @if (isset($mainpage_promises) && is_object($mainpage_promises) && $mainpage_promises->count() && Input::get('debug_mp')))
+              @if (isset($mainpage_promises) && is_object($mainpage_promises) && $mainpage_promises->count() && Input::get('debug_mp'))
 
                   <ul class="promises-index">
 

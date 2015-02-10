@@ -26,6 +26,7 @@ return array(
     'mainpage_promises_innova' => [],
     'mainpage_promises_city_aliases' => [
         'мск' => 'Москва',
+        'питер' => 'Санкт-Петербург'
     ],
 
 );
