@@ -128,7 +128,7 @@
           </div> -->
           <div class="indexpr-wrapper">
 
-              @if (isset($mainpage_promises) && is_object($mainpage_promises) && $mainpage_promises->count() && Input::get('debug_mp'))
+              @if (isset($mainpage_promises) && is_object($mainpage_promises) && $mainpage_promises->count())
 
                   <ul class="promises-index">
 
@@ -174,6 +174,7 @@
 
               @endif
 
+          @if (0)
             <ul class="promises-index">
              <!--  <li class="promise-item innova-block">
                 <div class="promise-cont type-undefined">
@@ -453,6 +454,7 @@
                 </div>
               </li>
             </ul>
+          @endif
           </div>
         </div>
         <!-- <ul class="promises-cloud js-promises">
