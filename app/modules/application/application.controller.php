@@ -2881,7 +2881,7 @@ class ApplicationController extends BaseController {
 
             }
 
-            $full_content = implode("\r\n", $lines);
+            $full_content = implode("\n", $lines);
 
             header("Content-Type: application/octet-stream; charset=utf-8");
             header("Content-Disposition: attachment; filename=report_" . date('Y-m-d') . ".csv");
