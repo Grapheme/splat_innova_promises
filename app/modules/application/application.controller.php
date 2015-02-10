@@ -147,13 +147,13 @@ class ApplicationController extends BaseController {
                         $mainpage_promises_city_aliases = (array)Config::get('site.mainpage_promises_city_aliases');
 
                         foreach ($users as $u => $user) {
-                            $city = mb_strtolower($user->city);
-                            if (isset($mainpage_promises_city_aliases[$city])) {
-                                $city = $mainpage_promises_city_aliases[$city];
+                            #$city = mb_strtolower($user->city);
+                            if (isset($mainpage_promises_city_aliases[mb_strtolower($user->city)])) {
+                                $city = $mainpage_promises_city_aliases[mb_strtolower($user->city)];
                                 $user->city = $city;
                                 $users[$u] = $user;
                             }
-                            $cities[] = $city;
+                            $cities[] = $user->city;
                         }
                     }
                 }
