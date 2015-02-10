@@ -98,11 +98,11 @@ body {
     .map-title {
       font-weight: 100;
       font-size: 38px;
-      margin: 0 0 70px;
+      margin: 0 0 90px;
     }
 
     .map-links {
-      margin: 0 0 15px;
+      margin: 0 0 35px;
       padding: 0;
       list-style: none;
 
@@ -119,6 +119,10 @@ body {
         &:hover {
           color: #7cc8df;
         }
+      }
+
+      .map-parent {
+        opacity: .5;
       }
     }
   }

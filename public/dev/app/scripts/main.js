@@ -91,6 +91,23 @@ SplatSite.tabs = function() {
 
 	init();
 }
+SplatSite.simpleBox = function() {
+	var sparent = $('.soverlay');
+	var sbox = sparent.find('.sbox');
+	var open = function(name) {
+		sparent.show();
+		sbox.filter('[data-name="' + name + '"]').show();
+	}
+	var close = function() {
+		sparent.hide();
+		sbox.hide();
+	}
+	var init = function() {
+		sbox.hide();
+	}
+	init();
+	return {open: open, close: close};
+}
 SplatSite.index = function() {
 	var showSlide = function(id) {
 		var active = $('.js-slide-title.active');
