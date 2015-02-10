@@ -132,12 +132,19 @@ class ApplicationController extends BaseController {
 
             if (count($mainpage_promises)) {
                 $user_ids = Dic::makeLists($mainpage_promises, NULL, 'user_id');
+                if (count($user_ids)) {
+                    $users = Dic::valuesBySlug('users', function($query) use ($user_ids) {
+                        $query->whereIn('id', $user_ids);
+                    });
+                    $users = DicVal::extracts($users, null, 1, 1);
+                }
             }
         }
 
         if (Input::get('debug_mainpage')) {
             Helper::ta($mainpage_promises);
-            Helper::tad($user_ids);
+            Helper::ta($user_ids);
+            Helper::tad($users);
         }
 
         $mainpage_promises_innova = (array)Config::get('site.mainpage_promises_innova');
