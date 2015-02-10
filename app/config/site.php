@@ -22,4 +22,7 @@ return array(
     'galleries_photo_public_dir' => '/uploads/galleries',
     'galleries_thumb_public_dir' => '/uploads/galleries/thumbs',
 
+    'mainpage_promises' => [3273, 3255, 3205, 2855, 3904, 3655, 3644, 3284, 3480, 4025, 3956],
+    'mainpage_promises_innova' => [],
+
 );

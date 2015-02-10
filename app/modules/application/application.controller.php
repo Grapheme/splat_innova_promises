@@ -118,7 +118,24 @@ class ApplicationController extends BaseController {
         if ($finished_promises < 1500)
             $finished_promises += 1500;
 
-        return View::make(Helper::layout('index'), compact('user', 'promises', 'finished_promises'));
+        /**
+         * Карточки обещаний для главной
+         */
+        $mainpage_promises = [];
+        $ids = (array)Config::get('site.mainpage_promises');
+        if (count($ids)) {
+            $mainpage_promises = Dic::valuesBySlug('promises', function($query) use ($ids) {
+                $query->whereIn('id', $ids);
+            });
+            $mainpage_promises = DicVal::extracts($mainpage_promises, null, 1, 1);
+        }
+        $mainpage_promises_innova = (array)Config::get('site.mainpage_promises_innova');
+
+        if ($debug) {
+            Helper::tad($mainpage_promises);
+        }
+
+        return View::make(Helper::layout('index'), compact('user', 'promises', 'finished_promises', 'mainpage_promises', 'mainpage_promises_innova'));
     }
 
 
