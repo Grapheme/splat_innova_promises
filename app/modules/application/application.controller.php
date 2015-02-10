@@ -178,7 +178,10 @@ class ApplicationController extends BaseController {
             Helper::ta($user_ids);
             Helper::ta($users);
             Helper::ta($cities);
-            Helper::tad($promises_cities);
+            Helper::ta($promises_cities);
+
+            Helper::smartQueries(1);
+            die;
         }
 
         $mainpage_promises_innova = (array)Config::get('site.mainpage_promises_innova');
