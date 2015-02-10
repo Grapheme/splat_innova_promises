@@ -131,7 +131,7 @@ class ApplicationController extends BaseController {
             $mainpage_promises = DicVal::extracts($mainpage_promises, null, 1, 1);
 
             if (count($mainpage_promises)) {
-                $user_ids = Dic::makeLists($mainpage_promises, 'user_ids');
+                $user_ids = Dic::makeLists($mainpage_promises, NULL, 'user_ids');
             }
         }
 
