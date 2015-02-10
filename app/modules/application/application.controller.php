@@ -183,6 +183,18 @@ class ApplicationController extends BaseController {
                         $rand_tbl_alias = $query->leftJoin_field('user_id', 'user_id');
                         $query->whereIn($rand_tbl_alias.'.value', $promises_cities_users_ids);
                     });
+                    $promises_cities = DicVal::extracts($promises_cities, null, true, true);
+
+                    if (count($promises_cities)) {
+                        #$promises_cities_count();
+                        $temp = [];
+                        foreach ($promises_cities as $promise_city) {
+                            $user = @$promises_cities_users[$promise_city->user_id];
+                            if (!$user || !$user->city)
+                                continue;
+                            @++$temp[$user->city]
+                        }
+                    }
                 }
             }
 
@@ -195,7 +207,8 @@ class ApplicationController extends BaseController {
             Helper::ta($cities);
             Helper::ta($promises_cities_users);
             Helper::ta($promises_cities_users_ids);
-            Helper::ta($promises_cities);
+            #Helper::ta($promises_cities);
+            Helper::ta($temp);
 
             Helper::smartQueries(1);
             die;
