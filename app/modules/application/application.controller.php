@@ -2638,10 +2638,20 @@ class ApplicationController extends BaseController {
 
     public function getStatisticsPromisesAll() {
 
-        $promises = Dic::valuesBySlug('promises', function($query) {
+        $limit = NULL;
+        $days_limit = Input::get('days') ?: NULL;
+        if ($days_limit)
+            $limit = (new \Carbon\Carbon())->now()->subDays($days_limit, $limit);
+
+        $promises = Dic::valuesBySlug('promises', function($query) use ($days_limit, $limit) {
+
             #$query->where(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), '=', $date);
             $query->orderBy('created_at', 'DESC');
             #$query->take(50);
+
+            if ($days_limit) {
+                $query->where(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), '>=', $limit->format('Y-m-d'));
+            }
         });
         $promises = DicVal::extracts($promises, null, true, true);
         #$promises = Dic::modifyKeys($promises, 'day');
@@ -2655,6 +2665,13 @@ class ApplicationController extends BaseController {
         #$promises = DicLib::groupByField($promises, 'user_id');
         #Helper::tad($promises);
         #Helper::smartQueries(1);
+
+
+        if (Input::get('format') == 'csv') {
+
+        }
+
+
 
         #/*
         echo "<table border='1' cellspacing='0' cellpadding='5'>";
