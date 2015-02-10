@@ -167,7 +167,7 @@ class ApplicationController extends BaseController {
              */
 
             $promises_cities = Dic::valuesBySlug('promises', function($query) use ($cities) {
-                $query->whereIn('city', $cities);
+                #$query->whereIn('city', $cities);
             });
             $promises_cities = DicVal::extracts($promises_cities, null, true, true);
         }
