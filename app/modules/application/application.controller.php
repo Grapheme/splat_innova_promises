@@ -2709,7 +2709,7 @@ class ApplicationController extends BaseController {
                 ];
 
 
-                echo implode(';', $line) . "\r\n";
+                echo implode(';', $line) . (Input::get('br') ? "<br/>\n" : "\r\n");
             }
 
         } else {
