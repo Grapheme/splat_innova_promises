@@ -167,7 +167,7 @@ class ApplicationController extends BaseController {
              */
 
             $promises_cities = Dic::valuesBySlug('promises', function($query) use ($cities) {
-                $rand_tbl_alias = $query->join_field('city', 'city');
+                $rand_tbl_alias = $query->leftJoin_field('city', 'city');
                 $query->whereIn($rand_tbl_alias.'.value', $cities);
             });
             $promises_cities = DicVal::extracts($promises_cities, null, true, true);
