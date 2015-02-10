@@ -2886,6 +2886,9 @@ class ApplicationController extends BaseController {
             header("Content-Type: application/octet-stream; charset=utf-8");
             header("Content-Disposition: attachment; filename=report_" . date('Y-m-d') . ".csv");
             header("Content-Length: " . mb_strlen($full_content));
+
+            echo pack('CCC', 0xef, 0xbb, 0xbf);
+
             echo $full_content;
 
         } else {
