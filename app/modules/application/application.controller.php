@@ -242,7 +242,21 @@ class ApplicationController extends BaseController {
 
         }
 
+
+        /**
+         * Получаем комментарии для каждого обещания на главной
+         */
+        if (count($ids)) {
+
+            $comments = Dic::valuesBySlug('comments', function($query) use ($ids) {
+                $rand_tbl_alias = $query->leftJoin_field('promise_id', 'promise_id');
+                $query->whereIn($rand_tbl_alias.'.value', $ids);
+            });
+        }
+
+
         if (Input::get('debug_mainpage')) {
+            /*
             Helper::ta($mainpage_promises);
             Helper::ta($user_ids);
             Helper::ta($users);
@@ -251,6 +265,8 @@ class ApplicationController extends BaseController {
             Helper::ta($promises_cities_users_ids);
             #Helper::ta($promises_cities);
             Helper::ta($cities_promises_counts);
+            */
+            Helper::tad($comments);
 
             Helper::smartQueries(1);
             die;
