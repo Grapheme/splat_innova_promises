@@ -15,6 +15,9 @@
             <div class="sitemap-cont">
                 <div class="map-title">Карта сайта</div>
                 <ul class="map-links">
+                    <li class="map-parent">Весь сайт</li>
+                </ul>
+                <ul class="map-links">
                     <li><a href="/">Главная страница</a></li>
                     <li><a href="/privacy_policy.pdf">Правила пользования</a></li>
                     {{--<li><a href="#">О проекте</a></li>--}}

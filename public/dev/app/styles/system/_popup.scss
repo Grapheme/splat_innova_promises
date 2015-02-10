@@ -331,3 +331,91 @@
 		}
 	}
 }
+
+.soverlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 101;
+	overflow: scroll;
+	background: rgba(0, 0, 0, .5);
+	text-align: center;
+
+	&:before {
+		content: "";
+		display: inline-block;
+		vertical-align: middle;
+		height: 100%;
+		width: 0;
+	}
+
+	.sbox {
+		display: inline-block;
+		vertical-align: middle;
+		text-align: left;
+		padding: 35px 30px;
+		background: #fff;
+		width: 450px;
+
+		.sms-title {
+			font-weight: 300;
+			line-height: 1.35;
+		}
+
+		.sms-inputs {
+			margin: 15px 0 25px;
+
+			.sms-input {
+				background: #ededed;
+				width: 150px;
+				height: 35px;
+				line-height: 35px;
+				border-radius: 3px;
+				border: none;
+				padding: 0 10px;
+				outline: none;
+			}
+
+			.sms-btn {
+				display: inline-block;
+				padding: 0 10px;
+				height: 35px;
+				line-height: 35px;
+				border-radius: 35px;
+				border: none;
+				background: #12b8b8;
+				color: #fff;
+				margin-left: 5px;
+				outline: none;
+				transition: background .2s ease;
+
+				&:hover, &.loading {
+					background: #5c5c5c;
+				}
+			}
+		}
+
+		.sms-links {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			font-size: 14px;
+
+			li {
+				margin-top: 10px;
+			}
+
+			a {
+				color: #11bab7;
+				transition: color .2s ease;
+
+				&:hover {
+					color: #5c5c5c;
+				}
+			}
+		}
+	}
+}

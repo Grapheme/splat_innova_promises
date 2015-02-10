@@ -65,7 +65,7 @@
                   <div class="promises-advice">
                     <span>Например:</span>
                     <a href="#" class="js-advice">Бросить курить</a>
-                    <a href="#" class="js-advice">Похудеть на 5 килогармм</a>
+                    <a href="#" class="js-advice">Похудеть на 5 килограмм</a>
                     <a href="#" class="js-advice">Навестить родителей</a>
                     <a href="#" class="js-advice">Выйти замуж</a>
                     <a href="#" class="js-advice">Спеть в трамвае</a>
