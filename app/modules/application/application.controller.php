@@ -131,7 +131,7 @@ class ApplicationController extends BaseController {
         }
         $mainpage_promises_innova = (array)Config::get('site.mainpage_promises_innova');
 
-        if ($debug) {
+        if (Input::get('debug')) {
             Helper::tad($mainpage_promises);
         }
 
