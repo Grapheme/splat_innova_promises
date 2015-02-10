@@ -160,12 +160,8 @@ SplatSite.index = function() {
 			var parent = $(this).parents('.js-parent');
 			var pr_text = parent.find('.js-promise-text').text();
 			$('.js-promise-input').val(pr_text);
-			$('html, body').animate({
-				scrollTop: $('.js-promise-input').offset().top
-			}, function(){
-				$('.js-promise-input').trigger('focus');
-				$('.js-promise-btn').trigger('click');
-			});
+			$('.js-promise-placeholder promise-placeholder span').hide();
+			$('.js-promise-btn').trigger('click');
 			return false;
 		});
 	}
