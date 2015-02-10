@@ -24,5 +24,8 @@ return array(
 
     'mainpage_promises' => [3273, 3255, 3205, 2855, 3904, 3655, 3644, 3284, 3480, 4025, 3956],
     'mainpage_promises_innova' => [],
+    'mainpage_promises_city_aliases' => [
+        'мск' => 'Москва',
+    ],
 
 );

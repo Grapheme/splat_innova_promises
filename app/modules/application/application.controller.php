@@ -122,20 +122,28 @@ class ApplicationController extends BaseController {
          * Карточки обещаний для главной
          */
         $mainpage_promises = [];
+        $user_ids = [];
         $ids = (array)Config::get('site.mainpage_promises');
         if (count($ids)) {
             $mainpage_promises = Dic::valuesBySlug('promises', function($query) use ($ids) {
                 $query->whereIn('id', $ids);
             });
             $mainpage_promises = DicVal::extracts($mainpage_promises, null, 1, 1);
+
+            if (count($mainpage_promises)) {
+                $user_ids = Dic::makeLists($mainpage_promises, 'user_ids');
+            }
         }
-        $mainpage_promises_innova = (array)Config::get('site.mainpage_promises_innova');
 
         if (Input::get('debug_mainpage')) {
-            Helper::tad($mainpage_promises);
+            Helper::ta($mainpage_promises);
+            Helper::tad($user_ids);
         }
 
-        return View::make(Helper::layout('index'), compact('user', 'promises', 'finished_promises', 'mainpage_promises', 'mainpage_promises_innova'));
+        $mainpage_promises_innova = (array)Config::get('site.mainpage_promises_innova');
+        $mainpage_promises_city_aliases = (array)Config::get('site.mainpage_promises_city_aliases');
+
+        return View::make(Helper::layout('index'), compact('user', 'promises', 'finished_promises', 'mainpage_promises', 'mainpage_promises_innova', 'mainpage_promises_city_aliases'));
     }
 
 
