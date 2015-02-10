@@ -192,7 +192,7 @@ class ApplicationController extends BaseController {
                             $user = @$promises_cities_users[$promise_city->user_id];
                             if (!$user || !$user->city)
                                 continue;
-                            @++$temp[$user->city]
+                            @++$temp[$user->city];
                         }
                     }
                 }
