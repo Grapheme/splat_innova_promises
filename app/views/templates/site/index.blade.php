@@ -127,6 +127,48 @@
             <div class="amount-cont">уже <b>4 738</b> человек дали свои обещания</div>
           </div> -->
           <div class="indexpr-wrapper">
+
+              @if (isset($mainpage_promises) && is_object($mainpage_promises) && $mainpage_promises->count() && Input::get('debug_mp')))
+
+                  <ul class="promises-index">
+
+                      @foreach ($mainpage_promises as $promise)
+                          <?
+                          $puser = isset($users[$promise->user_id]) ? $users[$promise->user_id] : NULL;
+                          if (!$puser)
+                              continue;
+                          ?>
+                          <li class="promise-item js-parent">
+                              <div class="flipper">
+                                  <div class="promise-cont type-{{ $promise->style_id }}">
+                                      <div class="info-cont"><a class="comments-amount">0 комментариев</a>
+                                          <div class="pr-title js-promise-text">{{ mb_strtoupper($promise->name) }}</div>
+                                          <div class="user-info"><a href="#" style="background-image: url({{ $puser->avatar }})" class="user-photo"></a>
+                                              <div class="user-text">
+                                                  <div class="name">{{ $puser->name }}</div>
+                                                  <div class="city">{{ $puser->city }}</div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="promise-cont promise-hover type-{{ $promise->style_id }}">
+                                      <div class="info-cont">
+                                          <div class="promise-stat pr-loc">
+                                              <div class="stat-title">45 Обещаний</div>
+                                              <div class="stat-desc">{{ $puser->city }}</div>
+                                          </div>
+                                          <div class="btn-cont"><a href="#" class="stat-btn js-promise-card-btn">Пообещать тоже</a></div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </li>
+                      @endforeach
+
+                  </ul>
+
+
+              @endif
+
             <ul class="promises-index">
              <!--  <li class="promise-item innova-block">
                 <div class="promise-cont type-undefined">

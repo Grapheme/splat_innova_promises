@@ -166,7 +166,7 @@ class ApplicationController extends BaseController {
         $mainpage_promises_innova = (array)Config::get('site.mainpage_promises_innova');
         $mainpage_promises_city_aliases = (array)Config::get('site.mainpage_promises_city_aliases');
 
-        return View::make(Helper::layout('index'), compact('user', 'promises', 'finished_promises', 'mainpage_promises', 'mainpage_promises_innova', 'mainpage_promises_city_aliases'));
+        return View::make(Helper::layout('index'), compact('user', 'promises', 'finished_promises', 'mainpage_promises', 'users', 'mainpage_promises_innova', 'mainpage_promises_city_aliases'));
     }
 
 
