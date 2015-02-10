@@ -2650,7 +2650,7 @@ class ApplicationController extends BaseController {
             #$query->take(50);
 
             if ($days_limit) {
-                $query->where(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), '>=', $limit->format('Y-m-d'));
+                $query->where(DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d")'), '>', $limit->format('Y-m-d'));
             }
         });
         $promises = DicVal::extracts($promises, null, true, true);
