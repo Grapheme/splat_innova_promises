@@ -140,6 +140,20 @@
                           $city_promises_count = @(int)$cities_promises_counts[mb_strtolower(trim($puser->city))];
                           $promise_comments_count = @(int)$promises_comments_count[$promise->id];
                           ?>
+                          <li class="promise-item innova-block">
+                            <div class="promise-cont type-undefined">
+                              <div class="info-cont">
+                                <div class="innova-choice">Выбор</div>
+                                <a href="http://mypromises.ru/promise/4458" class="pr-title">ВЗЯТЬ КОТЕНКА ИЗ ПРИЮТА</a>
+                                <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/8b8e7c5e0c09cd434246e3e1321a021f.jpg)" class="user-photo"></a>
+                                  <div class="user-text">
+                                    <div class="name"><a>Яна Долотина</a></div>
+                                    <div class="city"><a>Москва</a></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
                           <li class="promise-item js-parent">
                               <div class="flipper">
                                   <div class="promise-cont type-{{ $promise->style_id }}">
