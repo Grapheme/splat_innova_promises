@@ -2887,6 +2887,9 @@ class ApplicationController extends BaseController {
             header("Content-Disposition: attachment; filename=report_" . date('Y-m-d') . ".csv");
             header("Content-Length: " . mb_strlen($full_content));
 
+            /**
+             * Добавляем BOM, чтобы Excel понимал, что файл в кодировке UTF-8
+             */
             echo pack('CCC', 0xef, 0xbb, 0xbf);
 
             echo $full_content;
