@@ -132,6 +132,20 @@
 
                   <ul class="promises-index">
 
+                      <li class="promise-item innova-block">
+                        <div class="promise-cont type-undefined">
+                          <div class="info-cont">
+                            <div class="innova-choice">Выбор</div>
+                            <a href="http://mypromises.ru/promise/4458" class="pr-title">ВЗЯТЬ КОТЕНКА ИЗ ПРИЮТА</a>
+                            <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/8b8e7c5e0c09cd434246e3e1321a021f.jpg)" class="user-photo"></a>
+                              <div class="user-text">
+                                <div class="name"><a>Яна Долотина</a></div>
+                                <div class="city"><a>Москва</a></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
                       @foreach ($mainpage_promises as $promise)
                           <?
                           $puser = isset($users[$promise->user_id]) ? $users[$promise->user_id] : NULL;
@@ -176,19 +190,20 @@
 
           @if (0)
             <ul class="promises-index">
-             <!--  <li class="promise-item innova-block">
+              <li class="promise-item innova-block">
                 <div class="promise-cont type-undefined">
                   <div class="info-cont">
-                    <div class="innova-choice">Выбор</div><a href="#" class="pr-title">Купить новый телевизор на шпагате</a>
-                    <div class="user-info"><a href="#" style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg)" class="user-photo"></a>
+                    <div class="innova-choice">Выбор</div>
+                    <a href="http://mypromises.ru/promise/4458" class="pr-title">ВЗЯТЬ КОТЕНКА ИЗ ПРИЮТА</a>
+                    <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/8b8e7c5e0c09cd434246e3e1321a021f.jpg)" class="user-photo"></a>
                       <div class="user-text">
-                        <div class="name"><a href="#">Руслан Корнеев</a></div>
-                        <div class="city"><a href="#">Ростов-на-Дону</a></div>
+                        <div class="name"><a>Яна Долотина</a></div>
+                        <div class="city"><a>Москва</a></div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </li> -->
+              </li>
               <li class="promise-item js-parent">
                 <div class="flipper">
                   <div class="promise-cont type-blue">
