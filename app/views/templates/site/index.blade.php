@@ -137,7 +137,7 @@
                           <div class="promise-cont">
                             <div class="info-cont">
                               <div class="innova-choice">Выбор</div>
-                              <a href="http://mypromises.ru/promise/4458" class="pr-title">ВЗЯТЬ КОТЕНКА ИЗ ПРИЮТА</a>
+                              <a href="http://mypromises.ru/promise/4458" class="pr-title js-promise-text">ВЗЯТЬ КОТЕНКА ИЗ ПРИЮТА</a>
                               <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/8b8e7c5e0c09cd434246e3e1321a021f.jpg)" class="user-photo"></a>
                                 <div class="user-text">
                                   <div class="name"><a>Яна Долотина</a></div>
