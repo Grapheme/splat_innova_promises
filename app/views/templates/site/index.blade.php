@@ -132,26 +132,28 @@
 
                   <ul class="promises-index">
 
-                      <li class="promise-item innova-block">
-                        <div class="promise-cont">
-                          <div class="info-cont">
-                            <div class="innova-choice">Выбор</div>
-                            <a href="http://mypromises.ru/promise/4458" class="pr-title">ВЗЯТЬ КОТЕНКА ИЗ ПРИЮТА</a>
-                            <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/8b8e7c5e0c09cd434246e3e1321a021f.jpg)" class="user-photo"></a>
-                              <div class="user-text">
-                                <div class="name"><a>Яна Долотина</a></div>
-                                <div class="city"><a>Москва</a></div>
+                      <li class="promise-item innova-block js-parent">
+                        <div class="flipper">
+                          <div class="promise-cont">
+                            <div class="info-cont">
+                              <div class="innova-choice">Выбор</div>
+                              <a href="http://mypromises.ru/promise/4458" class="pr-title">ВЗЯТЬ КОТЕНКА ИЗ ПРИЮТА</a>
+                              <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/8b8e7c5e0c09cd434246e3e1321a021f.jpg)" class="user-photo"></a>
+                                <div class="user-text">
+                                  <div class="name"><a>Яна Долотина</a></div>
+                                  <div class="city"><a>Москва</a></div>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div class="promise-cont promise-hover type-aqua">
-                          <div class="info-cont">
-                            <div class="promise-stat pr-loc">
-                              <div class="stat-title">298 Обещаний</div>
-                              <div class="stat-desc">из Москвы</div>
+                          <div class="promise-cont promise-hover type-aqua">
+                            <div class="info-cont">
+                              <div class="promise-stat pr-loc">
+                                <div class="stat-title">298 Обещаний</div>
+                                <div class="stat-desc">из Москвы</div>
+                              </div>
+                              <div class="btn-cont"><a href="#" class="stat-btn js-promise-card-btn">Пообещать тоже</a></div>
                             </div>
-                            <div class="btn-cont"><a href="#" class="stat-btn js-promise-card-btn">Пообещать тоже</a></div>
                           </div>
                         </div>
                       </li>
