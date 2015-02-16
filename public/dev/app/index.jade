@@ -41,18 +41,29 @@ block content
 			li(style="color: #07cbcc; font-size: 20px;") ПОХУДЕЮ НА 20 КИЛОГРАММ
 		.indexpr-wrapper
 			ul.promises-index
-				li.promise-item.innova-block
-					div(class="promise-cont type-#{i}")
-						.info-cont
-							.innova-choice Выбор
-							a(href="#").pr-title Купить новый телевизор на шпагате
-							.user-info
-								a.user-photo(href="#" style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg)")
-								.user-text
-									.name
-										a(href="#") Руслан Корнеев
-									.city
-										a(href="#") Ростов-на-Дону
+				li.promise-item.innova-block.js-parent
+					.flipper
+						div(class="promise-cont")
+							.info-cont
+								.innova-choice Выбор
+								a(href="#").pr-title Купить новый телевизор на шпагате
+								.user-info
+									a.user-photo(href="#" style="background-image: url(http://img0.liveinternet.ru/images/attach/c/6/102/827/102827412_1346919545_0107400x320.jpg)")
+									.user-text
+										.name
+											a(href="#") Руслан Корнеев
+										.city
+											a(href="#") Ростов-на-Дону
+						div(class="promise-cont promise-hover type-blue")
+							.info-cont
+								.promise-stat.pr-loc
+									.stat-title 45 Обещаний
+									.stat-desc из Киева
+								//- .promise-stat.pr-user
+									.stat-title 29 Похожих
+									.stat-desc обещаний
+								.btn-cont
+									a(href="#").stat-btn.js-promise-card-btn Пообещать тоже
 				li.promise-item.js-parent
 					.flipper
 						div(class="promise-cont type-blue")

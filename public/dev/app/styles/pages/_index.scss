@@ -437,7 +437,7 @@
 		}
 
 		&.innova-block {
-			.promise-cont {
+			.promise-cont:not(.promise-hover) {
 				background: #82d9e1;
 
 				.innova-choice {
