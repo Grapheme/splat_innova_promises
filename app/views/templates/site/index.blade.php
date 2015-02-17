@@ -150,7 +150,8 @@
                             <div class="info-cont">
                               <div class="innova-choice">Выбор</div>
                               <div class="innova-text">
-                                <p>Команда INNOVA обещает, что каждую неделю мы будем выбирать одно выполненное обещание и награждать того,<br>кто сдержал свое слово призом-сюрпризом. </p><a href="#" class="innova-link">Читать далее</a>
+                                <p>Команда INNOVA обещает, что каждую неделю мы будем выбирать одно выполненное обещание и награждать того,<br>кто сдержал свое слово призом-сюрпризом. </p>
+                                <a href="#" class="js-open-box innova-link" data-box="promo" onclick="ga('send', 'event', 'brand', 'profile');">Читать далее</a>
                               </div>
                             </div>
                           </div>
