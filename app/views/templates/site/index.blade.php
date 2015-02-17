@@ -132,12 +132,12 @@
 
                   <ul class="promises-index">
 
-                      <li class="promise-item innova-block js-parent">
+                      <li class="promise-item innova-block">
                         <div class="flipper">
                           <div class="promise-cont">
                             <div class="info-cont">
                               <div class="innova-choice">Выбор</div>
-                              <a href="http://mypromises.ru/promise/4458" class="pr-title js-promise-text">ВЗЯТЬ КОТЕНКА ИЗ ПРИЮТА</a>
+                              <a href="http://mypromises.ru/promise/4458" class="pr-title">ВЗЯТЬ КОТЕНКА ИЗ ПРИЮТА</a>
                               <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/8b8e7c5e0c09cd434246e3e1321a021f.jpg)" class="user-photo"></a>
                                 <div class="user-text">
                                   <div class="name"><a>Яна Долотина</a></div>
@@ -146,13 +146,12 @@
                               </div>
                             </div>
                           </div>
-                          <div class="promise-cont promise-hover type-aqua">
+                          <div class="promise-cont promise-hover">
                             <div class="info-cont">
-                              <div class="promise-stat pr-loc">
-                                <div class="stat-title">298 Обещаний</div>
-                                <div class="stat-desc">из Москвы</div>
+                              <div class="innova-choice">Выбор</div>
+                              <div class="innova-text">
+                                <p>Команда INNOVA обещает, что каждую неделю мы будем выбирать одно выполненное обещание и награждать того,<br>кто сдержал свое слово призом-сюрпризом. </p><a href="#" class="innova-link">Читать далее</a>
                               </div>
-                              <div class="btn-cont"><a href="#" class="stat-btn js-promise-card-btn">Пообещать тоже</a></div>
                             </div>
                           </div>
                         </div>

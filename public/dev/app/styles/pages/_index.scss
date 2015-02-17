@@ -437,7 +437,7 @@
 		}
 
 		&.innova-block {
-			.promise-cont:not(.promise-hover) {
+			.promise-cont {
 				background: #82d9e1;
 
 				.innova-choice {
@@ -471,6 +471,18 @@
 						margin-left: 10px;
 						font-size: 1.1em;
 					}
+				}
+			}
+
+			.innova-text {
+				margin-top: 30px;
+				text-transform: uppercase;
+				line-height: 1.4;
+				font-size: 14px;
+				color: #444;
+
+				.innova-link {
+					color: #fff;
 				}
 			}
 		}
