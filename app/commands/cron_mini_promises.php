@@ -187,7 +187,7 @@ class CronMiniPromises extends Command {
 				$this->info('Users objects: ' . count($users));
 				#Helper::ta($users);
 
-				$this->info('Отправляем письма с оповещением о миниобещаниях...');
+				$this->info('Отправляем письма с оповещением о скором истечени срока миниобещания...');
 
 				/**
 				 * Если есть юзеры, которым нужно отправить оповещение...
