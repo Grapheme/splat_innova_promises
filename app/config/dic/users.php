@@ -93,19 +93,6 @@ return array(
                 'type' => 'text',
                 'default' => '',
             ),
-
-            'notify_period' => array(
-                'title' => 'Частота отправки уведомлений',
-                'type' => 'text',
-                'default' => '',
-            ),
-            /*
-            'notify_social' => array(
-                'title' => 'Отправлять уведомления в соцсеть',
-                'type' => 'text',
-                'default' => '',
-            ),
-            */
         );
     },
 

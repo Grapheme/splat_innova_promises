@@ -132,7 +132,7 @@
                         <div class="check-cont">
                             <ul>
                                 <li>
-                                    {{ Form::select('notify_period', Config::get('site.notify'), $user->notify_period, ['class' => 'ui-select']) }}
+                                    {{ Form::select('notifications[notify_period]', Config::get('site.notify'), @$auth_user->notifications['notify_period'], ['class' => 'ui-select']) }}
                                 </li>
                             </ul>
                         </div>
