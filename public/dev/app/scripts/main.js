@@ -457,7 +457,7 @@ $.fn.SmartBtn = function() {
 }
 
 SplatSite.ValidPhone = function() {
-	var defaultMethod = 'GET';
+	var defaultMethod = 'POST';
 	var urls = SplatDict.urls;
 	var start_check = false;
 	var error_cont = $('.js-phone-error');
