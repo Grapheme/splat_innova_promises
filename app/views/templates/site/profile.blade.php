@@ -117,12 +117,12 @@
                     <div class="input-cont">
                         <input name="email" value="{{ $user->email }}" placeholder="Укажите e-mail" class="us-input">
                     </div>
+                    <div class="input-hint">
+                        Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.
+                    </div>
                     <div class="check-cont">
                         <input type="checkbox" id="mail" class="styledCheck">
                         <label for="mail"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать по электронной почте:</label>
-                    </div>
-                    <div class="input-hint">
-                        Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.
                     </div>
 
                     <br/><br/>
