@@ -92,7 +92,7 @@ class CronMiniPromises extends Command {
 				$join
 					->on($rand_tbl_alias . '.dicval_id', '=', $tbl_dicval . '.id')
 					->where($rand_tbl_alias . '.key', '=', 'time_limit')
-					->where($rand_tbl_alias . '.value', '>=', $yesterday2->format('Y-m-d H:i:s'))
+					->where($rand_tbl_alias . '.created_at', '>=', $yesterday2->format('Y-m-d H:i:s'))
 					->where($rand_tbl_alias . '.value', '<', $tomorrow2->format('Y-m-d H:i:s'))
 				;
 			});
