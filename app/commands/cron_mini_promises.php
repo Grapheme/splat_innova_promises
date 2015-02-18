@@ -232,7 +232,7 @@ class CronMiniPromises extends Command {
 									$from_email = Config::get('mail.from.address');
 									$from_name = Config::get('mail.from.name');
 									$message->from($from_email, $from_name);
-									$message->subject('Не удалось выполнить обещание');
+									$message->subject('Заканчивается срок выполнения обещания!');
 									$message->to($user->email);
 								});
 						$this->info(' + ' . $user->email);
