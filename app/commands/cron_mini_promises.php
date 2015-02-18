@@ -180,61 +180,65 @@ class CronMiniPromises extends Command {
 			/**
 			 * Загружаем пользователей по IDs
 			 */
-			$users = Dic::valuesBySlugAndIds('users', $users_ids);
-			$users = DicVal::extracts($users, NULL, true, true);
-			$this->info('Users objects: ' . count($users));
-			#Helper::ta($users);
+			if (count($users_ids)) {
 
-			$this->info('Отправляем письма с оповещением о миниобещаниях...');
+				$users = Dic::valuesBySlugAndIds('users', $users_ids);
+				$users = DicVal::extracts($users, NULL, true, true);
+				$this->info('Users objects: ' . count($users));
+				#Helper::ta($users);
 
-			/**
-			 * Если есть юзеры, которым нужно отправить оповещение...
-			 */
-			if (count($users)) {
+				$this->info('Отправляем письма с оповещением о миниобещаниях...');
 
 				/**
-				 * Перебираем всех юзеров
+				 * Если есть юзеры, которым нужно отправить оповещение...
 				 */
-				foreach ($users as $u => $user) {
+				if (count($users)) {
 
 					/**
-					 * Если юзеру уже было отправлено письмо раньше - не будем отправлять
+					 * Перебираем всех юзеров
 					 */
-					if (in_array($user->id, $also_users)) {
-						continue;
+					foreach ($users as $u => $user) {
+
+						/**
+						 * Если юзеру уже было отправлено письмо раньше - не будем отправлять
+						 */
+						if (in_array($user->id, $also_users)) {
+							continue;
+						}
+
+						/**
+						 * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
+						 */
+						$also_users[] = $user->id;
+
+						/**
+						 * Валидация - установлен ли валидный адрес почты
+						 */
+						$validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
+						if ($validator->fails()) {
+							continue;
+						}
+
+						/**
+						 * Если валидация пройдена - отправляем письмо
+						 */
+						$data = array(
+							#'promise' => $promise,
+							'user' => $user,
+						);
+						if (!$debug && 0)
+							if (!$only_email || $only_email == $user->email)
+								Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
+									$from_email = Config::get('mail.from.address');
+									$from_name = Config::get('mail.from.name');
+									$message->from($from_email, $from_name);
+									$message->subject('Не удалось выполнить обещание');
+									$message->to($user->email);
+								});
+						$this->info(' + ' . $user->email);
 					}
-
-					/**
-					 * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
-					 */
-					$also_users[] = $user->id;
-
-					/**
-					 * Валидация - установлен ли валидный адрес почты
-					 */
-					$validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
-					if ($validator->fails()) {
-						continue;
-					}
-
-					/**
-					 * Если валидация пройдена - отправляем письмо
-					 */
-					$data = array(
-						#'promise' => $promise,
-						'user' => $user,
-					);
-					if (!$debug && 0)
-						if (!$only_email || $only_email == $user->email)
-							Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
-								$from_email = Config::get('mail.from.address');
-								$from_name = Config::get('mail.from.name');
-								$message->from($from_email, $from_name);
-								$message->subject('Не удалось выполнить обещание');
-								$message->to($user->email);
-							});
-					$this->info(' + ' . $user->email);
 				}
+
 			}
 		}
 
