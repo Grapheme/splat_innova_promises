@@ -3053,7 +3053,7 @@ class ApplicationController extends BaseController {
 
                 } catch (Services_Twilio_RestException $e) {
 
-                    $json_request['responseText'] = 'Ошибка отправки СМС: ' . '#' . $e->code . ', ' . $e->getMessage() . ': ' . $e->more_info;
+                    $json_request['responseText'] = 'Ошибка отправки СМС: ' . '#' . $e->getCode() . ', ' . $e->getMessage();
                 }
                 #*/
                 /*
