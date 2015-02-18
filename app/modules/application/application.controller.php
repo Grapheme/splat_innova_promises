@@ -3047,8 +3047,13 @@ class ApplicationController extends BaseController {
                         // the sms body
                         "MyPromises.ru code: " . $confirm_code
                     );
+
+                    $json_request['status'] = TRUE;
+                    $json_request['responseText'] = 'СМС отправлено';
+
                 } catch (Services_Twilio_RestException $e) {
-                    echo $e->getMessage();
+
+                    $json_request['responseText'] = 'Ошибка отправки СМС: ' . '#' . $e->code . ', ' . $e->getMessage() . ': ' . $e->more_info;
                 }
                 #*/
                 /*
@@ -3062,9 +3067,6 @@ class ApplicationController extends BaseController {
                     echo $e->getMessage();
                 }
                 #*/
-
-                $json_request['status'] = TRUE;
-                $json_request['responseText'] = 'СМС отправлено';
             }
 
             /*
