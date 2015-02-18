@@ -140,7 +140,7 @@ class CronMiniPromises extends Command {
 
 				$promise_halftime_mark = $promise_carbon_start->timestamp + ceil($promise_length/2);
 
-				$this->info($promise_halftime_mark . " >= \n" . time() . "\n && \n" . $promise_halftime_mark . " < \n" . (time()+60*60));
+				#$this->info($promise_halftime_mark . " >= \n" . time() . "\n && \n" . $promise_halftime_mark . " < \n" . (time()+60*60));
 				$this->info(
 					\Carbon\Carbon::createFromTimestamp($promise_halftime_mark)->format('Y-m-d H:i:s')
 					. " >= \n"
@@ -226,7 +226,7 @@ class CronMiniPromises extends Command {
 							#'promise' => $promise,
 							'user' => $user,
 						);
-						if (!$debug && 0)
+						if (!$debug)
 							if (!$only_email || $only_email == $user->email)
 								Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
 									$from_email = Config::get('mail.from.address');
