@@ -141,6 +141,15 @@ class CronMiniPromises extends Command {
 				$promise_halftime_mark = $promise_carbon_start->timestamp + ceil($promise_length/2);
 
 				$this->info($promise_halftime_mark . " >= \n" . time() . "\n && \n" . $promise_halftime_mark . " < \n" . (time()+60*60));
+				$this->info(
+					\Carbon\Carbon::createFromTimestamp($promise_halftime_mark)->format('Y-m-d H:i:s')
+					. " >= \n"
+					. \Carbon\Carbon::now()->format('Y-m-d H:i:s')
+					. "\n && \n"
+					. \Carbon\Carbon::createFromTimestamp($promise_halftime_mark)->format('Y-m-d H:i:s')
+					. " < \n"
+					. \Carbon\Carbon::now()->addHours(1)->format('Y-m-d H:i:s')
+				);
 
 				if ($promise_halftime_mark >= time() && $promise_halftime_mark < (time()+60*60)) {
 
