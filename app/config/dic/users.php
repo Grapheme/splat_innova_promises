@@ -87,6 +87,36 @@ return array(
                 'type' => 'text',
                 'default' => '',
             ),
+
+            'last_notification_email' => array(
+                'title' => 'Время последней отправки уведомлений на почту',
+                'type' => 'text',
+                'default' => '',
+            ),
+
+            'last_notification_phone' => array(
+                'title' => 'Время последней отправки уведомлений на телефон',
+                'type' => 'text',
+                'default' => '',
+            ),
+
+            'notify_email' => array(
+                'title' => 'Отправлять уведомления на почту',
+                'type' => 'text',
+                'default' => '',
+            ),
+            'notify_phone' => array(
+                'title' => 'Отправлять уведомления на телефон',
+                'type' => 'text',
+                'default' => '',
+            ),
+            /*
+            'notify_social' => array(
+                'title' => 'Отправлять уведомления в соцсеть',
+                'type' => 'text',
+                'default' => '',
+            ),
+            */
         );
     },
 

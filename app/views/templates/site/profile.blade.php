@@ -138,9 +138,7 @@
                             <label for="mail"><span class="check-fake"><i class="fi icon-check"></i></span> По электронной почте:</label>
                             <ul class="check-desc">
                                 <li><span>Частота оповещений:</span>
-                                    <select class="ui-select">
-                                        <option>Два раза в месяц</option>
-                                    </select>
+                                    {{ Form::select('notify_email', Config::get('notify'), $user->notify_email, ['class' => 'ui-select']) }}
                                 </li>
                             </ul>
                         </div>

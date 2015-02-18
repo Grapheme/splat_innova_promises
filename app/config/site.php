@@ -34,4 +34,11 @@ return array(
         'token' => '80ec5f6b892fc81f4253fb06a985d424',
     ],
 
+    'notify' => [
+        'daily'        => 'Каждый день',
+        'weekly_twice' => '2 раза в неделю',
+        'weekly'       => '1 раз в неделю',
+        'monthly'      => '1 раз в месяц',
+    ]
+
 );
