@@ -152,6 +152,8 @@ class CronMiniPromises extends Command {
 				);
 
 				if ($promise_halftime_mark >= time() && $promise_halftime_mark < (time()+60*60)) {
+					#
+				} else {
 
 					unset($promises[$p]);
 					continue;
