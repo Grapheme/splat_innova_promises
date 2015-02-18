@@ -98,7 +98,7 @@
 
                     @if (Input::get('dbg-phone') == 1)
                     <div class="input-cont js-phone">
-                        <input placeholder="Укажите телефон" value="+79129229922" class="js-phone-input us-input">
+                        <input placeholder="Укажите телефон" value="{{ $user->phone_number }}" class="js-phone-input us-input">
 
                         <div data-status="new" data-tooltip="Номер не подтвержден" data-add-class="tooltip-dark" class="phone-status js-phone-popup js-status-popup"></div>
                         <div data-status="valid" class="phone-status"></div>
