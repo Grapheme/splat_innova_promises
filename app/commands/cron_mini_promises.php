@@ -123,8 +123,8 @@ class CronMiniPromises extends Command {
 				if ($promise->finished_at || $promise->promise_fail) {
 
 					unset($promises[$p]);
+					continue;
 				}
-				continue;
 
 				$promise_carbon_start = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $promise->created_at);
 				$promise_carbon_limit = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $promise->time_limit);
