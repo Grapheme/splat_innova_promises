@@ -105,53 +105,30 @@
                         <div data-status="progress" class="phone-status"></div>
                     </div>
                     <div class="input-error js-phone-error"></div>
+                    <div class="check-cont">
+                        <input type="checkbox" id="phone" class="styledCheck">
+                        <label for="phone"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать через SMS на мобильный телефон:</label>
+                    </div>
                     @endif
 
                     <div class="input-cont">
                         <input name="email" value="{{ $user->email }}" placeholder="Укажите e-mail" class="us-input">
                     </div>
-                    <div class="input-hint">Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить
-                        о вашем обещании.
+                    <div class="check-cont">
+                        <input type="checkbox" id="mail" class="styledCheck">
+                        <label for="mail"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать по электронной почте:</label>
+                    </div>
+                    <div class="input-hint">
+                        Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.
                     </div>
 
 
                     @if (Input::get('dbg-phone'))
-                        <div class="check-title">Напоминать о данных мною обещаниях</div>
-
-                        @if (0)
+                        <div class="check-title">Частота оповещений:</div>
                         <div class="check-cont">
-                            <input type="checkbox" id="soc" disabled="disabled" class="styledCheck">
-                            <label for="soc"><span class="check-fake check-disabled"><i class="fi icon-check"></i></span> Через соц. сеть:</label>
-                            <ul class="check-desc">
-                                <li><span>Частота оповещений:</span>
-                                    <select class="ui-select">
-                                        <option>Каждый день</option>
-                                        <option>Не каждый день</option>
-                                    </select>
-                                </li>
-                            </ul>
-                        </div>
-                        @endif
-
-                        <div class="check-cont">
-                            <input type="checkbox" id="mail" class="styledCheck">
-                            <label for="mail"><span class="check-fake"><i class="fi icon-check"></i></span> По электронной почте:</label>
-                            <ul class="check-desc">
-                                <li><span>Частота оповещений:</span>
-                                    {{ Form::select('notify_email', Config::get('site.notify'), $user->notify_email, ['class' => 'ui-select']) }}
-                                </li>
-                            </ul>
+                            {{ Form::select('notify_period', Config::get('site.notify'), $user->notify_email, ['class' => 'ui-select']) }}
                         </div>
 
-                        <div class="check-cont">
-                            <input type="checkbox" id="phone" class="styledCheck">
-                            <label for="phone"><span class="check-fake"><i class="fi icon-check"></i></span> На мобильный телефон:</label>
-                            <ul class="check-desc">
-                                <li><span>Частота оповещений:</span>
-                                    {{ Form::select('notify_phone', Config::get('site.notify'), $user->notify_email, ['class' => 'ui-select']) }}
-                                </li>
-                            </ul>
-                        </div>
 
                         <br/><br/>
 

@@ -100,13 +100,8 @@ return array(
                 'default' => '',
             ),
 
-            'notify_email' => array(
-                'title' => 'Отправлять уведомления на почту',
-                'type' => 'text',
-                'default' => '',
-            ),
-            'notify_phone' => array(
-                'title' => 'Отправлять уведомления на телефон',
+            'notify_period' => array(
+                'title' => 'Частота отправки уведомлений',
                 'type' => 'text',
                 'default' => '',
             ),
