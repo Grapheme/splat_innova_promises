@@ -105,7 +105,7 @@ class CronMiniPromises extends Command {
 		Helper::ta($promises);
 		$this->info('Total mini promises: ' . count($promises));
 
-		die;
+		#die;
 
 		/**
 		 * Если что-то найдено...
@@ -125,6 +125,7 @@ class CronMiniPromises extends Command {
 			$promises_ids = Dic::makeLists($promises, NULL, 'id');
 			Helper::d($promises_ids);
 
+			die;
 
 			/**
 			 * Получаем ID пользователей - авторов обещаний
