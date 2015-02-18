@@ -18,3 +18,4 @@ Options -Indexes
 </IfModule>
 
 php_value max_input_vars 5000000
+php_value memory_limit 128M
