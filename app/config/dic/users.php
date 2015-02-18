@@ -88,14 +88,8 @@ return array(
                 'default' => '',
             ),
 
-            'last_notification_email' => array(
-                'title' => 'Время последней отправки уведомлений на почту',
-                'type' => 'text',
-                'default' => '',
-            ),
-
-            'last_notification_phone' => array(
-                'title' => 'Время последней отправки уведомлений на телефон',
+            'last_notification' => array(
+                'title' => 'Время последней отправки уведомлений',
                 'type' => 'text',
                 'default' => '',
             ),
