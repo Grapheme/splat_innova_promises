@@ -100,7 +100,7 @@ class CronMiniPromises extends Command {
 				->addSelect(DB::raw($rand_tbl_alias . '.value AS time_limit'))
 			;
 		});
-		#Helper::smartQueries(1);
+		Helper::smartQueries(1);
 		$promises = DicVal::extracts($promises, null, true, true);
 		Helper::ta($promises);
 		$this->info('Total mini promises: ' . count($promises));
