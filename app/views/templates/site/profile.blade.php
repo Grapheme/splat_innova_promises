@@ -97,18 +97,21 @@
                     </div>
 
                     @if (Input::get('dbg-phone') == 1)
-                    <div class="input-cont js-phone">
-                        <input placeholder="Укажите телефон" value="{{ $user->phone_number }}" class="js-phone-input us-input">
+                        <div class="input-cont js-phone">
+                            <input placeholder="Укажите телефон" value="{{ $user->phone_number }}" class="js-phone-input us-input">
 
-                        <div data-status="new" data-tooltip="Номер не подтвержден" data-add-class="tooltip-dark" class="phone-status js-phone-popup js-status-popup"></div>
-                        <div data-status="valid" class="phone-status"></div>
-                        <div data-status="progress" class="phone-status"></div>
-                    </div>
-                    <div class="input-error js-phone-error"></div>
-                    <div class="check-cont">
-                        <input type="checkbox" id="phone" class="styledCheck">
-                        <label for="phone"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать через SMS на мобильный телефон:</label>
-                    </div>
+                            <div data-status="new" data-tooltip="Номер не подтвержден" data-add-class="tooltip-dark" class="phone-status js-phone-popup js-status-popup"></div>
+                            <div data-status="valid" class="phone-status"></div>
+                            <div data-status="progress" class="phone-status"></div>
+                        </div>
+                        <div class="input-error js-phone-error"></div>
+                        <div class="check-cont">
+                            <input type="checkbox" id="phone" class="styledCheck">
+                            <label for="phone"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать через SMS на мобильный телефон:</label>
+                        </div>
+
+                        <br/><br/>
+
                     @endif
 
                     <div class="input-cont">
@@ -122,13 +125,17 @@
                         Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.
                     </div>
 
+                    <br/><br/>
 
                     @if (Input::get('dbg-phone'))
                         <div class="check-title">Частота оповещений:</div>
                         <div class="check-cont">
-                            {{ Form::select('notify_period', Config::get('site.notify'), $user->notify_email, ['class' => 'ui-select']) }}
+                            <ul>
+                                <li>
+                                    {{ Form::select('notify_period', Config::get('site.notify'), $user->notify_email, ['class' => 'ui-select']) }}
+                                </li>
+                            </ul>
                         </div>
-
 
                         <br/><br/>
 
