@@ -126,11 +126,27 @@ class CronMiniPromises extends Command {
 					continue;
 				}
 
+				/*
+				 * Получаем время создания обещания, временной лимит на выполнение обещания,
+				 * вычисляем общее время на обещание в секундах, и находим временную метку,
+				 * при которой прошла половина срока обещания.
+				 * Далее проверяем, попадает ли она в отведенный временной промежуток (в зависимости от текущего времени).
+				 */
 				$promise_carbon_start = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $promise->created_at);
 				$promise_carbon_limit = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $promise->time_limit);
-				$promise_carbon_length = $promise_carbon_limit->timestamp - $promise_carbon_start->timestamp;
+				$promise_length = $promise_carbon_limit->timestamp - $promise_carbon_start->timestamp;
 
-				Helper::ta($promise_carbon_length);
+				Helper::ta($promise_length);
+
+				$promise_halftime_mark = $promise_carbon_start->timestamp + ceil($promise_length/2);
+
+				$this->info($promise_halftime_mark . ' >= ' . time() . ' && ' . $promise_halftime_mark . ' < ' . (time()+60*60));
+
+				if ($promise_halftime_mark >= time() && $promise_halftime_mark < (time()+60*60)) {
+
+					unset($promises[$p]);
+					continue;
+				}
 			}
 			$this->info('Filtered promises: ' . count($promises));
 
