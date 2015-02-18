@@ -159,6 +159,10 @@
         opacity: 0;
         transition: opacity $default-anim-time $default-ease;
       }
+
+      &.check-disabled {
+        background: rgb(255, 128, 128);
+      }
     }
 
     &.ui-state-active {
