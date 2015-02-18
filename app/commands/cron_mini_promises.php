@@ -113,12 +113,24 @@ class CronMiniPromises extends Command {
 		if (count($promises)) {
 
 			/**
-			 * Фильтруем просроченные обещания - оставляем только те, у которых нет явной метки "выполнено" или "провалено"
+			 * Фильтруем просроченные обещания:
+			 * - оставляем только те, у которых нет явной метки "выполнено" или "провалено"
+			 * - оставляем только те, у которых прошла ~половина срока, т.е.
+			 * [текущее время] <= ([время создания обещания] + 0,5 * [общая длительность обещания]) < [текущее время] + 1 час
 			 */
 			foreach ($promises as $p => $promise) {
 
-				if ($promise->finished_at || $promise->promise_fail)
+				if ($promise->finished_at || $promise->promise_fail) {
+
 					unset($promises[$p]);
+				}
+				continue;
+
+				$promise_carbon_start = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $promise->created_at);
+				$promise_carbon_limit = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $promise->time_limit);
+				$promise_carbon_length = $promise_carbon_limit - $promise_carbon_start;
+
+				Helper::ta($promise_carbon_length);
 			}
 			$this->info('Filtered promises: ' . count($promises));
 
@@ -146,7 +158,7 @@ class CronMiniPromises extends Command {
 			$this->info('Users objects: ' . count($users));
 			#Helper::ta($users);
 
-			$this->info('Отправляем письма с оповещением о полностью проваленных обещаниях...');
+			$this->info('Отправляем письма с оповещением о миниобещаниях...');
 
 			/**
 			 * Если есть юзеры, которым нужно отправить оповещение...
@@ -187,7 +199,7 @@ class CronMiniPromises extends Command {
 					);
 					if (!$debug && 0)
 						if (!$only_email || $only_email == $user->email)
-							Mail::send('emails.cron_promise_fail', $data, function ($message) use ($user) {
+							Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
 								$from_email = Config::get('mail.from.address');
 								$from_name = Config::get('mail.from.name');
 								$message->from($from_email, $from_name);
