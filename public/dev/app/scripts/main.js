@@ -105,6 +105,11 @@ SplatSite.simpleBox = function() {
 	var init = function() {
 		sbox.hide();
 	}
+	$('.soverlay').on('click', function(e){
+		if($(e.target).hasClass('soverlay')) {
+			close();
+		}
+	});
 	init();
 	return {open: open, close: close};
 }
@@ -271,11 +276,15 @@ SplatSite.Tooltips = {
 			clearTimeout(close_timeout);
 			var text = $(this).attr('data-tooltip');
 			var elem = $(this);
+			var add_class = $(this).attr('data-add-class');
+			if(add_class)
+				$('.js-tooltip').addClass(add_class);
 			self.show(text, elem);
 		});
 		$('[data-tooltip]').on('mouseout', function(){
 			close_timeout = setTimeout(function(){
 				if(close_allow) {
+					$('.js-tooltip').removeClass($(this).attr('data-add-class'));
 					self.close();
 				}
 			}, 5);
@@ -447,6 +456,155 @@ $.fn.SmartBtn = function() {
 	});
 }
 
+SplatSite.ValidPhone = function() {
+	var defaultMethod = 'GET';
+	var urls = SplatDict.urls;
+	var start_check = false;
+	var error_cont = $('.js-phone-error');
+	var phone_status = $('.js-phone .phone-status');
+	var hide_error = function() {
+		error_cont.slideUp();
+	}
+	var show_error = function(text) {
+		error_cont.html(text).slideDown();
+	}
+	var hide_popup_error = function() {
+		$('.js-valid-errors').hide();
+	}
+	var show_popup_error = function(text) {
+		$('.js-valid-errors').html(text).show();
+	}
+
+	var checkThis = function(elem) {
+		var phone_number = elem.val(),
+			just_numbers = phone_number
+				.replace('(', '')
+				.replace(')', '')
+				.replace('-', '')
+				.replace('-', ''),
+			data = {
+				user_id: SplatDict.user_id,
+				phone: just_numbers
+			};
+		hide_error();
+		$.ajax({
+			url: urls['check_phone'],
+			data: data,
+			method: defaultMethod
+		}).done(function(resp){
+			if(resp.status == false) {
+				show_error('Произошла ошибка. Попробуйте позже');
+			} else {
+				if(resp.state == 'new') {
+					phone_status.filter('[data-status="new"]').fadeIn();
+					show_error('<a href="#" class="js-phone-popup">Подтвердите свой номер телефона</a>');
+				}
+				if(resp.state == 'valid') {
+					phone_status.filter('[data-status="valid"]').fadeIn();
+				}
+			}
+		}).fail(function(){
+			show_error('Произошла ошибка. Попробуйте позже');
+		});
+	}
+	var sendsms = function() {
+		var phone_number = $('.js-phone-input').val(),
+			just_numbers = phone_number
+				.replace('(', '')
+				.replace(')', '')
+				.replace('-', '')
+				.replace('-', ''),
+			data = {
+				user_id: SplatDict.user_id,
+				phone: just_numbers
+			};
+		$('.js-phone-code').val('');
+		$('.js-phone-popup').addClass('loading');
+		$('.js-valid-repeat').addClass('loading-link');
+		$.ajax({
+			data: data,
+			url: urls['send_sms'],
+			method: defaultMethod
+		})
+		.done(function(resp){
+			$('.js-valid-repeat').removeClass('loading-link');
+			$('.js-phone-popup').removeClass('loading');
+			if(resp.status == false) {
+				show_error('Произошла ошибка. Попробуйте позже');
+			} else {
+				SplatSite.simpleBox().open('sms');
+			}
+		})
+		.fail(function(){
+			$('.js-valid-repeat').removeClass('loading-link');
+			$('.js-phone-popup').removeClass('loading');
+			show_error('Произошла ошибка. Попробуйте позже');
+		});
+	}
+	var checkCode = function() {
+		var data = {
+				user_id: SplatDict.user_id,
+				code: $('.js-phone-code').val()
+			};
+		console.log(data);
+		$('.js-code-check').addClass('loading-link');
+		$.ajax({
+			data: data,
+			url: urls['check_code'],
+			method: defaultMethod
+		})
+		.done(function(resp){
+			$('.js-code-check').removeClass('loading-link');
+			if(resp.status == false) {
+				show_popup_error('Неверный код подтверждения');
+			} else {
+				hide_error();
+				hide_popup_error();
+				SplatSite.simpleBox().close();
+				phone_status.filter('[data-status="new"]').fadeOut();
+				phone_status.filter('[data-status="valid"]').fadeIn();
+			}
+		})
+		.fail(function(){
+			$('.js-code-check').removeClass('loading-link');
+			show_popup_error('Произошла ошибка. Попробуйте позже');
+		});
+	}
+	$('.js-phone-input').on('input', function(){
+		if(!$('.js-phone-input').inputmask("isComplete")) {
+			hide_error();
+			phone_status.hide();
+		}
+	});
+	$('.js-phone-input').inputmask('+7(999)999-99-99', {
+	    "oncomplete": function(){
+			checkThis($(this));
+		}
+	});
+	if($('.js-phone-input').inputmask("isComplete")) {
+		checkThis($('.js-phone-input'));
+	}
+	$(document).on('click', '.js-phone-popup', function(){
+		if(!$(this).hasClass('loading') && !$('.js-code-check').hasClass('loading-link')) {
+			sendsms();
+		}
+		return false;
+	});
+	$(document).on('click', '.js-valid-repeat', function(){
+		if(!$(this).hasClass('loading-link') && !$('.js-code-check').hasClass('loading-link')) {
+			sendsms();
+			show_popup_error('Новый код отправлен');
+		}
+		return false;
+	});
+	$(document).on('click', '.js-code-check', function(){
+		if(!$(this).hasClass('loading-link') && !$('.js-valid-repeat').hasClass('loading-link')) {
+			checkCode();
+		}
+		return false;
+	});
+}
+
 function declOfNum(number, titles) {  
     cases = [2, 0, 1, 1, 1, 2];  
     return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];  
@@ -498,6 +656,7 @@ $(function(){
 	SplatSite.ShowFriends();
 	SplatSite.Tooltips.init();
 	SplatSite.PromisePlaceholder();
+	SplatSite.ValidPhone();
 	$('.js-smart-btn').SmartBtn();
 	if($('.js-countdown').length) {
 		SplatSite.CountDown('.js-countdown');

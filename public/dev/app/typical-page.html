@@ -143,13 +143,15 @@
     <div data-name="sms" class="sbox sms-box">
       <div class="sms-title">Вам отправлена SMS для подтверждения номера мобильного телефона, введите код из сообщения:</div>
       <div class="sms-inputs">
-        <input class="sms-input">
-        <button class="sms-btn">Ок</button>
+        <input class="sms-input js-phone-code">
+        <button class="sms-btn js-code-check">Ок</button>
       </div>
+      <ul class="sms-links js-valid-errors">
+        <li>Неправильный код подтверждения</li>
+      </ul>
       <ul class="sms-links">
-        <li><a href="#">Отправить код повторно</a></li>
-        <li><a href="#">Другие способы напоминаний</a></li>
-        <li><a href="#">Не напоминать</a></li>
+        <li><a href="#" class="js-valid-repeat">Отправить код повторно</a></li>
+        
       </ul>
     </div>
   </div>

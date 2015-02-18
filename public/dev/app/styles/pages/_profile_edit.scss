@@ -36,11 +36,67 @@
     width: 480px;
 
     .input-cont {
+      position: relative;
       margin-bottom: 20px;
 
       .us-input {
         background: #f6f6f6;
         height: 65px;
+      }
+
+      .phone-status {
+        position: absolute;
+        display: none;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 70px;
+        line-height: 63px;
+        font-size: 35px;
+        text-align: center;
+
+        &:before {
+          @extend .fi;
+          display: inline-block;
+          vertical-align: middle;
+        }
+
+        &[data-status="new"] {
+          cursor: pointer;
+          color: #07cbcb;
+
+          &:before {
+            content: "\e60e";
+          }
+
+          &.loading {
+            &:before {
+              content: "\e605";
+              animation-name: spin;
+              animation-duration: 1000ms;
+              animation-iteration-count: infinite;
+              animation-timing-function: ease;
+            }
+          }
+        }
+
+        &[data-status="valid"] {
+          color: #07cbcb;
+
+          &:before {
+            content: "\e60f";
+          }
+        }
+      }
+    }
+
+    .input-error {
+      display: none;
+      margin-bottom: 25px;
+      font-size: 14px;
+
+      a {
+        color: inherit;
       }
     }
 

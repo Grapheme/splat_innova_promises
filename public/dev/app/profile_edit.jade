@@ -22,6 +22,12 @@ block content
 				.edit-cont
 					.input-cont
 						input.us-input(placeholder="Ваше имя")
+					.input-cont.js-phone
+						input.js-phone-input.us-input(placeholder="Укажите телефон" value="9129229922")
+						.phone-status.js-phone-popup.js-status-popup(data-status="new" data-tooltip="Номер не подтвержден" data-add-class="tooltip-dark")
+						.phone-status(data-status="valid")
+						.phone-status(data-status="progress")
+					.input-error.js-phone-error
 					.input-cont
 						input.us-input(placeholder="Укажите e-mail")
 					.input-hint Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.
@@ -32,3 +38,12 @@ block content
 						label(for="apply") <span class="check-fake"><i class="fi icon-check"></i></span>Подтверждаю ознакомление с <a href="#">правилами пользования</a>
 					.btn-cont
 						button.us-btn Сохранить
+
+	script.
+		var SplatDict = {};
+		SplatDict.user_id = 92;
+		SplatDict.urls = {
+			'check_phone': 'json/checkPhone.json',
+			'send_sms': 'json/sendSms.json',
+			'check_code': 'json/checkCode.json'
+		};

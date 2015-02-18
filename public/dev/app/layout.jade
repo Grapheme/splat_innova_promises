@@ -148,15 +148,17 @@ head
         .sbox.sms-box(data-name="sms")
             .sms-title Вам отправлена SMS для подтверждения номера мобильного телефона, введите код из сообщения:
             .sms-inputs
-                input.sms-input
-                button.sms-btn Ок
+                input.sms-input.js-phone-code
+                button.sms-btn.js-code-check Ок
+            ul.sms-links.js-valid-errors
+                li Неправильный код подтверждения
             ul.sms-links
                 li
-                    a(href="#") Отправить код повторно
-                li
-                    a(href="#") Другие способы напоминаний
-                li
-                    a(href="#") Не напоминать
+                    a(href="#").js-valid-repeat Отправить код повторно
+                //- li
+                //-     a(href="#") Другие способы напоминаний
+                //- li
+                //-     a(href="#") Не напоминать
 
 
     // build:js(.) scripts/vendor.js

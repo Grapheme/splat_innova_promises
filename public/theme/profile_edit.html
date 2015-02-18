@@ -49,6 +49,13 @@
             <div class="input-cont">
               <input placeholder="Ваше имя" class="us-input">
             </div>
+            <div class="input-cont js-phone">
+              <input placeholder="Укажите телефон" value="9129229922" class="js-phone-input us-input">
+              <div data-status="new" data-tooltip="Номер не подтвержден" data-add-class="tooltip-dark" class="phone-status js-phone-popup js-status-popup"></div>
+              <div data-status="valid" class="phone-status"></div>
+              <div data-status="progress" class="phone-status"></div>
+            </div>
+            <div class="input-error js-phone-error"></div>
             <div class="input-cont">
               <input placeholder="Укажите e-mail" class="us-input">
             </div>
@@ -67,6 +74,15 @@
         </form>
       </div>
     </div>
+    <script>
+      var SplatDict = {};
+      SplatDict.user_id = 92;
+      SplatDict.urls = {
+      	'check_phone': 'json/checkPhone.json',
+      	'send_sms': 'json/sendSms.json',
+      	'check_code': 'json/checkCode.json'
+      };
+    </script>
   </div>
   <footer class="main-footer">
     <div class="wrapper">
@@ -160,13 +176,15 @@
     <div data-name="sms" class="sbox sms-box">
       <div class="sms-title">Вам отправлена SMS для подтверждения номера мобильного телефона, введите код из сообщения:</div>
       <div class="sms-inputs">
-        <input class="sms-input">
-        <button class="sms-btn">Ок</button>
+        <input class="sms-input js-phone-code">
+        <button class="sms-btn js-code-check">Ок</button>
       </div>
+      <ul class="sms-links js-valid-errors">
+        <li>Неправильный код подтверждения</li>
+      </ul>
       <ul class="sms-links">
-        <li><a href="#">Отправить код повторно</a></li>
-        <li><a href="#">Другие способы напоминаний</a></li>
-        <li><a href="#">Не напоминать</a></li>
+        <li><a href="#" class="js-valid-repeat">Отправить код повторно</a></li>
+        
       </ul>
     </div>
   </div>

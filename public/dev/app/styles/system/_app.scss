@@ -37,6 +37,16 @@ body {
   line-height: 200px;
   margin-top: -100px;
 
+  &.tooltip-dark {
+   .js-tooltip-body {
+    background: #f6f6f6;
+
+    &:before {
+      border-color: transparent #f6f6f6 transparent transparent;
+    }
+   }
+  }
+
   .js-tooltip-body {
     display: inline-block;
     vertical-align: middle;
@@ -159,4 +169,47 @@ html, body {
 
 .main-footer {
   background: orange;
+}
+
+.loading-link {
+  position: relative;
+
+  &:after {
+    @extend .fi;
+    position: absolute;
+    left: 100%;
+    margin-left: .8em;
+    content: "\e605";
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+  }
+
+  &.sms-btn {
+    &:after {
+      top: 50%;
+      margin-top: -12.5px;
+      font-size: 25px;
+      margin-left: .5em;
+      color: #12b8b8;
+    }
+  }
+}
+
+.js-valid-errors {
+  display: none;
+}
+
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
 }
