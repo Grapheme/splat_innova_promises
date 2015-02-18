@@ -128,7 +128,7 @@ class CronMiniPromises extends Command {
 
 				$promise_carbon_start = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $promise->created_at);
 				$promise_carbon_limit = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $promise->time_limit);
-				$promise_carbon_length = $promise_carbon_limit - $promise_carbon_start;
+				$promise_carbon_length = $promise_carbon_limit->timestamp - $promise_carbon_start->timestamp;
 
 				Helper::ta($promise_carbon_length);
 			}
