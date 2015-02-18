@@ -82,69 +82,132 @@
             </div>
           </form>
 
-          <form action="{{ URL::route('app.update_profile') }}" method="POST" class="edit-cont" id="profile_form">
-            <div>
-              <div class="input-cont">
-                <input name="name" value="{{ trim($user->name) }}" placeholder="Ваше имя" class="us-input">
-              </div>
-              <div class="input-cont">
-                <input name="email" value="{{ $user->email }}" placeholder="Укажите e-mail" class="us-input">
-              </div>
-              <div class="input-hint">Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.</div>
-              {{--
-              <div class="input-cont">
-                <input name="bdate" value="{{ $user->bdate }}" placeholder="Ваша дата рождения" class="us-input js-mask-date">
-              </div>
-              --}}
-              <div class="input-cont">
-                <input name="city" value="{{ $user->city }}" placeholder="Ваш город" class="us-input">
-              </div>
-
-
-
-                @if ($new_user)
-
-                    <div class="check-cont">
-                        <label for="apply"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
-                            Подтверждаю ознакомление с <a target="_blank" href="http://mypromises.ru/privacy_policy.pdf">правилами пользования</a>
-                        </label>
-                        <input type="checkbox" name="confirmation" id="apply" class="styledCheck">
+            <form action="{{ URL::route('app.update_profile') }}" method="POST" class="edit-cont" id="profile_form">
+                <div>
+                    <div class="input-cont">
+                        <input name="name" value="{{ trim($user->name) }}" placeholder="Ваше имя" class="us-input">
+                    </div>
+                    {{--
+                    <div class="input-cont">
+                      <input name="bdate" value="{{ $user->bdate }}" placeholder="Ваша дата рождения" class="us-input js-mask-date">
+                    </div>
+                    --}}
+                    <div class="input-cont">
+                        <input name="city" value="{{ $user->city }}" placeholder="Ваш город" class="us-input">
                     </div>
 
-                    {{ Form::hidden('notifications[new_comment]', 1) }}
-                    {{ Form::hidden('notifications[promise_dates]', 1) }}
-                    {{ Form::hidden('notifications[promise_status]', 1) }}
+                    @if (Input::get('dbg-phone') == 1)
+                    <div class="input-cont js-phone">
+                        <input placeholder="Укажите телефон" value="+79129229922" class="js-phone-input us-input">
 
-                @else
+                        <div data-status="new" data-tooltip="Номер не подтвержден" data-add-class="tooltip-dark" class="phone-status js-phone-popup js-status-popup"></div>
+                        <div data-status="valid" class="phone-status"></div>
+                        <div data-status="progress" class="phone-status"></div>
+                    </div>
+                    <div class="input-error js-phone-error"></div>
+                    @endif
 
-                    <div class="check-cont input-cont">
-                        <label for="n1"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
-                            Оповещать меня о новых комментариях
-                        </label>
-                        <input type="checkbox" name="notifications[new_comment]" id="n1" class="styledCheck" value="1"{{ @$auth_user->notifications['new_comment'] ? ' checked' : '' }}>
+                    <div class="input-cont">
+                        <input name="email" value="{{ $user->email }}" placeholder="Укажите e-mail" class="us-input">
                     </div>
-                    <div class="check-cont input-cont">
-                        <label for="n2"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
-                            Напоминать мне о дате выполнения моих обещаний
-                        </label>
-                        <input type="checkbox" name="notifications[promise_dates]" id="n2" class="styledCheck" value="1"{{ @$auth_user->notifications['promise_dates'] ? ' checked' : '' }}>
-                    </div>
-                    <div class="check-cont input-cont">
-                        <label for="n3"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
-                            Оповещать о смене статуса моих обещаний
-                        </label>
-                        <input type="checkbox" name="notifications[promise_status]" id="n3" class="styledCheck" value="1"{{ @$auth_user->notifications['promise_status'] ? ' checked' : '' }}>
+                    <div class="input-hint">Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить
+                        о вашем обещании.
                     </div>
 
-                @endif
+
+                    @if (Input::get('dbg-phone'))
+                        <div class="check-title">Напоминать о данных мною обещаниях</div>
+
+                        @if (0)
+                        <div class="check-cont">
+                            <input type="checkbox" id="soc" disabled="disabled" class="styledCheck">
+                            <label for="soc"><span class="check-fake check-disabled"><i class="fi icon-check"></i></span> Через соц. сеть:</label>
+                            <ul class="check-desc">
+                                <li><span>Частота оповещений:</span>
+                                    <select class="ui-select">
+                                        <option>Каждый день</option>
+                                        <option>Не каждый день</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+                        @endif
+
+                        <div class="check-cont">
+                            <input type="checkbox" id="mail" class="styledCheck">
+                            <label for="mail"><span class="check-fake"><i class="fi icon-check"></i></span> По электронной почте:</label>
+                            <ul class="check-desc">
+                                <li><span>Частота оповещений:</span>
+                                    <select class="ui-select">
+                                        <option>Два раза в месяц</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="check-cont">
+                            <input type="checkbox" id="phone" class="styledCheck">
+                            <label for="phone"><span class="check-fake"><i class="fi icon-check"></i></span> На мобильный телефон:</label>
+                            <ul class="check-desc">
+                                <li><span>Частота оповещений:</span>
+                                    <select class="ui-select">
+                                        <option>Каждый день</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+
+                    @endif
+
+
+                    @if ($new_user)
+
+                        <div class="check-cont">
+                            <label for="apply"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
+                                Подтверждаю ознакомление с <a target="_blank"
+                                                              href="http://mypromises.ru/privacy_policy.pdf">правилами
+                                    пользования</a>
+                            </label>
+                            <input type="checkbox" name="confirmation" id="apply" class="styledCheck">
+                        </div>
+
+                        {{ Form::hidden('notifications[new_comment]', 1) }}
+                        {{ Form::hidden('notifications[promise_dates]', 1) }}
+                        {{ Form::hidden('notifications[promise_status]', 1) }}
+
+                    @else
+
+                        <div class="check-cont input-cont">
+                            <label for="n1"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
+                                Оповещать меня о новых комментариях
+                            </label>
+                            <input type="checkbox" name="notifications[new_comment]" id="n1" class="styledCheck"
+                                   value="1"{{ @$auth_user->notifications['new_comment'] ? ' checked' : '' }}>
+                        </div>
+                        <div class="check-cont input-cont">
+                            <label for="n2"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
+                                Напоминать мне о дате выполнения моих обещаний
+                            </label>
+                            <input type="checkbox" name="notifications[promise_dates]" id="n2" class="styledCheck"
+                                   value="1"{{ @$auth_user->notifications['promise_dates'] ? ' checked' : '' }}>
+                        </div>
+                        <div class="check-cont input-cont">
+                            <label for="n3"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
+                                Оповещать о смене статуса моих обещаний
+                            </label>
+                            <input type="checkbox" name="notifications[promise_status]" id="n3" class="styledCheck"
+                                   value="1"{{ @$auth_user->notifications['promise_status'] ? ' checked' : '' }}>
+                        </div>
+
+                    @endif
 
 
 
-                <div class="btn-cont">
-                <button class="us-btn">Сохранить</button>
-              </div>
-            </div>
-          </form>
+                    <div class="btn-cont">
+                        <button class="us-btn">Сохранить</button>
+                    </div>
+                </div>
+            </form>
 
 
         </div>
@@ -158,72 +221,82 @@
 
 
 @section('scripts')
-<script>
+    <script>
+        var SplatDict = {};
+        SplatDict.user_id = 92;
+        SplatDict.urls = {
+            'check_phone': 'json/checkPhone.json',
+            'send_sms': 'json/sendSms.json',
+            'check_code': 'json/checkCode.json'
+        };
+    </script>
 
-    $('input[type="file"]').on('change', function(){
-        $(this).parents('form').submit();
-    });
+    <script>
+
+        $('input[type="file"]').on('change', function () {
+            $(this).parents('form').submit();
+        });
 
 
-    $("#avatar-form").validate({
-        rules: {
-            //'avatar': { required: true },
-        },
-        messages: {
-            //'avatar': "",
-        },
-        errorClass: "inp-error",
-        submitHandler: function(form) {
+        $("#avatar-form").validate({
+            rules: {
+                //'avatar': { required: true },
+            },
+            messages: {
+                //'avatar': "",
+            },
+            errorClass: "inp-error",
+            submitHandler: function (form) {
+                //console.log(form);
+                sendAvatarForm(form);
+                return false;
+            }
+        });
+
+        function sendAvatarForm(form) {
+
             //console.log(form);
-            sendAvatarForm(form);
-            return false;
-        }
-    });
+            var options = {target: null, type: $(form).attr('method'), dataType: 'json'};
 
-    function sendAvatarForm(form) {
-
-        //console.log(form);
-        var options = { target: null, type: $(form).attr('method'), dataType: 'json' };
-
-        options.beforeSubmit = function(formData, jqForm, options){
-            //$(form).find('button').addClass('loading').attr('disabled', 'disabled');
-            //$(form).find('.error-msg').text('');
-            //$('.error').text('').hide();
-        }
-
-        options.success = function(response, status, xhr, jqForm){
-            //console.log(response);
-            //$('.success').hide().removeClass('hidden').slideDown();
-            //$(form).slideUp();
-
-            if (response.status) {
-                /*
-                $(form).find('button').addClass('success').text('Отправлено');
-                $(form).find('.popup-body').slideUp(function(){
-                    setTimeout(function(){ $('.popup .js-popup-close').trigger('click'); }, 3000);
-                });
-                */
-                //$(form).slideUp();
-                $(form).find('.profile-photo').attr('style', 'background-image: url(' + response.new_avatar + ');');
-
-            } else {
-                //$('.response').text(response.responseText).show();
+            options.beforeSubmit = function (formData, jqForm, options) {
+                //$(form).find('button').addClass('loading').attr('disabled', 'disabled');
+                //$(form).find('.error-msg').text('');
+                //$('.error').text('').hide();
             }
 
-        }
+            options.success = function (response, status, xhr, jqForm) {
+                //console.log(response);
+                //$('.success').hide().removeClass('hidden').slideDown();
+                //$(form).slideUp();
 
-        options.error = function(xhr, textStatus, errorThrown){
-            console.log(xhr);
-            $(form).find('button').removeAttr('disabled');
-            $(form).find('.error-msg').text('Ошибка при отправке, попробуйте позднее');
-        }
+                if (response.status) {
+                    /*
+                     $(form).find('button').addClass('success').text('Отправлено');
+                     $(form).find('.popup-body').slideUp(function(){
+                     setTimeout(function(){ $('.popup .js-popup-close').trigger('click'); }, 3000);
+                     });
+                     */
+                    //$(form).slideUp();
+                    $(form).find('.profile-photo').attr('style', 'background-image: url(' + response.new_avatar + ');');
 
-        options.complete = function(data, textStatus, jqXHR){
-            //$(form).find('button').removeClass('loading').removeAttribute('disabled');
-        }
+                } else {
+                    //$('.response').text(response.responseText).show();
+                }
 
-        $(form).ajaxSubmit(options);
-    }
+            }
+
+            options.error = function (xhr, textStatus, errorThrown) {
+                console.log(xhr);
+                $(form).find('button').removeAttr('disabled');
+                $(form).find('.error-msg').text('Ошибка при отправке, попробуйте позднее');
+            }
+
+            options.complete = function (data, textStatus, jqXHR) {
+                //$(form).find('button').removeClass('loading').removeAttribute('disabled');
+            }
+
+            $(form).ajaxSubmit(options);
+        }
 
     </script>
 @stop

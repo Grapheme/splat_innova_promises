@@ -1,7 +1,7 @@
 <?php
 /**
  * An helper file for Laravel 4, to provide autocomplete information to your IDE
- * Generated for Laravel 4.2.11 on 2014-11-27.
+ * Generated for Laravel 4.2.11 on 2015-02-18.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -2336,6 +2336,11 @@ namespace {
         public static function getDirectory(){
             return \Illuminate\Cache\FileStore::getDirectory();
         }
+        
+    }
+
+
+    class Carbon extends \Carbon\Carbon{
         
     }
 

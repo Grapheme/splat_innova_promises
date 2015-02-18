@@ -29,4 +29,9 @@ return array(
         'питер' => 'Санкт-Петербург'
     ],
 
+    'twilio' => [
+        'sid' => 'AC027e0f38785285c2f456ffd7aaee7b09',
+        'token' => '80ec5f6b892fc81f4253fb06a985d424',
+    ],
+
 );
