@@ -125,7 +125,7 @@ class CronMiniPromises extends Command {
 			$promises_ids = Dic::makeLists($promises, NULL, 'id');
 			Helper::d($promises_ids);
 
-			die;
+			#die;
 
 			/**
 			 * Получаем ID пользователей - авторов обещаний
@@ -185,7 +185,7 @@ class CronMiniPromises extends Command {
 						#'promise' => $promise,
 						'user' => $user,
 					);
-					if (!$debug)
+					if (!$debug && 0)
 						if (!$only_email || $only_email == $user->email)
 							Mail::send('emails.cron_promise_fail', $data, function ($message) use ($user) {
 								$from_email = Config::get('mail.from.address');
