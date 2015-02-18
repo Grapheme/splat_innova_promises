@@ -148,9 +148,7 @@
                             <label for="phone"><span class="check-fake"><i class="fi icon-check"></i></span> На мобильный телефон:</label>
                             <ul class="check-desc">
                                 <li><span>Частота оповещений:</span>
-                                    <select class="ui-select">
-                                        <option>Каждый день</option>
-                                    </select>
+                                    {{ Form::select('notify_phone', Config::get('site.notify'), $user->notify_email, ['class' => 'ui-select']) }}
                                 </li>
                             </ul>
                         </div>
