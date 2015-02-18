@@ -140,7 +140,7 @@ class CronMiniPromises extends Command {
 
 				$promise_halftime_mark = $promise_carbon_start->timestamp + ceil($promise_length/2);
 
-				$this->info($promise_halftime_mark . ' >= ' . time() . ' && ' . $promise_halftime_mark . ' < ' . (time()+60*60));
+				$this->info($promise_halftime_mark . " >= \n" . time() . "\n && \n" . $promise_halftime_mark . " < \n" . (time()+60*60));
 
 				if ($promise_halftime_mark >= time() && $promise_halftime_mark < (time()+60*60)) {
 
