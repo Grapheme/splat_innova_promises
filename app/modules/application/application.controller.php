@@ -3037,15 +3037,19 @@ class ApplicationController extends BaseController {
                 $client = new Services_Twilio(Config::get('twilio.sid'), Config::get('twilio.token'));
 
                 #/*
-                $sms = $client->account->messages->sendMessage(
-                    // Step 6: Change the 'From' number below to be a valid Twilio number
-                    // that you've purchased, or the (deprecated) Sandbox number
-                    "845-535-4123",
-                    // the number we are sending to - Any phone number
-                    $user->phone_number,
-                    // the sms body
-                    "MyPromises.ru code: " . $confirm_code
-                );
+                try {
+                    $sms = $client->account->messages->sendMessage(
+                        // Step 6: Change the 'From' number below to be a valid Twilio number
+                        // that you've purchased, or the (deprecated) Sandbox number
+                        "845-535-4123",
+                        // the number we are sending to - Any phone number
+                        $user->phone_number,
+                        // the sms body
+                        "MyPromises.ru code: " . $confirm_code
+                    );
+                } catch (Services_Twilio_RestException $e) {
+                    echo $e->getMessage();
+                }
                 #*/
                 /*
                 try {
