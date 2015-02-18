@@ -221,7 +221,7 @@
 @section('scripts')
     <script>
         var SplatDict = {};
-        SplatDict.user_id = 92;
+        SplatDict.user_id = {{ (int)$user->id }};
         SplatDict.urls = {
             'check_phone': '{{ URL::route('app.phone.check-phone') }}',
             'send_sms': '{{ URL::route('app.phone.send-sms') }}',
