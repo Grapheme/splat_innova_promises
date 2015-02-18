@@ -67,7 +67,7 @@ class ApplicationController extends BaseController {
 
 
 
-            Route::post('/ajax/phone/sendSms', array('as' => 'app.send-sms-phone-code', 'uses' => __CLASS__.'@postPhoneSendSms'));
+            Route::post('/ajax/phone/sendSms', array('as' => 'app.phone.send-sms', 'uses' => __CLASS__.'@postPhoneSendSms'));
             Route::post('/ajax/phone/checkPhone', array('as' => 'app.phone.check-phone', 'uses' => __CLASS__.'@postPhoneCheckPhone'));
 
         });

@@ -223,9 +223,9 @@
         var SplatDict = {};
         SplatDict.user_id = 92;
         SplatDict.urls = {
-            'check_phone': 'json/checkPhone.json',
-            'send_sms': 'json/sendSms.json',
-            'check_code': 'json/checkCode.json'
+            'check_phone': '{{ URL::route('app.phone.check-phone') }}',
+            'send_sms': '{{ URL::route('app.phone.send-sms') }}',
+            'check_code': '/json/checkCode.json'
         };
     </script>
 
