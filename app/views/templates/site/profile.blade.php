@@ -122,11 +122,14 @@
                         <input type="checkbox" name="notifications[on_email]" id="mail" class="styledCheck"{{ @$auth_user->notifications['on_email'] ? ' checked' : '' }}>
                         <label for="mail"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать по электронной почте:</label>
 
-                        <br/><br/><br/>
+                        <br/>
 
                     </div>
 
                     @if (Input::get('dbg-phone'))
+
+                        <br/>
+
                         <div class="check-title">
                             <span>Частота оповещений:</span>
                             <span class="check-select">{{ Form::select('notifications[notify_period]', Config::get('site.notify'), @$auth_user->notifications['notify_period'], ['class' => 'ui-select']) }}</span>
