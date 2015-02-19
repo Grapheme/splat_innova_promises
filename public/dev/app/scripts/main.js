@@ -474,6 +474,24 @@ SplatSite.ValidPhone = function() {
 	var show_popup_error = function(text) {
 		$('.js-valid-errors').html(text).show();
 	}
+	var phoneCheckbox = function(act) {
+		if(act == 'show') {
+			$('.js-phone-check-cont').slideDown();
+		} else {
+			$('.js-phone-check-cont').slideUp();
+			$(".js-phone-checkbox").prop("checked", false);
+			$('.js-phone-check-cont label').removeClass('ui-state-active');
+		}
+	}
+	var emailCheckbox = function() {
+		var value = $('.js-email-input').val();
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		if(re.test(value)) {
+			$('.js-email-check-cont').slideDown();
+		} else {
+			$('.js-email-check-cont').slideUp();
+		}
+	}
 
 	var checkThis = function(elem) {
 		var phone_number = elem.val(),
@@ -498,9 +516,11 @@ SplatSite.ValidPhone = function() {
 				if(resp.state == 'new') {
 					phone_status.filter('[data-status="new"]').fadeIn();
 					show_error('<a href="#" class="js-phone-popup">Подтвердите свой номер телефона</a>');
+					phoneCheckbox('close');
 				}
 				if(resp.state == 'valid') {
 					phone_status.filter('[data-status="valid"]').fadeIn();
+					phoneCheckbox('show');
 				}
 			}
 		}).fail(function(){
@@ -557,24 +577,31 @@ SplatSite.ValidPhone = function() {
 			$('.js-code-check').removeClass('loading-link');
 			if(resp.status == false) {
 				show_popup_error('Неверный код подтверждения');
+				phoneCheckbox('close');
 			} else {
 				hide_error();
 				hide_popup_error();
 				SplatSite.simpleBox().close();
 				phone_status.filter('[data-status="new"]').fadeOut();
 				phone_status.filter('[data-status="valid"]').fadeIn();
+				phoneCheckbox('show');
 			}
 		})
 		.fail(function(){
 			$('.js-code-check').removeClass('loading-link');
 			show_popup_error('Произошла ошибка. Попробуйте позже');
+			phoneCheckbox('close');
 		});
 	}
 	$('.js-phone-input').on('input', function(){
 		if(!$('.js-phone-input').inputmask("isComplete")) {
 			hide_error();
 			phone_status.hide();
+			phoneCheckbox('close');
 		}
+	});
+	$('.js-email-input').on('input', function(){
+		emailCheckbox();
 	});
 	$('.js-phone-input').inputmask('+7(999)999-99-99', {
 	    "oncomplete": function(){
