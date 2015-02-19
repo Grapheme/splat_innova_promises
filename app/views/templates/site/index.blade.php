@@ -132,7 +132,7 @@
 
                   <ul class="promises-index">
 
-                      <li class="promise-item innova-block">
+                      <li class="promise-item innova-block" style="cursor: pointer;" onclick="window.location.href='http://mypromises.ru/promise/4458'">
                         <div class="flipper">
                           <div class="promise-cont">
                             <div class="info-cont">
