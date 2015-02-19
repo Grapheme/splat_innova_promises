@@ -50,7 +50,7 @@
               <input placeholder="Ваше имя" class="us-input">
             </div>
             <div class="input-cont js-phone">
-              <input placeholder="Укажите телефон" value="9129229922" class="js-phone-input us-input">
+              <input placeholder="Укажите телефон" value="+79044442177" class="js-phone-input us-input">
               <div data-status="new" data-tooltip="Номер не подтвержден" data-add-class="tooltip-dark" class="phone-status js-phone-popup js-status-popup"></div>
               <div data-status="valid" class="phone-status"></div>
               <div data-status="progress" class="phone-status"></div>
@@ -76,10 +76,10 @@
     </div>
     <script>
       var SplatDict = {};
-      SplatDict.user_id = 92;
+      SplatDict.user_id = 43;
       SplatDict.urls = {
-      	'check_phone': 'json/checkPhone.json',
-      	'send_sms': 'json/sendSms.json',
+      	'check_phone': '/ajax/phone/checkPhone',
+      	'send_sms': '/ajax/phone/sendSms',
       	'check_code': 'json/checkCode.json'
       };
     </script>

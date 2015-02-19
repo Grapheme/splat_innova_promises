@@ -64,6 +64,12 @@ class ApplicationController extends BaseController {
             Route::get('/statistics/promises/all', array('as' => 'app.statistics_promises_all', 'uses' => __CLASS__.'@getStatisticsPromisesAll'));
 
             Route::get('/sitemap', array('as' => 'app.sitemap', 'uses' => __CLASS__.'@getSitemap'));
+
+
+
+            Route::post('/ajax/phone/sendSms', array('as' => 'app.phone.send-sms', 'uses' => __CLASS__.'@postPhoneSendSms'));
+            Route::post('/ajax/phone/checkPhone', array('as' => 'app.phone.check-phone', 'uses' => __CLASS__.'@postPhoneCheckPhone'));
+
         });
     }
 
@@ -2945,6 +2951,132 @@ class ApplicationController extends BaseController {
 
         return '';
 
+    }
+
+
+    /**
+     * Проверка валидности номера
+     */
+    public function postPhoneCheckPhone() {
+
+        $user_id = Input::get('user_id');
+        $phone = Input::get('phone');
+
+        $json_request = array('status' => FALSE, 'responseText' => '');
+
+        $user = NULL;
+        if ($user_id)
+            $user = Dic::valueBySlugAndId('users', $user_id, 'all', 1, 1);
+
+        if ($user_id && is_object($user)) {
+
+            #dd($user);
+
+            $json_request['status'] = TRUE;
+
+            if ($user->phone_number == $phone && $user->phone_confirmed == 1) {
+
+                $json_request['state'] = 'valid';
+
+            } else {
+
+                $json_request['state'] = 'new';
+
+                if ($user->phone_number != $phone) {
+
+                    $user->update_field('phone_number', $phone);
+                }
+            }
+
+        } else {
+
+            $json_request['responseText'] = 'Пользователь не найден';
+        }
+
+        #Helper::tad($user);
+
+        return Response::json($json_request, 200);
+    }
+
+
+    /**
+     * Отправляем СМС для подтверждения номера
+     */
+    public function postPhoneSendSms() {
+
+        $user_id = Input::get('user_id');
+        $phone = Input::get('phone');
+
+        $json_request = array('status' => FALSE, 'responseText' => '');
+
+        $user = NULL;
+        if ($user_id)
+            $user = Dic::valueBySlugAndId('users', $user_id, 'all', 1, 1);
+
+        if ($user_id && is_object($user)) {
+
+            /*
+             * Если номер уже подтвержден - не будем отправлять смс. Нечего бюджет транжирить.
+             */
+            if ($user->phone_number == $phone && $user->phone_confirmed == 1) {
+
+                $json_request['status'] = TRUE;
+                $json_request['responseText'] = 'Номер телефона уже подтвержден';
+
+            } else {
+
+                /*
+                 * Генерим и сохраняем код подтверждения для пользователя
+                 */
+                $confirm_code = rand(10000, 99999);
+                $user->update_field('phone_confirm_code', $confirm_code);
+
+                /*
+                 * Отправляем СМС с кодом пользователю
+                 */
+                $client = new Services_Twilio(Config::get('twilio.sid'), Config::get('twilio.token'));
+
+                #/*
+                try {
+                    $sms = $client->account->messages->sendMessage(
+                        // Step 6: Change the 'From' number below to be a valid Twilio number
+                        // that you've purchased, or the (deprecated) Sandbox number
+                        "845-535-4123",
+                        // the number we are sending to - Any phone number
+                        $user->phone_number,
+                        // the sms body
+                        "MyPromises.ru code: " . $confirm_code
+                    );
+
+                    $json_request['status'] = TRUE;
+                    $json_request['responseText'] = 'СМС отправлено';
+
+                } catch (Services_Twilio_RestException $e) {
+
+                    $json_request['responseText'] = 'Ошибка отправки СМС: ' . '#' . $e->getCode() . ', ' . $e->getMessage();
+                }
+                #*/
+                /*
+                try {
+                    $sms = $client->account->messages->create([
+                        "From" => "845-535-4123",
+                        "To" => $user->phone_number,
+                        "Body" => "MyPromises.ru code: " . $confirm_code,
+                    ]);
+                } catch (Services_Twilio_RestException $e) {
+                    echo $e->getMessage();
+                }
+                #*/
+            }
+
+            /*
+            phone_number
+            phone_confirmed
+            phone_confirm_code
+            */
+        }
+
+        return Response::json($json_request, 200);
     }
 
 }

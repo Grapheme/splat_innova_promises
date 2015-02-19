@@ -339,27 +339,37 @@ class Dictionary extends BaseModel {
      * @param bool $extract
      * @return mixed|static
      */
-    public static function valueBySlugAndId($dic_slug, $val_id, $extract = false) {
+    public static function valueBySlugAndId($slug, $val_id, $with = 'all', $extract = true, $unset = true) {
 
-        $data = self::where('slug', $dic_slug)->with(array('value' => function($query) use ($val_id){
-            $query->where('version_of', NULL);
-            $query->where('id', $val_id);
-            $query->with('meta', 'fields', 'textfields', 'seo', 'related_dicvals');
-        }))
-            ->first()
+        $return = new Collection();
+
+        $dic = Dic::where('slug', $slug)->first();
+        if (!is_object($dic))
+            return $return;
+
+        $value = DicVal::where('dic_id', $dic->id)
+            ->where('version_of', NULL)
+            ->where('id', $val_id)
         ;
 
-        if (is_object($data)) {
+        if ($with == 'all')
+            $with = ['meta', 'fields', 'textfields', 'seo', 'related_dicvals'];
+        else
+            $with = (array)$with;
 
-            $data = $data->value;
-            #Helper::tad($data);
-            if ($extract)
-                $data->extract(0);
-            #Helper::tad($data);
-        }
+        if (count($with))
+            $value = $value->with($with);
 
-        return is_object($data) ? $data : self::firstOrNew(array('id' => 0));
+        $value = $value->first();
+
+        #Helper::tad($value);
+
+        if ($extract && is_object($value))
+            $value->extract($unset);
+
+        return $value;
     }
+
 
     /**
      * Возвращает записи из словаря по системному имени словаря и набору IDs нужных записей.

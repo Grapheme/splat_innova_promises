@@ -71,6 +71,28 @@ return array(
                 'type' => 'text',
                 'default' => '',
             ),
+
+            'phone_number' => array(
+                'title' => 'Номер мобильного телефона',
+                'type' => 'text',
+                'default' => '',
+            ),
+            'phone_confirmed' => array(
+                'title' => 'Подтвержден ли номер мобильного телефона',
+                'type' => 'text',
+                'default' => '',
+            ),
+            'phone_confirm_code' => array(
+                'title' => 'Код подтверждения номера мобильного телефона',
+                'type' => 'text',
+                'default' => '',
+            ),
+
+            'last_notification' => array(
+                'title' => 'Время последней отправки уведомлений',
+                'type' => 'text',
+                'default' => '',
+            ),
         );
     },
 
