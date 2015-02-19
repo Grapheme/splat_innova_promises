@@ -118,31 +118,22 @@
                     <!-- <div class="input-hint">
                         Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.
                     </div> -->
-                    <div class="check-cont js-email-check-cont" style="display: none;">
+                    <div class="check-cont input-cont js-email-check-cont" style="display: none;">
                         <input type="checkbox" name="notifications[on_email]" id="mail" class="styledCheck"{{ @$auth_user->notifications['on_email'] ? ' checked' : '' }}>
                         <label for="mail"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать по электронной почте:</label>
-
-                        <br/>
-
                     </div>
 
                     @if (Input::get('dbg-phone'))
-
-                        <br/>
-
-                        <div class="check-title">
+                        <div class="check-title input-cont">
                             <span>Частота оповещений:</span>
                             <span class="check-select">{{ Form::select('notifications[notify_period]', Config::get('site.notify'), @$auth_user->notifications['notify_period'], ['class' => 'ui-select']) }}</span>
                         </div>
-
-                        <br/>
-                        <br/>
                     @endif
 
 
                     @if ($new_user)
 
-                        <div class="check-cont">
+                        <div class="check-cont input-cont">
                             <label for="apply"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                                 Подтверждаю ознакомление с <a target="_blank" href="http://mypromises.ru/privacy_policy.pdf">правилами пользования</a>
                             </label>
