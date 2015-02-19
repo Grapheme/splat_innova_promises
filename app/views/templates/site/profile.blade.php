@@ -121,9 +121,10 @@
                     <div class="check-cont js-email-check-cont" style="display: none;">
                         <input type="checkbox" name="notifications[on_email]" id="mail" class="styledCheck"{{ @$auth_user->notifications['on_email'] ? ' checked' : '' }}>
                         <label for="mail"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать по электронной почте:</label>
-                    </div>
 
-                    <br/><br/>
+                        <br/><br/>
+
+                    </div>
 
                     @if (Input::get('dbg-phone'))
                         <div class="check-title">
