@@ -35,13 +35,13 @@ class CronPromises extends Command {
 	 */
 	public function fire() {
 
-		#$this->info("111");
-
 		$only_email = false;
 		#$only_email = 'reserved@mail.ru';
 		$only_email = $this->option('only_email');
 
-		$debug = $this->argument('debug') ?: false;
+        $this->periods = Config::get('site.notify_periods');
+
+        $debug = $this->argument('debug') ?: false;
 
 		if ($debug)
 			$this->info('RUN IN DEBUG MODE - MAILs WILL NOT BE SEND');
@@ -91,17 +91,17 @@ class CronPromises extends Command {
 			$tbl_dic_field_val = (new DicFieldVal())->getTable();
 
 			$rand_tbl_alias = md5(time() . rand(999999, 9999999));
+			#$rand_tbl_alias = '12e8948616587468748674';
 			$query->join(DB::raw('`' . $tbl_dic_field_val . '` AS `' . $rand_tbl_alias . '`'), function ($join) use ($rand_tbl_alias, $tbl_dicval, $yesterday3, $yesterday) {
 				$join
 					->on($rand_tbl_alias . '.dicval_id', '=', $tbl_dicval . '.id')
-					#->orOn(...)
 					->where($rand_tbl_alias . '.key', '=', 'time_limit')
 					->where($rand_tbl_alias . '.value', '>=', $yesterday3->format('Y-m-d H:i:s'))
 					->where($rand_tbl_alias . '.value', '<', $yesterday->format('Y-m-d H:i:s'))
 				;
 			});
 			$query
-				->addSelect(DB::raw($rand_tbl_alias . '.value AS time_limit'))
+				->addSelect(DB::raw('`' . $rand_tbl_alias . '`.`value` AS time_limit'))
 			;
 		});
 		#Helper::smartQueries(1);
@@ -142,62 +142,126 @@ class CronPromises extends Command {
 			/**
 			 * Загружаем пользователей по IDs
 			 */
-			$users = Dic::valuesBySlugAndIds('users', $users_ids);
-			$users = DicVal::extracts($users, NULL, true, true);
-			$this->info('Users objects: ' . count($users));
-			#Helper::ta($users);
+            if (count($users_ids)) {
 
-			$this->info('Отправляем письма с оповещением о полностью проваленных обещаниях...');
+                $users = Dic::valuesBySlugAndIds('users', $users_ids);
+                $users = DicVal::extracts($users, NULL, true, true);
+                $this->info('Users objects: ' . count($users));
+                Helper::ta($users);
 
-			/**
-			 * Если есть юзеры, которым нужно отправить оповещение...
-			 */
-			if (count($users)) {
+                $this->info('Отправляем письма с оповещением о полностью проваленных обещаниях...');
 
-				/**
-				 * Перебираем всех юзеров
-				 */
-				foreach ($users as $u => $user) {
+                /**
+                 * Если есть юзеры, которым нужно отправить оповещение...
+                 */
+                if (count($users)) {
 
-					/**
-					 * Если юзеру уже было отправлено письмо раньше - не будем отправлять
-					 */
-					if (in_array($user->id, $also_users)) {
-						continue;
-					}
+                    /**
+                     * Перебираем всех юзеров
+                     */
+                    foreach ($users as $u => $user) {
 
-					/**
-					 * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
-					 */
-					$also_users[] = $user->id;
+                        /**
+                         * Если юзеру уже было отправлено письмо раньше - не будем отправлять
+                         */
+                        if (in_array($user->id, $also_users)) {
+                            continue;
+                        }
 
-					/**
-					 * Валидация - установлен ли валидный адрес почты
-					 */
-					$validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
-					if ($validator->fails()) {
-						continue;
-					}
+                        $user->notifications = json_decode($user->notifications, true);
 
-					/**
-					 * Если валидация пройдена - отправляем письмо
-					 */
-					$data = array(
-						#'promise' => $promise,
-						'user' => $user,
-					);
-					if (!$debug)
-						if (!$only_email || $only_email == $user->email)
-							Mail::send('emails.cron_promise_fail', $data, function ($message) use ($user) {
-								$from_email = Config::get('mail.from.address');
-								$from_name = Config::get('mail.from.name');
-								$message->from($from_email, $from_name);
-								$message->subject('Не удалось выполнить обещание');
-								$message->to($user->email);
-							});
-					$this->info(' + ' . $user->email);
-				}
-			}
+                        /**
+                         * Смотрим на выбранную частоту обновлений и метку отправки последнего уведомления
+                         * и решаем, прошел ли выбранный срок или нет.
+                         */
+                        $subSeconds = @(int)$this->periods[$user->notifications['notify_period']];
+                        $period_finish = ($user->last_notification + $subSeconds) < time();
+                        if (!$period_finish)
+                            continue;
+
+                        /**
+                         * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
+                         */
+                        $also_users[] = $user->id;
+
+
+                        $data = array(
+                            #'promise' => $promise,
+                            'user' => $user,
+                        );
+
+                        /**
+                         * Если не DEBUG режим...
+                         */
+                        if (!$debug) {
+
+                            /**
+                             * Отправка уведомлений на почту...
+                             */
+                            if (!$only_email || $only_email == $user->email) {
+
+                                /**
+                                 * Валидация - установлен ли валидный адрес почты
+                                 */
+                                $validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
+
+                                /**
+                                 * - если прошла валидация почты
+                                 * - если юзер хочет получать напоминания о сроках своего обещания
+                                 * - если юзер хочет получать уведомления на почту
+                                 */
+                                if (
+                                    !$validator->fails()
+                                    && @$user->notifications['promise_dates']
+                                    #&& @$user->notifications['on_email']
+                                ) {
+
+                                    Mail::send('emails.cron_promise_fail', $data, function ($message) use ($user) {
+                                        $from_email = Config::get('mail.from.address');
+                                        $from_name = Config::get('mail.from.name');
+                                        $message->from($from_email, $from_name);
+                                        $message->subject('Не удалось выполнить обещание');
+                                        $message->to($user->email);
+                                    });
+
+                                    /**
+                                     * Обновляем время последней отправки уведомлений
+                                     */
+                                    $user->update_field('last_notification', time());
+
+                                    $this->info(' + ' . $user->email);
+                                }
+                            }
+
+                            /**
+                             * Отправка уведомления на телефон...
+                             */
+                            $valid_phone = isset($user->phone_number) && $user->phone_number && preg_match('~^\+\d{11,15}$~is', $user->phone_number);
+                            #$this->info('Check phone number ' . $user->phone_number . ' => ' . $valid_phone);
+                            #die;
+
+                            /**
+                             * - если прошла валидация телефона
+                             * - если юзер хочет получать напоминания о сроках своего обещания
+                             * - если юзер хочет получать уведомления на телефон
+                             */
+                            if ($valid_phone && @$user->notifications['promise_dates'] && @$user->notifications['on_phone']) {
+
+                                /*
+                                 * ОТПРАВКА SMS на $user->phone_number
+                                 */
+
+                                /**
+                                 * Обновляем время последней отправки уведомлений
+                                 */
+                                $user->update_field('last_notification', time());
+                            }
+
+                        }
+                    }
+                }
+            }
+
 		}
 
 
@@ -225,14 +289,13 @@ class CronPromises extends Command {
 			$query->join(DB::raw('`' . $tbl_dic_field_val . '` AS `' . $rand_tbl_alias . '`'), function ($join) use ($rand_tbl_alias, $tbl_dicval, $yesterday, $now) {
 				$join
 					->on($rand_tbl_alias . '.dicval_id', '=', $tbl_dicval . '.id')
-					#->orOn(...)
 					->where($rand_tbl_alias . '.key', '=', 'time_limit')
 					->where($rand_tbl_alias . '.value', '>=', $yesterday->format('Y-m-d H:i:s'))
 					->where($rand_tbl_alias . '.value', '<', $now->format('Y-m-d H:i:s'))
 				;
 			});
 			$query
-				->addSelect(DB::raw($rand_tbl_alias . '.value AS time_limit'))
+				->addSelect(DB::raw('`' . $rand_tbl_alias . '`.`value` AS time_limit'))
 			;
 		});
 		#Helper::smartQueries(1);
@@ -273,62 +336,100 @@ class CronPromises extends Command {
 			/**
 			 * Загружаем пользователей по IDs
 			 */
-			$users = Dic::valuesBySlugAndIds('users', $users_ids);
-			$users = DicVal::extracts($users, NULL, true, true);
-			$this->info('Users objects: ' . count($users));
-			#Helper::ta($users);
+            if (count($users_ids)) {
 
-			$this->info('Отправляем письма с оповещением о проваленных обещаниях...');
+                $users = Dic::valuesBySlugAndIds('users', $users_ids);
+                $users = DicVal::extracts($users, NULL, true, true);
+                $this->info('Users objects: ' . count($users));
+                #Helper::ta($users);
 
-			/**
-			 * Если есть юзеры, которым нужно отправить оповещение...
-			 */
-			if (count($users)) {
+                $this->info('Отправляем письма с оповещением о проваленных обещаниях...');
 
-				/**
-				 * Перебираем всех юзеров
-				 */
-				foreach ($users as $u => $user) {
+                /**
+                 * Если есть юзеры, которым нужно отправить оповещение...
+                 */
+                if (count($users)) {
 
-					/**
-					 * Если юзеру уже было отправлено письмо раньше - не будем отправлять
-					 */
-					if (in_array($user->id, $also_users)) {
-						continue;
-					}
+                    /**
+                     * Перебираем всех юзеров
+                     */
+                    foreach ($users as $u => $user) {
 
-					/**
-					 * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
-					 */
-					$also_users[] = $user->id;
+                        /**
+                         * Если юзеру уже было отправлено письмо раньше - не будем отправлять
+                         */
+                        if (in_array($user->id, $also_users)) {
+                            continue;
+                        }
 
-					/**
-					 * Валидация - установлен ли валидный адрес почты
-					 */
-					$validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
-					if ($validator->fails()) {
-						continue;
-					}
+                        $user->notifications = json_decode($user->notifications, true);
 
-					/**
-					 * Если валидация пройдена - отправляем письмо
-					 */
-					$data = array(
-						#'promise' => $promise,
-						'user' => $user,
-					);
-					if (!$debug)
-						if (!$only_email || $only_email == $user->email)
-							Mail::send('emails.cron_promise_prefail', $data, function ($message) use ($user) {
-								$from_email = Config::get('mail.from.address');
-								$from_name = Config::get('mail.from.name');
-								$message->from($from_email, $from_name);
-								$message->subject('Еще есть время выполнить свое обещание');
-								$message->to($user->email);
-							});
-					$this->info(' + ' . $user->email);
-				}
-			}
+                        /**
+                         * Смотрим на выбранную частоту обновлений и метку отправки последнего уведомления
+                         * и решаем, прошел ли выбранный срок или нет.
+                         */
+                        $subSeconds = @(int)$this->periods[$user->notifications['notify_period']];
+                        $period_finish = ($user->last_notification + $subSeconds) < time();
+                        if (!$period_finish)
+                            continue;
+
+                        /**
+                         * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
+                         */
+                        $also_users[] = $user->id;
+
+
+                        $data = array(
+                            #'promise' => $promise,
+                            'user' => $user,
+                        );
+
+                        /**
+                         * Если не DEBUG режим...
+                         */
+                        if (!$debug) {
+
+                            /**
+                             * Отправка уведомлений на почту...
+                             */
+                            if (!$only_email || $only_email == $user->email) {
+
+                                /**
+                                 * Валидация - установлен ли валидный адрес почты
+                                 */
+                                $validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
+
+                                /**
+                                 * - если прошла валидация почты
+                                 * - если юзер хочет получать напоминания о сроках своего обещания
+                                 * - если юзер хочет получать уведомления на почту
+                                 */
+                                if (
+                                    !$validator->fails()
+                                    && @$user->notifications['promise_dates']
+                                    #&& @$user->notifications['on_email']
+                                ) {
+
+                                    Mail::send('emails.cron_promise_prefail', $data, function ($message) use ($user) {
+                                        $from_email = Config::get('mail.from.address');
+                                        $from_name = Config::get('mail.from.name');
+                                        $message->from($from_email, $from_name);
+                                        $message->subject('Еще есть время выполнить свое обещание');
+                                        $message->to($user->email);
+                                    });
+
+                                    /**
+                                     * Обновляем время последней отправки уведомлений
+                                     */
+                                    $user->update_field('last_notification', time());
+
+                                    $this->info(' + ' . $user->email);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 		}
 
 
@@ -399,62 +500,99 @@ class CronPromises extends Command {
 			/**
 			 * Загружаем пользователей по ID
 			 */
-			$users = Dic::valuesBySlugAndIds('users', $users_ids);
-			$users = DicVal::extracts($users, NULL, true, true);
-			$this->info('Users objects: ' . count($users));
-			#Helper::ta($users);
+            if (count($users_ids)) {
+                $users = Dic::valuesBySlugAndIds('users', $users_ids);
+                $users = DicVal::extracts($users, NULL, true, true);
+                $this->info('Users objects: ' . count($users));
+                #Helper::ta($users);
 
-			$this->info('Отправляем письма с оповещением об истекающих обещаниях...');
+                $this->info('Отправляем письма с оповещением об истекающих обещаниях...');
 
-			/**
-			 * Если есть юзеры, которым нужно отправить оповещение...
-			 */
-			if (count($users)) {
+                /**
+                 * Если есть юзеры, которым нужно отправить оповещение...
+                 */
+                if (count($users)) {
 
-				/**
-				 * Перебираем всех юзеров
-				 */
-				foreach ($users as $u => $user) {
+                    /**
+                     * Перебираем всех юзеров
+                     */
+                    foreach ($users as $u => $user) {
 
-					/**
-					 * Если юзеру уже было отправлено письмо раньше - не будем отправлять
-					 */
-					if (in_array($user->id, $also_users)) {
-						continue;
-					}
+                        /**
+                         * Если юзеру уже было отправлено письмо раньше - не будем отправлять
+                         */
+                        if (in_array($user->id, $also_users)) {
+                            continue;
+                        }
 
-					/**
-					 * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
-					 */
-					$also_users[] = $user->id;
+                        $user->notifications = json_decode($user->notifications, true);
 
-					/**
-					 * Валидация - есть ли у юзера валидный адрес почты
-					 */
-					$validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
-					if ($validator->fails()) {
-						continue;
-					}
+                        /**
+                         * Смотрим на выбранную частоту обновлений и метку отправки последнего уведомления
+                         * и решаем, прошел ли выбранный срок или нет.
+                         */
+                        $subSeconds = @(int)$this->periods[$user->notifications['notify_period']];
+                        $period_finish = ($user->last_notification + $subSeconds) < time();
+                        if (!$period_finish)
+                            continue;
 
-					/**
-					 * Если валидация пройдена - отправляем письмо
-					 */
-					$data = array(
-						#'promise' => $promise,
-						'user' => $user,
-					);
-					if (!$debug)
-						if (!$only_email || $only_email == $user->email)
-							Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
-								$from_email = Config::get('mail.from.address');
-								$from_name = Config::get('mail.from.name');
-								$message->from($from_email, $from_name);
-								$message->subject('Заканчивается срок выполнения обещания!');
-								$message->to($user->email);
-							});
-					$this->info(' + ' . $user->email);
-				}
-			}
+                        /**
+                         * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
+                         */
+                        $also_users[] = $user->id;
+
+
+                        $data = array(
+                            #'promise' => $promise,
+                            'user' => $user,
+                        );
+
+                        /**
+                         * Если не DEBUG режим...
+                         */
+                        if (!$debug) {
+
+                            /**
+                             * Отправка уведомлений на почту...
+                             */
+                            if (!$only_email || $only_email == $user->email) {
+
+                                /**
+                                 * Валидация - установлен ли валидный адрес почты
+                                 */
+                                $validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
+
+                                /**
+                                 * - если прошла валидация почты
+                                 * - если юзер хочет получать напоминания о сроках своего обещания
+                                 * - если юзер хочет получать уведомления на почту
+                                 */
+                                if (
+                                    !$validator->fails()
+                                    && @$user->notifications['promise_dates']
+                                    #&& @$user->notifications['on_email']
+                                ) {
+
+                                    Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
+                                        $from_email = Config::get('mail.from.address');
+                                        $from_name = Config::get('mail.from.name');
+                                        $message->from($from_email, $from_name);
+                                        $message->subject('Заканчивается срок выполнения обещания!');
+                                        $message->to($user->email);
+                                    });
+
+                                    /**
+                                     * Обновляем время последней отправки уведомлений
+                                     */
+                                    $user->update_field('last_notification', time());
+
+                                    $this->info(' + ' . $user->email);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 		}
 
 

@@ -39,7 +39,9 @@ class CronMiniPromises extends Command {
 		#$only_email = 'reserved@mail.ru';
 		$only_email = $this->option('only_email');
 
-		$debug = $this->argument('debug') ?: false;
+        $this->periods = Config::get('site.notify_periods');
+
+        $debug = $this->argument('debug') ?: false;
 
 		if ($debug)
 			$this->info('RUN IN DEBUG MODE - MAILs WILL NOT BE SEND');
@@ -97,7 +99,7 @@ class CronMiniPromises extends Command {
 				;
 			});
 			$query
-				->addSelect(DB::raw($rand_tbl_alias . '.value AS time_limit'))
+				->addSelect(DB::raw('`' . $rand_tbl_alias . '`.`value` AS time_limit'))
 			;
 		});
 		#Helper::smartQueries(1);
@@ -206,36 +208,71 @@ class CronMiniPromises extends Command {
 							continue;
 						}
 
-						/**
+                        $user->notifications = json_decode($user->notifications, true);
+
+                        /**
+                         * Смотрим на выбранную частоту обновлений и метку отправки последнего уведомления
+                         * и решаем, прошел ли выбранный срок или нет.
+                         */
+                        $subSeconds = @(int)$this->periods[$user->notifications['notify_period']];
+                        $period_finish = ($user->last_notification + $subSeconds) < time();
+                        if (!$period_finish)
+                            continue;
+
+                        /**
 						 * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
 						 */
 						$also_users[] = $user->id;
 
-						/**
-						 * Валидация - установлен ли валидный адрес почты
-						 */
-						$validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
-						if ($validator->fails()) {
-							continue;
-						}
 
-						/**
-						 * Если валидация пройдена - отправляем письмо
-						 */
 						$data = array(
 							#'promise' => $promise,
 							'user' => $user,
 						);
-						if (!$debug)
-							if (!$only_email || $only_email == $user->email)
-								Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
-									$from_email = Config::get('mail.from.address');
-									$from_name = Config::get('mail.from.name');
-									$message->from($from_email, $from_name);
-									$message->subject('Заканчивается срок выполнения обещания!');
-									$message->to($user->email);
-								});
-						$this->info(' + ' . $user->email);
+
+                        /**
+                         * Если не DEBUG режим...
+                         */
+                        if (!$debug) {
+
+                            /**
+                             * Отправка уведомлений на почту...
+                             */
+                            if (!$only_email || $only_email == $user->email) {
+
+                                /**
+                                 * Валидация - установлен ли валидный адрес почты
+                                 */
+                                $validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
+
+                                /**
+                                 * - если прошла валидация почты
+                                 * - если юзер хочет получать напоминания о сроках своего обещания
+                                 * - если юзер хочет получать уведомления на почту
+                                 */
+                                if (
+                                    !$validator->fails()
+                                    && @$user->notifications['promise_dates']
+                                    #&& @$user->notifications['on_email']
+                                ) {
+
+                                    Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
+                                        $from_email = Config::get('mail.from.address');
+                                        $from_name = Config::get('mail.from.name');
+                                        $message->from($from_email, $from_name);
+                                        $message->subject('Заканчивается срок выполнения обещания!');
+                                        $message->to($user->email);
+                                    });
+
+                                    /**
+                                     * Обновляем время последней отправки уведомлений
+                                     */
+                                    $user->update_field('last_notification', time());
+
+                                    $this->info(' + ' . $user->email);
+                                }
+                            }
+                        }
 					}
 				}
 
