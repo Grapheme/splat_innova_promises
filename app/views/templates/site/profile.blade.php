@@ -130,6 +130,9 @@
                             <span>Частота оповещений:</span>
                             <span class="check-select">{{ Form::select('notifications[notify_period]', Config::get('site.notify'), @$auth_user->notifications['notify_period'], ['class' => 'ui-select']) }}</span>
                         </div>
+
+                        <br/>
+                        <br/>
                     @endif
 
 
