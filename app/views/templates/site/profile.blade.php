@@ -105,12 +105,10 @@
                             <div data-status="progress" class="phone-status"></div>
                         </div>
                         <div class="input-error js-phone-error"></div>
-                        <div class="check-cont js-phone-check-cont">
+                        <div class="check-cont js-phone-check-cont" style="display: none;">
                             <input type="checkbox" name="notifications[on_phone]" id="phone" class="styledCheck js-phone-checkbox"{{ @$auth_user->notifications['on_phone'] ? ' checked' : '' }}>
                             <label for="phone"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать через SMS на мобильный телефон:</label>
                         </div>
-
-                        <br/><br/>
 
                     @endif
 
@@ -120,7 +118,7 @@
                     <!-- <div class="input-hint">
                         Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.
                     </div> -->
-                    <div class="check-cont js-email-check-cont">
+                    <div class="check-cont js-email-check-cont" style="display: none;">
                         <input type="checkbox" name="notifications[on_email]" id="mail" class="styledCheck"{{ @$auth_user->notifications['on_email'] ? ' checked' : '' }}>
                         <label for="mail"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать по электронной почте:</label>
                     </div>
@@ -128,17 +126,10 @@
                     <br/><br/>
 
                     @if (Input::get('dbg-phone'))
-                        <div class="check-title">Частота оповещений:</div>
-                        <div class="check-cont check-select">
-                            <ul class="check-desc">
-                                <li>
-                                    {{ Form::select('notifications[notify_period]', Config::get('site.notify'), @$auth_user->notifications['notify_period'], ['class' => 'ui-select']) }}
-                                </li>
-                            </ul>
+                        <div class="check-title">
+                            <span>Частота оповещений:</span>
+                            <span class="check-select">{{ Form::select('notifications[notify_period]', Config::get('site.notify'), @$auth_user->notifications['notify_period'], ['class' => 'ui-select']) }}</span>
                         </div>
-
-                        <br/><br/>
-
                     @endif
 
 

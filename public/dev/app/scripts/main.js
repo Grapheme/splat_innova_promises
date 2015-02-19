@@ -457,6 +457,7 @@ $.fn.SmartBtn = function() {
 }
 
 SplatSite.ValidPhone = function() {
+	if(!$('.js-phone').length) return;
 	var defaultMethod = 'POST';
 	var urls = SplatDict.urls;
 	var start_check = false;
@@ -479,8 +480,8 @@ SplatSite.ValidPhone = function() {
 			$('.js-phone-check-cont').slideDown();
 		} else {
 			$('.js-phone-check-cont').slideUp();
-			$(".js-phone-checkbox").prop("checked", false);
-			$('.js-phone-check-cont label').removeClass('ui-state-active');
+			//$(".js-phone-checkbox").prop("checked", false);
+			//$('.js-phone-check-cont label').removeClass('ui-state-active');
 		}
 	}
 	var emailCheckbox = function() {
@@ -608,6 +609,7 @@ SplatSite.ValidPhone = function() {
 			checkThis($(this));
 		}
 	});
+	emailCheckbox();
 	if($('.js-phone-input').inputmask("isComplete")) {
 		checkThis($('.js-phone-input'));
 	}
