@@ -39,6 +39,12 @@ return array(
         'weekly_twice' => '2 раза в неделю',
         'weekly'       => '1 раз в неделю',
         'monthly'      => '1 раз в месяц',
-    ]
+    ],
+    'notify_periods' => [
+        'daily'        => 60*60*24 - 300,
+        'weekly_twice' => 60*60*24*3 - 300,
+        'weekly'       => 60*60*24*7 - 300,
+        'monthly'      => 60*60*24*30 - 300,
+    ],
 
 );
