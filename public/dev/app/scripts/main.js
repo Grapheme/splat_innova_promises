@@ -456,6 +456,23 @@ $.fn.SmartBtn = function() {
 	});
 }
 
+SplatSite.ValidEmail = function() {
+	if(!$('.js-email-input').length) return;
+	var emailCheckbox = function() {
+		var value = $('.js-email-input').val();
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		if(re.test(value)) {
+			$('.js-email-check-cont').slideDown();
+		} else {
+			$('.js-email-check-cont').slideUp();
+		}
+	}
+	$('.js-email-input').on('input', function(){
+		emailCheckbox();
+	});
+	emailCheckbox();
+}
+
 SplatSite.ValidPhone = function() {
 	if(!$('.js-phone').length) return;
 	var defaultMethod = 'POST';
@@ -484,16 +501,6 @@ SplatSite.ValidPhone = function() {
 			//$('.js-phone-check-cont label').removeClass('ui-state-active');
 		}
 	}
-	var emailCheckbox = function() {
-		var value = $('.js-email-input').val();
-		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		if(re.test(value)) {
-			$('.js-email-check-cont').slideDown();
-		} else {
-			$('.js-email-check-cont').slideUp();
-		}
-	}
-
 	var checkThis = function(elem) {
 		var phone_number = elem.val(),
 			just_numbers = phone_number
@@ -601,15 +608,11 @@ SplatSite.ValidPhone = function() {
 			phoneCheckbox('close');
 		}
 	});
-	$('.js-email-input').on('input', function(){
-		emailCheckbox();
-	});
 	$('.js-phone-input').inputmask('+7(999)999-99-99', {
 	    "oncomplete": function(){
 			checkThis($(this));
 		}
 	});
-	emailCheckbox();
 	if($('.js-phone-input').inputmask("isComplete")) {
 		checkThis($('.js-phone-input'));
 	}
@@ -686,6 +689,7 @@ $(function(){
 	SplatSite.Tooltips.init();
 	SplatSite.PromisePlaceholder();
 	SplatSite.ValidPhone();
+	SplatSite.ValidEmail();
 	$('.js-smart-btn').SmartBtn();
 	if($('.js-countdown').length) {
 		SplatSite.CountDown('.js-countdown');
