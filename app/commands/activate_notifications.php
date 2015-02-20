@@ -38,8 +38,13 @@ class ActivateNotifications extends Command {
 		#$this->info("111");
 
 		$users = Dic::valuesBySlug('users');
+        $users = DicVal::extracts($users, null, 1, 1);
+        #Helper::tad($users);
 		foreach ($users as $user) {
-			$user->update_field('notifications', '{"new_comment":"1","promise_dates":"1","promise_status":"1"}');
+            $notifications = json_decode($user->notifications, 1);
+            $notifications['on_email'] = "1";
+            $notifications['notify_period'] = "daily";
+			$user->update_field('notifications', json_encode($notifications));
 		}
 
 		die;
