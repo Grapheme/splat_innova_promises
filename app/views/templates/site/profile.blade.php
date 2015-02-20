@@ -123,7 +123,7 @@
                         <label for="mail"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать по электронной почте:</label>
                     </div>
 
-                    @if (Input::get('dbg-phone'))
+                    @if (Input::get('dbg-phone') || 1)
                         <div class="check-title input-cont">
                             <span>Частота оповещений:</span>
                             <span class="check-select">{{ Form::select('notifications[notify_period]', Config::get('site.notify'), @$auth_user->notifications['notify_period'], ['class' => 'ui-select']) }}</span>
