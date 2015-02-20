@@ -2869,11 +2869,11 @@ class ApplicationController extends BaseController {
                 $line = [
                     @++$m,
                     $promise->created_at->format('d.m.Y'),
-                    $promise->promise_text,
+                    trim($promise->promise_text),
                     URL::route('app.promise', $promise->id),
-                    $city,
-                    $gender,
-                    $user->name,
+                    trim($city),
+                    trim($gender),
+                    trim($user->name),
                     URL::route('app.profile_id', $user->id),
                     $user->auth_method,
                     $user->identity,
@@ -2882,9 +2882,16 @@ class ApplicationController extends BaseController {
                 ];
 
                 #$content = implode(';', $line) . (Input::get('br') ? "<br/>\n" : "\r\n");
-                $content = implode(';', $line);
-                $lines[] = $content;
 
+                /**
+                 * Оборачивать значения в кавычки или нет
+                 */
+                if (Input::get('quotes') == 1)
+                    $content = '"' . implode('";"', $line) . '"';
+                else
+                    $content = implode(';', $line);
+
+                $lines[] = $content;
             }
 
             $full_content = implode("\n", $lines);
@@ -2896,7 +2903,8 @@ class ApplicationController extends BaseController {
             /**
              * Добавляем BOM, чтобы Excel понимал, что файл в кодировке UTF-8
              */
-            echo pack('CCC', 0xef, 0xbb, 0xbf);
+            if (Input::get('bom') == 1)
+                echo pack('CCC', 0xef, 0xbb, 0xbf);
 
             echo $full_content;
 
