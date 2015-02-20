@@ -2883,13 +2883,15 @@ class ApplicationController extends BaseController {
 
                 #$content = implode(';', $line) . (Input::get('br') ? "<br/>\n" : "\r\n");
 
+                $comma = ',';
+
                 /**
                  * Оборачивать значения в кавычки или нет
                  */
                 if (Input::get('quotes') == 1)
-                    $content = '"' . implode('";"', $line) . '"';
+                    $content = '"' . implode('"' . $comma . '"', $line) . '"';
                 else
-                    $content = implode(';', $line);
+                    $content = implode($comma, $line);
 
                 $lines[] = $content;
             }
