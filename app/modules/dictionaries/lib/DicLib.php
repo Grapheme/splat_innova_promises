@@ -439,14 +439,17 @@ class DicLib extends BaseController {
     public static function groupByField($values, $key) {
 
         $return = new Collection();
-        foreach ($values as $value) {
-            if (is_object($value) && isset($value->$key)) {
-                if (!isset($return[$value->$key]))
-                    $return[$value->$key] = new Collection();
-                $return[$value->$key][] = $value;
+        if (count($values)) {
+            foreach ($values as $v => $value) {
+                if (is_object($value) && isset($value->$key)) {
+                    if (!isset($return[$value->$key]))
+                        $return[$value->$key] = new Collection();
+                    $return[$value->$key][$v] = $value;
+                }
             }
         }
         return $return;
     }
+
 
 }

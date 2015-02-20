@@ -78,6 +78,7 @@ class CronPromises extends Command {
 
 		$also_users = array();
 
+
 		/************************************************************************************************************ */
 
 
@@ -106,8 +107,9 @@ class CronPromises extends Command {
 		});
 		#Helper::smartQueries(1);
 		$promises = DicVal::extracts($promises, null, true, true);
-		#Helper::ta($promises);
-		$this->info('Total full-failed promises: ' . count($promises));
+        #Helper::tad($promises);
+
+        $this->info('Total full-failed promises: ' . count($promises));
 
 		/**
 		 * Если что-то найдено...
@@ -124,9 +126,17 @@ class CronPromises extends Command {
 			}
 			$this->info('Filtered promises: ' . count($promises));
 
-			$promises_ids = Dic::makeLists($promises, NULL, 'id');
-			Helper::d($promises_ids);
+            /**
+             * Получаем список с IDs обещаний
+             */
+			#$promises_ids = Dic::makeLists($promises, NULL, 'id');
+			#Helper::d($promises_ids);
 
+            /**
+             * Группируем обещания по пользователям
+             */
+            $users_promises = DicLib::groupByField($promises, 'user_id');
+            #Helper::tad($users_promises);
 
 			/**
 			 * Получаем ID пользователей - авторов обещаний
@@ -188,6 +198,7 @@ class CronPromises extends Command {
                         $data = array(
                             #'promise' => $promise,
                             'user' => $user,
+                            'promises' => @$users_promises[$user->id],
                         );
 
                         /**
@@ -318,9 +329,17 @@ class CronPromises extends Command {
 			}
 			$this->info('Filtered promises: ' . count($promises));
 
-			$promises_ids = Dic::makeLists($promises, NULL, 'id');
-			Helper::d($promises_ids);
+            /**
+             * Получаем список с IDs обещаний
+             */
+            #$promises_ids = Dic::makeLists($promises, NULL, 'id');
+            #Helper::d($promises_ids);
 
+            /**
+             * Группируем обещания по пользователям
+             */
+            $users_promises = DicLib::groupByField($promises, 'user_id');
+            #Helper::tad($users_promises);
 
 			/**
 			 * Получаем ID пользователей - авторов обещаний
@@ -382,6 +401,7 @@ class CronPromises extends Command {
                         $data = array(
                             #'promise' => $promise,
                             'user' => $user,
+                            'promises' => @$users_promises[$user->id],
                         );
 
                         /**
@@ -486,7 +506,19 @@ class CronPromises extends Command {
 			}
 			$this->info('Filtered promises: ' . count($promises));
 
-			/**
+            /**
+             * Получаем список с IDs обещаний
+             */
+            #$promises_ids = Dic::makeLists($promises, NULL, 'id');
+            #Helper::d($promises_ids);
+
+            /**
+             * Группируем обещания по пользователям
+             */
+            $users_promises = DicLib::groupByField($promises, 'user_id');
+            #Helper::tad($users_promises);
+
+            /**
 			 * Получаем ID пользователей
 			 */
 			$users_ids = Dic::makeLists($promises, NULL, 'user_id');
@@ -545,6 +577,7 @@ class CronPromises extends Command {
                         $data = array(
                             #'promise' => $promise,
                             'user' => $user,
+                            'promises' => @$users_promises[$user->id],
                         );
 
                         /**

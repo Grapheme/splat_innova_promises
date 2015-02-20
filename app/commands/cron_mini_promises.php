@@ -168,7 +168,13 @@ class CronMiniPromises extends Command {
 
 			#die;
 
-			/**
+            /**
+             * Группируем обещания по пользователям
+             */
+            $users_promises = DicLib::groupByField($promises, 'user_id');
+            #Helper::tad($users_promises);
+
+            /**
 			 * Получаем ID пользователей - авторов обещаний
 			 */
 			$users_ids = Dic::makeLists($promises, NULL, 'user_id');
@@ -228,6 +234,7 @@ class CronMiniPromises extends Command {
 						$data = array(
 							#'promise' => $promise,
 							'user' => $user,
+                            'promises' => @$users_promises[$user->id],
 						);
 
                         /**
