@@ -2884,7 +2884,7 @@ class ApplicationController extends BaseController {
 
                 #$content = implode(';', $line) . (Input::get('br') ? "<br/>\n" : "\r\n");
 
-                $comma = ',';
+                $comma = (Input::get('comma') == ',' || Input::get('comma') == ';') ? Input::get('comma') : ',';
 
                 /**
                  * Оборачивать значения в кавычки или нет
