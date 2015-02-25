@@ -2878,7 +2878,8 @@ class ApplicationController extends BaseController {
                     $user->auth_method,
                     $user->identity,
                     $promise->time_limit,
-                    $promise_status
+                    $promise_status,
+                    ($promise->only_for_me ? 'П' : '')
                 ];
 
                 #$content = implode(';', $line) . (Input::get('br') ? "<br/>\n" : "\r\n");
