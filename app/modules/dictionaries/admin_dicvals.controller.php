@@ -653,6 +653,7 @@ class AdminDicvalsController extends BaseController {
             $element->load('metas', 'allfields', 'seos');
             $element = $element->extract(1);
 
+            $this->callHook('after_store_update', $dic, $element);
             if ($mode == 'update')
                 $this->callHook('after_update', $dic, $element);
             elseif ($mode == 'store')

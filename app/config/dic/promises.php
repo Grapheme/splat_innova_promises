@@ -74,6 +74,17 @@ return array(
                 'type' => 'checkbox',
                 'label_class' => 'normal_checkbox',
             ),
+
+            'promise_report' => array(
+                'title' => 'Отчет об обещании',
+                'type' => 'textarea',
+            ),
+            'promise_of_the_week' => array(
+                'no_label' => true,
+                'title' => 'Обещание недели',
+                'type' => 'checkbox',
+                'label_class' => 'normal_checkbox',
+            ),
         );
     },
 
@@ -100,6 +111,14 @@ return array(
             #Helper::tad($dics);
             Config::set('temp.index_dics', $dics);
             */
+        },
+
+        /**
+         * Вызывается в методе postStore, после создания или обновления записи
+         */
+        'after_store_update' => function ($dic, $dicval) {
+            if ($dicval->promise_of_the_week)
+                DicFieldVal::where('key', 'promise_of_the_week')->where('dicval_id', '!=', $dicval->id)->update(['value' => 0]);
         },
 
         /**
