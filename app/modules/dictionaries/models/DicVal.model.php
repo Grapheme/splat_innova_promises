@@ -343,7 +343,7 @@ class DicVal extends BaseModel {
             ->leftJoin($tbl_dic_field_val . ' AS ' . $rand_tbl_alias, function ($join) use ($rand_tbl_alias, $tbl_dicval, $key) {
                 $join
                     ->on($rand_tbl_alias . '.dicval_id', '=', $tbl_dicval . '.id')
-                    ->on($rand_tbl_alias . '.key', '=', $key)
+                    ->where($rand_tbl_alias . '.key', '=', DB::raw("'" . $key . "'"))
                 ;
             })
             ->orderBy($rand_tbl_alias . '.value', $order_method)
