@@ -151,6 +151,7 @@ class ApplicationController extends BaseController {
                 $query->whereIn(DB::raw('`dictionary_values`.`id`'), $ids);
                 $query->order_by_field('promise_of_the_week', 'DESC');
             });
+            Helper::smartQueries(1); die;
             $mainpage_promises = DicVal::extracts($mainpage_promises, null, 1, 1);
 
             if (count($mainpage_promises)) {
