@@ -79,12 +79,14 @@ return array(
                 'title' => 'Отчет об обещании',
                 'type' => 'textarea',
             ),
+            /*
             'promise_of_the_week' => array(
                 'no_label' => true,
                 'title' => 'Обещание недели',
                 'type' => 'checkbox',
                 'label_class' => 'normal_checkbox',
             ),
+            */
         );
     },
 
