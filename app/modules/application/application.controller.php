@@ -133,6 +133,11 @@ class ApplicationController extends BaseController {
         $cities_promises_counts = [];
         $promises_comments_count = [];
         $ids = (array)Config::get('site.mainpage_promises');
+
+        $promise_of_the_week = DicFieldVal::where('key', 'promise_of_the_week')->where('value', '1')->first();
+        if (isset($promise_of_the_week) && is_object($promise_of_the_week) && $promise_of_the_week->dicval_id)
+            array_unshift($ids, $promise_of_the_week->dicval_id);
+
         /**
          * Если есть IDs карточек для вывода на главной...
          */
@@ -143,6 +148,7 @@ class ApplicationController extends BaseController {
              */
             $mainpage_promises = Dic::valuesBySlug('promises', function($query) use ($ids) {
                 $query->whereIn('id', $ids);
+                $query->order_by_field('promise_of_the_week', 'DESC');
             });
             $mainpage_promises = DicVal::extracts($mainpage_promises, null, 1, 1);
 
