@@ -147,8 +147,8 @@ class ApplicationController extends BaseController {
              * Берем все эти обещания
              */
             $mainpage_promises = Dic::valuesBySlug('promises', function($query) use ($ids) {
-                $query->whereIn('id', $ids);
-                #$query->order_by_field('promise_of_the_week', 'DESC');
+                $query->whereIn('dictionary_values.id', $ids);
+                $query->order_by_field('promise_of_the_week', 'DESC');
             });
             $mainpage_promises = DicVal::extracts($mainpage_promises, null, 1, 1);
 
