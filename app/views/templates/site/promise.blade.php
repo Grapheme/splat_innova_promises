@@ -111,7 +111,7 @@
                 @if ($promise->promise_report)
                     <div class="promise-report">
                         <div class="rep-title"><i class="fi icon-okey"></i><span>Отчет о выполнении</span></div>
-                        <div class="rep-content">{{ $promise->promise_report }}</div>
+                        <div class="rep-content">{{ nl2br($promise->promise_report) }}</div>
                     </div>
                 @endif
 
