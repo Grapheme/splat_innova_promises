@@ -149,7 +149,8 @@ class ApplicationController extends BaseController {
             $mainpage_promises = Dic::valuesBySlug('promises', function($query) use ($ids) {
                 #$query->whereIn(DB::raw('`dictionary_values`.`id`'), $ids);
                 $query->whereIn(DB::raw('`dictionary_values`.`id`'), $ids);
-                $query->order_by_field('promise_of_the_week', 'DESC');
+                #$query->order_by_field('promise_of_the_week', 'DESC');
+                $query->orderBy(DB::raw('FIELD(`dictionary_values`.`id`, ' . implode(', ', $ids) . ')'));
             });
             if (Input::get('dbg-potw')) {
 
