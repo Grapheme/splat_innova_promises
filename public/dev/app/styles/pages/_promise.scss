@@ -1,12 +1,52 @@
 .promise-page {
 	padding: 1px 0 50px;
 
+	.promise-info {
+		position: relative;
+
+		.promise-report {
+			float: right;
+			width: 350px;
+			border: 2px solid #fff;
+			border-radius: 5px;
+			background: rgba(255, 255, 255, .75);
+			padding: 27px 25px;
+			margin-top: -15px;
+			color: #434041;
+
+			.rep-title {
+				font-weight: 300;
+				font-size: 18px;
+
+				.fi {
+					display: inline-block;
+					vertical-align: middle;
+					font-size: 22px;
+					margin-right: 7px;
+				}
+
+				span {
+					display: inline-block;
+					vertical-align: middle;
+				}
+			}
+
+			.rep-content {
+				margin-top: 20px;
+				font-size: 14px;
+				font-weight: 300;
+				line-height: 1.7;
+			}
+		}
+	}
+
 	.promise-text {
 		font-size: 48px;
 		font-weight: 700;
 		text-transform: uppercase;
 		margin-top: 55px;
-		width: 630px;
+		//width: 630px;
+		width: 565px;
 		line-height: 1.3;
 	}
 
