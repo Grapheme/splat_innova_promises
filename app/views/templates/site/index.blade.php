@@ -132,16 +132,16 @@
 
                   <ul class="promises-index">
 
-                      <li class="promise-item innova-block" style="cursor: pointer;" onclick="window.location.href='http://mypromises.ru/promise/4458'">
+                      <li class="promise-item innova-block" style="cursor: pointer;" onclick="window.location.href='http://mypromises.ru/promise/5066'">
                         <div class="flipper">
                           <div class="promise-cont">
                             <div class="info-cont">
                               <div class="innova-choice">Выбор</div>
-                              <a href="http://mypromises.ru/promise/4458" class="pr-title">ВЗЯТЬ КОТЕНКА ИЗ ПРИЮТА</a>
-                              <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/8b8e7c5e0c09cd434246e3e1321a021f.jpg)" class="user-photo"></a>
+                              <a href="http://mypromises.ru/promise/5066" class="pr-title">НАУЧИТЬСЯ ИГРАТЬ НА ГАРМОШКЕ)</a>
+                              <div class="user-info"><a style="background-image: url(http://cs624729.vk.me/v624729190/21a02/I8JSziad_c8.jpg)" class="user-photo"></a>
                                 <div class="user-text">
-                                  <div class="name"><a>Яна Долотина</a></div>
-                                  <div class="city"><a>Москва</a></div>
+                                  <div class="name"><a>Николай Barabanov</a></div>
+                                  <div class="city"><a>д.Гусевица</a></div>
                                 </div>
                               </div>
                             </div>
@@ -205,13 +205,13 @@
                 <div class="promise-cont type-undefined">
                   <div class="info-cont">
                     <div class="innova-choice">Выбор</div>
-                    <a href="http://mypromises.ru/promise/4458" class="pr-title">ВЗЯТЬ КОТЕНКА ИЗ ПРИЮТА</a>
-                    <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/8b8e7c5e0c09cd434246e3e1321a021f.jpg)" class="user-photo"></a>
-                      <div class="user-text">
-                        <div class="name"><a>Яна Долотина</a></div>
-                        <div class="city"><a>Москва</a></div>
-                      </div>
-                    </div>
+	                  <a href="http://mypromises.ru/promise/5066" class="pr-title">НАУЧИТЬСЯ ИГРАТЬ НА ГАРМОШКЕ)</a>
+	                  <div class="user-info"><a style="background-image: url(http://cs624729.vk.me/v624729190/21a02/I8JSziad_c8.jpg)" class="user-photo"></a>
+	                    <div class="user-text">
+	                      <div class="name"><a>Николай Barabanov</a></div>
+	                      <div class="city"><a>д.Гусевица</a></div>
+	                    </div>
+	                 </div>
                   </div>
                 </div>
               </li>
