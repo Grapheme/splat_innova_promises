@@ -106,85 +106,97 @@
                     </div>
                 </div>
             </div>
-            <div class="promise-text">
-                {{ $promise->promise_text }}
-            </div>
+            <div class="promise-info">
 
-            <?
-            $failed = (!$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit)) || Input::get('prefail') == 1;
-
-            #/*
-            #if (Input::get('dbg') || TRUE) {
-                $promise_full_failed_time = (new \Carbon\Carbon())->createFromFormat('Y-m-d H:i:s', $promise->time_limit)->addHours(48)->format('Y-m-d H:i:s');
-                $failed_finish_period =
-                    (
-                        !$promise->finished_at && !$promise->promise_fail
-                        && date('Y-m-d H:i:s') > $promise->time_limit
-                        && date('Y-m-d H:i:s') < $promise_full_failed_time
-                    )
-                    || Input::get('prefail') == 1
-                ;
-            #}
-            #*/
-
-            ?>
-            @if (!$failed && !$promise->finished_at && !$failed_finish_period)
-                <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div>
-            @endif
-
-            <div class="progress-btns">
-
-                @if ($failed)
-
-                    {{-- Задание провалено --}}
-                    <div class="pr-btn active">
-                        <i class="fi icon-no"></i>
-                        <span>
-                            @if (is_object($auth_user) && $auth_user->id == $promise->user_id)
-                                Вы не смогли выполнить данное обещание
-                            @else
-                                Обещание выполнить не удалось
-                            @endif
-                        </span>
+                @if ($promise->promise_report)
+                    <div class="promise-report">
+                        <div class="rep-title"><i class="fi icon-okey"></i><span>Отчет о выполнении</span></div>
+                        <div class="rep-content">{{ $promise->promise_report }}</div>
                     </div>
+                @endif
 
-                    @if (@$failed_finish_period && is_object($auth_user) && $auth_user->id == $promise_user->id)
-                        <br/>
-                        <br/>
-                        <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-time"></i> <span>Выполнено</span></a>
+                <div class="promise-text">
+                    {{ $promise->promise_text }}
+                </div>
+
+                <?
+                $failed = (!$promise->finished_at && ($promise->promise_fail || date('Y-m-d H:i:s') > $promise->time_limit)) || Input::get('prefail') == 1;
+
+                #/*
+                #if (Input::get('dbg') || TRUE) {
+                    $promise_full_failed_time = (new \Carbon\Carbon())->createFromFormat('Y-m-d H:i:s', $promise->time_limit)->addHours(48)->format('Y-m-d H:i:s');
+                    $failed_finish_period =
+                        (
+                            !$promise->finished_at && !$promise->promise_fail
+                            && date('Y-m-d H:i:s') > $promise->time_limit
+                            && date('Y-m-d H:i:s') < $promise_full_failed_time
+                        )
+                        || Input::get('prefail') == 1
+                    ;
+                #}
+                #*/
+
+                ?>
+                @if (!$failed && !$promise->finished_at && !$failed_finish_period)
+                    <div class="promise-time"><i class="fi icon-progress"></i><span class="js-countdown"></span></div>
+                @endif
+
+                <div class="progress-btns">
+
+                    @if ($failed)
+
+                        {{-- Задание провалено --}}
+                        <div class="pr-btn active">
+                            <i class="fi icon-no"></i>
+                            <span>
+                                @if (is_object($auth_user) && $auth_user->id == $promise->user_id)
+                                    Вы не смогли выполнить данное обещание
+                                @else
+                                    Обещание выполнить не удалось
+                                @endif
+                            </span>
+                        </div>
+
+                        @if (@$failed_finish_period && is_object($auth_user) && $auth_user->id == $promise_user->id)
+                            <br/>
+                            <br/>
+                            <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-time"></i> <span>Выполнено</span></a>
+                        @endif
+
+
+                    @elseif ($promise->finished_at)
+
+                        {{-- Обещание выполнено $promise->finished_at --}}
+                        <div class="pr-btn active"><i class="fi icon-okey"></i><span>Обещание выполнено</span></div>
+
+                    @elseif (is_object($auth_user) && $auth_user->id == $promise_user->id)
+
+                        <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-okey"></i><span>Выполнено</span></a>
+                        <a href="?fail=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'failure');"><i class="fi icon-no"></i><span>Отказаться</span></a>
+
                     @endif
 
+                    @if (is_object($auth_user) && $auth_user->id == $promise_user->id)
+                        <button data-href="?delete=1" class="pr-btn js-smart-btn">
+                            <span class="btn-text">Удалить обещание</span>
+                            <span class="abs-hint">Вы уверены?</span>
+                            <span class="fi-links">
+                                <a href="#" class="fi icon-okey fi-link js-yes" data-ga="promise-delete"></a>
+                                <a href="#" class="fi icon-no fi-link js-no"></a>
+                            </span>
+                        </button>
+                    @endif
 
-                @elseif ($promise->finished_at)
+                    <div class="promise-soc"><span>Расскажи об обещании:</span>
+                      <ul class="soc-ul">
+                        <li><a onclick="ga('send', 'event', 'like', 'facebook');" href="http://www.facebook.com/sharer.php?u={{ URL::route('app.promise', $promise->id) }}" class="soc-icon" target="_blank"><i class="fi icon-fb"></i></a></li>
+                        <li><a onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url={{ URL::route('app.promise', $promise->id) }}&event=button_share" class="soc-icon" target="_blank"><i class="fi icon-vk"></i></a></li>
+                        <li><a onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl={{ URL::route('app.promise', $promise->id) }}" class="soc-icon" target="_blank"><i class="fi icon-ok"></i></a></li>
+                      </ul>
+                    </div>
+                </div>
 
-                    {{-- Обещание выполнено $promise->finished_at --}}
-                    <div class="pr-btn active"><i class="fi icon-okey"></i><span>Обещание выполнено</span></div>
-
-                @elseif (is_object($auth_user) && $auth_user->id == $promise_user->id)
-
-                    <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-okey"></i><span>Выполнено</span></a>
-                    <a href="?fail=1" class="pr-btn" onclick="ga('send', 'event', 'promise', 'failure');"><i class="fi icon-no"></i><span>Отказаться</span></a>
-
-                @endif
-
-                @if (is_object($auth_user) && $auth_user->id == $promise_user->id)
-                    <button data-href="?delete=1" class="pr-btn js-smart-btn">
-                        <span class="btn-text">Удалить обещание</span>
-                        <span class="abs-hint">Вы уверены?</span>
-                        <span class="fi-links">
-                            <a href="#" class="fi icon-okey fi-link js-yes" data-ga="promise-delete"></a>
-                            <a href="#" class="fi icon-no fi-link js-no"></a>
-                        </span>
-                    </button>
-                @endif
-
-                <div class="promise-soc"><span>Расскажи об обещании:</span>
-                  <ul class="soc-ul">
-                    <li><a onclick="ga('send', 'event', 'like', 'facebook');" href="http://www.facebook.com/sharer.php?u={{ URL::route('app.promise', $promise->id) }}" class="soc-icon" target="_blank"><i class="fi icon-fb"></i></a></li>
-                    <li><a onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url={{ URL::route('app.promise', $promise->id) }}&event=button_share" class="soc-icon" target="_blank"><i class="fi icon-vk"></i></a></li>
-                    <li><a onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl={{ URL::route('app.promise', $promise->id) }}" class="soc-icon" target="_blank"><i class="fi icon-ok"></i></a></li>
-                  </ul>
-                </div> 
+                <div class="clearfix"></div>
             </div>
 
         </div>
