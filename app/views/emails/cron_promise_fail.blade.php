@@ -1,3 +1,8 @@
+<?
+$promise = NULL;
+if (isset($promises) && is_object($promises) && NULL !== ($promises = $promises->toArray()) && count($promises) == 1)
+    $promise = array_shift($promises);
+?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -5,9 +10,13 @@
 </head>
 <body>
 	<div>
-		<p>
+        <p>
+        @if (is_null($promise))
             Упс... Кажется, вы не успели выполнить своё обещание. Может стоит попробовать ещё раз?
-		</p>
+        @else
+            Упс... Кажется, вы не успели выполнить своё обещание "<a href="http://mypromises.ru/promise/{{ $promise['id'] }}">{{ $promise['name'] }}</a>". Может стоит попробовать ещё раз?
+        @endif
+        </p>
 		<p>
             <a href="http://mypromises.ru/new_promise">Добавить новое обещание</a>
 		</p>

@@ -53,3 +53,6 @@
       ga('send', 'pageview');
 
     </script>
+    
+    <!-- Код ретаргетинга от Panda Digital -->
+    <script type="text/javascript">(window.Image ? (new Image()) : document.createElement('img')).src = location.protocol + '//vk.com/rtrg?r=CGEMHLvteqCCLPuj1VgkIAF1mtj/VZsr*pRlUZK2tzPUco3AizDSQPavZpWgLNtKTf8j2ridia6blLGX65lPUcagEvhxjEBd*KXyzW8y2398O4opFw7NwNuu2zhBN94zcO5K3Bdkq*h2PKVtAk6JmBw2rAcPsxTgSuncm/s*8rM-';</script>

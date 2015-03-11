@@ -416,6 +416,12 @@ if (len > 0) {
         },
 
         /**
+         * Вызывается в методе postStore, после создания или обновления записи
+         */
+        'after_store_update' => function ($dic, $dicval) {
+        },
+
+        /**
          * Вызывается в начале метода destroy
          */
         'before_destroy' => function ($dic, $dicval) {

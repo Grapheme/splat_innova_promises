@@ -106,7 +106,7 @@
                         </div>
                         <div class="input-error js-phone-error"></div>
                         <div class="check-cont js-phone-check-cont" style="display: none;">
-                            <input type="checkbox" name="notifications[on_phone]" id="phone" class="styledCheck js-phone-checkbox"{{ @$auth_user->notifications['on_phone'] ? ' checked' : '' }}>
+                            <input type="checkbox" name="notifications[on_phone]" value="1" id="phone" class="styledCheck js-phone-checkbox"{{ @$auth_user->notifications['on_phone'] ? ' checked' : '' }}>
                             <label for="phone"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать через SMS на мобильный телефон:</label>
                         </div>
 
@@ -119,7 +119,7 @@
                         Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.
                     </div> -->
                     <div class="check-cont input-cont js-email-check-cont" style="display: none;">
-                        <input type="checkbox" name="notifications[on_email]" id="mail" class="styledCheck"{{ @$auth_user->notifications['on_email'] ? ' checked' : '' }}>
+                        <input type="checkbox" name="notifications[on_email]" value="1" id="mail" class="styledCheck"{{ @$auth_user->notifications['on_email'] ? ' checked' : '' }}>
                         <label for="mail"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать по электронной почте:</label>
                     </div>
 

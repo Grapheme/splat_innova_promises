@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6fb1b9df57e684ed2574bd7edda4dc08",
+    "hash": "38f9c0bf034fcc8d7eaae8d75658b96c",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -509,12 +509,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c583ee71b17e52b3d06f97baa0d2e318e20280a0"
+                "reference": "259187877936ead8aa6c2a7c482df9bb0defc0fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c583ee71b17e52b3d06f97baa0d2e318e20280a0",
-                "reference": "c583ee71b17e52b3d06f97baa0d2e318e20280a0",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/259187877936ead8aa6c2a7c482df9bb0defc0fc",
+                "reference": "259187877936ead8aa6c2a7c482df9bb0defc0fc",
                 "shasum": ""
             },
             "require": {
@@ -616,7 +616,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-11-21 18:43:42"
+            "time": "2014-11-27 02:30:09"
         },
         {
             "name": "maximebf/debugbar",
@@ -1275,12 +1275,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "84ff290871c3436c3703ce15ec5e344da0b59472"
+                "reference": "2aa7f9da2af1cd1a8943df88bbdb7da7bc03852d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/84ff290871c3436c3703ce15ec5e344da0b59472",
-                "reference": "84ff290871c3436c3703ce15ec5e344da0b59472",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/2aa7f9da2af1cd1a8943df88bbdb7da7bc03852d",
+                "reference": "2aa7f9da2af1cd1a8943df88bbdb7da7bc03852d",
                 "shasum": ""
             },
             "require": {
@@ -1319,7 +1319,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-11-23 19:27:48"
+            "time": "2014-11-27 14:13:43"
         },
         {
             "name": "symfony/browser-kit",
@@ -2246,8 +2246,12 @@
             "time": "2014-09-01 19:24:09"
         }
     ],
-    "packages-dev": [],
-    "aliases": [],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
         "intervention/image": 20,
@@ -2256,7 +2260,10 @@
         "twilio/sdk": 20
     },
     "prefer-stable": false,
-    "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": []
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
 }

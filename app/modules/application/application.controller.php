@@ -133,6 +133,11 @@ class ApplicationController extends BaseController {
         $cities_promises_counts = [];
         $promises_comments_count = [];
         $ids = (array)Config::get('site.mainpage_promises');
+
+        $promise_of_the_week = DicFieldVal::where('key', 'promise_of_the_week')->where('value', '1')->first();
+        if (isset($promise_of_the_week) && is_object($promise_of_the_week) && $promise_of_the_week->dicval_id)
+            array_unshift($ids, $promise_of_the_week->dicval_id);
+
         /**
          * Если есть IDs карточек для вывода на главной...
          */
@@ -142,8 +147,11 @@ class ApplicationController extends BaseController {
              * Берем все эти обещания
              */
             $mainpage_promises = Dic::valuesBySlug('promises', function($query) use ($ids) {
-                $query->whereIn('id', $ids);
+                #$query->whereIn(DB::raw('`dictionary_values`.`id`'), $ids);
+                $query->whereIn(DB::raw('`dictionary_values`.`id`'), $ids);
+                $query->order_by_field('promise_of_the_week', 'DESC');
             });
+            #Helper::smartQueries(1); die;
             $mainpage_promises = DicVal::extracts($mainpage_promises, null, 1, 1);
 
             if (count($mainpage_promises)) {
@@ -2878,18 +2886,21 @@ class ApplicationController extends BaseController {
                     $user->auth_method,
                     $user->identity,
                     $promise->time_limit,
-                    $promise_status
+                    $promise_status,
+                    ($promise->only_for_me ? 'П' : '')
                 ];
 
                 #$content = implode(';', $line) . (Input::get('br') ? "<br/>\n" : "\r\n");
+
+                $comma = (Input::get('comma') == ',' || Input::get('comma') == ';') ? Input::get('comma') : ',';
 
                 /**
                  * Оборачивать значения в кавычки или нет
                  */
                 if (Input::get('quotes') == 1)
-                    $content = '"' . implode('";"', $line) . '"';
+                    $content = '"' . implode('"' . $comma . '"', $line) . '"';
                 else
-                    $content = implode(';', $line);
+                    $content = implode($comma, $line);
 
                 $lines[] = $content;
             }
