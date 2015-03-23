@@ -18,7 +18,7 @@
           <li><a onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl=mypromises.ru" target="_blank" class="soc-icon"><i class="fi icon-ok"></i></a></li>
         </ul> -->
       </div>
-      <a onclick="ga('send', 'event', 'footer', 'brand');" href="http://splat-innova.com" target="_blank" class="footer-block right-logo"></a>
+      <a onclick="ga('send', 'event', 'footer', 'brand');" href="http://splat.ru" target="_blank" class="footer-block right-logo"></a>
     </div>
   </footer>
   <div class="overlay-shadow"></div>
@@ -142,7 +142,7 @@
           А ЧЕРЕЗ МЕСЯЦ - УСТРАНЯТСЯ ПРИЧИНЫ ЕЕ ВОЗНИКНОВЕНИЯ, ЭМАЛЬ ВОССТАНОВИТСЯ,<br>
           А ВЫ ПОЧУВСТВУЕТЕ УВЕРЕННОСТЬ В СЕБЕ И СВОИХ СИЛАХ.
         </div>
-        <div class="spec-link"><a href="http://www.splat-innova.com" target="_blank">Узнать больше</a></div>
+        <div class="spec-link"><a href="http://www.splat.ru" target="_blank">Узнать больше</a></div>
       </div>
     </div>
   </div>
