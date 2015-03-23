@@ -57,12 +57,6 @@ class ApplicationController extends BaseController {
 
             Route::get('/test/gen_image', array('as' => 'app.test.gen_image', 'uses' => __CLASS__.'@getTestGenImage'));
 
-
-            Route::get('/statistics', array('as' => 'app.statistics', 'uses' => __CLASS__.'@getStatistics'));
-            Route::get('/statistics/promises', array('as' => 'app.statistics_promises', 'uses' => __CLASS__.'@getStatisticsPromises'));
-
-            Route::get('/statistics/promises/all', array('as' => 'app.statistics_promises_all', 'uses' => __CLASS__.'@getStatisticsPromisesAll'));
-
             Route::get('/sitemap', array('as' => 'app.sitemap', 'uses' => __CLASS__.'@getSitemap'));
 
 
@@ -71,6 +65,14 @@ class ApplicationController extends BaseController {
             Route::post('/ajax/phone/checkPhone', array('as' => 'app.phone.check-phone', 'uses' => __CLASS__.'@postPhoneCheckPhone'));
 
         });
+
+
+
+        Route::get('/statistika', array('as' => 'app.statistics', 'uses' => __CLASS__.'@getStatistics'));
+        Route::get('/statistika/promises', array('as' => 'app.statistics_promises', 'uses' => __CLASS__.'@getStatisticsPromises'));
+        Route::get('/statistika/promises/all', array('as' => 'app.statistics_promises_all', 'uses' => __CLASS__.'@getStatisticsPromisesAll'));
+
+
     }
 
 
