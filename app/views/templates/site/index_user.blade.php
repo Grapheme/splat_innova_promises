@@ -63,7 +63,7 @@
 
         <br/>
 
-        <a href="{{ URL::route('app.new_promise') }}" onclick="ga('send', 'event', 'new_promise', 'profile');">Дать обещание</a>
+        <a href="{{ URL::route('app.new_promise') }}" onclick="ga('send', 'event', 'new_promise', 'profile'); yaCounter27511935.reachGoal('butpromisesme'); return true;">Дать обещание</a>
 
         <br/><br/>
 
@@ -137,7 +137,7 @@
                 @endif
               </div>
             </div>
-            <div class="btn-cont"><a href="{{ URL::route('app.new_promise') }}" class="us-btn">Дать обещание</a></div>
+            <div class="btn-cont"><a href="{{ URL::route('app.new_promise') }}" onclick = "yaCounter27511935.reachGoal('butpromisesme'); return true;" class="us-btn">Дать обещание</a></div>
           </div>
           <div class="promises-title us-title">Мои обещания</div>
         </div>

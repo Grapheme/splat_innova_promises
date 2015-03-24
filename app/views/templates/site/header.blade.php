@@ -4,7 +4,7 @@
         <div class="user-links">
         @if (!isset($auth_user) || !is_object($auth_user) || !$auth_user->id)
             <a href="#"><span data-box="auth" class="js-open-box" onclick="ga('send', 'event', 'header', 'login');">Войти</span></a>
-            <a href="#"><span data-box="reg" class="js-open-box" onclick="ga('send', 'event', 'header', 'register');">Зарегистрироваться</span></a>
+            <a href="#"><span data-box="reg" class="js-open-box" onclick="ga('send', 'event', 'header', 'register'); yaCounter27511935.reachGoal('reg'); return true;">Зарегистрироваться</span></a>
         @else
             <!-- <a href="{{ URL::route('app.mainpage') }}"><span data-box="auth_" class="js-open-box_">Главная</span></a> -->
             <!-- <a href="{{ URL::route('app.me') }}"><span data-box="auth_" class="js-open-box_">Мои Обещания</span></a> -->
