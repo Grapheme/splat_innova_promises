@@ -948,11 +948,11 @@ html { height: 100% }
 .promise-cont.type-promo,
 .promise-item.type-promo,
 .promise-make.type-promo { background-color: #70cfe6 }
-.promise-item.type-green:hover { background-color: #446f00 }
-.promise-item.type-aqua:hover { background-color: #047676 }
-.promise-item.type-yellow:hover { background-color: #a58f00 }
-.promise-item.type-blue:hover { background-color: #09607b }
-.promise-item.type-pink:hover { background-color: #c06da0 }
+.promise-item.type-green:hover { background-color: #f16f13; }
+.promise-item.type-aqua:hover { background-color: #e13832; }
+.promise-item.type-yellow:hover { background-color: #8ec75e; }
+.promise-item.type-blue:hover { background-color: #70bdd0; }
+.promise-item.type-pink:hover { background-color: #7c77b1; }
 .promise-item.type-promo { background-color: #70cfe6 }
 .color-item.type-green { background-image: url(../images/circles/green.png) }
 .color-item.type-aqua { background-image: url(../images/circles/aqua.png) }
