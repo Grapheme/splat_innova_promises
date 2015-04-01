@@ -1,3 +1,6 @@
+<?/*
+Картинки для шеринга - в /public/js/app.js
+*/?>
 @extends(Helper::layout())
 
 
