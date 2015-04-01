@@ -1017,7 +1017,7 @@ html { height: 100% }
                 transition: background .2s ease;
                 color: #fff;
             }
-            .main-header .soc-links li .soc-icon:hover { background: #07cbcc }
+            .main-header .soc-links li .soc-icon:hover { background: #db0a34; }
             .main-header .soc-links li .soc-icon i { line-height: 33px }
         .main-header .soc-links .soc-text {
             position: absolute;
