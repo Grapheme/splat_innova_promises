@@ -814,7 +814,7 @@ html { height: 100% }
         margin-top: 40px;
     }
     .overlay .popup.promo-popup .spec-link { margin-top: 50px }
-        .overlay .popup.promo-popup .spec-link a { color: #07cbcc }
+        .overlay .popup.promo-popup .spec-link a { color: #f43d37 }
     .overlay .popup.promo-popup .promo-box {
         position: absolute;
         top: 50%;
@@ -947,13 +947,13 @@ html { height: 100% }
 .promise-make.type-pink .pr-title { color: #8c87c7 }
 .promise-cont.type-promo,
 .promise-item.type-promo,
-.promise-make.type-promo { background-color: #8be9f2 }
+.promise-make.type-promo { background-color: #70cfe6 }
 .promise-item.type-green:hover { background-color: #446f00 }
 .promise-item.type-aqua:hover { background-color: #047676 }
 .promise-item.type-yellow:hover { background-color: #a58f00 }
 .promise-item.type-blue:hover { background-color: #09607b }
 .promise-item.type-pink:hover { background-color: #c06da0 }
-.promise-item.type-promo { background-color: #8be9f2 }
+.promise-item.type-promo { background-color: #70cfe6 }
 .color-item.type-green { background-image: url(../images/circles/green.png) }
 .color-item.type-aqua { background-image: url(../images/circles/aqua.png) }
 .color-item.type-yellow { background-image: url(../images/circles/yellow.png) }
@@ -1018,7 +1018,7 @@ html { height: 100% }
                 color: #fff;
             }
             .main-header .soc-links li .soc-icon:hover { background: #db0a34; }
-            .main-header .soc-links li .soc-icon i { line-height: 33px }
+            .main-header .soc-links li .soc-icon i { line-height: 33px; }
         .main-header .soc-links .soc-text {
             position: absolute;
             line-height: normal;
@@ -1600,7 +1600,7 @@ html { height: 100% }
     }
     .promises-index .promise-item .promise-cont .pr-title {
         display: block;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 700;
         text-transform: uppercase;
         text-decoration: none;
@@ -1718,7 +1718,7 @@ html { height: 100% }
             color: #56565b;
             background: #fff;
         }
-    .promises-index .promise-item.innova-block .promise-cont { background: #82d9e1 }
+    .promises-index .promise-item.innova-block .promise-cont { background: #70cfe6 }
         .promises-index .promise-item.innova-block .promise-cont .innova-choice {
             font-size: 12px;
             color: #56565b;
@@ -1877,9 +1877,9 @@ html { height: 100% }
             width: 30px;
             height: 30px;
             border-radius: 30px;
-            border: 2px solid #07cbcc;
+            border: 2px solid #f43d37;
             background: #fff;
-            color: #07cbcc;
+            color: #f43d37;
             text-decoration: none;
             font-size: 25px;
             -webkit-transition: all .2s ease;
@@ -1915,7 +1915,7 @@ html { height: 100% }
                 line-height: 30px;
             }
         .profile-photo .profile-hover a:hover {
-            background: #07cbcc;
+            background: #f43d37;
             color: #fff;
         }
         .profile-photo .profile-hover .down-link {
@@ -2200,7 +2200,7 @@ html { height: 100% }
             color: #434041;
         }
             .profile-page .promises-list .promise-item.type-promo .text a {
-                color: #07cbcc;
+                color: #f43d37;
                 -webkit-transition: color .2s ease;
                 transition: color .2s ease;
             }
@@ -2382,7 +2382,7 @@ html { height: 100% }
         .promise-make .check-cont .check-desc .ui-select {
             background: 0 0;
             border: none;
-            color: #07cbcc;
+            color: #f43d37;
             margin-left: 5px;
         }
             .promise-make .check-cont .check-desc .ui-select option {
@@ -2415,7 +2415,7 @@ html { height: 100% }
     .check-select .ui-select {
         background: 0 0;
         border: none;
-        color: #07cbcc;
+        color: #f43d37;
         margin-left: 5px;
     }
         .check-select .ui-select option {
@@ -2449,7 +2449,7 @@ html { height: 100% }
         margin-left: 60px;
     }
         .promo-block .text a {
-            color: #07cbcc;
+            color: #f43d37;
             -webkit-transition: color .2s ease;
             transition: color .2s ease;
         }
@@ -2918,7 +2918,7 @@ div.pr-btn { line-height: 38px }
 }
 .error404 .icon {
     font-size: 45px;
-    color: #07cbcc;
+    color: #f43d37;
 }
 .error404 .title {
     font-size: 38px;
@@ -2932,4 +2932,4 @@ div.pr-btn { line-height: 38px }
     line-height: 1.4;
     margin-top: 20px;
 }
-    .error404 .text a { color: #07cbcc }
+    .error404 .text a { color: #f43d37 }
