@@ -1108,11 +1108,13 @@ html { height: 100% }
             font-weight: 900;
         }
     .main-footer .footer-block.right-logo {
-        width: 11%;
-        height: 40px;
-        background-image: url(../images/footer-logo.png);
-        background-position: right center;
-        background-repeat: no-repeat;
+        width: 30px;
+		  height: 30px;
+		  background-image: url(../images/footer-logo.svg);
+		  background-position: right center;
+		  background-repeat: no-repeat;
+		  background-size: cover;
+		  margin-left: 50px;
     }
     .main-footer .footer-block span {
         display: inline-block;
