@@ -2509,6 +2509,8 @@ class ApplicationController extends BaseController {
             $avatar_path = public_path('theme/images/man.png');
         elseif (mb_substr($avatar_path, 0, 4) != 'http')
             $avatar_path = public_path($avatar_path);
+        elseif (!@file_get_contents($avatar_path))
+            $avatar_path = public_path('theme/images/man.png');
 
         if (!isset($promise_type) || !$promise_type)
             $promise_type = 'blue';
