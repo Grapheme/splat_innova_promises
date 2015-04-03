@@ -161,7 +161,7 @@
                                           <div class="info-cont">
                                               <div class="innova-choice">Выбор</div>
                                               <div class="innova-text">
-                                                  <p>Команда INNOVA обещает, что каждую неделю мы будем выбирать одно выполненное обещание и награждать того,<br>кто сдержал свое слово призом-сюрпризом. </p>
+                                                  <p>Команда SPLAT обещает, что каждую неделю мы будем выбирать одно выполненное обещание и награждать того,<br>кто сдержал свое слово призом-сюрпризом. </p>
                                                   <a href="#" class="js-open-box innova-link" data-box="promo" onclick="ga('send', 'event', 'brand', 'profile');">Читать далее</a>
                                               </div>
                                           </div>
@@ -507,7 +507,7 @@
           <li style="color: #b7b7b9;">Сделать пожертвование в детский дом</li>
         </ul>
         <div class="wrapper" style="cursor:pointer;" onclick="location.href='http://mypromises.ru/promise/2240';">
-          <div data-tooltip="Команда INNOVA обещает, что каждую неделю мы будем выбирать одно выполненное обещание<br>и награждать того,<br>кто сдержал свое слово призом-сюрпризом." data-tooltip-center="on" class="promise-week">
+          <div data-tooltip="Команда SPLAT обещает, что каждую неделю мы будем выбирать одно выполненное обещание<br>и награждать того,<br>кто сдержал свое слово призом-сюрпризом." data-tooltip-center="on" class="promise-week">
             <div class="week-inline left-word">Выбор</div>
             <div class="week-inline logo"></div>
             <div style="background-image: url(http://cs623324.vk.me/v623324593/16339/dIRyMEhIpJg.jpg);" class="week-inline profile-photo"></div>
