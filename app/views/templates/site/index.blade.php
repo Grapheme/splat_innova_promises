@@ -75,20 +75,24 @@
       <div class="main-screen">
         <div class="main-fotorama">
           <div class="js-main-fotorama">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-1.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-2.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-3.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-4.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-5.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/1.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/2.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/3.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/4.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/5.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/7.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/8.jpg" alt="">
           </div>
         </div>
         <div class="main-content wrapper">
           <div>
-          	  <div class="slide-title js-slide-title" data-promise-text="поиграть в снежки этой зимой">Я обещаю поиграть в снежки этой зимой</div>
-              <div class="slide-title js-slide-title" data-promise-text="съездить с близкими в горы">Я обещаю съездить с близкими в горы <!--до конца зимы--></div>
-              <div class="slide-title js-slide-title" data-promise-text="улыбнуться всем прохожим сегодня">Я обещаю улыбнуться всем прохожим сегодня<!--по дороге на работу--></div>
-              <div class="slide-title js-slide-title" data-promise-text="читать по одной книге в месяц">Я обещаю читать по одной книге в месяц</div> 
-              <div class="slide-title js-slide-title" data-promise-text="привести себя в форму к весне">Я обещаю привести себя в форму к весне</div> 
+              <div class="slide-title js-slide-title" data-promise-text="вырастить цветы у себя дома">Я обещаю вырастить цветы у себя дома</div> 
+              <div class="slide-title js-slide-title" data-promise-text="пойти в поход на майские праздники">Я обещаю пойти в поход на майские праздники</div> 
+              <div class="slide-title js-slide-title" data-promise-text="порадовать любимую уже сегодня">Я обещаю порадовать любимую уже сегодня</div> 
+              <div class="slide-title js-slide-title" data-promise-text="сделать ремонт в квартире">Я обещаю сделать ремонт в квартире</div> 
+              <div class="slide-title js-slide-title" data-promise-text="начать бегать по утрам">Я обещаю начать бегать по утрам</div> 
+              <div class="slide-title js-slide-title" data-promise-text="возобновить занятия балетом">Я обещаю возобновить занятия балетом</div> 
+              <div class="slide-title js-slide-title" data-promise-text="вернуться в любимый город">Я обещаю вернуться в любимый город</div>  
           </div>
           <h1 class="title">Пообещать и сдержать слово многого стоит</h1>
           <div class="desc">Обещания имеют огромную силу. Они способны изменить мир. Выполняя свои<br/>обещания, мы становимся сильнее, обретаем себя и уверенность в том, <br/>что нам все по зубам.</div>

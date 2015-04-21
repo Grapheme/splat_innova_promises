@@ -123,8 +123,8 @@ class ApplicationController extends BaseController {
          */
         $finished_promises = DicFieldVal::where('key', 'finished_at')->where('value', '>', 0)->count();
 
-        if ($finished_promises < 1500)
-            $finished_promises += 1500;
+        if ($finished_promises < 1800)
+            $finished_promises += 1800;
 
         /**
          * Карточки обещаний для главной
@@ -2393,8 +2393,8 @@ class ApplicationController extends BaseController {
 
         $finished_promises = DicFieldVal::where('key', 'finished_at')->where('value', '>', 0)->count();
 
-        if ($finished_promises < 1500)
-            $finished_promises += 1500;
+        if ($finished_promises < 1800)
+            $finished_promises += 1800;
 
         return $finished_promises;
     }
