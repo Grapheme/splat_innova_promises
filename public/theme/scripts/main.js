@@ -11,9 +11,8 @@ var randomAdvice = function() {
 	});
 	for(var i = 0; i < 6; i++){
 		var rand = getRandomInt(0, advice_array.length-1);
-		console.log(rand);
-		show_array.push(advice_array[i]);
-		advice_array.splice(i, 1);
+		show_array.push(advice_array[rand]);
+		advice_array.splice(rand, 1);
 	}
 	$.each(show_array, function(index, value){
 		advice.eq(value).show();
