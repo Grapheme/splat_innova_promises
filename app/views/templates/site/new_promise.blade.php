@@ -67,12 +67,19 @@
                   {{ Form::textarea('promise_text', (@$_SESSION['promise_text'] && $_SESSION['promise_text'] != 'undefined' ? $_SESSION['promise_text'] : ''), ['class' => 'js-advice-to']) }}
                   <div class="promises-advice">
                     <span>Например:</span>
-                    <a href="#" class="js-advice">Бросить курить</a>
-                    <a href="#" class="js-advice">Похудеть на 5 килограмм</a>
-                    <a href="#" class="js-advice">Навестить родителей</a>
-                    <a href="#" class="js-advice">Выйти замуж</a>
-                    <a href="#" class="js-advice">Спеть в трамвае</a>
-                    <a href="#" class="js-advice">Завести щенка</a>
+                    <a href="#" class="js-advice" style="display: none;">Научиться признавать свои ошибки</a>
+                    <a href="#" class="js-advice" style="display: none;">Не пропускать тренировки</a>
+                    <a href="#" class="js-advice" style="display: none;">Начать правильно питаться</a>
+                    <a href="#" class="js-advice" style="display: none;">Прыгнуть с парашютом и нырнуть с аквалангом за лето</a>
+                    <a href="#" class="js-advice" style="display: none;">Не сидеть дома по выходным</a>
+                    <a href="#" class="js-advice" style="display: none;">Съездить в диснейленд</a>
+                    <a href="#" class="js-advice" style="display: none;">Посвятить день самому себе</a>
+                    <a href="#" class="js-advice" style="display: none;">Находить выход из любой ситуации</a>
+                    <a href="#" class="js-advice" style="display: none;">Не расстраиваться по пустякам </a>
+                    <a href="#" class="js-advice" style="display: none;">Приходить на работу в хорошем настроении</a>
+                    <a href="#" class="js-advice" style="display: none;">Звонить родителям каждый день</a>
+                    <a href="#" class="js-advice" style="display: none;">Улыбаться кассирам в магазине</a>
+                    <a href="#" class="js-advice" style="display: none;">Перестать опаздывать</a>
                   </div>
                 </div>
               </div>
