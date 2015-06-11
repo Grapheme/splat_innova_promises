@@ -76,7 +76,6 @@
         <div class="main-fotorama">
           <div class="js-main-fotorama">
               <img src="{{ Config::get('site.theme_path') }}/images/main_slider/1.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/2.jpg" alt="">
               <img src="{{ Config::get('site.theme_path') }}/images/main_slider/3.jpg" alt="">
               <img src="{{ Config::get('site.theme_path') }}/images/main_slider/4.jpg" alt="">
               <img src="{{ Config::get('site.theme_path') }}/images/main_slider/5.jpg" alt="">
@@ -87,7 +86,6 @@
         <div class="main-content wrapper">
           <div>
               <div class="slide-title js-slide-title" data-promise-text="вырастить цветы у себя дома">Я обещаю вырастить цветы у себя дома</div> 
-              <div class="slide-title js-slide-title" data-promise-text="пойти в поход на майские праздники">Я обещаю пойти в поход на майские праздники</div> 
               <div class="slide-title js-slide-title" data-promise-text="порадовать любимую уже сегодня">Я обещаю порадовать любимую уже сегодня</div> 
               <div class="slide-title js-slide-title" data-promise-text="сделать ремонт в квартире">Я обещаю сделать ремонт в квартире</div> 
               <div class="slide-title js-slide-title" data-promise-text="начать бегать по утрам">Я обещаю начать бегать по утрам</div> 
