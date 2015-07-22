@@ -75,20 +75,22 @@
       <div class="main-screen">
         <div class="main-fotorama">
           <div class="js-main-fotorama">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-1.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-2.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-3.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-4.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/slider-5.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/1.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/3.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/4.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/5.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/7.jpg" alt="">
+              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/8.jpg" alt="">
           </div>
         </div>
         <div class="main-content wrapper">
           <div>
-          	  <div class="slide-title js-slide-title" data-promise-text="поиграть в снежки этой зимой">Я обещаю поиграть в снежки этой зимой</div>
-              <div class="slide-title js-slide-title" data-promise-text="съездить с близкими в горы">Я обещаю съездить с близкими в горы <!--до конца зимы--></div>
-              <div class="slide-title js-slide-title" data-promise-text="улыбнуться всем прохожим сегодня">Я обещаю улыбнуться всем прохожим сегодня<!--по дороге на работу--></div>
-              <div class="slide-title js-slide-title" data-promise-text="читать по одной книге в месяц">Я обещаю читать по одной книге в месяц</div> 
-              <div class="slide-title js-slide-title" data-promise-text="привести себя в форму к весне">Я обещаю привести себя в форму к весне</div> 
+              <div class="slide-title js-slide-title" data-promise-text="вырастить цветы у себя дома">Я обещаю вырастить цветы у себя дома</div> 
+              <div class="slide-title js-slide-title" data-promise-text="порадовать любимую уже сегодня">Я обещаю порадовать любимую уже сегодня</div> 
+              <div class="slide-title js-slide-title" data-promise-text="сделать ремонт в квартире">Я обещаю сделать ремонт в квартире</div> 
+              <div class="slide-title js-slide-title" data-promise-text="начать бегать по утрам">Я обещаю начать бегать по утрам</div> 
+              <div class="slide-title js-slide-title" data-promise-text="возобновить занятия балетом">Я обещаю возобновить занятия балетом</div> 
+              <div class="slide-title js-slide-title" data-promise-text="вернуться в любимый город">Я обещаю вернуться в любимый город</div>  
           </div>
           <h1 class="title">Пообещать и сдержать слово многого стоит</h1>
           <div class="desc">Обещания имеют огромную силу. Они способны изменить мир. Выполняя свои<br/>обещания, мы становимся сильнее, обретаем себя и уверенность в том, <br/>что нам все по зубам.</div>
@@ -161,7 +163,7 @@
                                           <div class="info-cont">
                                               <div class="innova-choice">Выбор</div>
                                               <div class="innova-text">
-                                                  <p>Команда INNOVA обещает, что каждую неделю мы будем выбирать одно выполненное обещание и награждать того,<br>кто сдержал свое слово призом-сюрпризом. </p>
+                                                  <p>Команда SPLAT обещает, что каждую неделю мы будем выбирать одно выполненное обещание и награждать того,<br>кто сдержал свое слово призом-сюрпризом. </p>
                                                   <a href="#" class="js-open-box innova-link" data-box="promo" onclick="ga('send', 'event', 'brand', 'profile');">Читать далее</a>
                                               </div>
                                           </div>
@@ -177,7 +179,7 @@
                                           <div class="info-cont">
                                               <a class="comments-amount">{{ trans_choice(':count комментарий|:count комментария|:count комментариев', $promise_comments_count, array(), 'ru') }}</a>
                                               <div class="pr-title js-promise-text">{{ mb_strtoupper($promise->name) }}</div>
-                                              <div class="user-info"><a href="#" style="background-image: url({{ $puser->avatar }})" class="user-photo"></a>
+                                              <div class="user-info"><a style="background-image: url({{ $puser->avatar }})" class="user-photo"></a>
                                                   <div class="user-text">
                                                       <div class="name">{{ $puser->name }}</div>
                                                       <div class="city">{{ $puser->city }}</div>
@@ -228,7 +230,7 @@
                   <div class="promise-cont type-blue">
                     <div class="info-cont"><a class="comments-amount">0 комментариев</a>
                       <div class="pr-title js-promise-text">ВЫЙТИ ЗАМУЖ В ЭТОМ ГОДУ</div>
-                      <div class="user-info"><a href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/b0c82b4fbbcc66aef2b56083809596a2.jpg)" class="user-photo"></a>
+                      <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/b0c82b4fbbcc66aef2b56083809596a2.jpg)" class="user-photo"></a>
                         <div class="user-text">
                           <div class="name">Кристина</div>
                           <div class="city">Киев</div>
@@ -252,7 +254,7 @@
                   <div class="promise-cont type-blue">
                     <div class="info-cont"><a class="comments-amount">0 комментариев</a>
                       <div class="pr-title js-promise-text">БЫТЬ ЛУЧШИМ ОТЦОМ</div>
-                      <div class="user-info"><a href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/e9409610fb556cf414e6dc6997bd2cea.jpg)" class="user-photo"></a>
+                      <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/e9409610fb556cf414e6dc6997bd2cea.jpg)" class="user-photo"></a>
                         <div class="user-text">
                           <div class="name">Артем</div>
                           <div class="city">Москва</div>
@@ -276,7 +278,7 @@
                   <div class="promise-cont type-blue">
                     <div class="info-cont"><a class="comments-amount">0 комментариев</a>
                       <div class="pr-title js-promise-text">НАУЧИТЬСЯ ТАНЦЕВАТЬ САЛЬСУ</div>
-                      <div class="user-info"><a href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/d98cd811d0ff77f1349dc4e76168689a.jpg)" class="user-photo"></a>
+                      <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/d98cd811d0ff77f1349dc4e76168689a.jpg)" class="user-photo"></a>
                         <div class="user-text">
                           <div class="name">Ксения</div>
                           <div class="city">Питер</div>
@@ -300,7 +302,7 @@
                   <div class="promise-cont type-green">
                     <div class="info-cont"><a class="comments-amount">0 комментариев</a>
                       <div class="pr-title js-promise-text">НЕ РАССТРАИВАТЬСЯ ПО ПУСТЯКАМ</div>
-                      <div class="user-info"><a href="#" style="background-image: url(http://cs624627.vk.me/v624627062/225/lKcpY5Jh2jY.jpg)" class="user-photo"></a>
+                      <div class="user-info"><a style="background-image: url(http://cs624627.vk.me/v624627062/225/lKcpY5Jh2jY.jpg)" class="user-photo"></a>
                         <div class="user-text">
                           <div class="name">Юлия Гафарова</div>
                           <div class="city">Уфа</div>
@@ -324,7 +326,7 @@
                   <div class="promise-cont type-blue">
                     <div class="info-cont"><a class="comments-amount">0 комментариев</a>
                       <div class="pr-title js-promise-text">ЗАНЯТЬ ПРИЗОВОЕ МЕСТО НА ВОКАЛЬНОМ КОНКУРСЕ</div>
-                      <div class="user-info"><a href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/64b4ea9f026a25675e7f17b9df9a8f23.jpg)" class="user-photo"></a>
+                      <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/64b4ea9f026a25675e7f17b9df9a8f23.jpg)" class="user-photo"></a>
                         <div class="user-text">
                           <div class="name">Анна</div>
                           <div class="city">Владимир</div>
@@ -348,7 +350,7 @@
                   <div class="promise-cont type-blue">
                     <div class="info-cont"><a class="comments-amount">0 комментариев</a>
                       <div class="pr-title js-promise-text">БЫТЬ СЧАСТЛИВОЙ КАЖДУЮ МИНУТУ 2015 ГОДА</div>
-                      <div class="user-info"><a href="#" style="background-image: url(http://cs607919.vk.me/v607919721/61cb/ZuNjvJqdZ14.jpg)" class="user-photo"></a>
+                      <div class="user-info"><a style="background-image: url(http://cs607919.vk.me/v607919721/61cb/ZuNjvJqdZ14.jpg)" class="user-photo"></a>
                         <div class="user-text">
                           <div class="name">Виктория Михайлова</div>
                           <div class="city">Ростов-на-Дону</div>
@@ -372,7 +374,7 @@
                   <div class="promise-cont type-green">
                     <div class="info-cont"><a class="comments-amount">0 комментариев</a>
                       <div class="pr-title js-promise-text">СТАТЬ ХОРОШИМ ВРАЧОМ</div>
-                      <div class="user-info"><a href="#" style="background-image: url(http://cs621226.vk.me/v621226487/8722/n4fAxxaN1Ig.jpg)" class="user-photo"></a>
+                      <div class="user-info"><a style="background-image: url(http://cs621226.vk.me/v621226487/8722/n4fAxxaN1Ig.jpg)" class="user-photo"></a>
                         <div class="user-text">
                           <div class="name">Никита Артемов</div>
                           <div class="city">Заринск</div>
@@ -396,7 +398,7 @@
                   <div class="promise-cont type-blue">
                     <div class="info-cont"><a class="comments-amount">0 комментариев</a>
                       <div class="pr-title js-promise-text">ВЛЮБИТЬСЯ</div>
-                      <div class="user-info"><a href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/3356e062b0b4be1b8ef9604ab12ea7b2.jpg)" class="user-photo"></a>
+                      <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/3356e062b0b4be1b8ef9604ab12ea7b2.jpg)" class="user-photo"></a>
                         <div class="user-text">
                           <div class="name">Карина</div>
                           <div class="city">Сальск</div>
@@ -420,7 +422,7 @@
                   <div class="promise-cont type-green">
                     <div class="info-cont"><a class="comments-amount">0 комментариев</a>
                       <div class="pr-title js-promise-text">НАУЧИТЬСЯ ИГРАТЬ НА ГИТАРЕ "SMOKE ON THE WATER"</div>
-                      <div class="user-info"><a href="#" style="background-image: url(http://cs411121.vk.me/v411121773/9d1a/SIxpfGvfpT0.jpg)" class="user-photo"></a>
+                      <div class="user-info"><a style="background-image: url(http://cs411121.vk.me/v411121773/9d1a/SIxpfGvfpT0.jpg)" class="user-photo"></a>
                         <div class="user-text">
                           <div class="name">Павел Ханов</div>
                           <div class="city">Екатеринбург</div>
@@ -444,7 +446,7 @@
                   <div class="promise-cont type-aqua">
                     <div class="info-cont"><a class="comments-amount">0 комментариев</a>
                       <div class="pr-title js-promise-text">ПРИХОДИТЬ НА РАБОТУ В ХОРОШЕМ НАСТРОЕНИИ</div>
-                      <div class="user-info"><a href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/bf0107c3df32ad80e336171fe425f5dd.jpg)" class="user-photo"></a>
+                      <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/bf0107c3df32ad80e336171fe425f5dd.jpg)" class="user-photo"></a>
                         <div class="user-text">
                           <div class="name">Владимир Манычев</div>
                           <div class="city">Москва</div>
@@ -468,7 +470,7 @@
                   <div class="promise-cont type-blue">
                     <div class="info-cont"><a class="comments-amount">0 комментариев</a>
                       <div class="pr-title js-promise-text">УСТРОИТЬ ОГРОМНЫЙ ПРАЗДНИК НА ДЕНЬ РОЖДЕНИЯ ДОЧКИ</div>
-                      <div class="user-info"><a href="#" style="background-image: url(http://mypromises.ru/uploads/avatar/49cf97b4e4171eaead6babef89003fbc.jpg)" class="user-photo"></a>
+                      <div class="user-info"><a style="background-image: url(http://mypromises.ru/uploads/avatar/49cf97b4e4171eaead6babef89003fbc.jpg)" class="user-photo"></a>
                         <div class="user-text">
                           <div class="name">Юлианна Никулина</div>
                           <div class="city">Москва</div>
@@ -507,7 +509,7 @@
           <li style="color: #b7b7b9;">Сделать пожертвование в детский дом</li>
         </ul>
         <div class="wrapper" style="cursor:pointer;" onclick="location.href='http://mypromises.ru/promise/2240';">
-          <div data-tooltip="Команда INNOVA обещает, что каждую неделю мы будем выбирать одно выполненное обещание<br>и награждать того,<br>кто сдержал свое слово призом-сюрпризом." data-tooltip-center="on" class="promise-week">
+          <div data-tooltip="Команда SPLAT обещает, что каждую неделю мы будем выбирать одно выполненное обещание<br>и награждать того,<br>кто сдержал свое слово призом-сюрпризом." data-tooltip-center="on" class="promise-week">
             <div class="week-inline left-word">Выбор</div>
             <div class="week-inline logo"></div>
             <div style="background-image: url(http://cs623324.vk.me/v623324593/16339/dIRyMEhIpJg.jpg);" class="week-inline profile-photo"></div>

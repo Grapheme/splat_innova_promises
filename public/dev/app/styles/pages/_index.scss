@@ -305,7 +305,7 @@
 				margin-left: 20px;
 
 				&:hover {
-					border-color: transparent;
+					//border-color: transparent;
 				}
 
 				&:before {
@@ -483,6 +483,18 @@
 
 				.innova-link {
 					color: #fff;
+				}
+			}
+		}
+	}
+}
+
+.ie-detected {
+	.promises-index {
+		.promise-item {
+			&:hover {
+				.flipper {
+					transform: rotateY(0);
 				}
 			}
 		}

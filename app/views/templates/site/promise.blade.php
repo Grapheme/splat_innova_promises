@@ -259,7 +259,7 @@
                 <div style="background-image: url({{ $auth_user->avatar ?: $default_avatar }});" class="profile-photo"></div>
                 <div class="comment-form">
                     <div class="textarea-cont">
-                        <textarea name="comment_text" class="input-class"></textarea>
+                        <textarea placeholder="Напишите сообщение..." name="comment_text" class="input-class"></textarea>
                     </div>
                     <button class="us-btn" onclick="ga('send', 'event', 'comment', 'new');">Оставить комментарий</button>
                 </div>
