@@ -6,7 +6,7 @@
 <body>
 	<div>
 		<p>
-            Вы только что оставили обещание &laquo;{{ $promise->name }}&raquo; на <a href="http://mypromises.ru/">mypromises.ru</a>, и сделали первый шаг к своей цели. Мы в вас верим!
+            Вы только что оставили обещание &laquo;{{ $promise->name }}&raquo; на <a href="http://mypromises.ru/promise/{{ $promise->id }}">mypromises.ru</a>, и сделали первый шаг к своей цели. Мы в вас верим!
 		</p>
 		<p>
 			<img src="{{ $message->embed($img_path) }}">
