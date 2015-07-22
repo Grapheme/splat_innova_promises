@@ -845,12 +845,19 @@ class ApplicationController extends BaseController {
         );
 
         /**
+         * Генерим картинку с текстом обещания для шеринга
+         */
+        $result = $this->genPromiseImage($promise->id, 'Я обещаю ' . trim($promise_text), $style_id, $this->user->avatar);
+        $img_path = $result['path'];
+
+        /**
          * Отсылаем уведомление на почту
          */
         if (@$this->user->notifications['promise_status'] && filter_var($this->user->email, FILTER_VALIDATE_EMAIL)) {
 
             $data = array(
                 'promise' => $promise,
+                'img_path' => $img_path,
             );
             Mail::send('emails.promise_added', $data, function ($message) use ($promise) {
                 $from_email = Config::get('mail.from.address');
@@ -865,12 +872,6 @@ class ApplicationController extends BaseController {
          * Очищаем сохраненный текст обещания в сессии
          */
         unset($_SESSION['promise_text']);
-
-        /**
-         * Генерим картинку с текстом обещания для шеринга
-         */
-        $this->genPromiseImage($promise->id, 'Я обещаю ' . trim($promise_text), $style_id, $this->user->avatar);
-
 
         return Redirect::route('app.me', array(
                 #'new_promise' => 1
@@ -2482,6 +2483,7 @@ class ApplicationController extends BaseController {
         $promise_type = 'blue';
         $avatar_path = public_path('uploads/avatar/ZZ0A4B96A6s.jpg');
         $dest_url = $this->genPromiseImage($promise_id, $promise_text, $promise_type, $avatar_path);
+        $dest_url = $dest_url['url'];
 
         return '<img src="' . $dest_url . '" />';
     }
@@ -2685,7 +2687,10 @@ class ApplicationController extends BaseController {
         $img->destroy();
 
         #return '<img src="' . $dest_url . '" />';
-        return $dest_url;
+        return [
+            'url'   => $dest_url,
+            'path'  => $dest_path,
+        ];
     }
 
 
