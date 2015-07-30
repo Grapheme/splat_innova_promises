@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<?php echo $__env->make('templates.admin.head', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->yieldContent('style'); ?>
+</head>
+<body class="smart-style-0">
+	<!--[if IE 7]><h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1><![endif]-->
+	<?php echo $__env->make('templates.admin.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('templates.admin.sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<div id="main" role="main">
+		<div id="content">
+			<?php echo $__env->yieldContent('content'); ?>
+		</div>
+		<?php /*
+		<?php echo $__env->make('templates.admin.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		*/ ?>
+	</div>
+	<?php echo $__env->make('templates.admin.scripts', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->yieldContent('scripts'); ?>
+    <script>
+    $.fn.select2&&$(".select2").each(function(){var a=$(this),b=a.attr("data-select-width")||"100%";a.select2({allowClear:!0,width:b}),a=null});
+    </script>
+</body>
+</html>

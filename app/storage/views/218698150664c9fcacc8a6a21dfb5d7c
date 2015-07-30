@@ -1,0 +1,26 @@
+    <?php echo Helper::dd_($attribute); ?>
+
+
+    <?
+    $values = array();
+    $settings = $attribute->settings;
+    if (isset($settings['values']) && is_string($settings['values'])) {
+        $temp = (array)explode("\n", $settings['values']);
+        if (count($temp))
+            foreach ($temp as $tmp)
+                $values[$tmp] = $tmp;
+    }
+    ?>
+
+    <?php echo Helper::tad_($attribute); ?>
+
+    <?php echo Helper::d_($value); ?>
+
+
+    <section>
+        <label class="label"><?php echo $attribute->name; ?></label>
+        <label class="select">
+            <?php echo Form::select('attributes[' . $locale_sign . '][' . $attribute->slug . ']', $values, $value); ?>
+
+        </label>
+    </section>

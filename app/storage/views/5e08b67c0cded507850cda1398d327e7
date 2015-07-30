@@ -1,0 +1,89 @@
+<?php $__env->startSection('content'); ?>
+
+    <?php echo $__env->make($module['tpl'].'menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
+            <?php if(count($templates)): ?>
+            <?php foreach($templates as $mod_name => $files): ?>
+            <?
+            $i = 0;
+            ?>
+            <h2 style="margin:-10px 0 10px 0">&laquo;<?php echo @$modules[$mod_name]['title']; ?>&raquo;:</h2>
+            <table class="table table-striped table-bordered min-table margin-bottom-25">
+                <thead>
+                <tr>
+                    <th class="text-center" style="width:50px">#</th>
+                    <th class="text-center" style="width:0px">Шаблон</th>
+                    <th class="text-center" style="width:100px">Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($files as $f => $file): ?>
+                    <?
+                    if ($mod_name == 'layout') {
+                        $full_file0 = 'views/templates/'.Config::get('app.template').'/'.$file.'.blade.php';
+                        $full_file = app_path($full_file0);
+                    } else {
+                        $full_file0 = 'modules/'.$mod_name.'/views/'.$file.'.blade.php';
+                        $full_file = app_path($full_file0);
+                    }
+                    $file_exists = file_exists($full_file);
+                    $file_writable = is_writable($full_file);
+                    $full_file0 = '/app/' . $full_file0;
+                    $class = '';
+                    if ($file_exists)
+                        if ($file_writable)
+                            $class = 'success';
+                        else
+                            $class = 'warning';
+                    else
+                        $class = 'danger';
+                    ?>
+                    <tr class="<?php echo $class; ?>">
+                        <td class="text-center">
+                            <?php echo ++$i; ?>
+
+                        </td>
+                        <td>
+                            <?php echo $file; ?>
+
+                            <div class="note">
+                                <?php echo $full_file0; ?>
+
+                            </div>
+                        </td>
+						<td class="text-center" style="white-space:nowrap;">
+
+							<a class="btn btn-success" href="<?php echo URL::action($module['class'].'@getEdit', array('mod' => $mod_name, 'tpl' => $file)); ?>">
+								Изменить
+							</a>
+
+                            <?php if(0): ?>
+							<form method="POST" action="<?php echo URL::action($module['class'].'@deleteDestroy', array('mod' => $mod_name, 'tpl' => $file)); ?>" style="display:inline-block">
+								<button type="button" class="btn btn-danger remove-page">
+									Удалить
+								</button>
+							</form>
+							<?php endif; ?>
+						</td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <?php endforeach; ?>
+            <?php endif; ?>
+
+        </div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('scripts'); ?>
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make(Helper::acclayout(), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

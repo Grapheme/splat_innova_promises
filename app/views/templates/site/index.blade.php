@@ -172,7 +172,7 @@
                               </li>
 
                           @else
-
+                          <!-- <?php print_r($promise); ?> -->
                               <li class="promise-item js-parent">
                                   <div class="flipper">
                                       <div class="promise-cont type-{{ $promise->style_id }}">
@@ -187,7 +187,7 @@
                                               </div>
                                           </div>
                                       </div>
-                                      <div class="promise-cont promise-hover type-{{ $promise->style_id }}">
+                                      <div style="cursor: pointer;" onclick="window.location.href='http://mypromises.ru/promise/{{ $promise->id }}'" class="promise-cont promise-hover type-{{ $promise->style_id }}">
                                           <div class="info-cont">
                                               <div class="promise-stat pr-loc">
                                                   @if ($city_promises_count)

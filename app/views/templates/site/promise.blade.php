@@ -158,9 +158,11 @@
                         </div>
 
                         @if (@$failed_finish_period && is_object($auth_user) && $auth_user->id == $promise_user->id || TRUE)
-                            <br/>
-                            <br/>
-                            <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-time"></i> <span>Выполнено</span></a>
+                            @if (is_object($auth_user) && $auth_user->id == $promise_user->id)
+                                <br/>
+                                <br/>
+                                <a href="?finished=1" class="pr-btn promise-finish-button" onclick="ga('send', 'event', 'promise', 'success');"><i class="fi icon-time"></i> <span>Выполнено</span></a>
+                            @endif
                         @endif
 
 

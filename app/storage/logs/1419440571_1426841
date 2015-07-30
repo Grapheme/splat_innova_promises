@@ -1,0 +1,24 @@
+_COOKIE[user_token] = 
+
+_SESSION[user_token] = 12fe4c54ddd2e545957edbfd304481ba
+
+_COOKIE's 
+Array
+(
+    [PHPSESSID] => fhjn74fjqb88kok6pnaca4alm7
+    [_gat] => 1
+    [site_session] => eyJpdiI6Ill1T2dsQ1NINThHQ011alwvVWcrVU1RPT0iLCJ2YWx1ZSI6IklBZEFjSjhxVWNzVzdudWY3WFBlWWQ4SjFQUHYwUWdoU0RzcW11eldSaWtJZkl0VkViVHVQRDJGMW5aOUM4Vk5PTjVXTWcxXC9zU3p3c3QxXC9TTEN0Mnc9PSIsIm1hYyI6IjYxMzM0ZjJkNTcxNjAxMDU0MmQxNGQ5M2VlMjFjMDQzZjFjZjkyZDUxZWNmZDVkNTA0ZTYwNWI3ZWRiMjBhY2UifQ==
+    [_ga] => GA1.2.1588159201.1419436575
+    [_ym_visorc_27511935] => w
+    [vk_app_4659025] => expire=1419447738&mid=116441722&secret=oauth&sid=b29fafbdd7dd09c7c56c68dbd094f8abd2225e462d7cd7ffde3ab5ec14f16c378b5602a3eec363b6abc5b&sig=779665016632adb6f0559b697be4a5d1
+    [_gali] => promise-form
+)
+
+
+_SESSION's 
+Array
+(
+    [user_token] => 12fe4c54ddd2e545957edbfd304481ba
+)
+
+

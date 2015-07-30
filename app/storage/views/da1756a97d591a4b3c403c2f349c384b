@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+ <head>
+	<?php echo $__env->make('templates.default.head', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->yieldContent('style'); ?>
+</head>
+<body>
+	<!--[if lt IE 7]>
+	<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+
+	<?php echo $__env->make('templates.default.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+    <div id="content" style="margin: 20px;">
+	   <?php echo $__env->yieldContent('content', @$content); ?>
+    </div>
+
+	<?php echo $__env->make('templates.default.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('templates.default.scripts', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->yieldContent('scripts'); ?>
+</body>
+</html>
