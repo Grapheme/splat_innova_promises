@@ -22,7 +22,7 @@ return array(
     'galleries_photo_public_dir' => '/uploads/galleries',
     'galleries_thumb_public_dir' => '/uploads/galleries/thumbs',
 
-    'mainpage_promises' => [3273, 3255, 3205, 2855, 3904, 3655, 3644, 3284, 3480, 4025, 3956],
+    'mainpage_promises' => [5815, 5816, 5817, 5818, 5819, 5820, 5821, 5823, 5824, 5825, 5826],
     'mainpage_promises_innova' => [],
     'mainpage_promises_city_aliases' => [
         'мск' => 'Москва',

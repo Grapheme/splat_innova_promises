@@ -91,10 +91,12 @@
     <div class="promise-make promise-page type-{{ $promise->style_id }}" data-finish="{{ $promise->time_limit }}">
         <div class="wrapper">
             <div class="profile-card">
-                <div style="background-image: url({{ $promise_user->avatar ?: $default_avatar }});" class="profile-photo"></div>
+                <a href="{{ URL::to('/profile/'.$promise_user->id) }}" style="background-image: url({{ $promise_user->avatar ?: $default_avatar }});" class="profile-photo"></a>
                 <div class="profile-info">
                     <div class="info-cont">
-                        <div class="name"><span>{{ $promise_user->name }}</span></div>
+                        <div>
+                            <a style="text-decoration: none; color: #fff;" href="{{ URL::to('/profile/'.$promise_user->id) }}" class="name"><span>{{ $promise_user->name }}</span></a>
+                        </div>
                         @if ($promise_user->years_old && 0)
                             <div class="age">
                                 {{ trans_choice(':count год|:count года|:count лет', $promise_user->years_old, array(), 'ru') }}
