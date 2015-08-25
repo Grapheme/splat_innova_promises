@@ -14,6 +14,7 @@ return array(
          * Предзагружаем нужные словари с данными, по системному имени словаря, для дальнейшего использования.
          * Делается это одним SQL-запросом, для снижения нагрузки на сервер БД.
          */
+        /*
         $dics_slugs = array(
             'users',
         );
@@ -22,12 +23,19 @@ return array(
         #Helper::tad($dics);
         $lists = Dic::makeLists($dics, 'values', 'name', 'id');
         #Helper::dd($lists);
+        */
 
         return array(
+            /*
             'user_id' => array(
                 'title' => 'Пользователь',
                 'type' => 'select',
                 'values' => $lists['users'], ## Используется предзагруженный словарь
+            ),
+            */
+            'user_id' => array(
+                'title' => 'ID пользователя',
+                'type' => 'text',
             ),
             'promise_text' => array(
                 'title' => 'Текст обещания',
