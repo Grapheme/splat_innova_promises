@@ -2,7 +2,8 @@
 
 /public/static/psd
 /public/uploads/*.*
-/public/uploads/*/*.*
+#/public/uploads/*/*.*
+#/public/uploads/cards/*.*
 node_modules
 less
 
@@ -16,6 +17,7 @@ Thumbs.db
 /app/config/database.php
 /app/storage/*.*
 /app/storage/logs/*.*
+/app/storage/debugbar/*.*
 /app/lang/*
 /!files
 /!info
