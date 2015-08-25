@@ -36,6 +36,7 @@ return array(
             'user_id' => array(
                 'title' => 'ID пользователя',
                 'type' => 'text',
+                'first_note' => 'Имя не показывается из соображений оптимизации; не изменять!',
             ),
             'promise_text' => array(
                 'title' => 'Текст обещания',
