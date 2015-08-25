@@ -14,7 +14,8 @@ less
 Thumbs.db
 
 /app/config/database.php
-/app/storage/*
+/app/storage/*.*
+/app/storage/logs/*.*
 /app/lang/*
 /!files
 /!info
