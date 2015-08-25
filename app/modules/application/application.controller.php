@@ -931,7 +931,8 @@ class ApplicationController extends BaseController {
                     && date('Y-m-d H:i:s') > $promise->time_limit
                     && date('Y-m-d H:i:s') < $promise_full_failed_time
                 ;
-                $can_finish = date('Y-m-d H:i:s') < $promise_full_failed_time;
+                #$can_finish = date('Y-m-d H:i:s') < $promise_full_failed_time;
+                $can_finish = true; ## 25.08.2015 - Андрей Самойлов: менять статус можно всегда
 
 
                 if (Input::get('fail')) {
