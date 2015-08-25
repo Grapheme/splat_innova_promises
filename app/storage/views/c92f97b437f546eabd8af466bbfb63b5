@@ -1,0 +1,53 @@
+<?php $__env->startSection('style'); ?>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('content'); ?>
+
+	<div class="wrapper">
+		<div class="normal-wrapper">
+			<div class="normal-title">
+				Новые обещания за <?php echo $date; ?>
+
+			</div>
+			<div class="normal-text">
+
+				<?php foreach($users as $user): ?>
+
+					<a href="<?php echo URL::route('app.profile_id', $user->id); ?>" target="_blank"><?php echo trim($user->name) != '' ? $user->name : $user->identity; ?></a>
+					<?php echo $user->city; ?>
+
+					<?php if($user->auth_method != 'native'): ?>
+						<a href="<?php echo $user->identity; ?>" target="_blank"><?php echo $user->auth_method; ?></a>
+					<?php endif; ?>
+					<br/>
+
+					<ul>
+					<?php foreach($promises[$user->id] as $promise): ?>
+
+						<li>
+							<a href="<?php echo URL::route('app.promise', ['id' => $promise->id, 'private' => md5(date('Y-m-d') . '_' . $promise->id)]); ?>" target="_blank"><?php echo $promise->id; ?></a>:
+							<?php echo $promise->promise_text; ?>
+
+							<?php if($promise->only_for_me): ?>
+								<i class="fa fa-lock"></i>
+							<?php endif; ?>
+						</li>
+
+					<?php endforeach; ?>
+					</ul>
+
+				<?php endforeach; ?>
+
+			</div>
+		</div>
+	</div>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('scripts'); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make(Helper::layout(), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

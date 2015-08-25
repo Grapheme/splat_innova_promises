@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<?php echo $__env->make('templates.dashboard.head', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->yieldContent('style'); ?>
+</head>
+<body class="smart-style-2">
+	<!--[if IE 7]><h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1><![endif]-->
+	<?php echo $__env->make('templates.dashboard.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->make('templates.dashboard.sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<div id="main" role="main">
+		<div id="content">
+			<?php echo $__env->yieldContent('content'); ?>
+		</div>
+		<!--<?php echo $__env->make('templates.dashboard.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>-->
+	</div>
+	<?php echo $__env->make('templates.dashboard.scripts', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php echo $__env->yieldContent('scripts'); ?>
+</body>
+</html>

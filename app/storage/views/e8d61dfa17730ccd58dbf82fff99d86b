@@ -1,0 +1,39 @@
+<?php $__env->startSection('style'); ?>
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('content'); ?>
+	
+    
+
+    <div class="wrapper">
+      <div class="normal-wrapper">
+        <div class="normal-title">Восстановление пароля</div>
+        <div class="normal-text">
+          <form action="<?php echo URL::route('app.restore_password_set_new_password'); ?>" method="POST">
+
+              <p><?php echo Session::get('msg'); ?></p>
+
+            <div class="restore-block">
+              <p>Введите новый пароль:</p>
+              <div class="input-container">
+              	<input class="us-input" type="password" name="password" value="">
+              </div>
+              <input type="hidden" name="token" value="<?php echo $token; ?>">
+              <div class="input-container">
+              	<button class="us-btn" type="submit">Сбросить пароль</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('scripts'); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make(Helper::layout(), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

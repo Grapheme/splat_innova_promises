@@ -1,0 +1,21 @@
+<div class="superbox col-sm-12" style="margin-top:10px;">
+
+    <?php if(@is_object($gallery) && @$gallery->id): ?>
+	<input type="hidden" name="gallery_id" value="<?php echo $gallery->id; ?>" />
+    <?php endif; ?>
+
+    <?php if(@is_object($gallery) && @$gallery->photos): ?>
+	<?php foreach($gallery->photos as $photo): ?>
+	<div style="display:inline-block; width:100px; height:100px; background:url(<?php echo $photo->thumb(); ?>) no-repeat 50% 50%; background-size:cover; overflow:hidden; position:relative;">
+		<!--<img src="<?php echo $photo->thumb(); ?>" data-img="<?php echo $photo->path(); ?>" alt="Photo alt" title="Title" class="superbox-img">-->
+		<a href="<?php echo $photo->path(); ?>" target="_blank" style="color:#090; background:#000">Full</a>
+		<a href="#" class="photo-delete" data-photo-id="<?php echo $photo->id; ?>" style="color:#f00; background:#000">Delete</a>
+	</div>
+	<?php endforeach; ?>
+    <?php endif; ?>
+
+	<div class="superbox-float"></div>
+	
+</div>
+
+<div style="float:none; clear:both"></div>
