@@ -1,7 +1,8 @@
 /vendor
 
 /public/static/psd
-/public/uploads/*
+/public/uploads/*.*
+/public/uploads/*/*.*
 node_modules
 less
 
