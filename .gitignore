@@ -1,7 +1,7 @@
 /vendor
 
 /public/static/psd
-/public/uploads/*.*
+#/public/uploads/*.*
 /public/uploads_copy/
 #/public/uploads/*/*.*
 #/public/uploads/cards/*.*
