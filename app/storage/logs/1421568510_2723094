@@ -1,0 +1,22 @@
+_COOKIE[user_token] = 
+
+_SESSION[user_token] = 7d17ae7b473d4fdae3b3113f8bd3df4a
+
+_COOKIE's 
+Array
+(
+    [_ga] => GA1.2.240947996.1419792687
+    [PHPSESSID] => rm28cmobeh8r4gciu29tnv73a4
+    [site_session] => eyJpdiI6Ik1ZRHhNQUFPbWJoWmtwd0VSRmo4bHc9PSIsInZhbHVlIjoiazM2MVRHNmdZRWxzMUttVHpQZUIwNlBXRmd6NWNVNUtneWdLTnJPVStRQlo3dWN6bnNBRm5WTm5BVkU0NnA2Mm5wMHF5OWJZaWlYNWNSQ0xFamxKK2c9PSIsIm1hYyI6ImFmYWVkYTE3YTQzMTlhOThhYmQ0ODcyNmI3ZDEzMDZiNmYyODJlYzkwMDgyZTAwMTNiY2I4ZDE0ZTMwYTcwMzAifQ==
+)
+
+
+_SESSION's 
+Array
+(
+    [user_token] => 7d17ae7b473d4fdae3b3113f8bd3df4a
+    [promise_text] => 
+    [redirect_to_new_promise] => 1
+)
+
+

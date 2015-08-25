@@ -1,0 +1,31 @@
+
+<?php if(isset($news) && is_object($news) && $news->count()): ?>
+
+    <?php echo Helper::tad_($news); ?>
+
+
+    <ul class="news-list">
+	<?php foreach($news as $new): ?>
+        <?
+        $photo = false;
+        if (@is_object($new->meta) && @is_object($new->meta->photo))
+            $photo = $new->meta->photo->thumb();
+        ?>
+        <li class="news-item">
+            <div class="news-cont">
+                <div class="news-photo" style="background-image: url(<?php echo $photo; ?>);"></div>
+                <p class="news-date"><?php echo date("d/m/Y", strtotime($new->published_at)); ?></p>
+                <h3>
+                    <a href="<?php echo URL::route('news_full', array('url' => $new->slug)); ?>"><?php echo $new->meta->title; ?></a>
+                </h3>
+                <div class="news-desc">
+                    <?php echo $new->meta->preview; ?>
+
+                </div>
+            </div>
+        </li>
+	<?php endforeach; ?>
+    </ul>
+	<?php echo $news->links(); ?>
+
+<?php endif; ?>

@@ -1,7 +1,10 @@
 /vendor
 
 /public/static/psd
-/public/uploads/*
+/public/uploads/*.*
+/public/uploads_copy/
+#/public/uploads/*/*.*
+#/public/uploads/cards/*.*
 node_modules
 less
 
@@ -13,7 +16,9 @@ less
 Thumbs.db
 
 /app/config/database.php
-/app/storage/*
+/app/storage/*.*
+/app/storage/logs/*.*
+/app/storage/debugbar/*.*
 /app/lang/*
 /!files
 /!info

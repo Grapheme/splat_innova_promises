@@ -1,0 +1,46 @@
+<?php $__env->startSection('style'); ?>
+	<link rel="stylesheet" href="/css/fotorama.css">
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('footer-class'); ?> white-footer <?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('content'); ?>
+
+    <section class="normal-page">
+        <div class="wrapper">
+            <h1>Новости</h1>
+            <ul class="news-list">
+                <li>
+                    <h3>
+                        <a href="#"><?php echo $news->meta->title; ?></a>
+                    </h3>
+                    <div class="news-date"><?php echo Helper::rdate("d M Y", strtotime($news->published_at)); ?></div>
+                    <div class="news-text">
+                        <p>
+                            <?php echo $news->meta->preview; ?>
+
+                        </p>  
+                        <p>
+                            <?php echo $news->meta->content; ?>
+
+                        </p>
+                    </div>
+            </ul>
+            <ul class="news-year">
+                <li class="active"><a href="#">2014</a>
+                <li><a href="#">2013</a>
+                <li><a href="#">2012</a>
+                <li><a href="#">2011</a>
+            </ul>
+        </div>
+    </section>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('scripts'); ?>
+    <script src="/js/vendor/fotorama.js"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make(Helper::layout(), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

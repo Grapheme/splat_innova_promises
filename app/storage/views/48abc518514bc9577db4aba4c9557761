@@ -1,0 +1,78 @@
+<?php $__env->startSection('content'); ?>
+
+    <?php echo $__env->make($module['tpl'].'/menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+	<?php if($pages->count()): ?>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<table class="table table-striped table-bordered min-table white-bg">
+				<thead>
+					<tr>
+                        <th class="text-center" style="width:40px">#</th>
+                        <th style="width:100%;" class="text-center">Название</th>
+                        <th class="width-250 text-center">Действия</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach($pages as $p => $page): ?>
+					<tr class="<?php echo $page->start_page ? 'success' : ''; ?>">
+                        <td>
+                            <?php echo $p+1; ?>
+
+                        </td>
+                        <td>
+                            <?php echo $page->name; ?>
+
+                            <?php if($page->slug): ?>
+                                <br/>
+                                <span style="color:#999"><?php echo $page->slug; ?></span>
+                            <?php endif; ?>
+                        </td>
+
+						<td class="text-center" style="white-space:nowrap;">
+	    					<?php if(Allow::action('pages','edit')): ?>
+							<a class="btn btn-success margin-right-10" href="<?php echo URL::route($module['entity'].'.edit', array('page_id' => $page->id)); ?>">
+								Изменить
+							</a>
+                            <?php endif; ?>
+                            <?php if(Allow::action('pages','delete')): ?>
+							<form method="POST" action="<?php echo URL::route($module['entity'].'.destroy', array('page_id' => $page->id)); ?>" style="display:inline-block">
+								<button type="button" class="btn btn-danger remove-page">
+									Удалить
+								</button>
+							</form>
+    						<?php endif; ?>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<?php else: ?>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="ajax-notifications custom">
+				<div class="alert alert-transparent">
+					<h4>Список пуст</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('scripts'); ?>
+	<script src="<?php echo link::to('js/modules/pages.js'); ?>"></script>
+	<script type="text/javascript">
+		if(typeof pageSetUp === 'function'){pageSetUp();}
+		if(typeof runFormValidation === 'function'){
+			loadScript("<?php echo asset('js/vendor/jquery-form.min.js');; ?>",runFormValidation);
+		}else{
+			loadScript("<?php echo asset('js/vendor/jquery-form.min.js');; ?>");
+		}
+	</script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make(Helper::acclayout(), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

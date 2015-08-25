@@ -1,0 +1,116 @@
+<?php $__env->startSection('content'); ?>
+
+    <?php echo $__env->make($module['tpl'].'/menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+	<?php if($count = @count($elements)): ?>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<table class="table table-striped2 table-bordered min-table white-bg">
+				<thead>
+					<tr>
+						<th class="text-center" style="width:40px">#</th>
+						<th style="width:100%;"class="text-center">Название</th>
+						<th colspan="2" class="width-250 text-center">Действия</th>
+					</tr>
+				</thead>
+				<tbody class="sortable">
+				<?php foreach($elements as $e => $element): ?>
+					<tr data-id="<?php echo $element->id; ?>"<?php echo $element->entity ? ' class="warning"' : ''; ?>>
+						<td class="text-center">
+						    <?php echo $e+1; ?>
+
+						</td>
+						<td style="position:relative">
+
+                            <?php if($element->module): ?>
+                                <strong><?php echo $element->module; ?><?php echo $element->unit_id ? ' / '.$element->unit_id : ''; ?> /</strong>
+                            <?php endif; ?>
+
+                            <?php echo mb_substr($element->original_name, 0, 100); ?>
+
+
+                            <div class="note">
+                                <?php echo $element->path; ?>
+
+                            </div>
+
+                            <div class="note">
+                                <?php echo Helper::smartFilesize($element->filesize); ?>
+
+                            </div>
+
+                            <?php if($element->mime1 == 'image'): ?>
+                            <div style="background:url(<?php echo $element->filesize < 100000 ? $element->path : ''; ?>) no-repeat #aaa 50% 50% / cover; position:absolute; top:0; right:0; height:100%; width:100px;">
+                                <a href="<?php echo URL::to($element->path); ?>" target="_blank" style="display:block; width:100%; height:100%; color:#fff; text-align:center; margin:12px auto;"><?php if($element->filesize > 100000): ?> <i class="fa fa-image fa-4x"></i> <?php endif; ?></a>
+                            </div>
+                            <?php endif; ?>
+
+						</td>
+						<td class="text-center" style="vertical-align:middle; white-space:nowrap;">
+
+                            <a href="<?php echo URL::to($element->path); ?>" target="_blank" download="$element->original_name" class="btn btn-success margin-right-10">
+                                <i class="fa fa-download"></i> Скачать
+                            </a>
+
+        					<?php if(Allow::action($module['group'], 'delete')): ?>
+							<form method="POST" action="<?php echo action('uploads.destroy', array('id' => $element->id)); ?>" style="display:inline-block">
+								<button type="submit" class="btn btn-danger remove-record">
+									Удалить
+								</button>
+							</form>
+                    		<?php endif; ?>
+
+						</td>
+					</tr>
+				<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+    <?php echo $elements->links(); ?>
+
+
+	<?php else: ?>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="ajax-notifications custom">
+				<div class="alert alert-transparent">
+					<h4>Список пуст</h4>
+					<p><br><i class="regular-color-light fa fa-th-list fa-3x"></i></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('scripts'); ?>
+    <script>
+    var essence = 'record';
+    var essence_name = 'запись';
+	var validation_rules = {
+		name: { required: true }
+	};
+	var validation_messages = {
+		name: { required: 'Укажите название' }
+	};
+    </script>
+
+	<?php echo HTML::script('private/js/modules/standard.js'); ?>
+
+
+	<script type="text/javascript">
+		if(typeof pageSetUp === 'function'){pageSetUp();}
+		if(typeof runFormValidation === 'function'){
+			loadScript("<?php echo asset('private/js/vendor/jquery-form.min.js');; ?>", runFormValidation);
+		}else{
+			loadScript("<?php echo asset('private/js/vendor/jquery-form.min.js');; ?>");
+		}
+	</script>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make(Helper::acclayout(), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -850,7 +850,7 @@ class ApplicationController extends BaseController {
         $result = $this->genPromiseImage($promise->id, 'Я обещаю ' . trim($promise_text), $style_id, $this->user->avatar);
         $img_path = $result['path'];
 
-        /**
+        /
          * Отсылаем уведомление на почту
          */
         if (@$this->user->notifications['promise_status'] && filter_var($this->user->email, FILTER_VALIDATE_EMAIL)) {
@@ -998,7 +998,11 @@ class ApplicationController extends BaseController {
 
             $comment = Dic::valueBySlugAndId('comments', $comment_id, true);
             #Helper::tad($comment);
-            if ($comment->user_id == $promise_user->id || (is_object($user) && $user->id == $promise_user->id)) {
+            if (
+                $comment->user_id == $promise_user->id
+                || (is_object($user) && $user->id == $promise_user->id)
+                || (is_object($user) && $user->id == $comment->user_id)
+            ) {
                 $comment->delete();
             }
             return Redirect::route('app.promise', $promise->id);

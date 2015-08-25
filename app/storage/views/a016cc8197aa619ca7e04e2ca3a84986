@@ -1,0 +1,19 @@
+
+    <!-- Don't forget add to form: ['files' => true] -->
+    <?php if(@is_object($values) && 0): ?>
+    <p style="margin: 5px 0;">
+
+        <label class="checkbox pull-right">
+            <?php echo Form::checkbox($name . '[delete]', 1, null, array('style' => 'display:inline-block; width:20px; height:20px;')); ?> Удалить
+            <i></i>
+        </label>
+
+        <i class="fa fa-fw fa-save"></i>
+        <a href="<?php echo $value->path; ?>" target="_blank" download="<?php echo $value->original_name ?: ''; ?>"><?php echo $value->original_name ? $value->original_name : basename($value->path); ?></a>
+
+        <?php echo Form::hidden($name . '[upload_id]', $value->id); ?>
+
+    </p>
+    <?php endif; ?>
+    <?php echo Form::file($name . '[files][]', $params); ?>
+

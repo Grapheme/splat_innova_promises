@@ -1,0 +1,14 @@
+<?php $__env->startSection('content'); ?>
+    <h1>Галерея #<?php echo $gallery->id; ?>: &laquo;<?php echo $gallery->name; ?>&raquo;</h1>
+
+   <?php echo ExtForm::gallery('gallery', $gallery); ?>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('scripts'); ?>
+    <script>
+    //loadScript("<?php echo asset('js/modules/gallery.js'); ?>");
+    </script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('templates.'.AuthAccount::getStartPage(), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
