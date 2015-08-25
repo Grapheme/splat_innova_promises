@@ -2935,3 +2935,15 @@ div.pr-btn { line-height: 38px }
     margin-top: 20px;
 }
     .error404 .text a { color: #f43d37 }
+
+.ie-detected .promises-index .promise-item:hover .flipper {
+    -webkit-transform:rotateY(0);transform:rotateY(0);
+}
+
+.ie-detected .promises-index .promise-item:hover .flipper .promise-cont.promise-hover {
+    z-index: 2;
+}
+
+.ie-detected .promises-index .promise-item .promise-cont.promise-hover {
+    transform: rotateY(0);
+}
