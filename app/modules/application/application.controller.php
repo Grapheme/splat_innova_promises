@@ -135,6 +135,7 @@ class ApplicationController extends BaseController {
         $cities_promises_counts = [];
         $promises_comments_count = [];
         #$ids = (array)Config::get('site.mainpage_promises');
+        $ids = [];
 
         /**
          * Обещание недели - одно, выводится перед всеми другими обещаниями для главной
