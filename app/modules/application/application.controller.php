@@ -1669,7 +1669,7 @@ class ApplicationController extends BaseController {
             /**
              * Если кол-во равно или больше указанного - добавляем ачивку
              */
-            if ($ach_data['count'] >= $count) {
+            if ($count >= $ach_data['count']) {
 
                 $achievements[] = $ach_key;
             }
