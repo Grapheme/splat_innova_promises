@@ -1,4 +1,6 @@
 @extends(Helper::layout())
+<!-- {{ Helper::ta($promises) }} -->
+
 
 @section('style')
 @stop
