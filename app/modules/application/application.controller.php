@@ -1640,7 +1640,9 @@ class ApplicationController extends BaseController {
                 $max_success_tmp = 0;
             }
         }
-        #$achievements = compact('max_success', 'max_fail', 'total_success', 'total_fail');
+        $temp = compact('max_success', 'max_fail', 'total_success', 'total_fail');
+
+        echo '<!--' . $temp . '-->';
 
         /**
          * Перебираем все имеющиеся ачивки
