@@ -149,6 +149,8 @@ class ApplicationController extends BaseController {
             foreach ($mainpage_promises as $mainpage_promise) {
                 $ids[] = $mainpage_promise->dicval_id;
             }
+            if (count($ids))
+                shuffle($ids);
         }
 
         ## ID обещания недели
