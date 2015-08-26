@@ -1,6 +1,18 @@
 @extends(Helper::layout())
+<?
+$ach_list = [];
+if (isset($achievements) && count($achievements)) {
+    foreach ($achievements as $achievement) {
+        $ach_list[] = [
+            'name' => $achievement->name,
+            'desc' => $achievement->desc,
+            'icon' => isset($achievement->image) && is_object($achievement->image) ? $achievement->image->full() : '',
+        ];
+    }
+}
+?>
 {{--<!-- {{ Helper::ta(Config::get('site.achievements')) }} -->--}}
-<!-- {{ Helper::ta($achievements) }} -->
+{{--<!-- {{ Helper::ta($achievements) }} -->--}}
 
 
 @section('style')
@@ -163,6 +175,11 @@
             </div>
             
         @endif
+
+    <script>
+        var __SITE__ = {};
+        __SITE__.achievements = {{ json_encode($ach_list, JSON_UNESCAPED_UNICODE) }};
+    </script>
 
 @stop
 

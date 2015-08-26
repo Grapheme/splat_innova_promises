@@ -1653,6 +1653,7 @@ class ApplicationController extends BaseController {
             foreach ($all_ach as $a => $ach) {
                 $all_ach[$a] = $ach->extract(1);
             }
+            $all_ach = DicLib::loadImages($all_ach, ['image']);
             #echo "<!--\n" . Helper::ta($all_ach, true) . "-->\n\n";
 
             /**
