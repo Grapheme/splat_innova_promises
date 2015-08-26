@@ -1642,7 +1642,7 @@ class ApplicationController extends BaseController {
         }
         $temp = compact('max_success', 'max_fail', 'total_success', 'total_fail');
 
-        echo "<!--\n" . print_r($temp, true) . "-->\n\n";
+        #echo "<!--\n" . print_r($temp, true) . "-->\n\n";
 
         /**
          * Перебираем все имеющиеся ачивки
@@ -1667,7 +1667,7 @@ class ApplicationController extends BaseController {
                 }
             }
 
-            echo "<!--\nach: " . $ach_key . "\ncount: " . $count . "\n" . print_r($ach_data, true) . "\n-->\n\n";
+            #echo "<!--\nach: " . $ach_key . "\ncount: " . $count . "\n" . print_r($ach_data, true) . "\n-->\n\n";
 
             /**
              * Если кол-во равно или больше указанного - добавляем ачивку
