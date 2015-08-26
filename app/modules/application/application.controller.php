@@ -1646,6 +1646,9 @@ class ApplicationController extends BaseController {
 
 
         $all_ach = Dic::valuesBySlug('achievements', null);
+        foreach ($all_ach as $a => $ach) {
+            $all_ach[$a] = $ach->extract(1);
+        }
         echo "<!--\n" . Helper::ta($all_ach, true) . "-->\n\n";
 
         /**
