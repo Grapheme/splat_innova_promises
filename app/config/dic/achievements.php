@@ -35,5 +35,12 @@ return array(
         );
     },
 
+
+    'second_line_modifier' => function($line, $dic, $dicval) {
+
+        return '';
+    },
+
+
     'seo' => 0,
 );
