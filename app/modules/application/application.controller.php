@@ -136,6 +136,12 @@ class ApplicationController extends BaseController {
         $promises_comments_count = [];
         $ids = (array)Config::get('site.mainpage_promises');
 
+        /**
+         * Обещание недели - одно, выводится перед всеми другими обещаниями для главной
+         * + сделать чекбокс в админке "выводить на главной"
+         * - поменять получение этих IDs (из БД, сейчас из конфига, стр.137) + случайный порядок
+         * + добавить хук: обещание недели должно быть только одно
+         */
         $promise_of_the_week = DicFieldVal::where('key', 'promise_of_the_week')->where('value', '1')->first();
         if (isset($promise_of_the_week) && is_object($promise_of_the_week) && $promise_of_the_week->dicval_id)
             array_unshift($ids, $promise_of_the_week->dicval_id);

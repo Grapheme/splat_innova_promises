@@ -95,6 +95,12 @@ return array(
                 'type' => 'checkbox',
                 'label_class' => 'normal_checkbox',
             ),
+            'mainpage' => array(
+                'no_label' => true,
+                'title' => 'Выводить на главной',
+                'type' => 'checkbox',
+                'label_class' => 'normal_checkbox',
+            ),
             #*/
         );
     },
