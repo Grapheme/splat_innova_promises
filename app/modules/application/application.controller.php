@@ -1644,6 +1644,10 @@ class ApplicationController extends BaseController {
 
         #echo "<!--\n" . print_r($temp, true) . "-->\n\n";
 
+
+        $all_ach = Dic::valuesBySlug('achievements', null);
+        echo "<!--\n" . Helper::ta($all_ach, true) . "-->\n\n";
+
         /**
          * Перебираем все имеющиеся ачивки
          */
