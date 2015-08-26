@@ -1,4 +1,5 @@
 @extends(Helper::layout())
+<!-- {{ Helper::ta(Config::get('site.achievements')) }} -->
 <!-- {{ Helper::ta($achievements) }} -->
 
 
