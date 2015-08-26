@@ -1645,43 +1645,51 @@ class ApplicationController extends BaseController {
         #echo "<!--\n" . print_r($temp, true) . "-->\n\n";
 
 
-        $all_ach = Dic::valuesBySlug('achievements', null);
-        foreach ($all_ach as $a => $ach) {
-            $all_ach[$a] = $ach->extract(1);
-        }
-        echo "<!--\n" . Helper::ta($all_ach, true) . "-->\n\n";
+        #$all_ach = Config::get('site.achievements')
+        $all_ach = Dic::valuesBySlug('achievements', function($query) {
 
-        /**
-         * Перебираем все имеющиеся ачивки
-         */
-        foreach (Config::get('site.achievements') as $ach_key => $ach_data) {
-
-            /**
-             * Определяем нужный счетчик, который будет использоваться для проверки есть ачивка или нет
-             */
-            $count = 0;
-            if ($ach_data['status'] == 'fail') {
-                if ($ach_data['mode'] == 'total') {
-                    $count = $total_fail;
-                } elseif ($ach_data['mode'] == 'row') {
-                    $count = $max_fail;
-                }
-            } elseif ($ach_data['status'] == 'success') {
-                if ($ach_data['mode'] == 'total') {
-                    $count = $total_success;
-                } elseif ($ach_data['mode'] == 'row') {
-                    $count = $max_success;
-                }
+        });
+        if (isset($all_ach) && is_object($all_ach) && $all_ach->count()) {
+            foreach ($all_ach as $a => $ach) {
+                $all_ach[$a] = $ach->extract(1);
             }
-
-            #echo "<!--\nach: " . $ach_key . "\ncount: " . $count . "\n" . print_r($ach_data, true) . "\n-->\n\n";
+            #echo "<!--\n" . Helper::ta($all_ach, true) . "-->\n\n";
 
             /**
-             * Если кол-во равно или больше указанного - добавляем ачивку
+             * Перебираем все имеющиеся ачивки
              */
-            if ($count >= $ach_data['count']) {
+            foreach ($all_ach as $ach_key => $ach_data) {
 
-                $achievements[] = $ach_key;
+                $ach_data = $ach_data->toArray();
+
+                /**
+                 * Определяем нужный счетчик, который будет использоваться для проверки есть ачивка или нет
+                 */
+                $count = 0;
+                if ($ach_data['status'] == 'fail') {
+                    if ($ach_data['mode'] == 'total') {
+                        $count = $total_fail;
+                    } elseif ($ach_data['mode'] == 'row') {
+                        $count = $max_fail;
+                    }
+                } elseif ($ach_data['status'] == 'success') {
+                    if ($ach_data['mode'] == 'total') {
+                        $count = $total_success;
+                    } elseif ($ach_data['mode'] == 'row') {
+                        $count = $max_success;
+                    }
+                }
+
+                #echo "<!--\nach: " . $ach_key . "\ncount: " . $count . "\n" . print_r($ach_data, true) . "\n-->\n\n";
+
+                /**
+                 * Если кол-во равно или больше указанного - добавляем ачивку
+                 */
+                if ($count >= $ach_data['count']) {
+
+                    #$achievements[] = $ach_key;
+                    $achievements[] = $ach_data;
+                }
             }
         }
 
