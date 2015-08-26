@@ -1647,7 +1647,7 @@ class ApplicationController extends BaseController {
 
         #$all_ach = Config::get('site.achievements')
         $all_ach = Dic::valuesBySlug('achievements', function($query) {
-
+            $query->orderBy('lft', 'ASC');
         });
         if (isset($all_ach) && is_object($all_ach) && $all_ach->count()) {
             foreach ($all_ach as $a => $ach) {
