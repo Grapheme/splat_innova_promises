@@ -1642,7 +1642,7 @@ class ApplicationController extends BaseController {
         }
         $temp = compact('max_success', 'max_fail', 'total_success', 'total_fail');
 
-        #echo '<!--' . print_r($temp, true) . '-->';
+        echo '<!--' . print_r($temp, true) . '-->';
 
         /**
          * Перебираем все имеющиеся ачивки
