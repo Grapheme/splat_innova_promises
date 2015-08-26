@@ -1661,6 +1661,7 @@ class ApplicationController extends BaseController {
              */
             foreach ($all_ach as $ach_key => $ach_data) {
 
+                $ach_data2 = clone $ach_data;
                 $ach_data = $ach_data->toArray();
 
                 /**
@@ -1689,7 +1690,7 @@ class ApplicationController extends BaseController {
                 if ($count >= $ach_data['count']) {
 
                     #$achievements[] = $ach_key;
-                    $achievements[] = $ach_data;
+                    $achievements[] = $ach_data2;
                 }
             }
         }
