@@ -62,3 +62,32 @@ $(function(){
 		$('html').addClass('not-ie');
 	}
 });
+var SplitPromises = function(){
+    if(!$('.js-split-promises').length) return;
+    var showItems = 12;
+    var activeStage = 0;
+    var promiseItems = $('.js-split-promises .js-promise-item');
+    var show = function(stage) {
+        activeStage = stage;
+        promiseItems.each(function(){
+            var t = $(this);
+            var showCount = showItems * stage;
+            if($(this).index() < showCount) {
+                t.show();
+            } else {
+                t.hide();
+            }
+            if(showCount >= promiseItems.length) {
+                $('.js-promises-more').hide();
+            } else {
+                $('.js-promises-more').show();
+            }
+        });
+    }
+    show(1);
+    $('.js-promises-more').on('click', function(){
+        show(activeStage+1);
+        return false;
+    });
+};
+SplitPromises();

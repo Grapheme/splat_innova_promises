@@ -2947,3 +2947,22 @@ div.pr-btn { line-height: 38px }
 .ie-detected .promises-index .promise-item .promise-cont.promise-hover {
     transform: rotateY(0);
 }
+
+.promises-more {
+    display: none;
+    position: relative;
+    z-index: 5;
+    padding: 50px 0 0;
+    text-align: center;
+}
+
+.promises-more a {
+    color: #54545a;
+    text-decoration: none;
+    border-bottom: 1px solid;
+    font-size: 18px;
+}
+
+.promises-more a:hover {
+    border-color: transparent;
+}

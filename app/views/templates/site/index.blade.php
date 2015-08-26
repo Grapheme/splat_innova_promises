@@ -132,7 +132,7 @@
 
               @if (isset($mainpage_promises) && is_object($mainpage_promises) && $mainpage_promises->count())
 
-                  <ul class="promises-index">
+                  <ul class="promises-index js-split-promises">
 
                       @foreach ($mainpage_promises as $promise)
                           <?
@@ -145,7 +145,7 @@
 
                           @if ($promise->promise_of_the_week)
 
-                              <li class="promise-item innova-block" style="cursor:pointer;" onclick="window.location.href='http://mypromises.ru/promise/{{ $promise->id }}'">
+                              <li class="promise-item innova-block js-promise-item" style="cursor:pointer;" onclick="window.location.href='http://mypromises.ru/promise/{{ $promise->id }}'">
                                   <div class="flipper">
                                       <div class="promise-cont">
                                           <div class="info-cont">
@@ -173,7 +173,7 @@
 
                           @else
                           <!-- <?php print_r($promise); ?> -->
-                              <li class="promise-item js-parent">
+                              <li class="promise-item js-parent js-promise-item">
                                   <div class="flipper">
                                       <div class="promise-cont type-{{ $promise->style_id }}">
                                           <div class="info-cont">
@@ -206,7 +206,9 @@
                       @endforeach
 
                   </ul>
-
+                  <div class="js-promises-more promises-more">
+                    <a href="#">Показать еще</a>
+                  </div>
 
               @endif
 
