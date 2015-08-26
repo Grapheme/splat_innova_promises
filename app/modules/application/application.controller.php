@@ -1653,16 +1653,19 @@ class ApplicationController extends BaseController {
              * Определяем нужный счетчик, который будет использоваться для проверки есть ачивка или нет
              */
             $count = 0;
-            if ($ach_data['status'] == 'fail')
-                if ($ach_data['mode'] == 'total')
+            if ($ach_data['status'] == 'fail') {
+                if ($ach_data['mode'] == 'total') {
                     $count = $total_fail;
-                elseif ($ach_data['mode'] == 'row')
+                } elseif ($ach_data['mode'] == 'row') {
                     $count = $max_fail;
-            elseif ($ach_data['status'] == 'success')
-                if ($ach_data['mode'] == 'total')
+                }
+            } elseif ($ach_data['status'] == 'success') {
+                if ($ach_data['mode'] == 'total') {
                     $count = $total_success;
-                elseif ($ach_data['mode'] == 'row')
+                } elseif ($ach_data['mode'] == 'row') {
                     $count = $max_success;
+                }
+            }
 
             echo "<!--\nach: " . $ach_key . "\ncount: " . $count . "\n" . print_r($ach_data, true) . "\n-->\n\n";
 
