@@ -47,4 +47,37 @@ return array(
         'monthly'      => 60*60*24*30 - 300,
     ],
 
+    'achievements' => [
+        'new' => [
+            'count'     => 1,           ## count of the promises: 1+
+            'status'    => 'success',   ## status of the promises: success / fail
+            'mode'      => 'total',     ## mode of the logic: total / row
+        ],
+        'guru' => [
+            'count'     => 3,           ## count of the promises: 1+
+            'status'    => 'success',   ## status of the promises: success / fail
+            'mode'      => 'row',       ## mode of the logic: total / row
+        ],
+        'sheff' => [
+            'count'     => 5,           ## count of the promises: 1+
+            'status'    => 'success',   ## status of the promises: success / fail
+            'mode'      => 'total',     ## mode of the logic: total / row
+        ],
+        'man' => [
+            'count'     => 10,          ## count of the promises: 1+
+            'status'    => 'success',   ## status of the promises: success / fail
+            'mode'      => 'total',     ## mode of the logic: total / row
+        ],
+        'storyteller' => [
+            'count'     => 5,
+            'status'    => 'fail',
+            'mode'      => 'row',
+        ],
+        'promises_failer' => [
+            'count'     => 10,
+            'status'    => 'fail',
+            'mode'      => 'row',
+        ],
+    ],
+
 );

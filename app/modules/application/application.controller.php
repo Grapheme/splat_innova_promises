@@ -1594,6 +1594,105 @@ class ApplicationController extends BaseController {
     }
 
 
+    /**
+     * Получаем ачивки пользователя
+     * @param $promises
+     *
+     * @return array
+     */
+    private function get_achievements($promises) {
+
+        /**
+         * Нужно посчитать количество выполненных и проваленных обещаний подряд и суммарно
+         */
+        $achievements = [];
+        $max_success = 0;
+        $max_fail = 0;
+        $max_success_tmp = 0;
+        $max_fail_tmp = 0;
+        $total_success = 0;
+        $total_fail = 0;
+        foreach ($promises as $promise) {
+
+            $status = $this->promise_status($promise);
+            if ($status === true) {
+
+                /**
+                 * Обещание ВЫПОЛНЕНО
+                 */
+                ++$total_success;
+                ++$max_success_tmp;
+                if ($max_fail_tmp > $max_fail) {
+                    $max_fail = $max_fail_tmp;
+                }
+                $max_fail_tmp = 0;
+
+            } elseif ($status === false) {
+
+                /**
+                 * Обещание ПРОВАЛЕНО
+                 */
+                ++$total_fail;
+                ++$max_fail_tmp;
+                if ($max_success_tmp > $max_success) {
+                    $max_success = $max_success_tmp;
+                }
+                $max_success_tmp = 0;
+            }
+        }
+        #$achievements = compact('max_success', 'max_fail', 'total_success', 'total_fail');
+
+        /**
+         * Перебираем все имеющиеся ачивки
+         */
+        foreach (Config::get('site.achievements') as $ach_key => $ach_data) {
+
+            /**
+             * Определяем нужный счетчик, который будет использоваться для проверки есть ачивка или нет
+             */
+            $count = 0;
+            if ($ach_data['status'] == 'fail')
+                if ($ach_data['mode'] == 'total')
+                    $count = $total_fail;
+                elseif ($ach_data['mode'] == 'row')
+                    $count = $max_fail;
+            elseif ($ach_data['status'] == 'success')
+                if ($ach_data['mode'] == 'total')
+                    $count = $total_success;
+                elseif ($ach_data['mode'] == 'row')
+                    $count = $max_success;
+
+            /**
+             * Если кол-во равно или больше указанного - добавляем ачивку
+             */
+            if ($count >= $ach_data) {
+
+                $achievements[] = $ach_key;
+            }
+        }
+
+        return $achievements;
+    }
+
+
+    /**
+     * Определяем статус обещания
+     * @param $promise
+     *
+     * @return bool|null
+     */
+    private function promise_status($promise) {
+
+        $promise_status = null; ## В ПРОЦЕССЕ
+        if ($promise->time_limit < date('Y-m-d H:i:s') && !$promise->finished_at)
+            $promise_status = false; ## ПРОВАЛЕНО
+        elseif ($promise->finished_at)
+            $promise_status = true; ## ВЫПОЛНЕНО
+
+        return $promise_status;
+    }
+
+
     public function getOkOauth() {
 
         $HOST = $_SERVER['HTTP_HOST'];
@@ -2116,14 +2215,19 @@ class ApplicationController extends BaseController {
         }
 
         /**
-         * Получаем обещания юзера
+         * Получаем обещания юзера (только публичные)
          */
         $promises = $this->get_promises($user, true);
 
         /**
+         * Получаем ачивки пользователя
+         */
+        $achievements = $this->get_achievements($promises);
+
+        /**
          * Показываем страницу профиля
          */
-        return View::make(Helper::layout('profile_id'), compact('user', 'promises'));
+        return View::make(Helper::layout('profile_id'), compact('user', 'promises', 'achievements'));
     }
 
 
