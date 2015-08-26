@@ -338,7 +338,10 @@ if (isset($achievements) && count($achievements)) {
 
       </div>
 
-
+    <script>
+        var __SITE__ = {};
+        __SITE__.achievements = {{ json_encode($ach_list, JSON_UNESCAPED_UNICODE) }};
+    </script>
 @stop
 
 
@@ -476,11 +479,6 @@ if (isset($achievements) && count($achievements)) {
             $(form).ajaxSubmit(options);
         }
 
-    </script>
-
-    <script>
-        var __SITE__ = {};
-        __SITE__.achievements = {{ json_encode($ach_list, JSON_UNESCAPED_UNICODE) }};
     </script>
 
 @stop
