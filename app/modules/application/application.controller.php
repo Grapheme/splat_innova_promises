@@ -434,10 +434,12 @@ class ApplicationController extends BaseController {
 
         }
 
+        $achievements = $this->get_achievements($promises);
+
         /**
          * Показываем главную страницу юзера
          */
-        return View::make(Helper::layout('index_user'), compact('user', 'promises', 'active_promises', 'inactive_promises', 'existing_friends_list', 'count_user_friends'));
+        return View::make(Helper::layout('index_user'), compact('user', 'promises', 'active_promises', 'inactive_promises', 'existing_friends_list', 'count_user_friends', 'achievements'));
     }
 
 
