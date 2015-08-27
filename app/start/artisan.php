@@ -15,3 +15,4 @@ Artisan::add(new helperr);
 Artisan::add(new CronPromises);
 Artisan::add(new CronMiniPromises);
 Artisan::add(new ActivateNotifications);
+Artisan::add(new CronHolidays());
