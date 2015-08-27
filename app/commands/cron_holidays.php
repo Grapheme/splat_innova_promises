@@ -128,15 +128,6 @@ class CronHolidays extends Command {
                 unset($user->full_social_info);
                 unset($user->friends);
 
-                /*
-                if (
-                    $reason == 'birthday'
-                    #&& $user->bdate != date('d.m.Y')
-                    && $user->bdate != '29.05.1987' ## debug
-                )
-                    continue;
-                */
-
                 $temp[] = $user;
             }
             $users = $temp;
@@ -147,8 +138,10 @@ class CronHolidays extends Command {
         if (!count($users))
             return;
 
-        if ($debug)
+        if ($debug) {
+            $this->info('Debug mode, exit.');
             return;
+        }
 
         $this->info('Start to sending messages...');
         #die;
@@ -158,16 +151,19 @@ class CronHolidays extends Command {
         ];
 
         $also_sended = [];
+        $i = 0;
 
         foreach ($users as $user) {
 
 
             ## DEBUG
-            if ($user->email != 'reserved@mail.ru') {
-                continue;
-            }
+            #if ($user->email != 'reserved@mail.ru')
+            #    continue;
 
 
+            /**
+             * Один email - одно письмо
+             */
             if (@$also_sended[$user->email])
                 continue;
 
@@ -200,13 +196,14 @@ class CronHolidays extends Command {
                 });
 
                 $this->info(' + ' . $user->email);
-
+                ++$i;
                 $also_sended[$user->email] = 1;
             }
         }
 
-		#die;
-	}
+        $this->info('Finish work, total sended messages: ' . $i);
+        #die;
+    }
 
 	/**
 	 * Get the console command arguments.
