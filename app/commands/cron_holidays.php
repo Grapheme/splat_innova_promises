@@ -112,6 +112,7 @@ class CronHolidays extends Command {
             $query->filter_by_field('email', 'LIKE', '%@%');
         });
         if (is_object($users) && $users->count()) {
+            $temp = new Collection();
             foreach ($users as $u => $user) {
                 $user = $user->extract(1);
                 unset($user->full_social_info);
@@ -121,8 +122,9 @@ class CronHolidays extends Command {
                     continue;
 
 
-                $users[$u] = $user;
+                $temp[] = $user;
             }
+            $users = $temp;
         }
         Helper::tad($users);
 
