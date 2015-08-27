@@ -155,9 +155,6 @@ class CronHolidays extends Command {
 
         $data = [
             'title' => $this->reasons[$reason]['title'],
-            'text' => strtr($this->reasons[$reason]['text'], [
-                'mypromises.ru' => '<a href="http://mypromises.ru">mypromises.ru</a>',
-            ]),
         ];
 
         $also_sended = [];
@@ -176,6 +173,7 @@ class CronHolidays extends Command {
             $data['user'] = $user;
             $data['text'] = strtr($this->reasons[$reason]['text'], [
                 '%name%' => $user->name,
+                'mypromises.ru' => '<a href="http://mypromises.ru">mypromises.ru</a>',
             ]);
 
             /**
