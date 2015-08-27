@@ -157,6 +157,8 @@ class CronHolidays extends Command {
             'title' => $this->reasons[$reason]['title'],
         ];
 
+        $also_sended = [];
+
         foreach ($users as $user) {
 
 
@@ -165,6 +167,8 @@ class CronHolidays extends Command {
                 continue;
             }
 
+            if (@$also_sended[$user->email])
+                continue;
 
             $data['user'] = $user;
             $data['text'] = strtr($this->reasons[$reason]['text'], [
@@ -194,6 +198,8 @@ class CronHolidays extends Command {
                 });
 
                 $this->info(' + ' . $user->email);
+
+                $also_sended[$user->email] = 1;
             }
         }
 
