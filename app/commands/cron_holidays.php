@@ -117,8 +117,8 @@ class CronHolidays extends Command {
              */
             if ($reason == 'birthday') {
 
-                #$query->filter_by_field('bdate', '=', date('d.m.Y'));
-                $query->filter_by_field('bdate', '=', '29.05.1987');
+                $query->filter_by_field('bdate', '=', date('d.m.Y'));
+                #$query->filter_by_field('bdate', '=', '29.05.1987');
             }
         });
         if (is_object($users) && $users->count()) {
