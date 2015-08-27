@@ -26,6 +26,33 @@ class CronHolidays extends Command {
 	public function __construct() {
 		parent::__construct();
 		date_default_timezone_set("Europe/Moscow");
+        $this->reasons = [
+
+            '01.01' => [
+                'title' => 'С Новым Годом!',
+                'text'  => 'С Новым Годом, %name%! Пусть в наступившем году вас окружает тепло, любовь и забота, а все ваши обещания непременно становятся делами и преображают мир вокруг. Самое время наметить новые планы и дать себе новые обещания на сайте mypromises.ru!',
+            ], # 1 января
+
+            '14.02' => [
+                'title' => 'С Днём всех влюблённых!',
+                'text'  => 'В день всех влюблённых мы хотим пожелать вам ещё больше любви и понимания, а если рядом всё ещё нет подходящего человека — непременно его встретить! Наверняка и вам есть что пообещать в этот знаменательный день себе или своей половинке: mypromises.ru',
+            ], # 14 февраля
+
+            '09.05' => [
+                'title' => 'Важная дата',
+                'text'  => 'Уже завтра вся Россия будет отмечать годовщину Великой Победы, а по нашим улицам вновь пройдут праздничные парады. Сегодня — лучший день, чтобы пообещать себе сделать доброе дело 9 мая или порадовать ветеранов. Оставьте своё обещание на сайте mypromises.ru',
+            ], # 9 мая
+
+            '01.12' => [
+                'title' => 'Время действовать',
+                'text'  => 'Через 30 дней наступит Новый Год. С ним придут новые надежды, мечты и планы, а значит, сейчас — отличное время, чтобы закончить намеченное в уходящем году. Просто оставьте свое обещание на сайте mypromises.ru, а мы обязательно поможем вам его выполнить.',
+            ], # 1 декабря
+
+            'birthday' => [
+                'title' => 'С Днём Рождения!',
+                'text'  => 'В этот поистине особенный день мы хотим от всей души пожелать вам здоровья, долголетия, гармонии внутри вас, и конечно же достижения даже самых смелых целей. А чтобы они ещё быстрее стали реальностью, оставьте своё обещание на mypromises.ru — и мы обязательно поможем вам выполнить их! С днём рождения!',
+            ], # день рождения юзера
+        ];
 	}
 
 	/**
@@ -35,11 +62,12 @@ class CronHolidays extends Command {
 	 */
 	public function fire() {
 
-		$only_email = false;
-		#$only_email = 'reserved@mail.ru';
-		$only_email = $this->option('only_email');
-
-        $this->periods = Config::get('site.notify_periods');
+        $reason = $this->option('reason');
+        if (!isset($this->reasons[$reason])) {
+            $this->info('BAD REASON: ' . $reason);
+            $this->info('Available reasons: ' . implode(', ', array_keys($this->reasons)));
+            return;
+        }
 
         $debug = $this->argument('debug') ?: false;
 
@@ -48,37 +76,9 @@ class CronHolidays extends Command {
         if ($debug)
 			$this->info('RUN IN DEBUG MODE - MAILs WILL NOT BE SEND');
 
-		if ($only_email)
-			$this->info('Mails will be send only to: ' . $only_email);
-
 		$this->info('System time: ' . date('Y-m-d H:i:s'));
 
-
 		#die;
-
-
-		/************************************************************************************************************ */
-
-
-		$now = (new \Carbon\Carbon())->now(); // сейчас
-
-		$yesterday3 = clone $now;
-		$yesterday3->subHours(24*3); // 3 дня назад
-
-		$yesterday2 = clone $now;
-		$yesterday2->subHours(48); // позавчера
-
-		$yesterday = clone $now;
-		$yesterday->subHours(24); // вчера
-
-		$tomorrow = clone $now;
-		$tomorrow->addHours(24); // завтра
-
-		$tomorrow2 = clone $now;
-		$tomorrow2->addHours(48); // послезавтра
-
-
-		$also_users = array();
 
 		/************************************************************************************************************ */
 
@@ -87,11 +87,38 @@ class CronHolidays extends Command {
          * Получаем все имеющиеся e-mail адреса
          * SELECT DISTINCT `value` FROM `dictionary_fields_values` WHERE `key` = 'email' AND `value` LIKE('%@%')
          */
-
+        /*
         $emails = (new DicFieldVal())->where('key', 'email')->where('value', 'LIKE', '%@%')->select('value')->distinct()->get();
+        if (!count($emails)) {
+            $this->info('Email not found in DB, exit.');
+            return;
+        }
+
         $emails = $emails->lists('value');
-        Helper::tad($emails);
-        die;
+        #Helper::tad($emails);
+        #die;
+
+        $this->info('Total emails: ' . count($emails) . ', start to sending messages...');
+
+        foreach ($emails as $email) {
+
+        }
+        */
+
+        /**
+         * Получаем юзеров, у которых указан валидный e-mail
+         */
+        $users = Dic::valuesBySlug('users', function($query) {
+            $query->filter_by_field('email', 'LIKE', '%@%');
+        });
+        if (is_object($users) && $users->count()) {
+            foreach ($users as $u => $user) {
+                $users[$u] = $user->extract(1);
+            }
+        }
+        Helper::tad($users);
+
+
 
 
 		/**
@@ -324,6 +351,7 @@ class CronHolidays extends Command {
 		return array(
 			#array('example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null),
 			array('only_email', null, InputOption::VALUE_OPTIONAL, 'Only email option.', null),
+			array('reason', null, InputOption::VALUE_REQUIRED, 'Reason for email sending.', null),
 		);
 	}
 
