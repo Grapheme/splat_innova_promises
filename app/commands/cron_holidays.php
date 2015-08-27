@@ -116,6 +116,11 @@ class CronHolidays extends Command {
                 $user = $user->extract(1);
                 unset($user->full_social_info);
                 unset($user->friends);
+
+                if ($reason == 'birthday' && $user->bdate != date('d.m.Y'))
+                    continue;
+
+
                 $users[$u] = $user;
             }
         }
