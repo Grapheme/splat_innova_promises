@@ -64,7 +64,7 @@ class CronHolidays extends Command {
 
         $reason = $this->option('reason');
         if (!isset($this->reasons[$reason])) {
-            $this->info('BAD REASON: ' . $reason);
+            $this->error('BAD REASON: ' . $reason);
             $this->info('Available reasons: ' . implode(', ', array_keys($this->reasons)));
             return;
         }
@@ -113,7 +113,9 @@ class CronHolidays extends Command {
         });
         if (is_object($users) && $users->count()) {
             foreach ($users as $u => $user) {
-                $users[$u] = $user->extract(1);
+                $user = $user->extract(1);
+                unset($user->full_social_info);
+                $users[$u] = $user;
             }
         }
         Helper::tad($users);
