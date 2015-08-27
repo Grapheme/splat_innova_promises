@@ -167,6 +167,7 @@ class CronHolidays extends Command {
                 continue;
             }
 
+
             if (@$also_sended[$user->email])
                 continue;
 
