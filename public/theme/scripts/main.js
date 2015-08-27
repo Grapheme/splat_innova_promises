@@ -91,3 +91,16 @@ var SplitPromises = function(){
     });
 };
 SplitPromises();
+var usPopups = {
+    open: function() {},
+    close: function() {},
+    init: function() {
+        $('.js-us-overlay-close').on('click', function(){
+            $(this).parents('.js-us-overlay').fadeOut(function(){
+                $(this).remove();
+            });
+            return false;
+        });
+    }
+};
+usPopups.init();

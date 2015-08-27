@@ -15,11 +15,11 @@ less
 *.clpprj
 Thumbs.db
 
-/app/config/database.php
-/app/storage/*.*
-/app/storage/logs/*.*
-/app/storage/debugbar/*.*
-/app/lang/*
+app/config/database.php
+app/storage/logs/
+app/storage/debugbar/*.*
+app/storage/*.*
+app/lang/*/
 /!files
 /!info
 /bootstrap/compiled.php

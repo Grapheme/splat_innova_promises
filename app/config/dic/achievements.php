@@ -9,6 +9,15 @@ return array(
                 'title' => 'Текст ачивки',
                 'type' => 'textarea',
             ),
+            'image' => array(
+                'title' => 'Иконка',
+                'type' => 'image',
+                'params' => array(
+                    'maxFilesize' => 1, // MB
+                    #'acceptedFiles' => 'image/*',
+                    #'maxFiles' => 2,
+                ),
+            ),
             'count' => array(
                 'title' => 'Количество обещаний',
                 'type' => 'text',
@@ -25,6 +34,13 @@ return array(
             ),
         );
     },
+
+
+    'second_line_modifier' => function($line, $dic, $dicval) {
+
+        return '';
+    },
+
 
     'seo' => 0,
 );
