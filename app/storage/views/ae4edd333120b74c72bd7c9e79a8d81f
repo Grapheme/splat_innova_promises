@@ -1,3 +1,18 @@
+<?
+$ach_list = [];
+if (isset($achievements) && count($achievements)) {
+    foreach ($achievements as $achievement) {
+        $ach_list[] = [
+            'name' => $achievement->name,
+            'desc' => $achievement->desc,
+            'icon' => isset($achievement->image) && is_object($achievement->image) ? $achievement->image->full() : '',
+        ];
+    }
+}
+?>
+
+
+
 <?php $__env->startSection('style'); ?>
     @parent
 <?php $__env->stopSection(); ?>
@@ -332,7 +347,10 @@
 
       </div>
 
-
+    <script>
+        var __SITE__ = {};
+        __SITE__.achievements = <?php echo json_encode($ach_list, JSON_UNESCAPED_UNICODE); ?>;
+    </script>
 <?php $__env->stopSection(); ?>
 
 
@@ -471,5 +489,6 @@
         }
 
     </script>
+
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make(Helper::layout(), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

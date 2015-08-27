@@ -96,10 +96,12 @@
     <div class="promise-make promise-page type-<?php echo $promise->style_id; ?>" data-finish="<?php echo $promise->time_limit; ?>">
         <div class="wrapper">
             <div class="profile-card">
-                <div style="background-image: url(<?php echo $promise_user->avatar ?: $default_avatar; ?>);" class="profile-photo"></div>
+                <a href="<?php echo URL::to('/profile/'.$promise_user->id); ?>" style="background-image: url(<?php echo $promise_user->avatar ?: $default_avatar; ?>);" class="profile-photo"></a>
                 <div class="profile-info">
                     <div class="info-cont">
-                        <div class="name"><span><?php echo $promise_user->name; ?></span></div>
+                        <div>
+                            <a style="text-decoration: none; color: #fff;" href="<?php echo URL::to('/profile/'.$promise_user->id); ?>" class="name"><span><?php echo $promise_user->name; ?></span></a>
+                        </div>
                         <?php if($promise_user->years_old && 0): ?>
                             <div class="age">
                                 <?php echo trans_choice(':count год|:count года|:count лет', $promise_user->years_old, array(), 'ru'); ?>
