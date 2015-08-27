@@ -108,8 +108,18 @@ class CronHolidays extends Command {
         /**
          * Получаем юзеров, у которых указан валидный e-mail
          */
-        $users = Dic::valuesBySlug('users', function($query) {
+        $users = Dic::valuesBySlug('users', function($query) use ($reason) {
+
             $query->filter_by_field('email', 'LIKE', '%@%');
+
+            /**
+             * Хук для режима рассылки birthday
+             */
+            if ($reason == 'birthday') {
+
+                #$query->filter_by_field('bdate', '=', date('d.m.Y'));
+                $query->filter_by_field('bdate', '=', '29.05.1987');
+            }
         });
         if (is_object($users) && $users->count()) {
             $temp = new Collection();
@@ -118,16 +128,14 @@ class CronHolidays extends Command {
                 unset($user->full_social_info);
                 unset($user->friends);
 
-                /**
-                 * Хук для режима рассылки birthday
-                 */
+                /*
                 if (
                     $reason == 'birthday'
                     #&& $user->bdate != date('d.m.Y')
                     && $user->bdate != '29.05.1987' ## debug
                 )
                     continue;
-
+                */
 
                 $temp[] = $user;
             }
