@@ -115,6 +115,7 @@ class CronHolidays extends Command {
             foreach ($users as $u => $user) {
                 $user = $user->extract(1);
                 unset($user->full_social_info);
+                unset($user->friends);
                 $users[$u] = $user;
             }
         }
