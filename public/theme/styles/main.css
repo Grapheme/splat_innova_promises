@@ -3106,3 +3106,137 @@ div.pr-btn { line-height: 38px }
 .pop-close:hover {
     opacity: .5;
 }
+
+.achives {
+    margin-top: 25px;
+}
+
+.achives-item {
+    display: inline-block;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-right: 15px;
+}
+
+.achive-tooltip {
+    margin: 10px 0 0 -81px;
+    width: 400px;
+}
+
+.achive-tooltip .js-tooltip-body {
+    position: relative;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.5);
+    -moz-box-shadow:    0px 0px 5px 0px rgba(50, 50, 50, 0.5);
+    box-shadow:         0px 0px 5px 0px rgba(50, 50, 50, 0.5);
+}
+
+.achive-tooltip .js-tooltip-body:before {
+    z-index: 2;
+    top: 0;
+    left: 25px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent #fff transparent;
+}
+
+.achive-tooltip .js-tooltip-body:after {
+    position: absolute;
+    content: "";
+    z-index: 1;
+    top: 0;
+    left: 25px;
+    width: 0;
+    height: 0;
+    margin-top: -11px;
+    margin-left: -1px;
+    border-style: solid;
+    border-width: 0 11px 11px 11px;
+    border-color: transparent transparent rgba(0, 0, 0, .25) transparent;
+}
+
+.achive-tooltip .at-title {
+    font-size: 16px;
+}
+
+.achive-tooltip .at-desc {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.us-btn.btn-unfollow {
+    background: #ff7514;
+}
+
+.promise-friend {
+    background: #6ec5cc;
+    padding: 30px 20px 60px;
+    width: 600px;
+    box-sizing: border-box;
+}
+
+.promise-friend .friend-title {
+    font-size: 23px;
+    margin: 5px 0 40px;
+}
+
+.promise-friend input {
+    width: 100%;
+}
+
+.promise-friend .friend-or {
+    padding: 20px 20px;
+}
+
+.chosen-container {
+    width: 100%;
+}
+
+.chosen-container .chosen-choices {
+    font-family: museo_sans_cyrl !important;
+    padding: 0 65px 0 20px !important;
+    height: 65px !important;
+    display: inline-block;
+    vertical-align: middle;
+    color: #444;
+    font-size: 20px;
+    background-image: none;
+    border-radius: 3px;
+    border: none;
+}
+
+.chosen-container .chosen-choices input {
+    font-family: museo_sans_cyrl !important;
+}
+
+.chosen-container-active .chosen-choices {
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice {
+    font-family: museo_sans_cyrl;
+    font-weight: 300;
+    margin: 7px 5px 3px 0;
+    padding: 17px 30px 17px 12px;
+    background-image: none;
+    background-color: #e6e6e6;
+    font-size: 18px;
+    color: #4d4d4d;
+    border: none;
+}
+
+.chosen-container-multi .chosen-choices li.search-field input[type=text] {
+    height: 65px;
+}
+
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+    top: 18px;
+    right: 7px;
+}
