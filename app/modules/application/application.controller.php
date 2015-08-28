@@ -2312,7 +2312,7 @@ class ApplicationController extends BaseController {
 
             $temp = Dic::valuesBySlug('subscribes', function($query) use ($user) {
                 $query->where('name', $this->user->id);
-                $query->filter_by_field('author', '=', $user);
+                $query->filter_by_field('author_id', '=', $user);
             });
             #Helper::tad($temp);
             if (isset($temp) && is_object($temp) && $temp->count()) {
