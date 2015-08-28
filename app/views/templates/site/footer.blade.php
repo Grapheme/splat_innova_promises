@@ -217,13 +217,15 @@
                             <?
                             $similar_promise_user = isset($similar_promises_users[$similar_promise->id]) && is_object($similar_promises_users[$similar_promise->id]) ? $similar_promises_users[$similar_promise->id] : null;
                             $line = [];
-                            if ($similar_promise_user->name)
-                                $line[] = $similar_promise_user->name;
-                            elseif ($similar_promise_user->identity)
-                                $line[] = $similar_promise_user->identity;
+                            if ($similar_promise_user) {
+                                if ($similar_promise_user->name)
+                                    $line[] = $similar_promise_user->name;
+                                elseif ($similar_promise_user->identity)
+                                    $line[] = $similar_promise_user->identity;
 
-                            if ($similar_promise_user->city)
-                                $line[] = $similar_promise_user->city;
+                                if ($similar_promise_user->city)
+                                    $line[] = $similar_promise_user->city;
+                            }
                             ?>
                             <div class="pop__list__item">
                                 <a href="#" class="item__title">{{ $similar_promise->promise_text }}</a>
