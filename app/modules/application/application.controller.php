@@ -940,8 +940,8 @@ class ApplicationController extends BaseController {
                 ),
                 'textfields' => array(
                     'promise_text' => $promise_text,
-                    'promise_users_ids' => $promise_friends_ids,
-                    'promise_users_emails' => $promise_friends_emails,
+                    'promise_friends_ids' => $promise_friends_ids,
+                    'promise_friends_emails' => $promise_friends_emails,
                 ),
             )
         );
