@@ -11,7 +11,7 @@ if (isset($achievements) && count($achievements)) {
 ?>
 {{--<!-- {{ Helper::ta(Config::get('site.achievements')) }} -->--}}
 {{--<!-- {{ Helper::ta($achievements) }} -->--}}
-<!--{{  var_dump($subscribed) }}-->
+{{--<!--{{  var_dump($subscribed) }}-->--}}
 
 @section('style')
 @stop
@@ -101,9 +101,9 @@ if (isset($achievements) && count($achievements)) {
                 @if ($subscribed !== null)
                     <div class="btn-cont">
                         @if ($subscribed)
-                            <a href="#" class="us-btn btn-unfollow">Отписаться</a>
+                            <a href="{{ URL::route('app.subscribe', [$user->id]) }}" class="us-btn btn-unfollow">Отписаться</a>
                         @else
-                            <a href="#" class="us-btn">Подписаться</a>
+                            <a href="{{ URL::route('app.unsubscribe', [$user->id]) }}" class="us-btn">Подписаться</a>
                         @endif
                     </div>
                 @endif
