@@ -215,7 +215,7 @@
                     <div class="pop__list">
                         @foreach($similar_promises as $similar_promise)
                             <?
-                            $similar_promise_user = isset($similar_promises_users[$similar_promise->id]) && is_object($similar_promises_users[$similar_promise->id]) ? $similar_promises_users[$similar_promise->id] : null;
+                            $similar_promise_user = isset($similar_promises_users[$similar_promise->user_id]) && is_object($similar_promises_users[$similar_promise->user_id]) ? $similar_promises_users[$similar_promise->user_id] : null;
                             $line = [];
                             if ($similar_promise_user) {
                                 if ($similar_promise_user->name)
@@ -230,13 +230,13 @@
                             <div class="pop__list__item">
                                 <a href="#" class="item__title">{{ $similar_promise->promise_text }}</a>
                                 @if ($similar_promise_user)
-                                    <a href="#" class="item__desc">{{ implode(', ', $line) }}</a>
+                                    <a href="{{ URL::route('app.promise', [$similar_promise->id]) }}" class="item__desc">{{ implode(', ', $line) }}</a>
                                 @endif
                             </div>
                         @endforeach
                     </div>
                     <div class="pop__more">
-                        <a href="#">Посмотреть другие обещания</a>
+                        <a href="{{ URL::route('mainpage') }}">Посмотреть другие обещания</a>
                     </div>
                 </div>
             @endif
