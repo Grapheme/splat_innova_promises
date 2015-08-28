@@ -1,9 +1,0 @@
-
-    <ul>
-    <?php foreach($photos as $photo): ?>
-    	<li style="float:left;">
-    		<a href="<?php echo $photo->full(); ?>" target="_blank"><img src="<?php echo $photo->thumb(); ?>" alt="" style="max-width: 150px;" /></a>
-    	</li>
-    <?php endforeach; ?>
-    </ul>
-    

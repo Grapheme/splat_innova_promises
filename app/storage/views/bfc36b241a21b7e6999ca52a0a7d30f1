@@ -1,8 +1,0 @@
-
-    <section>
-        <label class="label"><?php echo $attribute->name; ?></label>
-        <label class="textarea">
-            <?php echo Form::textarea('attributes[' . $locale_sign . '][' . $attribute->slug . ']', $value, array('class' => 'redactor')); ?>
-
-        </label>
-    </section>
