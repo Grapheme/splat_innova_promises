@@ -94,7 +94,7 @@
                     <div class="promise-friend time-inputs">
                         <div class="friend-title">Пообещать другу</div>
                         <div class="friend-input">
-                            <select name="friends_ids" class="input-class js-chosen" multiple data-placeholder="Выберите друга">
+                            <select name="friends_ids[]" class="input-class js-chosen" multiple data-placeholder="Выберите друга">
                                 @foreach ($temp as $t => $tmp)
                                     <option value="{{ $t }}">{{ $tmp }}</option>
                                 @endforeach
