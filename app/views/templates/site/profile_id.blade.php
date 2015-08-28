@@ -101,9 +101,9 @@ if (isset($achievements) && count($achievements)) {
                 @if ($subscribed !== null)
                     <div class="btn-cont">
                         @if ($subscribed)
-                            <a href="{{ URL::route('app.subscribe', [$user->id]) }}" class="us-btn btn-unfollow">Отписаться</a>
+                            <a href="{{ URL::route('app.unsubscribe', [$user->id]) }}" class="us-btn btn-unfollow">Отписаться</a>
                         @else
-                            <a href="{{ URL::route('app.unsubscribe', [$user->id]) }}" class="us-btn">Подписаться</a>
+                            <a href="{{ URL::route('app.subscribe', [$user->id]) }}" class="us-btn">Подписаться</a>
                         @endif
                     </div>
                 @endif

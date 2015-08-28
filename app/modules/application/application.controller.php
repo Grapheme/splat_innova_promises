@@ -735,13 +735,25 @@ class ApplicationController extends BaseController {
         if (!$user)
             return Redirect::back();
 
-        DicVal::inject('subscribes', [
-            'slug' => NULL,
-            'name' => $user->id,
-            'fields' => array(
-                'author_id' => $user_id,
-            ),
-        ]);
+        $temp = Dic::valuesBySlug('subscribes', function($query) use ($user_id) {
+            $query->where('name', $this->user->id);
+            $query->filter_by_field('author_id', '=', $user_id);
+        });
+
+        if (isset($temp) && is_object($temp) && $temp->count()) {
+
+            ##
+
+        } else {
+
+            DicVal::inject('subscribes', [
+                'slug' => NULL,
+                'name' => $user->id,
+                'fields' => array(
+                    'author_id' => $user_id,
+                ),
+            ]);
+        }
 
         return Redirect::back();
     }
