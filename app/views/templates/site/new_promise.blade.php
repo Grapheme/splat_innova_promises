@@ -83,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                @if(1)
+                @if(0)
                     <div class="promise-friend time-inputs">
                         <div class="friend-title">Пообещать другу</div>
                         <div class="friend-input">
