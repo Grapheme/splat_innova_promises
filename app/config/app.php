@@ -33,6 +33,7 @@ return array(
 	'key' => 'TSHZVixcD1cLGLSTObouk6Tmo3ChmyxD',
 	'providers' => array(
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
+		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
 		'Illuminate\Session\CommandsServiceProvider',
@@ -64,6 +65,7 @@ return array(
         'Barryvdh\Debugbar\ServiceProvider',
         'Illuminate\Custom\CustomUrlServiceProvider',
         'Flynsarmy\DbBladeCompiler\DbBladeCompilerServiceProvider',
+        'Scalia\SphinxSearch\SphinxSearchServiceProvider',
         'sngrl\StringBladeCompiler\StringBladeCompilerServiceProvider',
     ),
 	'aliases' => array(

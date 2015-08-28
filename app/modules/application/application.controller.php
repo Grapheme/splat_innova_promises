@@ -895,10 +895,24 @@ class ApplicationController extends BaseController {
          */
         unset($_SESSION['promise_text']);
 
+        /**
+         * Ищем обещания, близкие по духу
+         */
+        $similar_promises = new Collection();
+        $sphinx_match_mode = \Sphinx\SphinxClient::SPH_MATCH_ANY;
+        $results['similar_promises'] = SphinxSearch::search($promise_text, 'splat_promises_index')
+            ->setMatchMode($sphinx_match_mode)
+            ->limit(30)
+            ->query()
+        ;
+        $results_counts['similar_promises'] = @count($results['similar_promises']['matches']);
+        Helper::tad($results);
+
         return Redirect::route('app.me', array(
                 #'new_promise' => 1
             ))
             ->with('new_promise_id', $promise->id)
+            ->with('similar_promises', $similar_promises)
             ;
     }
 

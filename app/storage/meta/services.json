@@ -1,6 +1,7 @@
 {
     "providers": [
         "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
+        "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
         "Illuminate\\Auth\\AuthServiceProvider",
         "Illuminate\\Cache\\CacheServiceProvider",
         "Illuminate\\Session\\CommandsServiceProvider",
@@ -32,6 +33,7 @@
         "Barryvdh\\Debugbar\\ServiceProvider",
         "Illuminate\\Custom\\CustomUrlServiceProvider",
         "Flynsarmy\\DbBladeCompiler\\DbBladeCompilerServiceProvider",
+        "Scalia\\SphinxSearch\\SphinxSearchServiceProvider",
         "sngrl\\StringBladeCompiler\\StringBladeCompilerServiceProvider"
     ],
     "eager": [
@@ -47,6 +49,7 @@
         "Barryvdh\\Debugbar\\ServiceProvider",
         "Illuminate\\Custom\\CustomUrlServiceProvider",
         "Flynsarmy\\DbBladeCompiler\\DbBladeCompilerServiceProvider",
+        "Scalia\\SphinxSearch\\SphinxSearchServiceProvider",
         "sngrl\\StringBladeCompiler\\StringBladeCompilerServiceProvider"
     ],
     "deferred": {
