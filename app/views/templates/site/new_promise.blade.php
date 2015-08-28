@@ -83,29 +83,29 @@
                         </div>
                     </div>
                 </div>
-                @if($auth_user->auth_method == 'vkontakte' && isset($user->friends) && is_array($user->friends) && count($user->friends))
-                    <?
-                    $temp = [];
-                    foreach ($user->friends as $user_friend) {
-                        $temp[$user_friend['id']] = $user_friend['_name'];
-                    }
-                    natsort($temp);
-                    ?>
-                    <div class="promise-friend time-inputs">
-                        <div class="friend-title">Пообещать другу</div>
-                        <div class="friend-input">
-                            <select name="friends_ids[]" class="input-class js-chosen" multiple data-placeholder="Выберите друга">
-                                @foreach ($temp as $t => $tmp)
-                                    <option value="{{ $t }}">{{ $tmp }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="friend-or">или</div>
-                        <div class="friend-input">
-                            <input name="friends_emails" class="input-class" placeholder="Введите email друзей через запятую">
-                        </div>
+                <div class="promise-friend time-inputs">
+                    <div class="friend-title">Пообещать другу</div>
+                    @if($auth_user->auth_method == 'vkontakte' && isset($user->friends) && is_array($user->friends) && count($user->friends))
+                        <?
+                        $temp = [];
+                        foreach ($user->friends as $user_friend) {
+                            $temp[$user_friend['id']] = $user_friend['_name'];
+                        }
+                        natsort($temp);
+                        ?>
+                            <div class="friend-input">
+                                <select name="friends_ids[]" class="input-class js-chosen" multiple data-placeholder="Выберите друга">
+                                    @foreach ($temp as $t => $tmp)
+                                        <option value="{{ $t }}">{{ $tmp }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="friend-or">или</div>
+                    @endif
+                    <div class="friend-input">
+                        <input name="friends_emails" class="input-class" placeholder="Введите email друзей через запятую">
                     </div>
-                @endif
+                </div>
                 <div class="time-inputs">
                     <div class="desc">Я выполню обещание к</div>
                     <div class="input-cont">
