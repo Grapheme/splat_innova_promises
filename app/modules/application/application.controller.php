@@ -899,6 +899,7 @@ class ApplicationController extends BaseController {
          * Ищем обещания, близкие по духу
          */
         $similar_promises = new Collection();
+        $similar_promises_users = new Collection();
         $sphinx_match_mode = \Sphinx\SphinxClient::SPH_MATCH_ANY;
         $results['similar_promises'] = SphinxSearch::search($promise_text, 'splat_promises_index')
             ->setMatchMode($sphinx_match_mode)
@@ -914,18 +915,33 @@ class ApplicationController extends BaseController {
             $similar_promises = Dic::valuesBySlugAndIds('promises', $ids, true);
             if (isset($similar_promises) && is_object($similar_promises) && $similar_promises->count()) {
                 $temp = new Collection();
+                $similar_promises_users_ids = [];
                 foreach ($similar_promises as $t => $tmp) {
                     $tmp = $tmp->extract(true);
                     if ($tmp->user_id == $this->user->id)
                         continue;
                     $temp[$tmp->id] = $tmp;
+                    $similar_promises_users_ids[] = $tmp->user_id
                     if (count($temp) >= 3)
                         break;
                 }
                 $similar_promises = $temp;
+
+                if (count($similar_promises_users_ids)) {
+                    $similar_promises_users = Dic::valuesBySlugAndIds('users', $similar_promises_users_ids, true);
+
+                    if (isset($similar_promises_users) && is_object($similar_promises_users) && $similar_promises_users->count()) {
+                        $temp = new Collection();
+                        foreach ($similar_promises_users as $t => $tmp) {
+                            $temp[$tmp->id] = $tmp->extract(true);
+                        }
+                        $similar_promises_users = $temp;
+                    }
+                }
             }
         }
-        Helper::tad($similar_promises);
+        Helper::ta($similar_promises);
+        Helper::tad($similar_promises_users);
 
         return Redirect::route('app.me', array(
                 #'new_promise' => 1
