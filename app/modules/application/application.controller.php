@@ -918,9 +918,9 @@ class ApplicationController extends BaseController {
                 $tmp = trim($tmp);
                 if (!filter_var($tmp, FILTER_VALIDATE_EMAIL))
                     continue;
-                $promise_friends_emails[] = $tmp;
+                $promise_friends_emails[$tmp] = 1;
             }
-            $promise_friends_emails = implode(',', $promise_friends_emails);
+            $promise_friends_emails = implode(',', array_keys($promise_friends_emails));
         }
 
         /**
