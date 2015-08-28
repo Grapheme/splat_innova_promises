@@ -905,9 +905,23 @@ class ApplicationController extends BaseController {
 
         #Helper::d($date_finish);
 
-        $promise_friends_ids = '';
-        #$temp = Input::get('promise_friends_ids');
-        $promise_friends_emails = '';
+        #$promise_friends_ids = '';
+        $temp = Input::get('promise_friends_ids');
+        $promise_friends_ids = implode(',', $temp);
+
+        $promise_friends_emails = [];
+        $temp = Input::get('promise_friends_emails');
+        $temp = strtr($temp, [' ' => ',']);
+        $temp_array = explode(',', $temp);
+        if (count($temp_array)) {
+            foreach ($temp_array as $t => $tmp) {
+                $tmp = trim($tmp);
+                if (!filter_var($tmp, FILTER_VALIDATE_EMAIL))
+                    continue;
+                $promise_friends_emails[] = $tmp;
+            }
+            $promise_friends_emails = implode(',', $promise_friends_emails);
+        }
 
         /**
          * Добавляем обещание
@@ -926,8 +940,8 @@ class ApplicationController extends BaseController {
                 ),
                 'textfields' => array(
                     'promise_text' => $promise_text,
-                    #'promise_users_ids' => $promise_friends_ids,
-                    #'promise_users_emails' => $promise_friends_emails,
+                    'promise_users_ids' => $promise_friends_ids,
+                    'promise_users_emails' => $promise_friends_emails,
                 ),
             )
         );
