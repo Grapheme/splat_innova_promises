@@ -84,12 +84,19 @@
                     </div>
                 </div>
                 @if($auth_user->auth_method == 'vkontakte' && isset($user->friends) && is_array($user->friends) && count($user->friends))
+                    <?
+                    $temp = [];
+                    foreach ($user->friends as $user_friend) {
+                        $temp[$user_friend['id']] = $user_friend['_name'];
+                    }
+                    natsort($temp);
+                    ?>
                     <div class="promise-friend time-inputs">
                         <div class="friend-title">Пообещать другу</div>
                         <div class="friend-input">
                             <select class="input-class js-chosen" multiple data-placeholder="Выберите друга">
-                                @foreach ($user->friends as $user_friend)
-                                    <option value="{{ $user_friend['id'] }}">{{ $user_friend['_name'] }}</option>
+                                @foreach ($temp as $t => $tmp)
+                                    <option value="{{ $t }}">{{ $tmp }}</option>
                                 @endforeach
                             </select>
                         </div>
