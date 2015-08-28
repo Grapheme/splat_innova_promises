@@ -83,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                @if(0)
+                @if($auth_user->auth_method == 'vkontakte')
                     <div class="promise-friend time-inputs">
                         <div class="friend-title">Пообещать другу</div>
                         <div class="friend-input">

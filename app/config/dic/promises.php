@@ -102,6 +102,15 @@ return array(
                 'label_class' => 'normal_checkbox',
             ),
             #*/
+
+            'promise_users_ids' => array(
+                'title' => 'IDs друзей, которым дано обещание',
+                'type' => 'textarea',
+            ),
+            'promise_users_emails' => array(
+                'title' => 'E-mail\' друзей, которым дано обещание',
+                'type' => 'textarea',
+            ),
         );
     },
 

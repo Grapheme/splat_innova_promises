@@ -874,6 +874,8 @@ class ApplicationController extends BaseController {
         $this->check_auth();
 
         $user = $this->user;
+        $user = $this->processFriends($user);
+        Helper::tad($user);
         $promises = $this->promises;
 
         return View::make(Helper::layout('new_promise'), compact('user', 'promises'));
