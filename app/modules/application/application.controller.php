@@ -64,6 +64,9 @@ class ApplicationController extends BaseController {
             Route::post('/ajax/phone/sendSms', array('as' => 'app.phone.send-sms', 'uses' => __CLASS__.'@postPhoneSendSms'));
             Route::post('/ajax/phone/checkPhone', array('as' => 'app.phone.check-phone', 'uses' => __CLASS__.'@postPhoneCheckPhone'));
 
+
+            Route::any('/subscribe/{user_id}', array('as' => 'app.subscribe', 'uses' => __CLASS__.'@postSubscribe'));
+            Route::any('/unsubscribe/{user_id}', array('as' => 'app.unsubscribe', 'uses' => __CLASS__.'@postUnubscribe'));
         });
 
 
@@ -721,6 +724,44 @@ class ApplicationController extends BaseController {
         }
 
         return View::make(Helper::layout('profile'), compact('user', 'msg', 'new_user'));
+    }
+
+
+    public function postSubscribe($user_id) {
+
+        $this->check_auth();
+        $user = $this->user;
+
+        if (!$user)
+            return Redirect::back();
+
+        DicVal::inject('subscribes', [
+            'slug' => NULL,
+            'name' => $user->id,
+            'fields' => array(
+                'author_id' => $user_id,
+            ),
+        ]);
+
+        return Redirect::back();
+    }
+
+    public function postUnubscribe($user_id) {
+
+        $this->check_auth();
+        $user = $this->user;
+
+        if (!$user)
+            return Redirect::back();
+
+        $temp = Dic::valuesBySlug('subscribes', function($query) use ($user_id) {
+            $query->where('name', $this->user->id);
+            $query->filter_by_field('author_id', '=', $user_id);
+        });
+        $temp->remove_field('author_id');
+        $temp->delete();
+
+        return Redirect::back();
     }
 
 

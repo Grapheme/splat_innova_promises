@@ -11,7 +11,7 @@ if (isset($achievements) && count($achievements)) {
 ?>
 {{--<!-- {{ Helper::ta(Config::get('site.achievements')) }} -->--}}
 {{--<!-- {{ Helper::ta($achievements) }} -->--}}
-        <!--{{  var_dump($subscribed) }}-->
+{{--<!--{{  var_dump($subscribed) }}-->--}}
 
 @section('style')
 @stop
