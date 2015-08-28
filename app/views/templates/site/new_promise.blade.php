@@ -89,7 +89,7 @@
                         <div class="friend-input">
                             <select class="input-class js-chosen" multiple data-placeholder="Выберите друга">
                                 @foreach ($user->friends as $user_friend)
-                                    <option value="{{ $user_friend->id }}">{{ $user_friend->_name }}</option>
+                                    <option value="{{ $user_friend['id'] }}">{{ $user_friend['_name'] }}</option>
                                 @endforeach
                             </select>
                         </div>
