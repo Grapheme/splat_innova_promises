@@ -906,11 +906,11 @@ class ApplicationController extends BaseController {
         #Helper::d($date_finish);
 
         #$promise_friends_ids = '';
-        $temp = Input::get('promise_friends_ids');
+        $temp = Input::get('friends_ids');
         $promise_friends_ids = implode(',', $temp);
 
         $promise_friends_emails = [];
-        $temp = Input::get('promise_friends_emails');
+        $temp = Input::get('friends_emails');
         $temp = strtr($temp, [' ' => ',']);
         $temp_array = explode(',', $temp);
         if (count($temp_array)) {
