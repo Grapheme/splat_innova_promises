@@ -167,43 +167,46 @@
       </div>
     </div>
   </div>
-  @if(0)
-  <div class="us-overlay js-us-overlay">
-    <div class="overlay__back js-us-overlay-close"></div>
-    <div class="overlay__pop">
-      <a href="#" class="pop-close js-us-overlay-close"><i class="fi icon-cross"></i></a>
-      <div class="pop-top">
-        <div class="pop__title">Поздравляем! Вы дали обещание.<br>Постарайтесь выполнить его в срок.</div>
-        <div class="pop__desc">Поделитесь своим обещанием с друзьями</div>
-        <div class="pop__share">
-          <ul class="soc-links">
-            <li><a target="_blank" onclick="ga('send', 'event', 'like', 'facebook');" href="http://www.facebook.com/sharer.php?u=http://mypromises.ru" class="soc-icon"><i class="fi icon-fb"></i></a></li>
-            <li><a target="_blank" onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url=http://mypromises.ru&amp;event=button_share" class="soc-icon"><i class="fi icon-vk"></i></a></li>
-            <li><a target="_blank" onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&amp;st._surl=mypromises.ru" class="soc-icon"><i class="fi icon-ok"></i></a></li>
-          </ul>
+  @if(null !== ($new_promise_id = Session::get('new_promise_id')))
+      <?
+      $url = URL::route('app.promise', [$new_promise_id]);
+      ?>
+      <div class="us-overlay js-us-overlay">
+        <div class="overlay__back js-us-overlay-close"></div>
+        <div class="overlay__pop">
+          <a href="#" class="pop-close js-us-overlay-close"><i class="fi icon-cross"></i></a>
+          <div class="pop-top">
+            <div class="pop__title">Поздравляем! Вы дали обещание.<br>Постарайтесь выполнить его в срок.</div>
+            <div class="pop__desc">Поделитесь своим обещанием с друзьями</div>
+            <div class="pop__share">
+              <ul class="soc-links">
+                <li><a target="_blank" onclick="ga('send', 'event', 'like', 'facebook');" href="http://www.facebook.com/sharer.php?u={{ $url }}" class="soc-icon"><i class="fi icon-fb"></i></a></li>
+                <li><a target="_blank" onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url={{ $url }}&amp;event=button_share" class="soc-icon"><i class="fi icon-vk"></i></a></li>
+                <li><a target="_blank" onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&amp;st._surl={{ $url }}" class="soc-icon"><i class="fi icon-ok"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="pop-bottom">
+            <div class="pop__desc">Познакомьтесь с людьми, близкими Вам по духу</div>
+            <div class="pop__list">
+              <div class="pop__list__item">
+                <a href="#" class="item__title">Обещаю бросить курить</a>
+                <a href="#" class="item__desc">Маша, Москва</a>
+              </div>
+              <div class="pop__list__item">
+                <a href="#" class="item__title">Обещаю бросить курить</a>
+                <a href="#" class="item__desc">Маша, Москва</a>
+              </div>
+              <div class="pop__list__item">
+                <a href="#" class="item__title">Обещаю бросить курить</a>
+                <a href="#" class="item__desc">Маша, Москва</a>
+              </div>
+            </div>
+            <div class="pop__more">
+              <a href="#">Посмотреть другие обещания</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="pop-bottom">
-        <div class="pop__desc">Познакомьтесь с людьми, близкими Вам по духу</div>
-        <div class="pop__list">
-          <div class="pop__list__item">
-            <a href="#" class="item__title">Обещаю бросить курить</a>
-            <a href="#" class="item__desc">Маша, Москва</a>
-          </div>
-          <div class="pop__list__item">
-            <a href="#" class="item__title">Обещаю бросить курить</a>
-            <a href="#" class="item__desc">Маша, Москва</a>
-          </div>
-          <div class="pop__list__item">
-            <a href="#" class="item__title">Обещаю бросить курить</a>
-            <a href="#" class="item__desc">Маша, Москва</a>
-          </div>
-        </div>
-        <div class="pop__more">
-          <a href="#">Посмотреть другие обещания</a>
-        </div>
-      </div>
-    </div>
-  </div>
   @endif
 
