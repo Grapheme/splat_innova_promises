@@ -907,7 +907,7 @@ class ApplicationController extends BaseController {
             ->query()
         ;
         $results_counts['similar_promises'] = @count($results['similar_promises']['matches']);
-        Helper::ta($results);
+        #Helper::ta($results);
 
         if ($results_counts['similar_promises'] > 0) {
 
@@ -940,14 +940,15 @@ class ApplicationController extends BaseController {
                 }
             }
         }
-        Helper::ta($similar_promises);
-        Helper::tad($similar_promises_users);
+        #Helper::ta($similar_promises);
+        #Helper::tad($similar_promises_users);
 
         return Redirect::route('app.me', array(
                 #'new_promise' => 1
             ))
             ->with('new_promise_id', $promise->id)
             ->with('similar_promises', $similar_promises)
+            ->with('similar_promises_users', $similar_promises_users)
             ;
     }
 
