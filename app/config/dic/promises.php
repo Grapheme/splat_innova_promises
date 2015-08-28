@@ -103,11 +103,11 @@ return array(
             ),
             #*/
 
-            'promise_users_ids' => array(
+            'promise_friends_ids' => array(
                 'title' => 'IDs друзей, которым дано обещание',
                 'type' => 'textarea',
             ),
-            'promise_users_emails' => array(
+            'promise_friends_emails' => array(
                 'title' => 'E-mail\' друзей, которым дано обещание',
                 'type' => 'textarea',
             ),
