@@ -922,6 +922,7 @@ class ApplicationController extends BaseController {
                         continue;
                     $temp[$tmp->id] = $tmp;
                     $similar_promises_users_ids[] = $tmp->user_id;
+
                     if (count($temp) >= 3)
                         break;
                 }
