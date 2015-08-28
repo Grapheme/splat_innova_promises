@@ -906,7 +906,14 @@ class ApplicationController extends BaseController {
             ->query()
         ;
         $results_counts['similar_promises'] = @count($results['similar_promises']['matches']);
-        Helper::tad($results);
+        Helper::ta($results);
+
+        if ($results_counts['similar_promises'] > 0) {
+
+            $ids = array_keys($results['similar_promises']['matches']);
+            $similar_promises = Dic::valuesBySlugAndIds('promises', $ids, true);
+        }
+        Helper::tad($similar_promises);
 
         return Redirect::route('app.me', array(
                 #'new_promise' => 1
