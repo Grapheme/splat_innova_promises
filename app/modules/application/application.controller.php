@@ -770,8 +770,13 @@ class ApplicationController extends BaseController {
             $query->where('name', $this->user->id);
             $query->filter_by_field('author_id', '=', $user_id);
         });
-        $temp->remove_field('author_id');
-        $temp->delete();
+        if (isset($temp) && is_object($temp) && $temp->count()) {
+            foreach ($temp as $tmp) {
+
+                $tmp->remove_field('author_id');
+                $tmp->delete();
+            }
+        }
 
         return Redirect::back();
     }
