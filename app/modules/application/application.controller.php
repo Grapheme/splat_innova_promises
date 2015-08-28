@@ -917,14 +917,18 @@ class ApplicationController extends BaseController {
                 $temp = new Collection();
                 $similar_promises_users_ids = [];
                 foreach ($similar_promises as $t => $tmp) {
+
                     $tmp = $tmp->extract(true);
-                    if ($tmp->user_id == $this->user->id)
+                    if ($tmp->user_id == $this->user->id) {
                         continue;
+                    }
+
                     $temp[$tmp->id] = $tmp;
                     $similar_promises_users_ids[] = $tmp->user_id;
 
-                    if (count($temp) >= 3)
+                    if (count($temp) >= 3) {
                         break;
+                    }
                 }
                 $similar_promises = $temp;
 
