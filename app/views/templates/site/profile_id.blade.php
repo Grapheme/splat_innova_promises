@@ -82,16 +82,23 @@ if (isset($achievements) && count($achievements)) {
             <div class="profile-info">
               <div class="info-cont">
                 <div class="name"><span>{{ $user->name }}</span></div>
-                  @if ($user->years_old && 0)
-                      <div class="age">
-                          {{ trans_choice(':count год|:count года|:count лет', $user->years_old, array(), 'ru') }}
-                      </div>
-                  @endif
-                  @if ($user->city)
-                      {{ $user->city }}
-                  @endif
+                @if ($user->years_old && 0)
+                  <div class="age">
+                    {{ trans_choice(':count год|:count года|:count лет', $user->years_old, array(), 'ru') }}
+                  </div>
+                @endif
+                @if ($user->city)
+                  {{ $user->city }}
+                @endif
+                <div class="achives js-achives"></div>
               </div>
             </div>
+            {{--
+              <div class="btn-cont">
+                <a href="#" class="us-btn">Подписаться</a>
+                <a href="#" class="us-btn btn-unfollow">Отписаться</a>
+              </div>
+            --}}
           </div>
           <div class="promises-title us-title">Обещания</div>
         </div>

@@ -90,6 +90,7 @@ SplatSite.tabs = function() {
 	}
 
 	init();
+	return {popup.popup};
 }
 SplatSite.simpleBox = function() {
 	var sparent = $('.soverlay');

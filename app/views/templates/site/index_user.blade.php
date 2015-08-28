@@ -148,6 +148,7 @@ if (isset($achievements) && count($achievements)) {
                 @if ($user->city)
                     {{ $user->city }}
                 @endif
+                <div class="achives js-achives"></div>
               </div>
             </div>
             <div class="btn-cont"><a href="{{ URL::route('app.new_promise') }}" onclick = "yaCounter27511935.reachGoal('butpromisesme'); return true;" class="us-btn">Дать обещание</a></div>

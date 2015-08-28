@@ -53,6 +53,7 @@
                 @if ($user->city)
                   {{ $user->city }}
                 @endif
+                {{-- <div class="achives js-achives"></div> --}}
               </div>
             </div>
           </div>
@@ -83,6 +84,21 @@
                   </div>
                 </div>
               </div>
+              @if(0)
+              <div class="promise-friend time-inputs">
+                <div class="friend-title">Пообещать другу</div>
+                <div class="friend-input">
+                  <select class="input-class js-chosen" multiple data-placeholder="Выберите друга">
+                    <option>Andrey Samoilov</option>
+                    <option>Kostya Durnev</option>
+                  </select>
+                </div>
+                <div class="friend-or">или</div>
+                <div class="friend-input">
+                  <input class="input-class" placeholder="Введите email друзей через запятую">
+                </div>
+              </div>
+              @endif
               <div class="time-inputs">
                 <div class="desc">Я выполню обещание к</div>
                 <div class="input-cont">

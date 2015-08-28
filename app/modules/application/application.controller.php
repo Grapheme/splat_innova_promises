@@ -898,7 +898,7 @@ class ApplicationController extends BaseController {
         return Redirect::route('app.me', array(
                 #'new_promise' => 1
             ))
-            #->with('new_promise', 1)
+            ->with('new_promise_id', $promise->id)
             ;
     }
 
