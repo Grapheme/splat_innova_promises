@@ -2314,6 +2314,7 @@ class ApplicationController extends BaseController {
                 $query->where('name', $this->user->id);
                 $query->filter_by_field('author_id', '=', $user);
             });
+            Helper::smartQueries(1);
             #Helper::tad($temp);
             if (isset($temp) && is_object($temp) && $temp->count()) {
                 $subscribed = true;
