@@ -2305,6 +2305,15 @@ class ApplicationController extends BaseController {
          */
         $achievements = $this->get_achievements($promises);
 
+        $subscribed = null;
+        if ($this->user) {
+            #$subscribed
+            $temp = Dic::valuesBySlug('subscribes', function($query) {
+                $query->where('name', $this->user->id);
+            });
+            Helper::tad($temp);
+        }
+
         /**
          * Показываем страницу профиля
          */
