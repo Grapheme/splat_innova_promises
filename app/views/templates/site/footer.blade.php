@@ -228,9 +228,9 @@
                             }
                             ?>
                             <div class="pop__list__item">
-                                <a href="#" class="item__title">{{ $similar_promise->promise_text }}</a>
+                                <a href="{{ URL::route('app.promise', [$similar_promise->id]) }}" class="item__title">{{ $similar_promise->promise_text }}</a>
                                 @if ($similar_promise_user)
-                                    <a href="{{ URL::route('app.promise', [$similar_promise->id]) }}" class="item__desc">{{ implode(', ', $line) }}</a>
+                                    <a href="{{ URL::route('app.profile', [$similar_promise_user->id]) }}" class="item__desc">{{ implode(', ', $line) }}</a>
                                 @endif
                             </div>
                         @endforeach
