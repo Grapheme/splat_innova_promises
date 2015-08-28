@@ -236,7 +236,7 @@
                         @endforeach
                     </div>
                     <div class="pop__more">
-                        <a href="{{ URL::route('mainpage') }}">Посмотреть другие обещания</a>
+                        <a href="{{ URL::route('app.mainpage') }}">Посмотреть другие обещания</a>
                     </div>
                 </div>
             @endif
