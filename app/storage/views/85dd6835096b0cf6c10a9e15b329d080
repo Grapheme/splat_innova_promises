@@ -1,7 +1,0 @@
-<?php if(!empty($menu)): ?>
-<ul class="nav-list list-unstyled max-width-class text-center">
-	<?php foreach($menu as $url => $name): ?>
-		<li class="nav-item"><a href="<?php echo link::to($url); ?>"><?php echo $name; ?></a>
-	<?php endforeach; ?>
-	</ul>
-<?php endif; ?>
