@@ -2307,17 +2307,23 @@ class ApplicationController extends BaseController {
 
         $subscribed = null;
         if ($this->user) {
-            #$subscribed
-            $temp = Dic::valuesBySlug('subscribes', function($query) {
+
+            $subscribed = false;
+
+            $temp = Dic::valuesBySlug('subscribes', function($query) use ($user) {
                 $query->where('name', $this->user->id);
+                $query->filter_by_field('author', '=', $user);
             });
-            Helper::tad($temp);
+            #Helper::tad($temp);
+            if (isset($temp) && is_object($temp) && $temp->count()) {
+                $subscribed = true;
+            }
         }
 
         /**
          * Показываем страницу профиля
          */
-        return View::make(Helper::layout('profile_id'), compact('user', 'promises', 'achievements'));
+        return View::make(Helper::layout('profile_id'), compact('user', 'promises', 'achievements', 'subscribed'));
     }
 
 
