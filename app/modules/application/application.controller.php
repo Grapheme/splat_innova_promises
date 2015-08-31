@@ -61,8 +61,9 @@ class ApplicationController extends BaseController {
 
 
 
-            Route::post('/ajax/phone/sendSms', array('as' => 'app.phone.send-sms', 'uses' => __CLASS__.'@postPhoneSendSms'));
             Route::post('/ajax/phone/checkPhone', array('as' => 'app.phone.check-phone', 'uses' => __CLASS__.'@postPhoneCheckPhone'));
+            Route::post('/ajax/phone/sendSms', array('as' => 'app.phone.send-sms', 'uses' => __CLASS__.'@postPhoneSendSms'));
+            Route::post('/ajax/phone/checkCode', array('as' => 'app.phone.check-code', 'uses' => __CLASS__.'@postPhoneCheckCode'));
 
 
             Route::any('/subscribe/{user_id}', array('as' => 'app.subscribe', 'uses' => __CLASS__.'@postSubscribe'));
@@ -3390,7 +3391,7 @@ class ApplicationController extends BaseController {
                     );
                     */
 
-                    sendSms(preg_replace('~[^\d]~is', '', $user->phone_number), "MyPromises.ru code: " . $confirm_code);
+                    sendSms(preg_replace('~[^\d]~is', '', $user->phone_number), "MyPromises.ru confirmation code: " . $confirm_code);
 
                     $json_request['status'] = TRUE;
                     $json_request['responseText'] = 'СМС отправлено';
@@ -3419,6 +3420,49 @@ class ApplicationController extends BaseController {
             phone_confirm_code
             */
         }
+
+        return Response::json($json_request, 200);
+    }
+
+
+    /**
+     * Проверка проверочного кода
+     */
+    public function postPhoneCheckCode() {
+
+        $user_id = Input::get('user_id');
+        $code = Input::get('code');
+
+        $json_request = array('status' => FALSE, 'responseText' => '');
+
+        $user = NULL;
+        if ($user_id)
+            $user = Dic::valueBySlugAndId('users', $user_id, 'all', 1, 1);
+
+        if ($user_id && is_object($user)) {
+
+            #dd($user);
+
+            $json_request['status'] = TRUE;
+
+            if ($user->phone_confirm_code == $code) {
+
+                $user->update_field('phone_confirm_code', '');
+                $user->update_field('phone_confirmed', '1');
+                $json_request['state'] = 'valid';
+
+            } else {
+
+                $json_request['state'] = 'invalid';
+                $json_request['responseText'] = 'Неверный код';
+            }
+
+        } else {
+
+            $json_request['responseText'] = 'Пользователь не найден';
+        }
+
+        #Helper::tad($user);
 
         return Response::json($json_request, 200);
     }
