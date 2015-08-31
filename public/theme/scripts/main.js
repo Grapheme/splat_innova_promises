@@ -186,3 +186,7 @@ achives.init();
 $('.js-chosen').chosen({
     width: '100%'
 });
+$('.js-reload-set').on('click', function(){
+    window.location.href = $('.js-reload-select').val();
+    return false;
+});
