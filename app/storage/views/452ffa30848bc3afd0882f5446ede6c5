@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+</head>
+<body>
+	<div>
+		<p>
+			<?php echo $comment_user->name; ?> оставил комментарий под вашим обещанием &laquo;<?php echo $promise->name; ?>&raquo;:
+		</p>
+		<p>
+			<a href="<?php echo URL::route('app.promise', $promise->id); ?>">Посмотреть комментарий</a>
+		</p>
+	</div>
+</body>
+</html>

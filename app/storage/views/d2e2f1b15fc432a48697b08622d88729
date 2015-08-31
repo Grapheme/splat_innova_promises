@@ -1,60 +1,57 @@
-@extends(Helper::layout())
+<?php $__env->startSection('style'); ?>
+<?php $__env->stopSection(); ?>
 
 
-@section('style')
-@stop
+<?php $__env->startSection('content'); ?>
 
+    <?php if(0): ?>
 
-@section('content')
-
-    @if (0)
-
-        @if ($msg == 'vkontakte')
+        <?php if($msg == 'vkontakte'): ?>
             Вы успешно зарегистрировались через соц.сеть ВКонтакте.<br/>
-        @elseif ($msg == 'odnoklassniki')
+        <?php elseif($msg == 'odnoklassniki'): ?>
             Вы успешно зарегистрировались через соц.сеть Одноклассники.<br/>
-        @elseif ($msg == 'facebook')
+        <?php elseif($msg == 'facebook'): ?>
             Вы успешно зарегистрировались через соц.сеть Facebook.<br/>
-        @endif
+        <?php endif; ?>
         Пожалуйста подтвердите свои данные.
 
-        <form action="{{ URL::route('app.update_profile') }}" method="POST">
+        <form action="<?php echo URL::route('app.update_profile'); ?>" method="POST">
 
-            <input type="text" name="name" value="{{ trim($user->name) }}"><br/>
+            <input type="text" name="name" value="<?php echo trim($user->name); ?>"><br/>
 
-            <input type="text" name="email" value="{{ $user->email }}" placeholder="Укажите ваш e-mail">
+            <input type="text" name="email" value="<?php echo $user->email; ?>" placeholder="Укажите ваш e-mail">
             Обязательно укажите емейл<br/>
 
-            <input type="text" name="bdate" value="{{ $user->bdate }}" placeholder="Дата рождения"><br/>
+            <input type="text" name="bdate" value="<?php echo $user->bdate; ?>" placeholder="Дата рождения"><br/>
 
             <input type="submit" value="Сохранить"><br/>
 
         </form>
 
-    @endif
+    <?php endif; ?>
 
 
 
       <div class="wrapper">
-        @if ($msg == 'vkontakte' || $msg == 'odnoklassniki' || $msg == 'facebook')
+        <?php if($msg == 'vkontakte' || $msg == 'odnoklassniki' || $msg == 'facebook'): ?>
         <div class="profile-message">
           <div class="icon">
             <div class="fi icon-smile"></div>
           </div>
           <div class="text">
-            @if ($msg == 'vkontakte')
+            <?php if($msg == 'vkontakte'): ?>
                 Вы успешно зарегистрировались через соц.сеть ВКонтакте.<br/>
                   Пожалуйста, подтвердите ваши данные.
-            @elseif ($msg == 'odnoklassniki')
+            <?php elseif($msg == 'odnoklassniki'): ?>
                 Вы успешно зарегистрировались через соц.сеть Одноклассники.<br/>
                   Пожалуйста, подтвердите ваши данные.
-            @elseif ($msg == 'facebook')
+            <?php elseif($msg == 'facebook'): ?>
                 Вы успешно зарегистрировались через соц.сеть Facebook.<br/>
                   Пожалуйста, подтвердите ваши данные.
-            @endif
+            <?php endif; ?>
           </div>
         </div>
-        @endif
+        <?php endif; ?>
         <div class="profile-edit">
 
         <?
@@ -63,42 +60,42 @@
             $default_avatar = '/theme/images/woman.png';
         ?>
 
-          <form action="{{ URL::route('app.update_avatar') }}" method="POST" enctype="multipart/form-data" class="photo-cont" id="avatar-form">
+          <form action="<?php echo URL::route('app.update_avatar'); ?>" method="POST" enctype="multipart/form-data" class="photo-cont" id="avatar-form">
             <div>
-              <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo">
+              <div style="background-image: url(<?php echo $user->avatar ?: $default_avatar; ?>);" class="profile-photo">
                 <div class="profile-hover">
 
                     <a href="#" class="down-link">
                         <div class="fi icon-arrow-down"></div>
                         <input name="avatar" type="file" accept="image/*">
                     </a>
-                    {{--
+                    <?php /*
                     <a href="#" class="remove-link">
                         <div class="fi icon-cross"></div>
                     </a>
-                    --}}
+                    */ ?>
                 </div>
               </div>
             </div>
           </form>
 
-            <form action="{{ URL::route('app.update_profile') }}" method="POST" class="edit-cont" id="profile_form">
+            <form action="<?php echo URL::route('app.update_profile'); ?>" method="POST" class="edit-cont" id="profile_form">
                 <div>
                     <div class="input-cont">
-                        <input name="name" value="{{ trim($user->name) }}" placeholder="Ваше имя" class="us-input">
+                        <input name="name" value="<?php echo trim($user->name); ?>" placeholder="Ваше имя" class="us-input">
                     </div>
-                    {{--
+                    <?php /*
                     <div class="input-cont">
-                      <input name="bdate" value="{{ $user->bdate }}" placeholder="Ваша дата рождения" class="us-input js-mask-date">
+                      <input name="bdate" value="<?php echo $user->bdate; ?>" placeholder="Ваша дата рождения" class="us-input js-mask-date">
                     </div>
-                    --}}
+                    */ ?>
                     <div class="input-cont">
-                        <input name="city" value="{{ $user->city }}" placeholder="Ваш город" class="us-input">
+                        <input name="city" value="<?php echo $user->city; ?>" placeholder="Ваш город" class="us-input">
                     </div>
 
-                    @if (Input::get('dbg-phone') == 1 || 1)
-                        <div class="input-cont js-phone" data-url="{{ URL::route('app.phone.check-code') }}">
-                            <input placeholder="Укажите телефон" value="{{ $user->phone_number }}" class="js-phone-input us-input">
+                    <?php if(Input::get('dbg-phone') == 1 || 1): ?>
+                        <div class="input-cont js-phone" data-url="<?php echo URL::route('app.phone.check-code'); ?>">
+                            <input placeholder="Укажите телефон" value="<?php echo $user->phone_number; ?>" class="js-phone-input us-input">
 
                             <div data-status="new" data-tooltip="Номер не подтвержден" data-add-class="tooltip-dark" class="phone-status js-phone-popup js-status-popup"></div>
                             <div data-status="valid" class="phone-status"></div>
@@ -110,31 +107,31 @@
                         </div>
                         <div class="input-error js-phone-error"></div>
                         <div class="check-cont js-phone-check-cont input-cont" style="display: none;">
-                            <input type="checkbox" name="notifications[on_phone]" value="1" id="phone" class="styledCheck js-phone-checkbox"{{ @$auth_user->notifications['on_phone'] ? ' checked' : '' }}>
+                            <input type="checkbox" name="notifications[on_phone]" value="1" id="phone" class="styledCheck js-phone-checkbox"<?php echo @$auth_user->notifications['on_phone'] ? ' checked' : ''; ?>>
                             <label for="phone"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать через SMS на мобильный телефон:</label>
                         </div>
-                    @endif
+                    <?php endif; ?>
 
                     <div class="input-cont">
-                        <input name="email" value="{{ $user->email }}" placeholder="Укажите e-mail" class="us-input js-email-input">
+                        <input name="email" value="<?php echo $user->email; ?>" placeholder="Укажите e-mail" class="us-input js-email-input">
                     </div>
                     <!-- <div class="input-hint">
                         Обязательно укажите е-mail, которым вы пользуетесь, чтобы мы могли напомнить о вашем обещании.
                     </div> -->
                     <div class="check-cont input-cont js-email-check-cont" style="display: none;">
-                        <input type="checkbox" name="notifications[on_email]" value="1" id="mail" class="styledCheck"{{ @$auth_user->notifications['on_email'] ? ' checked' : '' }}>
+                        <input type="checkbox" name="notifications[on_email]" value="1" id="mail" class="styledCheck"<?php echo @$auth_user->notifications['on_email'] ? ' checked' : ''; ?>>
                         <label for="mail"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать по электронной почте:</label>
                     </div>
 
-                    @if (Input::get('dbg-phone') || 1)
+                    <?php if(Input::get('dbg-phone') || 1): ?>
                         <div class="check-title input-cont">
                             <span>Частота оповещений:</span>
-                            <span class="check-select">{{ Form::select('notifications[notify_period]', Config::get('site.notify'), @$auth_user->notifications['notify_period'], ['class' => 'ui-select']) }}</span>
+                            <span class="check-select"><?php echo Form::select('notifications[notify_period]', Config::get('site.notify'), @$auth_user->notifications['notify_period'], ['class' => 'ui-select']); ?></span>
                         </div>
-                    @endif
+                    <?php endif; ?>
 
 
-                    @if ($new_user)
+                    <?php if($new_user): ?>
 
                         <div class="check-cont input-cont">
                             <label for="apply"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
@@ -143,35 +140,38 @@
                             <input type="checkbox" name="confirmation" id="apply" class="styledCheck">
                         </div>
 
-                        {{ Form::hidden('notifications[new_comment]', 1) }}
-                        {{ Form::hidden('notifications[promise_dates]', 1) }}
-                        {{ Form::hidden('notifications[promise_status]', 1) }}
+                        <?php echo Form::hidden('notifications[new_comment]', 1); ?>
 
-                    @else
+                        <?php echo Form::hidden('notifications[promise_dates]', 1); ?>
+
+                        <?php echo Form::hidden('notifications[promise_status]', 1); ?>
+
+
+                    <?php else: ?>
 
                         <div class="check-cont input-cont">
                             <label for="n1"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                                 Оповещать меня о новых комментариях
                             </label>
                             <input type="checkbox" name="notifications[new_comment]" id="n1" class="styledCheck"
-                                   value="1"{{ @$auth_user->notifications['new_comment'] ? ' checked' : '' }}>
+                                   value="1"<?php echo @$auth_user->notifications['new_comment'] ? ' checked' : ''; ?>>
                         </div>
                         <div class="check-cont input-cont">
                             <label for="n2"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                                 Напоминать мне о дате выполнения моих обещаний
                             </label>
                             <input type="checkbox" name="notifications[promise_dates]" id="n2" class="styledCheck"
-                                   value="1"{{ @$auth_user->notifications['promise_dates'] ? ' checked' : '' }}>
+                                   value="1"<?php echo @$auth_user->notifications['promise_dates'] ? ' checked' : ''; ?>>
                         </div>
                         <div class="check-cont input-cont">
                             <label for="n3"><span class="check-fake check-dark"><i class="fi icon-check"></i></span>
                                 Оповещать о смене статуса моих обещаний
                             </label>
                             <input type="checkbox" name="notifications[promise_status]" id="n3" class="styledCheck"
-                                   value="1"{{ @$auth_user->notifications['promise_status'] ? ' checked' : '' }}>
+                                   value="1"<?php echo @$auth_user->notifications['promise_status'] ? ' checked' : ''; ?>>
                         </div>
 
-                    @endif
+                    <?php endif; ?>
 
 
 
@@ -189,21 +189,21 @@
 
 
 
-@stop
+<?php $__env->stopSection(); ?>
 
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
     <script>
         var SplatDict = {};
-        SplatDict.user_id = {{ (int)$user->id }};
+        SplatDict.user_id = <?php echo (int)$user->id; ?>;
         SplatDict.urls = {
-            'check_phone': '{{ URL::route('app.phone.check-phone') }}',
-            'send_sms': '{{ URL::route('app.phone.send-sms') }}',
+            'check_phone': '<?php echo URL::route('app.phone.check-phone'); ?>',
+            'send_sms': '<?php echo URL::route('app.phone.send-sms'); ?>',
             'check_code': '/json/checkCode.json'
         };
-        SplatDict.phone_exists = {{ $user->phone_number != '' ? 1 : 0 }};
-        SplatDict.phone_confirmed = {{ $user->phone_number != '' && $user->phone_confirmed ? 1 : 0 }};
-        SplatDict.phone_confirm_code = {{ $user->phone_confirm_code != '' ? 1 : 0 }};
+        SplatDict.phone_exists = <?php echo $user->phone_number != '' ? 1 : 0; ?>;
+        SplatDict.phone_confirmed = <?php echo $user->phone_number != '' && $user->phone_confirmed ? 1 : 0; ?>;
+        SplatDict.phone_confirm_code = <?php echo $user->phone_confirm_code != '' ? 1 : 0; ?>;
     </script>
 
     <script>
@@ -274,4 +274,5 @@
         }
 
     </script>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make(Helper::layout(), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
