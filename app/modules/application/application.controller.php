@@ -68,6 +68,9 @@ class ApplicationController extends BaseController {
 
             Route::any('/subscribe/{user_id}', array('as' => 'app.subscribe', 'uses' => __CLASS__.'@postSubscribe'));
             Route::any('/unsubscribe/{user_id}', array('as' => 'app.unsubscribe', 'uses' => __CLASS__.'@postUnubscribe'));
+
+
+            Route::any('/cities', array('as' => 'app.cities', 'uses' => __CLASS__.'@getCities'));
         });
 
 
@@ -780,6 +783,15 @@ class ApplicationController extends BaseController {
         }
 
         return Redirect::back();
+    }
+
+
+    public function getCities() {
+
+        $cities = Dic::valuesBySlug('cities');
+        Helper::tad($cities);
+
+        return View::make(Helper::layout('cities'), compact('user', 'msg', 'new_user'));
     }
 
 
