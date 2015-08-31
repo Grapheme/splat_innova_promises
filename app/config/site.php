@@ -47,6 +47,13 @@ return array(
         'monthly'      => 60*60*24*30 - 300,
     ],
 
+    'sms' => [
+        'base'     => 'https://gate.smsaero.ru/',
+        'user'     => 'info@grapheme.ru',
+        'password' => 'grapheme1234',
+        'from'     => 'MyPromises',
+    ],
+
     'achievements' => [
         'new' => [
             'count'     => 1,           ## count of the promises: 1+

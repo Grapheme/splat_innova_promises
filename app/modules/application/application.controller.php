@@ -3355,7 +3355,7 @@ class ApplicationController extends BaseController {
 
         if ($user_id && is_object($user)) {
 
-            /*
+            /**
              * Если номер уже подтвержден - не будем отправлять смс. Нечего бюджет транжирить.
              */
             if ($user->phone_number == $phone && $user->phone_confirmed == 1) {
@@ -3365,19 +3365,20 @@ class ApplicationController extends BaseController {
 
             } else {
 
-                /*
+                /**
                  * Генерим и сохраняем код подтверждения для пользователя
                  */
                 $confirm_code = rand(10000, 99999);
                 $user->update_field('phone_confirm_code', $confirm_code);
 
-                /*
+                /**
                  * Отправляем СМС с кодом пользователю
                  */
-                $client = new Services_Twilio(Config::get('twilio.sid'), Config::get('twilio.token'));
+                #$client = new Services_Twilio(Config::get('twilio.sid'), Config::get('twilio.token'));
 
                 #/*
                 try {
+                    /*
                     $sms = $client->account->messages->sendMessage(
                         // Step 6: Change the 'From' number below to be a valid Twilio number
                         // that you've purchased, or the (deprecated) Sandbox number
@@ -3387,6 +3388,9 @@ class ApplicationController extends BaseController {
                         // the sms body
                         "MyPromises.ru code: " . $confirm_code
                     );
+                    */
+
+                    sendSms(preg_replace('~[^\d]~is', '', $user->phone_number), "MyPromises.ru code: " . $confirm_code);
 
                     $json_request['status'] = TRUE;
                     $json_request['responseText'] = 'СМС отправлено';
@@ -3419,4 +3423,48 @@ class ApplicationController extends BaseController {
         return Response::json($json_request, 200);
     }
 
+}
+
+
+/**
+ * Отправка SMS-сообщения
+ *
+ * @param $number
+ * @param $text
+ *
+ * @return mixed
+ */
+function sendSms($number, $text) {
+
+    #$number = '79044442177';
+    #$text = 'Тест отправки SMS сообщения';
+
+    /**
+     * Отправка сообщения на указанный номер
+     */
+    $url = Config::get('site.sms.base') . 'send/?&answer=json&user=' . Config::get('site.sms.user') . '&password=' . md5(Config::get('site.sms.password')) . '&from=' . Config::get('site.sms.from') . '&to=' . $number . '&text=' . urlencode($text);
+
+    /**
+     * Баланс
+     */
+    #$url = 'https://gate.smsaero.ru/balance/?answer=json&user=' . Config::get('site.sms.user') . '&password=' . md5(Config::get('site.sms.password'));
+
+    #Helper::d($url);
+
+    /**
+     * Отправка запроса
+     */
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    #Helper::d($response);
+    #die;
+
+    return $response;
 }
