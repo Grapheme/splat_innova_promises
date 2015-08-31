@@ -798,19 +798,34 @@ class ApplicationController extends BaseController {
 
         $city = Input::get('city') ?: 'Москва';
 
+        $users_ids = [];
         $users = Dic::valuesBySlug('users', function($query) use ($city) {
             $query->filter_by_field('city', '=', $city);
         });
         if (isset($users) && is_object($users) && $users->count()) {
             foreach($users as $u => $user) {
-                $users[$c] = $user->extract(true);
+                $user = $user->extract(true);
+                $users[$c] = $user;
+                $users_ids[] = $user->id;
             }
         }
-        Helper::tad($users);
+        #Helper::tad($users);
 
-        $promises = Dic::valuesBySlug('promises', function($query) use ($city) {
-            $query->filter_by_field('city');
-        });
+        $promises = new Collection();
+
+        if (count($users_ids)) {
+
+            $promises = Dic::valuesBySlug('promises', function($query) use ($users_ids) {
+                $query->filter_by_field('user_id', 'IN', $users_ids);
+            });
+            if (isset($promises) && is_object($promises) && $promises->count()) {
+                foreach($promises as $p => $promise) {
+                    $promise = $promise->extract(true);
+                    $promises[$p] = $promise;
+                }
+            }
+        }
+        Helper::tad($promises);
 
         return View::make(Helper::layout('cities'), compact('cities', 'promises'));
     }
