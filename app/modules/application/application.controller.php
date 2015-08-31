@@ -803,11 +803,13 @@ class ApplicationController extends BaseController {
             $query->filter_by_field('city', '=', $city);
         });
         if (isset($users) && is_object($users) && $users->count()) {
+            $temp = new Collection();
             foreach($users as $u => $user) {
                 $user = $user->extract(true);
-                $users[$c] = $user;
+                $temp[$user->id] = $user;
                 $users_ids[] = $user->id;
             }
+            $users = $temp;
         }
         #Helper::tad($users);
 
@@ -836,7 +838,7 @@ class ApplicationController extends BaseController {
         #Helper::smartQueries(1);
         #die;
 
-        return View::make(Helper::layout('cities'), compact('cities', 'promises'));
+        return View::make(Helper::layout('cities'), compact('cities', 'users', 'promises'));
     }
 
 
