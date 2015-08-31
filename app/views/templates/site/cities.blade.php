@@ -44,7 +44,7 @@
                                 <div class="flipper">
                                     <div class="promise-cont type-{{ $promise->style_id }}">
                                         <div class="info-cont">
-                                            <a class="comments-amount">{{ trans_choice(':count комментарий|:count комментария|:count комментариев', $promise_comments_count, array(), 'ru') }}</a>
+                                            {{--<a class="comments-amount">{{ trans_choice(':count комментарий|:count комментария|:count комментариев', $promise_comments_count, array(), 'ru') }}</a>--}}
                                             <div class="pr-title js-promise-text">{{ mb_strtoupper($promise->name) }}</div>
                                             <div class="user-info"><a style="background-image: url({{ $puser->avatar }})" class="user-photo"></a>
                                                 <div class="user-text">
