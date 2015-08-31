@@ -832,9 +832,9 @@ class ApplicationController extends BaseController {
                 $promises = $temp;
             }
         }
-        Helper::ta($promises);
-        Helper::smartQueries(1);
-        die;
+        #Helper::ta($promises);
+        #Helper::smartQueries(1);
+        #die;
 
         return View::make(Helper::layout('cities'), compact('cities', 'promises'));
     }

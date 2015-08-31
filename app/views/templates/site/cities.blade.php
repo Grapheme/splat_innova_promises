@@ -17,8 +17,9 @@
                         <div class="select-ui">
                             <div class="select-wrap">
                                 <select class="ui-select js-reload-select">
-                                    <option value="cities.html#1" class="select-option">Ростов-на-Дону</option>
-                                    <option value="cities.html#2" class="select-option">Новороссийск</option>
+                                    @foreach ($cities as $city)
+                                        <option value="{{ URL::route('app.cities', ['city' => $city->name]) }}" class="select-option">{{ $city->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <a href="#" class="ui-btn us-btn js-reload-set">Узнать</a>
