@@ -819,7 +819,7 @@ class ApplicationController extends BaseController {
 
                 #$query->filter_by_field('user_id', DB::raw('IN'), DB::raw('(' . implode(',', $users_ids) . ')'));
 
-                $query->filter_by_field('user_id', 'IN', ('(' . implode(',', $users_ids) . ')'));
+                $query->filter_by_field('user_id', 'IN', $users_ids);
             });
             if (isset($promises) && is_object($promises) && $promises->count()) {
                 foreach($promises as $p => $promise) {
