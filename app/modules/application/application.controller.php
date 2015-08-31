@@ -820,14 +820,16 @@ class ApplicationController extends BaseController {
                 #$query->filter_by_field('only_for_me', '!=', '1'); ## не работает, будем делать костыль
             });
             if (isset($promises) && is_object($promises) && $promises->count()) {
+                $temp = new Collection();
                 foreach($promises as $p => $promise) {
                     $promise = $promise->extract(true);
                     if ($promise->only_for_me) {
-                        unset($promises[$p]);
+                        #unset($promises[$p]);
                         continue;
                     }
-                    $promises[$p] = $promise;
+                    $temp[] = $promise;
                 }
+                $promises = $temp;
             }
         }
         Helper::ta($promises);
