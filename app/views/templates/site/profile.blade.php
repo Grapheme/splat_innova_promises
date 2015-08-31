@@ -197,9 +197,9 @@
             'send_sms': '{{ URL::route('app.phone.send-sms') }}',
             'check_code': '/json/checkCode.json'
         };
-        SplatDict.phone_exists = {{ $user->phone_number != '' ? true : false }};
-        SplatDict.phone_confirmed = {{ $user->phone_number != '' && $user->phone_confirmed ? true : false }};
-        SplatDict.phone_confirm_code = {{ $user->phone_confirm_code != '' ? true : false }};
+        SplatDict.phone_exists = {{ $user->phone_number != '' ? 1 : 0 }};
+        SplatDict.phone_confirmed = {{ $user->phone_number != '' && $user->phone_confirmed ? 1 : 0 }};
+        SplatDict.phone_confirm_code = {{ $user->phone_confirm_code != '' ? 1 : 0 }};
     </script>
 
     <script>
