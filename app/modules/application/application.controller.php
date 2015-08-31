@@ -61,9 +61,13 @@ class ApplicationController extends BaseController {
 
 
 
-            Route::post('/ajax/phone/sendSms', array('as' => 'app.phone.send-sms', 'uses' => __CLASS__.'@postPhoneSendSms'));
             Route::post('/ajax/phone/checkPhone', array('as' => 'app.phone.check-phone', 'uses' => __CLASS__.'@postPhoneCheckPhone'));
+            Route::post('/ajax/phone/sendSms', array('as' => 'app.phone.send-sms', 'uses' => __CLASS__.'@postPhoneSendSms'));
+            Route::post('/ajax/phone/checkCode', array('as' => 'app.phone.check-code', 'uses' => __CLASS__.'@postPhoneCheckCode'));
 
+
+            Route::any('/subscribe/{user_id}', array('as' => 'app.subscribe', 'uses' => __CLASS__.'@postSubscribe'));
+            Route::any('/unsubscribe/{user_id}', array('as' => 'app.unsubscribe', 'uses' => __CLASS__.'@postUnubscribe'));
         });
 
 
@@ -724,6 +728,61 @@ class ApplicationController extends BaseController {
     }
 
 
+    public function postSubscribe($user_id) {
+
+        $this->check_auth();
+        $user = $this->user;
+
+        if (!$user)
+            return Redirect::back();
+
+        $temp = Dic::valuesBySlug('subscribes', function($query) use ($user_id) {
+            $query->where('name', $this->user->id);
+            $query->filter_by_field('author_id', '=', $user_id);
+        });
+
+        if (isset($temp) && is_object($temp) && $temp->count()) {
+
+            ##
+
+        } else {
+
+            DicVal::inject('subscribes', [
+                'slug' => NULL,
+                'name' => $user->id,
+                'fields' => array(
+                    'author_id' => $user_id,
+                ),
+            ]);
+        }
+
+        return Redirect::back();
+    }
+
+    public function postUnubscribe($user_id) {
+
+        $this->check_auth();
+        $user = $this->user;
+
+        if (!$user)
+            return Redirect::back();
+
+        $temp = Dic::valuesBySlug('subscribes', function($query) use ($user_id) {
+            $query->where('name', $this->user->id);
+            $query->filter_by_field('author_id', '=', $user_id);
+        });
+        if (isset($temp) && is_object($temp) && $temp->count()) {
+            foreach ($temp as $tmp) {
+
+                $tmp->remove_field('author_id');
+                $tmp->delete();
+            }
+        }
+
+        return Redirect::back();
+    }
+
+
     public function postUserUpdateProfile() {
 
         $this->check_auth();
@@ -816,6 +875,8 @@ class ApplicationController extends BaseController {
         $this->check_auth();
 
         $user = $this->user;
+        $user = $this->processFriends($user);
+        #Helper::tad($user);
         $promises = $this->promises;
 
         return View::make(Helper::layout('new_promise'), compact('user', 'promises'));
@@ -845,6 +906,24 @@ class ApplicationController extends BaseController {
 
         #Helper::d($date_finish);
 
+        #$promise_friends_ids = '';
+        $temp = Input::get('friends_ids');
+        $promise_friends_ids = implode(',', $temp);
+
+        $promise_friends_emails = [];
+        $temp = Input::get('friends_emails');
+        $temp = strtr($temp, [' ' => ',']);
+        $temp_array = explode(',', $temp);
+        if (count($temp_array)) {
+            foreach ($temp_array as $t => $tmp) {
+                $tmp = trim($tmp);
+                if (!filter_var($tmp, FILTER_VALIDATE_EMAIL))
+                    continue;
+                $promise_friends_emails[$tmp] = 1;
+            }
+            $promise_friends_emails = implode(',', array_keys($promise_friends_emails));
+        }
+
         /**
          * Добавляем обещание
          */
@@ -862,6 +941,8 @@ class ApplicationController extends BaseController {
                 ),
                 'textfields' => array(
                     'promise_text' => $promise_text,
+                    'promise_friends_ids' => $promise_friends_ids,
+                    'promise_friends_emails' => $promise_friends_emails,
                 ),
             )
         );
@@ -895,10 +976,65 @@ class ApplicationController extends BaseController {
          */
         unset($_SESSION['promise_text']);
 
+        /**
+         * Ищем обещания, близкие по духу
+         */
+        $similar_promises = new Collection();
+        $similar_promises_users = new Collection();
+        $sphinx_match_mode = \Sphinx\SphinxClient::SPH_MATCH_ANY;
+        $results['similar_promises'] = SphinxSearch::search($promise_text, 'splat_promises_index')
+            ->setMatchMode($sphinx_match_mode)
+            ->limit(30)
+            ->query()
+        ;
+        $results_counts['similar_promises'] = @count($results['similar_promises']['matches']);
+        #Helper::ta($results);
+
+        if ($results_counts['similar_promises'] > 0) {
+
+            $ids = array_keys($results['similar_promises']['matches']);
+            $similar_promises = Dic::valuesBySlugAndIds('promises', $ids, true);
+            if (isset($similar_promises) && is_object($similar_promises) && $similar_promises->count()) {
+                $temp = new Collection();
+                $similar_promises_users_ids = [];
+                foreach ($similar_promises as $t => $tmp) {
+
+                    $tmp = $tmp->extract(true);
+                    if ($tmp->user_id == $this->user->id) {
+                        continue;
+                    }
+
+                    $temp[$tmp->id] = $tmp;
+                    $similar_promises_users_ids[] = $tmp->user_id;
+
+                    if (count($temp) >= 3) {
+                        break;
+                    }
+                }
+                $similar_promises = $temp;
+
+                if (count($similar_promises_users_ids)) {
+                    $similar_promises_users = Dic::valuesBySlugAndIds('users', $similar_promises_users_ids, true);
+
+                    if (isset($similar_promises_users) && is_object($similar_promises_users) && $similar_promises_users->count()) {
+                        $temp = new Collection();
+                        foreach ($similar_promises_users as $t => $tmp) {
+                            $temp[$tmp->id] = $tmp->extract(true);
+                        }
+                        $similar_promises_users = $temp;
+                    }
+                }
+            }
+        }
+        #Helper::ta($similar_promises);
+        #Helper::tad($similar_promises_users);
+
         return Redirect::route('app.me', array(
                 #'new_promise' => 1
             ))
-            #->with('new_promise', 1)
+            ->with('new_promise_id', $promise->id)
+            ->with('similar_promises', $similar_promises)
+            ->with('similar_promises_users', $similar_promises_users)
             ;
     }
 
@@ -2250,10 +2386,26 @@ class ApplicationController extends BaseController {
          */
         $achievements = $this->get_achievements($promises);
 
+        $subscribed = null;
+        if ($this->user) {
+
+            $subscribed = false;
+
+            $temp = Dic::valuesBySlug('subscribes', function($query) use ($user) {
+                $query->where('name', $this->user->id);
+                $query->filter_by_field('author_id', '=', $user->id);
+            });
+            #Helper::smartQueries(1);
+            #Helper::tad($temp);
+            if (isset($temp) && is_object($temp) && $temp->count()) {
+                $subscribed = true;
+            }
+        }
+
         /**
          * Показываем страницу профиля
          */
-        return View::make(Helper::layout('profile_id'), compact('user', 'promises', 'achievements'));
+        return View::make(Helper::layout('profile_id'), compact('user', 'promises', 'achievements', 'subscribed'));
     }
 
 
@@ -3204,7 +3356,7 @@ class ApplicationController extends BaseController {
 
         if ($user_id && is_object($user)) {
 
-            /*
+            /**
              * Если номер уже подтвержден - не будем отправлять смс. Нечего бюджет транжирить.
              */
             if ($user->phone_number == $phone && $user->phone_confirmed == 1) {
@@ -3214,19 +3366,20 @@ class ApplicationController extends BaseController {
 
             } else {
 
-                /*
+                /**
                  * Генерим и сохраняем код подтверждения для пользователя
                  */
                 $confirm_code = rand(10000, 99999);
                 $user->update_field('phone_confirm_code', $confirm_code);
 
-                /*
+                /**
                  * Отправляем СМС с кодом пользователю
                  */
-                $client = new Services_Twilio(Config::get('twilio.sid'), Config::get('twilio.token'));
+                #$client = new Services_Twilio(Config::get('twilio.sid'), Config::get('twilio.token'));
 
                 #/*
                 try {
+                    /*
                     $sms = $client->account->messages->sendMessage(
                         // Step 6: Change the 'From' number below to be a valid Twilio number
                         // that you've purchased, or the (deprecated) Sandbox number
@@ -3236,6 +3389,9 @@ class ApplicationController extends BaseController {
                         // the sms body
                         "MyPromises.ru code: " . $confirm_code
                     );
+                    */
+
+                    sendSms(preg_replace('~[^\d]~is', '', $user->phone_number), "MyPromises.ru confirmation code: " . $confirm_code);
 
                     $json_request['status'] = TRUE;
                     $json_request['responseText'] = 'СМС отправлено';
@@ -3268,4 +3424,91 @@ class ApplicationController extends BaseController {
         return Response::json($json_request, 200);
     }
 
+
+    /**
+     * Проверка проверочного кода
+     */
+    public function postPhoneCheckCode() {
+
+        $user_id = Input::get('user_id');
+        $code = Input::get('code');
+
+        $json_request = array('status' => FALSE, 'responseText' => '');
+
+        $user = NULL;
+        if ($user_id)
+            $user = Dic::valueBySlugAndId('users', $user_id, 'all', 1, 1);
+
+        if ($user_id && is_object($user)) {
+
+            #dd($user);
+
+            $json_request['status'] = TRUE;
+
+            if ($user->phone_confirm_code == $code) {
+
+                $user->update_field('phone_confirm_code', '');
+                $user->update_field('phone_confirmed', '1');
+                $json_request['state'] = 'valid';
+
+            } else {
+
+                $json_request['state'] = 'invalid';
+                $json_request['responseText'] = 'Неверный код';
+            }
+
+        } else {
+
+            $json_request['responseText'] = 'Пользователь не найден';
+        }
+
+        #Helper::tad($user);
+
+        return Response::json($json_request, 200);
+    }
+
+}
+
+
+/**
+ * Отправка SMS-сообщения
+ *
+ * @param $number
+ * @param $text
+ *
+ * @return mixed
+ */
+function sendSms($number, $text) {
+
+    #$number = '79044442177';
+    #$text = 'Тест отправки SMS сообщения';
+
+    /**
+     * Отправка сообщения на указанный номер
+     */
+    $url = Config::get('site.sms.base') . 'send/?&answer=json&user=' . Config::get('site.sms.user') . '&password=' . md5(Config::get('site.sms.password')) . '&from=' . Config::get('site.sms.from') . '&to=' . $number . '&text=' . urlencode($text);
+
+    /**
+     * Баланс
+     */
+    #$url = 'https://gate.smsaero.ru/balance/?answer=json&user=' . Config::get('site.sms.user') . '&password=' . md5(Config::get('site.sms.password'));
+
+    #Helper::d($url);
+
+    /**
+     * Отправка запроса
+     */
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    #Helper::d($response);
+    #die;
+
+    return $response;
 }

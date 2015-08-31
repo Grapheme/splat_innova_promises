@@ -96,8 +96,8 @@
                         <input name="city" value="{{ $user->city }}" placeholder="Ваш город" class="us-input">
                     </div>
 
-                    @if (Input::get('dbg-phone') == 1)
-                        <div class="input-cont js-phone">
+                    @if (Input::get('dbg-phone') == 1 || 1)
+                        <div class="input-cont js-phone" data-url="{{ URL::route('app.phone.check-code') }}">
                             <input placeholder="Укажите телефон" value="{{ $user->phone_number }}" class="js-phone-input us-input">
 
                             <div data-status="new" data-tooltip="Номер не подтвержден" data-add-class="tooltip-dark" class="phone-status js-phone-popup js-status-popup"></div>
@@ -109,7 +109,6 @@
                             <input type="checkbox" name="notifications[on_phone]" value="1" id="phone" class="styledCheck js-phone-checkbox"{{ @$auth_user->notifications['on_phone'] ? ' checked' : '' }}>
                             <label for="phone"><span class="check-fake"><i class="fi icon-check"></i></span>Напоминать через SMS на мобильный телефон:</label>
                         </div>
-
                     @endif
 
                     <div class="input-cont">
@@ -198,6 +197,9 @@
             'send_sms': '{{ URL::route('app.phone.send-sms') }}',
             'check_code': '/json/checkCode.json'
         };
+        SplatDict.phone_exists = {{ $user->phone_number != '' ? 1 : 0 }};
+        SplatDict.phone_confirmed = {{ $user->phone_number != '' && $user->phone_confirmed ? 1 : 0 }};
+        SplatDict.phone_confirm_code = {{ $user->phone_confirm_code != '' ? 1 : 0 }};
     </script>
 
     <script>
