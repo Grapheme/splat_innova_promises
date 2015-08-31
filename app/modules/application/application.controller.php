@@ -68,6 +68,9 @@ class ApplicationController extends BaseController {
 
             Route::any('/subscribe/{user_id}', array('as' => 'app.subscribe', 'uses' => __CLASS__.'@postSubscribe'));
             Route::any('/unsubscribe/{user_id}', array('as' => 'app.unsubscribe', 'uses' => __CLASS__.'@postUnubscribe'));
+
+
+            Route::any('/cities', array('as' => 'app.cities', 'uses' => __CLASS__.'@getCities'));
         });
 
 
@@ -780,6 +783,62 @@ class ApplicationController extends BaseController {
         }
 
         return Redirect::back();
+    }
+
+
+    public function getCities() {
+
+        $cities = Dic::valuesBySlug('cities');
+        if (isset($cities) && is_object($cities) && $cities->count()) {
+            foreach($cities as $c => $city) {
+                $cities[$c] = $city->extract(true);
+            }
+        }
+        #Helper::tad($cities);
+
+        $city = Input::get('city') ?: 'Москва';
+
+        $users_ids = [];
+        $users = Dic::valuesBySlug('users', function($query) use ($city) {
+            $query->filter_by_field('city', '=', $city);
+        });
+        if (isset($users) && is_object($users) && $users->count()) {
+            $temp = new Collection();
+            foreach($users as $u => $user) {
+                $user = $user->extract(true);
+                $temp[$user->id] = $user;
+                $users_ids[] = $user->id;
+            }
+            $users = $temp;
+        }
+        #Helper::tad($users);
+
+        $promises = new Collection();
+
+        if (count($users_ids)) {
+
+            $promises = Dic::valuesBySlug('promises', function($query) use ($users_ids) {
+                $query->filter_by_field('user_id', 'IN', $users_ids);
+                #$query->filter_by_field('only_for_me', '!=', '1'); ## не работает, будем делать костыль
+            });
+            if (isset($promises) && is_object($promises) && $promises->count()) {
+                $temp = new Collection();
+                foreach($promises as $p => $promise) {
+                    $promise = $promise->extract(true);
+                    if ($promise->only_for_me) {
+                        #unset($promises[$p]);
+                        continue;
+                    }
+                    $temp[] = $promise;
+                }
+                $promises = $temp;
+            }
+        }
+        #Helper::ta($promises);
+        #Helper::smartQueries(1);
+        #die;
+
+        return View::make(Helper::layout('cities'), compact('cities', 'users', 'promises'));
     }
 
 
