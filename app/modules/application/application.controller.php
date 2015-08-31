@@ -789,6 +789,11 @@ class ApplicationController extends BaseController {
     public function getCities() {
 
         $cities = Dic::valuesBySlug('cities');
+        if (isset($cities) && is_object($cities) && $cities->count()) {
+            foreach($cities as $c => $city) {
+                $cities[$c] = $city->extract(true);
+            }
+        }
         Helper::tad($cities);
 
         return View::make(Helper::layout('cities'), compact('user', 'msg', 'new_user'));
