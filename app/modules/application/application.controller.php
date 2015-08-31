@@ -825,7 +825,8 @@ class ApplicationController extends BaseController {
                 }
             }
         }
-        Helper::tad($promises);
+        Helper::ta($promises);
+        Helper::smartQueries();
 
         return View::make(Helper::layout('cities'), compact('cities', 'promises'));
     }
