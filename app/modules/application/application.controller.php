@@ -794,9 +794,25 @@ class ApplicationController extends BaseController {
                 $cities[$c] = $city->extract(true);
             }
         }
-        Helper::tad($cities);
+        #Helper::tad($cities);
 
-        return View::make(Helper::layout('cities'), compact('user', 'msg', 'new_user'));
+        $city = Input::get('city') ?: 'Москва';
+
+        $users = Dic::valuesBySlug('users', function($query) use ($city) {
+            $query->filter_by_field('city', '=', $city);
+        });
+        if (isset($users) && is_object($users) && $users->count()) {
+            foreach($users as $u => $user) {
+                $users[$c] = $user->extract(true);
+            }
+        }
+        Helper::tad($users);
+
+        $promises = Dic::valuesBySlug('promises', function($query) use ($city) {
+            $query->filter_by_field('city');
+        });
+
+        return View::make(Helper::layout('cities'), compact('cities', 'promises'));
     }
 
 
