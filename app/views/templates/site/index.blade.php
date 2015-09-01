@@ -182,7 +182,9 @@
                                               <div class="user-info"><a style="background-image: url({{ $puser->avatar }})" class="user-photo"></a>
                                                   <div class="user-text">
                                                       <div class="name">{{ $puser->name }}</div>
-                                                      <div class="city">{{ $puser->city }}</div>
+                                                      <div class="city">
+                                                          <a href="{{ URL::route('app.cities', ['city' => $puser->city]) }}">{{ $puser->city }}</a>
+                                                      </div>
                                                   </div>
                                               </div>
                                           </div>
