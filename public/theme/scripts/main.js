@@ -403,11 +403,11 @@ $('.js-reload-set').on('click', function(){
     });
 })();
 (function inactive(){
-    var toHide = $('.js-inactive li').first().nextAll().not('.js-inactive-block');
-    console.log(toHide);
-    toHide.hide();
+    var toShow = $('.js-inactive li').not('.js-inactive-block');
+    $('.js-inactive li').first().show();
+    $('.js-inactive-block').show();
     $('.js-show-inactive').on('click', function(){
-        toHide.show();
+        toShow.show();
         $('.js-inactive-block').hide();
         return false;        
     });

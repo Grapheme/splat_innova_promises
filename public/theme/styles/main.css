@@ -3547,3 +3547,7 @@ div.pr-btn { line-height: 38px }
 .type-show-inactive {
     background: #9edd68;
 }
+
+.js-inactive li {
+    display: none;
+}
