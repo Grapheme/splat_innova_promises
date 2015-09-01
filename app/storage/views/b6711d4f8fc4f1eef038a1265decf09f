@@ -184,7 +184,9 @@
                                               <div class="user-info"><a style="background-image: url(<?php echo $puser->avatar; ?>)" class="user-photo"></a>
                                                   <div class="user-text">
                                                       <div class="name"><?php echo $puser->name; ?></div>
-                                                      <div class="city"><?php echo $puser->city; ?></div>
+                                                      <div class="city">
+                                                          <a href="<?php echo URL::route('app.cities', ['city' => $puser->city]); ?>"><?php echo $puser->city; ?></a>
+                                                      </div>
                                                   </div>
                                               </div>
                                           </div>
@@ -194,7 +196,11 @@
                                               <div class="promise-stat pr-loc">
                                                   <?php if($city_promises_count): ?>
                                                       <div class="stat-title"><?php echo trans_choice(':count Обещание|:count Обещания|:count Обещаний', $city_promises_count, array(), 'ru'); ?></div>
-                                                      <div class="stat-desc">из города <b><?php echo $puser->city; ?></b></div>
+                                                      <div class="stat-desc">из города
+                                                          <b>
+                                                              <a href="<?php echo URL::route('app.cities', ['city' => $puser->city]); ?>"><?php echo $puser->city; ?></a>
+                                                          </b>
+                                                      </div>
                                                       <div class="stat-desc" style="margin: 25px 0 0; font-size: 16px; line-height: 1.5;"><?php echo mb_strtoupper($promise->name); ?></div>
                                                   <?php endif; ?>
                                               </div>

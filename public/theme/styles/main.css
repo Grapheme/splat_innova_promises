@@ -1708,6 +1708,9 @@ html { height: 100% }
         margin-top: 3px;
         font-size: 13px;
     }
+    .promises-index .promise-item .promise-cont.promise-hover .promise-stat .stat-desc a {
+        color: inherit;
+    }
     .promises-index .promise-item .promise-cont.promise-hover .btn-cont {
         position: absolute;
         bottom: 0;
@@ -2039,6 +2042,9 @@ html { height: 100% }
         display: inline-block;
         vertical-align: middle;
         line-height: normal;
+    }
+    .profile-card .profile-info .info-cont a {
+        color: inherit;
     }
     .profile-card .profile-info .name {
         font-weight: 100;

@@ -95,6 +95,7 @@
     ?>
     <div class="promise-make promise-page type-<?php echo $promise->style_id; ?>" data-finish="<?php echo $promise->time_limit; ?>">
         <div class="wrapper">
+            <?php if(0): ?>
             <div class="relative-promises">
                 <div class="relative-title">Похожие обещания</div>
                 <div class="relative-list">
@@ -127,6 +128,7 @@
                     <a href="#">Посмотреть все похожие обещания</a>
                 </div>
             </div>
+            <?php endif; ?>
             <div class="profile-card">
                 <a href="<?php echo URL::to('/profile/'.$promise_user->id); ?>" style="background-image: url(<?php echo $promise_user->avatar ?: $default_avatar; ?>);" class="profile-photo"></a>
                 <div class="profile-info">
@@ -141,8 +143,7 @@
                             </div>
                         <?php endif; ?>
                         <?php if($promise_user->city): ?>
-                            <?php echo $promise_user->city; ?>
-
+                            <a href="<?php echo URL::route('app.cities', ['city' => $promise_user->city]); ?>"><?php echo $promise_user->city; ?></a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -228,7 +229,7 @@
                             </span>
                         </button>
                     <?php endif; ?>
-                    
+
                     <div class="promise-soc"><span>Расскажи об обещании:</span>
                       <ul class="soc-ul">
                         <li><a onclick="ga('send', 'event', 'like', 'facebook');" href="http://www.facebook.com/sharer.php?u=<?php echo URL::route('app.promise', $promise->id); ?>" class="soc-icon" target="_blank"><i class="fi icon-fb"></i></a></li>

@@ -154,8 +154,7 @@ if (isset($achievements) && count($achievements)) {
                 </div>
                 <?php endif; ?>
                 <?php if($user->city): ?>
-                    <?php echo $user->city; ?>
-
+                    <a href="<?php echo URL::route('app.cities', ['city' => $user->city]); ?>"><?php echo $user->city; ?></a>
                 <?php endif; ?>
                 <div class="achives js-achives"></div>
               </div>
