@@ -561,7 +561,7 @@ SplatSite.ValidPhone = function() {
 			if(resp.status == false) {
 				show_error('Произошла ошибка. Попробуйте позже');
 			} else {
-				SplatSite.simpleBox().open('sms');
+				$('.js-phone-code').slideDown();
 			}
 		})
 		.fail(function(){
@@ -569,6 +569,9 @@ SplatSite.ValidPhone = function() {
 			$('.js-phone-popup').removeClass('loading');
 			show_error('Произошла ошибка. Попробуйте позже');
 		});
+	}
+	var showForm = function() {
+
 	}
 	var checkCode = function() {
 		var data = {

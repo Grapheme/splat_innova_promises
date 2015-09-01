@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+ <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title><?php echo e((isset($page_title))?$page_title:Config::get('app.default_page_title')); ?></title>
+	<meta name="description" content="<?php echo e((isset($page_description))?$page_description:''); ?>">
+	<meta name="keywords" content="<?php echo e((isset($page_keywords))?$page_keywords:''); ?>">
+	<meta name="author" content="<?php echo e((isset($page_author))?$page_author:''); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<?php if(Config::get('app.use_css_local')): ?>
+	<?php echo HTML::style('private/css/bootstrap.min.css'); ?>
+
+<?php else: ?>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+<?php endif; ?>
+	<?php echo HTML::style('private/css/bootstrap-theme.min.css'); ?>
+
+	<?php echo HTML::style('private/css/font-awesome.min.css'); ?>
+
+	<?php echo HTML::style('private/css/production.css'); ?>
+
+	<?php echo HTML::style('private/css/skins.css'); ?>
+
+	<link rel="shortcut icon" href="<?php echo asset('private/img/favicon/favicon.png'); ?>" type="image/x-icon">
+	<link rel="icon" href="<?php echo asset('private/img/favicon/favicon.png'); ?>" type="image/x-icon">
+<?php if(Config::get('app.use_googlefonts')): ?>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
+<?php endif; ?>
+<?php echo HTML::script('private/js/vendor/modernizr-2.6.2.min.js');; ?>
+
+</head>
+<body>
+	<!--[if lt IE 7]>
+		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+	<div id="main2" role="main">
+		<div id="content" class="container">
+			<div class="row">
+
+				<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4" style="float:none; clear:both; margin: 0 auto">
+					<div class="well no-padding">
+						<?php echo $__env->make('guests.forms.sign-in', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					</div>
+				</div>
+
+                <?php /*
+    			<?php if(Allow::module('users') || 1): ?>
+				<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+					<div class="well no-padding">
+						<?php echo $__env->make('guests.forms.sign-up', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					</div>
+				</div>
+			    <?php endif; ?>
+                */ ?>
+
+			</div>
+		</div>
+	</div>
+
+<?php if(Config::get('app.use_scripts_local')): ?>
+	<?php echo HTML::script('js/vendor/jquery.min.js');; ?>
+
+<?php else: ?>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="<?php echo asset('private/js/vendor/jquery.min.js');; ?>"><\/script>')</script>
+<?php endif; ?>
+	<?php echo HTML::script('private/js/vendor/bootstrap.min.js');; ?>
+
+	<?php echo HTML::script('private/js/system/main.js');; ?>
+
+	<?php echo HTML::script('private/js/vendor/SmartNotification.min.js');; ?>
+
+	<?php echo HTML::script('private/js/vendor/jquery.validate.min.js');; ?>
+
+	<?php echo HTML::script('private/js/vendor/jquery.maskedinput.min.js');; ?>
+
+	<?php echo HTML::script('private/js/system/app.js');; ?>
+
+	<?php echo HTML::script('private/js/system/messages.js');; ?>
+
+<script type="text/javascript">pageSetUp();</script>
+<?php echo HTML::script('private/js/account/guest.js');; ?>
+
+
+<?php if(Allow::module('users') && 0): ?>
+<?php echo HTML::script('private/js/modules/users.js');; ?>
+
+<script type="text/javascript">
+	loadScript("<?php echo asset('private/js/vendor/jquery-form.min.js');; ?>", moduleFormValidtion);
+</script>
+<?php else: ?>
+<script type="text/javascript">
+	loadScript("<?php echo asset('private/js/vendor/jquery-form.min.js');; ?>", runFormValidation);
+</script>
+<?php endif; ?>
+
+</body>
+</html>
