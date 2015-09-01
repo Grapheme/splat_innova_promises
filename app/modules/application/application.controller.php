@@ -81,6 +81,9 @@ class ApplicationController extends BaseController {
         Route::get('/statistika/promises/all', array('as' => 'app.statistics_promises_all', 'uses' => __CLASS__.'@getStatisticsPromisesAll'));
 
 
+        Route::get('/how-it-works', array('as' => 'app.hiw', 'uses' => __CLASS__.'@getHiw'));
+
+
     }
 
 
@@ -3564,6 +3567,15 @@ class ApplicationController extends BaseController {
         #Helper::tad($user);
 
         return Response::json($json_request, 200);
+    }
+
+
+    public function getHiw() {
+
+        $user = $this->user;
+        #Helper::tad($user);
+
+        return View::make(Helper::layout('hiw'), compact('user'));
     }
 
 }
