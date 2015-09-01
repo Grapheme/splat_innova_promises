@@ -71,6 +71,7 @@ class ApplicationController extends BaseController {
 
 
             Route::any('/cities', array('as' => 'app.cities', 'uses' => __CLASS__.'@getCities'));
+            Route::any('/service/cities', array('as' => 'app.service.cities', 'uses' => __CLASS__.'@getServiceCities'));
         });
 
 
@@ -844,6 +845,27 @@ class ApplicationController extends BaseController {
         #die;
 
         return View::make(Helper::layout('cities'), compact('cities', 'current_city', 'users', 'promises'));
+    }
+
+
+    public function getServiceCities() {
+
+        $data = DicFieldVal::where('key', 'city')
+            ->select([DB::raw('value AS city'), DB::raw('COUNT(*) AS count')])
+            ->groupBy('value')
+            ->orderBy(DB::raw('COUNT(*)'), 'DESC')
+            ->get()
+        ;
+
+        Helper::error404();
+        #Helper::tad($data);
+
+        echo '<table border="1" cellspacing="0" cellpadding="5">
+<thead><th>Город</th><th>Количество</th></thead>';
+        foreach ($data as $dat) {
+            echo '<tr><td>' . $dat->city . '</td><td>' . $dat->count . '</td></tr>';
+        }
+        echo '</table>';
     }
 
 
