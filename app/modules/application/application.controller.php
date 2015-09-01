@@ -788,19 +788,24 @@ class ApplicationController extends BaseController {
 
     public function getCities() {
 
+        $current_city = Input::get('city') ?: 'Москва';
+
         $cities = Dic::valuesBySlug('cities');
         if (isset($cities) && is_object($cities) && $cities->count()) {
             foreach($cities as $c => $city) {
-                $cities[$c] = $city->extract(true);
+                $city = $city->extract(true);
+
+                if (!is_object($current_city) && $current_city == $city->name)
+                    $current_city = $city;
+
+                $cities[$c] = $city;
             }
         }
         #Helper::tad($cities);
 
-        $city = Input::get('city') ?: 'Москва';
-
         $users_ids = [];
-        $users = Dic::valuesBySlug('users', function($query) use ($city) {
-            $query->filter_by_field('city', '=', $city);
+        $users = Dic::valuesBySlug('users', function($query) use ($current_city) {
+            $query->filter_by_field('city', '=', $current_city->name);
         });
         if (isset($users) && is_object($users) && $users->count()) {
             $temp = new Collection();
@@ -838,7 +843,7 @@ class ApplicationController extends BaseController {
         #Helper::smartQueries(1);
         #die;
 
-        return View::make(Helper::layout('cities'), compact('cities', 'users', 'promises'));
+        return View::make(Helper::layout('cities'), compact('cities', 'current_city', 'users', 'promises'));
     }
 
 

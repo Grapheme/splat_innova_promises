@@ -1,4 +1,7 @@
 @extends(Helper::layout())
+<?
+$page_title = 'Что обещают в ' . $current_city->dp;
+?>
 
 
 @section('style')
@@ -11,7 +14,7 @@
         <div class="indexpr-wrapper">
             <div class="wrapper">
                 <div class="city-wrapper">
-                    <div class="city-title">Что обещают в Москве</div>
+                    <div class="city-title">Что обещают в {{ $current_city->dp }}</div>
                     <div class="city-select">
                         <div class="select-title">Узнай, что обещают в других городах</div>
                         <div class="select-ui">
