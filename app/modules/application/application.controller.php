@@ -789,12 +789,18 @@ class ApplicationController extends BaseController {
 
     public function getCities() {
 
-        $current_city = Input::get('city') ?: 'Москва';
+        $default_city_name = 'Москва';
+        $default_city = null;
+
+        $current_city = Input::get('city') ?: $default_city_name;
 
         $cities = Dic::valuesBySlug('cities');
         if (isset($cities) && is_object($cities) && $cities->count()) {
             foreach($cities as $c => $city) {
                 $city = $city->extract(true);
+
+                if (!is_object($default_city) && $city->name == $default_city_name)
+                    $default_city = $city;
 
                 if (!is_object($current_city) && $current_city == $city->name)
                     $current_city = $city;
@@ -803,6 +809,8 @@ class ApplicationController extends BaseController {
             }
         }
         #Helper::tad($cities);
+        if (!is_object($current_city))
+            $current_city = $default_city;
 
         $users_ids = [];
         $users = Dic::valuesBySlug('users', function($query) use ($current_city) {
