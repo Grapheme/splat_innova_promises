@@ -265,75 +265,90 @@ if (isset($achievements) && count($achievements)) {
         <?
         $friends_count = @count($user->existing_friends) + @count($user->non_existing_friends);
         ?>
-        <div class="friends">
-          <div class="wrapper">
-            <div class="us-title">Мои друзья <sup>{{ $friends_count }}</sup></div>
-          </div>
+        <div class="wrapper">
+            <div class="promises-title us-title" style="line-height: 60px;">
+                <span>Друзья на MyPromises</span>
+                <!-- <a href="#" class="us-btn right-title-btn">Посмотреть обещания друзей</a> -->
+            </div>
+        </div>
+        <div class="friends-lists">
+            <div class="wrapper">
+                <div class="friends friends-left">
+                    <div class="friends-title">Ваши друзья</sup></div>
+                    <ul class="friends-list">
 
-          <ul class="friends-list">
-
-            <?
-            $i = 0;
-            ?>
-
-            @if (count($user->existing_friends))
-
-                @foreach ($user->existing_friends as $friend)
                     <?
-                    ++$i;
-                    $default_avatar = '/theme/images/man.png';
-                    if (isset($friend['sex']) && $friend['sex'] == 1)
-                        $default_avatar = '/theme/images/woman.png';
+                    $i = 0;
                     ?>
-                    <li class="friend-item registered-user{{ $i > 12 ? ' hidden' : '' }}">
 
-                        @if (@$friend['profile_id'])
+                    @if (count($user->existing_friends))
 
-                            <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}" style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></a>
-                            <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}" class="name clean-a">{{ @$friend['_name'] }}</a>
-                        
-                        @else
+                        @foreach ($user->existing_friends as $friend)
+                            <?
+                            ++$i;
+                            $default_avatar = '/theme/images/man.png';
+                            if (isset($friend['sex']) && $friend['sex'] == 1)
+                                $default_avatar = '/theme/images/woman.png';
+                            ?>
+                            <li class="friend-item registered-user js-friend-item-left" style="display: none;">
 
-                            <div style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></div>
-                            <div class="name clean-a">{{ @$friend['_name'] }}</div>
+                                @if (@$friend['profile_id'])
 
-                        @endif
+                                    <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}" style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></a>
+                                    <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}" class="name clean-a">{{ @$friend['_name'] }}</a>
+                                
+                                @else
 
-                    </li>
-                @endforeach
+                                    <div style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></div>
+                                    <div class="name clean-a">{{ @$friend['_name'] }}</div>
 
-            @endif
+                                @endif
 
-            @if (count($user->non_existing_friends))
+                            </li>
+                        @endforeach
 
-                @foreach ($user->non_existing_friends as $friend)
-                    <?
-                    ++$i;
-                    $default_avatar = '/theme/images/man.png';
-                    if (isset($friend['sex']) && $friend['sex'] == 1)
-                        $default_avatar = '/theme/images/woman.png';
-                    ?>
-                    <li class="friend-item registered-user{{ $i > 12 ? ' hidden' : '' }}">
+                    @endif
 
-                            <a href="{{ URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])) }}" data-style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></a>
-                            <a href="{{ URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])) }}" class="name clean-a">{{ @$friend['_name'] }}</a>
+                        <div style="float:none; clear:both;"></div>
 
-                    </li>
-                @endforeach
-
-            @endif
-
-              @if ($friends_count > 12)
-                <div style="float:none; clear:both;"></div>
-                <div class="wrapper">
-                  <a href="#" class="show-more-friends" data-limit="12">Показать еще 12 друзей</a>
+                  </ul>
                 </div>
-              @endif
+                <div class="friends friends-right">
+                    <div class="friends-title">Пригласить друга</sup></div>
+                    <ul class="friends-list">
 
-          </ul>
+                    <?
+                    $i = 0;
+                    ?>
 
+                    @if (count($user->non_existing_friends))
 
+                        @foreach ($user->non_existing_friends as $friend)
+                            <?
+                            ++$i;
+                            $default_avatar = '/theme/images/man.png';
+                            if (isset($friend['sex']) && $friend['sex'] == 1)
+                                $default_avatar = '/theme/images/woman.png';
+                            ?>
+                            <li class="friend-item registered-user js-friend-item-right" style="display: none;">
 
+                                    <a href="{{ URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])) }}" data-style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></a>
+                                    <a href="{{ URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])) }}" class="name clean-a">{{ @$friend['_name'] }}</a>
+
+                            </li>
+                        @endforeach
+
+                    @endif
+
+                        <div style="float:none; clear:both;"></div>
+
+                  </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="friends-more">
+            <a href="#" class="js-show-friends">Показать еще друзей</a>
         </div>
         @endif
 

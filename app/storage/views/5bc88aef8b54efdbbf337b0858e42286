@@ -273,75 +273,90 @@ if (isset($achievements) && count($achievements)) {
         <?
         $friends_count = @count($user->existing_friends) + @count($user->non_existing_friends);
         ?>
-        <div class="friends">
-          <div class="wrapper">
-            <div class="us-title">Мои друзья <sup><?php echo $friends_count; ?></sup></div>
-          </div>
+        <div class="wrapper">
+            <div class="promises-title us-title" style="line-height: 60px;">
+                <span>Друзья на MyPromises</span>
+                <!-- <a href="#" class="us-btn right-title-btn">Посмотреть обещания друзей</a> -->
+            </div>
+        </div>
+        <div class="friends-lists">
+            <div class="wrapper">
+                <div class="friends friends-left">
+                    <div class="friends-title">Ваши друзья</sup></div>
+                    <ul class="friends-list">
 
-          <ul class="friends-list">
-
-            <?
-            $i = 0;
-            ?>
-
-            <?php if(count($user->existing_friends)): ?>
-
-                <?php foreach($user->existing_friends as $friend): ?>
                     <?
-                    ++$i;
-                    $default_avatar = '/theme/images/man.png';
-                    if (isset($friend['sex']) && $friend['sex'] == 1)
-                        $default_avatar = '/theme/images/woman.png';
+                    $i = 0;
                     ?>
-                    <li class="friend-item registered-user<?php echo $i > 12 ? ' hidden' : ''; ?>">
 
-                        <?php if(@$friend['profile_id']): ?>
+                    <?php if(count($user->existing_friends)): ?>
 
-                            <a href="<?php echo URL::route('app.profile_id', $friend['profile_id']); ?>" style="background-image: url(<?php echo @$friend['avatar'] ?: $default_avatar; ?>);" class="profile-photo clean-a"></a>
-                            <a href="<?php echo URL::route('app.profile_id', $friend['profile_id']); ?>" class="name clean-a"><?php echo @$friend['_name']; ?></a>
-                        
-                        <?php else: ?>
+                        <?php foreach($user->existing_friends as $friend): ?>
+                            <?
+                            ++$i;
+                            $default_avatar = '/theme/images/man.png';
+                            if (isset($friend['sex']) && $friend['sex'] == 1)
+                                $default_avatar = '/theme/images/woman.png';
+                            ?>
+                            <li class="friend-item registered-user js-friend-item-left" style="display: none;">
 
-                            <div style="background-image: url(<?php echo @$friend['avatar'] ?: $default_avatar; ?>);" class="profile-photo clean-a"></div>
-                            <div class="name clean-a"><?php echo @$friend['_name']; ?></div>
+                                <?php if(@$friend['profile_id']): ?>
 
-                        <?php endif; ?>
+                                    <a href="<?php echo URL::route('app.profile_id', $friend['profile_id']); ?>" style="background-image: url(<?php echo @$friend['avatar'] ?: $default_avatar; ?>);" class="profile-photo clean-a"></a>
+                                    <a href="<?php echo URL::route('app.profile_id', $friend['profile_id']); ?>" class="name clean-a"><?php echo @$friend['_name']; ?></a>
+                                
+                                <?php else: ?>
 
-                    </li>
-                <?php endforeach; ?>
+                                    <div style="background-image: url(<?php echo @$friend['avatar'] ?: $default_avatar; ?>);" class="profile-photo clean-a"></div>
+                                    <div class="name clean-a"><?php echo @$friend['_name']; ?></div>
 
-            <?php endif; ?>
+                                <?php endif; ?>
 
-            <?php if(count($user->non_existing_friends)): ?>
+                            </li>
+                        <?php endforeach; ?>
 
-                <?php foreach($user->non_existing_friends as $friend): ?>
-                    <?
-                    ++$i;
-                    $default_avatar = '/theme/images/man.png';
-                    if (isset($friend['sex']) && $friend['sex'] == 1)
-                        $default_avatar = '/theme/images/woman.png';
-                    ?>
-                    <li class="friend-item registered-user<?php echo $i > 12 ? ' hidden' : ''; ?>">
+                    <?php endif; ?>
 
-                            <a href="<?php echo URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])); ?>" data-style="background-image: url(<?php echo @$friend['avatar'] ?: $default_avatar; ?>);" class="profile-photo clean-a"></a>
-                            <a href="<?php echo URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])); ?>" class="name clean-a"><?php echo @$friend['_name']; ?></a>
+                        <div style="float:none; clear:both;"></div>
 
-                    </li>
-                <?php endforeach; ?>
-
-            <?php endif; ?>
-
-              <?php if($friends_count > 12): ?>
-                <div style="float:none; clear:both;"></div>
-                <div class="wrapper">
-                  <a href="#" class="show-more-friends" data-limit="12">Показать еще 12 друзей</a>
+                  </ul>
                 </div>
-              <?php endif; ?>
+                <div class="friends friends-right">
+                    <div class="friends-title">Пригласить друга</sup></div>
+                    <ul class="friends-list">
 
-          </ul>
+                    <?
+                    $i = 0;
+                    ?>
 
+                    <?php if(count($user->non_existing_friends)): ?>
 
+                        <?php foreach($user->non_existing_friends as $friend): ?>
+                            <?
+                            ++$i;
+                            $default_avatar = '/theme/images/man.png';
+                            if (isset($friend['sex']) && $friend['sex'] == 1)
+                                $default_avatar = '/theme/images/woman.png';
+                            ?>
+                            <li class="friend-item registered-user js-friend-item-right" style="display: none;">
 
+                                    <a href="<?php echo URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])); ?>" data-style="background-image: url(<?php echo @$friend['avatar'] ?: $default_avatar; ?>);" class="profile-photo clean-a"></a>
+                                    <a href="<?php echo URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])); ?>" class="name clean-a"><?php echo @$friend['_name']; ?></a>
+
+                            </li>
+                        <?php endforeach; ?>
+
+                    <?php endif; ?>
+
+                        <div style="float:none; clear:both;"></div>
+
+                  </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="friends-more">
+            <a href="#" class="js-show-friends">Показать еще друзей</a>
         </div>
         <?php endif; ?>
 

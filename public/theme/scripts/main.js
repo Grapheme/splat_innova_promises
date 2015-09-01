@@ -118,7 +118,7 @@ SplatSite.ValidPhone = function() {
     var checkCode = function() {
         var data = {
                 user_id: SplatDict.user_id,
-                code: $('.js-phone-code').val()
+                code: $('.js-code-input').val()
             };
         $('.js-code-check').addClass('loading-link');
         $.ajax({
@@ -384,3 +384,21 @@ $('.js-reload-set').on('click', function(){
     window.location.href = $('.js-reload-select').val();
     return false;
 });
+(function friendsList(){
+    var activeStep = 0;
+    var showCount = 12;
+    var show = function() {
+        activeStep++;
+        var countStep = activeStep * showCount;
+        $('.js-friend-item-right').not(':visible').slice(0, showCount/2).show();
+        $('.js-friend-item-left').not(':visible').slice(0, showCount/2).show();
+        if($('.js-friend-item-left').not(':visible').length == 0 && $('.js-friend-item-right').not(':visible').length == 0) {
+            $('.js-show-friends').hide();
+        }
+    }
+    show();
+    $('.js-show-friends').on('click', function(){
+        show();
+        return false;
+    });
+})();
