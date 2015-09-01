@@ -829,6 +829,7 @@ class ApplicationController extends BaseController {
         }
         #Helper::tad($users);
 
+        $current_city_name = is_object($current_city) ? $current_city->name : 'г.' . $current_city;
         $current_city_dp = is_object($current_city) ? $current_city->dp : 'г.' . $current_city;
 
         $promises = new Collection();
@@ -856,7 +857,7 @@ class ApplicationController extends BaseController {
         #Helper::smartQueries(1);
         #die;
 
-        return View::make(Helper::layout('cities'), compact('cities', 'current_city', 'current_city_dp', 'users', 'promises'));
+        return View::make(Helper::layout('cities'), compact('cities', 'current_city', 'current_city_name', 'current_city_dp', 'users', 'promises'));
     }
 
 
