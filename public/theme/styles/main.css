@@ -3288,3 +3288,40 @@ div.pr-btn { line-height: 38px }
     border-width: 5px 5px 0 5px;
     border-color: #ccc transparent transparent transparent;
 }
+
+.hiw-block {
+    height: 300px;
+    overflow: hidden;
+    background: #dedede;
+}
+
+.hiw-text {
+    float: left;
+    width: 50%;
+    height: 100%;
+    padding: 50px 70px;
+    box-sizing: border-box;
+}
+
+.hiw-image {
+    float: left;
+    width: 50%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+}
+
+.hiw-title {
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.hiw-desc {
+    margin-top: 30px;
+}
+
+.hiw-btn {
+    text-align: center;
+    padding: 90px 0;
+}
