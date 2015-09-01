@@ -1,6 +1,6 @@
 @extends(Helper::layout())
 <?
-$page_title = 'Что обещают в ' . $city->dp;
+#$page_title = 'Что обещают в г.' . $city;
 ?>
 
 
@@ -14,7 +14,7 @@ $page_title = 'Что обещают в ' . $city->dp;
         <div class="indexpr-wrapper">
             <div class="wrapper">
                 <div class="city-wrapper">
-                    <div class="city-title">Что обещают в {{ $city->dp }}</div>
+                    <div class="city-title">Что обещают в г.{{ $city }}</div>
                     <div class="city-select">
                         <div class="select-title">Узнай, что обещают в других городах</div>
                         <div class="select-ui">
