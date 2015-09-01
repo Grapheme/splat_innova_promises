@@ -804,8 +804,8 @@ class ApplicationController extends BaseController {
         #Helper::tad($cities);
 
         $users_ids = [];
-        $users = Dic::valuesBySlug('users', function($query) use ($city) {
-            $query->filter_by_field('city', '=', $city);
+        $users = Dic::valuesBySlug('users', function($query) use ($current_city) {
+            $query->filter_by_field('city', '=', $current_city->name);
         });
         if (isset($users) && is_object($users) && $users->count()) {
             $temp = new Collection();
