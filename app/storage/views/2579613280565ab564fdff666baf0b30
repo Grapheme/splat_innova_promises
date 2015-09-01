@@ -1,0 +1,48 @@
+<?
+$fb_app_id = '1010986995584773';
+$fb_friends_limit = 99;
+?>
+<?php $__env->startSection('title'); ?>
+<?php echo e(isset($page_title) ? $page_title : Config::get('app.default_page_title')); ?><?php $__env->stopSection(); ?>
+<?php $__env->startSection('description'); ?>
+<?php echo e(isset($page_description) ? $page_description : Config::get('app.default_page_description')); ?><?php $__env->stopSection(); ?>
+<?php $__env->startSection('keywords'); ?>
+<?php echo e(isset($page_keywords) ? $page_keywords : Config::get('app.default_page_keywords')); ?><?php $__env->stopSection(); ?>
+        <meta charset="utf-8">
+        <title><?php echo $__env->yieldContent('title'); ?></title>
+        <meta name="description" content="<?php echo $__env->yieldContent('description'); ?>">
+        <meta name="keywords" content="<?php echo $__env->yieldContent('keywords'); ?>">
+
+        <?php $__env->startSection('opengraph'); ?>
+        <!-- Open Graph Meta Data -->
+        <meta property="og:url" content="http://mypromises.ru">
+        <meta property="og:title" content="Мои обещания">
+        <meta property="og:description" content="Наши слова меняют мир, когда становятся делами.">
+        <meta property="og:image" content="http://mypromises.ru/uploads/card_green_share.jpg">
+        <?php echo $__env->yieldSection(); ?>
+        <meta property="og:site_name" content="mypromises.ru">
+        <meta property="og:type" content="website">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
+
+        <link rel="shortcut icon" href="/favicon.ico">
+
+        <?php echo HTML::stylemod(Config::get('site.theme_path') . '/styles/vendor.css'); ?>
+
+        <?php echo HTML::stylemod(Config::get('site.theme_path') . '/styles/main.css'); ?>
+
+        <?php echo HTML::scriptmod(Config::get('site.theme_path') . '/scripts/vendor/modernizr.js'); ?>
+
+        <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
+
+        <script>
+        var base_url = '<?php echo URL::to(''); ?>';
+        var domain = '<?=domain?>';
+        </script>
+
+        <script>
+        var fb_app_id = <?php echo $fb_app_id; ?>;
+        var fb_friends_limit = <?php echo $fb_friends_limit; ?>;
+
+        var user_id = <?php echo isset($auth_user) && is_object($auth_user) && $auth_user->id ? "'" . $auth_user->id . "'" : "''"; ?>;
+        </script>

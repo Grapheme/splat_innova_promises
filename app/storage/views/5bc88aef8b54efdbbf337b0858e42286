@@ -186,7 +186,18 @@ if (isset($achievements) && count($achievements)) {
 
                 <?php echo $__env->make(Helper::layout('promise_inc'), array('promise_type' => 'active'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-                <?php if($p == 2): ?>
+                <?php if($p == 1): ?>
+                    <li class="promise-item type-add-new">
+                        <a href="<?php echo URL::to('/new_promise'); ?>" class="add-content">
+                            <span class="add-wrap">
+                                <span class="add-text">Добавить новое обещание</span>
+                                <span class="add-icon"></span>
+                            </span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if($p == 5): ?>
                     <?php echo $__env->yieldContent('koe-chto'); ?>
                 <?php endif; ?>
 
@@ -208,7 +219,7 @@ if (isset($achievements) && count($achievements)) {
                 <div class="little-title">Неактивные</div>
             </div>
 
-            <ul class="promises-list">
+            <ul class="promises-list js-inactive">
                 <?
                 $p = 0;
                 ?>
@@ -232,6 +243,15 @@ if (isset($achievements) && count($achievements)) {
                 <?php if($p == 1 && !@count($active_promises)): ?>
                     <?php echo $__env->yieldContent('koe-chto'); ?>
                 <?php endif; ?>
+
+                <li class="promise-item type-show-inactive js-inactive-block">
+                    <a href="<?php echo URL::to('/new_promise'); ?>" class="add-content js-show-inactive">
+                        <span class="add-wrap">
+                            <span class="add-text">Посмотреть все архивные обещания</span>
+                            <span class="add-icon list-icon"></span>
+                        </span>
+                    </a>
+                </li>
 
             </ul>
         <?php endif; ?>

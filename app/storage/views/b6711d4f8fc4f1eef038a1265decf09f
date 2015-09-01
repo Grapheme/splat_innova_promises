@@ -1,13 +1,10 @@
-@extends(Helper::layout())
+<?php $__env->startSection('style'); ?>
+<?php $__env->stopSection(); ?>
 
 
-@section('style')
-@stop
+<?php $__env->startSection('content'); ?>
 
-
-@section('content')
-
-    @if (0)
+    <?php if(0): ?>
 
         <form action="#" method="POST" id="promise_form">
             Я обещаю, что...<br/>
@@ -43,7 +40,7 @@
             -->
             <link href="http://www.odnoklassniki.ru/oauth/resources.do?type=css" rel="stylesheet" />
             <script src="http://www.odnoklassniki.ru/oauth/resources.do?type=js" type="text/javascript" charset="utf-8"></script>
-            <a class="odkl-oauth-lnk_____ ok-oauth-link" href="#" data-domain="{{ domain }}">Войти через Одноклассники</a>
+            <a class="odkl-oauth-lnk_____ ok-oauth-link" href="#" data-domain="<?php echo domain; ?>">Войти через Одноклассники</a>
 
         <hr/>
 
@@ -53,34 +50,37 @@
 
         или адреса электронной почты:<br/>
 
-        <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" id="auth_form">
+        <form action="<?php echo URL::route('app.email-pass-auth'); ?>" method="POST" id="auth_form">
             <input type="hidden" name="promise_text" value=""><br/>
             почта <input type="text" name="email" class="user-auth-email"><br/>
             пароль <input type="password" name="pass" class="user-auth-pass"><br/>
             <button type="submit" class="user-auth-send">Войти</button>
-            <a href="{{ URL::route('app.restore_password') }}">Забыли пароль?</a>
+            <a href="<?php echo URL::route('app.restore_password'); ?>">Забыли пароль?</a>
         </form>
 
         <hr/>
 
         DEBUG:
-        {{ Helper::d(@$_SESSION) }}
-        {{ Helper::d(@$_COOKIE) }}
-        {{ Helper::ta_(@$promises) }}
+        <?php echo Helper::d(@$_SESSION); ?>
+
+        <?php echo Helper::d(@$_COOKIE); ?>
+
+        <?php echo Helper::ta_(@$promises); ?>
+
 
         <hr/>
 
-    @endif
+    <?php endif; ?>
 
       <div class="main-screen">
         <div class="main-fotorama">
           <div class="js-main-fotorama">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/1.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/3.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/4.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/5.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/7.jpg" alt="">
-              <img src="{{ Config::get('site.theme_path') }}/images/main_slider/8.jpg" alt="">
+              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/1.jpg" alt="">
+              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/3.jpg" alt="">
+              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/4.jpg" alt="">
+              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/5.jpg" alt="">
+              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/7.jpg" alt="">
+              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/8.jpg" alt="">
           </div>
         </div>
         <div class="main-content wrapper">
@@ -106,22 +106,24 @@
             </div>
             <div class="hint">Давайте только те обещания, которые сможете выполнить</div>
             <a data-box="auth" onclick="yaCounter27511935.reachGoal('butpromises'); return true;" class="js-open-box js-promise-btn us-btn make-new-promise-btn">Дать обещание</a>
-            <a class="hiw-link" href="{{URL::to('/how-it-works')}}">Как это работает?</a>
+            <a class="hiw-link" href="<?php echo URL::to('/how-it-works'); ?>">Как это работает?</a>
           </div>
         </div>
       </div>
       <div class="promises-cont">
         <div class="promises-fotorama">
-          <div class="js-promises-fotorama"><img src="{{ Config::get('site.theme_path') }}/images/promises/back0.png"><img src="{{ Config::get('site.theme_path') }}/images/promises/back1.png"><img src="{{ Config::get('site.theme_path') }}/images/promises/back2.png"><img src="{{ Config::get('site.theme_path') }}/images/promises/back3.png"><img src="{{ Config::get('site.theme_path') }}/images/promises/back4.png">
+          <div class="js-promises-fotorama"><img src="<?php echo Config::get('site.theme_path'); ?>/images/promises/back0.png"><img src="<?php echo Config::get('site.theme_path'); ?>/images/promises/back1.png"><img src="<?php echo Config::get('site.theme_path'); ?>/images/promises/back2.png"><img src="<?php echo Config::get('site.theme_path'); ?>/images/promises/back3.png"><img src="<?php echo Config::get('site.theme_path'); ?>/images/promises/back4.png">
           </div>
         </div>
         <div class="promises-amount">
           <div class="amount-cont">
               Выполнено <b>
                   <span class="mainpage_counter">
-                      {{ $finished_promises }}
+                      <?php echo $finished_promises; ?>
+
                   </span>
-                  {{ trans_choice('обещание|обещания|обещаний', $finished_promises, array(), 'ru') }}
+                  <?php echo trans_choice('обещание|обещания|обещаний', $finished_promises, array(), 'ru'); ?>
+
               </b>
           </div>
         </div>
@@ -131,11 +133,11 @@
           </div> -->
           <div class="indexpr-wrapper">
 
-              @if (isset($mainpage_promises) && is_object($mainpage_promises) && $mainpage_promises->count())
+              <?php if(isset($mainpage_promises) && is_object($mainpage_promises) && $mainpage_promises->count()): ?>
 
                   <ul class="promises-index js-split-promises">
 
-                      @foreach ($mainpage_promises as $promise)
+                      <?php foreach($mainpage_promises as $promise): ?>
                           <?
                           $puser = isset($users[$promise->user_id]) ? $users[$promise->user_id] : NULL;
                           if (!$puser)
@@ -144,18 +146,18 @@
                           $promise_comments_count = @(int)$promises_comments_count[$promise->id];
                           ?>
 
-                          @if ($promise->promise_of_the_week)
+                          <?php if($promise->promise_of_the_week): ?>
 
-                              <li class="promise-item innova-block js-promise-item" style="cursor:pointer;" onclick="window.location.href='http://mypromises.ru/promise/{{ $promise->id }}'">
+                              <li class="promise-item innova-block js-promise-item" style="cursor:pointer;" onclick="window.location.href='http://mypromises.ru/promise/<?php echo $promise->id; ?>'">
                                   <div class="flipper">
                                       <div class="promise-cont">
                                           <div class="info-cont">
                                               <div class="innova-choice">Выбор</div>
-                                              <a href="http://mypromises.ru/promise/{{ $promise->id }}" class="pr-title">{{ $promise->name }}</a>
-                                              <div class="user-info"><a style="background-image: url({{ $puser->avatar }})" class="user-photo"></a>
+                                              <a href="http://mypromises.ru/promise/<?php echo $promise->id; ?>" class="pr-title"><?php echo $promise->name; ?></a>
+                                              <div class="user-info"><a style="background-image: url(<?php echo $puser->avatar; ?>)" class="user-photo"></a>
                                                   <div class="user-text">
-                                                      <div class="name"><a>{{ $puser->name }}</a></div>
-                                                      <div class="city"><a>{{ $puser->city }}</a></div>
+                                                      <div class="name"><a><?php echo $puser->name; ?></a></div>
+                                                      <div class="city"><a><?php echo $puser->city; ?></a></div>
                                                   </div>
                                               </div>
                                           </div>
@@ -172,54 +174,54 @@
                                   </div>
                               </li>
 
-                          @else
+                          <?php else: ?>
                           <!-- <?php print_r($promise); ?> -->
                               <li class="promise-item js-parent js-promise-item">
                                   <div class="flipper">
-                                      <div class="promise-cont type-{{ $promise->style_id }}">
+                                      <div class="promise-cont type-<?php echo $promise->style_id; ?>">
                                           <div class="info-cont">
-                                              <a class="comments-amount">{{ trans_choice(':count комментарий|:count комментария|:count комментариев', $promise_comments_count, array(), 'ru') }}</a>
-                                              <div class="pr-title js-promise-text">{{ mb_strtoupper($promise->name) }}</div>
-                                              <div class="user-info"><a style="background-image: url({{ $puser->avatar }})" class="user-photo"></a>
+                                              <a class="comments-amount"><?php echo trans_choice(':count комментарий|:count комментария|:count комментариев', $promise_comments_count, array(), 'ru'); ?></a>
+                                              <div class="pr-title js-promise-text"><?php echo mb_strtoupper($promise->name); ?></div>
+                                              <div class="user-info"><a style="background-image: url(<?php echo $puser->avatar; ?>)" class="user-photo"></a>
                                                   <div class="user-text">
-                                                      <div class="name">{{ $puser->name }}</div>
+                                                      <div class="name"><?php echo $puser->name; ?></div>
                                                       <div class="city">
-                                                          <a href="{{ URL::route('app.cities', ['city' => $puser->city]) }}">{{ $puser->city }}</a>
+                                                          <a href="<?php echo URL::route('app.cities', ['city' => $puser->city]); ?>"><?php echo $puser->city; ?></a>
                                                       </div>
                                                   </div>
                                               </div>
                                           </div>
                                       </div>
-                                      <div style="cursor: pointer;" onclick="window.location.href='http://mypromises.ru/promise/{{ $promise->id }}'" class="promise-cont promise-hover type-{{ $promise->style_id }}">
+                                      <div style="cursor: pointer;" onclick="window.location.href='http://mypromises.ru/promise/<?php echo $promise->id; ?>'" class="promise-cont promise-hover type-<?php echo $promise->style_id; ?>">
                                           <div class="info-cont">
                                               <div class="promise-stat pr-loc">
-                                                  @if ($city_promises_count)
-                                                      <div class="stat-title">{{ trans_choice(':count Обещание|:count Обещания|:count Обещаний', $city_promises_count, array(), 'ru') }}</div>
+                                                  <?php if($city_promises_count): ?>
+                                                      <div class="stat-title"><?php echo trans_choice(':count Обещание|:count Обещания|:count Обещаний', $city_promises_count, array(), 'ru'); ?></div>
                                                       <div class="stat-desc">из города
                                                           <b>
-                                                              <a href="{{ URL::route('app.cities', ['city' => $puser->city]) }}">{{ $puser->city }}</a>
+                                                              <a href="<?php echo URL::route('app.cities', ['city' => $puser->city]); ?>"><?php echo $puser->city; ?></a>
                                                           </b>
                                                       </div>
-                                                      <div class="stat-desc" style="margin: 25px 0 0; font-size: 16px; line-height: 1.5;">{{ mb_strtoupper($promise->name) }}</div>
-                                                  @endif
+                                                      <div class="stat-desc" style="margin: 25px 0 0; font-size: 16px; line-height: 1.5;"><?php echo mb_strtoupper($promise->name); ?></div>
+                                                  <?php endif; ?>
                                               </div>
                                               <div class="btn-cont"><a href="#" class="stat-btn js-promise-card-btn">Пообещать тоже</a></div>
                                           </div>
                                       </div>
                                   </div>
                               </li>
-                          @endif
+                          <?php endif; ?>
 
-                      @endforeach
+                      <?php endforeach; ?>
 
                   </ul>
                   <div class="js-promises-more promises-more">
                     <a href="#">Показать еще</a>
                   </div>
 
-              @endif
+              <?php endif; ?>
 
-          @if (0)
+          <?php if(0): ?>
             <ul class="promises-index">
               <li class="promise-item innova-block">
                 <div class="promise-cont type-undefined">
@@ -500,7 +502,7 @@
                 </div>
               </li>
             </ul>
-          @endif
+          <?php endif; ?>
           </div>
         </div>
         <!-- <ul class="promises-cloud js-promises">
@@ -531,10 +533,10 @@
         </div> -->
       </div>
 
-@stop
+<?php $__env->stopSection(); ?>
 
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
     <script>
         $(function(){
 
@@ -542,7 +544,7 @@
             var update_mainpage_counter = function() {
 
                 $.ajax({
-                    url: '{{ URL::route('app.mainpage_counter') }}',
+                    url: '<?php echo URL::route('app.mainpage_counter'); ?>',
                     type: 'GET'
                     //dataType: 'json',
                     //data: { data: data, promise_text: promise_text }
@@ -563,4 +565,5 @@
 
         });
     </script>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make(Helper::layout(), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

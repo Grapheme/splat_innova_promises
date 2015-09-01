@@ -2043,8 +2043,13 @@ html { height: 100% }
         vertical-align: middle;
         line-height: normal;
     }
-    .profile-card .profile-info .info-cont a {
+    .profile-card .profile-info .info-cont a:not([class]) {
         color: inherit;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, .4);
+    }
+    .profile-page .profile-card .profile-info .info-cont a:not([class]) {
+        border-bottom: 1px solid rgba(0, 0, 0, .4) !important;
     }
     .profile-card .profile-info .name {
         font-weight: 100;
@@ -3479,4 +3484,66 @@ div.pr-btn { line-height: 38px }
 
 .friends-more a {
     color: inherit;
+}
+
+.hiw-link {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    top: -.1em;
+    color: #fff;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 18px;
+    border-bottom: 1px solid;
+}
+
+.add-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    line-height: 290px;
+    text-align: center;
+}
+
+.add-wrap {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.type-add-new {
+    background: #ff7514;
+}
+
+.add-text {
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+}
+
+.add-icon {
+    display: block;
+    margin-top: 15px;
+}
+
+.add-icon:before {
+    content: "";
+    display: inline-block;
+    vertical-align: top;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background: url(../images/icon-plus.svg) center center / contain;
+}
+
+.add-icon.list-icon:before {
+    background: url(../images/icon-list.svg) center center / contain;
+}
+
+.type-show-inactive {
+    background: #9edd68;
 }
