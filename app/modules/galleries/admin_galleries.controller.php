@@ -420,6 +420,8 @@ class AdminGalleriesController extends BaseController {
             $thumb_resize_w = ($w > $h) ? null : $thumb_size;
             $thumb_resize_h = ($w > $h) ? $thumb_size : null;
         }
+        print_r($thumb_resize_w);
+        print_r($thumb_resize_h);
         ## Resize thumb image
         $thumb_upload_success = ImageManipulation::make($file->getRealPath())
                                                 ->resize($thumb_resize_w, $thumb_resize_h, function($constraint){
