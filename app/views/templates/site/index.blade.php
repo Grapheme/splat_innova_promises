@@ -182,7 +182,9 @@
                                               <div class="user-info"><a style="background-image: url({{ $puser->avatar }})" class="user-photo"></a>
                                                   <div class="user-text">
                                                       <div class="name">{{ $puser->name }}</div>
-                                                      <div class="city">{{ $puser->city }}</div>
+                                                      <div class="city">
+                                                          <a href="{{ URL::route('app.cities', ['city' => $puser->city]) }}">{{ $puser->city }}</a>
+                                                      </div>
                                                   </div>
                                               </div>
                                           </div>
@@ -192,7 +194,11 @@
                                               <div class="promise-stat pr-loc">
                                                   @if ($city_promises_count)
                                                       <div class="stat-title">{{ trans_choice(':count Обещание|:count Обещания|:count Обещаний', $city_promises_count, array(), 'ru') }}</div>
-                                                      <div class="stat-desc">из города <b>{{ $puser->city }}</b></div>
+                                                      <div class="stat-desc">из города
+                                                          <b>
+                                                              <a href="{{ URL::route('app.cities', ['city' => $puser->city]) }}">{{ $puser->city }}</a>
+                                                          </b>
+                                                      </div>
                                                       <div class="stat-desc" style="margin: 25px 0 0; font-size: 16px; line-height: 1.5;">{{ mb_strtoupper($promise->name) }}</div>
                                                   @endif
                                               </div>

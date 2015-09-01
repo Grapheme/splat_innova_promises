@@ -137,7 +137,7 @@
                             </div>
                         @endif
                         @if ($promise_user->city)
-                            {{ $promise_user->city }}
+                            <a href="{{ URL::route('app.cities', ['city' => $promise_user->city]) }}">{{ $promise_user->city }}</a>
                         @endif
                     </div>
                 </div>

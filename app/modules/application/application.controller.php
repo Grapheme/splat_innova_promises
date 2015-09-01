@@ -71,6 +71,7 @@ class ApplicationController extends BaseController {
 
 
             Route::any('/cities', array('as' => 'app.cities', 'uses' => __CLASS__.'@getCities'));
+            Route::any('/service/cities', array('as' => 'app.service.cities', 'uses' => __CLASS__.'@getServiceCities'));
         });
 
 
@@ -788,12 +789,18 @@ class ApplicationController extends BaseController {
 
     public function getCities() {
 
-        $current_city = Input::get('city') ?: 'Москва';
+        $default_city_name = 'Москва';
+        $default_city = null;
+
+        $current_city = Input::get('city') ?: $default_city_name;
 
         $cities = Dic::valuesBySlug('cities');
         if (isset($cities) && is_object($cities) && $cities->count()) {
             foreach($cities as $c => $city) {
                 $city = $city->extract(true);
+
+                if (!is_object($default_city) && $city->name == $default_city_name)
+                    $default_city = $city;
 
                 if (!is_object($current_city) && $current_city == $city->name)
                     $current_city = $city;
@@ -802,10 +809,14 @@ class ApplicationController extends BaseController {
             }
         }
         #Helper::tad($cities);
+        #if (!is_object($current_city))
+        #    $current_city = $default_city;
+
+        $current_city_name = is_object($current_city) ? $current_city->name : $current_city;
 
         $users_ids = [];
-        $users = Dic::valuesBySlug('users', function($query) use ($current_city) {
-            $query->filter_by_field('city', '=', $current_city->name);
+        $users = Dic::valuesBySlug('users', function($query) use ($current_city_name) {
+            $query->filter_by_field('city', '=', $current_city_name);
         });
         if (isset($users) && is_object($users) && $users->count()) {
             $temp = new Collection();
@@ -817,6 +828,9 @@ class ApplicationController extends BaseController {
             $users = $temp;
         }
         #Helper::tad($users);
+
+        $current_city_name = is_object($current_city) ? $current_city->name : $current_city;
+        $current_city_dp = is_object($current_city) ? $current_city->dp : 'г.' . $current_city;
 
         $promises = new Collection();
 
@@ -843,7 +857,28 @@ class ApplicationController extends BaseController {
         #Helper::smartQueries(1);
         #die;
 
-        return View::make(Helper::layout('cities'), compact('cities', 'current_city', 'users', 'promises'));
+        return View::make(Helper::layout('cities'), compact('cities', 'current_city', 'current_city_name', 'current_city_dp', 'users', 'promises'));
+    }
+
+
+    public function getServiceCities() {
+
+        $data = DicFieldVal::where('key', 'city')
+            ->select([DB::raw('value AS city'), DB::raw('COUNT(*) AS count')])
+            ->groupBy('value')
+            ->orderBy(DB::raw('COUNT(*)'), 'DESC')
+            ->get()
+        ;
+
+        Helper::error404();
+        #Helper::tad($data);
+
+        echo '<table border="1" cellspacing="0" cellpadding="5">
+<thead><th>Город</th><th>Количество</th></thead>';
+        foreach ($data as $dat) {
+            echo '<tr><td>' . $dat->city . '</td><td>' . $dat->count . '</td></tr>';
+        }
+        echo '</table>';
     }
 
 

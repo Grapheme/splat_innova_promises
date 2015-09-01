@@ -93,7 +93,7 @@ if (isset($achievements) && count($achievements)) {
                             </div>
                         @endif
                         @if ($user->city)
-                            {{ $user->city }}
+                            <a href="{{ URL::route('app.cities', ['city' => $user->city]) }}">{{ $user->city }}</a>
                         @endif
                         <div class="achives js-achives"></div>
                     </div>
