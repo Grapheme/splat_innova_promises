@@ -457,6 +457,7 @@ class ApplicationController extends BaseController {
         $subscribes = Dic::valuesBySlug('subscribes', function($query) use ($user) {
             $query->where('name', $user->id);
         });
+        $subscribes = DicVal::extracts($subscribes, null, true, true);
         if (isset($subscribes) && is_object($subscribes) && $subscribes->count()) {
             echo '<!--'; Helper::ta($subscribes); echo '-->';
             $subscribed_friends_ids = [];
