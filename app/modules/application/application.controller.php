@@ -445,7 +445,26 @@ class ApplicationController extends BaseController {
 
         }
 
+        /**
+         * Получаем ачивки пользователя
+         */
         $achievements = $this->get_achievements($promises);
+
+        /**
+         * Получаем участников, на которых подписался пользователь
+         */
+        $subscribed_friends = new Collection();
+        $subscribes = Dic::valuesBySlug('subscribes', function($query) use ($user) {
+            $query->where('name', $user->id);
+        });
+        if (isset($subscribes) && is_object($subscribes) && $subscribes->count()) {
+            echo '<!--'; Helper::ta($subscribes) . echo '-->';
+            $subscribed_friends_ids = [];
+            foreach ($subscribes as $subscribe) {
+                #$subscribed_friends_ids[] = $subscribe->;
+            }
+        }
+
 
         /**
          * Показываем главную страницу юзера

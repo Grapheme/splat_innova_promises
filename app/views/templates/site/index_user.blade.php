@@ -294,7 +294,7 @@ if (isset($achievements) && count($achievements)) {
         <div class="friends-lists">
             <div class="wrapper">
                 <div class="friends friends-left">
-                    <div class="friends-title">Ваши друзья</sup></div>
+                    <div class="friends-title">Ваши друзья</div>
                     <ul class="friends-list">
 
                     <?
