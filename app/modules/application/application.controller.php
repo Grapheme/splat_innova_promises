@@ -1049,20 +1049,6 @@ class ApplicationController extends BaseController {
         if (is_array($temp) && count($temp))
             $promise_friends_ids = implode(',', $temp);
 
-        $promise_friends_emails = [];
-        $temp = Input::get('friends_emails');
-        $temp = strtr($temp, [' ' => ',']);
-        $temp_array = explode(',', $temp);
-        if (count($temp_array)) {
-            foreach ($temp_array as $t => $tmp) {
-                $tmp = trim($tmp);
-                if (!filter_var($tmp, FILTER_VALIDATE_EMAIL))
-                    continue;
-                $promise_friends_emails[$tmp] = 1;
-            }
-            $promise_friends_emails = implode(',', array_keys($promise_friends_emails));
-        }
-
         /**
          * Добавляем обещание
          */
@@ -1081,10 +1067,45 @@ class ApplicationController extends BaseController {
                 'textfields' => array(
                     'promise_text' => $promise_text,
                     'promise_friends_ids' => $promise_friends_ids,
-                    'promise_friends_emails' => $promise_friends_emails,
+                    #'promise_friends_emails' => $promise_friends_emails, ## updated below
                 ),
             )
         );
+
+        $promise_friends_emails = [];
+        $temp = Input::get('friends_emails');
+        $temp = strtr($temp, [' ' => ',']);
+        $temp_array = explode(',', $temp);
+        if (count($temp_array)) {
+            foreach ($temp_array as $t => $tmp) {
+                $tmp = trim($tmp);
+                if (!filter_var($tmp, FILTER_VALIDATE_EMAIL))
+                    continue;
+                $promise_friends_emails[$tmp] = 1;
+
+                /**
+                 * Отправляем на почту письмо с оповещением
+                 */
+                /*
+                $data = array(
+                    'promise' => $promise,
+                    'img_path' => $img_path,
+                );
+                Mail::send('emails.promise_added', $data, function ($message) use ($promise) {
+                    $from_email = Config::get('mail.from.address');
+                    $from_name = Config::get('mail.from.name');
+                    $message->from($from_email, $from_name);
+                    $message->subject('Добавлено новое обещание');
+                    $message->to($this->user->email);
+                });
+                */
+            }
+            $emails = array_keys($promise_friends_emails);
+            if (count($emails)) {
+                $promise_friends_emails = implode(',', $emails);
+                $promise->update_textfield('promise_friends_emails', $promise_friends_emails);
+            }
+        }
 
         /**
          * Генерим картинку с текстом обещания для шеринга

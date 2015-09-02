@@ -129,10 +129,22 @@ return array(
          * На этом этапе уже известны все элементы, которые будут отображены на странице.
          */
         'before_index_view' => function ($dic, $dicvals) {
+
+            $dicvals = DicVal::extracts($dicvals, null, true, true);
+            #Helper::ta($dicvals);
+            $user_ids = [];
+            foreach ($dicvals as $dicval) {
+                $user_ids[] = $dicval->user_id;
+            }
+            $user_ids = array_unique($user_ids);
+
+            $users = Dic::valuesBySlugAndIds('users', $user_ids, true);
+            #Helper::tad($users);
+            Config::set('temp.users', $users);
+
             /**
              * Предзагружаем нужные словари
              */
-
             /*
             $dics_slugs = array(
                 'users',
@@ -165,11 +177,17 @@ return array(
     #/*
     'second_line_modifier' => function($line, $dic, $dicval) {
 
-        #$dics = Config::get('temp.index_dics');
-        #Helper::tad($dics);
-        #$dic_products = $dics['products'];
+        $line = '';
+        if ($dicval->only_for_me)
+            $line .= '<i class="fa fa-eye-slash txt-color-red"></i> &nbsp;&nbsp;';
+        else
+            $line .= '<i class="fa fa-eye txt-color-green"></i> &nbsp;&nbsp;';
 
-        return '';
+        $users = Config::get('temp.users');
+        if (isset($users[$dicval->user_id]) && is_object($users[$dicval->user_id]))
+            $line .= $users[$dicval->user_id]->name;
+
+        return $line;
     },
     #*/
 

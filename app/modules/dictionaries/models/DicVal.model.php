@@ -1023,6 +1023,23 @@ class DicVal extends BaseModel {
 
         return $dicval;
     }
+    public function update_textfield($key, $value, $lang = NULL) {
+
+        if (!$this->id)
+            return false;
+
+        $dicval = DicTextFieldVal::firstOrNew(array(
+            'dicval_id' => $this->id,
+            'language' => $lang,
+            'key' => $key,
+        ));
+        $dicval->value = $value;
+        $dicval->save();
+
+        $this->$key = $value;
+
+        return $dicval;
+    }
 
 
     public function remove_field($key, $lang = NULL) {
