@@ -3221,7 +3221,7 @@ div.pr-btn { line-height: 38px }
 .chosen-container .chosen-choices {
     font-family: museo_sans_cyrl !important;
     padding: 0 65px 0 20px !important;
-    height: 65px !important;
+    min-height: 65px !important;
     display: inline-block;
     vertical-align: middle;
     color: #444;
