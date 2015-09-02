@@ -134,7 +134,6 @@
               @if (isset($mainpage_promises) && is_object($mainpage_promises) && $mainpage_promises->count())
 
                   <ul class="promises-index js-split-promises">
-                      <?
                       @foreach ($mainpage_promises as $promise)
                           <?
                           $puser = isset($users[$promise->user_id]) ? $users[$promise->user_id] : NULL;
