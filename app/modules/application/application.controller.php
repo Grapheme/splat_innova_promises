@@ -457,11 +457,24 @@ class ApplicationController extends BaseController {
         $subscribes = Dic::valuesBySlug('subscribes', function($query) use ($user) {
             $query->where('name', $user->id);
         });
+        $subscribes = DicVal::extracts($subscribes, null, true, true);
         if (isset($subscribes) && is_object($subscribes) && $subscribes->count()) {
-            echo '<!--'; Helper::ta($subscribes); echo '-->';
+            #echo '<!--'; Helper::ta($subscribes); echo '-->';
             $subscribed_friends_ids = [];
             foreach ($subscribes as $subscribe) {
-                #$subscribed_friends_ids[] = $subscribe->;
+                $subscribed_friends_ids[] = $subscribe->author_id;
+            }
+            $subscribed_friends_ids = array_unique($subscribed_friends_ids);
+            if (count($subscribed_friends_ids)) {
+                $subscribed_friends = Dic::valuesBySlug('users', function($query) use ($subscribed_friends_ids) {
+                    $query->whereIn('id', $subscribed_friends_ids);
+                });
+                $subscribed_friends = DicVal::extracts($subscribed_friends, null, true, true);
+                foreach ($subscribed_friends as $s => $subscribed_friend) {
+                    $subscribed_friend = $this->extract_user($subscribed_friend);
+                    $subscribed_friends[$s] = $subscribed_friend;
+                }
+                #echo '<!--'; Helper::ta($subscribed_friends); echo '-->';
             }
         }
 
@@ -469,7 +482,7 @@ class ApplicationController extends BaseController {
         /**
          * Показываем главную страницу юзера
          */
-        return View::make(Helper::layout('index_user'), compact('user', 'promises', 'active_promises', 'inactive_promises', 'existing_friends_list', 'count_user_friends', 'achievements'));
+        return View::make(Helper::layout('index_user'), compact('user', 'promises', 'active_promises', 'inactive_promises', 'subscribed_friends', 'existing_friends_list', 'count_user_friends', 'achievements'));
     }
 
 

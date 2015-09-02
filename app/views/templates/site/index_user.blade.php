@@ -4,9 +4,7 @@ $ach_list = [];
 if (isset($achievements) && count($achievements)) {
     foreach ($achievements as $achievement) {
         $ach_list[] = [
-            'name' => $achievement->name,
-            'desc' => $achievement->desc,
-            'icon' => isset($achievement->image) && is_object($achievement->image) ? $achievement->image->full() : '',
+                'name' => $achievement->name, 'desc' => $achievement->desc, 'icon' => isset($achievement->image) && is_object($achievement->image) ? $achievement->image->full() : '',
         ];
     }
 }
@@ -25,7 +23,10 @@ if (isset($achievements) && count($achievements)) {
             <div class="logo"></div>
             <div class="text">
                 <p>КАЖДЫЙ РАЗ, ВЫПОЛНЯЯ ОБЕЩАНИЯ,<br>ВЫ СТАНОВИТЕСЬ СИЛЬНЕЕ.</p>
-                <p>МЫ ТОЖЕ ХОТИМ <a href="#" class="js-open-box" data-box="promo" onclick="ga('send', 'event', 'brand', 'profile');">ДАТЬ ВАМ ОБЕЩАНИЕ</a></p>
+
+                <p>МЫ ТОЖЕ ХОТИМ
+                    <a href="#" class="js-open-box" data-box="promo" onclick="ga('send', 'event', 'brand', 'profile');">ДАТЬ ВАМ ОБЕЩАНИЕ</a>
+                </p>
             </div>
         </div>
     </li>
@@ -36,9 +37,11 @@ if (isset($achievements) && count($achievements)) {
 
     @if (0)
 
-        <br/>
+        <br />
 
-        <big><a href="{{ $user->identity }}" target="_blank">{{ $user->name }}</a></big>
+        <big>
+            <a href="{{ $user->identity }}" target="_blank">{{ $user->name }}</a>
+        </big>
         @if ($user->years_old)
             [ {{ $user->years_old }} ]
         @endif
@@ -51,55 +54,57 @@ if (isset($achievements) && count($achievements)) {
         <a href="{{ URL::route('app.profile') }}">Редактировать</a>
         <a href="#" class="logout">Выйти</a>
 
-        <br/>
+        <br />
 
-        Контактов: {{ $count_user_friends }}<br/>
-        Обещаний: {{ @count($promises) }}<br/>
+        Контактов: {{ $count_user_friends }}<br />
+        Обещаний: {{ @count($promises) }}<br />
 
         @if (isset($promises) && is_object($promises) && count($promises))
 
             Мои обещания:
 
             <ul>
-            @foreach ($promises as $promise)
-                {{ Helper::ta_($promise) }}
-                <li><a href="{{ URL::route('app.promise', $promise->id) }}">{{ $promise->name }}</a></li>
-            @endforeach
+                @foreach ($promises as $promise)
+                    {{ Helper::ta_($promise) }}
+                    <li>
+                        <a href="{{ URL::route('app.promise', $promise->id) }}">{{ $promise->name }}</a>
+                    </li>
+                @endforeach
             </ul>
         @else
 
             <div class="wrapper">
-              <div class="us-text">Вы еще не давали обещаний.</div>
+                <div class="us-text">Вы еще не давали обещаний.</div>
             </div>
 
         @endif
 
-        <br/>
+        <br />
 
         <a href="{{ URL::route('app.new_promise') }}" onclick="ga('send', 'event', 'new_promise', 'profile'); yaCounter27511935.reachGoal('butpromisesme'); return true;">Дать обещание</a>
 
-        <br/><br/>
+        <br /><br />
 
         @if (count($user->friends) || 1)
 
-            Мои друзья:<br/>
+            Мои друзья:<br />
 
             @if (count($user->existing_friends))
                 Уже в системе<sup>{{ count($user->existing_friends) }}</sup>:
                 <ul>
-                @foreach ($user->existing_friends as $friend)
-                    <li>
-                        @if (@$friend['profile_id'])
-                            <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}">
-                        @endif
+                    @foreach ($user->existing_friends as $friend)
+                        <li>
+                            @if (@$friend['profile_id'])
+                                <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}">
+                                    @endif
 
-                            {{ @$friend['_name'] }}
+                                    {{ @$friend['_name'] }}
 
-                        @if (@$friend['profile_id'])
-                            </a>
-                        @endif
-                    </li>
-                @endforeach
+                                    @if (@$friend['profile_id'])
+                                </a>
+                            @endif
+                        </li>
+                    @endforeach
                 </ul>
             @endif
 
@@ -116,15 +121,15 @@ if (isset($achievements) && count($achievements)) {
 
         @endif
 
-    <hr/>
+        <hr />
 
-    DEBUG:
-    {{ Helper::d(@$_SESSION) }}
-    {{ Helper::d(@$_COOKIE) }}
-    {{ Helper::ta(@$user) }}
-    {{ Helper::ta_(@$promises) }}
+        DEBUG:
+        {{ Helper::d(@$_SESSION) }}
+        {{ Helper::d(@$_COOKIE) }}
+        {{ Helper::ta(@$user) }}
+        {{ Helper::ta_(@$promises) }}
 
-    <div id="fb-root"></div>
+        <div id="fb-root"></div>
 
     @endif
 
@@ -133,27 +138,31 @@ if (isset($achievements) && count($achievements)) {
     if (isset($user->sex) && $user->sex == 1)
         $default_avatar = '/theme/images/woman.png';
     ?>
-      <div class="profile-page">
+    <div class="profile-page">
         <div class="wrapper">
-          <div class="profile-card">
-            <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo"></div>
-            <div class="profile-info">
-              <div class="info-cont">
-                <div class="name"><span>{{ $user->name }}</span><a href="{{ URL::route('app.profile') }}" class="us-link">Редактировать</a></div>
-                @if ($user->years_old && 0)
-                <div class="age">
-                    {{ trans_choice(':count год|:count года|:count лет', $user->years_old, array(), 'ru') }}
+            <div class="profile-card">
+                <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo"></div>
+                <div class="profile-info">
+                    <div class="info-cont">
+                        <div class="name"><span>{{ $user->name }}</span>
+                            <a href="{{ URL::route('app.profile') }}" class="us-link">Редактировать</a>
+                        </div>
+                        @if ($user->years_old && 0)
+                            <div class="age">
+                                {{ trans_choice(':count год|:count года|:count лет', $user->years_old, array(), 'ru') }}
+                            </div>
+                        @endif
+                        @if ($user->city)
+                            <a href="{{ URL::route('app.cities', ['city' => $user->city]) }}">{{ $user->city }}</a>
+                        @endif
+                        <div class="achives js-achives"></div>
+                    </div>
                 </div>
-                @endif
-                @if ($user->city)
-                    <a href="{{ URL::route('app.cities', ['city' => $user->city]) }}">{{ $user->city }}</a>
-                @endif
-                <div class="achives js-achives"></div>
-              </div>
+                <div class="btn-cont">
+                    <a href="{{ URL::route('app.new_promise') }}" onclick="yaCounter27511935.reachGoal('butpromisesme'); return true;" class="us-btn">Дать обещание</a>
+                </div>
             </div>
-            <div class="btn-cont"><a href="{{ URL::route('app.new_promise') }}" onclick = "yaCounter27511935.reachGoal('butpromisesme'); return true;" class="us-btn">Дать обещание</a></div>
-          </div>
-          <div class="promises-title us-title">Мои обещания</div>
+            <div class="promises-title us-title">Мои обещания</div>
         </div>
 
 
@@ -164,40 +173,40 @@ if (isset($achievements) && count($achievements)) {
             </div>
 
             <ul class="promises-list">
-            <?
-            $p = 0;
-            ?>
-            @foreach ($active_promises as $promise)
-            <?
-                ++$p;
-                if (!$promise->style_id) {
-                    $styles = array('green', 'aqua', 'yellow', 'blue', 'pink');
-                    $promise->style_id = $styles[array_rand($styles)];
-                }
-            ?>
+                <?
+                $p = 0;
+                ?>
+                @foreach ($active_promises as $promise)
+                    <?
+                    ++$p;
+                    if (!$promise->style_id) {
+                        $styles = array('green', 'aqua', 'yellow', 'blue', 'pink');
+                        $promise->style_id = $styles[array_rand($styles)];
+                    }
+                    ?>
 
-                @include(Helper::layout('promise_inc'), array('promise_type' => 'active'))
+                    @include(Helper::layout('promise_inc'), array('promise_type' => 'active'))
 
-                @if ($p == 1)
-                    <li class="promise-item type-add-new">
-                        <a href="{{ URL::to('/new_promise') }}" class="add-content">
+                    @if ($p == 1)
+                        <li class="promise-item type-add-new">
+                            <a href="{{ URL::to('/new_promise') }}" class="add-content">
                             <span class="add-wrap">
                                 <span class="add-text">Добавить новое обещание</span>
                                 <span class="add-icon"></span>
                             </span>
-                        </a>
-                    </li>
-                @endif
+                            </a>
+                        </li>
+                    @endif
 
-                @if ($p == 5)
+                    @if ($p == 5)
+                        @yield('koe-chto')
+                    @endif
+
+                @endforeach
+
+                @if ($p == 1)
                     @yield('koe-chto')
                 @endif
-
-            @endforeach
-
-            @if ($p == 1)
-                @yield('koe-chto')
-            @endif
 
             </ul>
 
@@ -216,13 +225,13 @@ if (isset($achievements) && count($achievements)) {
                 $p = 0;
                 ?>
                 @foreach ($inactive_promises as $promise)
-                <?
+                    <?
                     ++$p;
                     if (!$promise->style_id) {
                         $styles = array('green', 'aqua', 'yellow', 'blue', 'pink');
                         $promise->style_id = $styles[array_rand($styles)];
                     }
-                ?>
+                    ?>
 
                     @include(Helper::layout('promise_inc'), array('promise_type' => 'inactive'))
 
@@ -258,121 +267,151 @@ if (isset($achievements) && count($achievements)) {
 
         @if ($auth_user->auth_method == 'native')
 
-              <div class="wrapper">
-                  <div class="inv-form">
-                      <p class="text">Пригласите вашего друга и расскажите ему о том, почему так важно сдерживать данные обещания.</p>
-                      <div class="inv-btn js-inv-btn-cont2"><a href="#" class="us-btn js-inv-btn2 invite-friend-show-form">Пригласить друга</a></div>
-                      <div id="send-invite-success" style="display:none">
-                          Приглашение успешно отправлено.
-                      </div>
-                      <div style="display: none;" class="form js-inv-form2">
-                          <form action="{{ URL::route('app.send_invite_message') }}" method="POST" id="invite-form">
-                              <input name="email" placeholder="E-mail друга" class="us-input">
-                              <div class="input-cont">
-                                <input type="hidden" name="name" value="{{ @$user['name'] }}">
-                              </div>
-                              <div class="input-cont">
-                                <button class="us-btn" onclick="ga('send', 'event', 'invite', 'email');">Пригласить</button>
-                              </div>
-                          </form>
-                      </div>
-                  </div>
-
-              </div>
-
-          @else
-
-        <?
-        $friends_count = @count($user->existing_friends) + @count($user->non_existing_friends);
-        ?>
-        <div class="wrapper">
-            <div class="promises-title us-title" style="line-height: 60px;">
-                <span>Друзья на MyPromises</span>
-                <!-- <a href="#" class="us-btn right-title-btn">Посмотреть обещания друзей</a> -->
-            </div>
-        </div>
-        <div class="friends-lists">
             <div class="wrapper">
-                <div class="friends friends-left">
-                    <div class="friends-title">Ваши друзья</div>
-                    <ul class="friends-list">
+                <div class="inv-form">
+                    <p class="text">Пригласите вашего друга и расскажите ему о том, почему так важно сдерживать данные обещания.</p>
 
-                    <?
-                    $i = 0;
-                    ?>
+                    <div class="inv-btn js-inv-btn-cont2">
+                        <a href="#" class="us-btn js-inv-btn2 invite-friend-show-form">Пригласить друга</a>
+                    </div>
+                    <div id="send-invite-success" style="display:none">
+                        Приглашение успешно отправлено.
+                    </div>
+                    <div style="display: none;" class="form js-inv-form2">
+                        <form action="{{ URL::route('app.send_invite_message') }}" method="POST" id="invite-form">
+                            <input name="email" placeholder="E-mail друга" class="us-input">
 
-                    @if (count($user->existing_friends))
+                            <div class="input-cont">
+                                <input type="hidden" name="name" value="{{ @$user['name'] }}">
+                            </div>
+                            <div class="input-cont">
+                                <button class="us-btn" onclick="ga('send', 'event', 'invite', 'email');">Пригласить</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
-                        @foreach ($user->existing_friends as $friend)
+            </div>
+
+        @else
+
+            <?
+            $friends_count = @count($user->existing_friends) + @count($user->non_existing_friends);
+            ?>
+            <div class="wrapper">
+                <div class="promises-title us-title" style="line-height: 60px;">
+                    <span>Друзья на MyPromises</span>
+                    <!-- <a href="#" class="us-btn right-title-btn">Посмотреть обещания друзей</a> -->
+                </div>
+            </div>
+            <div class="friends-lists">
+                <div class="wrapper">
+                    <div class="friends friends-left">
+                        <div class="friends-title">Ваши друзья</div>
+                        <ul class="friends-list">
+
                             <?
-                            ++$i;
-                            $default_avatar = '/theme/images/man.png';
-                            if (isset($friend['sex']) && $friend['sex'] == 1)
-                                $default_avatar = '/theme/images/woman.png';
+                            $i = 0;
+                            $also = [];
                             ?>
-                            <li class="friend-item registered-user js-friend-item-left" style="display: none;">
 
-                                @if (@$friend['profile_id'])
 
-                                    <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}" style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></a>
-                                    <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}" class="name clean-a">{{ @$friend['_name'] }}</a>
-                                
-                                @else
+                                @if (count($user->existing_friends))
+                                    @foreach ($user->existing_friends as $friend)
+                                        <?
+                                        ++$i;
+                                        $default_avatar = '/theme/images/man.png';
+                                        if (isset($friend['sex']) && $friend['sex'] == 1)
+                                            $default_avatar = '/theme/images/woman.png';
 
-                                    <div style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></div>
-                                    <div class="name clean-a">{{ @$friend['_name'] }}</div>
+                                        if (isset($friend['_name']) && $friend['_name'])
+                                            $also[$friend['_name']] = 1;
+                                        ?>
+                                        <li class="friend-item registered-user js-friend-item-left" style="display: none;">
+
+                                            @if (@$friend['profile_id'])
+
+                                                <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}" style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></a>
+                                                <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}" class="name clean-a">{{ @$friend['_name'] }}</a>
+
+                                            @else
+
+                                                <div style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></div>
+                                                <div class="name clean-a">{{ @$friend['_name'] }}</div>
+
+                                            @endif
+
+                                        </li>
+                                    @endforeach
 
                                 @endif
 
-                            </li>
-                        @endforeach
+                                @if (count($subscribed_friends))
+                                    @foreach ($subscribed_friends as $friend)
+                                        <?
+                                        ++$i;
+                                        $default_avatar = '/theme/images/man.png';
+                                        if (isset($friend['sex']) && $friend['sex'] == 1)
+                                            $default_avatar = '/theme/images/woman.png';
 
-                    @endif
+                                        if (isset($friend->name) && $friend->name)
+                                            if (isset($also[$friend->name]))
+                                                continue;
+                                            else
+                                                $also[$friend->name] = 1;
+                                        ?>
+                                        <li class="friend-item registered-user js-friend-item-left" style="display: none;">
+                                            <a href="{{ URL::route('app.profile_id', $friend->id) }}" style="background-image: url({{ $friend->avatar ?: $default_avatar }});" class="profile-photo clean-a"></a>
+                                            <a href="{{ URL::route('app.profile_id', $friend->id) }}" class="name clean-a">{{ $friend->name }}</a>
+                                        </li>
+                                    @endforeach
 
-                        <div style="float:none; clear:both;"></div>
+                                @endif
 
-                  </ul>
-                </div>
-                <div class="friends friends-right">
-                    <div class="friends-title">Пригласить друга</sup></div>
-                    <ul class="friends-list">
+                            <div style="float:none; clear:both;"></div>
 
-                    <?
-                    $i = 0;
-                    ?>
+                        </ul>
+                    </div>
+                    <div class="friends friends-right">
+                        <div class="friends-title">Пригласить друга</sup></div>
+                        <ul class="friends-list">
 
-                    @if (count($user->non_existing_friends))
-
-                        @foreach ($user->non_existing_friends as $friend)
                             <?
-                            ++$i;
-                            $default_avatar = '/theme/images/man.png';
-                            if (isset($friend['sex']) && $friend['sex'] == 1)
-                                $default_avatar = '/theme/images/woman.png';
+                            $i = 0;
                             ?>
-                            <li class="friend-item registered-user js-friend-item-right" style="display: none;">
 
-                                    <a href="{{ URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])) }}" data-style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></a>
-                                    <a href="{{ URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])) }}" class="name clean-a">{{ @$friend['_name'] }}</a>
+                            @if (count($user->non_existing_friends))
 
-                            </li>
-                        @endforeach
+                                @foreach ($user->non_existing_friends as $friend)
+                                    <?
+                                    ++$i;
+                                    $default_avatar = '/theme/images/man.png';
+                                    if (isset($friend['sex']) && $friend['sex'] == 1)
+                                        $default_avatar = '/theme/images/woman.png';
+                                    ?>
+                                    <li class="friend-item registered-user js-friend-item-right" style="display: none;">
 
-                    @endif
+                                        <a href="{{ URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])) }}" data-style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></a>
+                                        <a href="{{ URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])) }}" class="name clean-a">{{ @$friend['_name'] }}</a>
 
-                        <div style="float:none; clear:both;"></div>
+                                    </li>
+                                @endforeach
 
-                  </ul>
+                            @endif
+
+                            <div style="float:none; clear:both;"></div>
+
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="clearfix"></div>
             </div>
-        </div>
-        <div class="friends-more">
-            <a href="#" class="js-show-friends">Показать еще друзей</a>
-        </div>
+            <div class="friends-more">
+                <a href="#" class="js-show-friends">Показать еще друзей</a>
+            </div>
         @endif
 
-      </div>
+    </div>
 
     <script>
         var __SITE__ = {};
@@ -391,26 +430,26 @@ if (isset($achievements) && count($achievements)) {
                 data: {},
                 api: "//vk.com/js/api/openapi.js",
                 appID: 4659025,
-                init: function(){
+                init: function () {
                     //alert(1);
                     //$.js(vk.api);
 
-                    window.vkAsyncInit = function(){
+                    window.vkAsyncInit = function () {
                         //alert("2'");
                         VK.init({apiId: vk.appID});
                         sendPostToWall();
                     }
 
-                    $.getScript(vk.api,function(){
+                    $.getScript(vk.api, function () {
                         // nothing..
                     });
 
-                    function sendPostToWall(){
+                    function sendPostToWall() {
                         //alert(3);
                         VK.Api.call('wall.post', {
                             owner_id: '{{ @$auth_user->full_social_info['id'] }}',
                             message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
-                        }, function(r) {
+                        }, function (r) {
                             //console.log(r);
                             //alert('OK!');
                             //$(".js-inv-btn-cont2").slideUp();
@@ -424,46 +463,46 @@ if (isset($achievements) && count($achievements)) {
         </script>
 
         @if (0)
-        <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            VK.init({
-                apiId: 4659025
-            });
-        </script>
-        <script>
-            $(document).ready(function(){
-                VK.Api.call('wall.post', {
-                    owner_id: '{{ @$auth_user->full_social_info['id'] }}',
-                    message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
-                }, function(r) {
-                    //console.log(r);
-                    //alert('OK!');
-                    //$(".js-inv-btn-cont2").slideUp();
-                    //$("#send-invite-success").slideDown();
+            <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                VK.init({
+                    apiId: 4659025
                 });
-            });
-        </script>
+            </script>
+            <script>
+                $(document).ready(function () {
+                    VK.Api.call('wall.post', {
+                        owner_id: '{{ @$auth_user->full_social_info['id'] }}',
+                        message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
+                    }, function (r) {
+                        //console.log(r);
+                        //alert('OK!');
+                        //$(".js-inv-btn-cont2").slideUp();
+                        //$("#send-invite-success").slideDown();
+                    });
+                });
+            </script>
         @endif
 
     @endif
 
 
     <script>
-        $(".js-inv-btn2").on("click",function(){
-            return $(".js-inv-btn-cont2").slideUp(), $(".js-inv-form2").slideDown(function(){
+        $(".js-inv-btn2").on("click", function () {
+            return $(".js-inv-btn-cont2").slideUp(), $(".js-inv-form2").slideDown(function () {
                 $(this).find("input").trigger("focus")
-            }),!1
+            }), !1
         });
 
         $("#invite-form").validate({
             rules: {
-                'email': { required: true, email: true },
+                'email': {required: true, email: true},
             },
             messages: {
                 'email': "",
             },
             errorClass: "inp-error",
-            submitHandler: function(form) {
+            submitHandler: function (form) {
                 //console.log(form);
                 sendInviteForm(form);
                 return false;
@@ -473,15 +512,15 @@ if (isset($achievements) && count($achievements)) {
         function sendInviteForm(form) {
 
             //console.log(form);
-            var options = { target: null, type: $(form).attr('method'), dataType: 'json' };
+            var options = {target: null, type: $(form).attr('method'), dataType: 'json'};
 
-            options.beforeSubmit = function(formData, jqForm, options){
+            options.beforeSubmit = function (formData, jqForm, options) {
                 $(form).find('button').addClass('loading').attr('disabled', 'disabled');
                 $(form).find('.error-msg').text('');
                 //$('.error').text('').hide();
             }
 
-            options.success = function(response, status, xhr, jqForm){
+            options.success = function (response, status, xhr, jqForm) {
                 //console.log(response);
                 //$('.success').hide().removeClass('hidden').slideDown();
                 //$(form).slideUp();
@@ -502,13 +541,13 @@ if (isset($achievements) && count($achievements)) {
 
             }
 
-            options.error = function(xhr, textStatus, errorThrown){
+            options.error = function (xhr, textStatus, errorThrown) {
                 console.log(xhr);
                 $(form).find('button').removeAttr('disabled');
                 $(form).find('.error-msg').text('Ошибка при отправке, попробуйте позднее');
             }
 
-            options.complete = function(data, textStatus, jqXHR){
+            options.complete = function (data, textStatus, jqXHR) {
                 $(form).find('button').removeClass('loading').removeAttribute('disabled');
             }
 
