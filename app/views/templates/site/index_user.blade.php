@@ -355,7 +355,7 @@ if (isset($achievements) && count($achievements)) {
                                             $default_avatar = '/theme/images/woman.png';
 
                                         if (isset($friend->name) && $friend->name)
-                                            if ($also[$friend->name])
+                                            if (isset($also[$friend->name]))
                                                 continue;
                                             else
                                                 $also[$friend->name] = 1;

@@ -474,7 +474,7 @@ class ApplicationController extends BaseController {
                     $subscribed_friend = $this->extract_user($subscribed_friend);
                     $subscribed_friends[$s] = $subscribed_friend;
                 }
-                echo '<!--'; Helper::ta($subscribed_friends); echo '-->';
+                #echo '<!--'; Helper::ta($subscribed_friends); echo '-->';
             }
         }
 
