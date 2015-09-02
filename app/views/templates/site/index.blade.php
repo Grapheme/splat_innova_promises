@@ -134,15 +134,21 @@
               @if (isset($mainpage_promises) && is_object($mainpage_promises) && $mainpage_promises->count())
 
                   <ul class="promises-index js-split-promises">
-
+                      <?
                       @foreach ($mainpage_promises as $promise)
                           <?
                           $puser = isset($users[$promise->user_id]) ? $users[$promise->user_id] : NULL;
                           if (!$puser)
                               continue;
+
+                          $default_avatar = '/theme/images/man.png';
+                          if (isset($promise_user->sex) && $promise_user->sex == 1)
+                              $default_avatar = '/theme/images/woman.png';
+
                           $city_promises_count = @(int)$cities_promises_counts[mb_strtolower(trim($puser->city))];
                           $promise_comments_count = @(int)$promises_comments_count[$promise->id];
                           ?>
+
 
                           @if ($promise->promise_of_the_week)
 
@@ -152,7 +158,8 @@
                                           <div class="info-cont">
                                               <div class="innova-choice">Выбор</div>
                                               <a href="http://mypromises.ru/promise/{{ $promise->id }}" class="pr-title">{{ $promise->name }}</a>
-                                              <div class="user-info"><a style="background-image: url({{ $puser->avatar }})" class="user-photo"></a>
+
+                                              <div class="user-info"><a style="background-image: url({{ $puser->avatar ?: $default_avatar }})" class="user-photo"></a>
                                                   <div class="user-text">
                                                       <div class="name"><a>{{ $puser->name }}</a></div>
                                                       <div class="city"><a>{{ $puser->city }}</a></div>
