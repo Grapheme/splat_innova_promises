@@ -8,7 +8,7 @@ return array(
     },
     */
 
-    'fields' => function() {
+    'fields' => function($dicval) {
 
         /**
          * Предзагружаем нужные словари с данными, по системному имени словаря, для дальнейшего использования.
@@ -24,6 +24,7 @@ return array(
         $lists = Dic::makeLists($dics, 'values', 'name', 'id');
         #Helper::dd($lists);
         */
+        $user = Dic::valueBySlugAndId('users', $dicval->user_id);
 
         return array(
             /*
@@ -34,9 +35,13 @@ return array(
             ),
             */
             'user_id' => array(
-                'title' => 'ID пользователя',
+                'title' => 'ID пользователя (не изменять!)',
                 'type' => 'text',
-                'second_note' => 'Не менять! Имя не показывается из соображений оптимизации.',
+                #'first_note' => 'Не менять! Имя не показывается из соображений оптимизации.',
+                'second_note' => $user->name
+                                 . ' - <a href="' . URL::route('entity.edit', ['users', $user->id]) . '">изменить</a>'
+                                 . ' / <a href="' . URL::route('app.profile_id', [$user->id]) . '" target="_blank">профиль</a>'
+                ,
             ),
             'promise_text' => array(
                 'title' => 'Текст обещания',
