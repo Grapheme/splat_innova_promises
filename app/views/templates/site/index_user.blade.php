@@ -354,26 +354,15 @@ if (isset($achievements) && count($achievements)) {
                                         if (isset($friend['sex']) && $friend['sex'] == 1)
                                             $default_avatar = '/theme/images/woman.png';
 
-                                        if (isset($friend['_name']) && $friend['_name'])
-                                            if ($also[$friend['_name']])
+                                        if (isset($friend->name) && $friend->name)
+                                            if ($also[$friend->name])
                                                 continue;
                                             else
-                                                $also[$friend['_name']] = 1;
+                                                $also[$friend->name] = 1;
                                         ?>
                                         <li class="friend-item registered-user js-friend-item-left" style="display: none;">
-
-                                            @if (@$friend['profile_id'])
-
-                                                <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}" style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></a>
-                                                <a href="{{ URL::route('app.profile_id', $friend['profile_id']) }}" class="name clean-a">{{ @$friend['_name'] }}</a>
-
-                                            @else
-
-                                                <div style="background-image: url({{ @$friend['avatar'] ?: $default_avatar }});" class="profile-photo clean-a"></div>
-                                                <div class="name clean-a">{{ @$friend['_name'] }}</div>
-
-                                            @endif
-
+                                            <a href="{{ URL::route('app.profile_id', $friend->id) }}" style="background-image: url({{ $friend->avatar ?: $default_avatar }});" class="profile-photo clean-a"></a>
+                                            <a href="{{ URL::route('app.profile_id', $friend->id) }}" class="name clean-a">{{ $friend->name }}</a>
                                         </li>
                                     @endforeach
 
