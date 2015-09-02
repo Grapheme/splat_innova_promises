@@ -120,9 +120,11 @@
                             </a>
                         @endforeach
                     </div>
+{{--
                     <div class="relative-all">
                         <a href="#">Посмотреть все похожие обещания</a>
                     </div>
+--}}
                 </div>
             @endif
             <div class="profile-card">
