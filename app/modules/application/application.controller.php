@@ -462,7 +462,15 @@ class ApplicationController extends BaseController {
             echo '<!--'; Helper::ta($subscribes); echo '-->';
             $subscribed_friends_ids = [];
             foreach ($subscribes as $subscribe) {
-                #$subscribed_friends_ids[] = $subscribe->;
+                $subscribed_friends_ids[] = $subscribe->author_id;
+            }
+            $subscribed_friends_ids = array_unique($subscribed_friends_ids);
+            if (count($subscribed_friends_ids)) {
+                $subscribed_friends = Dic::valuesBySlug('users', function($query) use ($subscribed_friends_ids) {
+                    $query->whereIn('id', $subscribed_friends_ids);
+                });
+                $subscribed_friends = DicVal::extracts($subscribed_friends, null, true, true);
+                echo '<!--'; Helper::ta($subscribed_friends); echo '-->';
             }
         }
 
