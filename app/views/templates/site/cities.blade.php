@@ -46,6 +46,7 @@ $page_title = 'Что обещают в ' . $current_city_dp;
                         if (isset($puser->sex) && $puser->sex == 1)
                             $default_avatar = '/theme/images/woman.png';
                         ?>
+                        <!-- {{ Helper::ta($puser) }} -->
                         <li class="promise-item js-parent js-promise-item">
                             <div class="flipper">
                                 <div class="promise-cont type-{{ $promise->style_id }}">
