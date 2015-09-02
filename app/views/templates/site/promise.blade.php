@@ -92,38 +92,33 @@
         <div class="wrapper">
 
             <!--
-            {{ Helper::ta($similar_promises) }}
-            {{ Helper::ta($similar_promises_users) }}
+{{--            {{ Helper::ta($similar_promises) }}--}}
+{{--            {{ Helper::ta($similar_promises_users) }}--}}
             -->
 
-            @if(0)
+            @if(isset($similar_promises) && is_object($similar_promises) && $similar_promises->count())
                 <div class="relative-promises">
                     <div class="relative-title">Похожие обещания</div>
                     <div class="relative-list">
-                        <a href="#" class="relative-item">
-                            <div class="relative-cont">
-                                <div class="item-title">Заниматься спортом</div>
-                                <div class="item-city">Дмитрий, Ярославль</div>
-                            </div>
-                        </a>
-                        <a href="#" class="relative-item">
-                            <div class="relative-cont">
-                                <div class="item-title">Заниматься спортом</div>
-                                <div class="item-city">Дмитрий, Ярославль</div>
-                            </div>
-                        </a>
-                        <a href="#" class="relative-item">
-                            <div class="relative-cont">
-                                <div class="item-title">Заниматься спортом</div>
-                                <div class="item-city">Дмитрий, Ярославль</div>
-                            </div>
-                        </a>
-                        <a href="#" class="relative-item">
-                            <div class="relative-cont">
-                                <div class="item-title">Заниматься спортом</div>
-                                <div class="item-city">Дмитрий, Ярославль</div>
-                            </div>
-                        </a>
+                        @foreach ($similar_promises as $similar_promise)
+                            <?
+                            $similar_promise_user = isset($similar_promises_users[$similar_promise->user_id]) ? $similar_promises_users[$similar_promise->user_id] : null;
+                            if (!$similar_promise_user)
+                                continue;
+
+                            $data = [];
+                            if ($similar_promise_user->name)
+                                $data[] = $similar_promise_user->name;
+                            if ($similar_promise_user->city)
+                                $data[] = $similar_promise_user->city;
+                            ?>
+                            <a href="{{ URL::route('app.promise', [$similar_promise->id]) }}" class="relative-item">
+                                <div class="relative-cont">
+                                    <div class="item-title">{{ $similar_promise->promise_text }}</div>
+                                    <div class="item-city">{{ implode(', ', $data) }}</div>
+                                </div>
+                            </a>
+                        @endforeach
                     </div>
                     <div class="relative-all">
                         <a href="#">Посмотреть все похожие обещания</a>
