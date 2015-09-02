@@ -114,7 +114,7 @@
                             ?>
                             <a href="{{ URL::route('app.promise', [$similar_promise->id]) }}" class="relative-item">
                                 <div class="relative-cont">
-                                    <div class="item-title">{{ $similar_promise->promise_text }}</div>
+                                    <div class="item-title">{{ $similar_promise->name }}</div>
                                     <div class="item-city">{{ implode(', ', $data) }}</div>
                                 </div>
                             </a>
