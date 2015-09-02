@@ -622,6 +622,17 @@ class CronPromises extends Command {
                                     $this->info(' + ' . $user->email);
                                 }
                             }
+
+                            /**
+                             * Отправка SMS
+                             */
+                            $number = $user->phone_number;
+                            $number = preg_replace('~[^\d]~is', '', $number);
+                            if (strlen($number) < 11 || @!$user->notifications['promise_dates'] || @!$user->notifications['on_phone'])
+                                continue;
+
+                            $text = 'У вас осталось совсем немного времени для выполнения обещания. Поторопитесь! MyPromises.ru';
+                            sendSms($number, $text);
                         }
                     }
                 }

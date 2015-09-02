@@ -8,7 +8,7 @@ return array(
     },
     */
 
-    'fields' => function() {
+    'fields' => function($dicval) {
 
         /**
          * Предзагружаем нужные словари с данными, по системному имени словаря, для дальнейшего использования.
@@ -24,6 +24,7 @@ return array(
         $lists = Dic::makeLists($dics, 'values', 'name', 'id');
         #Helper::dd($lists);
         */
+        $user = Dic::valueBySlugAndId('users', $dicval->user_id);
 
         return array(
             /*
@@ -34,9 +35,13 @@ return array(
             ),
             */
             'user_id' => array(
-                'title' => 'ID пользователя',
+                'title' => 'ID пользователя (не изменять!)',
                 'type' => 'text',
-                'second_note' => 'Не менять! Имя не показывается из соображений оптимизации.',
+                #'first_note' => 'Не менять! Имя не показывается из соображений оптимизации.',
+                'second_note' => $user->name
+                                 . ' - <a href="' . URL::route('entity.edit', ['users', $user->id]) . '">изменить</a>'
+                                 . ' / <a href="' . URL::route('app.profile_id', [$user->id]) . '" target="_blank">профиль</a>'
+                ,
             ),
             'promise_text' => array(
                 'title' => 'Текст обещания',
@@ -124,10 +129,22 @@ return array(
          * На этом этапе уже известны все элементы, которые будут отображены на странице.
          */
         'before_index_view' => function ($dic, $dicvals) {
+
+            $dicvals = DicVal::extracts($dicvals, null, true, true);
+            #Helper::ta($dicvals);
+            $user_ids = [];
+            foreach ($dicvals as $dicval) {
+                $user_ids[] = $dicval->user_id;
+            }
+            $user_ids = array_unique($user_ids);
+
+            $users = Dic::valuesBySlugAndIds('users', $user_ids, true);
+            #Helper::tad($users);
+            Config::set('temp.users', $users);
+
             /**
              * Предзагружаем нужные словари
              */
-
             /*
             $dics_slugs = array(
                 'users',
@@ -160,11 +177,17 @@ return array(
     #/*
     'second_line_modifier' => function($line, $dic, $dicval) {
 
-        #$dics = Config::get('temp.index_dics');
-        #Helper::tad($dics);
-        #$dic_products = $dics['products'];
+        $line = '';
+        if ($dicval->only_for_me)
+            $line .= '<i class="fa fa-eye-slash txt-color-red"></i> &nbsp;&nbsp;';
+        #else
+        #    $line .= '<i class="fa fa-eye txt-color-green"></i> &nbsp;&nbsp;';
 
-        return '';
+        $users = Config::get('temp.users');
+        if (isset($users[$dicval->user_id]) && is_object($users[$dicval->user_id]))
+            $line .= $users[$dicval->user_id]->name;
+
+        return $line;
     },
     #*/
 

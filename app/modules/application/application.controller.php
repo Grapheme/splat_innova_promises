@@ -1011,7 +1011,7 @@ class ApplicationController extends BaseController {
 
         $user = $this->user;
         $user = $this->processFriends($user);
-        #Helper::tad($user);
+        #echo '<!--'; Helper::ta($user); echo '-->';
         $promises = $this->promises;
 
         return View::make(Helper::layout('new_promise'), compact('user', 'promises'));
@@ -1049,20 +1049,6 @@ class ApplicationController extends BaseController {
         if (is_array($temp) && count($temp))
             $promise_friends_ids = implode(',', $temp);
 
-        $promise_friends_emails = [];
-        $temp = Input::get('friends_emails');
-        $temp = strtr($temp, [' ' => ',']);
-        $temp_array = explode(',', $temp);
-        if (count($temp_array)) {
-            foreach ($temp_array as $t => $tmp) {
-                $tmp = trim($tmp);
-                if (!filter_var($tmp, FILTER_VALIDATE_EMAIL))
-                    continue;
-                $promise_friends_emails[$tmp] = 1;
-            }
-            $promise_friends_emails = implode(',', array_keys($promise_friends_emails));
-        }
-
         /**
          * Добавляем обещание
          */
@@ -1081,10 +1067,45 @@ class ApplicationController extends BaseController {
                 'textfields' => array(
                     'promise_text' => $promise_text,
                     'promise_friends_ids' => $promise_friends_ids,
-                    'promise_friends_emails' => $promise_friends_emails,
+                    #'promise_friends_emails' => $promise_friends_emails, ## updated below
                 ),
             )
         );
+
+        $promise_friends_emails = [];
+        $temp = Input::get('friends_emails');
+        $temp = strtr($temp, [' ' => ',']);
+        $temp_array = explode(',', $temp);
+        if (count($temp_array)) {
+            foreach ($temp_array as $t => $tmp) {
+                $tmp = trim($tmp);
+                if (!filter_var($tmp, FILTER_VALIDATE_EMAIL))
+                    continue;
+                $promise_friends_emails[$tmp] = 1;
+
+                /**
+                 * Отправляем на почту письмо с оповещением
+                 */
+                #/*
+                $data = array(
+                    'promise' => $promise,
+                    'user' => $this->user,
+                );
+                Mail::send('emails.promise_from_friend', $data, function ($message) use ($promise, $tmp) {
+                    $from_email = Config::get('mail.from.address');
+                    $from_name = Config::get('mail.from.name');
+                    $message->from($from_email, $from_name);
+                    $message->subject('Вам дали обещание!');
+                    $message->to($tmp);
+                });
+                #*/
+            }
+            $emails = array_keys($promise_friends_emails);
+            if (count($emails)) {
+                $promise_friends_emails = implode(',', $emails);
+                $promise->update_textfield('promise_friends_emails', $promise_friends_emails);
+            }
+        }
 
         /**
          * Генерим картинку с текстом обещания для шеринга
