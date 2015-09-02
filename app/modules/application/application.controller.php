@@ -1008,9 +1008,13 @@ class ApplicationController extends BaseController {
 
         #Helper::d($date_finish);
 
-        #$promise_friends_ids = '';
+        /**
+         * Обещание дано друзьям
+         */
+        $promise_friends_ids = '';
         $temp = Input::get('friends_ids');
-        $promise_friends_ids = implode(',', $temp);
+        if (is_array($temp) && count($temp))
+            $promise_friends_ids = implode(',', $temp);
 
         $promise_friends_emails = [];
         $temp = Input::get('friends_emails');

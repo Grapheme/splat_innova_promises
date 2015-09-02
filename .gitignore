@@ -16,10 +16,14 @@ less
 Thumbs.db
 
 app/config/database.php
-app/storage/logs/
-app/storage/debugbar/*.*
+app/storage/cache/*
+app/storage/debugbar/*
+app/storage/logs/*
+app/storage/meta/*
+app/storage/sessions/*
+app/storage/views/*
 app/storage/*.*
-app/lang/*/
+app/lang/*/*
 /!files
 /!info
 /bootstrap/compiled.php
