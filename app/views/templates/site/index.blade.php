@@ -205,8 +205,8 @@
                                                               <a href="{{ URL::route('app.cities', ['city' => $puser->city]) }}">{{ $puser->city }}</a>
                                                           </b>
                                                       </div>
-                                                      <div class="stat-desc" style="margin: 25px 0 0; font-size: 16px; line-height: 1.5;">{{ mb_strtoupper($promise->name) }}</div>
                                                   @endif
+                                                  <div class="stat-desc" style="margin: 25px 0 0; font-size: 16px; line-height: 1.5;">{{ mb_strtoupper($promise->name) }}</div>
                                               </div>
                                               <div class="btn-cont"><a href="#" class="stat-btn js-promise-card-btn">Пообещать тоже</a></div>
                                           </div>
