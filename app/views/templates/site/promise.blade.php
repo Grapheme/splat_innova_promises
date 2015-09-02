@@ -90,39 +90,45 @@
     ?>
     <div class="promise-make promise-page type-{{ $promise->style_id }}" data-finish="{{ $promise->time_limit }}">
         <div class="wrapper">
+
+            <!--
+            {{ Helper::ta($similar_promises) }}
+            {{ Helper::ta($similar_promises_users) }}
+            -->
+
             @if(0)
-            <div class="relative-promises">
-                <div class="relative-title">Похожие обещания</div>
-                <div class="relative-list">
-                    <a href="#" class="relative-item">
-                        <div class="relative-cont">    
-                            <div class="item-title">Заниматься спортом</div>
-                            <div class="item-city">Дмитрий, Ярославль</div>
-                        </div>
-                    </a>
-                    <a href="#" class="relative-item">
-                        <div class="relative-cont">    
-                            <div class="item-title">Заниматься спортом</div>
-                            <div class="item-city">Дмитрий, Ярославль</div>
-                        </div>
-                    </a>
-                    <a href="#" class="relative-item">
-                        <div class="relative-cont">    
-                            <div class="item-title">Заниматься спортом</div>
-                            <div class="item-city">Дмитрий, Ярославль</div>
-                        </div>
-                    </a>
-                    <a href="#" class="relative-item">
-                        <div class="relative-cont">    
-                            <div class="item-title">Заниматься спортом</div>
-                            <div class="item-city">Дмитрий, Ярославль</div>
-                        </div>
-                    </a>
+                <div class="relative-promises">
+                    <div class="relative-title">Похожие обещания</div>
+                    <div class="relative-list">
+                        <a href="#" class="relative-item">
+                            <div class="relative-cont">
+                                <div class="item-title">Заниматься спортом</div>
+                                <div class="item-city">Дмитрий, Ярославль</div>
+                            </div>
+                        </a>
+                        <a href="#" class="relative-item">
+                            <div class="relative-cont">
+                                <div class="item-title">Заниматься спортом</div>
+                                <div class="item-city">Дмитрий, Ярославль</div>
+                            </div>
+                        </a>
+                        <a href="#" class="relative-item">
+                            <div class="relative-cont">
+                                <div class="item-title">Заниматься спортом</div>
+                                <div class="item-city">Дмитрий, Ярославль</div>
+                            </div>
+                        </a>
+                        <a href="#" class="relative-item">
+                            <div class="relative-cont">
+                                <div class="item-title">Заниматься спортом</div>
+                                <div class="item-city">Дмитрий, Ярославль</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="relative-all">
+                        <a href="#">Посмотреть все похожие обещания</a>
+                    </div>
                 </div>
-                <div class="relative-all">
-                    <a href="#">Посмотреть все похожие обещания</a>
-                </div>
-            </div>
             @endif
             <div class="profile-card">
                 <a href="{{ URL::to('/profile/'.$promise_user->id) }}" style="background-image: url({{ $promise_user->avatar ?: $default_avatar }});" class="profile-photo"></a>

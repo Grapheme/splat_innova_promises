@@ -1301,11 +1301,62 @@ class ApplicationController extends BaseController {
         #Helper::ta($comments);
         #Helper::ta($users_ids);
         #Helper::tad($users);
-
-
         #Helper::tad($promise);
 
-        return View::make(Helper::layout('promise'), compact('user', 'promise_user', 'promise', 'comments', 'users'));
+        /**
+         * Похожие обещания
+         */
+        $similar_promises = new Collection();
+        $similar_promises_users = new Collection();
+        $sphinx_match_mode = \Sphinx\SphinxClient::SPH_MATCH_ANY;
+        $results['similar_promises'] = SphinxSearch::search($promise->promise_text, 'splat_promises_index')
+            ->setMatchMode($sphinx_match_mode)
+            ->limit(30)
+            ->query()
+        ;
+        $results_counts['similar_promises'] = @count($results['similar_promises']['matches']);
+        #Helper::ta($results);
+
+        if ($results_counts['similar_promises'] > 0) {
+
+            $ids = array_keys($results['similar_promises']['matches']);
+            $similar_promises = Dic::valuesBySlugAndIds('promises', $ids, true);
+            if (isset($similar_promises) && is_object($similar_promises) && $similar_promises->count()) {
+                $temp = new Collection();
+                $similar_promises_users_ids = [];
+                foreach ($similar_promises as $t => $tmp) {
+
+                    $tmp = $tmp->extract(true);
+                    if ($tmp->user_id == $this->user->id) {
+                        continue;
+                    }
+
+                    $temp[$tmp->id] = $tmp;
+                    $similar_promises_users_ids[] = $tmp->user_id;
+
+                    if (count($temp) >= 4) {
+                        break;
+                    }
+                }
+                $similar_promises = $temp;
+
+                if (count($similar_promises_users_ids)) {
+                    $similar_promises_users = Dic::valuesBySlugAndIds('users', $similar_promises_users_ids, true);
+
+                    if (isset($similar_promises_users) && is_object($similar_promises_users) && $similar_promises_users->count()) {
+                        $temp = new Collection();
+                        foreach ($similar_promises_users as $t => $tmp) {
+                            $temp[$tmp->id] = $tmp->extract(true);
+                        }
+                        $similar_promises_users = $temp;
+                    }
+                }
+            }
+        }
+        #Helper::ta($similar_promises);
+        #Helper::tad($similar_promises_users);
+
+        return View::make(Helper::layout('promise'), compact('user', 'promise_user', 'promise', 'comments', 'users', 'similar_promises', 'similar_promises_users'));
     }
 
 
