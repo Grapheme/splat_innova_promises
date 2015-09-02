@@ -42,6 +42,8 @@ $page_title = 'Что обещают в ' . $current_city_dp;
                         if (!$puser)
                             continue;
 
+                        $puser = $this->extract_user($puser);
+
                         $default_avatar = '/theme/images/man.png';
                         if (isset($puser->sex) && $puser->sex == 1)
                             $default_avatar = '/theme/images/woman.png';
