@@ -825,6 +825,7 @@ class ApplicationController extends BaseController {
             $temp = new Collection();
             foreach($users as $u => $user) {
                 $user = $user->extract(true);
+                $user = $this->extract_user($user);
                 $temp[$user->id] = $user;
                 $users_ids[] = $user->id;
             }
