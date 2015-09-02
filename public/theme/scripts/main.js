@@ -412,3 +412,61 @@ $('.js-reload-set').on('click', function(){
         return false;        
     });
 })();
+(function tips(){
+    if(!$('.js-tip-overlay').length) return;
+    var autoTime = 4000;
+    var timeout = false;
+    var overlay = $('.js-tip-overlay');
+    var activeEq = 0;
+    var set = function() {
+        $('[data-tip]').each(function(){
+            var $this = $(this);
+            var name = $(this).attr('data-tip');
+            var block = $('[data-to-tip="' + name + '"]');
+            if(block.length == 0) {
+                $this.hide();
+                return;
+            }
+            $this.css({
+                top: block.offset().top - overlay.offset().top,
+                left: block.offset().left
+            });
+        });
+    }
+    var show = function(eq) {
+        clearTimeout(timeout);
+        activeEq = eq;
+        var block = $('[data-tip]').eq(eq);
+        if(eq == $('[data-tip]').length) {
+            overlay.fadeOut(function(){
+                $(this).remove();
+            });
+            return;
+        }
+        block.addClass('active')
+            .siblings().removeClass('active');
+        timeout = setTimeout(function(){
+           // show(eq+1);
+        }, autoTime);
+        var blockBottomPos = block.offset().top + $(window).scrollTop() + $(window).height()/4;
+        if(blockBottomPos > $(window).scrollTop() + $(window).height()
+            || block.offset().top < $(window).scrollTop()) {
+            $('html, body').animate({
+                scrollTop: block.offset().top - $(window).height()/2
+            });
+        }
+    }
+    var init = function() {
+        set();
+        $(window).on('resize', set);
+        $(window).on('load', function(){
+            set();
+            show(activeEq);
+        });
+        overlay.on('click', function(){
+            show(activeEq + 1);
+            return false;
+        });
+    }
+    init();
+})();

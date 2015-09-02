@@ -3,9 +3,7 @@ $ach_list = [];
 if (isset($achievements) && count($achievements)) {
     foreach ($achievements as $achievement) {
         $ach_list[] = [
-            'name' => $achievement->name,
-            'desc' => $achievement->desc,
-            'icon' => isset($achievement->image) && is_object($achievement->image) ? $achievement->image->full() : '',
+                'name' => $achievement->name, 'desc' => $achievement->desc, 'icon' => isset($achievement->image) && is_object($achievement->image) ? $achievement->image->full() : '',
         ];
     }
 }
@@ -24,7 +22,10 @@ if (isset($achievements) && count($achievements)) {
             <div class="logo"></div>
             <div class="text">
                 <p>КАЖДЫЙ РАЗ, ВЫПОЛНЯЯ ОБЕЩАНИЯ,<br>ВЫ СТАНОВИТЕСЬ СИЛЬНЕЕ.</p>
-                <p>МЫ ТОЖЕ ХОТИМ <a href="#" class="js-open-box" data-box="promo" onclick="ga('send', 'event', 'brand', 'profile');">ДАТЬ ВАМ ОБЕЩАНИЕ</a></p>
+
+                <p>МЫ ТОЖЕ ХОТИМ
+                    <a href="#" class="js-open-box" data-box="promo" onclick="ga('send', 'event', 'brand', 'profile');">ДАТЬ ВАМ ОБЕЩАНИЕ</a>
+                </p>
             </div>
         </div>
     </li>
@@ -35,9 +36,11 @@ if (isset($achievements) && count($achievements)) {
 
     <?php if(0): ?>
 
-        <br/>
+        <br />
 
-        <big><a href="<?php echo $user->identity; ?>" target="_blank"><?php echo $user->name; ?></a></big>
+        <big>
+            <a href="<?php echo $user->identity; ?>" target="_blank"><?php echo $user->name; ?></a>
+        </big>
         <?php if($user->years_old): ?>
             [ <?php echo $user->years_old; ?> ]
         <?php endif; ?>
@@ -52,57 +55,60 @@ if (isset($achievements) && count($achievements)) {
         <a href="<?php echo URL::route('app.profile'); ?>">Редактировать</a>
         <a href="#" class="logout">Выйти</a>
 
-        <br/>
+        <br />
 
-        Контактов: <?php echo $count_user_friends; ?><br/>
-        Обещаний: <?php echo @count($promises); ?><br/>
+        Контактов: <?php echo $count_user_friends; ?><br />
+        Обещаний: <?php echo @count($promises); ?><br />
 
         <?php if(isset($promises) && is_object($promises) && count($promises)): ?>
 
             Мои обещания:
 
             <ul>
-            <?php foreach($promises as $promise): ?>
-                <?php echo Helper::ta_($promise); ?>
+                <?php foreach($promises as $promise): ?>
+                    <?php echo Helper::ta_($promise); ?>
 
-                <li><a href="<?php echo URL::route('app.promise', $promise->id); ?>"><?php echo $promise->name; ?></a></li>
-            <?php endforeach; ?>
+                    <li>
+                        <a href="<?php echo URL::route('app.promise', $promise->id); ?>"><?php echo $promise->name; ?></a>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         <?php else: ?>
 
             <div class="wrapper">
-              <div class="us-text">Вы еще не давали обещаний.</div>
+                <div data-to-tip="promises"></div>
+                <div class="us-text" data-to-tip="list">Вы еще не давали обещаний.</div>
             </div>
 
         <?php endif; ?>
 
-        <br/>
+        <br />
 
         <a href="<?php echo URL::route('app.new_promise'); ?>" onclick="ga('send', 'event', 'new_promise', 'profile'); yaCounter27511935.reachGoal('butpromisesme'); return true;">Дать обещание</a>
 
-        <br/><br/>
+        <br /><br />
 
         <?php if(count($user->friends) || 1): ?>
 
-            Мои друзья:<br/>
+            Мои друзья:<br />
 
             <?php if(count($user->existing_friends)): ?>
                 Уже в системе<sup><?php echo count($user->existing_friends); ?></sup>:
                 <ul>
-                <?php foreach($user->existing_friends as $friend): ?>
-                    <li>
-                        <?php if(@$friend['profile_id']): ?>
-                            <a href="<?php echo URL::route('app.profile_id', $friend['profile_id']); ?>">
-                        <?php endif; ?>
+                    <?php foreach($user->existing_friends as $friend): ?>
+                        <li>
+                            <?php if(@$friend['profile_id']): ?>
+                                <a href="<?php echo URL::route('app.profile_id', $friend['profile_id']); ?>">
+                                    <?php endif; ?>
 
-                            <?php echo @$friend['_name']; ?>
+                                    <?php echo @$friend['_name']; ?>
 
 
-                        <?php if(@$friend['profile_id']): ?>
-                            </a>
-                        <?php endif; ?>
-                    </li>
-                <?php endforeach; ?>
+                                    <?php if(@$friend['profile_id']): ?>
+                                </a>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
 
@@ -119,19 +125,19 @@ if (isset($achievements) && count($achievements)) {
 
         <?php endif; ?>
 
-    <hr/>
+        <hr />
 
-    DEBUG:
-    <?php echo Helper::d(@$_SESSION); ?>
+        DEBUG:
+        <?php echo Helper::d(@$_SESSION); ?>
 
-    <?php echo Helper::d(@$_COOKIE); ?>
+        <?php echo Helper::d(@$_COOKIE); ?>
 
-    <?php echo Helper::ta(@$user); ?>
+        <?php echo Helper::ta(@$user); ?>
 
-    <?php echo Helper::ta_(@$promises); ?>
+        <?php echo Helper::ta_(@$promises); ?>
 
 
-    <div id="fb-root"></div>
+        <div id="fb-root"></div>
 
     <?php endif; ?>
 
@@ -140,28 +146,32 @@ if (isset($achievements) && count($achievements)) {
     if (isset($user->sex) && $user->sex == 1)
         $default_avatar = '/theme/images/woman.png';
     ?>
-      <div class="profile-page">
+    <div class="profile-page">
         <div class="wrapper">
-          <div class="profile-card">
-            <div style="background-image: url(<?php echo $user->avatar ?: $default_avatar; ?>);" class="profile-photo"></div>
-            <div class="profile-info">
-              <div class="info-cont">
-                <div class="name"><span><?php echo $user->name; ?></span><a href="<?php echo URL::route('app.profile'); ?>" class="us-link">Редактировать</a></div>
-                <?php if($user->years_old && 0): ?>
-                <div class="age">
-                    <?php echo trans_choice(':count год|:count года|:count лет', $user->years_old, array(), 'ru'); ?>
+            <div class="profile-card">
+                <div style="background-image: url(<?php echo $user->avatar ?: $default_avatar; ?>);" class="profile-photo" data-to-tip="photo"></div>
+                <div class="profile-info">
+                    <div class="info-cont">
+                        <div class="name"><span><?php echo $user->name; ?></span>
+                            <a href="<?php echo URL::route('app.profile'); ?>" class="us-link" data-to-tip="edit">Редактировать</a>
+                        </div>
+                        <?php if($user->years_old && 0): ?>
+                            <div class="age">
+                                <?php echo trans_choice(':count год|:count года|:count лет', $user->years_old, array(), 'ru'); ?>
 
+                            </div>
+                        <?php endif; ?>
+                        <?php if($user->city): ?>
+                            <a href="<?php echo URL::route('app.cities', ['city' => $user->city]); ?>" data-to-tip="city"><?php echo $user->city; ?></a>
+                        <?php endif; ?>
+                        <div class="achives js-achives"></div>
+                    </div>
                 </div>
-                <?php endif; ?>
-                <?php if($user->city): ?>
-                    <a href="<?php echo URL::route('app.cities', ['city' => $user->city]); ?>"><?php echo $user->city; ?></a>
-                <?php endif; ?>
-                <div class="achives js-achives"></div>
-              </div>
+                <div class="btn-cont">
+                    <a href="<?php echo URL::route('app.new_promise'); ?>" onclick="yaCounter27511935.reachGoal('butpromisesme'); return true;" class="us-btn" data-to-tip="promise">Дать обещание</a>
+                </div>
             </div>
-            <div class="btn-cont"><a href="<?php echo URL::route('app.new_promise'); ?>" onclick = "yaCounter27511935.reachGoal('butpromisesme'); return true;" class="us-btn">Дать обещание</a></div>
-          </div>
-          <div class="promises-title us-title">Мои обещания</div>
+            <div class="promises-title us-title">Мои обещания</div>
         </div>
 
 
@@ -172,40 +182,40 @@ if (isset($achievements) && count($achievements)) {
             </div>
 
             <ul class="promises-list">
-            <?
-            $p = 0;
-            ?>
-            <?php foreach($active_promises as $promise): ?>
-            <?
-                ++$p;
-                if (!$promise->style_id) {
-                    $styles = array('green', 'aqua', 'yellow', 'blue', 'pink');
-                    $promise->style_id = $styles[array_rand($styles)];
-                }
-            ?>
+                <?
+                $p = 0;
+                ?>
+                <?php foreach($active_promises as $promise): ?>
+                    <?
+                    ++$p;
+                    if (!$promise->style_id) {
+                        $styles = array('green', 'aqua', 'yellow', 'blue', 'pink');
+                        $promise->style_id = $styles[array_rand($styles)];
+                    }
+                    ?>
 
-                <?php echo $__env->make(Helper::layout('promise_inc'), array('promise_type' => 'active'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    <?php echo $__env->make(Helper::layout('promise_inc'), array('promise_type' => 'active'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-                <?php if($p == 1): ?>
-                    <li class="promise-item type-add-new">
-                        <a href="<?php echo URL::to('/new_promise'); ?>" class="add-content">
+                    <?php if($p == 1): ?>
+                        <li class="promise-item type-add-new">
+                            <a href="<?php echo URL::to('/new_promise'); ?>" class="add-content">
                             <span class="add-wrap">
                                 <span class="add-text">Добавить новое обещание</span>
                                 <span class="add-icon"></span>
                             </span>
-                        </a>
-                    </li>
-                <?php endif; ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
 
-                <?php if($p == 5): ?>
+                    <?php if($p == 5): ?>
+                        <?php echo $__env->yieldContent('koe-chto'); ?>
+                    <?php endif; ?>
+
+                <?php endforeach; ?>
+
+                <?php if($p == 1): ?>
                     <?php echo $__env->yieldContent('koe-chto'); ?>
                 <?php endif; ?>
-
-            <?php endforeach; ?>
-
-            <?php if($p == 1): ?>
-                <?php echo $__env->yieldContent('koe-chto'); ?>
-            <?php endif; ?>
 
             </ul>
 
@@ -224,13 +234,13 @@ if (isset($achievements) && count($achievements)) {
                 $p = 0;
                 ?>
                 <?php foreach($inactive_promises as $promise): ?>
-                <?
+                    <?
                     ++$p;
                     if (!$promise->style_id) {
                         $styles = array('green', 'aqua', 'yellow', 'blue', 'pink');
                         $promise->style_id = $styles[array_rand($styles)];
                     }
-                ?>
+                    ?>
 
                     <?php echo $__env->make(Helper::layout('promise_inc'), array('promise_type' => 'inactive'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
@@ -259,128 +269,185 @@ if (isset($achievements) && count($achievements)) {
 
         <?php if(!@count($active_promises) && !@count($inactive_promises)): ?>
             <div class="wrapper">
-                <div class="us-text">Вы еще не давали обещаний.</div>
+                <div data-to-tip="promises"></div>
+                <div class="us-text" data-to-tip="list">Вы еще не давали обещаний.</div>
             </div>
         <?php endif; ?>
 
 
         <?php if($auth_user->auth_method == 'native'): ?>
 
-              <div class="wrapper">
-                  <div class="inv-form">
-                      <p class="text">Пригласите вашего друга и расскажите ему о том, почему так важно сдерживать данные обещания.</p>
-                      <div class="inv-btn js-inv-btn-cont2"><a href="#" class="us-btn js-inv-btn2 invite-friend-show-form">Пригласить друга</a></div>
-                      <div id="send-invite-success" style="display:none">
-                          Приглашение успешно отправлено.
-                      </div>
-                      <div style="display: none;" class="form js-inv-form2">
-                          <form action="<?php echo URL::route('app.send_invite_message'); ?>" method="POST" id="invite-form">
-                              <input name="email" placeholder="E-mail друга" class="us-input">
-                              <div class="input-cont">
-                                <input type="hidden" name="name" value="<?php echo @$user['name']; ?>">
-                              </div>
-                              <div class="input-cont">
-                                <button class="us-btn" onclick="ga('send', 'event', 'invite', 'email');">Пригласить</button>
-                              </div>
-                          </form>
-                      </div>
-                  </div>
-
-              </div>
-
-          <?php else: ?>
-
-        <?
-        $friends_count = @count($user->existing_friends) + @count($user->non_existing_friends);
-        ?>
-        <div class="wrapper">
-            <div class="promises-title us-title" style="line-height: 60px;">
-                <span>Друзья на MyPromises</span>
-                <!-- <a href="#" class="us-btn right-title-btn">Посмотреть обещания друзей</a> -->
-            </div>
-        </div>
-        <div class="friends-lists">
             <div class="wrapper">
-                <div class="friends friends-left">
-                    <div class="friends-title">Ваши друзья</sup></div>
-                    <ul class="friends-list">
+                <div class="inv-form">
+                    <p class="text">Пригласите вашего друга и расскажите ему о том, почему так важно сдерживать данные обещания.</p>
 
-                    <?
-                    $i = 0;
-                    ?>
+                    <div class="inv-btn js-inv-btn-cont2">
+                        <a href="#" class="us-btn js-inv-btn2 invite-friend-show-form" data-to-tip="invite">Пригласить друга</a>
+                    </div>
+                    <div id="send-invite-success" style="display:none">
+                        Приглашение успешно отправлено.
+                    </div>
+                    <div style="display: none;" class="form js-inv-form2">
+                        <form action="<?php echo URL::route('app.send_invite_message'); ?>" method="POST" id="invite-form">
+                            <input name="email" placeholder="E-mail друга" class="us-input">
 
-                    <?php if(count($user->existing_friends)): ?>
+                            <div class="input-cont">
+                                <input type="hidden" name="name" value="<?php echo @$user['name']; ?>">
+                            </div>
+                            <div class="input-cont">
+                                <button class="us-btn" onclick="ga('send', 'event', 'invite', 'email');">Пригласить</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
-                        <?php foreach($user->existing_friends as $friend): ?>
+            </div>
+
+        <?php else: ?>
+
+            <?
+            $friends_count = @count($user->existing_friends) + @count($user->non_existing_friends);
+            ?>
+            <div class="wrapper">
+                <div class="promises-title us-title" style="line-height: 60px;">
+                    <span>Друзья на MyPromises</span>
+                    <!-- <a href="#" class="us-btn right-title-btn">Посмотреть обещания друзей</a> -->
+                </div>
+            </div>
+            <div class="friends-lists">
+                <div class="wrapper">
+                    <div class="friends friends-left">
+                        <div class="friends-title">Ваши друзья</div>
+                        <ul class="friends-list">
+
                             <?
-                            ++$i;
-                            $default_avatar = '/theme/images/man.png';
-                            if (isset($friend['sex']) && $friend['sex'] == 1)
-                                $default_avatar = '/theme/images/woman.png';
+                            $i = 0;
+                            $also = [];
                             ?>
-                            <li class="friend-item registered-user js-friend-item-left" style="display: none;">
 
-                                <?php if(@$friend['profile_id']): ?>
 
-                                    <a href="<?php echo URL::route('app.profile_id', $friend['profile_id']); ?>" style="background-image: url(<?php echo @$friend['avatar'] ?: $default_avatar; ?>);" class="profile-photo clean-a"></a>
-                                    <a href="<?php echo URL::route('app.profile_id', $friend['profile_id']); ?>" class="name clean-a"><?php echo @$friend['_name']; ?></a>
-                                
-                                <?php else: ?>
+                                <?php if(count($user->existing_friends)): ?>
+                                    <?php foreach($user->existing_friends as $friend): ?>
+                                        <?
+                                        ++$i;
+                                        $default_avatar = '/theme/images/man.png';
+                                        if (isset($friend['sex']) && $friend['sex'] == 1)
+                                            $default_avatar = '/theme/images/woman.png';
 
-                                    <div style="background-image: url(<?php echo @$friend['avatar'] ?: $default_avatar; ?>);" class="profile-photo clean-a"></div>
-                                    <div class="name clean-a"><?php echo @$friend['_name']; ?></div>
+                                        if (isset($friend['_name']) && $friend['_name'])
+                                            $also[$friend['_name']] = 1;
+                                        ?>
+                                        <li class="friend-item registered-user js-friend-item-left" style="display: none;">
+
+                                            <?php if(@$friend['profile_id']): ?>
+
+                                                <a href="<?php echo URL::route('app.profile_id', $friend['profile_id']); ?>" style="background-image: url(<?php echo @$friend['avatar'] ?: $default_avatar; ?>);" class="profile-photo clean-a"></a>
+                                                <a href="<?php echo URL::route('app.profile_id', $friend['profile_id']); ?>" class="name clean-a"><?php echo @$friend['_name']; ?></a>
+
+                                            <?php else: ?>
+
+                                                <div style="background-image: url(<?php echo @$friend['avatar'] ?: $default_avatar; ?>);" class="profile-photo clean-a"></div>
+                                                <div class="name clean-a"><?php echo @$friend['_name']; ?></div>
+
+                                            <?php endif; ?>
+
+                                        </li>
+                                    <?php endforeach; ?>
 
                                 <?php endif; ?>
 
-                            </li>
-                        <?php endforeach; ?>
+                                <?php if(count($subscribed_friends)): ?>
+                                    <?php foreach($subscribed_friends as $friend): ?>
+                                        <?
+                                        ++$i;
+                                        $default_avatar = '/theme/images/man.png';
+                                        if (isset($friend['sex']) && $friend['sex'] == 1)
+                                            $default_avatar = '/theme/images/woman.png';
 
-                    <?php endif; ?>
+                                        if (isset($friend->name) && $friend->name)
+                                            if (isset($also[$friend->name]))
+                                                continue;
+                                            else
+                                                $also[$friend->name] = 1;
+                                        ?>
+                                        <li class="friend-item registered-user js-friend-item-left" style="display: none;">
+                                            <a href="<?php echo URL::route('app.profile_id', $friend->id); ?>" style="background-image: url(<?php echo $friend->avatar ?: $default_avatar; ?>);" class="profile-photo clean-a"></a>
+                                            <a href="<?php echo URL::route('app.profile_id', $friend->id); ?>" class="name clean-a"><?php echo $friend->name; ?></a>
+                                        </li>
+                                    <?php endforeach; ?>
 
-                        <div style="float:none; clear:both;"></div>
+                                <?php endif; ?>
 
-                  </ul>
-                </div>
-                <div class="friends friends-right">
-                    <div class="friends-title">Пригласить друга</sup></div>
-                    <ul class="friends-list">
+                            <div style="float:none; clear:both;"></div>
 
-                    <?
-                    $i = 0;
-                    ?>
+                        </ul>
+                    </div>
+                    <div class="friends friends-right">
+                        <div class="friends-title">Пригласить друга</sup></div>
+                        <ul class="friends-list">
 
-                    <?php if(count($user->non_existing_friends)): ?>
-
-                        <?php foreach($user->non_existing_friends as $friend): ?>
                             <?
-                            ++$i;
-                            $default_avatar = '/theme/images/man.png';
-                            if (isset($friend['sex']) && $friend['sex'] == 1)
-                                $default_avatar = '/theme/images/woman.png';
+                            $i = 0;
                             ?>
-                            <li class="friend-item registered-user js-friend-item-right" style="display: none;">
 
-                                    <a href="<?php echo URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])); ?>" data-style="background-image: url(<?php echo @$friend['avatar'] ?: $default_avatar; ?>);" class="profile-photo clean-a"></a>
-                                    <a href="<?php echo URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])); ?>" class="name clean-a"><?php echo @$friend['_name']; ?></a>
+                            <?php if(count($user->non_existing_friends)): ?>
 
-                            </li>
-                        <?php endforeach; ?>
+                                <?php foreach($user->non_existing_friends as $friend): ?>
+                                    <?
+                                    ++$i;
+                                    $default_avatar = '/theme/images/man.png';
+                                    if (isset($friend['sex']) && $friend['sex'] == 1)
+                                        $default_avatar = '/theme/images/woman.png';
+                                    ?>
+                                    <li class="friend-item registered-user js-friend-item-right" style="display: none;">
 
-                    <?php endif; ?>
+                                        <a href="<?php echo URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])); ?>" data-style="background-image: url(<?php echo @$friend['avatar'] ?: $default_avatar; ?>);" class="profile-photo clean-a"></a>
+                                        <a href="<?php echo URL::route('app.send_invite', array('name' => @$friend['_name'], 'avatar' => @$friend['avatar'], 'uid' => @$friend['id'])); ?>" class="name clean-a"><?php echo @$friend['_name']; ?></a>
 
-                        <div style="float:none; clear:both;"></div>
+                                    </li>
+                                <?php endforeach; ?>
 
-                  </ul>
+                            <?php endif; ?>
+
+                            <div style="float:none; clear:both;"></div>
+
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="clearfix"></div>
             </div>
-        </div>
-        <div class="friends-more">
-            <a href="#" class="js-show-friends">Показать еще друзей</a>
-        </div>
+            <div class="friends-more">
+                <a href="#" class="js-show-friends">Показать еще друзей</a>
+            </div>
         <?php endif; ?>
 
-      </div>
+    </div>
+
+    <div class="tip-overlay js-tip-overlay">
+        <div class="tip-block arrow-right-top" data-tip="photo">
+            Это Ваша фотография из соц сети. Вы можете ее изменить, зайдя в Настройки
+        </div>
+        <div class="tip-block arrow-top-left" data-tip="edit">
+            Отредактируйте свой профиль и настройте частоту оповещений.
+        </div>
+        <div class="tip-block arrow-right-top" data-tip="city">
+            Укажите город Вашего проживания, чтобы единомышленникам было проще Вас найти.
+        </div>
+        <div class="tip-block arrow-bottom-top" data-tip="promise">
+            Здесь Вы можете составить своё обещание, и выбрать один из предложенных шаблонов его оформления.
+        </div>
+        <div class="tip-block" data-tip="list">
+            <div class="fake-promise"></div>
+            <div class="fake-promise"></div>
+            <div class="fake-promise"></div>
+            <div class="tip-text arrow-right-top">
+                Это список Ваших обещаний. Здесь хранятся все данные Вами обещания, включая выполненные, невыполненные и текущие.
+            </div>
+        </div>
+        <div class="tip-block arrow-top-left" data-tip="invite">
+            Вы всегда можете пригласить на MyPromises друга из соцсети, отправив ему нашу открытку.
+        </div>
+    </div>
 
     <script>
         var __SITE__ = {};
@@ -399,26 +466,26 @@ if (isset($achievements) && count($achievements)) {
                 data: {},
                 api: "//vk.com/js/api/openapi.js",
                 appID: 4659025,
-                init: function(){
+                init: function () {
                     //alert(1);
                     //$.js(vk.api);
 
-                    window.vkAsyncInit = function(){
+                    window.vkAsyncInit = function () {
                         //alert("2'");
                         VK.init({apiId: vk.appID});
                         sendPostToWall();
                     }
 
-                    $.getScript(vk.api,function(){
+                    $.getScript(vk.api, function () {
                         // nothing..
                     });
 
-                    function sendPostToWall(){
+                    function sendPostToWall() {
                         //alert(3);
                         VK.Api.call('wall.post', {
                             owner_id: '<?php echo @$auth_user->full_social_info['id']; ?>',
                             message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
-                        }, function(r) {
+                        }, function (r) {
                             //console.log(r);
                             //alert('OK!');
                             //$(".js-inv-btn-cont2").slideUp();
@@ -432,46 +499,46 @@ if (isset($achievements) && count($achievements)) {
         </script>
 
         <?php if(0): ?>
-        <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            VK.init({
-                apiId: 4659025
-            });
-        </script>
-        <script>
-            $(document).ready(function(){
-                VK.Api.call('wall.post', {
-                    owner_id: '<?php echo @$auth_user->full_social_info['id']; ?>',
-                    message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
-                }, function(r) {
-                    //console.log(r);
-                    //alert('OK!');
-                    //$(".js-inv-btn-cont2").slideUp();
-                    //$("#send-invite-success").slideDown();
+            <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                VK.init({
+                    apiId: 4659025
                 });
-            });
-        </script>
+            </script>
+            <script>
+                $(document).ready(function () {
+                    VK.Api.call('wall.post', {
+                        owner_id: '<?php echo @$auth_user->full_social_info['id']; ?>',
+                        message: "Я только что дал обещание на mypromises.ru\r\nКаждый, кто читает эту запись, имеет право потребовать у меня отчет о выполнении обещания."
+                    }, function (r) {
+                        //console.log(r);
+                        //alert('OK!');
+                        //$(".js-inv-btn-cont2").slideUp();
+                        //$("#send-invite-success").slideDown();
+                    });
+                });
+            </script>
         <?php endif; ?>
 
     <?php endif; ?>
 
 
     <script>
-        $(".js-inv-btn2").on("click",function(){
-            return $(".js-inv-btn-cont2").slideUp(), $(".js-inv-form2").slideDown(function(){
+        $(".js-inv-btn2").on("click", function () {
+            return $(".js-inv-btn-cont2").slideUp(), $(".js-inv-form2").slideDown(function () {
                 $(this).find("input").trigger("focus")
-            }),!1
+            }), !1
         });
 
         $("#invite-form").validate({
             rules: {
-                'email': { required: true, email: true },
+                'email': {required: true, email: true},
             },
             messages: {
                 'email': "",
             },
             errorClass: "inp-error",
-            submitHandler: function(form) {
+            submitHandler: function (form) {
                 //console.log(form);
                 sendInviteForm(form);
                 return false;
@@ -481,15 +548,15 @@ if (isset($achievements) && count($achievements)) {
         function sendInviteForm(form) {
 
             //console.log(form);
-            var options = { target: null, type: $(form).attr('method'), dataType: 'json' };
+            var options = {target: null, type: $(form).attr('method'), dataType: 'json'};
 
-            options.beforeSubmit = function(formData, jqForm, options){
+            options.beforeSubmit = function (formData, jqForm, options) {
                 $(form).find('button').addClass('loading').attr('disabled', 'disabled');
                 $(form).find('.error-msg').text('');
                 //$('.error').text('').hide();
             }
 
-            options.success = function(response, status, xhr, jqForm){
+            options.success = function (response, status, xhr, jqForm) {
                 //console.log(response);
                 //$('.success').hide().removeClass('hidden').slideDown();
                 //$(form).slideUp();
@@ -510,13 +577,13 @@ if (isset($achievements) && count($achievements)) {
 
             }
 
-            options.error = function(xhr, textStatus, errorThrown){
+            options.error = function (xhr, textStatus, errorThrown) {
                 console.log(xhr);
                 $(form).find('button').removeAttr('disabled');
                 $(form).find('.error-msg').text('Ошибка при отправке, попробуйте позднее');
             }
 
-            options.complete = function(data, textStatus, jqXHR){
+            options.complete = function (data, textStatus, jqXHR) {
                 $(form).find('button').removeClass('loading').removeAttribute('disabled');
             }
 

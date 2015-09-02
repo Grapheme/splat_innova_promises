@@ -2070,7 +2070,7 @@ html { height: 100% }
     line-height: 140px;
     float: right;
 }
-.profile-page .profile-card { margin-top: 80px }
+.profile-page .profile-card { padding-top: 80px }
 .profile-page .promises-title { margin: 80px 0 20px }
 .profile-page .promises-list {
     padding: 0;
@@ -3563,4 +3563,186 @@ div.pr-btn { line-height: 38px }
 
 .js-inactive li {
     display: none;
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.tip-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 55;
+    background: rgba(0, 0, 0, .7);
+    cursor: pointer;
+}
+
+.tip-block {
+    position: absolute;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.25;
+    width: 240px;
+    opacity: 0;
+    transform: translateY(-3px);
+    transition: all .3s ease;
+}
+
+.tip-block.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.arrow-right-top:before {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    left: -75px;
+    width: 62px;
+    height: 62px;
+    background: url(../images/tips/arrow-right-top.png);
+}
+
+.arrow-top-left:before {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    left: -75px;
+    width: 63px;
+    height: 60px;
+    background: url(../images/tips/arrow-top-left.png);
+}
+
+.arrow-bottom-top:before {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    top: -80px;
+    left: 50%;
+    width: 38px;
+    height: 69px;
+    margin-left: -19px;
+    background: url(../images/tips/arrow-bottom-top.png);
+}
+
+.tip-block[data-tip="photo"] {
+    margin-top: 150px;
+    margin-left: 125px;
+}
+
+.tip-block[data-tip="photo"]:before {
+    top: -10px;
+}
+
+.tip-block[data-tip="edit"] {
+    margin-top: -70px;
+    margin-left: 110px;
+}
+
+.tip-block[data-tip="edit"]:before {
+    top: 5px;
+}
+
+.tip-block[data-tip="city"] {
+    margin-top: 30px;
+    margin-left: 100px;
+}
+
+.tip-block[data-tip="promise"] {
+    margin-left: 0;
+    margin-top: 160px;
+}
+
+.tip-block[data-tip="list"] {
+    margin-left: -25px;
+    width: 999px;
+}
+
+.tip-block[data-tip="list"] .tip-text {
+    position: relative;
+    margin-left: 460px;
+    width: 240px;
+    margin-top: 25px;
+}
+
+.tip-block[data-tip="invite"] {
+    margin-left: 150px;
+    margin-top: -120px;
+}
+
+.tip-block[data-tip="invite"]:before {
+    top: 30px;
+}
+
+.tip-block[data-tip="promises"] {
+    width: 999px;
+    margin-left: -25px;
+}
+
+.tip-block[data-tip="promise-input"] {
+    margin-left: 430px;
+    margin-top: -70px;
+}
+
+.tip-block[data-tip="promise-input"]:before {
+    top: 10px;
+}
+
+.tip-block[data-tip="tip"] {
+    margin-left: 400px;
+    margin-top: -105px;
+}
+
+.tip-block[data-tip="tip"]:before {
+    top: 25px;
+}
+
+.tip-block[data-tip="date"] {
+    margin-left: 330px;
+    margin-top: -50px;
+}
+
+.tip-block[data-tip="date"]:before {
+    top: 10px;
+}
+
+.tip-block[data-tip="template"] {
+    margin-left: 330px;
+    margin-top: -50px;
+}
+
+.tip-block[data-tip="template"]:before {
+    top: 10px;
+}
+
+.tip-block[data-tip="private"] {
+    margin-left: 70px;
+    margin-top: -130px;
+}
+
+.tip-block[data-tip="private"]:before {
+    top: 50px;
+}
+
+.tip-block[data-tip="done"] {
+    margin-left: 160px;
+    margin-top: -131px;
+}
+
+.tip-block[data-tip="done"]:before {
+    top: 50px;
+}
+
+.fake-promise {
+    display: inline-block;
+    vertical-align: top;
+    height: 75px;
+    width: 260px;
+    margin-right: 25px;
+    border: 2px dashed #fff;
 }

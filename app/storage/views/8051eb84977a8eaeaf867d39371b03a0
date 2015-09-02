@@ -26,10 +26,12 @@ define('domain', 'http://' . $_SERVER['HTTP_HOST']);
     <![endif]-->
     <?php echo $__env->make(Helper::layout('header'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-    <?php $__env->startSection('content'); ?>
-        <?php echo @$content; ?>
+    <div class="content-wrapper">
+        <?php $__env->startSection('content'); ?>
+            <?php echo @$content; ?>
 
-    <?php echo $__env->yieldSection(); ?>
+        <?php echo $__env->yieldSection(); ?>
+    </div>
 
     <?php echo $__env->make(Helper::layout('footer'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     <?php echo $__env->make(Helper::layout('scripts'), array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

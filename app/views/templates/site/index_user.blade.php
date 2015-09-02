@@ -74,7 +74,8 @@ if (isset($achievements) && count($achievements)) {
         @else
 
             <div class="wrapper">
-                <div class="us-text">Вы еще не давали обещаний.</div>
+                <div data-to-tip="promises"></div>
+                <div class="us-text" data-to-tip="list">Вы еще не давали обещаний.</div>
             </div>
 
         @endif
@@ -141,11 +142,11 @@ if (isset($achievements) && count($achievements)) {
     <div class="profile-page">
         <div class="wrapper">
             <div class="profile-card">
-                <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo"></div>
+                <div style="background-image: url({{ $user->avatar ?: $default_avatar }});" class="profile-photo" data-to-tip="photo"></div>
                 <div class="profile-info">
                     <div class="info-cont">
                         <div class="name"><span>{{ $user->name }}</span>
-                            <a href="{{ URL::route('app.profile') }}" class="us-link">Редактировать</a>
+                            <a href="{{ URL::route('app.profile') }}" class="us-link" data-to-tip="edit">Редактировать</a>
                         </div>
                         @if ($user->years_old && 0)
                             <div class="age">
@@ -153,13 +154,13 @@ if (isset($achievements) && count($achievements)) {
                             </div>
                         @endif
                         @if ($user->city)
-                            <a href="{{ URL::route('app.cities', ['city' => $user->city]) }}">{{ $user->city }}</a>
+                            <a href="{{ URL::route('app.cities', ['city' => $user->city]) }}" data-to-tip="city">{{ $user->city }}</a>
                         @endif
                         <div class="achives js-achives"></div>
                     </div>
                 </div>
                 <div class="btn-cont">
-                    <a href="{{ URL::route('app.new_promise') }}" onclick="yaCounter27511935.reachGoal('butpromisesme'); return true;" class="us-btn">Дать обещание</a>
+                    <a href="{{ URL::route('app.new_promise') }}" onclick="yaCounter27511935.reachGoal('butpromisesme'); return true;" class="us-btn" data-to-tip="promise">Дать обещание</a>
                 </div>
             </div>
             <div class="promises-title us-title">Мои обещания</div>
@@ -260,7 +261,8 @@ if (isset($achievements) && count($achievements)) {
 
         @if (!@count($active_promises) && !@count($inactive_promises))
             <div class="wrapper">
-                <div class="us-text">Вы еще не давали обещаний.</div>
+                <div data-to-tip="promises"></div>
+                <div class="us-text" data-to-tip="list">Вы еще не давали обещаний.</div>
             </div>
         @endif
 
@@ -272,7 +274,7 @@ if (isset($achievements) && count($achievements)) {
                     <p class="text">Пригласите вашего друга и расскажите ему о том, почему так важно сдерживать данные обещания.</p>
 
                     <div class="inv-btn js-inv-btn-cont2">
-                        <a href="#" class="us-btn js-inv-btn2 invite-friend-show-form">Пригласить друга</a>
+                        <a href="#" class="us-btn js-inv-btn2 invite-friend-show-form" data-to-tip="invite">Пригласить друга</a>
                     </div>
                     <div id="send-invite-success" style="display:none">
                         Приглашение успешно отправлено.
@@ -412,6 +414,33 @@ if (isset($achievements) && count($achievements)) {
         @endif
 
     </div>
+    @if(0)
+    <div class="tip-overlay js-tip-overlay">
+        <div class="tip-block arrow-right-top" data-tip="photo">
+            Это Ваша фотография из соц сети. Вы можете ее изменить, зайдя в Настройки
+        </div>
+        <div class="tip-block arrow-top-left" data-tip="edit">
+            Отредактируйте свой профиль и настройте частоту оповещений.
+        </div>
+        <div class="tip-block arrow-right-top" data-tip="city">
+            Укажите город Вашего проживания, чтобы единомышленникам было проще Вас найти.
+        </div>
+        <div class="tip-block arrow-bottom-top" data-tip="promise">
+            Здесь Вы можете составить своё обещание, и выбрать один из предложенных шаблонов его оформления.
+        </div>
+        <div class="tip-block" data-tip="list">
+            <div class="fake-promise"></div>
+            <div class="fake-promise"></div>
+            <div class="fake-promise"></div>
+            <div class="tip-text arrow-right-top">
+                Это список Ваших обещаний. Здесь хранятся все данные Вами обещания, включая выполненные, невыполненные и текущие.
+            </div>
+        </div>
+        <div class="tip-block arrow-top-left" data-tip="invite">
+            Вы всегда можете пригласить на MyPromises друга из соцсети, отправив ему нашу открытку.
+        </div>
+    </div>
+    @endif
 
     <script>
         var __SITE__ = {};

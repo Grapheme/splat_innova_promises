@@ -68,11 +68,11 @@
                 <?php echo Form::textarea('promise_text', (@$_SESSION['promise_text'] && $_SESSION['promise_text'] != 'undefined' ? $_SESSION['promise_text'] : ''), array('placeholder' => "Я ОБЕЩАЮ ...")); ?><br/>
               </div> -->
                 <div class="input-cont input-advice-cont">
-                    <div class="make-promise-placeholder js-promise-placeholder">
+                    <div class="make-promise-placeholder js-promise-placeholder" data-to-tip="promise-input">
                         <div class="promise-placeholder">Я ОБЕЩАЮ <span>...</span></div>
                         <?php echo Form::textarea('promise_text', (@$_SESSION['promise_text'] && $_SESSION['promise_text'] != 'undefined' ? $_SESSION['promise_text'] : ''), ['class' => 'js-advice-to']); ?>
 
-                        <div class="promises-advice">
+                        <div class="promises-advice" data-to-tip="tip">
                             <span>Например:</span>
                             <a href="#" class="js-advice" style="display: none;">Научиться признавать свои ошибки</a>
                             <a href="#" class="js-advice" style="display: none;">Не пропускать тренировки</a>
@@ -113,7 +113,7 @@
                         <input name="friends_emails" class="input-class" placeholder="Введите email друзей через запятую">
                     </div>
                 </div>
-                <div class="time-inputs">
+                <div class="time-inputs" data-to-tip="date">
                     <div class="desc">Я выполню обещание к</div>
                     <div class="input-cont">
                         <!-- <span class="bet-text">часам</span> -->
@@ -127,7 +127,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="color-inputs">
+                <div class="color-inputs" data-to-tip="template">
                     <div class="desc">Выберите оформление</div>
                     <select name="style_id" class="js-type-select hidden">
                         <option value="blue"></option>
@@ -143,18 +143,41 @@
                         <li data-type="pink" class="color-item type-pink"></li>
                         <li data-type="green" class="color-item type-green"></li>
                     </ul>
-                    <div class="check-cont">
+                    <div class="check-cont" data-to-tip="private">
                         <?php echo Form::checkbox('only_for_me', 1, null, array('id' => 'apply', 'class' => 'styledCheck')); ?>
 
                         <label for="apply"><span class="check-fake"><i class="fi icon-check"></i></span> Сделать обещание видимым только мне</label>
                     </div>
-                    <div class="btn-cont">
+                    <div class="btn-cont" data-to-tip="done">
                         <button class="us-btn">Дать обещание</button>
                     </div>
                 </div>
                 <?php echo Form::close(); ?>
 
             </div>
+        </div>
+    </div>
+    <div class="tip-overlay js-tip-overlay">
+        <div class="tip-block arrow-top-left" data-tip="promise-input">
+            Напишите свое обещание
+        </div>
+        <div class="tip-block arrow-top-left" data-tip="tip">
+            Если вам ничего не приходит в голову, выберите одно из популярных обещаний
+        </div>
+        <div class="tip-block arrow-top-left" data-tip="date">
+            Установите срок выполнения обещания
+        </div>
+        <div class="tip-block arrow-top-left" data-tip="template">
+            Оформите карточку с обещанием на свой вкус.
+        </div>
+        <div class="tip-block arrow-top-left" data-tip="private">
+            Вы можете дать личное обещание, 
+            не доступное для посторонних глаз. 
+            Для этого поставьте галочку здесь.
+        </div>
+        <div class="tip-block arrow-top-left" data-tip="done">
+            Если вы готовы дать своё обещание — нажмите эту кнопку. 
+            И помните, каждое обещание должно становиться делом!
         </div>
     </div>
     <!--
