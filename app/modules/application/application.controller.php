@@ -458,7 +458,7 @@ class ApplicationController extends BaseController {
             $query->where('name', $user->id);
         });
         if (isset($subscribes) && is_object($subscribes) && $subscribes->count()) {
-            echo '<!--'; Helper::ta($subscribes) . echo '-->';
+            echo '<!--'; Helper::ta($subscribes); echo '-->';
             $subscribed_friends_ids = [];
             foreach ($subscribes as $subscribe) {
                 #$subscribed_friends_ids[] = $subscribe->;
