@@ -75,16 +75,26 @@
       <div class="main-screen">
         <div class="main-fotorama">
           <div class="js-main-fotorama">
-              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/1.jpg" alt="">
-              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/3.jpg" alt="">
-              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/4.jpg" alt="">
-              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/5.jpg" alt="">
-              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/7.jpg" alt="">
-              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/8.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/1new.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/2new.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/3new.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/4new.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/5new.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/6new.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/1.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/1.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/5.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/7.jpg" alt="">
           </div>
         </div>
         <div class="main-content wrapper">
           <div>
+              <div class="slide-title js-slide-title" data-promise-text="прыгнуть с парашютом">Я обещаю прыгнуть с парашютом</div>
+              <div class="slide-title js-slide-title" data-promise-text="не пропускать тренировки">Я обещаю не пропускать тренировки</div>
+              <div class="slide-title js-slide-title" data-promise-text="устроить турнир по пляжному волейболу">Я обещаю устроить турнир по пляжному волейболу</div>
+              <div class="slide-title js-slide-title" data-promise-text="сходить в поход с палаткой">Я обещаю сходить в поход с палаткой</div>
+              <div class="slide-title js-slide-title" data-promise-text="съесть арбуз целиком">Я обещаю съесть арбуз целиком</div>
+              <div class="slide-title js-slide-title" data-promise-text="встретить рассвет на крыше">Я обещаю встретить рассвет на крыше</div>
               <div class="slide-title js-slide-title" data-promise-text="вырастить цветы у себя дома">Я обещаю вырастить цветы у себя дома</div> 
               <div class="slide-title js-slide-title" data-promise-text="порадовать любимую уже сегодня">Я обещаю порадовать любимую уже сегодня</div> 
               <div class="slide-title js-slide-title" data-promise-text="сделать ремонт в квартире">Я обещаю сделать ремонт в квартире</div> 

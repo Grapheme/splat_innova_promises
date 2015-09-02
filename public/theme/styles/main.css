@@ -2047,13 +2047,15 @@ html { height: 100% }
         color: inherit;
         text-decoration: none;
         border-bottom: 1px solid rgba(255, 255, 255, .4);
+        font-weight: 300;
     }
     .profile-page .profile-card .profile-info .info-cont a:not([class]) {
         border-bottom: 1px solid rgba(0, 0, 0, .4) !important;
     }
     .profile-card .profile-info .name {
         font-weight: 100;
-        font-size: 38px;
+        font-size: 30px;
+        line-height: 140%;
         max-width: 500px;
     }
     .profile-card .profile-info .age {
@@ -3456,14 +3458,25 @@ div.pr-btn { line-height: 38px }
     position: absolute;
     left: 100%;
     top: 0;
-    bottom: 0;
-    right: -500%;
+    bottom: -9999px;
+    right: -9999px;
+    background: #8ad1ef;
+}
+
+.friends-right:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    bottom: -9999px;
+    right: 0;
     background: #8ad1ef;
 }
 
 .friends-lists {
     background: #f2f2f2;
     margin-top: 60px;
+    overflow: hidden;
 }
 
 .friends-title {
