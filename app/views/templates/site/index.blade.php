@@ -141,7 +141,7 @@
                               continue;
 
                           $default_avatar = '/theme/images/man.png';
-                          if (isset($promise_user->sex) && $promise_user->sex == 1)
+                          if (isset($puser->sex) && $puser->sex == 1)
                               $default_avatar = '/theme/images/woman.png';
 
                           $city_promises_count = @(int)$cities_promises_counts[mb_strtolower(trim($puser->city))];

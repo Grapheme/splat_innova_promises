@@ -41,6 +41,10 @@ $page_title = 'Что обещают в ' . $current_city_dp;
                         $puser = isset($users[$promise->user_id]) ? $users[$promise->user_id] : NULL;
                         if (!$puser)
                             continue;
+
+                        $default_avatar = '/theme/images/man.png';
+                        if (isset($puser->sex) && $puser->sex == 1)
+                            $default_avatar = '/theme/images/woman.png';
                         ?>
                         <li class="promise-item js-parent js-promise-item">
                             <div class="flipper">
@@ -48,7 +52,7 @@ $page_title = 'Что обещают в ' . $current_city_dp;
                                     <div class="info-cont">
                                         {{--<a class="comments-amount">{{ trans_choice(':count комментарий|:count комментария|:count комментариев', $promise_comments_count, array(), 'ru') }}</a>--}}
                                         <div class="pr-title js-promise-text">{{ mb_strtoupper($promise->name) }}</div>
-                                        <div class="user-info"><a style="background-image: url({{ $puser->avatar }})" class="user-photo"></a>
+                                        <div class="user-info"><a style="background-image: url({{ $puser->avatar ?: $default_avatar }})" class="user-photo"></a>
                                             <div class="user-text">
                                                 <div class="name">{{ $puser->name }}</div>
                                                 <div class="city">{{ $puser->city }}</div>
