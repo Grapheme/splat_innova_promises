@@ -1091,7 +1091,7 @@ class ApplicationController extends BaseController {
                     'promise' => $promise,
                     'user' => $this->user,
                 );
-                Mail::send('emails.promise_from_friend', $data, function ($message) use ($promise) {
+                Mail::send('emails.promise_from_friend', $data, function ($message) use ($promise, $tmp) {
                     $from_email = Config::get('mail.from.address');
                     $from_name = Config::get('mail.from.name');
                     $message->from($from_email, $from_name);
