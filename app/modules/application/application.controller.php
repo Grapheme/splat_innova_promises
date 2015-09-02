@@ -445,7 +445,26 @@ class ApplicationController extends BaseController {
 
         }
 
+        /**
+         * Получаем ачивки пользователя
+         */
         $achievements = $this->get_achievements($promises);
+
+        /**
+         * Получаем участников, на которых подписался пользователь
+         */
+        $subscribed_friends = new Collection();
+        $subscribes = Dic::valuesBySlug('subscribes', function($query) use ($user) {
+            $query->where('name', $user->id);
+        });
+        if (isset($subscribes) && is_object($subscribes) && $subscribes->count()) {
+            echo '<!--'; Helper::ta($subscribes); echo '-->';
+            $subscribed_friends_ids = [];
+            foreach ($subscribes as $subscribe) {
+                #$subscribed_friends_ids[] = $subscribe->;
+            }
+        }
+
 
         /**
          * Показываем главную страницу юзера
@@ -825,6 +844,7 @@ class ApplicationController extends BaseController {
             $temp = new Collection();
             foreach($users as $u => $user) {
                 $user = $user->extract(true);
+                $user = $this->extract_user($user);
                 $temp[$user->id] = $user;
                 $users_ids[] = $user->id;
             }
@@ -1008,9 +1028,13 @@ class ApplicationController extends BaseController {
 
         #Helper::d($date_finish);
 
-        #$promise_friends_ids = '';
+        /**
+         * Обещание дано друзьям
+         */
+        $promise_friends_ids = '';
         $temp = Input::get('friends_ids');
-        $promise_friends_ids = implode(',', $temp);
+        if (is_array($temp) && count($temp))
+            $promise_friends_ids = implode(',', $temp);
 
         $promise_friends_emails = [];
         $temp = Input::get('friends_emails');
@@ -1297,11 +1321,62 @@ class ApplicationController extends BaseController {
         #Helper::ta($comments);
         #Helper::ta($users_ids);
         #Helper::tad($users);
-
-
         #Helper::tad($promise);
 
-        return View::make(Helper::layout('promise'), compact('user', 'promise_user', 'promise', 'comments', 'users'));
+        /**
+         * Похожие обещания
+         */
+        $similar_promises = new Collection();
+        $similar_promises_users = new Collection();
+        $sphinx_match_mode = \Sphinx\SphinxClient::SPH_MATCH_ANY;
+        $results['similar_promises'] = SphinxSearch::search($promise->promise_text, 'splat_promises_index')
+            ->setMatchMode($sphinx_match_mode)
+            ->limit(30)
+            ->query()
+        ;
+        $results_counts['similar_promises'] = @count($results['similar_promises']['matches']);
+        #Helper::ta($results);
+
+        if ($results_counts['similar_promises'] > 0) {
+
+            $ids = array_keys($results['similar_promises']['matches']);
+            $similar_promises = Dic::valuesBySlugAndIds('promises', $ids, true);
+            if (isset($similar_promises) && is_object($similar_promises) && $similar_promises->count()) {
+                $temp = new Collection();
+                $similar_promises_users_ids = [];
+                foreach ($similar_promises as $t => $tmp) {
+
+                    $tmp = $tmp->extract(true);
+                    if (is_object($this->user) && $tmp->user_id == $this->user->id) {
+                        continue;
+                    }
+
+                    $temp[$tmp->id] = $tmp;
+                    $similar_promises_users_ids[] = $tmp->user_id;
+
+                    if (count($temp) >= 4) {
+                        break;
+                    }
+                }
+                $similar_promises = $temp;
+
+                if (count($similar_promises_users_ids)) {
+                    $similar_promises_users = Dic::valuesBySlugAndIds('users', $similar_promises_users_ids, true);
+
+                    if (isset($similar_promises_users) && is_object($similar_promises_users) && $similar_promises_users->count()) {
+                        $temp = new Collection();
+                        foreach ($similar_promises_users as $t => $tmp) {
+                            $temp[$tmp->id] = $tmp->extract(true);
+                        }
+                        $similar_promises_users = $temp;
+                    }
+                }
+            }
+        }
+        #Helper::ta($similar_promises);
+        #Helper::tad($similar_promises_users);
+
+        return View::make(Helper::layout('promise'), compact('user', 'promise_user', 'promise', 'comments', 'users', 'similar_promises', 'similar_promises_users'));
     }
 
 
