@@ -14,9 +14,9 @@
                 <li>
                     <a onclick="ga('send', 'event', 'footer', 'feedback');" href="mailto:hello@mypromises.ru?subject=У меня есть предложение&body=Здравствуйте! Я бы хотел предложить ...">Обратная связь</a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="http://mypromises.ru/sitemap">Карта сайта</a>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="footer-block"><span>Поделиться:</span>
