@@ -180,8 +180,8 @@ return array(
         $line = '';
         if ($dicval->only_for_me)
             $line .= '<i class="fa fa-eye-slash txt-color-red"></i> &nbsp;&nbsp;';
-        else
-            $line .= '<i class="fa fa-eye txt-color-green"></i> &nbsp;&nbsp;';
+        #else
+        #    $line .= '<i class="fa fa-eye txt-color-green"></i> &nbsp;&nbsp;';
 
         $users = Config::get('temp.users');
         if (isset($users[$dicval->user_id]) && is_object($users[$dicval->user_id]))
