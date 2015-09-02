@@ -6,7 +6,7 @@
         <div class="footer-block">
             <ul class="footer-links">
                 <li>
-                    <a href="{{URL::to('/how-it-works')}}">Как это работает</a>
+                    <a href="<?php echo URL::to('/how-it-works'); ?>">Как это работает</a>
                 </li>
                 <li>
                     <a target="_blank" href="http://mypromises.ru/privacy_policy.pdf">Правила использования</a>
@@ -14,9 +14,9 @@
                 <li>
                     <a onclick="ga('send', 'event', 'footer', 'feedback');" href="mailto:hello@mypromises.ru?subject=У меня есть предложение&body=Здравствуйте! Я бы хотел предложить ...">Обратная связь</a>
                 </li>
-                <!-- <li>
+                <li>
                     <a href="http://mypromises.ru/sitemap">Карта сайта</a>
-                </li> -->
+                </li>
             </ul>
         </div>
         <div class="footer-block"><span>Поделиться:</span>
@@ -48,14 +48,14 @@
                     <a href="#" class="soc-vk vk-oauth-link" onclick="ga('send', 'event', 'auth', 'vkontakte');">
                         <i class="fi icon-vk"></i>Вконтакте
                     </a>
-                    <a href="#" class="soc-ok ok-oauth-link" data-domain="{{ domain }}" onclick="ga('send', 'event', 'auth', 'odnoklassniki');">
+                    <a href="#" class="soc-ok ok-oauth-link" data-domain="<?php echo domain; ?>" onclick="ga('send', 'event', 'auth', 'odnoklassniki');">
                         <i class="fi icon-ok"></i>Одноклассники
                     </a>
                 </div>
                 <div class="desc">или с помощью адреса электронной почты:</div>
                 <div data-type="auth" class="form-inputs js-pop-form">
 
-                    <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" class="auth_form_validate">
+                    <form action="<?php echo URL::route('app.email-pass-auth'); ?>" method="POST" class="auth_form_validate">
                         <input type="hidden" name="promise_text">
 
                         <div class="input-cont">
@@ -86,7 +86,7 @@
         <a href="#" class="popup-close js-pop-close"><span></span></a>
         <div class="restore-form">
             <div class="form-inputs">
-                <form action="{{ URL::route('app.do_restore_password') }}" class="js-ajax-form">
+                <form action="<?php echo URL::route('app.do_restore_password'); ?>" class="js-ajax-form">
                     <div class="js-ajax-before">
                         <div class="input-title">Восстановление пароля</div>
                         <div class="input-cont">
@@ -118,14 +118,14 @@
                     <a href="#" class="soc-vk vk-oauth-link" onclick="ga('send', 'event', 'auth', 'vkontakte');">
                         <i class="fi icon-vk"></i>Вконтакте
                     </a>
-                    <a href="#" class="soc-ok ok-oauth-link" data-domain="{{ domain }}" onclick="ga('send', 'event', 'auth', 'odnoklassniki');">
+                    <a href="#" class="soc-ok ok-oauth-link" data-domain="<?php echo domain; ?>" onclick="ga('send', 'event', 'auth', 'odnoklassniki');">
                         <i class="fi icon-ok"></i>Одноклассники
                     </a>
                 </div>
                 <div class="desc">или с помощью адреса электронной почты:</div>
                 <div data-type="auth" class="form-inputs">
 
-                    <form action="{{ URL::route('app.email-pass-auth') }}" method="POST" class="reg_form_validate">
+                    <form action="<?php echo URL::route('app.email-pass-auth'); ?>" method="POST" class="reg_form_validate">
                         <input type="hidden" name="promise_text">
 
                         <div class="input-cont">
@@ -136,7 +136,7 @@
                         </div>
                         <div class="btns">
                             <button class="us-btn" onclick="ga('send', 'event', 'register', 'email');">Зарегистрироваться</button>
-                            <a href="{{ URL::route('app.restore_password') }}" class="right-link js-change-box" data-box="auth">У меня уже есть аккаунт!</a>
+                            <a href="<?php echo URL::route('app.restore_password'); ?>" class="right-link js-change-box" data-box="auth">У меня уже есть аккаунт!</a>
                         </div>
                     </form>
 
@@ -185,7 +185,7 @@
         </div>
     </div>
 </div>
-@if(null !== ($new_promise_id = Session::get('new_promise_id')))
+<?php if(null !== ($new_promise_id = Session::get('new_promise_id'))): ?>
     <?
     $url = URL::route('app.promise', [$new_promise_id]);
     $similar_promises = Session::get('similar_promises');
@@ -201,22 +201,22 @@
                 <div class="pop__share">
                     <ul class="soc-links">
                         <li>
-                            <a target="_blank" onclick="ga('send', 'event', 'like', 'facebook');" href="http://www.facebook.com/sharer.php?u={{ $url }}" class="soc-icon"><i class="fi icon-fb"></i></a>
+                            <a target="_blank" onclick="ga('send', 'event', 'like', 'facebook');" href="http://www.facebook.com/sharer.php?u=<?php echo $url; ?>" class="soc-icon"><i class="fi icon-fb"></i></a>
                         </li>
                         <li>
-                            <a target="_blank" onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url={{ $url }}&amp;event=button_share" class="soc-icon"><i class="fi icon-vk"></i></a>
+                            <a target="_blank" onclick="ga('send', 'event', 'like', 'vkontakte');" href="http://vk.com/share.php?url=<?php echo $url; ?>&amp;event=button_share" class="soc-icon"><i class="fi icon-vk"></i></a>
                         </li>
                         <li>
-                            <a target="_blank" onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&amp;st._surl={{ $url }}" class="soc-icon"><i class="fi icon-ok"></i></a>
+                            <a target="_blank" onclick="ga('send', 'event', 'like', 'odnoklassniki');" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&amp;st._surl=<?php echo $url; ?>" class="soc-icon"><i class="fi icon-ok"></i></a>
                         </li>
                     </ul>
                 </div>
             </div>
-            @if (isset($similar_promises) && is_object($similar_promises) && $similar_promises->count())
+            <?php if(isset($similar_promises) && is_object($similar_promises) && $similar_promises->count()): ?>
                 <div class="pop-bottom">
                     <div class="pop__desc">Познакомьтесь с людьми, близкими Вам по духу</div>
                     <div class="pop__list">
-                        @foreach($similar_promises as $similar_promise)
+                        <?php foreach($similar_promises as $similar_promise): ?>
                             <?
                             $similar_promise_user = isset($similar_promises_users[$similar_promise->user_id]) && is_object($similar_promises_users[$similar_promise->user_id]) ? $similar_promises_users[$similar_promise->user_id] : null;
                             $line = [];
@@ -231,19 +231,19 @@
                             }
                             ?>
                             <div class="pop__list__item">
-                                <a href="{{ URL::route('app.promise', [$similar_promise->id]) }}" class="item__title">{{ $similar_promise->promise_text }}</a>
-                                @if ($similar_promise_user)
-                                    <a href="{{ URL::route('app.profile', [$similar_promise_user->id]) }}" class="item__desc">{{ implode(', ', $line) }}</a>
-                                @endif
+                                <a href="<?php echo URL::route('app.promise', [$similar_promise->id]); ?>" class="item__title"><?php echo $similar_promise->promise_text; ?></a>
+                                <?php if($similar_promise_user): ?>
+                                    <a href="<?php echo URL::route('app.profile', [$similar_promise_user->id]); ?>" class="item__desc"><?php echo implode(', ', $line); ?></a>
+                                <?php endif; ?>
                             </div>
-                        @endforeach
+                        <?php endforeach; ?>
                     </div>
                     <div class="pop__more">
-                        <a href="{{ URL::route('app.mainpage') }}">Посмотреть другие обещания</a>
+                        <a href="<?php echo URL::route('app.mainpage'); ?>">Посмотреть другие обещания</a>
                     </div>
                 </div>
-            @endif
+            <?php endif; ?>
         </div>
     </div>
-@endif
+<?php endif; ?>
 

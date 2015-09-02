@@ -402,3 +402,13 @@ $('.js-reload-set').on('click', function(){
         return false;
     });
 })();
+(function inactive(){
+    var toShow = $('.js-inactive li').not('.js-inactive-block');
+    $('.js-inactive li').first().show();
+    $('.js-inactive-block').show();
+    $('.js-show-inactive').on('click', function(){
+        toShow.show();
+        $('.js-inactive-block').hide();
+        return false;        
+    });
+})();

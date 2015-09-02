@@ -178,7 +178,18 @@ if (isset($achievements) && count($achievements)) {
 
                 @include(Helper::layout('promise_inc'), array('promise_type' => 'active'))
 
-                @if ($p == 2)
+                @if ($p == 1)
+                    <li class="promise-item type-add-new">
+                        <a href="{{ URL::to('/new_promise') }}" class="add-content">
+                            <span class="add-wrap">
+                                <span class="add-text">Добавить новое обещание</span>
+                                <span class="add-icon"></span>
+                            </span>
+                        </a>
+                    </li>
+                @endif
+
+                @if ($p == 5)
                     @yield('koe-chto')
                 @endif
 
@@ -200,7 +211,7 @@ if (isset($achievements) && count($achievements)) {
                 <div class="little-title">Неактивные</div>
             </div>
 
-            <ul class="promises-list">
+            <ul class="promises-list js-inactive">
                 <?
                 $p = 0;
                 ?>
@@ -224,6 +235,15 @@ if (isset($achievements) && count($achievements)) {
                 @if ($p == 1 && !@count($active_promises))
                     @yield('koe-chto')
                 @endif
+
+                <li class="promise-item type-show-inactive js-inactive-block">
+                    <a href="{{ URL::to('/new_promise') }}" class="add-content js-show-inactive">
+                        <span class="add-wrap">
+                            <span class="add-text">Посмотреть все архивные обещания</span>
+                            <span class="add-icon list-icon"></span>
+                        </span>
+                    </a>
+                </li>
 
             </ul>
         @endif
