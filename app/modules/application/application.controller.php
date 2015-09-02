@@ -1086,19 +1086,19 @@ class ApplicationController extends BaseController {
                 /**
                  * Отправляем на почту письмо с оповещением
                  */
-                /*
+                #/*
                 $data = array(
                     'promise' => $promise,
-                    'img_path' => $img_path,
+                    'user' => $this->user,
                 );
-                Mail::send('emails.promise_added', $data, function ($message) use ($promise) {
+                Mail::send('emails.promise_from_friend', $data, function ($message) use ($promise) {
                     $from_email = Config::get('mail.from.address');
                     $from_name = Config::get('mail.from.name');
                     $message->from($from_email, $from_name);
-                    $message->subject('Добавлено новое обещание');
-                    $message->to($this->user->email);
+                    $message->subject('Вам дали обещание!');
+                    $message->to($tmp);
                 });
-                */
+                #*/
             }
             $emails = array_keys($promise_friends_emails);
             if (count($emails)) {
