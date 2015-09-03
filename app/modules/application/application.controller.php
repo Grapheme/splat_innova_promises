@@ -1413,7 +1413,7 @@ class ApplicationController extends BaseController {
                     ) {
                         continue;
                     }
-                    echo '<!--'; Helper::ta($tmp); echo '-->';
+                    #echo '<!--'; Helper::ta($tmp); echo '-->';
 
                     $temp[$tmp->id] = $tmp;
                     $similar_promises_users_ids[] = $tmp->user_id;
