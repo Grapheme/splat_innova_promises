@@ -75,16 +75,26 @@
       <div class="main-screen">
         <div class="main-fotorama">
           <div class="js-main-fotorama">
-              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/1.jpg" alt="">
-              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/3.jpg" alt="">
-              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/4.jpg" alt="">
-              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/5.jpg" alt="">
-              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/7.jpg" alt="">
-              <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/8.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/1new.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/2new.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/3new.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/4new.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/5new.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/6new.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/1.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/1.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/5.jpg" alt="">
+            <img src="<?php echo Config::get('site.theme_path'); ?>/images/main_slider/7.jpg" alt="">
           </div>
         </div>
         <div class="main-content wrapper">
           <div>
+              <div class="slide-title js-slide-title" data-promise-text="прыгнуть с парашютом">Я обещаю прыгнуть с парашютом</div>
+              <div class="slide-title js-slide-title" data-promise-text="не пропускать тренировки">Я обещаю не пропускать тренировки</div>
+              <div class="slide-title js-slide-title" data-promise-text="устроить турнир по пляжному волейболу">Я обещаю устроить турнир по пляжному волейболу</div>
+              <div class="slide-title js-slide-title" data-promise-text="сходить в поход с палаткой">Я обещаю сходить в поход с палаткой</div>
+              <div class="slide-title js-slide-title" data-promise-text="съесть арбуз целиком">Я обещаю съесть арбуз целиком</div>
+              <div class="slide-title js-slide-title" data-promise-text="встретить рассвет на крыше">Я обещаю встретить рассвет на крыше</div>
               <div class="slide-title js-slide-title" data-promise-text="вырастить цветы у себя дома">Я обещаю вырастить цветы у себя дома</div> 
               <div class="slide-title js-slide-title" data-promise-text="порадовать любимую уже сегодня">Я обещаю порадовать любимую уже сегодня</div> 
               <div class="slide-title js-slide-title" data-promise-text="сделать ремонт в квартире">Я обещаю сделать ремонт в квартире</div> 
@@ -136,15 +146,20 @@
               <?php if(isset($mainpage_promises) && is_object($mainpage_promises) && $mainpage_promises->count()): ?>
 
                   <ul class="promises-index js-split-promises">
-
                       <?php foreach($mainpage_promises as $promise): ?>
                           <?
                           $puser = isset($users[$promise->user_id]) ? $users[$promise->user_id] : NULL;
                           if (!$puser)
                               continue;
+
+                          $default_avatar = '/theme/images/man.png';
+                          if (isset($puser->sex) && $puser->sex == 1)
+                              $default_avatar = '/theme/images/woman.png';
+
                           $city_promises_count = @(int)$cities_promises_counts[mb_strtolower(trim($puser->city))];
                           $promise_comments_count = @(int)$promises_comments_count[$promise->id];
                           ?>
+
 
                           <?php if($promise->promise_of_the_week): ?>
 
@@ -154,7 +169,8 @@
                                           <div class="info-cont">
                                               <div class="innova-choice">Выбор</div>
                                               <a href="http://mypromises.ru/promise/<?php echo $promise->id; ?>" class="pr-title"><?php echo $promise->name; ?></a>
-                                              <div class="user-info"><a style="background-image: url(<?php echo $puser->avatar; ?>)" class="user-photo"></a>
+
+                                              <div class="user-info"><a style="background-image: url(<?php echo $puser->avatar ?: $default_avatar; ?>)" class="user-photo"></a>
                                                   <div class="user-text">
                                                       <div class="name"><a><?php echo $puser->name; ?></a></div>
                                                       <div class="city"><a><?php echo $puser->city; ?></a></div>
@@ -175,14 +191,13 @@
                               </li>
 
                           <?php else: ?>
-                          <!-- <?php print_r($promise); ?> -->
                               <li class="promise-item js-parent js-promise-item">
                                   <div class="flipper">
                                       <div class="promise-cont type-<?php echo $promise->style_id; ?>">
                                           <div class="info-cont">
                                               <a class="comments-amount"><?php echo trans_choice(':count комментарий|:count комментария|:count комментариев', $promise_comments_count, array(), 'ru'); ?></a>
                                               <div class="pr-title js-promise-text"><?php echo mb_strtoupper($promise->name); ?></div>
-                                              <div class="user-info"><a style="background-image: url(<?php echo $puser->avatar; ?>)" class="user-photo"></a>
+                                              <div class="user-info"><a style="background-image: url(<?php echo $puser->avatar ?: $default_avatar; ?>)" class="user-photo"></a>
                                                   <div class="user-text">
                                                       <div class="name"><?php echo $puser->name; ?></div>
                                                       <div class="city">

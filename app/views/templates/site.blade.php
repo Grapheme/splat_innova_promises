@@ -26,9 +26,11 @@ define('domain', 'http://' . $_SERVER['HTTP_HOST']);
     <![endif]-->
     @include(Helper::layout('header'))
 
-    @section('content')
-        {{ @$content }}
-    @show
+    <div class="content-wrapper">
+        @section('content')
+            {{ @$content }}
+        @show
+    </div>
 
     @include(Helper::layout('footer'))
     @include(Helper::layout('scripts'))
