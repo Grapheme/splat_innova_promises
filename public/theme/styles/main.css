@@ -3404,6 +3404,7 @@ div.pr-btn { line-height: 38px }
     bottom: 3px;
     right: 5px;
     color: #4d4d4d;
+    text-align: right;
     font-weight: 300;
     font-size: 11px;
     -webkit-transition: all .3s ease;
