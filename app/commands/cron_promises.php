@@ -212,31 +212,29 @@ class CronPromises extends Command {
                             'promises' => @$users_promises[$user->id],
                         );
 
+
                         /**
-                         * Если не DEBUG режим...
+                         * Отправка уведомлений на почту...
                          */
-                        if (!$debug) {
+                        if (!$only_email || $only_email == $user->email) {
 
                             /**
-                             * Отправка уведомлений на почту...
+                             * Валидация - установлен ли валидный адрес почты
                              */
-                            if (!$only_email || $only_email == $user->email) {
+                            $validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
 
-                                /**
-                                 * Валидация - установлен ли валидный адрес почты
-                                 */
-                                $validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
+                            /**
+                             * - если прошла валидация почты
+                             * - если юзер хочет получать напоминания о сроках своего обещания
+                             * - если юзер хочет получать уведомления на почту
+                             */
+                            if (
+                                !$validator->fails()
+                                && @$user->notifications['promise_dates']
+                                #&& @$user->notifications['on_email']
+                            ) {
 
-                                /**
-                                 * - если прошла валидация почты
-                                 * - если юзер хочет получать напоминания о сроках своего обещания
-                                 * - если юзер хочет получать уведомления на почту
-                                 */
-                                if (
-                                    !$validator->fails()
-                                    && @$user->notifications['promise_dates']
-                                    #&& @$user->notifications['on_email']
-                                ) {
+                                if (!$debug) {
 
                                     Mail::send('emails.cron_promise_fail', $data, function ($message) use ($user) {
                                         $from_email = Config::get('mail.from.address');
@@ -250,35 +248,34 @@ class CronPromises extends Command {
                                      * Обновляем время последней отправки уведомлений
                                      */
                                     $user->update_field('last_notification', time());
-
-                                    $this->info(' + ' . $user->email);
                                 }
+
+                                $this->info(' + ' . $user->email);
                             }
+                        }
+
+                        /**
+                         * Отправка уведомления на телефон...
+                         */
+                        $valid_phone = isset($user->phone_number) && $user->phone_number && preg_match('~^\+\d{11,15}$~is', $user->phone_number);
+                        #$this->info('Check phone number ' . $user->phone_number . ' => ' . $valid_phone);
+                        #die;
+
+                        /**
+                         * - если прошла валидация телефона
+                         * - если юзер хочет получать напоминания о сроках своего обещания
+                         * - если юзер хочет получать уведомления на телефон
+                         */
+                        if ($valid_phone && @$user->notifications['promise_dates'] && @$user->notifications['on_phone']) {
+
+                            /*
+                             * ОТПРАВКА SMS на $user->phone_number
+                             */
 
                             /**
-                             * Отправка уведомления на телефон...
+                             * Обновляем время последней отправки уведомлений
                              */
-                            $valid_phone = isset($user->phone_number) && $user->phone_number && preg_match('~^\+\d{11,15}$~is', $user->phone_number);
-                            #$this->info('Check phone number ' . $user->phone_number . ' => ' . $valid_phone);
-                            #die;
-
-                            /**
-                             * - если прошла валидация телефона
-                             * - если юзер хочет получать напоминания о сроках своего обещания
-                             * - если юзер хочет получать уведомления на телефон
-                             */
-                            if ($valid_phone && @$user->notifications['promise_dates'] && @$user->notifications['on_phone']) {
-
-                                /*
-                                 * ОТПРАВКА SMS на $user->phone_number
-                                 */
-
-                                /**
-                                 * Обновляем время последней отправки уведомлений
-                                 */
-                                $user->update_field('last_notification', time());
-                            }
-
+                            $user->update_field('last_notification', time());
                         }
                     }
                 }
@@ -422,30 +419,27 @@ class CronPromises extends Command {
                         );
 
                         /**
-                         * Если не DEBUG режим...
+                         * Отправка уведомлений на почту...
                          */
-                        if (!$debug) {
+                        if (!$only_email || $only_email == $user->email) {
 
                             /**
-                             * Отправка уведомлений на почту...
+                             * Валидация - установлен ли валидный адрес почты
                              */
-                            if (!$only_email || $only_email == $user->email) {
+                            $validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
 
-                                /**
-                                 * Валидация - установлен ли валидный адрес почты
-                                 */
-                                $validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
+                            /**
+                             * - если прошла валидация почты
+                             * - если юзер хочет получать напоминания о сроках своего обещания
+                             * - если юзер хочет получать уведомления на почту
+                             */
+                            if (
+                                !$validator->fails()
+                                && @$user->notifications['promise_dates']
+                                #&& @$user->notifications['on_email']
+                            ) {
 
-                                /**
-                                 * - если прошла валидация почты
-                                 * - если юзер хочет получать напоминания о сроках своего обещания
-                                 * - если юзер хочет получать уведомления на почту
-                                 */
-                                if (
-                                    !$validator->fails()
-                                    && @$user->notifications['promise_dates']
-                                    #&& @$user->notifications['on_email']
-                                ) {
+                                if (!$debug) {
 
                                     Mail::send('emails.cron_promise_prefail', $data, function ($message) use ($user) {
                                         $from_email = Config::get('mail.from.address');
@@ -459,11 +453,12 @@ class CronPromises extends Command {
                                      * Обновляем время последней отправки уведомлений
                                      */
                                     $user->update_field('last_notification', time());
-
-                                    $this->info(' + ' . $user->email);
                                 }
+
+                                $this->info(' + ' . $user->email);
                             }
                         }
+
                     }
                 }
             }
@@ -604,30 +599,27 @@ class CronPromises extends Command {
                         );
 
                         /**
-                         * Если не DEBUG режим...
+                         * Отправка уведомлений на почту...
                          */
-                        if (!$debug) {
+                        if (!$only_email || $only_email == $user->email) {
 
                             /**
-                             * Отправка уведомлений на почту...
+                             * Валидация - установлен ли валидный адрес почты
                              */
-                            if (!$only_email || $only_email == $user->email) {
+                            $validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
 
-                                /**
-                                 * Валидация - установлен ли валидный адрес почты
-                                 */
-                                $validator = Validator::make(array('email' => $user->email), array('email' => 'required|email'));
+                            /**
+                             * - если прошла валидация почты
+                             * - если юзер хочет получать напоминания о сроках своего обещания
+                             * - если юзер хочет получать уведомления на почту
+                             */
+                            if (
+                                !$validator->fails()
+                                && @$user->notifications['promise_dates']
+                                #&& @$user->notifications['on_email']
+                            ) {
 
-                                /**
-                                 * - если прошла валидация почты
-                                 * - если юзер хочет получать напоминания о сроках своего обещания
-                                 * - если юзер хочет получать уведомления на почту
-                                 */
-                                if (
-                                    !$validator->fails()
-                                    && @$user->notifications['promise_dates']
-                                    #&& @$user->notifications['on_email']
-                                ) {
+                                if (!$debug) {
 
                                     Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
                                         $from_email = Config::get('mail.from.address');
@@ -641,23 +633,28 @@ class CronPromises extends Command {
                                      * Обновляем время последней отправки уведомлений
                                      */
                                     $user->update_field('last_notification', time());
-
-                                    $this->info(' + ' . $user->email);
                                 }
+
+                                $this->info(' + ' . $user->email);
                             }
+                        }
 
-                            /**
-                             * Отправка SMS
-                             */
-                            $number = $user->phone_number;
-                            $number = preg_replace('~[^\d]~is', '', $number);
-                            if (strlen($number) < 11 || @!$user->notifications['promise_dates'] || @!$user->notifications['on_phone'])
-                                continue;
+                        /**
+                         * Отправка SMS
+                         */
+                        $number = $user->phone_number;
+                        $number = preg_replace('~[^\d]~is', '', $number);
+                        if (strlen($number) < 11 || @!$user->notifications['promise_dates'] || @!$user->notifications['on_phone'])
+                            continue;
 
-                            $text = 'У вас осталось совсем немного времени для выполнения обещания. Поторопитесь! MyPromises.ru';
+                        $text = 'У вас осталось совсем немного времени для выполнения обещания. Поторопитесь! MyPromises.ru';
+                        if (!$debug) {
+
+                            $this->info('[SMS] + ' . $number);
                             sendSms($number, $text);
                         }
                     }
+
                 }
             }
 		}
