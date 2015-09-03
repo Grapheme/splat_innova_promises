@@ -42,6 +42,7 @@ class CronPromises extends Command {
         $this->periods = Config::get('site.notify_periods');
 
         $debug = $this->argument('debug') ?: false;
+        $only_sms_number = $this->argument('only_sms_number') ?: false;
 
         $this->info('Start to work...');
 
@@ -649,7 +650,7 @@ class CronPromises extends Command {
                             continue;
 
                         $text = 'У вас осталось совсем немного времени для выполнения обещания. Поторопитесь! MyPromises.ru';
-                        if (!$debug) {
+                        if (!$debug || $only_sms_number == $number) {
                             sendSms($number, $text);
                         }
                         $this->info('[SMS] + ' . $number);
@@ -674,6 +675,7 @@ class CronPromises extends Command {
 		return array(
 			#array('example', InputArgument::REQUIRED, 'An example argument.'),
 			array('debug', InputArgument::OPTIONAL, 'Debug or not debug.', null),
+			array('only_sms_number', InputArgument::OPTIONAL, 'Send sms on only this address.', null),
 		);
 	}
 
@@ -690,4 +692,3 @@ class CronPromises extends Command {
 	}
 
 }
-
