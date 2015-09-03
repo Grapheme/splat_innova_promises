@@ -1,6 +1,6 @@
 @extends(Helper::layout())
 <?
-setcookie('first_visit_index_user', 1, 60*60*24*365, '/');
+setcookie('first_visit_index_user', 1, time()+60*60*24*365, '/');
 #echo '<!-- ' . isset($_COOKIE['first_visit_index_user']) ? $_COOKIE['first_visit_index_user'] : '' . ' -->';
 $ach_list = [];
 if (isset($achievements) && count($achievements)) {
