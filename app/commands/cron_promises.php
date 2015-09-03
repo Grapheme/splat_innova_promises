@@ -42,7 +42,7 @@ class CronPromises extends Command {
         $this->periods = Config::get('site.notify_periods');
 
         $debug = $this->argument('debug') ?: false;
-        $only_sms_number = $this->argument('only_sms_number') ?: false;
+        $only_sms_number = $this->option('only_sms_number') ?: false;
 
         $this->info('Start to work...');
 
