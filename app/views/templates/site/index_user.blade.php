@@ -373,16 +373,16 @@ if (isset($achievements) && count($achievements)) {
 
                         </ul>
                     </div>
-                    <div class="friends friends-right">
-                        <div class="friends-title">Пригласить друга</sup></div>
-                        <ul class="friends-list">
 
-                            <?
-                            $i = 0;
-                            ?>
+                    @if (count($user->non_existing_friends))
 
-                            @if (count($user->non_existing_friends))
+                        <div class="friends friends-right">
+                            <div class="friends-title">Пригласить друга</div>
+                            <ul class="friends-list">
 
+                                <?
+                                $i = 0;
+                                ?>
                                 @foreach ($user->non_existing_friends as $friend)
                                     <?
                                     ++$i;
@@ -398,12 +398,11 @@ if (isset($achievements) && count($achievements)) {
                                     </li>
                                 @endforeach
 
-                            @endif
+                                <div style="float:none; clear:both;"></div>
+                            </ul>
+                        </div>
+                    @endif
 
-                            <div style="float:none; clear:both;"></div>
-
-                        </ul>
-                    </div>
                     <div class="clearfix"></div>
                 </div>
             </div>
