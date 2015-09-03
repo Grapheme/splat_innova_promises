@@ -3395,14 +3395,16 @@ div.pr-btn { line-height: 38px }
 }
 
 .relative-item .item-title {
+    font-size: 15px;
     text-transform: uppercase;
     line-height: 1.6;
 }
 
 .relative-item .item-city {
     position: absolute;
-    bottom: 3px;
-    right: 5px;
+    bottom: 10px;
+    left: 30px;
+    right: 30px;
     color: #4d4d4d;
     text-align: right;
     font-weight: 300;
