@@ -440,10 +440,10 @@ if (isset($achievements) && count($achievements)) {
                 Вы всегда можете пригласить на MyPromises друга из соцсети, отправив ему нашу открытку.
             </div>
         </div>
-        <?
-        Cookie::make('first-visit-index_user', 1, 60*24*365);
-        ?>
     @endif
+    <?
+    Cookie::make('first_visit_index_user', 1, 60*24*365);
+    ?>
 
     <script>
         var __SITE__ = {};
