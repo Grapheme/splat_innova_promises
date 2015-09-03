@@ -200,12 +200,6 @@ class CronPromises extends Command {
                         if (!$period_finish)
                             continue;
 
-                        /**
-                         * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
-                         */
-                        $also_users[] = $user->id;
-
-
                         $data = array(
                             #'promise' => $promise,
                             'user' => $user,
@@ -248,6 +242,11 @@ class CronPromises extends Command {
                                      * Обновляем время последней отправки уведомлений
                                      */
                                     $user->update_field('last_notification', time());
+
+                                    /**
+                                     * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
+                                     */
+                                    $also_users[] = $user->id;
                                 }
 
                                 $this->info(' + ' . $user->email);
@@ -406,12 +405,6 @@ class CronPromises extends Command {
                         if (!$period_finish)
                             continue;
 
-                        /**
-                         * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
-                         */
-                        $also_users[] = $user->id;
-
-
                         $data = array(
                             #'promise' => $promise,
                             'user' => $user,
@@ -453,6 +446,11 @@ class CronPromises extends Command {
                                      * Обновляем время последней отправки уведомлений
                                      */
                                     $user->update_field('last_notification', time());
+
+                                    /**
+                                     * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
+                                     */
+                                    $also_users[] = $user->id;
                                 }
 
                                 $this->info(' + ' . $user->email);
@@ -571,9 +569,9 @@ class CronPromises extends Command {
                         /**
                          * Если юзеру уже было отправлено письмо раньше - не будем отправлять
                          */
-                        if (in_array($user->id, $also_users)) {
-                            continue;
-                        }
+                        #if (in_array($user->id, $also_users)) {
+                        #    continue;
+                        #}
 
                         $user->notifications = json_decode($user->notifications, true);
 
@@ -585,12 +583,6 @@ class CronPromises extends Command {
                         $period_finish = ($user->last_notification + $subSeconds) < time();
                         if (!$period_finish)
                             continue;
-
-                        /**
-                         * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
-                         */
-                        $also_users[] = $user->id;
-
 
                         $data = array(
                             #'promise' => $promise,
@@ -619,23 +611,32 @@ class CronPromises extends Command {
                                 #&& @$user->notifications['on_email']
                             ) {
 
-                                if (!$debug) {
+                                if (!in_array($user->id, $also_users)) {
 
-                                    Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
-                                        $from_email = Config::get('mail.from.address');
-                                        $from_name = Config::get('mail.from.name');
-                                        $message->from($from_email, $from_name);
-                                        $message->subject('Заканчивается срок выполнения обещания!');
-                                        $message->to($user->email);
-                                    });
+                                    if (!$debug) {
 
-                                    /**
-                                     * Обновляем время последней отправки уведомлений
-                                     */
-                                    $user->update_field('last_notification', time());
+                                        Mail::send('emails.cron_promise_expire', $data, function ($message) use ($user) {
+                                            $from_email = Config::get('mail.from.address');
+                                            $from_name = Config::get('mail.from.name');
+                                            $message->from($from_email, $from_name);
+                                            $message->subject('Заканчивается срок выполнения обещания!');
+                                            $message->to($user->email);
+                                        });
+
+                                        /**
+                                         * Обновляем время последней отправки уведомлений
+                                         */
+                                        $user->update_field('last_notification', time());
+
+                                        /**
+                                         * Запомним юзера, чтобы не отправлять ему больше, чем одно письмо
+                                         */
+                                        $also_users[] = $user->id;
+                                    }
+
+                                    $this->info(' + ' . $user->email);
                                 }
 
-                                $this->info(' + ' . $user->email);
                             }
                         }
 
