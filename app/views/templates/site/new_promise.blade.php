@@ -91,6 +91,12 @@
                         foreach ($user->friends as $user_friend) {
                             $temp[$user_friend['id']] = $user_friend['_name'];
                         }
+
+                        if (isset($user->existing_friends) && count($user->existing_friends))
+                            foreach ($user->existing_friends as $user_friend) {
+                                $temp[$user_friend['id']] = $user_friend['_name'];
+                            }
+
                         natsort($temp);
                         ?>
                         <div class="friend-input">
