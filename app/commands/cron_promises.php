@@ -153,7 +153,8 @@ class CronPromises extends Command {
 			$users_ids = array_unique($users_ids);
 			$this->info('Filtered (unique) users: ' . count($users_ids));
 			#Helper::d($users_ids);
-			Helper::d(implode(', ', $users_ids));
+			#Helper::d(implode(', ', $users_ids));
+            $this->info(implode(', ', $users_ids));
 
 			/**
 			 * Загружаем пользователей по IDs
@@ -361,7 +362,8 @@ class CronPromises extends Command {
 			$users_ids = array_unique($users_ids);
 			$this->info('Filtered (unique) users: ' . count($users_ids));
 			#Helper::d($users_ids);
-            Helper::d(implode(', ', $users_ids));
+            #Helper::d(implode(', ', $users_ids));
+            $this->info(implode(', ', $users_ids));
 
 			/**
 			 * Загружаем пользователей по IDs
@@ -543,7 +545,8 @@ class CronPromises extends Command {
 			$users_ids = array_unique($users_ids);
 			$this->info('Filtered (unique) users: ' . count($users_ids));
 			#Helper::d($users_ids);
-            Helper::d(implode(', ', $users_ids));
+            #Helper::d(implode(', ', $users_ids));
+            $this->info(implode(', ', $users_ids));
 
 			/**
 			 * Загружаем пользователей по ID
