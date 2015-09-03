@@ -3380,7 +3380,7 @@ div.pr-btn { line-height: 38px }
     position: relative;
     background: #fff;
     box-sizing: border-box;
-    padding: 30px 20px 15px;
+    padding: 25px 20px 15px;
     min-height: 175px;
 }
 
@@ -3395,14 +3395,16 @@ div.pr-btn { line-height: 38px }
 }
 
 .relative-item .item-title {
+    font-size: 15px;
     text-transform: uppercase;
     line-height: 1.6;
 }
 
 .relative-item .item-city {
     position: absolute;
-    bottom: 3px;
-    right: 5px;
+    bottom: 10px;
+    left: 20px;
+    right: 30px;
     color: #4d4d4d;
     font-weight: 300;
     font-size: 11px;

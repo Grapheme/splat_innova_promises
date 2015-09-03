@@ -422,7 +422,7 @@ if (isset($achievements) && count($achievements)) {
         <?php endif; ?>
 
     </div>
-
+    <?php if(0): ?>
     <div class="tip-overlay js-tip-overlay">
         <div class="tip-block arrow-right-top" data-tip="photo">
             Это Ваша фотография из соц сети. Вы можете ее изменить, зайдя в Настройки
@@ -448,6 +448,7 @@ if (isset($achievements) && count($achievements)) {
             Вы всегда можете пригласить на MyPromises друга из соцсети, отправив ему нашу открытку.
         </div>
     </div>
+    <?php endif; ?>
 
     <script>
         var __SITE__ = {};

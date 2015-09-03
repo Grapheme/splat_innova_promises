@@ -85,23 +85,12 @@
                 </div>
                 <div class="promise-friend time-inputs">
                     <div class="friend-title">Пообещать другу</div>
-                    @if(
-                        $auth_user->auth_method == 'vkontakte'
-                        && (
-                            (isset($user->friends) && is_array($user->friends) && count($user->friends))
-                            || (isset($user->existing_friends) && is_array($user->existing_friends) && count($user->existing_friends))
-                        )
-                    )
+                    @if($auth_user->auth_method == 'vkontakte' && isset($user->friends) && is_array($user->friends) && count($user->friends))
                         <?
                         $temp = [];
-                        if (isset($user->friends) && is_array($user->friends) && count($user->friends))
-                            foreach ($user->friends as $user_friend) {
-                                $temp[$user_friend['id']] = $user_friend['_name'];
-                            }
-                        if (isset($user->existing_friends) && is_array($user->existing_friends) && count($user->existing_friends))
-                            foreach ($user->existing_friends as $user_friend) {
-                                $temp[$user_friend['id']] = $user_friend['_name'];
-                            }
+                        foreach ($user->friends as $user_friend) {
+                            $temp[$user_friend['id']] = $user_friend['_name'];
+                        }
                         natsort($temp);
                         ?>
                             <div class="friend-input">
