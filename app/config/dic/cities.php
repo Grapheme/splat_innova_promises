@@ -9,6 +9,10 @@ return array(
                 'title' => 'Дательный падеж (Москве)',
                 'type' => 'text',
             ),
+            'aliases' => array(
+                'title' => 'Синонимы (по одному на строку)',
+                'type' => 'textarea',
+            ),
         );
     },
 

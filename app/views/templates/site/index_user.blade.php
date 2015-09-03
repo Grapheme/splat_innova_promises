@@ -11,7 +11,6 @@ if (isset($achievements) && count($achievements)) {
 ?>
 
 
-
 @section('style')
     @parent
 @stop
@@ -374,16 +373,16 @@ if (isset($achievements) && count($achievements)) {
 
                         </ul>
                     </div>
-                    <div class="friends friends-right">
-                        <div class="friends-title">Пригласить друга</sup></div>
-                        <ul class="friends-list">
 
-                            <?
-                            $i = 0;
-                            ?>
+                    @if (count($user->non_existing_friends))
 
-                            @if (count($user->non_existing_friends))
+                        <div class="friends friends-right">
+                            <div class="friends-title">Пригласить друга</div>
+                            <ul class="friends-list">
 
+                                <?
+                                $i = 0;
+                                ?>
                                 @foreach ($user->non_existing_friends as $friend)
                                     <?
                                     ++$i;
@@ -399,12 +398,11 @@ if (isset($achievements) && count($achievements)) {
                                     </li>
                                 @endforeach
 
-                            @endif
+                                <div style="float:none; clear:both;"></div>
+                            </ul>
+                        </div>
+                    @endif
 
-                            <div style="float:none; clear:both;"></div>
-
-                        </ul>
-                    </div>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -414,32 +412,35 @@ if (isset($achievements) && count($achievements)) {
         @endif
 
     </div>
-    @if(0)
-    <div class="tip-overlay js-tip-overlay">
-        <div class="tip-block arrow-right-top" data-tip="photo">
-            Это Ваша фотография из соц сети. Вы можете ее изменить, зайдя в Настройки
-        </div>
-        <div class="tip-block arrow-top-left" data-tip="edit">
-            Отредактируйте свой профиль и настройте частоту оповещений.
-        </div>
-        <div class="tip-block arrow-right-top" data-tip="city">
-            Укажите город Вашего проживания, чтобы единомышленникам было проще Вас найти.
-        </div>
-        <div class="tip-block arrow-bottom-top" data-tip="promise">
-            Здесь Вы можете составить своё обещание, и выбрать один из предложенных шаблонов его оформления.
-        </div>
-        <div class="tip-block" data-tip="list">
-            <div class="fake-promise"></div>
-            <div class="fake-promise"></div>
-            <div class="fake-promise"></div>
-            <div class="tip-text arrow-right-top">
-                Это список Ваших обещаний. Здесь хранятся все данные Вами обещания, включая выполненные, невыполненные и текущие.
+    @if(!isset($_COOKIE['first_visit_index_user']))
+        <div class="tip-overlay js-tip-overlay">
+            <div class="tip-block arrow-right-top" data-tip="photo">
+                Это Ваша фотография из соц сети. Вы можете ее изменить, зайдя в Настройки
+            </div>
+            <div class="tip-block arrow-top-left" data-tip="edit">
+                Отредактируйте свой профиль и настройте частоту оповещений.
+            </div>
+            <div class="tip-block arrow-right-top" data-tip="city">
+                Укажите город Вашего проживания, чтобы единомышленникам было проще Вас найти.
+            </div>
+            <div class="tip-block arrow-bottom-top" data-tip="promise">
+                Здесь Вы можете составить своё обещание, и выбрать один из предложенных шаблонов его оформления.
+            </div>
+            <div class="tip-block" data-tip="list">
+                <div class="fake-promise"></div>
+                <div class="fake-promise"></div>
+                <div class="fake-promise"></div>
+                <div class="tip-text arrow-right-top">
+                    Это список Ваших обещаний. Здесь хранятся все данные Вами обещания, включая выполненные, невыполненные и текущие.
+                </div>
+            </div>
+            <div class="tip-block arrow-top-left" data-tip="invite">
+                Вы всегда можете пригласить на MyPromises друга из соцсети, отправив ему нашу открытку.
             </div>
         </div>
-        <div class="tip-block arrow-top-left" data-tip="invite">
-            Вы всегда можете пригласить на MyPromises друга из соцсети, отправив ему нашу открытку.
-        </div>
-    </div>
+        <?
+        setcookie('first_visit_index_user', 1, time()+60*60*24*365, '/');
+        ?>
     @endif
 
     <script>
