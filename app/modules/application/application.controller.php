@@ -1405,7 +1405,10 @@ class ApplicationController extends BaseController {
                 foreach ($similar_promises as $t => $tmp) {
 
                     $tmp = $tmp->extract(true);
-                    if (is_object($this->user) && $tmp->user_id == $this->user->id) {
+                    if (
+                        (is_object($this->user) && $tmp->user_id == $this->user->id)
+                        || $tmp->only_for_my
+                    ) {
                         continue;
                     }
 
