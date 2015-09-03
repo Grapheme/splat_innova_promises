@@ -441,7 +441,7 @@ if (isset($achievements) && count($achievements)) {
             </div>
         </div>
         <?
-        Cookie::make('first-visit-index_user', 1, 60*24*365, '/');
+        Cookie::make('first-visit-index_user', 1, 60*24*365);
         ?>
     @endif
 
