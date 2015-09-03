@@ -12,7 +12,8 @@
 		"scalia/sphinxsearch": "*",
 		"flynsarmy/db-blade-compiler": "1.*",
         "sngrl/string-blade-compiler": "dev-master",
-		"twilio/sdk": "dev-master"
+		"twilio/sdk": "dev-master",
+		"vladkens/vk": "v0.1.9"
 	},
 	"autoload": {
 		"classmap": [

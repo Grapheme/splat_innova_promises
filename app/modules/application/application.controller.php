@@ -72,6 +72,32 @@ class ApplicationController extends BaseController {
 
             Route::any('/cities', array('as' => 'app.cities', 'uses' => __CLASS__.'@getCities'));
             Route::any('/service/cities', array('as' => 'app.service.cities', 'uses' => __CLASS__.'@getServiceCities'));
+
+            Route::any('/service/post', function(){
+
+                $vk = new \VK\VK(Config::get('site.vk.app_id'), Config::get('site.vk.api_secret'), Config::get('site.vk.access_token'));
+
+                $user1 = '@id' . 1889847;
+                $user2 = '@id' . 2740015;
+                $message = $user1 . ' оставил персональное обещание для ' . $user2 . ':' . "\n\n" . '«Я обещаю протестить постинг в ВК»';
+
+                $result = $vk->api('wall.post', [
+                    'owner_id' => Config::get('site.vk.owner_id'),
+                    'message' => $message,
+                ]);
+
+                dd($result);
+
+                /*
+                $users = $vk->api('users.get', array(
+                    'uids'   => '1234,4321',
+                    'fields' => 'first_name,last_name,sex'));
+
+                foreach ($users['response'] as $user) {
+                    echo $user['first_name'] . ' ' . $user['last_name'] . ' (' . ($user['sex'] == 1 ? 'Girl' : 'Man') . ')<br />';
+                }
+                */
+            });
         });
 
 
@@ -1069,9 +1095,9 @@ class ApplicationController extends BaseController {
          * Обещание дано друзьям
          */
         $promise_friends_ids = '';
-        $temp = Input::get('friends_ids');
-        if (is_array($temp) && count($temp))
-            $promise_friends_ids = implode(',', $temp);
+        $promise_friends_ids_array = Input::get('friends_ids');
+        if (is_array($promise_friends_ids_array) && count($promise_friends_ids_array))
+            $promise_friends_ids = implode(',', $promise_friends_ids_array);
 
         /**
          * Добавляем обещание
@@ -1136,6 +1162,27 @@ class ApplicationController extends BaseController {
          */
         $result = $this->genPromiseImage($promise->id, 'Я обещаю ' . trim($promise_text), $style_id, $this->user->avatar);
         $img_path = $result['path'];
+
+        /**
+         * Отправляем пост в ВК
+         */
+        if (isset($this->user) && is_object($this->user) && $this->user->auth_method == 'vkontakte' && is_array($promise_friends_ids_array) && count($promise_friends_ids_array)) {
+
+            $vk = new \VK\VK(Config::get('site.vk.app_id'), Config::get('site.vk.api_secret'), Config::get('site.vk.access_token'));
+            $user1 = preg_replace('~[^\d]~', '', $this->user->identity);
+            $user1 = '@id' . $user1;
+
+            foreach ($promise_friends_ids_array as $promise_friend_id) {
+
+                $user2 = '@id' . $promise_friend_id;
+                $message = $user1 . ' оставил персональное обещание для ' . $user2 . ':' . "\n\n" . '«' . $promise_text . '»';
+
+                $result = $vk->api('wall.post', [
+                    'owner_id' => Config::get('site.vk.owner_id'),
+                    'message' => $message,
+                ]);
+            }
+        }
 
         /**
          * Отсылаем уведомление на почту

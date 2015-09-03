@@ -57,6 +57,15 @@ return array(
         'from'     => 'MyPromises',
     ],
 
+    'vk' => [
+        'app_id' => 5054628,
+        'api_secret' => 'LHlo0xDa1K3KdUTXJK8e',
+        'access_token' => '3916f9fb337e074774ce9eb2369a56c50e1d0537c9c18b8fd3003a76875fcb5cef404de6c2eb991811dae',
+        'owner_id' => 321366759,
+
+        #{"89281755824": {"access_token": {"access_token": "3916f9fb337e074774ce9eb2369a56c50e1d0537c9c18b8fd3003a76875fcb5cef404de6c2eb991811dae", "user_id": "321366759", "expires_in": "0"}, "remixsid": "6658e4bf4296522253f48507083b2f27af2f8a3b5fd950860b6eb", "forapilogin": {"p": "f4abd7f4e9c39083aff20b317a3417a88a1ce39d469b4483fbe95", "l": "321366759"}}}
+    ],
+
     'achievements' => [
         'new' => [
             'count'     => 1,           ## count of the promises: 1+
