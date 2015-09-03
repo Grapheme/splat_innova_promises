@@ -207,7 +207,11 @@
                                       </div>
                                       <div style="cursor: pointer;" onclick="window.location.href='http://mypromises.ru/promise/{{ $promise->id }}'" class="promise-cont promise-hover type-{{ $promise->style_id }}">
                                           <div class="info-cont">
-                                              <div class="promise-stat pr-loc">
+                                              @if ($city_promises_count)
+                                                <div class="promise-stat pr-loc">
+                                              @else
+                                                <div class="promise-stat">
+                                              @endif
                                                   @if ($city_promises_count)
                                                       <div class="stat-title">{{ trans_choice(':count Обещание|:count Обещания|:count Обещаний', $city_promises_count, array(), 'ru') }}</div>
                                                       <div class="stat-desc">из города
