@@ -650,10 +650,9 @@ class CronPromises extends Command {
 
                         $text = 'У вас осталось совсем немного времени для выполнения обещания. Поторопитесь! MyPromises.ru';
                         if (!$debug) {
-
-                            $this->info('[SMS] + ' . $number);
                             sendSms($number, $text);
                         }
+                        $this->info('[SMS] + ' . $number);
                     }
 
                 }
