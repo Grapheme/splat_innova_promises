@@ -3398,6 +3398,8 @@ div.pr-btn { line-height: 38px }
     font-size: 15px;
     text-transform: uppercase;
     line-height: 1.6;
+    height: 95px;
+    overflow: hidden;
 }
 
 .relative-item .item-city {
