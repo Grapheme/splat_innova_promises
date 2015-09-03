@@ -847,11 +847,35 @@ class ApplicationController extends BaseController {
         #if (!is_object($current_city))
         #    $current_city = $default_city;
 
+
         $current_city_name = is_object($current_city) ? $current_city->name : $current_city;
 
+        if (is_object($current_city)) {
+
+            $current_city_name_filter = [$current_city->name];
+
+            if (isset($current_city->aliases) && $current_city->aliases != '') {
+
+                $temp = explode("\n", $current_city->aliases);
+                foreach ($temp as $tmp) {
+                    $tmp = trim($tmp);
+                    if (!$tmp)
+                        continue;
+
+                    $current_city_name_filter[] = $tmp;
+                }
+            }
+
+        } else {
+
+            $current_city_name_filter = [$current_city];
+        }
+
+
         $users_ids = [];
-        $users = Dic::valuesBySlug('users', function($query) use ($current_city_name) {
-            $query->filter_by_field('city', '=', $current_city_name);
+        $users = Dic::valuesBySlug('users', function($query) use ($current_city_name_filter) {
+            #$query->filter_by_field('city', '=', $current_city_name);
+            $query->filter_by_field('city', 'IN', $current_city_name_filter);
         });
         if (isset($users) && is_object($users) && $users->count()) {
             $temp = new Collection();
