@@ -414,7 +414,7 @@ if (isset($achievements) && count($achievements)) {
         @endif
 
     </div>
-    @if(!Cookie::get('first-visit-index_user'))
+    @if(!Cookie::get('first-visit-index_user') && 0)
         <div class="tip-overlay js-tip-overlay">
             <div class="tip-block arrow-right-top" data-tip="photo">
                 Это Ваша фотография из соц сети. Вы можете ее изменить, зайдя в Настройки
