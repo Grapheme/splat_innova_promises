@@ -1,6 +1,6 @@
 @extends(Helper::layout())
 <?
-Cookie::make('first_visit_index_user', 1, 60*24*365);
+Cookie::forever('first_visit_index_user', 1);
 $ach_list = [];
 if (isset($achievements) && count($achievements)) {
     foreach ($achievements as $achievement) {
