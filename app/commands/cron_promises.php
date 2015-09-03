@@ -649,7 +649,7 @@ class CronPromises extends Command {
                         if (strlen($number) < 11 || @!$user->notifications['promise_dates'] || @!$user->notifications['on_phone'])
                             continue;
 
-                        $text = 'У вас осталось совсем немного времени для выполнения обещания. Поторопитесь! MyPromises.ru';
+                        $text = 'Осталось совсем мало времени для выполнения обещания! MyPromises.ru';
                         if (!$debug || $only_sms_number == $number) {
                             SmsAero::sendSms($number, $text);
                         }
