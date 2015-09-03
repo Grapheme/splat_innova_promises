@@ -1400,19 +1400,20 @@ class ApplicationController extends BaseController {
             $ids = array_keys($results['similar_promises']['matches']);
             $similar_promises = Dic::valuesBySlugAndIds('promises', $ids, true);
             $similar_promises = DicVal::extracts($similar_promises, null, true, true);
-            echo '<!--'; Helper::ta($similar_promises); echo '-->';
+            #echo '<!--'; Helper::ta($similar_promises); echo '-->';
             if (isset($similar_promises) && is_object($similar_promises) && $similar_promises->count()) {
                 $temp = new Collection();
                 $similar_promises_users_ids = [];
                 foreach ($similar_promises as $t => $tmp) {
 
-                    $tmp = $tmp->extract(true);
+                    #$tmp = $tmp->extract(true);
                     if (
                         (is_object($this->user) && $tmp->user_id == $this->user->id)
-                        || $tmp->only_for_my
+                        || $tmp->only_for_me
                     ) {
                         continue;
                     }
+                    echo '<!--'; Helper::ta($tmp); echo '-->';
 
                     $temp[$tmp->id] = $tmp;
                     $similar_promises_users_ids[] = $tmp->user_id;
