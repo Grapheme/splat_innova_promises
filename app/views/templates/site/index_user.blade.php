@@ -1,7 +1,5 @@
 @extends(Helper::layout())
 <?
-setcookie('first_visit_index_user', 1, time()+60*60*24*365, '/');
-echo '<!-- ' . (isset($_COOKIE['first_visit_index_user']) ? $_COOKIE['first_visit_index_user'] : '') . ' -->';
 $ach_list = [];
 if (isset($achievements) && count($achievements)) {
     foreach ($achievements as $achievement) {
@@ -415,7 +413,7 @@ if (isset($achievements) && count($achievements)) {
         @endif
 
     </div>
-    @if(!Cookie::get('first-visit-index_user') && 0)
+    @if(!isset($_COOKIE['first_visit_index_user']))
         <div class="tip-overlay js-tip-overlay">
             <div class="tip-block arrow-right-top" data-tip="photo">
                 Это Ваша фотография из соц сети. Вы можете ее изменить, зайдя в Настройки
@@ -441,9 +439,11 @@ if (isset($achievements) && count($achievements)) {
                 Вы всегда можете пригласить на MyPromises друга из соцсети, отправив ему нашу открытку.
             </div>
         </div>
+        <?
+        setcookie('first_visit_index_user', 1, time()+60*60*24*365, '/');
+        #echo '<!-- ' . (isset($_COOKIE['first_visit_index_user']) ? $_COOKIE['first_visit_index_user'] : '') . ' -->';
+        ?>
     @endif
-    <?
-    ?>
 
     <script>
         var __SITE__ = {};
