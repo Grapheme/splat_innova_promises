@@ -424,7 +424,7 @@ $('.js-reload-set').on('click', function(){
             var name = $(this).attr('data-tip');
             var block = $('[data-to-tip="' + name + '"]');
             if(block.length == 0) {
-                $this.hide();
+                $this.remove();
                 return;
             }
             $this.css({
@@ -446,7 +446,7 @@ $('.js-reload-set').on('click', function(){
         block.addClass('active')
             .siblings().removeClass('active');
         timeout = setTimeout(function(){
-           // show(eq+1);
+           show(eq+1);
         }, autoTime);
         var blockBottomPos = block.offset().top + $(window).scrollTop() + $(window).height()/4;
         if(blockBottomPos > $(window).scrollTop() + $(window).height()
