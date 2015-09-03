@@ -93,14 +93,14 @@
                         }
                         natsort($temp);
                         ?>
-                            <div class="friend-input">
-                                <select name="friends_ids[]" class="input-class js-chosen" multiple data-placeholder="Выберите друга">
-                                    @foreach ($temp as $t => $tmp)
-                                        <option value="{{ $t }}">{{ $tmp }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="friend-or">или</div>
+                        <div class="friend-input">
+                            <select name="friends_ids[]" class="input-class js-chosen" multiple data-placeholder="Выберите друга">
+                                @foreach ($temp as $t => $tmp)
+                                    <option value="{{ $t }}">{{ $tmp }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="friend-or">или</div>
                     @endif
                     <div class="friend-input">
                         <input name="friends_emails" class="input-class" placeholder="Введите email друзей через запятую">
@@ -148,32 +148,32 @@
             </div>
         </div>
     </div>
-    @if(0)
-    <div class="tip-overlay js-tip-overlay">
-        <div class="tip-block arrow-top-left" data-tip="promise-input">
-            Напишите свое обещание
+    @if(!Cookie::get('first-visit-new_promise'))
+        <div class="tip-overlay js-tip-overlay">
+            <div class="tip-block arrow-top-left" data-tip="promise-input">
+                Напишите свое обещание
+            </div>
+            <div class="tip-block arrow-top-left" data-tip="tip">
+                Если вам ничего не приходит в голову, выберите одно из популярных обещаний
+            </div>
+            <div class="tip-block arrow-top-left" data-tip="date">
+                Установите срок выполнения обещания
+            </div>
+            <div class="tip-block arrow-top-left" data-tip="template">
+                Оформите карточку с обещанием на свой вкус.
+            </div>
+            <div class="tip-block arrow-top-left" data-tip="private">
+                Вы можете дать личное обещание, не доступное для посторонних глаз. Для этого поставьте галочку здесь.
+            </div>
+            <div class="tip-block arrow-top-left" data-tip="done">
+                Если вы готовы дать своё обещание — нажмите эту кнопку. И помните, каждое обещание должно становиться делом!
+            </div>
         </div>
-        <div class="tip-block arrow-top-left" data-tip="tip">
-            Если вам ничего не приходит в голову, выберите одно из популярных обещаний
-        </div>
-        <div class="tip-block arrow-top-left" data-tip="date">
-            Установите срок выполнения обещания
-        </div>
-        <div class="tip-block arrow-top-left" data-tip="template">
-            Оформите карточку с обещанием на свой вкус.
-        </div>
-        <div class="tip-block arrow-top-left" data-tip="private">
-            Вы можете дать личное обещание, 
-            не доступное для посторонних глаз. 
-            Для этого поставьте галочку здесь.
-        </div>
-        <div class="tip-block arrow-top-left" data-tip="done">
-            Если вы готовы дать своё обещание — нажмите эту кнопку. 
-            И помните, каждое обещание должно становиться делом!
-        </div>
-    </div>
+        <?
+        Cookie::make('first-visit-new_promise', 1, 60*24*365, '/');
+        ?>
     @endif
-    <!--
+                <!--
     <div class="promo-block">
       <div class="wrapper">
         <div class="text">
