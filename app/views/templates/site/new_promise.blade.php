@@ -148,7 +148,7 @@
             </div>
         </div>
     </div>
-    @if(!Cookie::get('first-visit-new_promise'))
+    @if(!Cookie::get('first-visit-new_promise') && 0)
         <div class="tip-overlay js-tip-overlay">
             <div class="tip-block arrow-top-left" data-tip="promise-input">
                 Напишите свое обещание
