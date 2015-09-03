@@ -1166,7 +1166,7 @@ class ApplicationController extends BaseController {
         /**
          * Отправляем пост в ВК
          */
-        if (isset($this->user) && is_object($this->user) && $this->user->auth_method == 'vkontakte' && is_array($promise_friends_ids_array) && count($promise_friends_ids_array) && 1) {
+        if (isset($this->user) && is_object($this->user) && $this->user->auth_method == 'vkontakte' && is_array($promise_friends_ids_array) && count($promise_friends_ids_array) && 0) {
 
             $vk = new \VK\VK(Config::get('site.vk.app_id'), Config::get('site.vk.api_secret'), Config::get('site.vk.access_token'));
             $user1 = preg_replace('~[^\d]~', '', $this->user->identity);
