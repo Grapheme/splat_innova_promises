@@ -148,7 +148,7 @@
             </div>
         </div>
     </div>
-    @if(!Cookie::get('first-visit-new_promise') && 0)
+    @if(!isset($_COOKIE['first_visit_new_promise']))
         <div class="tip-overlay js-tip-overlay">
             <div class="tip-block arrow-top-left" data-tip="promise-input">
                 Напишите свое обещание
@@ -170,7 +170,7 @@
             </div>
         </div>
         <?
-        Cookie::make('first-visit-new_promise', 1, 60*24*365, '/');
+        setcookie('first_visit_new_promise', 1, time()+60*60*24*365, '/');
         ?>
     @endif
                 <!--
