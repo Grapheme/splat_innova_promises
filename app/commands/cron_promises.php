@@ -675,7 +675,6 @@ class CronPromises extends Command {
 		return array(
 			#array('example', InputArgument::REQUIRED, 'An example argument.'),
 			array('debug', InputArgument::OPTIONAL, 'Debug or not debug.', null),
-			array('only_sms_number', InputArgument::OPTIONAL, 'Send sms on only this address.', null),
 		);
 	}
 
@@ -688,6 +687,7 @@ class CronPromises extends Command {
 		return array(
 			#array('example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null),
 			array('only_email', null, InputOption::VALUE_OPTIONAL, 'Only email option.', null),
+            array('only_sms_number', null, InputArgument::VALUE_OPTIONAL, 'Send sms on only this address.', null),
 		);
 	}
 
