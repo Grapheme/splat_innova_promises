@@ -43,7 +43,9 @@ class CronPromises extends Command {
 
         $debug = $this->argument('debug') ?: false;
 
-		if ($debug)
+        $this->info('Start to work...');
+
+        if ($debug)
 			$this->info('RUN IN DEBUG MODE - MAILs WILL NOT BE SEND');
 
 		if ($only_email)
@@ -82,7 +84,9 @@ class CronPromises extends Command {
 		/************************************************************************************************************ */
 
 
-		/**
+        $this->info('Получаем полностью проваленные обещания...');
+
+        /**
 		 * Получаем полностью проваленные обещания
 		 * 3 ДНЯ НАЗАД - ВЧЕРА
 		 */
@@ -124,6 +128,7 @@ class CronPromises extends Command {
 				if ($promise->finished_at || $promise->promise_fail)
 					unset($promises[$p]);
 			}
+
 			$this->info('Filtered promises: ' . count($promises));
 
             /**
@@ -143,11 +148,12 @@ class CronPromises extends Command {
 			 */
 			$users_ids = Dic::makeLists($promises, NULL, 'user_id');
 			$this->info('Total users: ' . count($users_ids));
-			Helper::d($users_ids);
+            #Helper::d($users_ids);
 
 			$users_ids = array_unique($users_ids);
 			$this->info('Filtered (unique) users: ' . count($users_ids));
-			Helper::d($users_ids);
+			#Helper::d($users_ids);
+			Helper::d(implode(', ', $users_ids));
 
 			/**
 			 * Загружаем пользователей по IDs
@@ -157,7 +163,11 @@ class CronPromises extends Command {
                 $users = Dic::valuesBySlugAndIds('users', $users_ids);
                 $users = DicVal::extracts($users, NULL, true, true);
                 $this->info('Users objects: ' . count($users));
-                Helper::ta($users);
+                foreach ($users as $u => $user) {
+                    unset($user->friends);
+                    $users[$u] = $user;
+                }
+                #Helper::ta($users);
 
                 $this->info('Отправляем письма с оповещением о полностью проваленных обещаниях...');
 
@@ -346,11 +356,12 @@ class CronPromises extends Command {
 			 */
 			$users_ids = Dic::makeLists($promises, NULL, 'user_id');
 			$this->info('Total users: ' . count($users_ids));
-			Helper::d($users_ids);
+			#Helper::d($users_ids);
 
 			$users_ids = array_unique($users_ids);
 			$this->info('Filtered (unique) users: ' . count($users_ids));
-			Helper::d($users_ids);
+			#Helper::d($users_ids);
+            Helper::d(implode(', ', $users_ids));
 
 			/**
 			 * Загружаем пользователей по IDs
@@ -360,6 +371,10 @@ class CronPromises extends Command {
                 $users = Dic::valuesBySlugAndIds('users', $users_ids);
                 $users = DicVal::extracts($users, NULL, true, true);
                 $this->info('Users objects: ' . count($users));
+                foreach ($users as $u => $user) {
+                    unset($user->friends);
+                    $users[$u] = $user;
+                }
                 #Helper::ta($users);
 
                 $this->info('Отправляем письма с оповещением о проваленных обещаниях...');
@@ -523,11 +538,12 @@ class CronPromises extends Command {
 			 */
 			$users_ids = Dic::makeLists($promises, NULL, 'user_id');
 			$this->info('Total users: ' . count($users_ids));
-			Helper::d($users_ids);
+			#Helper::d($users_ids);
 
 			$users_ids = array_unique($users_ids);
 			$this->info('Filtered (unique) users: ' . count($users_ids));
-			Helper::d($users_ids);
+			#Helper::d($users_ids);
+            Helper::d(implode(', ', $users_ids));
 
 			/**
 			 * Загружаем пользователей по ID
@@ -536,6 +552,10 @@ class CronPromises extends Command {
                 $users = Dic::valuesBySlugAndIds('users', $users_ids);
                 $users = DicVal::extracts($users, NULL, true, true);
                 $this->info('Users objects: ' . count($users));
+                foreach ($users as $u => $user) {
+                    unset($user->friends);
+                    $users[$u] = $user;
+                }
                 #Helper::ta($users);
 
                 $this->info('Отправляем письма с оповещением об истекающих обещаниях...');
@@ -639,7 +659,8 @@ class CronPromises extends Command {
             }
 		}
 
-
+        $this->info('###################################################################');
+        $this->info('Finish work.');
 
 		die;
 	}
