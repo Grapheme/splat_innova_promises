@@ -4,16 +4,16 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.2.*",
-		"way/generators": "*",
-		"intervention/image": "dev-master",
-		"barryvdh/laravel-ide-helper": "1.*",
-		"barryvdh/laravel-debugbar": "dev-master",
-		"scalia/sphinxsearch": "*",
-		"flynsarmy/db-blade-compiler": "1.*",
-        "sngrl/string-blade-compiler": "dev-master",
-		"twilio/sdk": "dev-master",
-		"vladkens/vk": "v0.1.9"
+      "laravel/framework": "4.2.*",
+      "way/generators": "2.6.*",
+      "intervention/image": "2.1.*",
+      "barryvdh/laravel-ide-helper": "1.*",
+      "barryvdh/laravel-debugbar": "1.8.*",
+      "scalia/sphinxsearch": "*",
+      "flynsarmy/db-blade-compiler": "1.*",
+      "sngrl/string-blade-compiler": "dev-master",
+      "sleeping-owl/with-join": "1.*",
+      "gregwar/captcha": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
