@@ -33,7 +33,10 @@
 			"php artisan optimize"
 		],
 		"post-update-cmd": [
-            "php artisan debugbar:publish"
+          "php artisan clear-compiled",
+          "php artisan ide-helper:generate",
+          "php artisan optimize",
+          "php artisan debugbar:publish"
         ],
 		"post-create-project-cmd": [
 			"php artisan key:generate"
