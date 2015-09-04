@@ -1,4 +1,5 @@
-<?
+<?php
+dd(123);
 $promise = NULL;
 if (isset($promises) && is_object($promises) && NULL !== ($promises = $promises->toArray()) && count($promises) == 1)
     $promise = array_shift($promises);
