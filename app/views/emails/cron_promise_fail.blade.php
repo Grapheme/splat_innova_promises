@@ -1,10 +1,10 @@
 <?php
-dd(123);
 $promise = NULL;
+dd($promise);
 if (isset($promises) && is_object($promises) && NULL !== ($promises = $promises->toArray()) && count($promises) == 1)
     $promise = array_shift($promises);
 
-Helper::tad($promise);
+#dd($promise);
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
