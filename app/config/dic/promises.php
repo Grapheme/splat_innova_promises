@@ -24,7 +24,7 @@ return array(
         $lists = Dic::makeLists($dics, 'values', 'name', 'id');
         #Helper::dd($lists);
         */
-        $user = Dic::valueBySlugAndId('users', $dicval->user_id);
+        $user = is_object($dicval) ? Dic::valueBySlugAndId('users', $dicval->user_id) : null;
 
         return array(
             /*
@@ -38,9 +38,9 @@ return array(
                 'title' => 'ID пользователя (не изменять!)',
                 'type' => 'text',
                 #'first_note' => 'Не менять! Имя не показывается из соображений оптимизации.',
-                'second_note' => $user->name
+                'second_note' => is_object($user) ? ($user->name
                                  . ' - <a href="' . URL::route('entity.edit', ['users', $user->id]) . '">изменить</a>'
-                                 . ' / <a href="' . URL::route('app.profile_id', [$user->id]) . '" target="_blank">профиль</a>'
+                                 . ' / <a href="' . URL::route('app.profile_id', [$user->id]) . '" target="_blank">профиль</a>') : ''
                 ,
             ),
             'promise_text' => array(
