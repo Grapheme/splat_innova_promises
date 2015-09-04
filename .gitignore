@@ -1,4 +1,5 @@
-/vendor
+
+vendor
 
 /public/static/psd
 #/public/uploads/*.*
