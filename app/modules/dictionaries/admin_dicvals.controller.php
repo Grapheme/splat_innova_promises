@@ -495,6 +495,8 @@ class AdminDicvalsController extends BaseController {
                 $redirect = true;
             }
 
+            Helper::tad($element);
+
             /**
              * Доп. поля, не зависящие от языка
              */
