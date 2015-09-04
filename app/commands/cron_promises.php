@@ -155,6 +155,7 @@ class CronPromises extends Command {
 			$this->info('Filtered (unique) users: ' . count($users_ids));
 			#Helper::d($users_ids);
 			#Helper::d(implode(', ', $users_ids));
+            sort($users_ids);
             $this->info(implode(', ', $users_ids));
 
 			/**
@@ -360,6 +361,7 @@ class CronPromises extends Command {
 			$this->info('Filtered (unique) users: ' . count($users_ids));
 			#Helper::d($users_ids);
             #Helper::d(implode(', ', $users_ids));
+            sort($users_ids);
             $this->info(implode(', ', $users_ids));
 
 			/**
@@ -540,6 +542,7 @@ class CronPromises extends Command {
 			$this->info('Filtered (unique) users: ' . count($users_ids));
 			#Helper::d($users_ids);
             #Helper::d(implode(', ', $users_ids));
+            sort($users_ids);
             $this->info(implode(', ', $users_ids));
 
 			/**

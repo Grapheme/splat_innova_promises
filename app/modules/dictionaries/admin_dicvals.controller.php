@@ -500,7 +500,7 @@ class AdminDicvalsController extends BaseController {
              */
             $element_fields = Config::get('dic/' . $dic->slug . '.fields');
             if (isset($element_fields) && is_callable($element_fields))
-                $element_fields = $element_fields();
+                $element_fields = $element_fields($element);
 
             #Helper::dd($element_fields);
 
