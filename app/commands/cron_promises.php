@@ -214,7 +214,7 @@ class CronPromises extends Command {
                          */
                         if (!$only_email || $only_email == $user->email) {
 
-                            Helper::tad($data);
+                            #Helper::tad($data);
 
                             /**
                              * Валидация - установлен ли валидный адрес почты
