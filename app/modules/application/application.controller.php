@@ -2231,7 +2231,8 @@ class ApplicationController extends BaseController {
             $birthday = (new \Carbon\Carbon())->createFromFormat('Y-m-d', $user['birthday']);
             $user['bdate'] = $birthday->format('d.m.Y');
         }
-        $user['avatar'] = @$user['pic_3'];
+        #$user['avatar'] = @$user['pic_3'];
+        $user['avatar'] = ''; ## https://basecamp.com/1763145/projects/7571992/todos/202287061
         $user['city'] = @$user['location']['city'];
         $user['auth_method'] = 'odnoklassniki';
 
